@@ -1,0 +1,10 @@
+2080 Swiper: 
+ 
+        (map-indexed
+         (fn [i n]
+ 
+           [:div {:style {:border-bottom "2px solid #111"
+                          :background-color
+                          "hsl(240,70%,70%)"}} n])
+         [ "13" "" "13" "" "13" "" "13"])
+ 

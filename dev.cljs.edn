@@ -1,0 +1,6 @@
+^{:auto-bundle :webpack
+  :open-url "http://103.112.239.78:[[server-port]]"
+  :connect-url "ws://103.112.239.78:[[server-port]]/figwheel-connect"
+ 	:css-dirs ["resources/public/css"]}
+
+{:main hello-bundler.core}
