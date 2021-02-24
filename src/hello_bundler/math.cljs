@@ -7511,25 +7511,53 @@ findout out the mass of the grain."]
      [:div {:style {:padding-left "10vw"}}
 
 
-      [:div [m '(= yc
-                   (- (:b (- 400 y))
-                      200))]]
-
-      [:div [m '(= yc 0)]]
-      [:div [m '(= xc 0)]]
 
 
-      [:div [m '(= x (xc 30))]]
+      [:div [m '(= yc-min 0)]]
+      [:div [m '(= xc-min 0)]]
+
+      [:div [m '(= xc-max 400)]]
+      [:div [m '(= yc-max 400)]]
+
+      [:div [m '(= step 30)]]
+      [:div [m '(= (* 7 step) 210)]]
 
 
+      [:div {:style {:background-color (c [70 70 70])}}
+       [m '(= yc
+                   (- (:b (- 400 y)) 200)
+
+                   )]]
+
+      [:div {:style {:background-color (c [120 70 70])}}
+       [m '(= yc
+                   (- (:b (- 400 0)) 200)
+
+                   )]]
+
+      [:div {:style {:background-color (c [120 70 70])}}
+       [m '(= yc
+                   (- (:b (- 400 100)) 200)
+
+                   )]]
+
+      [:div {:style {:background-color (c [150 70 70])}}
+       [m '(= yc
+                   (- (:b (- 400 (:b (- 10)))) 200)
+
+                   )]]
 
 
-
-      ]
-
-
+      [:div [m '(= x (xc 30))]]]
      (let [y (fn [yc]
-               (- (- 400 yc) 200))
+               (- (* (- 400 yc) 1)
+                  200))
+           x (fn [xp] xp)
+           xc-min 0
+           xc-min 0
+           yc-max 400
+           xc-max 400
+           step 30
            ]
 
        [:svg {:viewBox (reduce
@@ -7546,26 +7574,22 @@ findout out the mass of the grain."]
               }
 
         (map
-
-         (fn [a]
-           (let [y1 (+ 10 (* a 30))]
+         (fn [[y y1]]
+           (let []
              [:g
-              [:circle {:cx 0
+              [:circle {:cx (x 0)
                         :cy y1
                         :r 1}]
-              [:text {:x -7
+              [:text {:x (x -7)
                       :y y1
                       :style {:font-size ".3rem"}
-                      } (y y1)]
-              ])
-           )
-
-
-         (range 20))
-
+                      }
+               y]]))
+         (map
+          (fn [y2] [y2 (y y2)])
+          (range  210 -210 (* step -1))))
 
         (map
-
          (fn [a]
            [:g
             [:circle {:cx (* a 30)
@@ -7581,13 +7605,14 @@ findout out the mass of the grain."]
 
          (range 15))
 
+
         [:circle {:cx 0
                   :cy (y 20)
                   :r 2}]
-
         [:circle {:cx 90
                   :cy (y 0)
                   :r 2}]
+
         (map
          (fn [a]
            [:path {:stroke (c [90 70 70])
@@ -7595,17 +7620,57 @@ findout out the mass of the grain."]
                    :d (str "M" -10  " "
                            (y (* 30 a))
                            " l  420 0" )}])
-         (range 41))
-
-
-
+         (range  -7 7))
 
         (map
          (fn [x]
            [:path {:stroke (c [10 70 70])
                    :stroke-width .8
-                   :d (str "M" (* x 30)  " " (y -10)   " l 0 -420 " )}])
-         (range 42))
+                   :d (str "M" (* x 30)  " " (y -200)   " l 0 -420 " )}] )
+         (range 14))
+
+
+        [:circle {:cx 0
+                  :cy (y 120)
+                  :r 2
+                  :fill (c [10 70 70])}]
+
+        [:circle {:cx (* 3 30)
+                  :cy (y 120)
+                  :r 2
+                  :fill (c [10 70 70])}]
+
+        [:path {:stroke (c [10 70 70])
+                :stroke-width .8
+                :d (str "M" 0
+                        " " (y 120)
+                        " l " (* step 3)   " "  0 )}]
+
+        [:path {:stroke (c [10 70 70])
+                :stroke-width .8
+                :d (str "M" (* 3 30)
+                        " " (y 120)
+                        " L " (* 7 30)
+                        " "  (y -120) )}]
+
+        [:circle {:cx (* 7 30)
+                  :cy (y -120)
+                  :r 2
+                  :fill (c [10 70 70])}]
+
+        [:circle {:cx (* 9 30)
+                  :cy (y -120)
+                  :r 2
+                  :fill (c [10 70 70])}]
+
+        [:circle {:cx (* 11 30)
+                  :cy (y 180)
+                  :r 2
+                  :fill (c [10 70 70])}]
+
+
+
+
 
         ])]]])
 
