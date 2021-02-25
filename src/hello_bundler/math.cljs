@@ -150,6 +150,8 @@
 
 
 
+
+
 (comment (s/valid? ::mark-area [3 :span 2]))
 
 (s/valid? ::size [1 :fr :hello])
@@ -261,7 +263,11 @@
    :m-exp ::m-exp
    :f-exp ::f-exp))
 
+
+
 (declare expr)
+
+
 
 (defn p-exp [{:keys [mo first-elem elem ]}]
   (reduce
@@ -378,7 +384,176 @@
   [:math (e ex)])
 
 
+(defn grid-svg [[x y]
+                [[xc-min yc-min]
+                 [yc-max xc-max]]
+                [[bxc-min byc-min]
+                 [byc-max bxc-max]]
+                step
+                eqs]
+  [:div {:style
+         {
+          :width "100vw"
+          :display :grid
+          :grid-template-columns "1fr 1fr 1fr 1fr"
+          :grid-template-rows "1fr 1fr 1fr 1fr"}
+         }
+   [:div {:style {:z-index 2
+                  :grid-column "4/5"
+                  :grid-row "1/2"}}
+    (map (fn [e] e) eqs)]
+   [:div {:style {
+                  :z-index 1
+                  :grid-column "1/5"
+                  :grid-row "1/5"}}
+    (let [
+          [x1 y1 x2 y2 :as canvas] [(+ xc-min bxc-min)
+                                    (+ yc-min byc-min)
+                                    (+ xc-max bxc-max)
+                                    (+ yc-max byc-max)
+                                    ]
 
+          mark-y-grid
+          (map
+           (fn [[y y1]]
+             (let []
+               [:g
+                [:circle {:cx (x 0)
+                          :cy y1
+                          :r 1}]
+                [:text {:x (x -7)
+                        :y y1
+                        :style {:font-size ".3rem"}
+                        }
+                 y]]))
+           (map
+            (fn [a] [(* step a) (y (* step a))])
+            (into (range 0 (/ (- y2 y1) (* 2 step)))
+                  (range -1 (/ (- y2 y1) (* -1 2 step)) -1))
+            ))
+          mark-x-grid
+          (map
+           (fn [a]
+             [:g
+              [:circle {:cx (* a 30)
+                        :cy (y 0)
+                        :r 1}]
+              [:text {:x (* a 30)
+                      :y (y -5)
+                      :style {:font-size ".3rem"}
+                      } a]
+              ]
+             )
+
+
+           (range (/ (- x2 x1) (* 1 step))))
+
+          ]
+      [:div
+
+
+       [:svg {:viewBox (reduce
+                        (fn [acc b]
+                          (str acc " " b)
+                          )
+                        ""
+                        canvas)
+              :style {:background-color
+                      (c [70 80 85])
+
+                      :height (str 90
+                                   (name :vh))
+                      }
+              }
+
+        mark-y-grid
+
+        mark-x-grid
+
+
+        [:circle {:cx 0
+                  :cy (y 20)
+                  :r 2}]
+        [:circle {:cx 90
+                  :cy (y 0)
+                  :r 2}]
+
+        (map
+         (fn [a]
+           [:path {:stroke (c [90 70 70])
+                   :stroke-width .8
+                   :d (str "M" -10  " "
+                           (y (* 30 a))
+                           " l  820 0" )}])
+         (range -7
+                 7
+                 ))
+
+        (map
+         (fn [x]
+           [:path {:stroke (c [10 70 70])
+                   :stroke-width .8
+                   :d (str "M" (* x 30)  " " (y -200)   " l 0 -420 " )}] )
+
+         (range (/ (- x2 x1) (* 1 step))))
+
+
+        [:circle {:cx 0
+                  :cy (y 120)
+                  :r 2
+                  :fill (c [10 70 70])}]
+
+        [:circle {:cx (* 3 30)
+                  :cy (y 120)
+                  :r 2
+                  :fill (c [10 70 70])}]
+
+        [:path {:stroke (c [10 70 70])
+                :stroke-width .8
+                :d (str "M" 0
+                        " " (y 120)
+                        " l " (* step 3)   " "  0 )}]
+
+        [:path {:stroke (c [10 70 70])
+                :stroke-width .8
+                :d (str "M" (* 3 30)
+                        " " (y 120)
+                        " L " (* 7 30)
+                        " "  (y -120) )}]
+
+
+
+        [:circle {:cx (* 7 30)
+                  :cy (y -120)
+                  :r 2
+                  :fill (c [10 70 70])}]
+        [:path {:stroke (c [10 70 70])
+                :stroke-width .8
+                :d (str "M" (* 7 30)
+                        " " (y -120)
+                        " l " (* 2 30)
+                        " " 0)}]
+
+        [:circle {:cx (* 9 30)
+                  :cy (y -120)
+                  :r 2
+                  :fill (c [10 70 70])}]
+
+        [:circle {:cx (* 14 30)
+                  :cy (y 180)
+                  :r 2
+                  :fill (c [10 70 70])}]
+
+        [:path {:stroke (c [10 70 70])
+                :stroke-width .8
+                :d (str "M" (* 9 30)
+                        " " (y -120)
+                        " L " (* 14 30)
+                        " " (y 180))}]
+
+
+
+        ]])]])
 
 
 (defn menu-overlay [direction]
@@ -3949,8 +4124,7 @@ size of 4 peaces is 15 cm. What is the size of the zucchini"]
 (defn exercise-313 []
   [container "313" "2.5"
    [ [:div {:style {:padding "2rem"}}
-
-
+      ""
       ]
     [:div {:contenteditable :true
            :style {:border "2px solid #ddd"
@@ -3986,7 +4160,7 @@ size of 4 peaces is 15 cm. What is the size of the zucchini"]
              {:padding "1rem"
              :display :grid
               :grid-template-columns
-              "16vw 2vw 16vw 2vw 16vw 2vw 16vw 2vw 16vw"
+              "16vw 2vw 16vw 2vw 16vw 2vw 16vw"
               :gap ".1rem"
               :grid-auto-rows "5vh"
               ;;:grid-template-rows "1fr 7vh 1fr"
@@ -3995,26 +4169,26 @@ size of 4 peaces is 15 cm. What is the size of the zucchini"]
         (fn [i n]
           [:div {:style {:background-color (c [70 70 70])}}
            n])
-        ["275" "=" "100" "+" "80" "+" "5"  "+" ""])
+        ["275" "=" "100" "+" "80" "+" "5" ])
 
        (map-indexed
         (fn [i n]
 
           [:div {:style {:background-color (c [110 70 70])}} n])
-        [ "200" "" "200" "" "200" "" "" "" ""])
+        [ "200" "" "200" "" "200" "" "" ])
 
        (map-indexed
         (fn [i n]
           [:div {:contenteditable :true
                  :style {:background-color (c [150 70 70])}} n])
-        [ "75" "" "75" "" "75" "" "" "" ""])
+        [ "75" "" "75" "" "75" "" "" ])
 
        (map-indexed
         (fn [i n]
 
           [:div {:contenteditable :true
                  :style {:background-color (c [210 70 70])}} n])
-        [ "" "=" "27500" "+" "" "+" "" "+" ""])]]]])
+        [ "" "=" "50500" "+" "0" "+" "375" ])]]]])
 
 
 
@@ -7554,10 +7728,15 @@ findout out the mass of the grain."]
                   200))
            x (fn [xp] xp)
            xc-min 0
-           xc-min 0
+           yc-min 0
            yc-max 400
            xc-max 400
            step 30
+           yc-max-with-border (+ yc-max 20)
+           xc-max-with-border (+ xc-max 20)
+           xc-min-with-border (- xc-min 10)
+           yc-min-with-border (- yc-min 10)
+
            ]
 
        [:svg {:viewBox (reduce
@@ -7565,7 +7744,10 @@ findout out the mass of the grain."]
                           (str acc " " b)
                           )
                         ""
-                        [-10 -10 420 420])
+                        [xc-min-with-border
+                         yc-min-with-border
+                         xc-max-with-border
+                         yc-max-with-border])
               :style {:background-color
                       (c [70 80 85])
                       :height (str 90
@@ -7587,7 +7769,7 @@ findout out the mass of the grain."]
                y]]))
          (map
           (fn [y2] [y2 (y y2)])
-          (range  210 -210 (* step -1))))
+          (range  -210 -210 (* step -1))))
 
         (map
          (fn [a]
@@ -7673,6 +7855,110 @@ findout out the mass of the grain."]
 
 
         ])]]])
+
+
+(defn exercise-176 []
+  [container "176" "1.4"
+   [
+    [grid-svg [(fn [xp] xp)
+                (fn [yc]
+                  (- (* (- 400 yc) 1) 200))]
+      [[0 0] [400 600]]
+      [[-10 -10] [20 20]] 30
+      [
+       [:div [m '(= yc-min 0)]]
+       [:div [m '(= xc-min 0)]]
+
+       [:div [m '(= xc-max 400)]]
+       [:div [m '(= yc-max 400)]]
+       [:div [m '(= step 30)]]
+       [:div [m '(= (* 7 step) 210)]]
+
+
+       [:div {:style {:background-color (c [70 70 70])}}
+        [m '(= yc
+               (- (:b (- 400 y)) 200)
+
+               )]]
+
+       [:div {:style {:background-color (c [70 70 70])}}
+        [m '(= 0
+               (- (:b (- 400 y)) 200)
+
+               )]]
+
+       [:div {:style {:background-color (c [120 70 70])}}
+        [m '(= yc
+               (- (:b (- 400 0)) 200)
+
+               )]]
+
+       [:div {:style {:background-color (c [120 70 70])}}
+        [m '(= yc
+               (- (:b (- 400 100)) 200)
+
+               )]]
+
+       [:div {:style {:background-color (c [150 70 70])}}
+        [m '(= yc
+               (- (:b (- 400 (:b (- 10)))) 200))]]
+
+       [:div [m '(= x (xc 30))]]]
+      ]
+    ]])
+
+
+(defn exercise-177 []
+  [container "177" "1.4"
+   [
+    [grid-svg [(fn [xp] (+ xp  200))
+               (fn [yc]
+                 (- (* (- 400 yc) 1) 200))]
+      [[0 0] [400 600]]
+      [[-10 -10] [20 20]] 30
+     [
+      [:div [m '(= xc (:b (+ x 200)))]]
+       [:div [m '(= yc-min 0)]]
+       [:div [m '(= xc-min 0)]]
+
+       [:div [m '(= xc-max 400)]]
+       [:div [m '(= yc-max 400)]]
+       [:div [m '(= step 30)]]
+       [:div [m '(= (* 7 step) 210)]]
+
+
+       [:div {:style {:background-color (c [70 70 70])}}
+        [m '(= yc
+               (- (:b (- 400 y)) 200)
+
+               )]]
+
+       [:div {:style {:background-color (c [70 70 70])}}
+        [m '(= 0
+               (- (:b (- 400 y)) 200)
+
+               )]]
+
+       [:div {:style {:background-color (c [120 70 70])}}
+        [m '(= yc
+               (- (:b (- 400 0)) 200)
+
+               )]]
+
+       [:div {:style {:background-color (c [120 70 70])}}
+        [m '(= yc
+               (- (:b (- 400 100)) 200)
+
+               )]]
+
+       [:div {:style {:background-color (c [150 70 70])}}
+        [m '(= yc
+               (- (:b (- 400 (:b (- 10)))) 200))]]
+
+       [:div [m '(= x (xc 30))]]]
+      ]
+    ]])
+
 
 (defn exercise-165 []
   [container "165" "1.4"
@@ -7842,6 +8128,8 @@ findout out the mass of the grain."]
     [exercise-164]
     [exercise-165]
     [exercise-175]
+    [exercise-176]
+    [exercise-177]
     [exercise-313]
     [:div
      [:div {:style {
