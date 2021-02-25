@@ -383,6 +383,42 @@
 (defn m [ex]
   [:math (e ex)])
 
+(defn animate-circle []
+  (let [ref (react/useRef)
+        _ (react/useEffect
+           (fn []
+             (.animate (-> ref
+                           .-current)
+                       (clj->js
+                        [{
+                          :transform
+                          "translateX(200px)"
+                          }
+                         {:transform
+                          "translateX(190px)"
+                          :offset (/ 3 14)}
+
+                         {:transform
+                          "translateX(0px)"
+                          :offset (/ 9 14)}
+
+                         {:transform
+                          "translateX(450px)"}])
+                       (clj->js
+                        {:duration 14000
+                         :iterations 2})
+                       )
+             (js/console.log "hello world")))
+        ]
+    [:div {:ref ref
+           :style {
+                   :height "70px"
+                   :width "70px"
+
+                   :background-color :#ddd
+                   }}
+
+     ]))
 
 (defn grid-svg [[x y]
                 [[xc-min yc-min]
@@ -402,6 +438,10 @@
                   :grid-column "4/5"
                   :grid-row "1/2"}}
     (map (fn [e] e) eqs)]
+   [:div {:style {:z-index 2
+                  :grid-row "1/2"
+                  :grid-column "1/5"}}
+    [animate-circle]]
    [:div {:style {
                   :z-index 1
                   :grid-column "1/5"
@@ -467,7 +507,6 @@
               }
 
         mark-y-grid
-
         mark-x-grid
 
 
@@ -554,6 +593,103 @@
 
 
         ]])]])
+
+(defn test-canvas []
+  (let [ref (react/useRef)
+        _ (react/useEffect
+           (fn []
+             (let [canvas (. ref -current)
+                   context (. canvas getContext "2d")
+                   _ (. context beginPath)
+                   _ (. context arc 100 70 50 0
+                        (* 2 js/Math.PI))]
+               (. context fill))
+             ))]
+    [:canvas {:ref ref
+              :style {:width "100px"
+                      :height "100px"}}]))
+
+(comment (react/useEffect
+          (fn []
+            (let [rf (. ref -current)]
+              (ref.current.animate
+               (clj->js
+                [{:transform
+                  "translateY(0)"
+                  }
+                 {:transform
+                  "translateY(450px)"}])
+               (clj->js
+                {:duration 1000
+                 :iterations 2}))
+              )
+            )))
+(comment (.. ref -current -animate ))
+
+
+
+
+(declare logo)
+
+(defn menu-ps []
+  (let [[toggle-chat update-toggle-chat]
+        (react/useState 0)]
+      [:div {:style {:background-color :white
+                     :grid-column "1/4"
+                     :grid-row "1"
+                     :padding ".8rem"
+                     :color "#232323"
+                     :font-size "1rem"
+                     :align-items :center
+                     :justify-content :space-between
+                     :display :grid
+                     :grid-template-columns "2fr 4fr 3fr"}}
+       [:div {:style {:display :flex
+                      :gap "1rem"}}
+        [logo]
+        [:div {:style {:display :flex
+                       :align-items :center}} "PRANTI"]]
+       [:div {:style {:width "40vw"
+                      :display :flex
+                      :justify-content :space-around}}
+        (map
+         (fn [i]
+           [:div i])
+         ["Home" "Pages" "Blog" "Portfolio" "Contacts"])]
+       [:div {:style {:justify-content :space-around
+                      :display :flex}}
+
+
+        [:div {:on-click (fn [e]
+                           (update-toggle-chat (mod (+ toggle-chat 1) 2)))
+               :style {
+                       :padding ".7rem"
+                       :background :#111
+                       :color :white
+                       :font-variation-settings
+                       "'wdth' 110, 'wght' 800, 'CNTR' 85"}}
+         "Chat with Me"]]
+       [animate-circle]
+       (comment (if (= toggle-chat 0)
+                  [:div
+                   {:style {
+                            :grid-column "2/4"
+                            :display :flex
+                            :justify-content :center
+                            :align-items :center
+                            :height "30vh"}}
+                   [:input {:type :text
+                            :style {:width "50vw"
+                                    :height "5vh"}}
+
+                    ]
+
+                   ]))
+
+       ])
+  )
+
+
 
 
 (defn menu-overlay [direction]
@@ -720,115 +856,6 @@
              :stroke-dasharray dash
              :stroke-linecap :round
              :d "m 44.055121,77.976268 a 24.948597,38.982552 0 0 1 4.22425,-54.547194 24.948597,38.982552 0 0 1 34.937331,6.23568 24.948597,38.982552 0 0 1 -3.757168,54.63056 24.948597,38.982552 0 0 1 -34.987561,-5.505316"}]]))
-
-
-
-
-
-(defn test-canvas []
-  (let [ref (react/useRef)
-        _ (react/useEffect
-           (fn []
-             (let [canvas (. ref -current)
-                   context (. canvas getContext "2d")
-                   _ (. context beginPath)
-                   _ (. context arc 100 70 50 0
-                           (* 2 js/Math.PI))]
-               (. context fill))
-             ))]
-    [:canvas {:ref ref
-              :style {:width "100px"
-                      :height "100px"}}]))
-
-
-(defn animate-circle []
-  (let [ref (react/useRef)
-        _ (react/useEffect
-           (fn []
-             (let [rf (. ref -current)]
-               (. rf animate
-                  (clj->js
-                   [{:transform
-                     "translateY(0)"
-                     }
-                    {:transform
-                     "translateY(450px)"}])
-                  (clj->js
-                   {:duration 1000
-                    :iterations 4})))
-             ))]
-    [:div {:ref ref
-           :style {:height "200px"
-                   :border-radius "100%"
-                   :background-color :#ddd
-                   :width "200px"}}
-
-     ]))
-
-
-
-
-(defn menu-ps []
-  (let [[toggle-chat update-toggle-chat]
-        (react/useState 0)]
-      [:div {:style {:background-color :white
-                     :grid-column "1/4"
-                     :grid-row "1"
-                     :padding ".8rem"
-                     :color "#232323"
-                     :font-size "1rem"
-                     :align-items :center
-                     :justify-content :space-between
-                     :display :grid
-                     :grid-template-columns "2fr 4fr 3fr"}}
-       [:div {:style {:display :flex
-                      :gap "1rem"}}
-        [logo {:height "10vh"
-               :width "10vh"}]
-        [:div {:style {:display :flex
-                       :align-items :center}} "PRANTI"]]
-       [:div {:style {:width "40vw"
-                      :display :flex
-                      :justify-content :space-around}}
-        (map
-         (fn [i]
-           [:div i])
-         ["Home" "Pages" "Blog" "Portfolio" "Contacts"])]
-       [:div {:style {:justify-content :space-around
-                      :display :flex}}
-
-
-        [:div {:on-click (fn [e]
-                           (update-toggle-chat (mod (+ toggle-chat 1) 2)))
-               :style {
-                       :padding ".7rem"
-                       :background :#111
-                       :color :white
-                       :font-variation-settings
-                       "'wdth' 110, 'wght' 800, 'CNTR' 85"}}
-         "Chat with Me"]]
-       (if (= toggle-chat 0)
-         [:div
-          {:style {
-                   :grid-column "2/4"
-                   :display :flex
-                   :justify-content :center
-                   :align-items :center
-                   :height "30vh"}}
-          [:input {:type :text
-                   :style {:width "50vw"
-                           :height "5vh"}}
-
-           ]
-          [animate-circle]
-          ])
-       [test-canvas]
-       ])
-  )
-
-
-
-
 
 
 
@@ -7911,53 +7938,34 @@ findout out the mass of the grain."]
 (defn exercise-177 []
   [container "177" "1.4"
    [
-    [grid-svg [(fn [xp] (+ xp  200))
+    [grid-svg [(fn [xp] (+ xp  0))
                (fn [yc]
                  (- (* (- 400 yc) 1) 200))]
       [[0 0] [400 600]]
       [[-10 -10] [20 20]] 30
      [
-      [:div [m '(= xc (:b (+ x 200)))]]
-       [:div [m '(= yc-min 0)]]
-       [:div [m '(= xc-min 0)]]
-
-       [:div [m '(= xc-max 400)]]
-       [:div [m '(= yc-max 400)]]
-       [:div [m '(= step 30)]]
-       [:div [m '(= (* 7 step) 210)]]
-
-
-       [:div {:style {:background-color (c [70 70 70])}}
-        [m '(= yc
-               (- (:b (- 400 y)) 200)
-
-               )]]
-
-       [:div {:style {:background-color (c [70 70 70])}}
+      [:div [m '(= xc (:b (+ (:m 30 x) 200)))]]
+      [:div {:style {:background-color (c [70 70 70])}}
+       [m '(= yc (- (:b (- 400 y)) 200))]]
+      [:div [m '(= yc-min 0)]]
+      [:div [m '(= xc-min 0)]]
+      [:div [m '(= xc-max 400)]]
+      [:div [m '(= yc-max 400)]]
+      [:div [m '(= step 30)]]
+      [:div [m '(= (* 7 step) 210)]]
+      [:div {:style {:background-color (c [70 70 70])}}
         [m '(= 0
-               (- (:b (- 400 y)) 200)
+               (- (:b (- 400 y)) 200))]]
+      [:div [m '(= v1
+                   ((- 120  (:b (- 120)))  (- 7 3)))]]
+      [:div [m '(= v1
+                   ((- 120  (:b (- 120)))  (- 7 3)))]]
+      [:div [m '(= v2
+                   ((- 120  (:b (- 120)))  (- 7 3)))]]
 
-               )]]
-
-       [:div {:style {:background-color (c [120 70 70])}}
-        [m '(= yc
-               (- (:b (- 400 0)) 200)
-
-               )]]
-
-       [:div {:style {:background-color (c [120 70 70])}}
-        [m '(= yc
-               (- (:b (- 400 100)) 200)
-
-               )]]
-
-       [:div {:style {:background-color (c [150 70 70])}}
-        [m '(= yc
-               (- (:b (- 400 (:b (- 10)))) 200))]]
-
-       [:div [m '(= x (xc 30))]]]
-      ]
+      ]]
     ]])
+
 
 
 (defn exercise-165 []
@@ -8131,6 +8139,7 @@ findout out the mass of the grain."]
     [exercise-176]
     [exercise-177]
     [exercise-313]
+    [menu-ps]
     [:div
      [:div {:style {
                     :font-variation-settings
