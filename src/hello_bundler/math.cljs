@@ -585,7 +585,7 @@
 
         [:path {:stroke (c [10 70 70])
                 :stroke-width .8
-                :d (str "M" (* 9 30)
+                :d (str "M" (* 7 30)
                         " " (y -120)
                         " L " (* 14 30)
                         " " (y 180))}]
@@ -964,38 +964,17 @@
 
 (defn sq-factor [exer x a]
   (let []
-   [container exer "1.1"
+   [container exer "2.5"
      [
       [:math (op :mul (- x a) (+ x a))]
+      [m '(:m (:b (- x 3)) (:b (+ x 3)))]
+      [m '(:m (:b (- 30 3)) (:b (+ 30 3)))]
 
-      [:math
-       [:mstyle {:displaystyle "true", :scriptlevel "0"}
-        [:mrow
-         [:mrow {:style {:background-color "hsl(10,70%,70%)"}}
-          [:mo "("]
-          [:mn "x"]
-          [:mo "−" ]
-          [:mi a]
-          [:mo ")"]]
-         [:mrow {:style {:background-color "hsl(40,70%,70%)"}}
-          [:mo "("]
-          [:mn "x"]
-          [:mo "+" ]
-          [:mi a]
-          [:mo ")"]]]]]
-      [:math [:mrow [:mo "("]
-              [:mn x]
-              [:mo "-"]
-              [:mn a]
-              [:mo ")"]
-              [:mo "("]
-              [:mn x]
-              [:mo "+"]
-              [:mn a]
-              [:mo ")"]]]
-[:div {:style {
+
+
+      [:div {:style {
                      :width "6rem"
-                   :overflow :hidden}}
+                     :overflow :visible}}
      [:svg {:viewBox "0 0 200 50"
             :style {}}
       [:defs
@@ -1009,33 +988,26 @@
                  }
         [:path {:fill "black"
                 :stroke "black"
-
-                :transform "scale(0.8) rotate(245) "
+                :transform "scale(1.2) rotate(270) "
                 :d "M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "}]]
-       [:marker {:id "dot"
-                      :viewBox "0 0 10 10"
-                 :refX 5
-                 :refY 5
-                 :markerWidth 5
-                 :markerHeight 5}
-        [:circle {:cx 5
-                  :cy 5
-                  :r 5
-                  :fill "black"}]]
+
        ]
 
-      [:path {:d "m 46,50 c 70,-78 79,5 95,-4"
+      [:path {:d
+              "m 100 30 c 80,-88 79,5 110,-4"
               :style {:fill "none"
                       :marker-end "url(#arr)"
                       :stroke "#000000"
                       :stroke-width "1.28px"
                       }}]
-      [:path {:d "m 46,50 c 70,-88 129,0 150,-4"
+      (comment
+        )
+      [:path {:d "m 100,50 c 70,-88 129,0 150,-4"
               :style {:fill "none"
                       :marker-end "url(#arr)"
                       :stroke "#000000"
                       :stroke-width "1.28px"
-                     }}]
+                      }}]
            ]]
       [:math
        [:mstyle {:displaystyle "true", :scriptlevel "0"}
@@ -7975,61 +7947,102 @@ findout out the mass of the grain."]
                    :grid-template-columns "auto auto"}}
 
      [:div {:style {:padding "2vw"}}
+      [:div
+       [m '(= x-canvas 0)]]
+      [:div
+       [m '(= x-canvas-max 800)]
+       ]
+      [:div
+       [m '(= step-size 20)]]
+      [:div
+       [m '(= xc  (- (:m 20 x ) (* 20 20) 6))]]
 
-
-      ]
-
-
-
-     [:svg {:viewBox (reduce
-                      (fn [acc b]
-                        (str acc " " b)
-                        )
-                      ""
-                      [-10 -10 820 420])
-            :style {:background-color
-                    (c [70 80 85])
-                    :height (str 90
-                                 (name :vh))
-                    }
-            }
-
-      (map
-       (fn [a]
-         [:g
-          [:circle {:cx (* a 20)
-                    :cy 200
-                    :r 1}]
-          [:text  {:style {:font-size ".5rem"}
-                   :x (* a 20)
-                   :y 210}
-           (- a 20)]
-          ])
-
-       (range 40))
-      [:circle {:cy 180
-                :cx 400
-                :r 2}]
-
-      [:path {:stroke (c [10 70 70])
-              :stroke-width 1
-              :d "M 300 180 l 200 0"}]
-
-      [:path {:stroke (c [10 70 70])
-              :stroke-width 1
-              :d "M 280 190 l 240 0"}]
-
-
-
-
-
-      [:path {:stroke (c [10 70 70])
-              :stroke-width 1
-              :d "M 0 200 l 900 0"}]
-
-
+      [:div
+       [m '(+ 0 6)]]
 
       ]
+
+
+     (comment :transform "rotate(0)")
+     (let [x (fn [x1]
+               (+ (* 20 20) (* x1 20) ))
+           ]
+       [:svg {:viewBox (reduce
+                        (fn [acc b]
+                          (str acc " " b)
+                          )
+                        ""
+                        [-10 -10 820 420])
+              :style {:background-color
+                      (c [70 80 85])
+                      :height (str 90
+                                   (name :vh))
+                      }
+              }
+        [:defs
+         [:marker {:id "arr"
+                   :viewBox "0 0 7 7"
+                   :style {:overflow :visible}
+                   :refX 5
+                   :refY 5
+                   :markerHeight 5
+                   :markerWidth 5
+                   }
+          [:path {:fill "black"
+                  :stroke "black"
+                  :transform "rotate(0)"
+
+                  :d "M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "}]]
+         [:marker {:id "dot"
+                   :viewBox "0 0 10 10"
+                   :refX 5
+                   :refY 5
+                   :markerWidth 5
+                   :markerHeight 5}
+          [:circle {:cx 5
+                    :cy 5
+                    :r 5
+                    :fill "black"}]]
+         ]
+
+        (map
+         (fn [x]
+           (let [a (* x 20)]
+             [:g
+              [:circle {:cx a
+                        :cy 200
+                        :r 1}]
+              [:text  {:style {:font-size ".7rem"}
+                       :x a
+                       :y 210}
+
+               (comment )
+               (- (+ (- x 20)
+                     5) 10)
+               (comment (- x 20))
+               ]
+              ]))
+
+         (range 0 40))
+
+
+
+        [:circle {:cx (x -5)
+                  :cy "180"
+                  :r 2}]
+
+        [:path {:stroke (c [10 70 70])
+                :stroke-width 1
+                :d (str "M" (x 0) " 180" " L " (x -5)  " 180")  }]
+
+
+        [:path {:stroke (c [10 70 70])
+                :stroke-width 1
+                :d "M 0 200 l 900 0"}]
+
+
+
+        ])
 
 
 
