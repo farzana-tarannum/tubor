@@ -1945,74 +1945,7 @@ s -90 90 -90 0"
       ]]
     ]])
 
-(defn ex-1 []
-  [container 1 "2"
-   [
-    [:div {:style {:padding "1rem"}}
-     "Mass of the  lorry when it was carring grain was 11,600kg, Mass of the grain 3 times of empty lorry,
-findout out the mass of the grain."]
 
-    [:div {:style {:background-color "hsl(90,80%,80%)"
-                   :padding ".5rem"
-                   :display :flex
-                   :justify-content :center
-                   :font-size "1.5rem"}}
-     "Solution"]
-    [:div
-     {:style {:font-size "1.1rem"
-              :padding "1rem"}}
-     "let, define mass of the empty lorry, "
-     [:math [:mi "x"]]]
-
-    [:div {:style {:font-size "1.1rem"
-                   :padding "1rem"}}
-     "Mass the gain is 3 time of empty lorry,  "
-     [:math [:mn 3] [:mi "x"] ] ]
-
-    [:div {:style {:background-color "#ddd"
-
-                   :font-size "2rem"
-                   :display :flex
-                   :align-items :center
-                   :flex-direction :column}}
-     [:div "Expression"]
-     [m '(= 11600 (+ x (:m 3 x)))]
-     [m '(=  (:m 4 x) 11600 )]
-     [m '(=  x
-             (11600 4) )]
-     [m '(= 11600 (+ x (:m 3 x)))]
-     [m '(= 11600 (+ (11600 4)  (:m 3 x)))]
-     [m '(= (- 11600 (11600 4) )
-            (:m 3 x))]
-     [m '(=
-          (:m 3 x)
-          (- 11600 (11600 4) ))]
-     [:div {:style {:background-color "hsl(40,70%,70%)"}}
-      [m '(=
-           (:m 3 x)
-           (- 11600 ((*
-                      116
-                      100) 4) ))]]
-     [m '(=
-          (:m 3 x)
-          (- 11600 ((* (:b (+ 100 16)) 100) 4) ))]
-     [m '(=
-          (:m 3 x)
-          (- 11600 ((* (:b (+ (* 25 4) (* 4 4))) 100) 4) ))]
-     [m '(=
-          (:m 3 x)
-          (- 11600 ((* (:b (+ 25  4 ))
-                       4  100) 4) ))]
-     [:div {:style {:background-color "hsl(40,70%,70%)"}}
-      [m '(=
-           (:m 3 x)
-           (- 11600 (* 29 100)))]
-      ]
-
-     ]
-
-
-    ]])
 
 (defn exercise-1-1 []
   [container 1 "2"
@@ -8159,6 +8092,76 @@ findout out the mass of the grain."]
      ]]])
 
 
+(defn ex-1 []
+  [container 1 "2"
+   [
+    [:div {:style {:padding "1rem"}}
+     "Mass of the  lorry when it was carring grain was 11,600kg, Mass of the grain 3 times of empty lorry,
+findout out the mass of the grain."]
+
+    [:div {:style {:background-color "hsl(90,80%,80%)"
+                   :padding ".5rem"
+                   :display :flex
+                   :justify-content :center
+                   :font-size "1.5rem"}}
+     "Solution"]
+    [:div
+     {:style {:font-size "1.1rem"
+              :padding "1rem"}}
+     "let, define mass of the empty lorry, "
+     [:math [:mi "x"]]]
+
+    [:div {:style {:font-size "1.1rem"
+                   :padding "1rem"}}
+     "Mass the gain is 3 time of empty lorry,  "
+     [:math [:mn 3] [:mi "x"] ] ]
+
+    [:div {:style {:background-color "#ddd"
+
+                   :font-size "2rem"
+                   :display :flex
+                   :align-items :center
+                   :flex-direction :column}}
+     [:div "Expression"]
+     [m '(= 11600 (+ x (:m 3 x)))]
+     [m '(=  (:m 4 x) 11600 )]
+     [m '(=  x
+             (11600 4) )]
+     [m '(= 11600 (+ x (:m 3 x)))]
+     [m '(= 11600 (+ (11600 4)  (:m 3 x)))]
+     [m '(= (- 11600 (11600 4) )
+            (:m 3 x))]
+     [m '(=
+          (:m 3 x)
+          (- 11600 (11600 4) ))]
+     [:div {:style {:background-color "hsl(40,70%,70%)"}}
+      [m '(=
+           (:m 3 x)
+           (- 11600 ((*
+                      116
+                      100) 4) ))]]
+     [m '(=
+          (:m 3 x)
+          (- 11600 ((* (:b (+ 100 16)) 100) 4) ))]
+     [m '(=
+          (:m 3 x)
+          (- 11600 ((* (:b (+ (* 25 4) (* 4 4))) 100) 4) ))]
+     [m '(=
+          (:m 3 x)
+          (- 11600 ((* (:b (+ 25  4 ))
+                       4  100) 4) ))]
+     [:div {:style {:background-color "hsl(40,70%,70%)"}}
+      [m '(=
+           (:m 3 x)
+           (- 11600 (* 29 100)))]
+      ]
+
+     ]
+
+
+    ]])
+
+
 (defn template1 []
   [:div {:style {:background-color :#f1fafa}}
    (comment
@@ -8168,7 +8171,7 @@ findout out the mass of the grain."]
                   :background-color :#eee
                   :font-size "1rem"
                   :grid-auto-rows "minmax(40vh,auto)"
-                :grid-gap "1rem"
+                  :grid-gap "1rem"
                   :grid-template-columns "repeat(auto-fit, minmax(35vw, 1fr))"}}
     [ex-1]
     [ex-2]
