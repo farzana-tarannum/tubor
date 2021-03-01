@@ -171,8 +171,6 @@
    (s/conform ::hsl a)))
 
 
-
-
 ;; 01741775277 ethan mom maliha
 ;; 01716980473  angira mom maliha
 
@@ -430,14 +428,21 @@
   [:div {:style
          {
           :width "100vw"
+          :height "200vh"
           :display :grid
           :grid-template-columns "1fr 1fr 1fr 1fr"
-          :grid-template-rows "1fr 1fr 1fr 1fr"}
-         }
+          :grid-template-rows "1fr 1fr 1fr 1fr"}}
+
    [:div {:style {:z-index 2
                   :grid-column "4/5"
                   :grid-row "1/2"}}
-    (map (fn [e] e) eqs)]
+
+    (map (fn [e] e) eqs)
+
+    ]
+   [:div {:style {:grid-row "3/5"
+                  :grid-column "1/5"}}
+    [file/file-input-background2]]
    [:div {:style {:z-index 2
                   :grid-row "1/2"
                   :grid-column "1/5"}}
@@ -445,13 +450,12 @@
    [:div {:style {
                   :z-index 1
                   :grid-column "1/5"
-                  :grid-row "1/5"}}
-    (let [
-          [x1 y1 x2 y2 :as canvas] [(+ xc-min bxc-min)
-                                    (+ yc-min byc-min)
-                                    (+ xc-max bxc-max)
-                                    (+ yc-max byc-max)
-                                    ]
+                  :grid-row "1/3"}}
+    (let [ [x1 y1 x2 y2 :as canvas]
+          [(+ xc-min bxc-min)
+           (+ yc-min byc-min)
+           (+ xc-max bxc-max)
+           (+ yc-max byc-max)]
 
           mark-y-grid
           (map
@@ -463,13 +467,17 @@
                           :r 1}]
                 [:text {:x (x -7)
                         :y y1
-                        :style {:font-size ".3rem"}
-                        }
+                        :style
+                        {:font-size ".3rem"}}
                  y]]))
            (map
-            (fn [a] [(* step a) (y (* step a))])
-            (into (range 0 (/ (- y2 y1) (* 2 step)))
-                  (range -1 (/ (- y2 y1) (* -1 2 step)) -1))
+            (fn [a]
+              [a
+               (y (* step a))])
+            (into (range 0 (/
+                            (- y2 y1) (* 2 step)))
+                  (range -1 (/
+                             (- y2 y1) (* -1 2 step)) -1))
             ))
           mark-x-grid
           (map
@@ -519,20 +527,54 @@
 
         (map
          (fn [a]
-           [:path {:stroke (c [90 70 70])
-                   :stroke-width .8
-                   :d (str "M" -10  " "
-                           (y (* 30 a))
-                           " l  820 0" )}])
+           [:g
+            [:path {:stroke (c [180 70 70])
+                    :stroke-width .8
+                    :d (str "M" -10  " "
+                            (y (* 30 a))
+                            " l  820 0" )}]
+
+            [:path {:stroke (c [90 70 70])
+                    :stroke-width .8
+                    :d (str "M" -10  " "
+                            (y (+ (* 30 a ) (* 6 1)))
+                            " l  820 0" )}]
+
+            [:path {:stroke (c [90 70 70])
+                    :stroke-width .8
+                    :d (str "M" -10  " "
+                            (y (+ (* 30 a ) (* 6 2)))
+                            " l  820 0" )}]
+
+            [:path {:stroke (c [90 70 70])
+                    :stroke-width .8
+                    :d (str "M" -10  " "
+                            (y (+ (* 30 a ) (* 6 3)))
+                            " l  820 0" )}]
+            [:path {:stroke (c [90 70 70])
+                    :stroke-width .8
+                    :d (str "M" -10  " "
+                            (y (+ (* 30 a ) (* 6 4)))
+                            " l  820 0" )}]])
          (range -7
-                 7
-                 ))
+                7))
 
         (map
          (fn [x]
-           [:path {:stroke (c [10 70 70])
-                   :stroke-width .8
-                   :d (str "M" (* x 30)  " " (y -200)   " l 0 -420 " )}] )
+           [:g
+            [:path {:stroke (c [10 70 70])
+                    :stroke-width .8
+                    :d (str "M" (* x 30)  " " (y -200)   " l 0 -420 " )}]
+
+            (comment [:path {:stroke (c [60 70 70])
+                             :stroke-width .8
+                             :d (str "M" (+ (* x 30) 6)  " " (y -200)   " l 0 -420 " )}])
+
+            [:path {:stroke (c [10 70 70])
+                    :stroke-width .8
+                    :d (str "M" (* x 30)  " " (y -200)   " l 0 -420 " )}]
+
+            ] )
 
          (range (/ (- x2 x1) (* 1 step))))
 
@@ -589,6 +631,35 @@
                         " " (y -120)
                         " L " (* 14 30)
                         " " (y 180))}]
+
+        [:path {:stroke (c [300 70 70])
+                :stroke-width .8
+                :fill :none
+                :d (str "M" (* 0 30)
+                        " " (y 0)
+                        " L " (* 3 30)
+                        " " (y (- 60 12))
+                        " L " (* 5 30)
+                        " " (y (- 60 12))
+                        " L " (* 7 30)
+                        " " (y (+ (* 4 30) (* 6 2)))
+                        " L " (* 8 30)
+                        " " (y (+ (* 4 30) (* 6 2)))
+                        " L " (+ (* 11 30) (* 6 3))
+                        " " (y (+ (* 5 30)
+                                  (* 6 0)))
+                        " L " (+ (* 12 30) (* 6 3))
+                        " " (y (+ (* 5 30)
+                                  (* 6 0)))
+                        " L " (+ (* 14 30)
+                                 (* 6 0))
+                        " " (y (+ (* 6 30)
+                                  (* 6 0)))
+
+
+
+
+                        )}]
 
 
 
@@ -800,7 +871,7 @@
 (defn problem2 []
   [:div
 
-   [file/file-input-background2]
+   (comment [file/file-input-background2])
 
    [:math {:xmlns "http://www.w3.org/1998/Math/MathML"}
     [:mstyle {:displaystyle "true", :scriptlevel "0"}
@@ -4136,24 +4207,24 @@ size of 4 peaces is 15 cm. What is the size of the zucchini"]
      [:div {:contenteditable :true
             :style {:grid-row "1/2"
                      :grid-column "1/7"}}
-       "Rahim sold 185 hen and each hen cost 275"
+      "1"
        ]
      [:div {:style {:grid-row "2/3"
                     :grid-column "1/7"}}
-      [:div "cost of 1 hen is " (m '(* 1 275))]
+      [:div "2" ]
       ]
      [:div {:style {:grid-row "2/3"
                     :grid-column "1/7"}}
-      [:div "cost of 2 hen is " (m '(* 2 275))]
+      [:div "3 " ]
       ]
 
      [:div {:style {:grid-row "2/3"
                     :grid-column "1/7"}}
-      [:div "cost of 3 hen is " (m '(* 3 275))]
+      [:div "3 " ]
       ]
       [:div {:style {:grid-row "2/3"
                      :grid-column "1/7"}}
-       [:div "cost of 185 hen is " (m '(* 185 275))]
+       [:div "4 " ]
        ]
       [:div {:style
              {:padding "1rem"
@@ -4168,26 +4239,26 @@ size of 4 peaces is 15 cm. What is the size of the zucchini"]
         (fn [i n]
           [:div {:style {:background-color (c [70 70 70])}}
            n])
-        ["275" "=" "100" "+" "80" "+" "5" ])
+        ["Biology" "=" "1" "1" "" "" "" ])
 
        (map-indexed
         (fn [i n]
 
           [:div {:style {:background-color (c [110 70 70])}} n])
-        [ "200" "" "200" "" "200" "" "" ])
+        [ "" "" "" "" "" "" "" ])
 
        (map-indexed
         (fn [i n]
           [:div {:contenteditable :true
                  :style {:background-color (c [150 70 70])}} n])
-        [ "75" "" "75" "" "75" "" "" ])
+        [ "" "" "" "" "" "" "" ])
 
        (map-indexed
         (fn [i n]
 
           [:div {:contenteditable :true
                  :style {:background-color (c [210 70 70])}} n])
-        [ "" "=" "50500" "+" "0" "+" "375" ])]]]])
+        [ "" "" "" "" "" "" "" ])]]]])
 
 
 
@@ -5694,7 +5765,6 @@ size of 4 peaces is 15 cm. What is the size of the zucchini"]
   (container
    221
    "1.4"
-
    [[:div {:style {:display :flex
                    :justify-content :center
                    :flex-direction :column
@@ -6452,7 +6522,7 @@ findout out the mass of the grain."]
 
      [:div "1101"]
 
-     [file/file-input]
+     (comment [file/file-input])
 
      (comment
        )
@@ -6542,7 +6612,7 @@ findout out the mass of the grain."]
                         "min-content")
                  :grid-template-rows "12vw 8vh 10vh 10vh 14vh"
                  :background-color "hsl(70,70%,90%)"}}
-   [file/file-input-background]
+   (comment [file/file-input-background])
 
    [:div {:style {:grid-column "3 / 5"
                   :grid-row "1 / 6"
@@ -7928,12 +7998,46 @@ findout out the mass of the grain."]
       [:div {:style {:background-color (c [70 70 70])}}
         [m '(= 0
                (- (:b (- 400 y)) 200))]]
-      [:div [m '(= v1
-                   ((- 120  (:b (- 120)))  (- 7 3)))]]
-      [:div [m '(= v1
-                   ((- 120  (:b (- 120)))  (- 7 3)))]]
-      [:div [m '(= v2
-                   ((- 120  (:b (- 120)))  (- 7 3)))]]
+      [:div [m '(= v
+                   (d
+                    t))]]
+      [:div {:style {:background-color (c [70 70 70])
+                     :font-size "2rem"}}
+       [m '(= va
+                   (1.6
+                    3))]]
+      [:div {:style {:background-color (c [70 70 70])
+                     :font-size "2rem"}}
+       [m '(= vb
+                   0)]]
+
+      [:div {:style {:background-color (c [90 70 70])
+                     :font-size "2rem"}}
+       [m '(= vc
+                   ((- 4.4 1.6) 2))]]
+
+      [:div {:style {:background-color (c [120 70 70])
+                     :font-size "2rem"}}
+       [m '(= vd
+                   0)]]
+      [:div {:style  {:background-color (c [150 70 70])
+              :font-size "2rem"}}
+       [m '(= ve
+                   ((- 4.4
+                       5) (- 11.6 8)))]]
+
+      [:div {:background-color (c [180 70 70])
+             :font-size "2rem"}
+       [m '(= vf
+                   0)]]
+
+      [:div {:background-color (c [70 70 70])
+             :font-size "2rem"}
+       [m '(= vg
+                   ((- 6
+                       5)
+                    (- 12.6 8)))]]
+
 
       ]]
     ]])
@@ -7947,6 +8051,7 @@ findout out the mass of the grain."]
                    :grid-template-columns "auto auto"}}
 
      [:div {:style {:padding "2vw"}}
+      (comment [file/file-input-background])
       [:div
        [m '(= x-canvas 0)]]
       [:div
@@ -8149,7 +8254,7 @@ findout out the mass of the grain."]
     [exercise-164]
     [exercise-165]
     [exercise-175]
-    [exercise-176]
+    (comment [exercise-176])
     [exercise-177]
     [exercise-313]
     [menu-ps]

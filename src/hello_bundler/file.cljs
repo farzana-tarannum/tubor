@@ -27,7 +27,11 @@
 
 (defn file-input []
   (let [[img update-image] (react/useState "")]
-    [:div
+    [:div {:style {:background-size :cover
+                   :background-position :center
+
+                   :background-color "hsl(34,70%,70%)"
+                   :background-image (str "url(" img   ")")}}
 
      [:img {:src (if (> (count img) 0) img (.getItem js/localStorage "file-input-img" ))
             :style {
@@ -43,7 +47,9 @@
 
 (defn file-input-background []
   (let [[img update-image] (react/useState "")]
-    [:div {:style {:grid-row "1 / 2"
+    [:div {:style {:width "80vw"
+                   :height "80vh"
+                   :grid-row "1 / 2"
                    :grid-column "1 / 3"
                    :background-size :cover
                    :background-position :center
@@ -63,8 +69,8 @@
     [:div
 
 
-     [:div {:style {:width "30vw"
-                    :height "30vh"
+     [:div {:style {:width "100vw"
+                    :height "100vh"
                     :background-size :cover
                     :background-position :center
 
