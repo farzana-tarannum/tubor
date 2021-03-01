@@ -428,7 +428,7 @@
   [:div {:style
          {
           :width "100vw"
-          :height "200vh"
+          :height "300vh"
           :display :grid
           :grid-template-columns "1fr 1fr 1fr 1fr"
           :grid-template-rows "1fr 1fr 1fr 1fr"}}
@@ -442,7 +442,7 @@
     ]
    [:div {:style {:grid-row "3/5"
                   :grid-column "1/5"}}
-    [file/file-input-background2]]
+    [file/file-input]]
    [:div {:style {:z-index 2
                   :grid-row "1/2"
                   :grid-column "1/5"}}
@@ -509,8 +509,7 @@
               :style {:background-color
                       (c [70 80 85])
 
-                      :height (str 90
-                                   (name :vh))
+
                       }
               }
 
