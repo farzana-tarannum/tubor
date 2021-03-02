@@ -418,251 +418,7 @@
 
      ]))
 
-(defn grid-svg [[x y]
-                [[xc-min yc-min]
-                 [yc-max xc-max]]
-                [[bxc-min byc-min]
-                 [byc-max bxc-max]]
-                step
-                eqs]
-  [:div {:style
-         {
-          :width "100vw"
-          :height "300vh"
-          :display :grid
-          :grid-template-columns "1fr 1fr 1fr 1fr"
-          :grid-template-rows "1fr 1fr 1fr 1fr"}}
 
-   [:div {:style {:z-index 2
-                  :grid-column "4/5"
-                  :grid-row "1/2"}}
-
-    (map (fn [e] e) eqs)
-
-    ]
-   [:div {:style {:grid-row "3/5"
-                  :grid-column "1/5"}}
-    [file/file-input]]
-   [:div {:style {:z-index 2
-                  :grid-row "1/2"
-                  :grid-column "1/5"}}
-    [animate-circle]]
-   [:div {:style {
-                  :z-index 1
-                  :grid-column "1/5"
-                  :grid-row "1/3"}}
-    (let [ [x1 y1 x2 y2 :as canvas]
-          [(+ xc-min bxc-min)
-           (+ yc-min byc-min)
-           (+ xc-max bxc-max)
-           (+ yc-max byc-max)]
-
-          mark-y-grid
-          (map
-           (fn [[y y1]]
-             (let []
-               [:g
-                [:circle {:cx (x 0)
-                          :cy y1
-                          :r 1}]
-                [:text {:x (x -7)
-                        :y y1
-                        :style
-                        {:font-size ".3rem"}}
-                 y]]))
-           (map
-            (fn [a]
-              [a
-               (y (* step a))])
-            (into (range 0 (/
-                            (- y2 y1) (* 2 step)))
-                  (range -1 (/
-                             (- y2 y1) (* -1 2 step)) -1))
-            ))
-          mark-x-grid
-          (map
-           (fn [a]
-             [:g
-              [:circle {:cx (* a 30)
-                        :cy (y 0)
-                        :r 1}]
-              [:text {:x (* a 30)
-                      :y (y -5)
-                      :style {:font-size ".3rem"}
-                      } a]
-              ]
-             )
-
-
-           (range (/ (- x2 x1) (* 1 step))))
-
-          ]
-      [:div
-
-
-       [:svg {:viewBox (reduce
-                        (fn [acc b]
-                          (str acc " " b)
-                          )
-                        ""
-                        canvas)
-              :style {:background-color
-                      (c [70 80 85])
-
-
-                      }
-              }
-
-        mark-y-grid
-        mark-x-grid
-
-
-        [:circle {:cx 0
-                  :cy (y 20)
-                  :r 2}]
-        [:circle {:cx 90
-                  :cy (y 0)
-                  :r 2}]
-
-        (map
-         (fn [a]
-           [:g
-            [:path {:stroke (c [180 70 70])
-                    :stroke-width .8
-                    :d (str "M" -10  " "
-                            (y (* 30 a))
-                            " l  820 0" )}]
-
-            [:path {:stroke (c [90 70 70])
-                    :stroke-width .8
-                    :d (str "M" -10  " "
-                            (y (+ (* 30 a ) (* 6 1)))
-                            " l  820 0" )}]
-
-            [:path {:stroke (c [90 70 70])
-                    :stroke-width .8
-                    :d (str "M" -10  " "
-                            (y (+ (* 30 a ) (* 6 2)))
-                            " l  820 0" )}]
-
-            [:path {:stroke (c [90 70 70])
-                    :stroke-width .8
-                    :d (str "M" -10  " "
-                            (y (+ (* 30 a ) (* 6 3)))
-                            " l  820 0" )}]
-            [:path {:stroke (c [90 70 70])
-                    :stroke-width .8
-                    :d (str "M" -10  " "
-                            (y (+ (* 30 a ) (* 6 4)))
-                            " l  820 0" )}]])
-         (range -7
-                7))
-
-        (map
-         (fn [x]
-           [:g
-            [:path {:stroke (c [10 70 70])
-                    :stroke-width .8
-                    :d (str "M" (* x 30)  " " (y -200)   " l 0 -420 " )}]
-
-            (comment [:path {:stroke (c [60 70 70])
-                             :stroke-width .8
-                             :d (str "M" (+ (* x 30) 6)  " " (y -200)   " l 0 -420 " )}])
-
-            [:path {:stroke (c [10 70 70])
-                    :stroke-width .8
-                    :d (str "M" (* x 30)  " " (y -200)   " l 0 -420 " )}]
-
-            ] )
-
-         (range (/ (- x2 x1) (* 1 step))))
-
-
-        [:circle {:cx 0
-                  :cy (y 120)
-                  :r 2
-                  :fill (c [10 70 70])}]
-
-        [:circle {:cx (* 3 30)
-                  :cy (y 120)
-                  :r 2
-                  :fill (c [10 70 70])}]
-
-        [:path {:stroke (c [10 70 70])
-                :stroke-width .8
-                :d (str "M" 0
-                        " " (y 120)
-                        " l " (* step 3)   " "  0 )}]
-
-        [:path {:stroke (c [10 70 70])
-                :stroke-width .8
-                :d (str "M" (* 3 30)
-                        " " (y 120)
-                        " L " (* 7 30)
-                        " "  (y -120) )}]
-
-
-
-        [:circle {:cx (* 7 30)
-                  :cy (y -120)
-                  :r 2
-                  :fill (c [10 70 70])}]
-        [:path {:stroke (c [10 70 70])
-                :stroke-width .8
-                :d (str "M" (* 7 30)
-                        " " (y -120)
-                        " l " (* 2 30)
-                        " " 0)}]
-
-        [:circle {:cx (* 9 30)
-                  :cy (y -120)
-                  :r 2
-                  :fill (c [10 70 70])}]
-
-        [:circle {:cx (* 14 30)
-                  :cy (y 180)
-                  :r 2
-                  :fill (c [10 70 70])}]
-
-        [:path {:stroke (c [10 70 70])
-                :stroke-width .8
-                :d (str "M" (* 7 30)
-                        " " (y -120)
-                        " L " (* 14 30)
-                        " " (y 180))}]
-
-        [:path {:stroke (c [300 70 70])
-                :stroke-width .8
-                :fill :none
-                :d (str "M" (* 0 30)
-                        " " (y 0)
-                        " L " (* 3 30)
-                        " " (y (- 60 12))
-                        " L " (* 5 30)
-                        " " (y (- 60 12))
-                        " L " (* 7 30)
-                        " " (y (+ (* 4 30) (* 6 2)))
-                        " L " (* 8 30)
-                        " " (y (+ (* 4 30) (* 6 2)))
-                        " L " (+ (* 11 30) (* 6 3))
-                        " " (y (+ (* 5 30)
-                                  (* 6 0)))
-                        " L " (+ (* 12 30) (* 6 3))
-                        " " (y (+ (* 5 30)
-                                  (* 6 0)))
-                        " L " (+ (* 14 30)
-                                 (* 6 0))
-                        " " (y (+ (* 6 30)
-                                  (* 6 0)))
-
-
-
-
-                        )}]
-
-
-
-        ]])]])
 
 (defn test-canvas []
   (let [ref (react/useRef)
@@ -4125,72 +3881,57 @@ size of 4 peaces is 15 cm. What is the size of the zucchini"]
 
 (defn exercise-313 []
   [container "313" "2.5"
-   [ [:div {:style {:padding "2rem"}}
-      ""
+   [[:div {:style {:height "100vh"
+                   :width "100vw"}}
+
+
+     [:svg {:viewBox "0  0 400 400"
+            :style {
+                    :background-color (c [180 70 70])}
+            }
+      [:text {:x 20
+              :y 20} "6"]
+
+      [:path {:stroke (c [310 70 70])
+              :stroke-width 2
+              :fill :none
+              :d "M 40 0 q 10 10  0 46  l 40 0 l 0 -46"}]
+
+      [:text {:x 45
+              :y 20}
+       "84"]
+
+      [:text {:x 45
+              :y 40}
+       "60"]
+
+      [:text {:x 45
+              :y 65}
+       "24"]
+
+      [:text {:x 45
+              :y 85}
+       "24"]
+
+
+
+
+      [:text {:x 85
+              :y 20}
+       "10 + 4"]
+
+
+
+
+
       ]
-    [:div {:contenteditable :true
-           :style {:border "2px solid #ddd"
-                    :display :flex
-                    :padding "1rem"
-                    :flex-direction :column
-                    :align-items :center
-                    :font-size
-                    "1.5rem"}}
-     [:div {:contenteditable :true
-            :style {:grid-row "1/2"
-                     :grid-column "1/7"}}
-      "1"
-       ]
-     [:div {:style {:grid-row "2/3"
-                    :grid-column "1/7"}}
-      [:div "2" ]
-      ]
-     [:div {:style {:grid-row "2/3"
-                    :grid-column "1/7"}}
-      [:div "3 " ]
-      ]
 
-     [:div {:style {:grid-row "2/3"
-                    :grid-column "1/7"}}
-      [:div "3 " ]
-      ]
-      [:div {:style {:grid-row "2/3"
-                     :grid-column "1/7"}}
-       [:div "4 " ]
-       ]
-      [:div {:style
-             {:padding "1rem"
-             :display :grid
-              :grid-template-columns
-              "16vw 2vw 16vw 2vw 16vw 2vw 16vw"
-              :gap ".1rem"
-              :grid-auto-rows "5vh"
-              ;;:grid-template-rows "1fr 7vh 1fr"
-              }}
-       (map-indexed
-        (fn [i n]
-          [:div {:style {:background-color (c [70 70 70])}}
-           n])
-        ["Biology" "=" "1" "1" "" "" "" ])
 
-       (map-indexed
-        (fn [i n]
 
-          [:div {:style {:background-color (c [110 70 70])}} n])
-        [ "" "" "" "" "" "" "" ])
 
-       (map-indexed
-        (fn [i n]
-          [:div {:contenteditable :true
-                 :style {:background-color (c [150 70 70])}} n])
-        [ "" "" "" "" "" "" "" ])
 
-       (map-indexed
-        (fn [i n]
 
-          [:div {:contenteditable :true
-                 :style {:background-color (c [210 70 70])}} n])
-        [ "" "" "" "" "" "" "" ])]]]])
+     ]]])
 
 
 
@@ -7857,122 +7598,11 @@ findout out the mass of the grain."]
 
         ])]]])
 
-
-(defn exercise-176 []
-  [container "176" "1.4"
-   [
-    [grid-svg [(fn [xp] xp)
-                (fn [yc]
-                  (- (* (- 400 yc) 1) 200))]
-      [[0 0] [400 600]]
-      [[-10 -10] [20 20]] 30
-      [
-       [:div [m '(= yc-min 0)]]
-       [:div [m '(= xc-min 0)]]
-
-       [:div [m '(= xc-max 400)]]
-       [:div [m '(= yc-max 400)]]
-       [:div [m '(= step 30)]]
-       [:div [m '(= (* 7 step) 210)]]
+(comment
+  )
 
 
-       [:div {:style {:background-color (c [70 70 70])}}
-        [m '(= yc
-               (- (:b (- 400 y)) 200)
 
-               )]]
-
-       [:div {:style {:background-color (c [70 70 70])}}
-        [m '(= 0
-               (- (:b (- 400 y)) 200)
-
-               )]]
-
-       [:div {:style {:background-color (c [120 70 70])}}
-        [m '(= yc
-               (- (:b (- 400 0)) 200)
-
-               )]]
-
-       [:div {:style {:background-color (c [120 70 70])}}
-        [m '(= yc
-               (- (:b (- 400 100)) 200)
-
-               )]]
-
-       [:div {:style {:background-color (c [150 70 70])}}
-        [m '(= yc
-               (- (:b (- 400 (:b (- 10)))) 200))]]
-
-       [:div [m '(= x (xc 30))]]]
-      ]
-    ]])
-
-
-(defn exercise-177 []
-  [container "177" "1.4"
-   [
-    [grid-svg [(fn [xp] (+ xp  0))
-               (fn [yc]
-                 (- (* (- 400 yc) 1) 200))]
-      [[0 0] [400 600]]
-      [[-10 -10] [20 20]] 30
-     [
-      [:div [m '(= xc (:b (+ (:m 30 x) 200)))]]
-      [:div {:style {:background-color (c [70 70 70])}}
-       [m '(= yc (- (:b (- 400 y)) 200))]]
-      [:div [m '(= yc-min 0)]]
-      [:div [m '(= xc-min 0)]]
-      [:div [m '(= xc-max 400)]]
-      [:div [m '(= yc-max 400)]]
-      [:div [m '(= step 30)]]
-      [:div [m '(= (* 7 step) 210)]]
-      [:div {:style {:background-color (c [70 70 70])}}
-        [m '(= 0
-               (- (:b (- 400 y)) 200))]]
-      [:div [m '(= v
-                   (d
-                    t))]]
-      [:div {:style {:background-color (c [70 70 70])
-                     :font-size "2rem"}}
-       [m '(= va
-                   (1.6
-                    3))]]
-      [:div {:style {:background-color (c [70 70 70])
-                     :font-size "2rem"}}
-       [m '(= vb
-                   0)]]
-
-      [:div {:style {:background-color (c [90 70 70])
-                     :font-size "2rem"}}
-       [m '(= vc
-                   ((- 4.4 1.6) 2))]]
-
-      [:div {:style {:background-color (c [120 70 70])
-                     :font-size "2rem"}}
-       [m '(= vd
-                   0)]]
-      [:div {:style  {:background-color (c [150 70 70])
-              :font-size "2rem"}}
-       [m '(= ve
-                   ((- 4.4
-                       5) (- 11.6 8)))]]
-
-      [:div {:background-color (c [180 70 70])
-             :font-size "2rem"}
-       [m '(= vf
-                   0)]]
-
-      [:div {:background-color (c [70 70 70])
-             :font-size "2rem"}
-       [m '(= vg
-                   ((- 6
-                       5)
-                    (- 12.6 8)))]]
-
-
-      ]]
-    ]])
 
 
 
@@ -8162,7 +7792,22 @@ findout out the mass of the grain."]
     ]])
 
 
-(defn template1 []
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(defn template11 []
   [:div {:style {:background-color :#f1fafa}}
    (comment
      [menu])
@@ -8257,7 +7902,7 @@ findout out the mass of the grain."]
     [exercise-165]
     [exercise-175]
     (comment [exercise-176])
-    [exercise-177]
+    (comment [exercise-177])
     [exercise-313]
     [menu-ps]
     [:div
@@ -8272,3 +7917,419 @@ findout out the mass of the grain."]
      ]
     [simple-example]
     ]])
+
+
+(defn grid-svg [[x y]
+                [[xc-min yc-min]
+                 [yc-max xc-max]]
+                [[bxc-min byc-min]
+                 [byc-max bxc-max]]
+                step
+                eqs]
+  [:div {:style
+         {
+          :padding-left "10px"
+          :width "98vw"
+          :height "200vh"
+          :display :grid
+          :grid-template-columns "1fr 1fr 1fr 1fr"
+          :grid-template-rows "1fr 1fr 1fr 1fr"}}
+
+   [:div {:style {:z-index 2
+                  :grid-column "4/5"
+                  :grid-row "1/2"}}
+
+    (map (fn [e] e) eqs)]
+   [:div {:style {:grid-row "3/5"
+                  :grid-column "1/5"}}
+    [file/file-input]]
+   [:div {:style {:z-index 2
+                  :grid-row "1/2"
+                  :grid-column "1/5"}}
+    [animate-circle]]
+   [:div {:style
+          {
+           :z-index 1
+           :grid-column "1/5"
+           :grid-row "1/3"}}
+    (let [ [x1 y1 x2 y2 :as canvas]
+          [(+ xc-min bxc-min)
+           (+ yc-min byc-min)
+           (+ xc-max bxc-max)
+           (+ yc-max byc-max)]
+
+          mark-y-grid
+          (map
+           (fn [[y y1]]
+             (let []
+               [:g
+                [:circle {:cx (x 0)
+                          :cy y1
+                          :r 1}]
+                [:text {:x (x -7)
+                        :y y1
+                        :style
+                        {:font-size ".3rem"}}
+                 y]]))
+           (map
+            (fn [a]
+              [a
+               (y (* step a))])
+            (into (range 0 (/
+                            (- y2 y1) (* 2 step)))
+                  (range -1 (/
+                             (- y2 y1) (* -1 2 step)) -1))
+            ))
+          mark-x-grid
+          (map
+           (fn [a]
+             [:g
+              [:circle {:cx (* a 30)
+                        :cy (y 0)
+                        :r 1}]
+              [:text {:x (* a 30)
+                      :y (y -5)
+                      :style {:font-size ".3rem"}
+                      } a]
+              ]
+             )
+
+
+           (range (/ (- x2 x1) (* 1 step))))
+
+          ]
+      [:div
+
+
+       [:svg {:viewBox (reduce
+                        (fn [acc b]
+                          (str acc " " b)
+                          )
+                        ""
+                        canvas)
+              :style
+              {:background-color
+               (c [70 80 85])}}
+        [:defs
+         [:marker {:id "i"
+                   :refY 0
+                   :refX 0
+                   :orient :auto
+                   :style {:overflow :visible}}
+          [:path {:d "M 0 0 L 5 -5 L -12.5 0 L 5 5 L 0 0 z"
+                  :style {:fill-rule :evenodd
+                          :stroke (c [70 70 70])
+                          :stroke-width 1
+                          :stroke-opacity 1
+                          :fill (c [300 70 70])
+                          :fill-opacity 1}
+                  :transform "scale(.5 ) rotate(180) translate(2,0)"
+                  }]]]
+
+
+        mark-y-grid
+        mark-x-grid
+        (comment
+          [:circle {:fill (c [120 70 70])
+                    :cx (x 30)
+                    :cy (y 30)
+                    :r 2}])
+
+        [:text {
+                :style {:font-size ".4rem"}
+                :x (x 30)
+                :y (+ (y 30)
+                      (* 6 2))
+                } "a"]
+
+        [:text {
+                :style {:font-size ".4rem"}
+                :x (x (* 4 30))
+                :y (+ (y (+ (* 1 30) (* 6 3)))
+                      )
+                } "b"]
+
+        [:text {
+                :style {:font-size ".4rem"}
+                :x (x (+ (* 6 30) (* 6 1 -1)))
+                :y (+ (y (+ (* 3 30) (* 6 0)))
+                      )
+                } "c"]
+
+        [:text {
+                :style {:font-size ".4rem"}
+                :x (x (+ (* 7 30) (* 6 2  1)))
+                :y (+ (y (+ (* 4 30) (* 6 2)))
+                      )
+                } "d"]
+
+        [:text {
+                :style {:font-size ".4rem"}
+                :x (x (+ (* 9 30) (* 6 0  1)))
+                :y (+ (y (+ (* 4 30) (* 6 3 1)))
+                      )
+                } "e"]
+
+        [:text {
+                :style {:font-size ".4rem"}
+                :x (x (+ (* 12 30) (* 6 0  1)))
+                :y (+ (y (+ (* 5 30) (* 6 0 1)))
+                      )
+                } "f"]
+
+        [:text {
+                :style {:font-size ".4rem"}
+                :x (x (+ (* 13 30) (* 6 0  1)))
+                :y (+ (y (+ (* 5 30) (* 6 2 1)))
+                      )
+                } "g"]
+
+
+        (map
+         (fn [a]
+           [:g
+            [:path {:stroke (c [180 70 70])
+                    :stroke-width .8
+                    :d (str "M" -10  " "
+                            (y (* 30 a))
+                            " l  820 0" )}]
+
+            [:path {:stroke (c [90 70 70])
+                    :stroke-width .8
+                    :d (str "M" -10  " "
+                            (y (+ (* 30 a ) (* 6 1)))
+                            " l  820 0" )}]
+
+            [:path {:stroke (c [90 70 70])
+                    :stroke-width .8
+                    :d (str "M" -10  " "
+                            (y (+ (* 30 a ) (* 6 2)))
+                            " l  820 0" )}]
+
+            [:path {:stroke (c [90 70 70])
+                    :stroke-width .8
+                    :d (str "M" -10  " "
+                            (y (+ (* 30 a ) (* 6 3)))
+                            " l  820 0" )}]
+            [:path {:stroke (c [90 70 70])
+                    :stroke-width .8
+                    :d (str "M" -10  " "
+                            (y (+ (* 30 a ) (* 6 4)))
+                            " l  820 0" )}]])
+         (range -7
+                7))
+
+        (map
+         (fn [x]
+           [:g
+            [:path {:stroke (c [10 70 70])
+                    :stroke-width .8
+                    :d (str "M" (* x 30)  " " (y -200)   " l 0 -420 " )}]
+
+            (comment [:path {:stroke (c [60 70 70])
+                             :stroke-width .8
+                             :d (str "M" (+ (* x 30) 6)  " " (y -200)   " l 0 -420 " )}])
+
+            [:path {:stroke (c [10 70 70])
+                    :stroke-width .8
+                    :d (str "M" (* x 30)  " " (y -200)   " l 0 -420 " )}]
+
+            ] )
+
+         (range (/ (- x2 x1) (* 1 step))))
+
+
+
+
+
+        [:path {:stroke (c [10 70 70])
+                :stroke-width .8
+                :marker-end "url(#i)"
+                :d (str "M" 0
+                        " " (y 120)
+                        " l " (* step 3)   " "  0 )}]
+
+        [:path {:stroke (c [10 70 70])
+                :stroke-width .8
+                :d (str "M" (* 3 30)
+                        " " (y 120)
+                        " L " (* 7 30)
+                        " "  (y -120) )}]
+
+
+
+
+        [:path {:stroke (c [10 70 70])
+                :stroke-width .8
+                :d (str "M" (* 7 30)
+                        " " (y -120)
+                        " l " (* 2 30)
+                        " " 0)}]
+
+
+
+        [:path {:stroke (c [10 70 70])
+                :stroke-width .8
+                :d (str "M" (* 7 30)
+                        " " (y -120)
+                        " L " (* 14 30)
+                        " " (y 180))}]
+
+        [:path {:stroke (c [380 70 70])
+                :stroke-width 1
+                :d (str "M" (x (+ (* 0 30) (* 6 0  1)))
+                        " " (y (+ (* 0 30) (* 6 0 1)))
+
+                        " l "  (* step 3)
+                        " 0" )}]
+
+        [:path {:stroke (c [180 70 70])
+                :stroke-width 1
+                :d (str "M" (x (+ (* 8 30) (* 6 0  1)))
+                        " " (y (+ (* 5 30) (* 6 0 1)))
+
+                        " l "  (+ (* step 3) (* (/ step 5) 3))
+                        " 0" )}]
+
+
+        [:path {:stroke (c [200 70 70])
+                :stroke-width 1
+                :d (str "M" (x (+ (* 3 30) (* 6 0  1)))
+                        " " (y (+ (* 0 30)
+                                  (* 6 0 1)))
+
+                        " l " 0
+                        " " (+ (* step 1 -1) (* (/ step 5) 3 -1) ) )}]
+
+
+        [:path {:stroke (c [300 70 70])
+                :stroke-width 1
+                :d (str "M" (x (+ (* 8 30) (* 6 0  1)))
+                        " " (y (+ (* 4 30)
+                                  (* 6 2 1)))
+
+                        " l " 0
+                        " " (+ (* step 0 -1) (* (/ step 5) 3 -1) ) )}]
+
+        [:path {:stroke (c [300 70 70])
+                :stroke-width .8
+                :fill :none
+                :stroke-opacity .5
+                :marker-mid "url(#i)"
+                :marker-end "url(#i)"
+                :d (str "M" (* 0 30)
+                        " " (y 0)
+                        " L " (* 3 30)
+                        " " (y (- 60 12))
+                        " L " (* 5 30)
+                        " " (y (- 60 12))
+                        " L " (* 7 30)
+                        " " (y (+ (* 4 30) (* 6 2)))
+                        " L " (* 8 30)
+                        " " (y (+ (* 4 30) (* 6 2)))
+                        " L " (+ (* 11 30) (* 6 3))
+                        " " (y (+ (* 5 30)
+                                  (* 6 0)))
+                        " L " (+ (* 12 30) (* 6 3))
+                        " " (y (+ (* 5 30)
+                                  (* 6 0)))
+                        " L " (+ (* 14 30)
+                                 (* 6 0))
+                        " " (y (+ (* 6 30)
+                                  (* 6 0))))}]
+        (comment :d "M 0 0 l 5 -5 l -17.5 5 l 17.5 5 l -5 -5 z"
+                 "M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z"
+                 )
+        (comment [:path   {:d (str "M " (x 20)  " " (y 0)
+                                   "l 5 -5 l -17.5 5 l 17.5 5 l -5 -5 z")
+                           :transform (str  "scale(1)" " " "rotate" "(" 175  "," (x 20)  ","  (y 0)  ")"
+                                            " ")
+                           :stroke (c [300 70 70])
+                           :stroke-width .8
+                           :fill (c [10 70 70])
+                           }])
+
+        ]])]])
+
+
+
+(defn exercise-177 []
+  [container "177" "1.4"
+   [
+    [grid-svg [(fn [xp] (+ xp  0))
+               (fn [yc]
+                 (- (* (- 400 yc) 1) 200))]
+      [[0 0] [400 600]]
+      [[-10 -10] [20 20]] 30
+     [
+      [:div [m '(= xc (:b (+ (:m 30 x) 200)))]]
+      [:div {:style {:background-color (c [70 70 70])}}
+       [m '(= yc (- (:b (- 400 y)) 200))]]
+      [:div [m '(= yc-min 0)]]
+      [:div [m '(= xc-min 0)]]
+      [:div [m '(= xc-max 400)]]
+      [:div [m '(= yc-max 400)]]
+      [:div [m '(= step 30)]]
+      [:div [m '(= (* 7 step) 210)]]
+      [:div {:style {:background-color (c [70 70 70])}}
+        [m '(= 0
+               (- (:b (- 400 y)) 200))]]
+      [:div [m '(= v
+                   (d
+                    t))]]
+      [:div {:style {:background-color (c [70 70 70])
+                     :font-size "2rem"}}
+       [m '(= va
+                   (1.6
+                    3))]]
+      [:div {:style {:background-color (c [70 70 70])
+                     :font-size "2rem"}}
+       [m '(= vb
+                   0)]]
+
+      [:div {:style {:background-color (c [10 70 70])
+                     :font-size "2rem"}}
+       [:div
+        [m '(= vc
+               (:m ((- 4.4 1.6) (- 7 5))
+
+                   (km min))
+
+               )]]
+
+       [:div
+        [m '(= vc
+               (:m ((* 2.8 1000)
+                    (* 2 60))
+
+                   (m s))
+               )]]]
+
+      [:div {:style {:background-color (c [120 70 70])
+                     :font-size "2rem"}}
+       [m '(= vd
+                   0)]]
+      [:div {:style  {:background-color (c [150 70 70])
+              :font-size "2rem"}}
+       [m '(= ve
+                   ((- 4.4
+                       5) (- 11.6 8)))]]
+
+      [:div {:background-color (c [180 70 70])
+             :font-size "2rem"}
+       [m '(= vf
+                   0)]]
+
+      [:div {:background-color (c [70 70 70])
+             :font-size "2rem"}
+       [m '(= vg
+                   ((- 6
+                       5)
+                    (- 12.6 8)))]]
+
+
+      ]]
+    ]])
+
+(defn template1 []
+  [exercise-177])
