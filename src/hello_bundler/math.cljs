@@ -8029,11 +8029,6 @@ findout out the mass of the grain."]
 
         mark-y-grid
         mark-x-grid
-        (comment
-          [:circle {:fill (c [120 70 70])
-                    :cx (x 30)
-                    :cy (y 30)
-                    :r 2}])
 
         [:text {
                 :style {:font-size ".4rem"}
@@ -8125,10 +8120,6 @@ findout out the mass of the grain."]
             [:path {:stroke (c [10 70 70])
                     :stroke-width .8
                     :d (str "M" (* x 30)  " " (y -200)   " l 0 -420 " )}]
-
-            (comment [:path {:stroke (c [60 70 70])
-                             :stroke-width .8
-                             :d (str "M" (+ (* x 30) 6)  " " (y -200)   " l 0 -420 " )}])
 
             [:path {:stroke (c [10 70 70])
                     :stroke-width .8
@@ -8236,20 +8227,438 @@ findout out the mass of the grain."]
                         " L " (+ (* 14 30)
                                  (* 6 0))
                         " " (y (+ (* 6 30)
-                                  (* 6 0))))}]
-        (comment :d "M 0 0 l 5 -5 l -17.5 5 l 17.5 5 l -5 -5 z"
-                 "M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z"
-                 )
-        (comment [:path   {:d (str "M " (x 20)  " " (y 0)
-                                   "l 5 -5 l -17.5 5 l 17.5 5 l -5 -5 z")
-                           :transform (str  "scale(1)" " " "rotate" "(" 175  "," (x 20)  ","  (y 0)  ")"
-                                            " ")
-                           :stroke (c [300 70 70])
-                           :stroke-width .8
-                           :fill (c [10 70 70])
-                           }])
+                                  (* 6 0))))}]]])]])
 
-        ]])]])
+
+(defn grid-svg2 [[x y]
+                [[xc-min yc-min]
+                 [xc-max yc-max]]
+                [[bxc-min byc-min]
+                 [byc-max bxc-max]]
+                step
+                eqs]
+  [:div {:style
+         {
+          :padding-left "10px"
+          :width "98vw"
+          :height "200vh"
+          :display :grid
+          :grid-template-columns "1fr 1fr 1fr 1fr"
+          :grid-template-rows "1fr 1fr 1fr 1fr"}}
+
+   [:div {:style {:z-index 2
+                  :grid-column "4/5"
+                  :grid-row "1/2"}}
+
+    (map (fn [e] e) eqs)]
+
+   [:div {:style
+          {
+           :z-index 1
+           :grid-column "1/5"
+           :grid-row "1/3"}}
+    (let [ [x1 y1 x2 y2 :as canvas]
+          [(+ xc-min bxc-min)
+           (+ yc-min byc-min)
+           (+ xc-max bxc-max)
+           (+ yc-max byc-max)]
+          [xg yg] [(fn [[xl xs]]
+                     (x (+ (* step xl)
+                           (* (/ step 5) xs))
+                        ))
+
+                   (fn [[xl xs]]
+                     (y (+ (* step xl)
+                           (* (/ step 5) xs))
+                        ))]
+          mark-y-grid
+          (map
+           (fn [[y y1]]
+             (let []
+               [:g
+                [:circle {:cx (x 0)
+                          :cy y1
+                          :r 1}]
+                [:text {:x (x -7)
+                        :y y1
+                        :style
+                        {:font-size ".3rem"}}
+                 y]]))
+           (map
+            (fn [a]
+              [a
+               (y (* step a))])
+            (let []
+                (into (range 0 (/
+                                (- yc-max yc-min)
+                                (* 2 step)))
+                      (range -1 (/
+                                 (- yc-max yc-min)
+                                 (* -1 2 step)) -1)))
+            ))
+          mark-x-grid
+          (map
+           (fn [a]
+             [:g
+              [:circle {:cx (xg [a 0])
+                        :cy (y 0)
+                        :r 1}]
+              [:text {:x (xg [a 0])
+                      :y (y -5)
+                      :style {:font-size ".3rem"}
+                      } a]
+              ]
+             )
+
+
+           (range (/ (- xc-max xc-min) (* 1 step))))
+
+          ]
+      [:div
+
+
+       [:svg {:viewBox (reduce
+                        (fn [acc b]
+                          (str acc " " b)
+                          )
+                        ""
+                        canvas)
+              :style
+              {:background-color
+               (c [70 80 85])}}
+        [:defs
+         [:marker {:id "i"
+                   :refY 0
+                   :refX 0
+                   :orient :auto
+                   :style {:overflow :visible}}
+          [:path {:d "M 0 0 L 5 -5 L -12.5 0 L 5 5 L 0 0 z"
+                  :style {:fill-rule :evenodd
+                          :stroke (c [70 70 70])
+                          :stroke-width 1
+                          :stroke-opacity 1
+                          :fill (c [300 70 70])
+                          :fill-opacity 1}
+                  :transform "scale(.2 ) rotate(180) translate(2,0)"
+                  }]]]
+
+
+        mark-y-grid
+        mark-x-grid
+
+        (map
+         (fn [a]
+           [:g
+            [:path {:stroke (c [180 70 70])
+                    :stroke-width .8
+                    :d (str "M" -10  " "
+                            (yg [a 0])
+                            " l " (- x2 x1)  " 0")}]
+
+            [:path {:stroke (c [90 70 70])
+                    :stroke-width .8
+                    :d (str "M" -10  " "
+                            (yg [a 1])
+                            " l " (- x2 x1)  " 0")}]
+
+            [:path {:stroke (c [90 70 70])
+                    :stroke-width .8
+                    :d (str "M" -10  " "
+                            (yg [a 2])
+                            " l " (- x2 x1)  " 0"
+                            )}]
+
+            [:path {:stroke (c [90 70 70])
+                    :stroke-width .8
+                    :d (str "M" -10  " "
+                            (yg [a 3])
+                            " l " (- x2 x1)  " 0"
+                            )}]
+            [:path {:stroke (c [90 70 70])
+                    :stroke-width .8
+                    :d (str "M" -10  " "
+                            (yg [a 4])
+                            " l " (- x2 x1)  " 0"
+                            )}]])
+         (range (* (- yc-max yc-min) -1)
+                (- yc-max yc-min)))
+
+        (map
+         (fn [x]
+           [:g
+            [:path {:stroke (c [10 70 70])
+                    :stroke-width .8
+                    :d (str "M" (xg [x 0])
+                            " " y2
+                            " l 0 " (- y1 y2))}]
+
+
+
+            ] )
+
+         (range
+          (/ (- x2 x1) (* 2 step -1))
+          (/ (- x2 x1) (* 2 step))))
+        [:path {:stroke (c [370 70 70])
+                :stroke-width 20
+                :fill :none
+                :stroke-opacity .5
+
+                :d (str
+                    "M " (+ (* 5 30) (* 6 0))
+                    " " (y (+ (* 0 30)
+                              (* 6 0)))
+                    " L " (+ (* 12 30) (* 6 0))
+                    " " (y (+ (* 0 30)
+                              (* 6 0)))
+
+                    " L " (+ (* 12 30) (* 6 0))
+
+                    " " (y (+ (* 5 30)
+                              (* 6 0))
+
+                           )
+                    " L " (+ (* 5 30) (* 6 0))
+                    " " (y (+ (* 5 30)
+                              (* 6 0)))
+
+                    " z"
+
+                    )}]
+
+
+
+        (comment
+          a)
+        (let [yy 4]
+          [:g
+           [:path {:stroke (c [10 40 40])
+                   :stroke-width 2
+                   :fill :none
+                   :stroke-opacity .5
+                   :marker-end "url(#i)"
+                   :d (str
+                       "M " (+ (* 4 30) (* 6 3.2))
+                       " " (y (+ (* yy 30)
+                                 (* 6 2)))
+                       " l " (+ (* 7 30) (* 6 3))
+                       " " 0)}]
+           [:text {:style {:font-size ".8rem"}
+                   :x (+ (* 7 30) (* 6 3.2))
+                   :y (y (+ (* yy 30)
+                            (* 6 0)))}
+            "a"]])
+
+
+
+        (comment 50)
+        [:path {:stroke (c [50 40 40])
+                :stroke-width 2
+                :fill :none
+                :stroke-opacity .5
+                :marker-end "url(#i)"
+                :d (str
+                    "M " (+ (* 9 30) (* 6 3.2))
+                    " " (y (+ (* 5 30)
+                              (* 6 1.8)))
+                    " l " 0
+                    " " (+ (* 5 30) (* 6 3)))}]
+
+        (comment x udown)
+        [:path {:stroke (c [80 40 40])
+                :stroke-width 2
+                :fill :none
+                :stroke-opacity .5
+                :marker-end "url(#i)"
+                :d (str
+                    "M " (+ (* 9 30) (* 6 3.2))
+                    " " (y (+ (* 5 30)
+                              (* 6 1.8)))
+                    " l " 0
+                    " " (+ (* 0 301) (* 6 3))
+
+1111
+
+                    )}]
+
+        (comment 70)
+
+        (let [yy 5]
+          [:g
+
+           [:path {:stroke (c [90 40 40])
+                   :stroke-width 20
+                   :fill :none
+                   :stroke-opacity .5
+
+                   :d (str
+                       "M " (+ (* 5 30) (* 6 1.8))
+                       " " (y (+ (* yy 30)
+                                 (* 6 0)))
+                       " l " (+ (* 6 30) (* 6 1))
+                       " " 0
+                       )}]
+           [:path {:stroke (c [90 40 40])
+                   :stroke-width 20
+                   :fill :none
+                   :stroke-opacity .5
+
+                   :d (str
+                       "M " (+ (* 5 30) (* 6 1.8))
+                       " " (y (+ (* 0 30)
+                                 (* 6 0)))
+                       " l " (+ (* 6 30) (* 6 1))
+                       " " 0
+                       )}]
+           [:text {:x (xg [8 1.8])
+                   :y (yg [yy 1])} "70"]])
+
+        [:path {:stroke (c [70 40 40])
+                :stroke-width 1
+                :fill :none
+                :stroke-opacity .5
+                :marker-end "url(#i)"
+                :d (str
+                    "M " (+ (* 11 30) (* 6 3.2))
+                    " " (y (+ (* 4 30)
+                              (* 6 0)))
+                    " l " (+ (* 0 30) (* 6 3))
+                    " " 0
+
+
+
+                    )}]
+        (comment x)
+
+        (let [yy 2]
+          [:g
+           [:path {:stroke (c [140 70 70])
+                   :stroke-width 2
+                   :fill :none
+                   :stroke-opacity 1
+                   :marker-end "url(#i)"
+                   :d (str
+                       "M " (+ (* 11 30) (* 6 3.2))
+                       " " (y (+ (* yy 30)
+                                 (* 6 0)))
+                       " l " (+ (* 0 30) (* 6 4))
+                       " " 0
+
+
+
+                       )}]
+
+           [:path {:stroke (c [140 70 70])
+                   :stroke-width 2
+                   :fill :none
+                   :stroke-opacity 1
+                   :marker-end "url(#i)"
+                   :d (str
+                       "M " (+ (* 4 30) (* 6 3.2))
+                       " " (y (+ (* yy 30)
+                                 (* 6 0)))
+                       " l " (+ (* 0 30) (* 6 4))
+                       " " 0
+
+
+
+                       )}]
+
+           [:text {:style {:font-size ".5rem"}
+                   :x (+ (* 4 30) (* 6 4.5))
+                   :y (yg [yy 0])
+                   } "x"]
+
+
+           [:text {:style {:font-size ".5rem"}
+                   :x (+ (* 11 30) (* 6 4.5))
+                   :y (yg [yy 0])
+                   } "x"]
+
+
+
+           ])
+
+
+
+
+
+
+
+        [:path {:stroke (c [300 70 70])
+                :stroke-width 2
+                :fill (c [300 70 70])
+                :stroke-opacity 1
+                :d (str
+                    "M " (+ (* 4 30) (* 6 3.5))
+                    " " (y (+ (* 0 30)
+                              (* 6 1.6 -1)))
+                    " l " (+ (* 0 30) (* 6 3))
+                    " " 0
+                    " l " 0
+                    " " (+ (* 0 30) (* 6 3 -1))
+                    " l " (+ (* 0 30) (* 6 3 -1))
+                    "  " 0
+                    " z"
+
+
+
+                    )}]
+
+
+        [:path {:stroke (c [300 70 70])
+                :stroke-width 2
+                :fill (c [300 70 70])
+                :stroke-opacity 1
+                :d (str
+                    "M " (xg [4 3.4])
+                    " " (yg [4 3.3])
+                    " l " (+ (* 0 30) (* 6 3))
+                    " " 0
+                    " l " 0
+                    " " (+ (* 0 30) (* 6 3 -1))
+                    " l " (+ (* 0 30) (* 6 3 -1))
+                    "  " 0
+                    " z"
+
+
+
+                    )}]
+
+
+        [:path {:stroke (c [300 70 70])
+                :stroke-width 2
+                :fill (c [300 70 70])
+                :stroke-opacity 1
+                :d (str
+                    "M " (xg [11 3.4])
+                    " " (yg [4 3.3])
+                    " l " (+ (* 0 30) (* 6 3))
+                    " " 0
+                    " l " 0
+                    " " (+ (* 0 30) (* 6 3 -1))
+                    " l " (+ (* 0 30) (* 6 3 -1))
+                    "  " 0
+                    " z"
+
+
+
+                    )}]
+
+        [:path {:stroke (c [300 70 70])
+                :stroke-width 2
+                :fill (c [300 70 70])
+                :stroke-opacity 1
+                :d (str
+                    "M " (xg [11 3.4])
+                    " " (yg [0 -2.1])
+                    " l " (+ (* 0 30) (* 6 3))
+                    " " 0
+                    " l " 0
+                    " " (+ (* 0 30) (* 6 3 -1))
+                    " l " (+ (* 0 30) (* 6 3 -1))
+                    "  " 0
+                    " z")}]]])]])
 
 
 
@@ -8331,5 +8740,31 @@ findout out the mass of the grain."]
       ]]
     ]])
 
+
+(defn exercise-178 []
+  [container "178" "1.4"
+   [
+    [grid-svg2
+     [(fn [xp]
+        (+ xp  210))
+      (fn [yc]
+        (-
+         (*
+          (- 600 yc) 1) 300))]
+      [[0 0] [400 600]]
+     [[-10 -10] [20 20]] 30
+     [
+      [:div {:style {:background-color (c [10 70 70])}}
+       (m '(= (+ (:m 4
+                     (:p x 2))
+                 (:m 70 x)
+                 (:m 70 x)
+                 (:m 50 x)
+                 (:m 50 x)
+                 )
+              1024)
+
+          )]]]]])
+
 (defn template1 []
-  [exercise-177])
+  [exercise-178])
