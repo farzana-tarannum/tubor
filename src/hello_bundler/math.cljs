@@ -8339,7 +8339,7 @@ findout out the mass of the grain."]
                           :stroke-opacity 1
                           :fill (c [300 70 70])
                           :fill-opacity 1}
-                  :transform "scale(.2 ) rotate(180) translate(2,0)"
+                  :transform "scale(.2) rotate(180) translate(12.5,0)"
                   }]]]
 
 
