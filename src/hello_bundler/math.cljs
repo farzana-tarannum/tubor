@@ -8579,12 +8579,6 @@ findout out the mass of the grain."]
 
            ])
 
-
-
-
-
-
-
         [:path {:stroke (c [300 70 70])
                 :stroke-width 2
                 :fill (c [300 70 70])
@@ -8619,11 +8613,7 @@ findout out the mass of the grain."]
                     " " (+ (* 0 30) (* 6 3 -1))
                     " l " (+ (* 0 30) (* 6 3 -1))
                     "  " 0
-                    " z"
-
-
-
-                    )}]
+                    " z")}]
 
 
         [:path {:stroke (c [300 70 70])
@@ -8639,11 +8629,7 @@ findout out the mass of the grain."]
                     " " (+ (* 0 30) (* 6 3 -1))
                     " l " (+ (* 0 30) (* 6 3 -1))
                     "  " 0
-                    " z"
-
-
-
-                    )}]
+                    " z")}]
 
         [:path {:stroke (c [300 70 70])
                 :stroke-width 2
@@ -8750,7 +8736,7 @@ findout out the mass of the grain."]
       (fn [yc]
         (-
          (*
-          (- 600 yc) 1) 300))]
+          (- 600 yc) 1) 100))]
       [[0 0] [400 600]]
      [[-10 -10] [20 20]] 30
      [
