@@ -1,6 +1,7 @@
 (ns hello-bundler.math
   (:require
    [react]
+   [clojure.string :as str]
    [clojure.test.check.generators :as gen2]
    [clojure.spec.gen.alpha :as gen]
    [clojure.spec.alpha :as s]
@@ -62,8 +63,7 @@
            [:c 2 3 3 4 7 4
             :s 2 3 2 3])
 
-(s/conform ::q-curve [:q 2 3 3 4
-                      ])
+(s/conform ::q-curve [:q 2 3 3 4])
 
 
 
@@ -74,13 +74,6 @@
    :points
    (s/+
     ::point)))
-
-
-
-(s/valid? ::lines [:L
-                   3 4
-                   3 4
-                   5 2])
 
 
 
@@ -97,16 +90,18 @@
             ))
    ))
 
-(s/valid? ::path [3 4
-                  :L 2 3 3 5 5 2
-                  :c 4 3 4 5 3 4 :s 5 2 3 4
-                  :c 4 5 6 2 2 3
-                  :L 2 3 3 5
-                  :q 23 23 24 53 :t 23 23
-                  :l 3 5 5 6
-                  :q 23 23 24 53
-                  :A 24 20 25 0 0 200 200
-                  ])
+(s/conform ::path [3 4
+                   :L 2 3 3 5 5 2
+                   :c 4 3 4 5 3 4 :s 5 2 3 4
+                   :c 4 5 6 2 2 3
+                   :L 2 3 3 5
+                   :q 23 23 24 53 :t 23 23
+                   :l 3 5 5 6
+                   :q 23 23 24 53
+                   :A 24 20 25 0 0 200 200
+                   ])
+
+
 
 
 (s/def ::hsl
@@ -142,26 +137,27 @@
         :name (s/?
                keyword?))))
 
-(s/def ::grid
+
+(s/def ::mark-area
   (s/cat
-   :rows ::size
-   :columns ::size
-   :gap ::size))
+   :row int?
+   :row-span int?
+   :col int?
+   :col-span int?))
 
 
 
 
 
-(comment (s/valid? ::mark-area [3 :span 2]))
+(defn mark-area [area]
+  (let [{:keys [row row-span col col-span]} (s/conform ::mark-area area)]
+    (str/join "/" [row row-span
+                   col  col-span]))
+  )
 
-(s/valid? ::size [1 :fr :hello])
+(comment (mark-area [3 2 3 2]))
 
-(s/conform ::size [1 :rem
-                   2 :fr
-                   10 :vh :hello
-                   ])
-
-
+(s/valid? ::size [1 :fr ])
 
 
 
@@ -169,6 +165,21 @@
 (defn c [a]
   (hsl
    (s/conform ::hsl a)))
+
+(defn size [s]
+  (str/join " "
+   (map (fn [{:keys [size scale nm]}]
+          (str/join "" [size (name scale) nm]))
+        (s/conform ::size s))))
+
+
+
+(size [.1 :rem
+       2 :vw
+       10 :vh :hello
+       ])
+
+
 
 
 ;; 01741775277 ethan mom maliha
@@ -8230,261 +8241,6 @@ findout out the mass of the grain."]
                                   (* 6 0))))}]]])]])
 
 
-(defn grid-svg2 [[x y]
-                [[xc-min yc-min]
-                 [xc-max yc-max]]
-                [[bxc-min byc-min]
-                 [byc-max bxc-max]]
-                step
-                eqs]
-  [:div {:style
-         {
-          :padding-left "10px"
-          :width "98vw"
-          :height "200vh"
-          :display :grid
-          :grid-template-columns "1fr 1fr 1fr 1fr"
-          :grid-template-rows "1fr 1fr 1fr 1fr"}}
-
-   [:div {:style {:z-index 2
-                  :grid-column "4/5"
-                  :grid-row "1/2"}}
-
-    (map (fn [e] e) eqs)]
-
-   [:div {:style
-          {
-           :z-index 1
-           :grid-column "1/5"
-           :grid-row "1/3"}}
-    (let [ [x1 y1 x2 y2 :as canvas]
-          [(+ xc-min bxc-min)
-           (+ yc-min byc-min)
-           (+ xc-max bxc-max)
-           (+ yc-max byc-max)]
-          [xg yg] [(fn [[xl xs]]
-                     (x (+ (* step xl)
-                           (* (/ step 5) xs))
-                        ))
-
-                   (fn [[xl xs]]
-                     (y (+ (* step xl)
-                           (* (/ step 5) xs))
-                        ))]
-          [sx sy] [(fn [[s sa]]
-                     (+ (* s step) (* sa (/ step 5))))
-                   (fn [[s sa]]
-                     (+ (* s step) (* sa (/ step 5))))
-                   ]
-          mark-y-grid
-          (map
-           (fn [[y y1]]
-             (let []
-               [:g
-                [:circle {:cx (x 0)
-                          :cy y1
-                          :r 1}]
-                [:text {:x (x -7)
-                        :y y1
-                        :style
-                        {:font-size ".3rem"}}
-                 y]]))
-           (map
-            (fn [a]
-              [a
-               (y (* step a))])
-            (let []
-                (into (range 0 (/
-                                (- yc-max yc-min)
-                                (* 2 step)))
-                      (range -1 (/
-                                 (- yc-max yc-min)
-                                 (* -1 2 step)) -1)))
-            ))
-          mark-x-grid
-          (map
-           (fn [a]
-             [:g
-              [:circle {:cx (xg [a 0])
-                        :cy (y 0)
-                        :r 1}]
-              [:text {:x (xg [a 0])
-                      :y (y -5)
-                      :style {:font-size ".3rem"}
-                      } a]
-              ]
-             )
-
-
-           (range (/ (- xc-max xc-min) (* 1 step))))
-
-          ]
-      [:div
-
-
-       ]
-      [:svg {:viewBox (reduce
-                        (fn [acc b]
-                          (str acc " " b)
-                          )
-                        ""
-                        canvas)
-              :style
-              {:background-color
-               (c [70 80 85])}}
-        [:defs
-
-         [:marker {:id "i"
-                   :refY 0
-                   :refX 0
-                   :orient :auto
-                   :style {:overflow :visible}}
-          [:path {:d "M 0 0 L 5 -5 L -12.5 0 L 5 5 L 0 0 z"
-                  :style {:fill-rule :evenodd
-                          :stroke (c [70 70 70])
-                          :stroke-width 1
-                          :stroke-opacity 1
-                          :fill (c [300 70 70])
-                          :fill-opacity 1}
-                  :transform "scale(.2) rotate(180) translate(12.5,0)"
-                  }]]
-
-         [:marker {:id "c"
-                   :refY 0
-                   :refX 0
-                   :orient :auto
-                   :style {:overflow :visible}}
-          [:circle {:x 0
-                    :y 0
-                    :r 5
-                    :fill (c [80 70 70])
-                    :stroke-width 1
-                    :stroke-opacity .3
-                    :fill-opacity .7}]]
-
-         [:marker {:id "d"
-                   :refY 0
-                   :refX 0
-                   :orient :auto
-                   :style {:overflow :visible}}
-          [:circle {:x 0
-                    :y 0
-                    :r 2.5
-                    :fill (c [80 70 70])
-                    :stroke-width 1
-                    :stroke-opacity .3
-                    :fill-opacity .7}]]
-
-         ]
-
-
-        mark-y-grid
-        mark-x-grid
-
-
-
-
-
-        (map
-         (fn [a]
-           [:g
-            [:path {:stroke (c [180 70 70])
-                    :stroke-width .8
-                    :d (str "M" -10  " "
-                            (yg [a 0])
-                            " l " (- x2 x1)  " 0")}]
-
-            [:path {:stroke (c [90 70 70])
-                    :stroke-width .8
-                    :d (str "M" -10  " "
-                            (yg [a 1])
-                            " l " (- x2 x1)  " 0")}]
-
-            [:path {:stroke (c [90 70 70])
-                    :stroke-width .8
-                    :d (str "M" -10  " "
-                            (yg [a 2])
-                            " l " (- x2 x1)  " 0"
-                            )}]
-
-            [:path {:stroke (c [90 70 70])
-                    :stroke-width .8
-                    :d (str "M" -10  " "
-                            (yg [a 3])
-                            " l " (- x2 x1)  " 0"
-                            )}]
-            [:path {:stroke (c [90 70 70])
-                    :stroke-width .8
-                    :d (str "M" -10  " "
-                            (yg [a 4])
-                            " l " (- x2 x1)  " 0"
-                            )}]])
-         (range (* (- yc-max yc-min) -1)
-                (- yc-max yc-min)))
-
-        (map
-         (fn [x]
-           [:g
-            [:path {:stroke (c [10 70 70])
-                    :stroke-width .8
-                    :d (str "M" (xg [x 0])
-                            " " y2
-                            " l 0 " (- y1 y2))}]
-
-
-
-            ] )
-
-         (range
-          (/ (- x2 x1) (* 2 step -1))
-          (/ (- x2 x1) (* 2 step))))
-
-
-
-        [:path {:stroke (c [140 70 70])
-                :stroke-width 2
-                :fill :none
-                :stroke-opacity 1
-                :marker-end "url(#i)"
-                :d (str
-                    "M " (xg [0 0])
-                    " " (yg [10 0])
-                    " l " 0
-                    " " (sy [1 0]))}]
-
-
-        (comment x)
-
-        (let [yy 2]
-          [:g
-
-
-           [:path {:stroke (c [140 70 70])
-                   :stroke-width 2
-                   :fill :none
-                   :stroke-opacity 1
-                   :marker-end "url(#i)"
-                   :d (str
-                       "M " (+ (* 4 30) (* 6 3.2))
-                       " " (y (+ (* yy 30)
-                                 (* 6 0)))
-                       " l " (+ (* 0 30) (* 6 4))
-                       " " 0
-
-
-
-                       )}]
-
-           [:text {:style {:font-size ".5rem"}
-                   :x (+ (* 4 30) (* 6 4.5))
-                   :y (yg [yy 0])
-                   } "x"]
-
-
-           [:text {:style {:font-size ".5rem"}
-                   :x (+ (* 11 30) (* 6 4.5))
-                   :y (yg [yy 0])
-                   } "x"]])])]])
 
 
 
@@ -8493,12 +8249,59 @@ findout out the mass of the grain."]
                   [xc-max yc-max]
                   [stepx stepy]
                   & rest]
-                 eqs]
-  (let [ [xc-min yc-min] [0 0]
+                 eqs2]
+  (let [
+        [xc-min yc-min] [0 0]
+        step stepx
         [[bxc-min byc-min]
          [byc-max bxc-max]]
-        [[-10 -10] [20 20]]
-        step stepx]
+
+        [[(* step -1) (* step -1)] [step step]]
+        [x1 y1 x2 y2 :as canvas]
+        [(+ xc-min bxc-min)
+         (+ yc-min byc-min)
+         (+ xc-max bxc-max)
+         (+ yc-max byc-max)]
+        [xg yg] [(fn [[xl xs]]
+                   (x (+ (* step xl)
+                         (* (/ step 5) xs))
+                      ))
+
+                 (fn [[xl xs]]
+                   (y (+ (* step xl)
+                         (* (/ step 5) xs))
+                      ))]
+        [sx sy] [(fn [[s sa]]
+                   (+ (* s step) (* sa (/ step 5))))
+                 (fn [[s sa]]
+                   (+ (* s step) (* sa (/ step 5))))
+                 ]
+        eqs (filter (fn [[x & rest :as whole]]
+                      (if (= x :s) false true))
+                 eqs2)
+
+        [[_ mark-y-grid] & eqs-svg]
+        (map (fn [[x & rest :as whole]]
+                       (if (= x :s) true false))
+                 eqs2)
+
+        mark-x-grid
+        (map
+         (fn [a]
+           [:g
+            [:circle {:cx (xg [a 0])
+                      :cy (y 0)
+                      :r 1}]
+            [:text {:x (xg [a 0])
+                    :y (y -5)
+                    :style {:font-size ".3rem"}
+                    } a]
+            ]
+           )
+
+
+         (range (/ (- xc-max xc-min) (* 1 step))))
+        ]
     [:div
      {:style
       {
@@ -8508,11 +8311,11 @@ findout out the mass of the grain."]
        :grid-template-columns
        (apply str (repeat
                    (/ yc-max step)
-                   "1fr "))
+                   (str 11   "vh ")))
        :grid-template-rows
        (apply str (repeat
                    (/ xc-max step)
-                   "1fr ")) }}
+                   (str 11   "vh "))) }}
 
      (map
       (fn [[[x y] [spx spy] style & rest ]]
@@ -8527,85 +8330,20 @@ findout out the mass of the grain."]
 
       eqs)
 
-     (comment
-       )
-     [:div {:style
-              {:z-index -1
-               :grid-column "1/-1"
-               :grid-row "1/-1"}}
-        (let [ [x1 y1 x2 y2 :as canvas]
-              [(+ xc-min bxc-min)
-               (+ yc-min byc-min)
-               (+ xc-max bxc-max)
-               (+ yc-max byc-max)]
-              [xg yg] [(fn [[xl xs]]
-                         (x (+ (* step xl)
-                               (* (/ step 5) xs))
-                            ))
 
-                       (fn [[xl xs]]
-                         (y (+ (* step xl)
-                               (* (/ step 5) xs))
-                            ))]
-              [sx sy] [(fn [[s sa]]
-                         (+ (* s step) (* sa (/ step 5))))
-                       (fn [[s sa]]
-                         (+ (* s step) (* sa (/ step 5))))
-                       ]
-              mark-y-grid
-              (map
-               (fn [[y y1]]
-                 (let []
-                   [:g
-                    [:circle {:cx (x 0)
-                              :cy y1
-                              :r 1}]
-                    [:text {:x (x -7)
-                            :y y1
-                            :style
-                            {:font-size ".3rem"}}
-                     y]]))
-               (map
-                (fn [a]
-                  [a
-                   (y (* step a))])
-                (let []
-                  (into (range 0 (/
-                                  (- yc-max yc-min)
-                                  (* 2 step)))
-                        (range -1 (/
-                                   (- yc-max yc-min)
-                                   (* -1 2 step)) -1)))
-                ))
-              mark-x-grid
-              (map
-               (fn [a]
-                 [:g
-                  [:circle {:cx (xg [a 0])
-                            :cy (y 0)
-                            :r 1}]
-                  [:text {:x (xg [a 0])
-                          :y (y -5)
-                          :style {:font-size ".3rem"}
-                          } a]
-                  ]
-                 )
-
-
-               (range (/ (- xc-max xc-min) (* 1 step))))
-
-              ]
-          [:div
-
-
-           [:svg {:viewBox (reduce
+     [:svg {:viewBox (reduce
                             (fn [acc b]
                               (str acc " " b)
                               )
                             ""
                             canvas)
-                  :style
-                  {:background-color
+                 :style
+                 {:height "100vh"
+                  :width "100vw"
+                  :z-index 1
+                  :grid-column "1/-1"
+                  :grid-row "1/-1"
+                  :background-color
                    (c [70 80 85])}}
             [:defs
              [:marker {:id "i"
@@ -8624,8 +8362,8 @@ findout out the mass of the grain."]
                       }]]]
 
 
-            mark-y-grid
-            mark-x-grid
+      (comment [mark-y-grid [xg yg] [sx sy] [step _] ])
+      mark-x-grid
 
 
 
@@ -9010,12 +8748,6 @@ findout out the mass of the grain."]
                         " z")}]
 
 
-
-
-
-
-
-
             [:path {:stroke (c [300 70 70])
                     :stroke-width 2
                     :fill (c [300 70 70])
@@ -9029,7 +8761,13 @@ findout out the mass of the grain."]
                         " " (+ (* 0 30) (* 6 3 -1))
                         " l " (+ (* 0 30) (* 6 3 -1))
                         "  " 0
-                        " z")}]]])]]))
+                        " z")}]]
+
+     ]))
+
+
+
+
 
 
 
@@ -9118,40 +8856,123 @@ findout out the mass of the grain."]
 (defn exercise-178 []
   [container "178" "1.4"
    [
-    [grid-svg3
-     [
-      [(fn [xp]
-         (+ xp  180))
-       (fn [yc]
-         (-
-          (*
-           (- 400 yc) 1) 200))]
-      [400 400]
-      [30 30]]
-     [
-      [[7 4] [1 5]
-       {:background-color (c [10 70 70])}
-       (m '(= (+ (:m 4
-                     (:p x 2))
-                 (:m 70 x)
-                 (:m 70 x)
-                 (:m 50 x)
-                 (:m 50 x)
-                 )
-              1024)
 
-          )
-       (m '(= (+ (:m 4
-                     (:p x 2))
-                 (:m 70 x)
-                 (:m 70 x)
-                 (:m 50 x)
-                 (:m 50 x)
-                 )
-              1024)
+    (let [[w h] [420 210]
+          step 30]
+      [grid-svg3
+       [
+        [(fn [xp]
+           (+ xp 0))
+         (fn [yc]
+           (-
+            (*
+             (- 400 yc) 1) 200))]
+        [w h]
+        [step step]]
+       [
+        [:s
+         (fn [[x y] [sx sy] [stepx _] ]
+           (map
+            (fn [i]
+              [:circle {:cx (x [0 0])
+                        :cy (y [i 0])
+                        :r 1}])
 
-          )
-       ]]]]])
+            (into (range 0 5)
+                  (range -1 -4))
+
+            ) )]
+
+
+        [[7 4] [1 4]
+         {:background-color (c [10 70 70])
+          }
+         (m '(= (+ (:m 4
+                       (:p x 2))
+                   (:m 70 x)
+                   (:m 70 x)
+                   (:m 50 x)
+                   (:m 50 x)
+                   )
+                1024)
+
+            )
+         (m '(= (+ (:m 4
+                       (:p x 2))
+                   (:m 70 x)
+                   (:m 70 x)
+                   (:m 50 x)
+                   (:m 50 x)
+                   )
+                1024)
+
+            )
+         ]
+
+        [[1 2] [1 1]
+         {:background-color (c [30 70 70])}
+         (m '(:p x 2))]
+        ]])]])
+
+(let [{:keys [m curve]}
+      (s/conform
+       ::path
+       [3 4
+        :L 2 3 3 5 5 2
+        :c 4 3 4 5 3 4 :s 5 2 3 4
+        :c 4 5 6 2 2 3
+        :L 2 3 3 5
+        :q 23 23 24 53 :t 23 23
+        :l 3 5 5 6
+        :q 23 23 24 53
+        :A 24 20 25 0 0 200 200])]
+  (map (fn [[x & r]] r)
+       curve))
+
+(defn grid2 [[w h s]]
+  [:div {:style
+         {:background-color (c [10 70 70])
+          :display :grid
+          :height (size [100 :vh])
+          :width (size [100 :vw])
+          :grid-template-columns (size
+                                  (into []
+                                        (apply concat
+                                               (take 13 (repeat [10 :vh])))) )
+
+          :grid-template-rows
+          (size (into []
+                      (apply concat
+                             (take 10 (repeat [10 :vh])))))
+          }}
+   [:div {
+          :style
+          {:color :#444
+           :grid-row (str/join "/" [2 -2])
+           :grid-column (str/join "/" [2 -2])
+           :background-color (c [70 70 70])
+           }}
+
+    (let [[sx sy] [(fn [[x dx]]
+                     (+ (* s x) (* (/ s 5) dx)))
+                   (fn [[x dx]]
+                     (+ (* s x) (* (/ s 5) dx)))]
+
+          ]
+
+      [:svg {:style {:background-color (c [150 70 70])
+                     :height "100%"
+                     :width "100%"}
+             :viewBox (str/join [0 0 w h])}
+       (comment [x-line [10 0]])
+
+       ])
+
+    ]])
+
+
+
+
 
 (defn template1 []
-  [exercise-178])
+  [grid2 [420 420 30]])
