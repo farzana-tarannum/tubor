@@ -16,28 +16,28 @@
 (s/def
   ::g-num
   (s/and number? (fn [n]
-                   (and (< n  20)
-                        (> n -20)))))
+                   (and (<= n  15)
+                        (>= n -15)))))
 
 
 (s/def
   ::i-num
   (s/and int?
          (fn [n]
-                   (and (< n  20)
-                        (> n -20)))))
+                   (and (< n  15)
+                        (> n -15)))))
 
 (s/def
   ::d-num
   (s/and number? (fn [n]
-                   (and (< n 5)
-                        (>  -5)))))
+                   (and (< n 6)
+                        (>  -6)))))
 
 (s/def
   ::di-num
   (s/and int? (fn [n]
-                   (and (< n 10)
-                        (>  -10)))))
+                   (and (< n 16)
+                        (>  -16)))))
 
 (comment
   (gen/sample
@@ -68,13 +68,9 @@
 
 (s/def ::ipoint
   (s/cat
-
    :x ::si-num
-
    :y ::si-num
    ))
-
-
 
 
 (s/def ::ghpoint
@@ -376,20 +372,32 @@
    :m ::point
    :lines ::lines))
 
+(s/def ::path2
+  (s/cat
+   :m ::point
+   :lines (s/+ ::lines)))
+
+
+
 
 (s/def ::gpath
   (s/cat
    :m ::gpoint
    :lines ::glines))
 
-(s/def ::gtpath
+(s/def ::gpath2
   (s/cat
    :m ::gpoint
-   :lines ::gtlines))
+   :lines
+   (s/+ ::glines)))
 
 
 
-(s/conform ::path (last  (gen/sample (s/gen ::path  10)) ))
+
+
+(comment (s/conform ::path (last  (gen/sample (s/gen ::path  10)) )))
+
+(comment (s/conform ::gpath2 (last  (gen/sample (s/gen ::gpath2  2)) )))
 
 (defn  path [transform]
   (fun [{:m m
@@ -9383,6 +9391,21 @@ findout out the mass of the grain."]
             sam)))
 
 
+(comment (let [t (path (comp space transform-points))]
+           (map
+            (comp
+             (fn [d]
+               [:path {:d d
+                       :fill :none
+                       :stroke-width 1
+                       :stroke :#111}])
+             t
+             (fn [l]
+               (s/conform ::gpath l)))
+
+            (gen/sample
+             (s/gen ::gpath 10)))))
+
 
 
 (defn grid2 [[w h s]]
@@ -9394,108 +9417,152 @@ findout out the mass of the grain."]
           :grid-template-columns (size
                                   (into []
                                         (apply concat
-                                               (take 13 (repeat [10 :vh])))) )
+                                               (take (* 14 1) (repeat [10 :vh])))) )
 
           :grid-template-rows
           (size (into []
                       (apply concat
-                             (take 10 (repeat [10 :vh])))))
+                             (take (* 10 1) (repeat [10 :vh])))))
           }}
 
+   [:div {
+          :style
+          {:z-index 10
+           :color :#444
+           :display :flex
+           :justify-content :center
+           :align-items :center
+           :flex-direction :column
+           :font-size (size [2 :rem])
+           :grid-row (str/join "/" [2 4])
+           :grid-column (str/join "/" [8 12])
+           :background-color (c [20 70 70])}}
+    [m '(= (:m 7 (2 7)) (:m 7  (4 x)))]
+    [m '(= (:m 2 x)
+           ( (* 7 (:m 4 x)) x ))]
 
+    [m '(= x
+           (* 7 4 (1 2)))]]
+
+   [:div {
+          :style
+          {:z-index 10
+           :color :#444
+           :display :flex
+           :justify-content :center
+           :align-items :center
+           :flex-direction :column
+           :font-size (size [2 :rem])
+           :grid-row (str/join "/" [4 10])
+           :grid-column (str/join "/" [8 12])
+           :background-color (c [70 70 70])}}
+    [:div [m '[= (:b (= t 8))
+               (k (:b (= N 3)))]]]
+
+    [:div [m '[= 8
+               (k 3)]]]
+    [:div [m '[= ((= k 24) (= N 1))
+               t]]]
+    [:div  [m '[= t (24  (= N 6))]] ]
+    [:div  [m '[= (3 4) (24 N)]] ]
+    [:div  [m '[= (:m N (3 4)) (:m N (24 N))]] ]
+    [:div  [m '[= (:m N (3 4)) 24]] ]
+    [:div  [m '[= (:m N (3 4) 4) (*  24 4)]] ]
+    [:div  [m '[= (:m 3 N ) (*  24 4)]] ]
+    [:div  [m '[= (:m 3 N (1 3)) (*  24 4 (1 3))]] ]
+    [:div  [m '[= N
+                (*  24 4 (1 3))]] ]
+
+    ]
 
 
    [:div {
           :style
-          {:color :#444
+          {:z-index 2
+           :color :#444
            :grid-row (str/join "/" [2 -2])
            :grid-column (str/join "/" [2 -2])
            :background-color (c [70 70 70])
            }}
-
-    (comment (comp
-              (fn [x] (+ 200 x))
-              (fn [[x y]] (+ x y))
-              (juxt (comp (fn [x] (* x 30))  first)
-                    (comp (fn [x] (* x 6) ) second))
-              :x))
-
     (let [
-          transform-s
-          (comp
-           (fn [[x y]] (+ x y))
-           (juxt (comp (fn [x] (* x 30))  first)
-                 (comp (fn [x] (* x 6) ) second)))
+          space (fn [p] (str/join " " p))
+          t-s (comp
+               (fn [[x y]] (+ x y))
+               (juxt (comp (fn [x] (* x 30))  first)
+                     (comp (fn [x] (* x 6) ) second)))
 
-          transform-x (comp
-                       (fn [x] (+ 200 x))
-                       transform-s
-                       :x)
+          t-x (comp (fn [x] (+ (* 40 6) x))
+                    t-s
+                    :x)
 
-
-          transform-y
-          (comp
-           (fn [y] (- 200 y))
-           transform-s
-           :y)
-
-          transform-points
-          (juxt
-           transform-x
-           transform-y
-           )
+          t-y (comp (fn [y]
+                      (- (+ (* 40 6) 0) y))
+                    t-s
+                    :y)
           space (fn [p] (str/join " " p))
 
-          sam [
-               [[2 3] [-1 4] [2 3]]
+          sam (let [[x dx] [-4 3]
+                    [r rx] [1 0]
+                    [y dy] [-1 4]]
+                [[[x dx] [y dy] [r (+ r 3)]]
+                 [[x dx] [(+ y 3) dy] [r (+ r 3)]]
+                 [[x dx] [(+ y 6) dy] [r (+ r 3)]]
 
-               [[-2 -2] [-1 4] [2 0]]
-
-               [[8 -2] [-1 4] [2 0]]
-               [[2 3] [-2 -4] [2 3]]
-               [[2 3] [-5 -4] [2 3]]
-               [[12 -2] [-1 4] [2 0]]
-               [[2 3] [-8 -4] [2 3]]
-               ]]
+                 [[(- x 2)  dx] [(+ y 6) dy] [r rx]]
+                 [[(+ x 2)  dx] [(+ y 6) dy] [r rx]]
+                 [[(+ x 3)  dx] [(+ y 6) dy] [r rx]]
+                 [[(+ x 4)  dx] [(+ y 6) dy] [r rx]]])]
 
       [:svg {:style {:background-color (c [150 70 70])
                      :height "100%"
                      :width "100%"}
-             :viewBox (str/join [0 0 w h])}
-
-       (comment (let [t (path (comp space transform-points))]
-                  (map
-                   (comp
-                    (fn [d]
-                      [:path {:d d
-                              :fill :none
-                              :stroke-width 1
-                              :stroke :#111}])
-                    t
-                    (fn [l]
-                      (s/conform ::gpath l)))
-
-                   (gen/sample
-                    (s/gen ::gpath 10)))))
-
-       (let [t (path (comp space transform-points))]
-         (map
+             :viewBox (str/join " " [0 0 (* 40 12)  (* 40 12)])}
+       (map
           (comp
            (fn [d]
              [:path {:d d
                      :fill :none
                      :stroke-width 1
                      :stroke :#111}])
-           t
+           space
            (fn [l]
-             (s/conform ::gtpath l)))
+             (let [line-t (get-in l [:lines :l])
+                   t
+                   (if (= line-t :l)
+                     (juxt
+                      (comp  t-s :x)
+                      (comp t-s :y))
 
-          (gen/sample
-           (s/gen ::gtpath 10))))
+                     (juxt
+                      (comp  t-x :x)
+                      (comp t-y :y))
+                     )]
+               [
+                (name :M)
+                ((comp space
+                       (juxt t-x t-y )) (get l :m))
+                (name line-t)
+                (space
+                 (map
+                  (comp
+                   space
+                   t)
+                  (get-in l [:lines :points])))]))
+           (fn [l]
+             (s/conform ::gpath l))
+           (fn [[x y s]]
+             [[x 0] [y 0]
+              :l
+              [s 0] [0 0]
+              [0 0] [(* s -1) 0]
+              [(* s -1) 0] [0 0]
+              [0 0] [(* s 1) 0]]))
 
-       (comment cirlce)
+          (for [x (range -12 12 2)
+                y (range -10 10 2)] [x y 2]))
+
+
        (map
-
         (comp
          (fn [[x y r]]
            [:circle {:cx x
@@ -9506,11 +9573,12 @@ findout out the mass of the grain."]
                second)
          (juxt
           (comp
-           (juxt transform-x transform-y)
+           (juxt t-x t-y)
            :point)
-          (comp transform-s
+          (comp t-s
                 :r))
-         #(s/conform ::gbubble %))
+         (fn [x]
+           (s/conform ::gbubble x)))
         (gen/sample (s/gen ::gbubble 30)))
 
        (map
@@ -9525,17 +9593,19 @@ findout out the mass of the grain."]
                second)
          (juxt
           (comp
-           (juxt transform-x transform-y)
+           (juxt t-x t-y)
            :point)
-          (comp transform-s
+          (comp t-s
                 :r))
          (fn [x]
            (s/conform ::gcircle x)))
-        sam)])]])
+        sam)
+       ])]])
 
 
 
 
-
+(comment (exercise-177))
+(comment )
 (defn template1 []
   [grid2 [420 420 30]])
