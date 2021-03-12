@@ -9659,8 +9659,7 @@ findout out the mass of the grain."]
 (defn grid3 [[w h s]]
   (let [mark-y-axis (fn [y] (* y 10) )
         table-range (range 0 7)
-        table-x (into [[m '[:p x 2]]
-                       ]
+        table-x (into [[m '[:p x 2]]]
                       (map (fn [x] (* x x))
                        (range 1 8)))
         table-y (into [[:div {:style {:font-size (size [1 :rem])}}
@@ -9756,8 +9755,6 @@ findout out the mass of the grain."]
             }}
 
 
-     (comment
-       )
      (map
       (fn [y]
         [:div (g-style
