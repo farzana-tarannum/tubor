@@ -4,3 +4,7 @@
 /package-lock.json
 /.cpcache/
 /.nrepl-port
+/resources/public/g[1-9].png
+/resources/public/home[1-9].png
+/resources/public/m2.png
+/resources/public/graph1.png
