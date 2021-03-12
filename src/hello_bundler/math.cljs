@@ -9618,385 +9618,12 @@ findout out the mass of the grain."]
          (m '(:p x 2))]
         ]])]])
 
-(comment
-  (let [transform-s
-        (comp
-         (fn [[x y]] (+ x y))
-         (juxt (comp (fn [x] (* x 30))  first)
-               (comp (fn [x] (* x 6) ) second)))
-
-        transform-x (comp
-                     (fn [x] (+ 200 x))
-                     transform-s
-                     :x)
-
-
-        transform-y
-
-        (comp
-         (fn [y] (- 200 y))
-         transform-s
-         :y)
-        cir (fun [{:point {:x x
-                       :y y}
-               :r r}]
-
-             (let [[cx cy r] (juxt
-                              (comp space transform-x)
-                              (comp space transform-y)
-                              (comp space transform-s))]
-               ))
-        ]
-    (map
-
-     (comp
-      (fn [[x y r]]
-        [:circle {:cx x
-                  :cy y
-                  :r r}])
-      (juxt (comp first first)
-            (comp second first)
-            second)
-      (juxt
-       (comp
-        (juxt transform-x transform-y)
-        :point)
-       (comp transform-s
-             :r))
-      #(s/conform ::gcircle %))
-     (gen/sample (s/gen ::gcircle 10)))))
-
-(comment (let [{:keys [m curve]}
-               (s/conform
-                ::path
-                [3 4
-                 :L 2 3 3 5 5 2
-                 :c 4 3 4 5 3 4 :s 5 2 3 4
-                 :c 4 5 6 2 2 3
-                 :L 2 3 3 5
-                 :q 23 23 24 53 :t 23 23
-                 :l 3 5 5 6
-                 :q 23 23 24 53
-                 :A 24 20 25 0 0 200 200])]
-           (map (fn [[x & r]]
-                  (:points (first r)))
-                curve)))
-
-(comment (let [ t (fn [[x dx]]
-                   (+ (* x 30)
-                      (* dx 6)))
-               txy (juxt
-                    (comp
-                     (fn [x]
-                       (+ 200 x)) t first)
-                    (comp (fn [y]
-                            (+ y 200)) t second)
-
-                    (comp t (fn [a] (nth  a 2))))]
-           (map
-            (fn [d1]
-              ((fun [{:point {:x x
-                              :y y}
-                      :r r}]
-
-                    (let [[cx cy r] (txy [x y r])]
-                      [:circle {:fill (c [(rand-int 70)
-                                          (+ 40 (rand-int 20))
-
-                                          (+ 40 (rand-int 40))])
-                                :cx cx
-                                :cy cy
-                                :r r}]))
-               (s/conform ::gcircle d1)))
-
-            sam)))
-
-
-(comment (let [t (path (comp space transform-points))]
-           (map
-            (comp
-             (fn [d]
-               [:path {:d d
-                       :fill :none
-                       :stroke-width 1
-                       :stroke :#111}])
-             t
-             (fn [l]
-               (s/conform ::gpath l)))
-
-            (gen/sample
-             (s/gen ::gpath 10)))))
 
 
 
-(defn grid2 [[w h s]]
-  [:div {:style
-         {:background-color (c [10 70 70])
-          :display :grid
-          :height (size [100 :vh])
-          :width (size [100 :vw])
-          :grid-template-columns (size
-                                  (into []
-                                        (apply concat
-                                               (take (* 14 1) (repeat [10 :vh])))) )
-
-          :grid-template-rows
-          (size (into []
-                      (apply concat
-                             (take (* 10 1) (repeat [10 :vh])))))
-          }}
-
-   [:div {
-          :style
-          {:z-index 12
-           :opacity .8
-           :color :#444
-           :display :flex
-           :justify-content :center
-           :align-items :center
-           :flex-direction :column
-           :font-size (size [2 :rem])
-           :grid-row (str/join "/" [2 6])
-           :grid-column (str/join "/" [7 14])
-           :background-color (c [20 70 70 .2])}}
-    [m '[- [+ x y] [:m 2
-                    [:b
-                     [+ [- [:m 3 x] [:m 4 y]]
-                      3]]]]]
-
-    [m '[+ [+ x y] [:m (*
-                        2
-
-                        (:b (- 1)))
-                    [:b
-                     [+ [- [:m 3 x] [:m 4 y]]
-                      3]]]]]
-    [m '[+ [+ x y] [:m (:b (- 2))
-                    [:b
-                     [+ [- [:m
-
-                            3
-                            x] [:m 4 y]]
-                      3]]]]]
-    [m '[+ [+ x y] [+ [-
-                       [:m
-                        (:b (- 2))
-                        3
-                        x]
-                       [:m 4 (:b (- 2))
-                        y]]
-                    (:m 3 (:b (- 2)))]
-         ]]
-
-
-    ]
-
-   [:div {
-          :style
-          {:z-index 13
-           :opacity .8
-           :color :#444
-           :display :flex
-           :justify-content :center
-           :align-items :center
-           :flex-direction :column
-           :font-size (size [2 :rem])
-           :grid-row (str/join "/" [2 7])
-           :grid-column (str/join "/" [2 7])
-           :background-color (c [180 70 70 .2])}}
-    [m '[- [+ a [:m 3 b]]
-         (:b (- [:m 5 a] [:m 4 b]))]]
-    [m '[+ [+ a [:m 3 b]]
-         (:m (:b (- 1))
-             (:b (- [:m 5 a ] [:m 4 b])) )]]
 
 
 
-    [m '[+ [+ a [:m 3 b]]
-         (- [:m 5 a (:b (- 1))]
-            [:m 4 b (:b (- 1))])
-         ]]
-
-    [m '[+ [+ a [:m 3 b]]
-         (+ [:m 5 a (:b (- 1))]
-            [:m (:b (- 1)) 4 b (:b (- 1))])
-         ]]
-
-    [m '[+ [+ a [:m 3 b]]
-         (+ [:m 5 a (:b (- 1))]
-            [:m (:b (- 1)) 4 b (:b (- 1))])
-         ]]
-
-    ]
-
-   [:div {
-          :style
-          {:z-index 10
-           :opacity .8
-           :color :#444
-           :display :flex
-           :justify-content :center
-           :align-items :center
-           :flex-direction :column
-           :font-size (size [2 :rem])
-           :grid-row (str/join "/" [4 10])
-           :grid-column (str/join "/" [6 14])
-           :background-color (c [70 70 70])}}
-
-
-
-    [m '[+ x (:m 3 (:b (+ (- (:m 2 x) (:m  3 y))
-                          z) )) (:m  7 z)]]
-
-    [m '[+ x (+ (- (* 3 (:m 2 x ))
-                   (* 3 (:m  3 y)))
-                (:m 3 z)) (:m  7 z)]]
-
-    [m '[+ x (+ (- (:m 6 x )
-                   (:m  9 y))
-                (:m 3 z)) (:m  7 z)]]
-
-    [m '(+ (- (:m x (:b (+ 1  6)))
-            (:m 9 y)
-            ) (:m z (:b (+ 3 7))))
-
-     ]
-    [m '(+ (- (:m 7 x)
-            (:m 9 y)
-            ) (:m  10 z ))
-
-     ]
-    ]
-
-
-   [:div {
-          :style
-          {:z-index 2
-           :color :#444
-           :grid-row (str/join "/" [2 -2])
-           :grid-column (str/join "/" [2 -2])
-           :background-color (c [70 70 70])
-           }}
-    (let [
-          space (fn [p] (str/join " " p))
-          t-s (comp
-               (fn [[x y]] (+ x y))
-               (juxt (comp (fn [x] (* x 30))  first)
-                     (comp (fn [x] (* x 6) ) second)))
-
-          t-x (comp (fn [x] (+ (* 40 6) x))
-                    t-s
-                    :x)
-
-          t-y (comp (fn [y]
-                      (- (+ (* 40 6) 0) y))
-                    t-s
-                    :y)
-          sam (let [[x dx] [-3 0]
-                    [r rx] [1 0]
-                    [y dy] [-1 4]]
-                [
-                 [[x dx] [y dy] [r (+ rx 3)]]
-                 [[x dx] [(+ y 3) dy] [r (+ rx 3)]]
-                 [[x dx] [(+ y 6) dy] [r (+ rx 3)]]
-                 [[(- x 2)  dx] [(+ y 6) dy] [r rx]]
-                 [[(+ x 2)  dx] [(+ y 6) dy] [r rx]]
-                 [[(+ x 3)  dx] [(+ y 6) dy] [r rx]]
-                 [[(+ x 4)  dx] [(+ y 6) dy] [r rx]]])
-          ]
-
-      [:svg {:style {:background-color (c [150 70 70])
-                     :height "100%"
-                     :width "100%"}
-             :viewBox (str/join " " [0 0 (* 40 12)  (* 40 12)])}
-       (map
-          (comp
-           (fn [d]
-             [:path {:d d
-                     :fill :none
-                     :stroke-width 1
-                     :stroke :#111}])
-           space
-           (fn [l]
-             (let [line-t (get-in l [:lines :l])
-                   t
-                   (if (= line-t :l)
-                     (juxt
-                      (comp  t-s :x)
-                      (comp t-s :y))
-
-                     (juxt
-                      (comp  t-x :x)
-                      (comp t-y :y))
-                     )]
-               [
-                (name :M)
-                ((comp space
-                       (juxt t-x t-y )) (get l :m))
-                (name line-t)
-                (space
-                 (map
-                  (comp
-                   space
-                   t)
-                  (get-in l [:lines :points])))]))
-           (fn [l]
-             (s/conform ::gpath l))
-           (fn [[x y s]]
-             [[x 0] [y 0]
-              :l
-              [s 0] [0 0]
-              [0 0] [(* s -1) 0]
-              [(* s -1) 0] [0 0]
-              [0 0] [(* s 1) 0]]))
-
-          (for [x (range -12 12 2)
-                y (range -10 10 2)] [x y 2]))
-
-       (comment
-         (map
-          (comp
-           (fn [[x y r]]
-             [:circle {:cx x
-                       :cy y
-                       :r r}])
-           (juxt (comp first first)
-                 (comp second first)
-                 second)
-           (juxt
-            (comp
-             (juxt t-x t-y)
-             :point)
-            (comp t-s
-                  :r))
-           (fn [x]
-             (s/conform ::ibubble x)))
-          (gen/sample (s/gen ::ibubble 30))))
-       (comment
-
-         (map
-
-          (comp
-           (fn [[x y r a]]
-             [:circle {:cx x
-                       :cy y
-                       :r r
-                       :ro a}])
-           (juxt (comp first first)
-                 (comp second first)
-                 second
-                 (fn [a] (get  a  2)))
-           (juxt
-            (comp
-             (juxt t-x t-y)
-             :point)
-            (comp t-s
-                  :r)
-            :r)
-           (fn [x]
-             (s/conform ::icircle x)))
-          sam))
-       ])]])
 
 
 (defn g-style
@@ -10032,16 +9659,18 @@ findout out the mass of the grain."]
 (defn grid3 [[w h s]]
   (let [mark-y-axis (fn [y] (* y 10) )
         table-range (range 0 7)
-        table-x (into ["x"
-                       ] (range 0 8))
+        table-x (into [[m '[:p x 2]]
+                       ]
+                      (map (fn [x] (* x x))
+                       (range 1 8)))
         table-y (into [[:div {:style {:font-size (size [1 :rem])}}
                         [m '[= y [:m 3 [:p x 2]]]]]] (map
                                                       (fn [x] (* 3 x x))
                                                       (range 1 8)))
         table-k (into [[:div {:style {:font-size (size [1 :rem])}}
-                        [m '[= k [y x]]]]]
+                        [m '[= k [y [:p x 2]]]]]]
                       (map
-                       (fn [x] (/ (* 3 x x) x))
+                       (fn [x] 3)
                        (range 1 8)))
         eqs [
              [m '[=
@@ -10052,7 +9681,14 @@ findout out the mass of the grain."]
              [m '[=
                   y
                   [:m  3 [:p x 2]]
-                  ]]]
+                  ]]
+             [:div  {:style {:background-color (c [70 70 70])}}
+              [m '[=
+                   y
+                   [*  3 [:p 2 2]]
+                   ]]]
+
+             ]
         plot-e1
         (map
          (fn [x]
@@ -10119,6 +9755,9 @@ findout out the mass of the grain."]
 
             }}
 
+
+     (comment
+       )
      (map
       (fn [y]
         [:div (g-style
@@ -10127,56 +9766,72 @@ findout out the mass of the grain."]
       (range 0 9))
      (map
       (fn [x]
-        [:div (g-style [10 (+ x 4) 10 .8] s-start)
+        [:div (g-style [10 (+ x 4) 10 .8]
+                       (into {:background-color (c [10 70 70])}
+                             s-start))
 
          (* 2 x)])
       (range 0 11))
-
+     (comment
+       )
      (map
       (fn [x v]
         [:div (g-style [(+ 2 x) 1 10 .8]
                        (into s-center
-                             {:background-color (c [70 70 70])
-                              :font-size (size [1.4 :rem])}) )
+                             {:background-color (c [10 70 70])
+                              :font-size (size [1.6 :rem])}) )
          v])
       table-range
       table-x)
      (map
       (fn [y v]
         [:div (g-style [(+ 2 y) 2 10 .8 ]
-                       (into s-center {:background-color (c [130 70 70 .2])}))
+                       (into s-center {:font-size (size [1.6 :rem])
+                                       :background-color (c [130 70 70 .2])}))
          v])
       table-range
       table-y)
-     (map
-      (fn [k v]
-        [:div
-         (g-style [(+ 2 k) 3 10 .8 ]
-                  (into s-center {:background-color (c [60 70 70 .2])}))
-         v]
+     (comment
+       )
+     (comment
+       (map
+        (fn [k v]
+          [:div
+           (g-style [(+ 2 k) 3 10 .8 ]
+                    (into s-center {:font-size (size [1.6 :rem])
+                                    :background-color (c [60 10 70 .2])}))
+           v]
 
-        )
-      table-range
-      table-k
-      )
+          )
+        table-range
+        table-k
+        ))
+
+     (comment
+       [:div (g-style [2 9 10 .9]
+                      (into s-center {:font-size (size [1.6 :rem])
+                                      :background-color
+                                      (c [230 70 70])})
+                      [(fn [x] (+ x 2))
+                       (fn [x] (+ x 4))])
 
 
-     [:div (g-style [2 9 10 .9]
-                    (into s-center {:background-color
-                                    (c [230 70 70])})
-                    [(fn [x] (+ x 2))
-                     (fn [x] (+ x 4))])
 
 
+        (map
+         (fn [eq]
+           eq)
+         eqs)
 
+        ])
 
-      (map
-       (fn [eq]
-         eq)
-       eqs)
-
-      ]
-
+     (comment
+       (str/join " "
+                 [0 (* 40 11)
+                  (* 40 1)
+                  (* 40 12)
+                  ])
+       )
      [:div {
             :style
             {:z-index 2
@@ -10188,31 +9843,56 @@ findout out the mass of the grain."]
       [:svg {:style {:background-color (c [150 70 70])
                        :height "100%"
                        :width "100%"}
-               :viewBox (str/join " " [0 0 (* 40 12)  (* 40 12)])}
+             :viewBox (str/join " "
+                                [0 0
+                                 (* 40 12)
+                                 (* 40 12)
+                                 ])
+             }
+       (comment
+         (paths (let [[[x dx]
+                       [y dy]]
+                      [
+                       [3 0]
+                       [1 1]]
+                      [[x1 dx1]
+                       [y1 dy1]]
+                      [[3 0]
+                       [6 0]]
+                      ]
+                  [[[0 0]
+                    [0 0]
+                    :c
+                    [x dx]
+                    [y dy]
+                    [3 3]
+                    [8 0]
+                    [5 0]
+                    [16 0]]
+                   ])
+                [140 40 90]))
 
-       (paths (let [[[x dx]
-                     [y dy]]
-                    [
-                     [3 0]
-                     [1 1]]
-                    [[x1 dx1]
-                     [y1 dy1]]
-                    [[3 0]
-                     [6 0]]
-                    ]
-                [[[0 0]
-                  [0 0]
-                  :c
-                  [x dx]
-                  [y dy]
-                  [3 3]
-                  [8 0]
-                  [5 0]
-                  [16 0]]
-                 ])
-              [140 40 90])
 
-
+       (comment
+         (paths (for [i (range 0 10)]
+                  [[i 0]
+                   [0 0]
+                   :l
+                   [1 0]
+                   [0 0]
+                   [0 0]
+                   [0 1]
+                   [0 0]
+                   [0 -1]
+                   [1 0]
+                   [0 0]
+                   [0 0]
+                   [0 1]
+                   ]
+                  )
+                [340 90 20]))
+       (comment
+         )
 
        (paths (for [i (range 0 10)]
                 [[i 0]
@@ -10231,25 +9911,8 @@ findout out the mass of the grain."]
                  ]
                 )
               [340 90 20])
-
-       (paths (for [i (range 0 10)]
-                [[i 0]
-                 [0 0]
-                 :l
-                 [1 0]
-                 [0 0]
-                 [0 0]
-                 [0 1]
-                 [0 0]
-                 [0 -1]
-                 [1 0]
-                 [0 0]
-                 [0 0]
-                 [0 1]
-                 ]
-                )
-              [340 90 20])
-
+       (comment
+         )
 
        (paths (for [i (range 0 12)]
                 [[0 0]
@@ -10272,13 +9935,15 @@ findout out the mass of the grain."]
                  [0 0]
                  ]
                 )
-              [340 90 20])
+              [340 20 20])
 
 
 
 
 
-
+       (comment
+         )
+       (comment
          (paths [[[0 0]
                   [0 0]
                   :l
@@ -10286,9 +9951,10 @@ findout out the mass of the grain."]
                   [9 4]
                   ]
                  ]
-                [140 40 90])
+                [140 40 90]))
 
-
+       (comment
+         )
        (paths
         (for [i (range -4 20 2)
               j (range -4 20 2)]
@@ -10304,24 +9970,30 @@ findout out the mass of the grain."]
            [0 0]
            [-2 0]])
         [70 40 80])
-
-       (paths
-        (for [i (range 0 20 1)
-              j (range 0 20 1)]
-          [[2 i]
-           [2 j]
-           :l
-           [0 1]
-           [0 0]
-           [0 0]
-           [0 1]
-           [0 -1]
-           [0 0]
-           [0 0]
-           [0 -1]])
-        [70 80 40])
-       (circles plot-e1 tfun-e1)
-       (circles plot-e2 tfun-e1)
+       (comment
+         )
+       (comment
+         )
+       (comment
+         (paths
+          (for [i (range 0 5 1)
+                j (range 0 5 1)]
+            [[0 i]
+             [0 j]
+             :l
+             [0 1]
+             [0 0]
+             [0 0]
+             [0 1]
+             [0 -1]
+             [0 0]
+             [0 0]
+             [0 -1]])
+          [70 80 40]))
+       (comment
+         (circles plot-e1 tfun-e1))
+       (comment
+         (circles plot-e2 tfun-e1))
        ]
       ]]))
 
