@@ -38,52 +38,6 @@
            (and (< n 15)
                 (>  -16)))))
 
-
-
-
-
-
-
-(comment
-  ((comp
-    (fn [x] (s/conform :math2/point x))
-    first)
-   (gen/sample
-    (s/gen :math2/point 10))))
-
-
-(comment
-  (gen/sample
-   (s/gen :math2/path 10)))
-
-(comment
-  (gen/sample
-   (s/gen ::g-num 10)))
-
-(comment
-  (gen/sample
-   (s/gen ::di-num 10)))
-
-(s/def ::point
-  (s/cat
-   :x (s/and number?
-             (fn [x]
-               (and (> x -500)
-                    (< x 500))))
-   :y (s/and number?
-             (fn [x]
-               (and (> x -500)
-                    (< x 500))))))
-
-(s/def ::s-num
-  (s/tuple ::g-num ::d-num))
-
-(s/def ::si-num
-  (s/tuple ::i-num ::di-num))
-
-(comment
-  (gen/sample (s/gen ::si-num 10)))
-
 (s/def ::gpoint
   (s/cat
    :x ::s-num
@@ -94,21 +48,6 @@
    :x ::si-num
    :y ::si-num
    ))
-
-(comment
-  (map
-   (fn [i]
-     (s/conform ::ipoint i))
-   (gen/sample (s/gen ::ipoint 10))))
-
-(comment
-  (gen/sample (s/gen ::gpoint 10)))
-
-(comment
-  (gen/sample (s/gen ::ipoint 10)))
-
-(comment
-  (gen/sample (s/gen ::ghpoint 1)))
 
 
 
@@ -163,13 +102,6 @@
               (< x 1)
               (< dx 3))))))
 
-
-(comment
-  (gen/sample
-   (s/gen ::gcircle 10)))
-
-(s/conform ::gcircle [[2 3] [3 4] [1 2]])
-
 (s/def ::garc
   (s/cat
    :a #{:a :A}
@@ -198,13 +130,6 @@
    :direction #{0 1}
    :end ::ipoint))
 
-
-(comment
-  (gen/sample (s/gen ::garc 10)))
-
-(comment
-  (gen/sample (s/gen ::iarc 10)))
-
 (s/def ::arc
   (s/cat
    :a #{:a :A}
@@ -215,12 +140,9 @@
    :direction number?
    :end ::point))
 
-
-
 (s/def ::c-curve
   (s/cat
    :c #{:c :C}
-
    :points
    (s/+
     (s/cat
@@ -230,10 +152,7 @@
      :s-points  (s/cat
                  :s  #{:s :S}
                  :control-right ::point
-                 :end-point2 ::point)
-
-     ))
-   ))
+                 :end-point2 ::point)))))
 
 
 
@@ -273,14 +192,6 @@
    :points
    (s/+
     ::ipoint)))
-
-
-
-(comment (gen/sample
-          (s/gen
-           (s/and ::ilines
-                  (fn [{:keys [l]}]
-                    (= l :L))) 10)))
 
 
 (s/def ::path
@@ -347,6 +258,58 @@
     :r :math2/r
     :text string?)))
 
+(s/def :math2/svg-circle
+  (s/cat
+   :point :math2/svg-point
+   :attr (s/or
+          :r :math2/r
+          :text string?)))
+
+(comment
+  (let [s
+        (fn [[x dx]]
+          (+  (* 30 x)
+              (* 6 dx)))]
+    (map
+     (comp
+      (juxt
+
+       (comp
+        (juxt
+         (comp
+          s
+          :x)
+         (comp
+          s
+          :y))
+        :point) :attr)
+      (fn [n]
+        (s/conform :math2/svg-circle n)))
+     (gen/sample
+      (s/gen :math2/svg-circle 10)))))
+
+
+
+(defn circle [[t-s t-x t-y]]
+  (fn [point-fn-svg]
+    (fn [plot-e]
+      (let [space (fn [p] (str/join " " p))]
+        (map
+         (comp
+          point-fn-svg
+          (juxt (comp
+                 (juxt (comp
+                        t-x
+                        first)
+                       (comp
+                        t-y
+                        second))
+                 first)
+                second)
+          (fn [x]
+            (s/conform :math2/circle x))
+          )
+         plot-e)))))
 
 
 (s/def :math2/path
@@ -516,15 +479,6 @@
 
 
 
-
-(comment
-  (map
-   (fn [x]
-     (s/conform ::ipath x))
-   (gen/sample (s/gen ::ipath 10))))
-
-
-
 (s/def ::gpath
   (s/cat
    :m ::gpoint
@@ -538,12 +492,6 @@
 
 
 
-
-
-(comment (s/conform ::path (last  (gen/sample (s/gen ::path  10)) )))
-
-(comment (s/conform ::gpath2 (last  (gen/sample (s/gen ::gpath2  2)) )))
-
 (defn  path [transform]
   (fun [{:m m
          :lines {:l l
@@ -553,24 +501,6 @@
               (transform m)
               (name l)
               (str/join " " (map transform points))])))
-
-
-
-
-
-
-(comment (s/conform ::path [3 4
-                            :L 2 3 3 5 5 2
-                            :c 4 3 4 5 3 4 :s 5 2 3 4
-                            :c 4 5 6 2 2 3
-                            :L 2 3 3 5
-                            :q 23 23 24 53 :t 23 23
-                            :l 3 5 5 6
-                            :q 23 23 24 53
-                            :A 24 20 25 0 0 200 200
-                            ]))
-
-
 
 
 (s/def ::hsl
@@ -634,7 +564,7 @@
 (s/def ::size
   (s/+ (s/cat
         :size number?
-        :scale #{:rem :px :fr :vh :vw}
+        :scale #{:rem :px :fr :vh :vw :%}
         :name (s/?
                keyword?))))
 
@@ -656,9 +586,7 @@
                    col  col-span]))
   )
 
-(comment (mark-area [3 2 3 2]))
-
-(s/valid? ::size [1 :fr ])
+(comment (s/valid? ::size [1 :% ]))
 
 
 
@@ -697,9 +625,9 @@
       (fun ([[[x y] [:r r]]]
             [:circle {:cx x
                       :cy y
-                      :r r
+                      :r 1
                       :fill (c [270 70 70])
-                      :stroke-width 1.2
+                      :stroke-width .2
                       :stroke (c [330 70 70])}])
            ([[[x y] [:text r]]]
             [:text {:x x
@@ -749,26 +677,9 @@
              [t-s t-x t-y])))
 
 
-(defn circle [[t-s t-x t-y]]
-  (fn [point-fn-svg]
-    (fn [plot-e]
-      (let [ space (fn [p] (str/join " " p))]
-        (map
-         (comp
-          point-fn-svg
-          (juxt (comp
-                 (juxt (comp
-                        t-x
-                        first)
-                       (comp
-                        t-y
-                        second))
-                 first)
-                second)
-          (fn [x]
-            (s/conform :math2/circle x))
-          )
-         plot-e)))))
+
+
+
 
 (defn paths [svg-pathf [t-s t-x t-y]]
   (fn [pts]
@@ -10113,7 +10024,7 @@ findout out the mass of the grain."]
          (fn [d]
            [:path {:d d
                    :fill :none
-                   :stroke-width 1
+                   :stroke-width .5
                    :stroke (c [70 80 40])}])
          tfun-e1)
 
