@@ -485,6 +485,8 @@
 (comment
 
 
+  )
+(defn gen-grad []
   (map
    (comp
     (fn [x] (str "linear-gradient" x) )
@@ -511,7 +513,13 @@
                           (str "(" a ")"))
                         (partial str/join ",")))
                  (partial remove nil?)
-                 (juxt :hue :saturation :lighness :opacity)
+                 (juxt :hue
+                       (comp
+                        (fn [n] (str n "%"))
+                        :saturation)
+                       (comp
+                        (fn [n] (str n "%"))
+                        :lighness) :opacity)
                  :color)
 
                 (comp
@@ -528,6 +536,8 @@
            :colors))
     (fn [e] (s/conform ::gradient e)))
    (gen/sample (s/gen ::gradient 10))))
+
+
 
 (comment
   (gen/sample
@@ -690,14 +700,14 @@
       (fun ([[[x y] [:r r]]]
             [:circle {:cx x
                       :cy y
-                      :r 1
+                      :r 2
                       :fill (c [270 70 70])
                       :stroke-width .2
                       :stroke (c [330 70 70])}])
            ([[[x y] [:text r]]]
             [:text {:x x
                     :y y
-                    :style {:font-size (size [0.2 :rem])}
+                    :style {:font-size (size [0.5 :rem])}
                     } r]))
       (juxt (comp
              (juxt (comp
@@ -9849,10 +9859,10 @@ findout out the mass of the grain."]
            (let [y (* 3 x x)]
              [[[x
                 0]
-               [(/ (- (* 3 x) 7) 2)
+               [(/ (+ (* 2 x) 2) -3)
                 0]]
               2]))
-         (range 1 5))
+         (range -10 10))
         plot-e4
         (map
          (fn [x]
@@ -9901,13 +9911,13 @@ findout out the mass of the grain."]
              :background-color (c [70 70 70])
              }}
       [:svg {:style {:background-color (c [150 70 70])
-                       :height "100%"
-                       :width "100%"}
+                     :height "100%"
+                     :width "100%"}
              :viewBox (str/join " "
-                                [(* 40 0)
-                                 (* 40 0)
-                                 (* 40 12)
-                                 (* 40 12)
+                                [(* 40 3)
+                                 (* 40 6)
+                                 (* 40 6)
+                                 (* 40 6)
                                  ])}
 
        ( (paths
@@ -9938,25 +9948,25 @@ findout out the mass of the grain."]
           ))
 
 
+       (comment
+         ( (paths
+            (fn [d]
+              [:path
+               {:d d
+                :fill :none
+                :stroke (c [340 90 20])
+                :stroke-width .5}])
 
-       ( (paths
-          (fn [d]
-            [:path
-             {:d d
-              :fill :none
-              :stroke (c [340 90 20])
-              :stroke-width 2}])
+            tfun-e1
+            )
+          [[[-3 0]
+            [-5 0]
+            :l
+            [0 0]
+            [20 0]
 
-          tfun-e1
-          )
-        [[[-3 0]
-          [-5 0]
-          :l
-          [0 0]
-          [20 0]
-
-          ]]
-        )
+            ]]
+          ))
 
 
        (comment(
@@ -9989,8 +9999,6 @@ findout out the mass of the grain."]
                     [5 0]
                     [16 0]]
                    ])))
-
-
        ((paths
          (fn [d]
            [:path
@@ -10018,6 +10026,8 @@ findout out the mass of the grain."]
            [0 0]
            ]
           ))
+       (comment
+         )
 
 
 
@@ -10071,7 +10081,7 @@ findout out the mass of the grain."]
         (for [i (range 0 10 1)
               j (range 0 10 1)]
           [[0 i]
-           [0 j]
+           [-2 j]
            :l
            [0 1]
            [0 0]
@@ -10089,30 +10099,37 @@ findout out the mass of the grain."]
        (comment (circles plot-e2 tfun-e1))
        (circles plot-e3 tfun-e1)
 
-       (circles plot-e4 tfun-e1)
+       (comment (circles plot-e4 tfun-e1))
        (comment
          )
        (circles (map
                  (fn [x]
                    [[[x 0]
-                     [0 0]]
+                     [0 -1]]
                     (str x)])
-                 (range -10 10))   tfun-e1)
+                 (range -10 15))   tfun-e1)
 
        (circles (map
                  (fn [x]
-                   [[[0 0] [x 0]] (str x)])
-                 (range -10 10))   tfun-e1)
+                   [[[0 -1] [x .5]] (str x)])
+                 (range -10 12))
+                tfun-e1)
 
        ((paths
          (fn [d]
            [:path {:d d
                    :fill :none
-                   :stroke-width .5
+                   :stroke-width 1
                    :stroke (c [70 80 40])}])
          tfun-e1)
-        [[[0 0] [-3 -2.5] :L [4 0] [2 2.5]]
-         [[0 0] [3 0] :L [4 0] [0  1.5]]])]
+        [[[-10 0] [(/ (+ 2 (* 2 -10)) -3)
+                   0]
+          :L [10 0] [(/ (+ 2 (* 2 10)) -3) 0]]
+         ])
+       (comment
+         )
+       (comment[[0 0] [3 0] :L [4 0] [0  1.5]])
+       ]
       ]]))
 
 
@@ -10134,15 +10151,22 @@ findout out the mass of the grain."]
       (- (+ (* 40 (- 12 4)) 0) y))
     ]
    [(comment
+      )
+    (comment
       [:div
        (g-style2
-        [2 2 4 4 10 .9]
+        [2 6 4 6 10 .9]
         {:c [70 70 70]
          :size [1.6 :rem]
          :flex :center
          })
-       [m '[[* 9 1]
-            1]]
+
+
+       [:div {:style {
+                      :height "10vh"
+                      :width "10vw"}}
+        [m '[[* 9 1]
+             1]]]
        ])
 
 
@@ -10154,7 +10178,14 @@ findout out the mass of the grain."]
                 :flex :center})
 
      [m '[= y
-          [:m [- [1 3]] [:b  [+ 2 [:m 2 x]]]]]]]
+          [:m [- [1 3]] [:b  [+ 2 [:m 2 x]]]]]]
+
+     [m '[= y
+          [* [- [1 3]] 4]]]
+
+
+
+     ]
 
     (comment
       (for [row [4 5]
@@ -10210,5 +10241,4 @@ findout out the mass of the grain."]
                 :flex :center})
          z]
         ))
-    (comment
-      )]])
+    ]])
