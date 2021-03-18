@@ -464,10 +464,10 @@
                             (< s 101)
                             (> s -1))
                            ))
-   :opacity (s/? (s/and number?
-                        (fn [num]
-                          (and (> num 0)
-                               (< num 1.01)))))))
+   :opacity (s/and number?
+                   (fn [num]
+                     (and (> num 0)
+                          (< num 1.01))))))
 
 
 (s/def ::gradient
@@ -479,16 +479,15 @@
    :colors
    (s/+ (s/cat
          :size (s/cat
-                :size (s/and number? (fn [a] (> a 0)))
+                :size number?
                 :scale #{:rem :px :vh :vw :%})
          :color ::hsl2))))
 (comment
 
 
   )
-(defn gen-grad []
-  (map
-   (comp
+(defn gen-grad [v]
+  ((comp
     (fn [x] (str "linear-gradient" x) )
     (fn [x] (str "(" x ")") )
     (fn [[x y]] (str x "rad , " y))
@@ -513,7 +512,9 @@
                           (str "(" a ")"))
                         (partial str/join ",")))
                  (partial remove nil?)
-                 (juxt :hue
+                 (juxt (comp
+                        (fn [n] (str n "rad"))
+                        :hue)
                        (comp
                         (fn [n] (str n "%"))
                         :saturation)
@@ -534,10 +535,18 @@
 
                 ))  v))
            :colors))
-    (fn [e] (s/conform ::gradient e)))
-   (gen/sample (s/gen ::gradient 10))))
+    (fn [e] (s/conform ::gradient e)))     v)
+  )
 
 
+(comment
+  (nth  (gen/sample (s/gen ::gradient 10)) 3)
+
+  (gen-grad (s/conform
+             ::gradient
+             [1
+              -2 :% 10 70 70
+              ])))
 
 (comment
   (gen/sample
@@ -9692,6 +9701,9 @@ findout out the mass of the grain."]
             :align-items :center
             })
       :flex)
+     (comp
+      (fn [d] [:background-image (gen-grad d)])
+      :d)
      )) m)
   )
 
@@ -9914,10 +9926,10 @@ findout out the mass of the grain."]
                      :height "100%"
                      :width "100%"}
              :viewBox (str/join " "
-                                [(* 40 3)
-                                 (* 40 6)
-                                 (* 40 6)
-                                 (* 40 6)
+                                [(* 40 0)
+                                 (* 40 0)
+                                 (* 40 12)
+                                 (* 40 12)
                                  ])}
 
        ( (paths
@@ -10150,42 +10162,53 @@ findout out the mass of the grain."]
     (fn [y]
       (- (+ (* 40 (- 12 4)) 0) y))
     ]
-   [(comment
-      )
-    (comment
-      [:div
-       (g-style2
-        [2 6 4 6 10 .9]
-        {:c [70 70 70]
-         :size [1.6 :rem]
-         :flex :center
-         })
-
-
-       [:div {:style {
-                      :height "10vh"
-                      :width "10vw"}}
-        [m '[[* 9 1]
-             1]]]
-       ])
-
+   [
+    [:div
+     (g-style2 [2 2 2 5 10 .9]
+               {:d [1
+                    -40 :% 0 30 70 0.5
+                    65 :% 1 30 70 0.1
+                    65 :% 1 40 70 0.6
+                    90 :% 2 50 70 .3]
+                :size [2 :rem]
+                :flex :center})
+     [m '[= [+ p q r] 33]]]
 
 
     [:div
-     (g-style2 [2 2 10 4 10 .9]
-               {:c [270 70 70]
-                :size [1.6 :rem]
+     (g-style2 [2 2 9 5 10 .9]
+               {:d [1
+                    -40 :% -1 70 70 0.25
+                    65 :% -2 70 40 0.375
+                    65 :% 0.75 70 70 0.3
+                    90 :% -3.5 70 70 .5]
+                :size [2 :rem]
                 :flex :center})
 
-     [m '[= y
-          [:m [- [1 3]] [:b  [+ 2 [:m 2 x]]]]]]
+     [m '[= [* p q r]
+          [* 2 2 2]]]
 
-     [m '[= y
-          [* [- [1 3]] 4]]]
+     [m '[= p 2]]
+     [m '[= q 2]]
+     [m '[= r 2]]
 
 
 
      ]
+
+    [:div
+     (g-style2 [2 2 7 2 10 .9]
+               {:d [1
+                    -20 :% 1 70 70 0.25
+                    25 :% .3 70 40 0.1
+                    37 :% .2 40 70 0.2
+                    90 :% .3 70 70 .2]
+                :size [2.5 :rem]
+                :flex :center})
+
+     ]
+
+
 
     (comment
       (for [row [4 5]
@@ -10201,26 +10224,26 @@ findout out the mass of the grain."]
                          :size [1.6 :rem]
                          :flex :center
                          }) v2]))
-
-    (for [i (range 0 2)
-          :let [col (+ i 1)]
-          [v n m]
-          (map
-           (fn [x]
-             [x
-              4
-              4
-              ])
-           (range 1 5))
-          :let [z (get [v n m] i)
-                row (+ v 1)]]
-      [:div (g-style2
-             [row 1 col 1 10 .8]
-             {:c [10 70 70]
-              :size [1.6 :rem]
-              :flex :center})
-       z]
-      )
+    (comment
+      (for [i (range 0 2)
+            :let [col (+ i 1)]
+            [v n m]
+            (map
+             (fn [x]
+               [x
+                4
+                4
+                ])
+             (range 1 5))
+            :let [z (get [v n m] i)
+                  row (+ v 1)]]
+        [:div (g-style2
+               [row 1 col 1 10 .8]
+               {:c [10 70 70]
+                :size [1.6 :rem]
+                :flex :center})
+         z]
+        ))
     (comment
       (for [i (range 0 3)
             :let [col (+ i 1)]
@@ -10241,4 +10264,5 @@ findout out the mass of the grain."]
                 :flex :center})
          z]
         ))
-    ]])
+    ]
+   ])
