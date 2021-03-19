@@ -9694,12 +9694,52 @@ findout out the mass of the grain."]
       (fn [f-size] [:font-size (size f-size)] )
       :size)
      (comp
-      (fun [:center]
-           {:display :flex
-            :flex-direction :column
-            :justify-content :center
-            :align-items :center
-            })
+      (fun ([:center]
+            {:display :flex
+             :flex-direction :column
+             :justify-content :center
+             :align-items :center
+             })
+           ([[:center :left]]
+            {:display :flex
+             :flex-direction :column
+             :justify-content :center
+             :align-items :flex-start
+             })
+           ([[:center :right]]
+            {:display :flex
+             :flex-direction :column
+             :justify-content :center
+             :align-items :flex-end
+             })
+           ([[:center :space]]
+            {:display :flex
+             :flex-direction :column
+             :justify-content :space-around
+             :align-items :center
+             })
+           ([[:center :space :row]]
+            {:display :flex
+             :flex-direction :row
+             :justify-content :space-around
+             :align-items :center
+             })
+           ([:start]
+            {:display :flex
+             :flex-direction :column
+             :justify-content :space-between
+             :align-items :flex-start
+             })
+           ([:end]
+            {:display :flex
+             :flex-direction :column
+             :justify-content :flex-end
+             :align-items :flex-end
+             }
+            )
+
+
+           )
       :flex)
      (comp
       (fn [d] [:background-image (gen-grad d)])
@@ -9713,36 +9753,6 @@ findout out the mass of the grain."]
                          :size [1.6 :rem]
                              :flex :center})
   )
-
-
-(defn g-style
-  ([[x y z o c]]
-   (g-style [x y z o] {:display :flex
-                       :flex-direction :column
-                       :justify-content :center
-                       :align-items :center} [inc inc]))
-
-  ([[x y z o c] flx]
-   (g-style [x y z o] flx
-            [inc inc]))
-  ([[x y z o c] flx [rf cf]]
-   {
-    :style
-    (into
-     {:z-index z
-      :opacity o
-      :color :#111
-
-      :font-size (size [1 :rem])
-      :grid-row (str/join "/"
-                          [x
-                           (rf x)])
-      :grid-column (str/join "/" [y (cf y)])
-      }
-     flx
-
-     )}))
-
 
 
 
@@ -10189,12 +10199,21 @@ findout out the mass of the grain."]
 
    [m '[= [:sq 324]
         [* [:p 2 1] [:p 3 2]]
-        ]]
+        ]]])
+
+(defn center []
+  [:div
+   (g-style2 [2 2 7 2 10 .9]
+             {:d [1
+                  -20 :% 1 70 70 0.25
+                  25 :% .3 70 40 0.1
+                  37 :% .2 40 70 0.2
+                  90 :% .3 70 70 .2]
+              :size [2.5 :rem]
+              :flex :start})
 
 
-
-
-
+   [:div 2]
    ])
 
 (defn template1 []
@@ -10214,17 +10233,8 @@ findout out the mass of the grain."]
 
     [rhs]
 
-    [:div
-     (g-style2 [2 2 7 2 10 .9]
-               {:d [1
-                    -20 :% 1 70 70 0.25
-                    25 :% .3 70 40 0.1
-                    37 :% .2 40 70 0.2
-                    90 :% .3 70 70 .2]
-                :size [2.5 :rem]
-                :flex :center})
+    [center]
 
-     ]
 
 
 
