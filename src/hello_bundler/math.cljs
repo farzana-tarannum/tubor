@@ -9877,8 +9877,8 @@ findout out the mass of the grain."]
                      :height "100%"
                      :width "100%"}
              :viewBox (str/join " "
-                                [(* 40 0)
-                                 (* 40 0)
+                                [(* 40 -0.55)
+                                 (* 40 0.5)
                                  (* 40 12)
                                  (* 40 12)
                                  ])}
@@ -9936,39 +9936,31 @@ findout out the mass of the grain."]
 
 (comment (exercise-177))
 
-(defn lhs []
+(defn lhs [[r rs] [c cs]]
   [:div
    (g
-    [[2 2] [2 5] [10 .9]]
+    [[r rs] [c cs]
+     [10 .9]]
     {:d [1
          -40 :% 0 30 70 0.5
          65 :% 1 30 70 0.1
          65 :% 1 40 70 0.6
          90 :% 2 50 70 .3]
-     :size [1.5 :rem]
+     :size [1.7 :rem]
      :flex :center})
-   [m '[= [* 2 162]
-        324]]
 
-   [m '[= [* 3 54]
-        162]]
-
-   [m '[= [* 3 27]
-        54]]
-   [m '[= [* 3 9]
-        27]]
-
-   [m '[= [* 3 3]
-        9]]
-
-    ] )
+   [m '[+ [:m 6  [:p x 2]] [:m 5 [:b [- x]]]
+        6
+        ]
+    ]])
 
 
-(defn rhs []
+(defn rhs [[r rs] [c cs]]
   [:div
    (g
-    [[2 2 ] [9 5] [10 .9]]
-    {:d [1
+    [[r rs] [c cs]
+     [10 .9]]
+    {:d [.9
          -40 :% -1 70 70 0.25
          65 :% -2 70 40 0.375
          65 :% 0.75 70 70 0.3
@@ -9976,22 +9968,57 @@ findout out the mass of the grain."]
      :size [1.8 :rem]
      :flex :center})
 
-   [m '[= [:sq 324]
-        [* [:p 2 1] [:p 3 2]]
-        ]]])
+   ])
 
-(defn center []
+(defn rhs2 [[r rs] [c cs]]
   [:div
-   (g  [[2 2] [7 2] [10 .9]]
+   (g
+    [[r rs] [c cs]
+     [10 .9]]
+    {:d [-1
+         -40 :% -1 70 70 0.25
+         65 :% -2 70 40 0.375
+         65 :% 0.75 70 70 0.3
+         90 :% -3.5 70 70 .5]
+     :size [1.8 :rem]
+     :flex :center})
+   (comment
+     [m '[= [:sq 324]
+          [* [:p 2 1] [:p 3 2]]
+          ]])
+   ])
+
+(defn center [[r rs] [c cs]]
+  [:div
+   (g  [[r rs] [c cs]
+        [10 .9]]
        {:d [1
             -20 :% 1 70 70 0.25
             25 :% .3 70 40 0.1
             37 :% .2 40 70 0.2
             90 :% .3 70 70 .2]
         :size [2.5 :rem]
+        :flex :center})
+   [m '[:p x 2]]
+   ])
+
+(defn center2 [[r rs] [c cs]]
+  [:div
+   (g  [[r rs] [c cs]
+        [10 .9]]
+       {:d [1
+            -20 :% 1 70 70 0.9
+            25 :% .3 70 40 0.5
+            37 :% .2 40 70 0.7
+            90 :% .3 70 70 .7]
+        :size [2.5 :rem]
         :flex :start})
-   [:div 2]
-  ])
+   [:div ""]
+   ])
+
+
+
+
 
 (defn template1 []
   (let [[s tx ty]
@@ -10008,25 +10035,28 @@ findout out the mass of the grain."]
      [420 420 30]
      [s tx ty]
      [
-      [lhs]
-      [rhs]
-      [center]
-
-      (for [d [[0 [0 2 0 6 0 4]] [1 [8 6 4 2 0 9]]]
-            :let [i (first d)
-                  d (second d)
-                  row (+ i 4)]
-            j (range 6)
-            :let [dd (nth d j)
-                  col (+ j 5)]]
-        [:div
-         (g [[row 1] [col 1] [10 .8]]
-            {:c [70 70 70]
-             :size [1.5 :rem]
-             :flex :center})
-         dd])]
+      [lhs [2 2] [2 5]]
+      [center [2 2] [7 2]]
+      [center2 [4 3] [7 2]]
+      [rhs [2 2] [9 3]]
+      [rhs2 [4 3] [9 3]]
 
 
+
+      (comment
+        (for [d [[0 [0 2 0 6 0 4]] [1 [8 6 4 2 0 9]]]
+              :let [i (first d)
+                    d (second d)
+                    row (+ i 4)]
+              j (range 6)
+              :let [dd (nth d j)
+                    col (+ j 5)]]
+          [:div
+           (g [[row 1] [col 1] [10 .8]]
+              {:c [70 70 70]
+               :size [1.5 :rem]
+               :flex :center})
+           dd]))]
      (map
         (paths
           (fn [d]
