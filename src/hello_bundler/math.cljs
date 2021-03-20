@@ -968,7 +968,8 @@
 (s/def ::e-exp
   (s/cat
    :mo (s/or := ::op-equal
-             :p ::op-pow)
+             :p ::op-pow
+             :s ::op-sub)
    :elem-left ::element
    :elem-right ::element))
 
@@ -1027,7 +1028,7 @@
                   (expr elem)
                   elem))])))
 
-(defn e-exp [{:keys [mo elem-left elem-right]}]
+(defn e-exp2 [{:keys [mo elem-left elem-right]}]
   (if (= (first mo) :p)
     [:msup
      (if (= (first elem-left) :expr)
@@ -1047,6 +1048,39 @@
      (if (= (first elem-right) :expr)
        (expr elem-right)
        elem-right)]))
+
+(defn e-exp [{:keys [mo elem-left elem-right]}]
+  ((fun ([[:p _]]
+         [:msup
+          (if (= (first elem-left) :expr)
+            (expr elem-left)
+            elem-left)
+          (if (= (first elem-right) :expr)
+            (expr elem-right)
+            elem-right)
+          ])
+        ([[:s _]]
+         [:mroot
+          (if (= (first elem-left) :expr)
+            (expr elem-left)
+            elem-left)
+          (if (= (first elem-right) :expr)
+            (expr elem-right)
+            elem-right)
+          ])
+        ([[:= _]]
+         [:mrow
+
+          (if (= (first elem-left) :expr)
+            (expr elem-left)
+            elem-left)
+
+          [:mo "="]
+          (if (= (first elem-right) :expr)
+            (expr elem-right)
+            elem-right)])) mo))
+
+
 
 
 (defn b-exp [{:keys [mo elem]}]
@@ -1077,6 +1111,22 @@
         :f-exp f-exp
         :e-exp e-exp} t-expr)
      expr-1)))
+
+(defn expr2 [e]
+  (let [expr-f (juxt first (comp  first second)
+                     (comp  second second))
+        [_ t-expr expr-1] (expr-f e)]
+    (( {:p-exp p-exp
+        :m-exp m-exp
+        :b-exp b-exp
+        :f-exp f-exp
+        :e-exp e-exp2} t-expr)
+     expr-1)))
+
+
+(comment
+  (expr2 (s/conform ::element '(:s x 2) ))  )
+
 (comment
   (expr (s/conform ::element '(:m 2 x))))
 
@@ -9728,8 +9778,31 @@ findout out the mass of the grain."]
      :flex :center})
 
    [m '[= [* 5
-           q]  10]]
-   [:div "5 is less or equal 5"]
+           [:b [= q 2]]]  10]]
+   [m '[= q [:sq [:p 3 2]] ]]
+   ])
+
+(defn lhs2 [[r rs] [c cs]]
+  [:div
+   (g
+    [[r rs] [c cs]
+     [10 .9]]
+    {:d [1
+         -40 :% 0 30 70 0.5
+         65 :% 1 30 70 0.1
+         65 :% 1 40 70 0.6
+         90 :% 2 50 70 .3]
+     :size [1.3 :rem]
+     :flex :center})
+
+   [:div "if 997 is a prime number?"]
+
+   [m '[= [* p q] 997 ]]
+   [m ['= 'q [:b ['= [:sq 997 ] (js/Math.sqrt 997)]] ]]
+
+   [:div "2,3,5,7,11,13,17,19,23,29,31"]
+
+
    ])
 
 
@@ -9746,9 +9819,10 @@ findout out the mass of the grain."]
      :size [1.2 :rem]
      :flex :center})
 
-   [m '[= [* 5 5] 25] ]
-   [m '[= [[+ 20 5] 2] 12.5 ]]
-   [:div "5 is less or equal 12.5"]
+   [m '[= [* 5 [:b [= q 5]]] 25] ]
+
+   [m '[= q [:sq [:p  5 2]]]]
+
    ])
 
 (defn rhs2 [[r rs] [c cs]]
@@ -9761,13 +9835,13 @@ findout out the mass of the grain."]
          65 :% -2 70 40 0.375
          65 :% 0.75 70 70 0.3
          90 :% -3.5 70 70 .5]
-     :size [1.8 :rem]
+     :size [1.2 :rem]
      :flex :center})
 
 
-   [m '[= [* [:b [= p 41]] q]  82]]
+   [m '[= [* [:b [= p [82 2]]] q]  82]]
 
-
+   [:div "41 is less than of equal 41"]
 
 
    ])
@@ -9799,7 +9873,7 @@ findout out the mass of the grain."]
             90 :% .3 70 70 .7]
         :size [2 :rem]
         :flex :center})
-   [m '[= [* 11 3] 33 ]]
+   [m '[:s s 3]]
    ])
 
 (defn grid4 []
@@ -9823,24 +9897,25 @@ findout out the mass of the grain."]
 
 
      [lhs [2 2] [2 5]]
+     [lhs2 [4 3] [2 5]]
      [center [2 2] [7 2]]
      [center2 [4 3] [7 2]]
      [rhs [2 2] [9 3]]
      [rhs2 [4 3] [9 3]]
-     (comment
-       (for [d [[0 [0 2 0 6 0 4]] [1 [8 6 4 2 0 9]]]
-             :let [i (first d)
-                   d (second d)
-                   row (+ i 4)]
-             j (range 6)
-             :let [dd (nth d j)
-                   col (+ j 5)]]
-         [:div
-          (g [[row 1] [col 1] [10 .8]]
-             {:c [70 70 70]
-              :size [1.5 :rem]
-              :flex :center})
-          dd]))
+
+     (for [d [[0 [0 2 0 6 0 4]] [1 [8 6 4 2 0 9]]]
+           :let [i (first d)
+                 d (second d)
+                 row (+ i 8)]
+           j (range 6)
+           :let [dd (nth d j)
+                 col (+ j 2)]]
+       [:div
+        (g [[row 1] [col 1] [10 .8]]
+           {:c [70 70 70]
+            :size [1.5 :rem]
+            :flex :center})
+        dd])
 
 
      [:div {
@@ -9852,21 +9927,17 @@ findout out the mass of the grain."]
              :background-color (c [70 70 70])
              }}
       [:svg {:style {:background-color (c [150 70 70])
-                     :height "100%"
-                     :width "100%"}
-             :viewBox (str/join " "
-                                [(* 40 -0.55)
-                                 (* 40 0.5)
-                                 (* 40 12)
-                                 (* 40 12)
-                                 ])}
+                     :height (size [100 :%])
+                     :width (size [100 :%])}
+             :viewBox
+             (str/join " "
+                       [(* 40 -0.55) (* 40 0.5)
+                        (* 40 12) (* 40 12)])}
 
        (map (paths
              (fn [d]
                [:path
-                {:d d
-                 :fill :none
-                 :stroke (c [140 80 40])
+                {:d d :fill :none :stroke (c [140 80 40])
                  :stroke-width 0.8}])
              tfun-e1)
             [
@@ -9911,37 +9982,35 @@ findout out the mass of the grain."]
                            ([[[x y] [:r r]]]
                             [:circle
                              {:cx x
+                              :style {:z-index 22}
                               :cy  y
                               :r  r
-                              :fill (c [70 70 70])}])))]
+                              :fill (c [10 70 60])}])))]
          (for [xyz [(map (fn [x]
                            [[0 0] [(* x 2) 0] (str x)])
                          (range -8 8))
                     (map (fn [x]
                            [[(* x 2) 0] [0 0] (str x)])
                          (range -8 8))
-                    ]
-               ]
+                    (map (fn [x]
+                           (let [yp (* 3 x x)
+                                 y (int (/ yp 10))
+                                 dy (* 6 (/ (mod yp 10) 10))]
+                             [[(* x x) 0] [y dy] 4]))
+                         (range 0 5))]]
            (map shapefn xyz)))
-
-       (map
-        (paths
+       (map (paths
          (fn [d]
-           [:path
-            {:d d
-             :fill :none
-             :stroke (c [140 80 40])
-             :stroke-width 0.8}])
+           [:path {:d d :fill :none
+                   :stroke (c [640 80 40]) :stroke-width 0.8}])
          tfun-e1)
         [(for [i (range -20 20)]
-           [[i 0] [0 0]
-            :l
+           [[i 0] [0 0] :l
             [1 0] [0 0] [0 0] [0 1] [0 0] [0 -1] [1 0] [0 0]
             [0 0] [0 1]])
          (for [i (range  -10 10)]
            [[0 0] [i 0]
-            :l
-            [0 -1] [0 0] [0 1] [0 0] [0 0] [1 0]
+            :l [0 -1] [0 0] [0 1] [0 0] [0 0] [1 0]
             [0 -1] [0 0] [0 1] [0 0]])])]]]))
 
 
