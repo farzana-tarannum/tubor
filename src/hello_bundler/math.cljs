@@ -969,6 +969,7 @@
   (s/cat
    :mo (s/or := ::op-equal
              :p ::op-pow
+             :b #{:b}
              :s ::op-sub)
    :elem-left ::element
    :elem-right ::element))
@@ -1028,30 +1029,18 @@
                   (expr elem)
                   elem))])))
 
-(defn e-exp2 [{:keys [mo elem-left elem-right]}]
-  (if (= (first mo) :p)
-    [:msup
-     (if (= (first elem-left) :expr)
-       (expr elem-left)
-       elem-left)
-     (if (= (first elem-right) :expr)
-       (expr elem-right)
-       elem-right)
-     ]
-    [:mrow
-
-     (if (= (first elem-left) :expr)
-       (expr elem-left)
-       elem-left)
-
-     [:mo "="]
-     (if (= (first elem-right) :expr)
-       (expr elem-right)
-       elem-right)]))
-
 (defn e-exp [{:keys [mo elem-left elem-right]}]
   ((fun ([[:p _]]
          [:msup
+          (if (= (first elem-left) :expr)
+            (expr elem-left)
+            elem-left)
+          (if (= (first elem-right) :expr)
+            (expr elem-right)
+            elem-right)
+          ])
+        ([[:b _]]
+         [:msub
           (if (= (first elem-left) :expr)
             (expr elem-left)
             elem-left)
@@ -1112,16 +1101,7 @@
         :e-exp e-exp} t-expr)
      expr-1)))
 
-(defn expr2 [e]
-  (let [expr-f (juxt first (comp  first second)
-                     (comp  second second))
-        [_ t-expr expr-1] (expr-f e)]
-    (( {:p-exp p-exp
-        :m-exp m-exp
-        :b-exp b-exp
-        :f-exp f-exp
-        :e-exp e-exp2} t-expr)
-     expr-1)))
+
 
 
 (comment
@@ -9777,6 +9757,7 @@ findout out the mass of the grain."]
      :size [1.7 :rem]
      :flex :center})
 
+   [m '[:b x 2]]
    [m '[= [* 5
            [:b [= q 2]]]  10]]
    [m '[= q [:sq [:p 3 2]] ]]
