@@ -13,9 +13,10 @@
 
 (s/def
   ::g-num
-  (s/and number? (fn [n]
-                   (and (<= n  15)
-                        (>= n -15)))))
+  (s/and number?
+         (fn [n]
+           (and (<= n  15)
+                (>= n -15)))))
 
 
 (s/def
@@ -262,53 +263,6 @@
    :attr (s/or
           :r :math2/r
           :text string?)))
-
-(comment
-  (
-   (fn [[s t-x t-y]]
-     (map
-      (comp
-       (fun ([[[x y] [:text t]]]
-             [:text
-              {:x x
-               :style {:font-size (size [0.4 :rem])}
-               :y y}
-              t])
-            ([[[x y] [:r r]]]
-             [x y r]))
-       (juxt
-
-        (comp
-         (juxt
-          (comp
-           t-x
-           s
-           :x)
-          (comp
-           t-y
-           s
-           :y))
-         :point)
-        :attr
-        )
-       (fn [n]
-         (s/conform :math2/svg-circle n)))
-      (gen/sample
-       (s/gen :math2/svg-circle 10))))
-   (let [s
-         (fn [[x dx]]
-           (+  (* 30 x)
-               (* 6 dx)))
-         t-x (fn [x]
-               (+ x (* 40 6)))
-         t-y (fn [y]
-               (- (* 40 12) y))]
-     [s t-x t-y])))
-
-
-
-
-
 
 (s/def :math2/path
   (s/tuple
@@ -667,12 +621,6 @@
   )
 
 (comment (s/valid? ::size [1 :% ]))
-
-
-
-
-(comment
-  )
 
 
 (defn c [a]
@@ -9669,12 +9617,6 @@ findout out the mass of the grain."]
 
 
 
-
-
-
-
-
-
 (defn g [[[row rspan] [col cspan] [z op]] m]
   ((comp
     (fn [m] {:style m} )
@@ -9749,121 +9691,157 @@ findout out the mass of the grain."]
 
 (def cr
   (fn [[s t-x t-y]]
-    (comp
-     (fun ([[[x y] [:text t]]]
-           [:text
-            {:x x
-             :style {:font-size (size [0.4 :rem])}
-             :y y}
-            t])
-          ([[[x y] [:r r]]]
-           [:circle
-            {:cx x
-             :cy  y
-             :r  r
-             :fill :none}]))
-     (juxt
+    (fn [shape]
       (comp
+       shape
        (juxt
         (comp
-         t-x
-         s
-         :x)
-        (comp
-         t-y
-         s
-         :y))
-       :point)
-      :attr
-      )
-     (fn [n]
-       (s/conform :math2/svg-circle n)))))
+         (juxt
+          (comp
+           t-x
+           s
+           :x)
+          (comp
+           t-y
+           s
+           :y))
+         :point)
+        :attr
+        )
+       (fn [n]
+         (s/conform :math2/svg-circle n))))))
+
+
+(comment (exercise-177))
+
+(defn lhs [[r rs] [c cs]]
+  [:div
+   (g
+    [[r rs] [c cs]
+     [10 .9]]
+    {:d [1
+         -40 :% 0 30 70 0.5
+         65 :% 1 30 70 0.1
+         65 :% 1 40 70 0.6
+         90 :% 2 50 70 .3]
+     :size [1.7 :rem]
+     :flex :center})
+
+   [m '[= [* 5
+           q]  10]]
+   [:div "5 is less or equal 5"]
+   ])
+
+
+(defn rhs [[r rs] [c cs]]
+  [:div
+   (g
+    [[r rs] [c cs]
+     [10 .9]]
+    {:d [.9
+         -40 :% -1 70 70 0.25
+         65 :% -2 70 40 0.375
+         65 :% 0.75 70 70 0.3
+         90 :% -3.5 70 70 .5]
+     :size [1.2 :rem]
+     :flex :center})
+
+   [m '[= [* 5 5] 25] ]
+   [m '[= [[+ 20 5] 2] 12.5 ]]
+   [:div "5 is less or equal 12.5"]
+   ])
+
+(defn rhs2 [[r rs] [c cs]]
+  [:div
+   (g
+    [[r rs] [c cs]
+     [10 .9]]
+    {:d [-1
+         -40 :% -1 70 70 0.25
+         65 :% -2 70 40 0.375
+         65 :% 0.75 70 70 0.3
+         90 :% -3.5 70 70 .5]
+     :size [1.8 :rem]
+     :flex :center})
+
+
+   [m '[= [* [:b [= p 41]] q]  82]]
 
 
 
-(comment
-  (map
-   (cr
-    [(fn [[x dx]]
-       (+  (* 30 x)
-           (* 6 dx)))
-     (fn [x]
-       (+ x (* 40 6)))
-     (fn [y]
-       (- (* 40 12) y))])
 
-   (gen/sample
-    (s/gen :math2/svg-circle 10))))
+   ])
 
+(defn center [[r rs] [c cs]]
+  [:div
+   (g  [[r rs] [c cs]
+        [10 .9]]
+       {:d [1
+            -20 :% 1 70 70 0.25
+            25 :% .3 70 40 0.1
+            37 :% .2 40 70 0.2
+            90 :% .3 70 70 .2]
+        :size [2 :rem]
+        :flex :center})
 
-(defn grid3 [[w h s] [s tx ty] divs path-svg ]
-  (let [tfun-e1 [s (comp tx s) (comp ty s)]
-        plot-e1 (map (fn [x]
-                       (let [y (* 3 x x)]
-                               [[[x 0] [(int (/ y 5))
-                                        (mod y 5) ]] 2]))
-                     (range 1 6))
-        plot-e2
-        (conj
-         (map
-          (fn [x]
-            (let [y (* 3 x x)]
-              [[[(* x x ) 0]
-                [(int (/ y 5))
-                 (mod y 5) ]]
-               2]))
-          (range 1 5))
-         [[[4 0]
-           [2 2]]
-          3])
-        plot-e3
-        (map
-         (fn [x]
-           (let [y (* 3 x x)]
-             [[[x
-                0]
-               [(/ (+ (* 2 x) 2) -3)
-                0]]
-              2]))
-         (range -10 10))
-        plot-e4
-        (map
-         (fn [x]
-           [[[x
-              0]
-             [(/ (- 9 (* 2 x) ) 3)
-              0]]
-            2])
-         (range 1 5))
+   (comment [m '[= [* p q] 53]])
+
+   ])
+
+(defn center2 [[r rs] [c cs]]
+  [:div
+   (g  [[r rs] [c cs]
+        [10 .9]]
+       {:d [1
+            -20 :% 1 70 70 0.9
+            25 :% .3 70 40 0.5
+            37 :% .2 40 70 0.7
+            90 :% .3 70 70 .7]
+        :size [2 :rem]
+        :flex :center})
+   [m '[= [* 11 3] 33 ]]
+   ])
+
+(defn grid4 []
+  (let [[w h s] [420 420 30]
+        [s tx ty] [(comp
+                    (fn [[x y]] (+ x y))
+                    (juxt (comp (fn [x] (* x 30))  first)
+                          (comp (fn [x] (* x 6) ) second)))
+                   (fn [x] (+ (* 40 (+ 0 4)) x))
+                   (fn [y] (- (+ (* 40 (- 12 4)) 0) y))]
+        tfun-e1 [s (comp tx s) (comp ty s)]]
 
 
-
-
-
-
-        ]
     [:div {:style
            {:background-color (c [90 70 70])
             :display :grid
             :height (size [100 :vh])
             :width (size [100 :vw])
-            :grid-template-columns (size
-                                    (into
-                                     []
-                                     (apply concat
-                                            (take (* 14 1)
-                                                  (repeat [10 :vh])))))
+            :grid-template-columns (size (apply concat (take 14 (repeat [10 :vh]))))
+            :grid-template-rows (size (apply concat (take 10 (repeat [10 :vh]))))}}
 
-            :grid-template-rows (size (into
-                                       []
-                                       (apply concat
-                                              (take (* 10 1)
-                                                    (repeat [10 :vh])))))
 
-            }}
+     [lhs [2 2] [2 5]]
+     [center [2 2] [7 2]]
+     [center2 [4 3] [7 2]]
+     [rhs [2 2] [9 3]]
+     [rhs2 [4 3] [9 3]]
+     (comment
+       (for [d [[0 [0 2 0 6 0 4]] [1 [8 6 4 2 0 9]]]
+             :let [i (first d)
+                   d (second d)
+                   row (+ i 4)]
+             j (range 6)
+             :let [dd (nth d j)
+                   col (+ j 5)]]
+         [:div
+          (g [[row 1] [col 1] [10 .8]]
+             {:c [70 70 70]
+              :size [1.5 :rem]
+              :flex :center})
+          dd]))
 
-     (map (fn
-            [div] div)  divs)
 
      [:div {
             :style
@@ -9883,7 +9861,31 @@ findout out the mass of the grain."]
                                  (* 40 12)
                                  ])}
 
-       path-svg
+       (map (paths
+             (fn [d]
+               [:path
+                {:d d
+                 :fill :none
+                 :stroke (c [140 80 40])
+                 :stroke-width 0.8}])
+             tfun-e1)
+            [
+             (for [i (range 0 10 1)
+                   j (range 0 10 1)]
+               [[0 i] [-2 j]
+                :l
+                [0 1] [0 0] [0 0] [0 1] [0 -1] [0 0] [0 0] [0 -1]])
+             (let [[[x dx] [y dy]] [ [3 0] [1 1]]
+                   [[x1 dx1] [y1 dy1]] [[3 0] [6 0]]]
+               [[[0 0] [0 0]
+                 :c
+                 [x dx] [y dy] [3 3] [8 0] [5 0] [16 0]]
+                [[0 0] [0 0] :l [16 0] [9 4]]
+                [[-3 0] [-5 0] :l [0 0] [20 0]]
+                [[0 0] [0 0] :l [16 0] [9 4]]
+                [[-10 0] [(/ (+ 2 (* 2 -10)) -3) 0]
+                 :L [10 0] [(/ (+ 2 (* 2 10)) -3) 0]]
+                ])])
 
        ((paths
          (fn [d]
@@ -9894,229 +9896,54 @@ findout out the mass of the grain."]
              :stroke-width .5}]) tfun-e1)
         (for [i (range -12 13 2)
               j (range -12 13 2)]
-          [[i 0]
-           [j 0]
+          [[i 0] [j 0]
            :l
-           [2 0]
-           [0 0]
-           [0 0]
-           [2 0]
-           [-2 0]
-           [0 0]
-           [0 0]
-           [-2 0]])
-        )
+           [2 0] [0 0] [0 0] [2 0] [-2 0] [0 0] [0 0] [-2 0]]))
 
+       (let [ shapefn ((cr [s tx ty])
+                      (fun ([[[x y] [:text t]]]
+                            [:text
+                             {:x x
+                              :style {:font-size
+                                      (size [0.5 :rem])}
+                              :y y}
+                             t])
+                           ([[[x y] [:r r]]]
+                            [:circle
+                             {:cx x
+                              :cy  y
+                              :r  r
+                              :fill (c [70 70 70])}])))]
+         (for [xyz [(map (fn [x]
+                           [[0 0] [(* x 2) 0] (str x)])
+                         (range -8 8))
+                    (map (fn [x]
+                           [[(* x 2) 0] [0 0] (str x)])
+                         (range -8 8))
+                    ]
+               ]
+           (map shapefn xyz)))
 
-       (comment
-         (circles plot-e1 tfun-e1))
-       (comment (circles plot-e2 tfun-e1))
-       (circles plot-e3 tfun-e1)
-
-       (comment (circles plot-e4 tfun-e1))
-       (comment
-         )
-       (circles (map
-                 (fn [x]
-                   [[[x 0]
-                     [0 -1]]
-                    (str x)])
-                 (range -10 15))   tfun-e1)
-
-       (circles (map
-                 (fn [x]
-                   [[[0 -1] [x .5]] (str x)])
-                 (range -10 12))
-                tfun-e1)
-
-
-
-       ]
-      ]]))
-
-(comment (exercise-177))
-
-(defn lhs [[r rs] [c cs]]
-  [:div
-   (g
-    [[r rs] [c cs]
-     [10 .9]]
-    {:d [1
-         -40 :% 0 30 70 0.5
-         65 :% 1 30 70 0.1
-         65 :% 1 40 70 0.6
-         90 :% 2 50 70 .3]
-     :size [1.7 :rem]
-     :flex :center})
-
-   [m '[+ [:m 6  [:p x 2]] [:m 5 [:b [- x]]]
-        6
-        ]
-    ]])
-
-
-(defn rhs [[r rs] [c cs]]
-  [:div
-   (g
-    [[r rs] [c cs]
-     [10 .9]]
-    {:d [.9
-         -40 :% -1 70 70 0.25
-         65 :% -2 70 40 0.375
-         65 :% 0.75 70 70 0.3
-         90 :% -3.5 70 70 .5]
-     :size [1.8 :rem]
-     :flex :center})
-
-   ])
-
-(defn rhs2 [[r rs] [c cs]]
-  [:div
-   (g
-    [[r rs] [c cs]
-     [10 .9]]
-    {:d [-1
-         -40 :% -1 70 70 0.25
-         65 :% -2 70 40 0.375
-         65 :% 0.75 70 70 0.3
-         90 :% -3.5 70 70 .5]
-     :size [1.8 :rem]
-     :flex :center})
-   (comment
-     [m '[= [:sq 324]
-          [* [:p 2 1] [:p 3 2]]
-          ]])
-   ])
-
-(defn center [[r rs] [c cs]]
-  [:div
-   (g  [[r rs] [c cs]
-        [10 .9]]
-       {:d [1
-            -20 :% 1 70 70 0.25
-            25 :% .3 70 40 0.1
-            37 :% .2 40 70 0.2
-            90 :% .3 70 70 .2]
-        :size [2.5 :rem]
-        :flex :center})
-   [m '[:p x 2]]
-   ])
-
-(defn center2 [[r rs] [c cs]]
-  [:div
-   (g  [[r rs] [c cs]
-        [10 .9]]
-       {:d [1
-            -20 :% 1 70 70 0.9
-            25 :% .3 70 40 0.5
-            37 :% .2 40 70 0.7
-            90 :% .3 70 70 .7]
-        :size [2.5 :rem]
-        :flex :start})
-   [:div ""]
-   ])
-
-
-
+       (map
+        (paths
+         (fn [d]
+           [:path
+            {:d d
+             :fill :none
+             :stroke (c [140 80 40])
+             :stroke-width 0.8}])
+         tfun-e1)
+        [(for [i (range -20 20)]
+           [[i 0] [0 0]
+            :l
+            [1 0] [0 0] [0 0] [0 1] [0 0] [0 -1] [1 0] [0 0]
+            [0 0] [0 1]])
+         (for [i (range  -10 10)]
+           [[0 0] [i 0]
+            :l
+            [0 -1] [0 0] [0 1] [0 0] [0 0] [1 0]
+            [0 -1] [0 0] [0 1] [0 0]])])]]]))
 
 
 (defn template1 []
-  (let [[s tx ty]
-        [(comp
-          (fn [[x y]] (+ x y))
-          (juxt (comp (fn [x] (* x 30))  first)
-                (comp (fn [x] (* x 6) ) second)))
-         (fn [x] (+ (* 40 (+ 0 4)) x))
-         (fn [y]
-           (- (+ (* 40 (- 12 4)) 0) y))
-         ]
-        tfun-e1 [s (comp tx s) (comp ty s)] ]
-    [grid3
-     [420 420 30]
-     [s tx ty]
-     [
-      [lhs [2 2] [2 5]]
-      [center [2 2] [7 2]]
-      [center2 [4 3] [7 2]]
-      [rhs [2 2] [9 3]]
-      [rhs2 [4 3] [9 3]]
-
-
-
-      (comment
-        (for [d [[0 [0 2 0 6 0 4]] [1 [8 6 4 2 0 9]]]
-              :let [i (first d)
-                    d (second d)
-                    row (+ i 4)]
-              j (range 6)
-              :let [dd (nth d j)
-                    col (+ j 5)]]
-          [:div
-           (g [[row 1] [col 1] [10 .8]]
-              {:c [70 70 70]
-               :size [1.5 :rem]
-               :flex :center})
-           dd]))]
-     (map
-        (paths
-          (fn [d]
-            [:path
-             {:d d
-              :fill :none
-              :stroke (c [140 80 40])
-              :stroke-width 0.8}])
-          tfun-e1)
-        [
-         (for [i (range -20 20)]
-           [[i 0] [0 0]
-            :l
-            [1 0] [0 0] [0 0] [0 1] [0 0] [0 -1] [1 0] [0 0] [0 0] [0 1]])
-
-         (for [i (range 0 10 1)
-               j (range 0 10 1)]
-           [[0 i] [-2 j]
-            :l
-            [0 1] [0 0] [0 0] [0 1] [0 -1] [0 0] [0 0] [0 -1]])
-
-         (for [i (range  -8 8)]
-           [[0 0] [i 0]
-            :l
-            [0 -1] [0 0] [0 1] [0 0]
-
-
-            [0 0] [1 0] [0 -1] [0 0]
-
-            [0 1] [0 0]
-            ]
-           )
-
-         (let [[[x dx] [y dy]]
-               [ [3 0] [1 1]]
-               [[x1 dx1] [y1 dy1]]
-               [[3 0] [6 0]]
-               ]
-           [[[0 0] [0 0]
-             :c
-             [x dx] [y dy]
-             [3 3] [8 0] [5 0] [16 0]]
-            [[0 0] [0 0]
-             :l
-             [16 0] [9 4]
-             ]
-            [[-3 0] [-5 0]
-             :l
-             [0 0] [20 0]
-             ]
-            [[0 0]
-             [0 0]
-             :l
-             [16 0]
-             [9 4]
-             ]
-            [[-10 0]
-             [(/ (+ 2 (* 2 -10)) -3) 0]
-             :L [10 0] [(/ (+ 2 (* 2 10)) -3) 0]]
-            ])])])
-
-
-  )
+  [grid4])
