@@ -923,6 +923,7 @@
               :+ ::op-plus
               :- ::op-minus
               :× ::op-mul
+              := ::op-equal
               :op-mul2 ::op-mul2))
 
 
@@ -967,7 +968,7 @@
 
 (s/def ::e-exp
   (s/cat
-   :mo (s/or := ::op-equal
+   :mo (s/or
              :p ::op-pow
              :b #{:b}
              :s ::op-sub)
@@ -9840,7 +9841,7 @@ findout out the mass of the grain."]
         :flex :center})
 
    (comment [m '[= [* p q] 53]])
-
+   [m '[= x y z]]
    ])
 
 (defn center2 [[r rs] [c cs]]
