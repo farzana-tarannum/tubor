@@ -921,6 +921,10 @@
 
 (s/def ::ops (s/or
               :+ ::op-plus
+              :> '#{>}
+              :< '#{<}
+              :<= '#{<=}
+              :>= '#{>=}
               :- ::op-minus
               :× ::op-mul
               := ::op-equal
@@ -9757,7 +9761,8 @@ findout out the mass of the grain."]
          90 :% 2 50 70 .3]
      :size [1.7 :rem]
      :flex :center})
-
+   [m '[<= b 2]]
+   [m '[<= 2 [+ x 3]  3]]
    [m '[:b x 2]]
    [m '[= [* 5
            [:b [= q 2]]]  10]]
