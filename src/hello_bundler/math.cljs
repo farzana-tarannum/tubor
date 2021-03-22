@@ -974,7 +974,7 @@
   (s/cat
    :mo (s/or
              :p ::op-pow
-             :b #{:b}
+             :k #{:k}
              :s ::op-sub)
    :elem-left ::element
    :elem-right ::element))
@@ -1044,7 +1044,7 @@
             (expr elem-right)
             elem-right)
           ])
-        ([[:b _]]
+        ([[:k _]]
          [:msub
           (if (= (first elem-left) :expr)
             (expr elem-left)
@@ -9756,19 +9756,33 @@ findout out the mass of the grain."]
      [10 .9]]
     {:d [1
          -40 :% 0 30 70 0.5
-         65 :% 1 30 70 0.1
+         65 :% 1 30 70 0.7
          65 :% 1 40 70 0.6
          90 :% 2 50 70 .3]
      :size [1.7 :rem]
      :flex :center})
-   [m '[<= b 2]]
-   [m '[<= 2 [+ x 3]  3]]
-   [m '[:b x 2]]
-   [m '[= [* 5
-           [:b [= q 2]]]  10]]
-   [m '[= q [:sq [:p 3 2]] ]]
-   ])
+   [m '[=  displacement s ]]
+   [m '[= [s t] [[+ v u] 2]]]
+   [m '[= s
+        [[:m t [:b [+ v u]]] 2]]]
 
+   [m '[= s
+        [[:m t [:b [+ [:b  [= v [+ u [:m a t]] ]] u]]] 2]]]
+
+   [m '[= s
+        [:m [t 2] [:b [+ [:m 2 u] [:m a t]]]]
+
+        ]]
+   [m '[= s
+        [+ [:m  u t] [:m [1 2]  a [:p t 2]]]
+
+
+        ]]
+
+   ])
+(js/Math.sqrt 3)
+
+(comment )
 (defn lhs2 [[r rs] [c cs]]
   [:div
    (g
@@ -9779,18 +9793,17 @@ findout out the mass of the grain."]
          65 :% 1 30 70 0.1
          65 :% 1 40 70 0.6
          90 :% 2 50 70 .3]
-     :size [1.3 :rem]
+     :size [2 :rem]
      :flex :center})
-
-   [:div "if 997 is a prime number?"]
-
-   [m '[= [* p q] 997 ]]
-   [m ['= 'q [:b ['= [:sq 997 ] (js/Math.sqrt 997)]] ]]
-
-   [:div "2,3,5,7,11,13,17,19,23,29,31"]
-
-
-   ])
+   [m '[= Acceleration a]]
+   [m '[= velocity-at-begining u]]
+   [m '[= velocity-at-end v]]
+   [m '[=
+        a [[- v u] t]]]
+   [m '[=
+        [:m a t]  [- v u]]]
+   [m '[= v
+        [+ u [:m a t]] ]]])
 
 
 (defn rhs [[r rs] [c cs]]
@@ -9803,12 +9816,22 @@ findout out the mass of the grain."]
          65 :% -2 70 40 0.375
          65 :% 0.75 70 70 0.3
          90 :% -3.5 70 70 .5]
-     :size [1.2 :rem]
+     :size [1.8 :rem]
      :flex :center})
 
-   [m '[= [* 5 [:b [= q 5]]] 25] ]
+   [m '[= [:sq [:p 5  2 ]]
+        [:p 5 1]]]
 
-   [m '[= q [:sq [:p  5 2]]]]
+   [m '[= [:sq [*  2  [:p 5 2]]]
+        [:m 5 [:sq 2] ]]]
+
+   [m '[= [:sq 50] [:sq [+ [:p 7 2] 1]]
+
+        ]
+
+    ]
+
+   [:div "this is estimated as 7 "]
 
    ])
 
@@ -9826,9 +9849,7 @@ findout out the mass of the grain."]
      :flex :center})
 
 
-   [m '[= [* [:b [= p [82 2]]] q]  82]]
 
-   [:div "41 is less than of equal 41"]
 
 
    ])
@@ -9845,23 +9866,67 @@ findout out the mass of the grain."]
         :size [2 :rem]
         :flex :center})
 
-   (comment [m '[= [* p q] 53]])
-   [m '[= x y z]]
+   (map
+    (fn [i j]
+      [m ['* i (js/Math.pow 2 j) ] ])
+    [1 0 1 1 0 1 1 0]
+    (range 7  -1 -1)
+    )
+
    ])
 
-(defn center2 [[r rs] [c cs]]
+(defn center2 [[r rs] [c cs] bin]
   [:div
-   (g  [[r rs] [c cs]
-        [10 .9]]
-       {:d [1
-            -20 :% 1 70 70 0.9
-            25 :% .3 70 40 0.5
-            37 :% .2 40 70 0.7
-            90 :% .3 70 70 .7]
-        :size [2 :rem]
-        :flex :center})
-   [m '[:s s 3]]
+   (g
+    [[r rs] [c cs]
+     [10 .9]]
+    {:d [-1
+         -20 :% -2 70 70 0.5
+         25 :% -2 100 40 0.2
+         28 :% 1 50 70 0.7
+         90 :% .7 70 60 .7]
+     :size [1.4 :rem]
+     :flex :center})
+
+   [m ['+ [:k 11101001  2] [:k 11010001  2]]]
+   [m '[= [+ 0 0] 0]]
+   [m '[= [+ 0 1] 1]]
+   [m '[= [+ 1 0] 1]]
+   [:div
+    [m '[= [+ 1 1] 0]]
+    " "
+    [m '[= c 1] ]]
+
+   [:div
+    [m '[= [+ 1 1 1] 1]]
+    " "
+    [m '[= c 1] ]]
+
+   [m '[= c 1]]
+   [m [:k 11101001  2]]
+   [m [:k 11010001  2]]
+   [m [:k [:m 1 1 0 1  1 1 0 1 0] 2]]
+
+
+
+   (comment
+     [m ['=
+
+         (cons '+
+               (map-indexed
+                (fn [i e]
+                  ['* (js/Math.pow 2 (- (dec (count bin)) i)) e])
+                bin
+                ))
+         [:k (apply + (map-indexed
+                       (fn [i e]
+                         (* (js/Math.pow 2 (- (dec (count bin)) i)) e))
+                       bin
+                       )) 10]
+         ]
+      ])
    ])
+
 
 (defn grid4 []
   (let [[w h s] [420 420 30]
@@ -9872,8 +9937,6 @@ findout out the mass of the grain."]
                    (fn [x] (+ (* 40 (+ 0 4)) x))
                    (fn [y] (- (+ (* 40 (- 12 4)) 0) y))]
         tfun-e1 [s (comp tx s) (comp ty s)]]
-
-
     [:div {:style
            {:background-color (c [90 70 70])
             :display :grid
@@ -9882,27 +9945,95 @@ findout out the mass of the grain."]
             :grid-template-columns (size (apply concat (take 14 (repeat [10 :vh]))))
             :grid-template-rows (size (apply concat (take 10 (repeat [10 :vh]))))}}
 
+     (comment [lhs2 [2 3] [2 5]])
+     (comment [lhs [5 5] [2 5]])
 
-     [lhs [2 2] [2 5]]
-     [lhs2 [4 3] [2 5]]
-     [center [2 2] [7 2]]
-     [center2 [4 3] [7 2]]
-     [rhs [2 2] [9 3]]
-     [rhs2 [4 3] [9 3]]
+     (comment )
+     (comment )
+     (comment [center [2 2] [7 7]])
+     (comment )
 
-     (for [d [[0 [0 2 0 6 0 4]] [1 [8 6 4 2 0 9]]]
-           :let [i (first d)
-                 d (second d)
-                 row (+ i 8)]
-           j (range 6)
-           :let [dd (nth d j)
-                 col (+ j 2)]]
-       [:div
-        (g [[row 1] [col 1] [10 .8]]
-           {:c [70 70 70]
-            :size [1.5 :rem]
-            :flex :center})
-        dd])
+     (comment )
+     (comment [rhs [2 2] [5 7]])
+     (comment [rhs2 [4 3] [9 3]])
+     (comment
+
+
+       (loop [iter 253
+              acc []]
+         (if (= (int (/ iter 2 )) 0 )
+           (conj acc [iter (mod iter 2)])
+           (recur (int (/ iter 2)) (conj acc [iter
+                                              (mod iter 2)]))))
+       )
+
+     (let [gsd
+           (map-indexed
+            (fn [i [x y]] [i [ [m [x 2]] y]])
+            (loop [iter 253
+                   acc []]
+              (if (= (int (/ iter 2 )) 0 )
+                (conj acc [iter (mod iter 2)])
+                (recur (int (/ iter 2))
+                       (conj acc [iter
+                                  (mod iter 2)])))))]
+
+       (for [i [0 1]
+             :let [c (+ i 2)]
+             [j x] gsd
+             :let [k (nth x i)
+                   r (+ j 2)]]
+         [:div (g [[r 1] [c 1] [10 1]]
+                  {:d [.7
+                       -5 :% 0.6 90 50 0.78
+                       80 :% 0.7 70 60 0.40
+                       85 :% 3 40 40 0.50
+                       95 :% 3.5 70 70 0.40]
+                   :size [2 :rem]
+                   :flex :center})
+          k]))
+
+     [center2 [4 3] [4 12] [1 1 1 0 1 0 0 1]]
+     (comment
+       (let [bin [1 1 1 0 1 0 0 1]
+             l (dec (count bin))]
+         (for [[i d] (map-indexed
+                      (fn [x y]
+                        [x y])
+                      [bin
+                       (map-indexed
+                        (fn [i e]
+                          [m ['* [:p 2 (- l i)] e]]) bin)
+
+                       (map-indexed
+                        (fn [i e]
+                          [m ['* (js/Math.pow 2 (- l i)) e]])
+                        bin)
+                       (map-indexed
+                        (fn [i e]
+                          (* (js/Math.pow 2 (- l i)) e))
+                        bin)])
+               :let [r (+ i 2)]
+               j (range 0 (count d))
+               :let [c (+ j 2)
+                     v (nth d j)]]
+           [:div
+            (g  [[r 1] [c 1]
+                 [20 1]]
+                {:d [-1
+                     -10 :% .1 40 70 0.25
+                     25 :% 2 70 40 0.4
+                     37 :% .2 40 70 0.8
+                     90 :% .3 70 70 .2]
+                 :size [1.8 :rem]
+                 :flex :center})
+            v
+
+            ])))
+
+
+
+
 
 
      [:div {
@@ -9979,6 +10110,13 @@ findout out the mass of the grain."]
                     (map (fn [x]
                            [[(* x 2) 0] [0 0] (str x)])
                          (range -8 8))
+                    (map (fn [x]
+                           (let [yp (* 3 x x)
+                                 y (int (/ yp 10))
+                                 dy (* 6 (/ (mod yp 10) 10))]
+                             [[(* x x) 0] [y dy] 4]))
+                         (range 0 5))
+
                     (map (fn [x]
                            (let [yp (* 3 x x)
                                  y (int (/ yp 10))
