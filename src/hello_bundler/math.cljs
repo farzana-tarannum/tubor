@@ -1234,16 +1234,17 @@
 
      (comment [lhs2 [2 3] [2 5]])
      (comment [lhs [5 5] [2 5]])
-     [center [2 2] [3 4]
-      (map
-       (fn [x] x)
-       [[m '[= [+ [- x] [:m 2 y]] 4]]
-        [m '[= [+ [- x] x [:m 2 y]] [+ 4 x]]]
-        [m '[= [ [:m 2 y] 2]
-             [[+ 4 x] 2]]]
-        [m '[= y
-             [[+ 4 x] 2]]]
-        ])]
+     (comment
+       [center [2 2] [3 4]
+        (map
+         (fn [x] x)
+         [[m '[= [+ [- x] [:m 2 y]] 4]]
+          [m '[= [+ [- x] x [:m 2 y]] [+ 4 x]]]
+          [m '[= [ [:m 2 y] 2]
+               [[+ 4 x] 2]]]
+          [m '[= y
+               [[+ 4 x] 2]]]
+          ])])
      (comment [rhs [2 2] [5 7]])
      (comment [rhs2 [4 3] [9 3]])
      (comment
@@ -1293,6 +1294,26 @@
                [0 0] [1 0]  [5 0] [2.25 0]]]
              ])
 
+
+       (map (paths
+             (fn [d]
+               [:path
+                {:d d :fill (c [70 70 70])
+                 :stroke (c [10 80 40])
+                 :stroke-width 1.5}])
+             tfun-e1)
+            [
+
+             (for [i (range 0 28 4)
+                   j (range 0 24 4)]
+               [[-4 i] [3 j]
+                :l
+                [0 4] [0 0] [0 0] [0 4]
+                [0 -4] [0 0] [0 0] [0 -4]])
+
+
+             ])
+
        ((paths
          (fn [d]
            [:path
@@ -1329,10 +1350,7 @@
                     (map (fn [x]
                            [[(* x 2) 0] [0 0] (str x)])
                          (range -8 8))
-                    (comment
-                      )
-                    (comment
-                      )
+
                     (comment
                       (map (fn [x]
                                    [[0 2] [x 0] (str x)])
@@ -1351,7 +1369,7 @@
          (fn [d]
            [:path {:d d :fill :none
                    :stroke-dasharray (size [2 :rem 2 :rem])
-                   :stroke (c [640 80 40]) :stroke-width 0.8}])
+                   :stroke (c [20 80 80]) :stroke-width 0.8}])
          tfun-e1)
         [(for [i (range -20 20)]
            [[i 0] [0 0] :l
