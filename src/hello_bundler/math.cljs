@@ -1099,51 +1099,28 @@
          65 :% 1 30 70 0.7
          65 :% 1 40 70 0.6
          90 :% 2 50 70 .3]
-     :size [1.7 :rem]
+     :size [3 :rem]
      :flex :center})
-   [m '[=  displacement s ]]
-   [m '[= [s t] [[+ v u] 2]]]
-   [m '[= s
-        [[:m t [:b [+ v u]]] 2]]]
-
-   [m '[= s
-        [[:m t [:b [+ [:b  [= v [+ u [:m a t]] ]] u]]] 2]]]
-
-   [m '[= s
-        [:m [t 2] [:b [+ [:m 2 u] [:m a t]]]]
-
-        ]]
-   [m '[= s
-        [+ [:m  u t] [:m [1 2]  a [:p t 2]]]
-
-
-        ]]
+   [m '[:p x 2]]
 
    ])
 (js/Math.sqrt 3)
 
 (comment )
-(defn lhs2 [[r rs] [c cs]]
+(defn lhs2 [[r rs] [c cs] m]
   [:div
    (g
     [[r rs] [c cs]
      [10 .9]]
     {:d [1
-         -40 :% 0 30 70 0.5
+         -40 :% 0 30 70 0.2
          65 :% 1 30 70 0.1
-         65 :% 1 40 70 0.6
-         90 :% 2 50 70 .3]
+         65 :% 1 40 70 0.2
+         90 :% 2 50 70 .1]
      :size [2 :rem]
      :flex :center})
-   [m '[= Acceleration a]]
-   [m '[= velocity-at-begining u]]
-   [m '[= velocity-at-end v]]
-   [m '[=
-        a [[- v u] t]]]
-   [m '[=
-        [:m a t]  [- v u]]]
-   [m '[= v
-        [+ u [:m a t]] ]]])
+   m
+   ])
 
 
 (defn rhs [[r rs] [c cs]]
@@ -1159,19 +1136,7 @@
      :size [1.8 :rem]
      :flex :center})
 
-   [m '[= [:sq [:p 5  2 ]]
-        [:p 5 1]]]
 
-   [m '[= [:sq [*  2  [:p 5 2]]]
-        [:m 5 [:sq 2] ]]]
-
-   [m '[= [:sq 50] [:sq [+ [:p 7 2] 1]]
-
-        ]
-
-    ]
-
-   [:div "this is estimated as 7 "]
 
    ])
 
@@ -1185,8 +1150,11 @@
          65 :% -2 70 40 0.375
          65 :% 0.75 70 70 0.3
          90 :% -3.5 70 70 .5]
-     :size [1.2 :rem]
-     :flex :center})])
+     :size [3 :rem]
+     :flex :center})
+
+   [m '[= [:m [:b [+ x 6]] [:b  [+ x 7]]]
+        [+ [:p x 2] [:m x [:b  [+ 6 7]]] [* 7 6] ]] ]])
 
 (defn center [[r rs] [c cs] m]
   [:div
@@ -1232,21 +1200,24 @@
             :grid-template-columns (size (apply concat (take 14 (repeat [10 :vh]))))
             :grid-template-rows (size (apply concat (take 10 (repeat [10 :vh]))))}}
 
-     (comment [lhs2 [2 3] [2 5]])
-     (comment [lhs [5 5] [2 5]])
-     (comment
-       [center [2 2] [3 4]
-        (map
-         (fn [x] x)
-         [[m '[= [+ [- x] [:m 2 y]] 4]]
-          [m '[= [+ [- x] x [:m 2 y]] [+ 4 x]]]
-          [m '[= [ [:m 2 y] 2]
-               [[+ 4 x] 2]]]
-          [m '[= y
-               [[+ 4 x] 2]]]
-          ])])
-     (comment [rhs [2 2] [5 7]])
-     (comment [rhs2 [4 3] [9 3]])
+     [lhs [2 2] [5 2]]
+
+     [lhs2 [4 2] [5 2] [m '[:m 6 x]]]
+
+     [center [2 2] [7 3]
+      [m '[:m 7 x]]]
+
+     [center [4 2] [7 3]
+      [m '[* 7 6]]]
+
+     [center [2 5] [4 1] [m '[+ x 6]] ]
+
+     [center [6 1] [5 5] [m '[+ x 7]] ]
+
+     [rhs2 [7 3] [3 9]]
+
+     (comment )
+     (comment )
      (comment
        (loop [iter 253
               acc []]
@@ -1275,44 +1246,57 @@
        (map (paths
              (fn [d]
                [:path
-                {:d d :fill :none :stroke (c [40 80 40])
-                 :stroke-width 1.5}])
+                {:d d
+                 :fill (c [70 70 70])
+                 :stroke (c [10 80 40])
+                 :stroke-width .6}])
              tfun-e1)
             [
+             [
+              [[-4 0] [6 0] :l
+               [0 0] [4 0] [4 0] [0 0]
+               [0 0] [-4 0] [-4 0] [0 0]]
 
-             (for [i (range 0 10 1)
+              [[0 0] [6 0] :l
+               [0 0] [4 0] [5 3] [0 0]
+               [0 0] [-4 0] [-5 -3] [0 0]]
+
+              [[-4 0] [1 1] :l
+               [0 0] [4 4] [4 0] [0 0]
+               [0 0] [-4 -4] [-4 0] [0 0]]
+
+              ]
+
+             (for [i (range 0 28 4)
+                   j (range 0 24 4)]
+               [[0 i] [2 (- j 4)]
+                :l
+                [0 4] [0 0] [0 0] [0 4]
+                [0 -4] [0 0] [0 0] [0 -4]])])
+
+       (map (paths
+             (fn [d]
+               [:path
+                {:style {:z-index 24}
+                 :d d :fill :none :stroke (c [309 80 40])
+                 :stroke-width 4}])
+             tfun-e1)
+            [
+             #_(for [i (range 0 10 1)
                    j (range 0 10 1)]
                [[1 i] [-2 j]
                 :l
                 [0 1] [0 0] [0 0] [0 1]
                 [0 -1] [0 0] [0 0] [0 -1]])
 
-             [
-              [[2 2.5] [10 0] :l [0 0] [-20 0]]]
-             [
-              [ [-6 0] [0 -2.5]  :L [-3 0] [ 0.25 0 ]
-               [0 0] [1 0]  [5 0] [2.25 0]]]
-             ])
-
-
-       (map (paths
-             (fn [d]
-               [:path
-                {:d d :fill (c [70 70 70])
-                 :stroke (c [10 80 40])
-                 :stroke-width 1.5}])
-             tfun-e1)
-            [
-
-             (for [i (range 0 28 4)
-                   j (range 0 24 4)]
-               [[-4 i] [3 j]
-                :l
-                [0 4] [0 0] [0 0] [0 4]
-                [0 -4] [0 0] [0 0] [0 -4]])
+             [[[-4 0] [1 1] :l [0 0] [10 0]]
+              [[-4 0] [1 1] :l [9 3] [0 0]]]
 
 
              ])
+
+
+
 
        ((paths
          (fn [d]
