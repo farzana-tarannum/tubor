@@ -1104,7 +1104,7 @@
    [m '[:p x 2]]
 
    ])
-(js/Math.sqrt 3)
+
 
 (comment )
 (defn lhs2 [[r rs] [c cs] m]
@@ -1181,7 +1181,35 @@
          90 :% .7 70 60 .7]
      :size [1.4 :rem]
      :flex :center})])
+(defn tranfrom [t]
+  ((partial str/join " ")
+   (map
+    (comp
+     (partial str/join "")
+     (juxt
+      (comp
+       name
+       first)
+      (comp
+       (fn [n]
+         (str "(" n ")"))
+       (fn [n]
+         (if (vector? n)
+           (str/join "," n)
+           (str n)))
+       second)))
 
+    t)))
+
+(defn url [i]
+  (str "url" "(#" i  ")" ))
+
+
+(comment
+  (url 1)
+  (tranfrom [[:scale 3]
+             [:rotate 180]
+             [:translate [12.5 0]]]))
 
 (defn grid4 []
   (let [[w h s] [420 420 30]
@@ -1216,17 +1244,6 @@
 
      [rhs2 [7 3] [3 9]]
 
-     (comment )
-     (comment )
-     (comment
-       (loop [iter 253
-              acc []]
-         (if (= (int (/ iter 2 )) 0 )
-           (conj acc [iter (mod iter 2)])
-           (recur (int (/ iter 2)) (conj acc [iter
-                                              (mod iter 2)]))))
-       )
-
      [:div {
             :style
             {:z-index 2
@@ -1248,7 +1265,7 @@
                [:path
                 {:d d
                  :fill (c [70 70 70])
-                 :stroke (c [10 80 40])
+                 :stroke (c [90 80 40])
                  :stroke-width .6}])
              tfun-e1)
             [
@@ -1350,20 +1367,746 @@
                       )]]
            (map shapefn xyz)))
        (map (paths
+             (fn [d]
+               [:path {:d d :fill :none
+                       :stroke-dasharray (size [2 :rem 2 :rem])
+                       :stroke (c [20 80 80]) :stroke-width 0.8}])
+             tfun-e1)
+            [(for [i (range -20 20)]
+               [[i 0] [0 0] :l
+                [1 0] [0 0] [0 0] [0 1] [0 0] [0 -1] [1 0] [0 0]
+                [0 0] [0 1]])
+             (for [i (range  -10 10)]
+               [[0 0] [i 0]
+                :l [0 -1] [0 0] [0 1] [0 0] [0 0] [1 0]
+                [0 -1] [0 0] [0 1] [0 0]])])]]]))
+
+
+
+
+(defn grid5 []
+  (let [[w h s] [420 420 30]
+        [s tx ty] [(comp
+                    (fn [[x y]] (+ x y))
+                    (juxt (comp (fn [x] (* x 30))  first)
+                          (comp (fn [x] (* x 6) ) second)))
+                   (fn [x] (+ (* 40 -2) x))
+                   (fn [y] (- (+ (* 40 (- 12 4)) 0) y))]
+        tfun-e1 [s (comp tx s) (comp ty s)]]
+    [:div {:style
+           {:background-color (c [90 70 70])
+            :display :grid
+            :height (size [100 :vh])
+            :width (size [100 :vw])
+            :grid-template-columns (size (apply concat (take 14 (repeat [10 :vh]))))
+            :grid-template-rows (size (apply concat (take 10 (repeat [10 :vh]))))}}
+
+
+     (comment )
+     [:div (g [[3 2] [3 2] [10 1]]
+              {:d [1
+                   20 :% 1 70 70 .2
+                   50 :% 2 70 70 .2]
+               :size [3 :rem]
+               :flex :center})
+      [m '[:m 2 [:p x 2  ]]]]
+
+
+
+
+
+
+
+     [:div (g [[5 1] [3 2] [10 1]]
+              {:d [1
+                   20 :% 3 70 70 .2
+                   50 :% 4 70 70 .2]
+               :size [3 :rem]
+               :flex :center})
+      [m '[:m [- 3]
+           x]]]
+
+
+
+     [:div (g [[3 2] [5 2] [10 1]]
+              {:d [4
+                   5 :% .1 70 70 .4
+                   50 :% .3 70 70 .4
+                   80 :% .4 70 70 .4]
+               :size [3 :rem]
+               :flex :center})
+      [m '[:m [* 4 2 ] x ]]]
+
+
+     [:div (g [[3 5] [8 3] [10 1]]
+              {:d [4
+                   5 :% .1 70 70 .2
+                   50 :% .3 70 70 .2
+                   80 :% .4 70 70 .2]
+               :size [1.8 :rem]
+               :flex :center})
+
+      [m '[= [- [+ [:m 2 [:p x  2]] [:m 5 x]] (* 4 3)] 0] ]
+      [m '[= [- [+ [:m 2 [:p x  2]] [:m (:b (- 8 3)) x]] (* 4 3)] 0] ]
+      [m '[:m
+
+           [:b [- [:m 2 x] 3]]
+           [:b [+ x 4]]]]
+      ]
+
+     (comment
+       [:div (g [[3 2] [9 2] [10 1]]
+                {:d [1
+                     20 :% 1 70 70 .2
+                     50 :% 2 70 70 .2]
+                 :size [2 :rem]
+                 :flex :start})
+        [m '[+ x 4]]])
+     (comment
+       [:div (g [[3 2] [3 2] [10 1]]
+                {:d [1
+                     20 :% 1 70 70 .2
+                     50 :% 2 70 70 .2]
+                 :size [2 :rem]
+                 :flex :start})
+        [m '[+ x 4]]])
+
+     (comment
+       [:div (g [[3 5] [3 1] [10 1]]
+                {:d [1
+                     20 :% 1 70 70 .2
+                     50 :% 2 70 70 .2]
+                 :size [2 :rem]
+                 :flex :end})
+        [m '[- x 7]]])
+
+
+     (comment
+       )
+
+     [:div {
+            :style
+            {:z-index 2
+             :color :#444
+             :grid-row (str/join "/" [2 -2])
+             :grid-column (str/join "/" [2 -2])
+             :background-color (c [70 70 70])
+             }}
+      [:svg {:style {:background-color (c [150 70 70])
+                     :height (size [100 :%])
+                     :width (size [100 :%])}
+             :viewBox
+             (str/join " "
+                       [(* 40 -0.55) (* 40 0.5)
+                        (* 40 12) (* 40 12)])}
+
+       [:defs
+        [:marker {:id "i"
+                  :refY 0
+                  :refX 0
+                  :orient :auto
+                  :style {:overflow :visible}}
+
+         ((paths (fn [d]
+                   [:path {:d d
+                           :style {:fill-rule :evenodd
+                                   :stroke (c [70 70 70])
+                                   :stroke-width 1
+                                   :stroke-opacity 1
+                                   :fill (c [330 70 70])
+                                   :fill-opacity 1}
+                           :transform (tranfrom [[:scale .4]
+                                                 [:rotate 180]
+                                                 [:translate [12.5 0]]])
+
+
+                           }])
+                 [(fn [[x _]] x)
+                  (fn [[x _]] x)
+                  (fn [[x _]] x)])
+          [[[0 0] [0 0] :L [5 0] [-5 0] :L [-12.5 0] [0 0]
+            :L [3 0] [5 0] :L [0 0] [0 0]]])
+         ]]
+
+       (map (paths (fn [d]
+                     [:path {:d d
+                             :stroke (c [90 70 50])
+                             :stroke-width 2
+                             :marker-end (url "i")
+                             :fill :none}])
+               [s (comp tx s) (comp ty s)])
+            [
+             [[[0 0] [8 0]
+               :l [4 0] [0 0] [0 0] [-4 0]
+               [-4 0] [0 0] [0 0] [4 0]]
+              [[0 0] [4 0]
+               :l [4 0] [0 0] [0 0] [-3 0]
+               [-4 0] [0 0] [0 0] [3 0]]
+
+              [[4 0] [8 0]
+               :l [4 0] [0 0] [0 0] [-4 0]
+               [-4 0] [0 0] [0 0] [4 0]]
+              [[4 0] [4 0]
+               :l [4 0] [0 0] [0 0] [-3 0]
+               [-4 0] [0 0] [0 0] [3 0]]
+              ]
+
+             [[[9 0] [8 0]
+               :l [8 0] [0 0] [0 0] [-11 0]
+               [-8 0] [0 0] [0 0] [11 0]]]
+
+
+             ])
+       (map (paths
          (fn [d]
-           [:path {:d d :fill :none
-                   :stroke-dasharray (size [2 :rem 2 :rem])
-                   :stroke (c [20 80 80]) :stroke-width 0.8}])
-         tfun-e1)
-        [(for [i (range -20 20)]
-           [[i 0] [0 0] :l
-            [1 0] [0 0] [0 0] [0 1] [0 0] [0 -1] [1 0] [0 0]
-            [0 0] [0 1]])
-         (for [i (range  -10 10)]
-           [[0 0] [i 0]
-            :l [0 -1] [0 0] [0 1] [0 0] [0 0] [1 0]
-            [0 -1] [0 0] [0 1] [0 0]])])]]]))
+           [:path {:d d
+                   :stroke (c [20 70 80])
+                   :stroke-width 2
+                   :fill (c [40 70 80])}])
+         [s (comp tx s) (comp ty s)])
+            [
+             [[[0 0] [8 0]
+               :l [4 0] [0 0]
+               ]]
+             [[[0 0] [8 0]
+               :l [0 0] [-3 0]
+               ]]
+
+             (for [i (range 4)
+               :let [k 1
+                     x (+ 4 (* i k))]
+               j (range 3)
+               :let [k 1
+                     y (+ 4 (* j k -1))]
+               ]
+           [[x 0] [y 0]
+            :l [k 0] [0 0] [0 0] [(* k -1) 0]
+            [(* k -1) 0] [0 0] [0 0] [k 0]])])
+
+
+
+
+       ]]]))
+
+
+
+
+(defn grid6 []
+  (let [[w h s] [420 420 30]
+        [s tx ty] [(comp
+                    (fn [[x y]] (+ x y))
+                    (juxt (comp (fn [x] (* x 30))  first)
+                          (comp (fn [x] (* x 6) ) second)))
+                   (fn [x] (+ (* 40 5) x))
+                   (fn [y] (- (+ (* 40 (- 12 4)) 0) y))]
+        tfun-e1 [s (comp tx s) (comp ty s)]]
+    [:div {:style
+           {:background-color (c [90 70 70])
+            :display :grid
+            :height (size [100 :vh])
+            :width (size [100 :vw])
+            :grid-template-columns (size (apply concat (take 14 (repeat [10 :vh]))))
+            :grid-template-rows (size (apply concat (take 10 (repeat [10 :vh]))))}}
+
+
+     [:div  (g [[3 1] [5 7] [10 1]]
+               {:d [1
+                    20 :% 1 70 70 .2
+                    50 :% 2 70 70 .2]
+                :size [1.6 :rem]
+                :flex :center})
+
+
+
+      [m '[:sq [* 4 [441 9]]]]
+
+      [m '[:sq [* 4 9 49]]]
+
+      [m '[:sq [* [:p 2
+                   2] [:p 3 2] [:p 7 2] ]]]
+
+      [m '[* [:p 2
+              1] [:p 3 1] [:p 7 1]
+           ]
+       ]
+
+
+      ]
+
+
+
+
+
+
+
+
+
+
+
+
+     [:div {
+            :style
+            {:z-index 2
+             :color :#444
+             :grid-row (str/join "/" [2 -2])
+             :grid-column (str/join "/" [2 -2])
+             :background-color (c [70 70 70])
+             }}
+      [:svg {:style {:background-color (c [150 70 70])
+                     :height (size [100 :%])
+                     :width (size [100 :%])}
+             :viewBox
+             (str/join " "
+                       [(* 40 -0.55) (* 40 0.5)
+                        (* 40 12) (* 40 12)])}
+
+       [:defs
+        [:marker {:id "i"
+                  :refY 0
+                  :refX 0
+                  :orient :auto
+                  :style {:overflow :visible}}
+
+         ((paths (fn [d]
+                   [:path
+                    {:d d
+                     :style {:fill-rule :evenodd
+                             :stroke (c [70 70 70])
+                             :stroke-width 1
+                             :stroke-opacity 1
+                             :fill (c [330 70 70])
+                             :fill-opacity 1}
+                     :transform
+                     (tranfrom [[:scale .4]
+                                [:rotate 180]
+                                [:translate [12.5 0]]])
+
+
+                     }])
+                 [(fn [[x _]] x)
+                  (fn [[x _]] x)
+                  (fn [[x _]] x)])
+          [[[0 0] [0 0] :L [5 0] [-5 0] :L [-12.5 0] [0 0]
+            :L [3 0] [5 0] :L [0 0] [0 0]]])
+         ]]
+
+
+       (map (paths
+             (fn [d]
+               [:path
+                {:d d
+                 :fill (c [70 70 70])
+                 :stroke (c [70 80 40])
+                 :stroke-width 2}])
+             tfun-e1)
+            [
+
+
+             (for [i (range 0 20 4)
+                   j (range 0 16 4)]
+               [[0 i] [3 (- j 4)]
+                :l
+                [0 4] [0 0] [0 0] [0 4]
+                [0 -4] [0 0] [0 0] [0 -4]])])
+
+       (map (paths
+             (fn [d]
+               [:path
+                {:d d
+                 :fill (c [300 70 70])
+                 :stroke (c [70 80 40])
+                 :stroke-width 2}])
+             tfun-e1)
+            [
+
+
+             (for [i (range 0 4 4)
+                   j (range 0 16 4)]
+               [[-1 i] [3 (- j 4)]
+                :l
+                [0 4] [0 0] [0 0] [0 4]
+                [0 -4] [0 0] [0 0] [0 -4]])])
+       (comment
+         )]]]))
+
+(defn grid7 []
+  (let [[w h s] [420 420 30]
+        [s tx ty] [(comp
+                    (fn [[x y]] (+ x y))
+                    (juxt (comp (fn [x] (* x 30))  first)
+                          (comp (fn [x] (* x 6) ) second)))
+                   (fn [x] (+ (* 40 -2) x))
+                   (fn [y] (- (+ (* 40 (- 12 4)) 0) y))]
+        tfun-e1 [s (comp tx s) (comp ty s)]]
+    [:div {:style
+           {:background-color (c [90 70 70])
+            :display :grid
+            :height (size [100 :vh])
+            :width (size [100 :vw])
+            :grid-template-columns (size (apply concat (take 14 (repeat [10 :vh]))))
+            :grid-template-rows (size (apply concat (take 10 (repeat [10 :vh]))))}}
+
+
+
+     [:div (g [[3 1] [4 1] [10 1]]
+              {:d [1
+                   20 :% 1 70 70 .2
+                   50 :% 2 70 70 .2]
+               :size [3 :rem]
+               :flex :end})
+      [m '[:m 2 x]]
+      ]
+
+
+     [:div (g [[5 1] [3 2] [10 1]]
+              {:d [1
+                   20 :% 3 70 70 .1
+                   50 :% 4 70 70 .1]
+               :size [3 :rem]
+               :flex :center})
+      [m '[:m [- 3] x]]
+      ]
+
+
+
+     [:div (g [[3 1] [5 2] [10 1]]
+              {:d [4
+                   5 :% .1 70 70 .1
+                   50 :% .3 70 70 .1
+                   80 :% .4 70 70 .1]
+               :size [3 :rem]
+               :flex :center})
+      [m '[:m 8 x]]
+      ]
+
+
+     [:div (g [[3 5] [8 5] [10 1]]
+              {:d [4
+                   5 :% .1 70 70 .2
+                   50 :% .3 70 70 .2
+                   80 :% .4 70 70 .2]
+               :size [1.8 :rem]
+               :flex :center})
+      [m '[= [- [+ [:m 2 [:p  x 2]]
+               [:m 5 x ]
+                 ] [* 3 4]
+             ]
+           0]]
+      [m '[= [:m [:b [+ [:m  2 x]
+                    [- 3]]]
+              [:b (+ x 4)]]
+          0]]
+
+      ]
+
+
+
+     [:div {
+            :style
+            {:z-index 2
+             :color :#444
+             :grid-row (str/join "/" [2 -2])
+             :grid-column (str/join "/" [2 -2])
+             :background-color (c [70 70 70])
+             }}
+      [:svg {:style {:background-color (c [150 70 70])
+                     :height (size [100 :%])
+                     :width (size [100 :%])}
+             :viewBox
+             (str/join " "
+                       [(* 40 -0.55) (* 40 0.5)
+                        (* 40 12) (* 40 12)])}
+
+       [:defs
+        [:marker {:id "i"
+                  :refY 0
+                  :refX 0
+                  :orient :auto
+                  :style {:overflow :visible}}
+
+         ((paths (fn [d]
+                   [:path {:d d
+                           :style {:fill-rule :evenodd
+                                   :stroke (c [70 70 70])
+                                   :stroke-width 1
+                                   :stroke-opacity 1
+                                   :fill (c [330 70 70])
+                                   :fill-opacity 1}
+                           :transform (tranfrom [[:scale .4]
+                                                 [:rotate 180]
+                                                 [:translate [12.5 0]]])
+
+
+                           }])
+                 [(fn [[x _]] x)
+                  (fn [[x _]] x)
+                  (fn [[x _]] x)])
+          [[[0 0] [0 0] :L [5 0] [-5 0] :L [-12.5 0] [0 0]
+            :L [3 0] [5 0] :L [0 0] [0 0]]])
+         ]]
+
+       (map (paths (fn [d]
+                     [:path {:d d
+                             :stroke (c [90 70 50])
+                             :stroke-width 2
+
+                             :fill :none}])
+               [s (comp tx s) (comp ty s)])
+            [
+             [[[0 0] [8 0]
+               :l [4 0] [0 0] [0 0] [-3 0]
+               [-4 0] [0 0] [0 0] [3 0]]
+
+              [[0 0] [5 0]
+               :l [4 0] [0 0] [0 0] [-3 0]
+               [-4 0] [0 0] [0 0] [3 0]]
+              [[4 0] [8 0]
+               :l [4 0] [0 0] [0 0] [-3 0]
+               [-4 0] [0 0] [0 0] [3 0]]
+              [[4 0] [5 0]
+               :l [4 0] [0 0] [0 0] [-3 0]
+               [-4 0] [0 0] [0 0] [3 0]]
+              ]
+
+
+
+
+             ])
+       (map (paths
+         (fn [d]
+           [:path {:d d
+                   :stroke (c [20 70 80])
+                   :stroke-width 2
+                   :marker-end (url "i")
+                   :fill (c [40 70 80])}])
+         [s (comp tx s) (comp ty s)])
+            [
+
+             [[[0 0] [2 0] :l [0 0] [6 0]]]
+
+             [[[0 0] [8 0] :l [8 0] [0 0]]]
+
+             (for [i (range 4)
+               :let [k 1
+                     x (+ 4 (* i k))]
+               j (range 3)
+               :let [k 1
+                     y (+ 5 (* j k -1))]
+               ]
+           [[x 0] [y 0]
+            :l [k 0] [0 0] [0 0] [(* k -1) 0]
+            [(* k -1) 0] [0 0] [0 0] [k 0]])])
+
+
+
+
+       ]]]))
+
+
+(defn grid8 []
+  (let [mm m
+        [start x1 m n] [8 1 2 4]
+        dx 1
+        dy 1
+        x (* x1 dx)
+        y (* x1 dy)
+        v 'z
+        [w h s] [420 420 30]
+        [s tx ty] [(comp
+                    (fn [[x y]] (+ x y))
+                    (juxt (comp (fn [x] (* x 30))  first)
+                          (comp (fn [x] (* x 6) ) second)))
+                   (fn [x] (+ (* 40 -2) x))
+                   (fn [y] (- (+ (* 40 (- 12 4)) 0) y))]
+        tfun-e1 [s (comp tx s) (comp ty s)]]
+    [:div {:style
+           {:background-color (c [90 70 70])
+            :display :grid
+            :height (size [100 :vh])
+            :width (size [100 :vw])
+            :grid-template-columns (size (apply concat (take 14 (repeat [10 :vh]))))
+            :grid-template-rows (size (apply concat (take 10 (repeat [10 :vh]))))}}
+
+
+     [:div (g [[(+ x 1) 1] [3 1] [10 1]]
+              {:d [1
+                   -5 :% 1.5 70 70 0.5
+                   20 :% 1.8 70 70 0.5
+                   80 :% 2.2 70 70 0.5]
+               :size [1 :rem]
+               :flex :center})
+      [mm [:m ['* dx dy]  [:p v 2]]]
+
+      ]
+
+
+     [:div (g [[(+ y 1) 1] [3 1] [10 1]]
+              {:d [1
+                   -5 :% 1.5 70 70 0.5
+                   20 :% 1.8 70 70 0.5
+                   80 :% 2.2 70 70 0.5]
+               :size [1 :rem]
+               :flex :center})
+      [mm [:m ['* ['- m]
+               dx] v]]
+      ]
+
+     [:div (g [[(+ x 1) 1] [(+ 3 x) 1] [10 1]]
+              {:d [1
+                   -5 :% 1.5 70 70 0.8
+                   20 :% 1.8 70 70 0.8
+                   80 :% 2.2 70 70 0.8]
+               :size [1 :rem]
+               :flex :center})
+      [mm [:m ['* n  dy] v]]
+      ]
+
+
+
+     [:div (g [[(+ y 1)  1] [(+ 3 x) 1] [10 1]]
+              {:d [1
+                   -5 :% 1.5 70 70 0.2
+                   20 :% 1.8 70 70 0.2
+                   80 :% 2.2 70 70 0.2]
+               :size [1 :rem]
+               :flex :center})
+      [mm ['*  m n ]]
+      ]
+
+     [:div (g [[x 5] [(+ 3 x 2) 5] [10 1]]
+              {:d [1
+                   -5 :% 1.5 70 70 0.2
+                   20 :% 1.8 70 70 0.2
+                   80 :% 2.2 70 70 0.2]
+               :size [1 :rem]
+               :flex :center})
+      [mm [:m [:b ['+ v n ]]
+           [:b ['+ [:m dy v] ['- m] ]]]]
+      ]
+
+
+     [:div {
+            :style
+            {:z-index 2
+             :color :#444
+             :grid-row (str/join "/" [2 -2])
+             :grid-column (str/join "/" [2 -2])
+             :background-color (c [70 70 70])
+             }}
+      [:svg {:style {:background-color (c [150 70 70])
+                     :height (size [100 :%])
+                     :width (size [100 :%])}
+             :viewBox
+             (str/join " "
+                       [(* 40 -0.55) (* 40 0.5)
+                        (* 40 12) (* 40 12)])}
+
+       [:defs
+        [:marker {:id "i"
+                  :refY 0
+                  :refX 0
+                  :orient :auto
+                  :style {:overflow :visible}}
+
+         ((paths (fn [d]
+                   [:path {:d d
+                           :style {:fill-rule :evenodd
+                                   :stroke (c [70 70 70])
+                                   :stroke-width 1
+                                   :stroke-opacity 1
+                                   :fill (c [330 70 70])
+                                   :fill-opacity 1}
+                           :transform (tranfrom [[:scale .4]
+                                                 [:rotate 180]
+                                                 [:translate [12.5 0]]])
+
+
+                           }])
+                 [(fn [[x _]] x)
+                  (fn [[x _]] x)
+                  (fn [[x _]] x)])
+          [[[0 0] [0 0] :L [5 0] [-5 0] :L [-12.5 0] [0 0]
+            :L [3 0] [5 0] :L [0 0] [0 0]]])
+         ]]
+
+
+       (map (paths (fn [d]
+                     [:path {:d d
+                             :stroke (c [90 70 50])
+                             :stroke-width 2
+
+                             :fill :none}])
+                   [s (comp tx s) (comp ty s)])
+            [
+             [[[0 0] [start 0]
+               :l [x 0] [0 0] [0 0] [(* y -1) 0]
+               [(* x -1) 0] [0 0] [0 0] [(* y 1) 0]]
+
+              [[0 0] [(+ start (* y -1) ) 0]
+               :l [x 0] [0 0] [0 0] [(* -1 m) 0]
+               [(* -1 x) 0] [0 0] [0 0] [(* m 1) 0]]
+              [[x 0] [start 0]
+               :l [n 0] [0 0] [0 0] [(* -1 y) 0]
+               [(* -1 n) 0] [0 0] [0 0] [(* 1 y) 0]]
+              [[x 0] [(- start y)  0]
+               :l [n 0] [0 0] [0 0] [(* -1 m) 0]
+               [(* -1 n) 0] [0 0] [0 0] [m 0]]
+              ]
+             ])
+
+       (map (paths
+         (fn [d]
+           [:path {:d d
+                   :stroke (c [20 70 80])
+                   :stroke-width 2
+                   :marker-end (url "i")
+                   :fill (c [40 70 80])}])
+         [s (comp tx s) (comp ty s)])
+            [
+
+             [[[0 0] [start 0] :l [(+ x 0) 0] [0 0]]]
+
+             [[[0 0] [start 0] :l [(+ x n) 0] [0 0]]]
+
+
+             [[[0 0] [start 0] :l [0 0] [(* y -1) 0]]]
+             [[[0 0] [start 0] :l [0 0] [(* (+ y m)  -1) 0]]]
+
+
+             [[[10 0] [start 0] :l
+               [x 0] [0 0] [n 0] [0 0]
+               [0 0] [(* y -1) 0] [0 0] [ (* m -1) 0]
+               [(* -1 x) 0] [0 0] [(* -1 n) 0] [0 0]
+
+               ]]
+
+             (for [i (range dx)
+                   :let [k 1
+                         x1 (* i k)]
+                   j (range dy)
+                   :let [k 1
+                         y1 (+ start
+                               (* j k -1))]
+                   ]
+               [[x1 0] [y1 0]
+                :l [k 0] [0 0] [0 0] [(* k -1) 0]
+                [(* k -1) 0] [0 0] [0 0] [k 0]])
+
+             (for [i (range n)
+                   :let [k 1
+                         x1 (+ x (* i k))]
+                   j (range m)
+                   :let [k 1
+                         y1 (+ (- start y) (* j k -1))]
+                   ]
+               [[x1 0] [y1 0]
+                :l [k 0] [0 0] [0 0] [(* k -1) 0]
+                [(* k -1) 0] [0 0] [0 0] [k 0]])])
+
+
+
+       ]]]))
 
 
 (defn template1 []
-  [grid4])
+  [grid8])
