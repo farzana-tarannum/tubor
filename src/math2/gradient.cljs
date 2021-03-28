@@ -1,4 +1,4 @@
-(ns hello-bundler.gradient)
+(ns math2.gradient)
 
 (defn grad []
   [:div {:style {:display :flex

@@ -1,4 +1,4 @@
-(ns hello-bundler.template)
+(ns math2.template)
 
 (def x2 (fn [x y]  [(+ x y) 5 2 24]))
 

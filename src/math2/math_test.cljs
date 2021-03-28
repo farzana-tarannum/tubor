@@ -1,4 +1,4 @@
-(ns hello-bundler.math-test)
+(ns math2.math-test)
 
 (def path-test-data [[[-1 0] [0 0] :l [-1 -1] [0 -1]
                       ]

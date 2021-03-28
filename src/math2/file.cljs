@@ -1,4 +1,4 @@
-(ns hello-bundler.file
+(ns math2.file
   (:require [reagent.core :as r]
             [react]))
 

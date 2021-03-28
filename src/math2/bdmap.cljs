@@ -1,4 +1,4 @@
-(ns hello-bundler.bdmap)
+(ns math2.bdmap)
 
 (defn test-map []
   (let []

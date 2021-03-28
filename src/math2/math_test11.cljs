@@ -1,4 +1,4 @@
-(ns hello-bundler.math-test11)
+(ns math2.math-test11)
 
 (def test-path1
   [

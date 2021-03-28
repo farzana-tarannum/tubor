@@ -3,4 +3,4 @@
   :connect-url "ws://192.168.49.21:[[server-port]]/figwheel-connect"
   :css-dirs ["resources/public/css"]}
 
-{:main hello-bundler.core}
+{:main math2.core}

@@ -1,12 +1,12 @@
-(ns ^:figwheel-hooks hello-bundler.core
+(ns ^:figwheel-hooks math2.core
   (:require [reagent.dom :as rdom]
             [reagent.core :as r]
             [clojure.string :as str]
-            [hello-bundler.template :as t]
-            [hello-bundler.file :as file]
-            [hello-bundler.bdmap :as bmap]
-            [hello-bundler.math :as math]
-            [hello-bundler.gradient :as gradient]
+            [math2.template :as t]
+            [math2.file :as file]
+            [math2.bdmap :as bmap]
+            [math2.math :as math]
+            [math2.gradient :as gradient]
             [react]))
 
 ;;(defn ^:before-load my-before-reload-callback []
@@ -14,7 +14,7 @@
 
 
 (defn ^:after-load my-after-reload-callback []
-    (println "AFTER reload!!!"))
+  (println "AFTER reload"))
 
 
 (def functional-compiler (r/create-compiler {:function-components true}))
