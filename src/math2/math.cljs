@@ -487,6 +487,42 @@
       )
      plot-e1)))
 
+
+(defn circles2 [plot-e1 [t-s t-x t-y] [txt cir]]
+  (let [ space (fn [p] (str/join " " p))]
+    (map
+     (comp
+      (fun ([[[x y] [:r r]]]
+            [:circle
+             (into {:cx x
+                    :cy y
+                    :r r
+                    :fill (c [270 70 70])
+                    :stroke-width .2
+                    :stroke (c [330 70 70])}
+                   cir)
+             ])
+           ([[[x y] [:text r]]]
+            [:text {:x x
+                    :y y
+                    :style (into {:font-size (size [0.5 :rem])}
+                                 txt)
+                    } r]))
+      (juxt (comp
+             (juxt (comp
+                    t-x
+                    first)
+                   (comp
+                    t-y
+                    second))
+             first)
+            (comp
+             second))
+      (fn [x]
+        (s/conform :math2/circle x))
+      )
+     plot-e1)))
+
 (comment
   (let
       [[t-s t-x t-y]
@@ -501,6 +537,7 @@
                   (- (+ (* 40 (- 12 4)) 0) y))
                 t-s)
           ]
+
          )
        data (map
              (fn [x]
@@ -511,8 +548,9 @@
                 2])
              (range 1 5))]
 
-    (circles (gen/sample (s/gen :math2/circle 10 ))
-             [t-s t-x t-y])))
+    (circles2 (gen/sample (s/gen :math2/circle 10 ))
+              [t-s t-x t-y]
+              [{} {}])))
 
 
 
@@ -1065,7 +1103,6 @@
      )) m)
   )
 
-
 (def cr
   (fn [[s t-x t-y]]
     (fn [shape]
@@ -1087,6 +1124,70 @@
         )
        (fn [n]
          (s/conform :math2/svg-circle n))))))
+
+
+(defn circle2 [[s tx ty]]
+  (fun ([[[x y] [:text t]]]
+        [:text
+         {:x x
+          :style {:font-size
+                  (size [0.5 :rem])}
+          :y y}
+         t])
+       ([[[x y] [:r r]]]
+        [:circle
+         {:cx x
+          :style {:z-index 22}
+          :cy  y
+          :r  r
+          :fill (c [10 70 60])}]))
+
+
+  ((cr [s tx ty])
+   ))
+
+(comment
+  (let
+      [[s tx ty] [(comp
+                   (fn [[x y]] (+ x y))
+                   (juxt (comp (fn [x] (* x 30))  first)
+                         (comp (fn [x] (* x 6) ) second)))
+                  (fn [x] (+ (* 40 -2) x))
+                  (fn [y] (- (+ (* 40 (- 12 4)) 0) y))]
+       [txt-fn circle-fn]
+       [(fn [x y s]
+          [:text {:x x
+                  :y  y
+                  :font-size (size [1 :rem])} s])
+        (fn [x y r] [:circle {:cx x
+                              :cy  y
+                              :r  4
+                              :fill (c [70 70 70])}
+                     ])]
+       data (gen/sample (s/gen :math2/svg-circle))]
+    ((comp
+      (fn [[x y f v]]
+        (f x y v))
+      (partial mapcat identity )
+      (juxt
+       (comp
+        (juxt
+         (comp tx s :x)
+         (comp ty s :y)) :point)
+       (comp
+        (juxt (comp
+               (fn [n]
+                 (condp = n
+                   :text txt-fn
+                   :r circle-fn))
+               first) (comp
+                       second))
+             :attr))
+      (fn [n]
+        (s/conform :math2/svg-circle n)))
+     (first data)))
+  )
+
 
 
 (defn lhs [[r rs] [c cs]]
@@ -1329,20 +1430,20 @@
            [2 0] [0 0] [0 0] [2 0] [-2 0] [0 0] [0 0] [-2 0]]))
 
        (let [ shapefn ((cr [s tx ty])
-                      (fun ([[[x y] [:text t]]]
-                            [:text
-                             {:x x
-                              :style {:font-size
-                                      (size [0.5 :rem])}
-                              :y y}
-                             t])
-                           ([[[x y] [:r r]]]
-                            [:circle
-                             {:cx x
-                              :style {:z-index 22}
-                              :cy  y
-                              :r  r
-                              :fill (c [10 70 60])}])))]
+                       (fun ([[[x y] [:text t]]]
+                             [:text
+                              {:x x
+                               :style {:font-size
+                                       (size [0.5 :rem])}
+                               :y y}
+                              t])
+                            ([[[x y] [:r r]]]
+                             [:circle
+                              {:cx x
+                               :style {:z-index 22}
+                               :cy  y
+                               :r  r
+                               :fill (c [10 70 60])}])))]
          (for [xyz [(map (fn [x]
                            [[0 0] [x
                                    0] (str
@@ -1905,16 +2006,16 @@
 
 (defn grid8 []
   (let [mm m
-        [m1 n1] [11 11]
+        [m1 n1] [9 7]
         [start x1 m n] [9 2 (* 2 m1) (* 2 n1)]
-        dx 3
-        dy 2
+        dx 1
+        dy 1
         x (* x1 dx)
         y (* x1 dy)
         v 'x
         vb (str/join " "
                      [(* 40 -0.55) (* 40 0.5)
-                      (* 40 20) (* 40 22)])
+                      (* 40 18) (* 40 18)])
         [w h s] [420 420 30]
         [s tx ty] [(comp
                     (fn [[x y]] (+ x y))
@@ -1933,178 +2034,27 @@
 
 
 
-     (comment
-       [:div  (g [[2 1] [3 m] [10 1]]
-                 {:d [1
-                      -5 :% 1.5 70 70 0.5
-                      20 :% 1.8 70 70 0.5
-                      80 :% 2.2 70 70 0.5]
-                  :size [1 :rem]
-                  :flex :center})
+     [:div  (g [[1 1] [3 8] [10 1]]
+               {:d [1
+                    -5 :% 1.5 70 70 0.5
+                    20 :% 1.8 70 70 0.5
+                    80 :% 2.2 70 70 0.5]
+                :size [2 :rem]
+                :flex :center})
 
-        [mm '[= [+ [:m 1
-                    [:p x 2]]
+      [mm ['=  ['+  [:p 'x 2]
+                [:m [:b ['- 9 7]] 'x ]
 
-                 [:m 60
-                  x]]
-              [:m [:p 2 2] [:p 2 6]]]]
-        (comment
-          [mm ['= ['-  ['- [:m ['*  dx dy] [:p v 2]] [:m 3 v] ] ['* n1 m1]]
-               0]])
-        (comment
-          [mm ['= ['-  ['+ [:m 2 [:p v 2]]
-                        [:m [:b ['+
-                                 ['*  ['- dy] n1]  ['* dx m1] ]] v] ] ['* n1 m1]]
-               0]])])
-     (comment
-       [:div  (g [[(+ 3 m1 dy) 2] [5 m] [10 1]]
-                 {:d [1
-                      -5 :% .2 70 70 0.5
-                      20 :% .5 70 70 0.5
-                      80 :% .7 70 70 0.5]
-                  :size [1 :rem]
-                  :flex :center})
-        [mm ['= [:m [:b ['- [:m dx  v]  n1 ]]
-                 [:b ['+ [:m dy v]  m1 ]]]
-             0]]
-        [:div
-         [mm ['=  ['- [:m dx  v]  n1 ]
-              0]]
-
-         ]
-        [:div "or"]
-        [mm ['= ['+ [:m dy v]  m1 ]
-             0]]
+                ['- ['* 9 7]]]
+           0
+           ]
 
 
-        ])
 
-
-     (comment
-       [:div  (g [[2 1] [3 1] [10 1]]
-                 {:d [1
-                      -5 :% 1.5 70 70 0.5
-                      20 :% 1.8 70 70 0.5
-                      80 :% 2.2 70 70 0.5]
-                  :size [1 :rem]
-                  :flex :end})
-
-        [mm [:m dx v]]
-        ])
-     (comment
-       [:div  (g [[2 (+ 1 0)] [3 n1] [10 1]]
-                 {:d [1
-                      -5 :% 1.5 70 70 0.5
-                      20 :% 1.8 70 70 0.5
-                      80 :% 2.2 70 70 0.5]
-                  :size [1 :rem]
-                  :flex :end})
-
-        [mm ['- n1]]
-        ])
-     (comment
-       [:div  (g [[3 1] [2 1] [10 1]]
-                 {:d [1
-                      -5 :% 1.5 70 70 0.5
-                      20 :% 1.8 70 70 0.5
-                      80 :% 2.2 70 70 0.5]
-                  :size [1 :rem]
-                  :flex :end})
-
-        [mm [:m dy v]]
-        ])
-     (comment
-       [:div  (g [[(+ 3 1) m1] [2 1] [10 1]]
-                 {:d [1
-                      -5 :% 1.5 70 70 0.5
-                      20 :% 1.8 70 70 0.5
-                      80 :% 2.2 70 70 0.5]
-                  :size [1 :rem]
-                  :flex :end})
-
-        [mm ['+ m1 0] ]])
-
-     (comment
-       [:div (g [[3 dy] [3 dx] [10 1]]
-                {:d [1
-                     -5 :% 1.5 70 70 0.5
-                     20 :% 1.8 70 70 0.5
-                     80 :% 2.2 70 70 0.5]
-                 :size [1 :rem]
-                 :flex :center})
-        [mm [:m ['* dx dy]  [:p v 2]]]
-
-        ])
-
-     (comment
-       [:div (g [[(+ 3 dy) m1] [3 dx] [10 1]]
-                {:d [1
-                     -5 :% 1.5 70 70 0.5
-                     20 :% 1.8 70 70 0.5
-                     80 :% 2.2 70 70 0.5]
-                 :size [1 :rem]
-                 :flex :center})
-        [mm [:m ['* m1
-                 dx] v]]
-        ])
-
-
-     (comment
-       [:div (g [[3 dy] [(+ 3 dx) n1] [10 1]]
-                {:d [1
-                     -5 :% 1.5 70 70 0.8
-                     20 :% 1.8 70 70 0.8
-                     80 :% 2.2 70 70 0.8]
-                 :size [1 :rem]
-                 :flex :center})
-        [mm [:m ['* ['- n1]  dy] v]]
-        ])
-
-
-     (comment
-       [:div (g [[(+ 3 dy)  m1] [(+ 3 dx) n1] [10 1]]
-                {:d [1
-                     -5 :% 1.5 70 70 0.2
-                     20 :% 1.8 70 70 0.2
-                     80 :% 2.2 70 70 0.2]
-                 :size [1 :rem]
-                 :flex :center})
-        [mm ['*  m1 n1 ]]
-        ])
-     ;; len
-     (comment
-       [:div (g [[(+ 3 dy 1) 1] [3 (+ n1 dx)] [10 1]]
-                {:d [1
-                     -5 :% 1.5 70 70 0.2
-                     20 :% 1.8 70 70 0.2
-                     80 :% 2.2 70 70 0.2]
-                 :size [1 :rem]
-                 :flex :center})
-        [mm ['+ [:m dx  v]  n1 ]]
-        ])
-     ;; len
-     (comment
-       [:div (g [[(+ 3 n1 dy  ) (+ dy n1)] [2 1] [10 1]]
-                {:d [1
-                     -5 :% 1.5 70 70 0.2
-                     20 :% 1.8 70 70 0.2
-                     80 :% 2.2 70 70 0.2]
-                 :size [1 :rem]
-                 :flex :center})
-        [mm ['+ [:m dy  v]  m1 ]]
-        ])
-     ;;; sol
-     (comment [:div (g [[3 2] [12 5] [10 1]]
-                       {:d [1
-                            -5 :% 1.5 70 70 0.2
-                            20 :% 1.8 70 70 0.2
-                            80 :% 2.2 70 70 0.2]
-                        :size [1 :rem]
-                        :flex :center})
-               [mm [:m [:b ['+ v n1 ]]
-                    [:b ['+ [:m dy v] m1]]]]
-               ])
-
+       ]
+      [mm  ['= [:m [:b  ['- v 7]] [:b  ['+ v 9]]]
+            0]]
+      ]
 
      [:div {
             :style
@@ -2173,22 +2123,50 @@
               ]
              ])
 
+
        (map (paths
          (fn [d]
            [:path {:d d
                    :stroke (c [20 70 80])
                    :stroke-width 2
-                   :marker-end (url "i")
-                   :fill  (c [40 70 80])
+                   :fill  (c [80 70 80])
                    }])
          [s (comp tx s) (comp ty s)])
             [
-             [[[0 0] [(- start 0) 0]
-               :l [x 0] [0 0]
-               [0 0] [(* y -1) 0]
-               [(* -1 x) 0] [0 0]
+             [
+              [[0 0] [(+ 0 start) 0]
+               :l
+               [x 0] [0 0]
+               [n 0] [0 0]]
 
-               ]]
+
+
+              [[0 -2] [(+ 0 start) 0]
+               :l
+               [0 0] [(* -1 y) 0]
+               [0 0] [(* -1 y) 0]
+               ]
+
+
+              [[x 0] [(- start 1)
+                      0]
+               :l
+               [n 0] [0 0]
+
+
+               ]
+
+
+              #_[[x 0] [start 0]
+                 :l
+                 [m 0] [0 0]
+                 [0 0] [(* y -1) 0 ]
+                 [(* -1 m) 0] [0 0]]
+              #_[[0 0] [(- start y) 0]
+               :l
+               [x 0] [0 0]
+               [0 0] [(* n -1) 0 ]
+               [(* -1 x) 0] [0 0]]]
 
 
              (for [i (range dx)
@@ -2212,6 +2190,74 @@
                [[x1 0] [y1 0]
                 :l [k 0] [0 0] [0 0] [(* k -1) 0]
                 [(* k -1) 0] [0 0] [0 0] [k 0]])])
+
+
+
+
+       (map (paths
+             (fn [d]
+               [:path {:d d
+                       :stroke (c [300 70 80])
+                       :stroke-width 2
+                       :marker-end (url "i")
+                       :fill :none}])
+             [s (comp tx s) (comp ty s)])
+            [
+             [
+              [[0 0] [(+ 0 start) 0]
+               :l
+               [x 0] [0 0]
+               [n 0] [0 0]
+               [0 0] [(* -1 (+ x m)) 0]
+               [(* -1 (+ x n))   0] [ 0 0]
+               [0 0] [(* 1 (+ x m)) 0]]
+
+              #_[[x 0] [start 0]
+                 :l
+                 [m 0] [0 0]
+                 [0 0] [(* y -1) 0 ]
+                 [(* -1 m) 0] [0 0]]
+              #_[[0 0] [(- start y) 0]
+                 :l
+                 [x 0] [0 0]
+                 [0 0] [(* n -1) 0 ]
+                 [(* -1 x) 0] [0 0]]]])
+       (let [[txt-fn circle-fn]
+            [(fn [x y s]
+               [:text {:x x
+                       :y  y
+                       :font-size (size [1 :rem])} s])
+             (fn [x y r] [:circle
+                          {:cx x
+                           :cy  y
+                           :r  r
+                           :fill (c [70 70 70])}
+                          ])]
+             #_ (gen/sample (s/gen :math2/svg-circle))
+             data [[[0 0] [0 0] 2]]
+             ]
+         (map
+          (comp
+           (fn [[x y f v]]
+             (f x y v))
+           (partial mapcat identity )
+           (juxt
+            (comp
+             (juxt
+              (comp tx s :x)
+              (comp ty s :y)) :point)
+            (comp
+             (juxt (comp
+                    (fn [n]
+                      (condp = n
+                        :text txt-fn
+                        :r circle-fn))
+                    first) (comp
+                            second))
+             :attr))
+           (fn [n]
+             (s/conform :math2/svg-circle n)))
+          data))
        ]]]))
 
 
