@@ -211,8 +211,8 @@
 (s/def ::hsl2
   (s/cat
    :hue (s/and number? (fn [r]
-                         (and (< r 7)
-                              (> r -7))))
+                         (and (< r 59)
+                              (> r -59))))
    :saturation (s/and int? (fn [s]
                              (and
                               (< s 101)
@@ -232,9 +232,9 @@
 (s/def ::gradient
   (s/cat
    :angle (s/and number?
-               (fn [a]
-                 (and (> a -8)
-                      (< a 8))))
+                 (fn [a]
+                   (and (> a -50)
+                        (< a 50))))
    :colors
    (s/+ (s/cat
          :size (s/cat
@@ -1967,12 +1967,8 @@
               [[4 0] [5 0]
                :l [4 0] [0 0] [0 0] [-3 0]
                [-4 0] [0 0] [0 0] [3 0]]
-              ]
+              ]])
 
-
-
-
-             ])
        (map (paths
          (fn [d]
            [:path {:d d
@@ -1997,15 +1993,16 @@
            [[x 0] [y 0]
             :l [k 0] [0 0] [0 0] [(* k -1) 0]
             [(* k -1) 0] [0 0] [0 0] [k 0]])])
-
-
-
-
        ]]]))
 
 
 (defn grid8 []
   (let [ve (fn [n] (* n -1))
+        grad2 (fn [n]
+                [1
+                 -5 :% (+ n 1.5) 70 70 0.3
+                 20 :% (+ n n 1.5) 70 70 0.5
+                 80 :% (+ n n 1.5)  70 70 0.8])
         mm m
         [m1 n1] [9 7]
         [start x1 m n] [9 2 (* 2 m1) (* 2 n1)]
@@ -2014,9 +2011,11 @@
         x (* x1 dx)
         y (* x1 dy)
         v 'x
-        vb (str/join " "
-                     [(* 40 -0.55) (* 40 0.5)
-                      (* 40 18) (* 40 18)])
+
+        vb (str/join
+            " "
+            [(* 40 -0.55) (* 40 0.5)
+             (* 40 18) (* 40 18)])
         [w h s] [420 420 30]
         [s tx ty] [(comp
                     (fn [[x y]] (+ x y))
@@ -2034,28 +2033,24 @@
             :grid-template-rows (size (apply concat (take 10 (repeat [10 :vh]))))}}
 
 
+     (let [x2 [:p v 2]
+           a m1
+           b n1
+           ab+ [:b ['+ a b]]
+           abx+ [:m ab+ v]
+           ab ['* a b]
+           r1 ['+ x2 abx+ ab]]
+       (map-indexed
+        (fn [i eq]
+          [:div  (g [[(inc i) 1] [8 7] [10 1]]
+                    {:d (grad2 i)
+                     :size [2 :rem]
+                     :flex :center})
+           [mm eq]
 
-     [:div  (g [[1 1] [3 8] [10 1]]
-               {:d [1
-                    -5 :% 1.5 70 70 0.5
-                    20 :% 1.8 70 70 0.5
-                    80 :% 2.2 70 70 0.5]
-                :size [2 :rem]
-                :flex :center})
+           ])
+        [r1  x2 abx+ ab ]))
 
-      [mm ['=  ['+  [:p 'x 2]
-                [:m [:b ['- 9 7]] 'x ]
-
-                ['- ['* 9 7]]]
-           0
-           ]
-
-
-
-       ]
-      [mm  ['= [:m [:b  ['- v 7]] [:b  ['+ v 9]]]
-            0]]
-      ]
 
      [:div {
             :style
@@ -2510,7 +2505,50 @@
                [(+ x x m) 0] [0 0]
                [0 0] [(* 1 x) 0]
                [(* -1 (+ x x m)) 0] [0 0]
-               ]]])]]]))
+               ]]])
+
+       (map (paths
+             (fn [d]
+               [:path {:d d
+                       :stroke (c [300 70 80])
+                       :stroke-width 4
+                       :marker-end (url "i")
+                       :fill :none}])
+             [s (comp tx s) (comp ty s)])
+            [
+             [
+              [[x 0] [(- start y) 0]
+               :l
+
+               [n 0] [0 0]
+               [0 0] [(* -1 (- m y) ) 0]]
+
+              [[(+ x n) 0] [start 0]
+               :l
+
+               [0 0] [ (* -1 y) 0]
+               ]
+              [[(+ x n) 0] [(- start y 8) 0]
+               :l
+
+               [(* x 1) 0] [0
+                      0]
+               ]
+
+
+
+              #_[[x 0] [start 0]
+                 :l
+                 [m 0] [0 0]
+                 [0 0] [(* y -1) 0 ]
+                 [(* -1 m) 0] [0 0]]
+              #_[[0 0] [(- start y) 0]
+                 :l
+                 [x 0] [0 0]
+                 [0 0] [(* n -1) 0 ]
+                 [(* -1 x) 0] [0 0]]]])
+       ]]
+     ]))
 
 
 
@@ -2741,4 +2779,4 @@
 
 
 (defn template1 []
-  [grid10])
+  [grid8])
