@@ -971,7 +971,6 @@
             (/ x factor)))))
 
 (comment
-
   (let [[s tx ty] [(s 40 10) (partial + 200) (partial + -400)]
         path ((path2 [s tx ty]) (fn [x] x))
         space (fn [p] (str/join " " p))
@@ -987,27 +986,28 @@
 
        (comp
         (fn  [l]
-          (mapcat
+          (map
            (comp
             (fun
              ([[:line p]]
               ((juxt :l
                      (comp
                       (fn [l]
-                        (mapcat
+                        (map
                          (juxt (comp tx s :x) (comp ty s :y))
                          l))
                       :points) ) p)
               )
              ([[:arc  x]]
               (let [{:keys [a r1 r2 angle f1 f2  end]} x]
-                [a r1 r2 angle (if f1 1 0) (if f2 1 0) ((juxt (comp ty s :x)
-                                            (comp ty s :y)) end)]))
+                [a r1 r2 angle (if f1 1 0) (if f2 1 0)
+                 ((juxt (comp ty s :x)
+                        (comp ty s :y)) end)]))
              ([[:curve-c  c]]
               ((juxt :c
                      (comp
                       (fn [l]
-                        (mapcat
+                        (map
                          (juxt (comp ty  s :x) (comp ty s :y))
                          l))
                       :points) ) c)
@@ -1016,7 +1016,7 @@
               ((juxt :q
                      (comp
                       (fn [l]
-                        (mapcat
+                        (map
                          (juxt (comp tx s :x) (comp ty s :y))
                          l))
                       :points) ) q))
