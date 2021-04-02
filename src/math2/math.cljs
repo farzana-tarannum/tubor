@@ -3609,30 +3609,17 @@
             :grid-template-columns (size (apply concat (take 12 (repeat [10 :vh]))))
             :grid-template-rows (size (apply concat (take 10 (repeat [10 :vh]))))}}
 
-     [:div (g [[9 2] [2 4] [10 .5]]
-              {:flex :center
-               :size [20 :rem]
-               :d (grad2 2.3)})
 
-      "÷"]
+     (map-indexed
+      (fn [i eq]
+        [:div  (g [[(inc i) 1] [8 7] [10 1]]
+                  {:d (grad2 (inc i))
+                   :size [1.7 :rem]
+                   :flex :center})
+         [mm eq]
 
-
-     (comment solve )
-     (let []
-       (map-indexed
-        (fn [i eq]
-          [:div  (g [[(inc i) 1] [8 7] [10 1]]
-                    {:d (grad2 (inc i))
-                     :size [1.7 :rem]
-                     :flex :center})
-           [mm eq]
-
-           ])
-        [
-
-
-
-         ]))
+         ])
+      [[1 10]])
 
      [:div {
             :style
@@ -3679,15 +3666,25 @@
 
 
 
-       (comment [s tx ty] [(s 40 10) (partial + 200) (partial + -400)])
-       (comment
-         (let []
-           (map
-            path
-            (gen/sample (s/gen :math2/svg-path 10)))
-           ))
+       (map (paths
+             (fn [d]
+               [:path {:d d
+                       :stroke (c [20 80 10])
+                       :stroke-width 4
+                       :fill :none
+                       }])
+             [s (comp tx s) (comp ty s)])
+            [
 
+             (for [i (range 0 m1)
+                   :let [y (+ 2 (* i 2))]]
+               [[0 -3] [(- start y 2) 0] :l [0 0] [2 0] [0 4] [0 0]])
 
+             (for [i (range 0 n1)
+                   :let [x (+ 2 (* i 2))]]
+               [[x 0] [start 0] :l [2 0] [0 0] [0 0] [0 -4]])
+
+             ])
 
 
        (map (paths
@@ -3701,6 +3698,8 @@
             [
 
 
+
+
              (for [i (range 0 (/ n1 6))
                    :let [k 12
                          x1 (+ x (* i k))]
@@ -3712,200 +3711,6 @@
                [[x1 0] [y1 0]
                 :l [k 0] [0 0] [0 0] [(* k -1) 0]
                 [(* k -1) 0] [0 0] [0 0] [k 0]])])
-       (comment
-
-         ((paths
-           (fn [d]
-             [:path {:d d
-                     :stroke (c [120 70 50])
-                     :stroke-width 1
-                     :fill (c [10 70 70])}])
-           [s (comp tx s) (comp ty s)])
-          (for [i (range  n1)
-                :let [k 2
-                      x1 (+ 2 (* i k))]
-                j (range 6)
-                :let [k 2
-                      y1 (+ start 0
-                            (* j k -1)  -2 )]
-                :when (not (and (= j 5) (> i 4) ))
-
-                ]
-            [[x1 0] [y1 0]
-             :l [k 0] [0 0] [0 0] [(* k -1) 0]
-             [(* k -1) 0] [0 0] [0 0] [k 0]])))
-       (comment
-         ((paths
-           (fn [d]
-             [:path {:d d
-                     :stroke (c [120 70 50])
-                     :stroke-width 1
-                     :fill (c [310 70 70])}])
-           [s (comp tx s) (comp ty s)])
-          (for [i (range  n1)
-                :let [k 2
-                      x1 (+ 2 (* i k))]
-                j (range 7)
-                :let [k 2
-                      y1 (+ start -10
-                            (* j k -1)  -2 )]
-                ;;:when (not (and (= j 0) (< i 5) ))
-
-                ]
-            [[x1 0] [y1 0]
-             :l [k 0] [0 0] [0 0] [(* k -1) 0]
-             [(* k -1) 0] [0 0] [0 0] [k 0]])))
-
-       (comment
-         ((paths
-           (fn [d]
-             [:path {:d d
-                     :stroke (c [120 70 50])
-                     :stroke-width 1
-                     :fill (c [210 70 70])}])
-           [s (comp tx s) (comp ty s)])
-          (for [i (range  n1)
-                :let [k 2
-                      x1 (+ 2 (* i k))]
-                j (range 6)
-                :let [k 2
-                      y1 (+ start -22
-                            (* j k -1)  -2 )]
-                ;;:when (not (and (= j 5) (> i 4) ))
-
-                ]
-            [[x1 0] [y1 0]
-             :l [k 0] [0 0] [0 0] [(* k -1) 0]
-             [(* k -1) 0] [0 0] [0 0] [k 0]])))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-       (comment   a + b)
-       (comment
-         (map (paths
-               (fn [d]
-                 [:path {:d d
-                         :stroke (c [120 70 50])
-                         :stroke-width 4
-                         :marker-end (url "i")
-                         :fill :none}])
-               [s (comp tx s) (comp ty s)])
-              [
-               [
-                [
-                 [0 0] [(- start y (/ m 4)) 0]
-                 :a 4 4 0 true true [0 3] [0 0]
-                 :a 4 4 0 true true [0 -3] [0 0]
-                 :l
-                 [0 -3] [0  0]
-                 [0 0] [(+ y (/ m 4))  2]
-                 [9 0] [ 0 0]
-                 [0 0] [ -2 0]
-                 :a 4 4 0 true true [0 3] [0 0]
-                 :a 4 4 0 true true [0 -3] [0 0]
-                 :l
-                 [0 0] [2 0]
-                 [8 0] [0 0]
-                 [0 0] [-7 0]
-                 [2 0] [0 0]
-                 ]
-
-
-
-                #_[[0 0] [(- start y) 0]
-                   :l
-                   [x 0] [0 0]
-                   [0 0] [(* n -1) 0 ]
-                   [(* -1 x) 0] [0 0]]]]))
-
-
-
-
-
-       (comment  pink  [x a][x b] )
-       (comment
-         (map (paths
-               (fn [d]
-                 [:path {:d d
-                         :stroke (c [400 70 80])
-                         :stroke-width 4
-                         :marker-end (url "i")
-                         :fill :none}])
-               [s (comp tx s) (comp ty s)])
-              [
-               [
-                [[0 0] [(+ 0 start) 0]
-                 :l
-                 [x 0] [0 0]
-                 [n 0] [0 0]
-                 [0 0] [(* -1 (+ x m)) 0]]
-                ]]))
-
-
-
-
-
-       (comment blue kkx2)
-       (comment
-         (map (paths
-               (fn [d]
-                 [:path {:d d
-                         :stroke (c [250 70 80])
-                         :stroke-width 2
-                         :marker-end (url "i")
-                         :fill :none}])
-               [s (comp tx s) (comp ty s)])
-              [
-               [
-
-                [
-                 [0 3] [start -3]
-                 :a 4 4 0 true true [0 3] [0 0]
-                 :a 4 4 0 true true [0 -3] [0 0]
-                 :l
-                 [0 0] [0 4]
-                 [15 0] [0 0]
-                 [0 0] [-4 0]
-                 [2 0] [0 0]
-                 ]
-
-                ]]))
-
-       (comment purple one a*b )
-       (comment
-         (map (paths
-               (fn [d]
-                 [:path {:d d
-                         :stroke (c [10 70 50])
-                         :stroke-width 3
-                         :marker-end (url "i")
-                         :fill :none}])
-               [s (comp tx s) (comp ty s)])
-              [
-               [
-
-                [
-                 [(+ x  (/ n 2)) 3] [(- start y (/ m 4)) 0]
-                 :a 4 4 0 true true [0 3] [0 0]
-                 :a 4 4 0 true true [0 -3] [0 0]
-                 :l
-                 [0 0] [-4 0]
-                 [10 0] [0 0]
-
-                 ]
-
-                ]]))
        (let [[txt-fn circle-fn]
             [(fn [x y s]
                [:text {:x x
@@ -3918,17 +3723,23 @@
                            :fill (c [70 70 70])}
                           ])]
              #_ (gen/sample (s/gen :math2/svg-circle))
-             m (map (fn [x]
-                      [[(+ 0 (* 2  x)) 0 ] [(- start 2) 0]  (str x)]
-                      ) (range 1 25))
-             m2 (map (fn [y]
-                       [[(+ 0 0) 0 ]
-                        [(- start (* 2 y) 1) 0]
-                        (str y)])
-                     (range 1 37))
-             data (into (into []
-                              m
-                              ) m2)
+             data
+             (for [i [(map
+                       (fn [x]
+                         [[(+ .2 (* 2  x)) 0 ] [(- start 2) 3]  (str x)])
+                       (range 1 25))
+
+                      (map (fn [y]
+                             [[(+ 0 0) 0 ]
+                              [(- start (* 2 y) 1) 0]
+                              (str y)])
+                           (range 1 37))
+                      ]
+                   j (range (count i))
+                   :let [k (nth i j)]
+                   ]
+               k)
+
              ]
          (map
           (comp
