@@ -240,10 +240,7 @@
                 :size number?
                 :scale #{:rem :px :vh :vw :%})
          :color ::hsl2))))
-(comment
 
-
-  )
 (defn gen-grad [v]
   ((comp
     (fn [x] (str "linear-gradient" x) )
@@ -293,8 +290,7 @@
 
                 ))  v))
            :colors))
-    (fn [e] (s/conform ::gradient e)))     v)
-  )
+    (fn [e] (s/conform ::gradient e))) v))
 
 
 (comment
@@ -736,229 +732,6 @@
 
        ))))
 
-
-(defn path2 [[t-s t-x t-y]]
-  (fn [svg-pathf]
-    (let [space (fn [p] (str/join " " p))]
-      (comp
-          svg-pathf
-          (fn [x] (str "M" x))
-          space
-          (juxt (comp
-                 space
-                 (juxt (comp
-                        t-x
-                        first)
-                       (comp
-                        t-y
-                        second))
-                 first)
-                (comp
-                 space
-                 (comp
-                  (fn [l]
-                    (map (fun
-                          ([[:arc [:a r1 r2
-                                   angle
-                                   f1 f2
-                                   point]]]
-                           (space
-                            [
-                             (name :a) r1 r2
-                             angle
-                             (if f1 1 0)
-                             (if f2 1 0)
-                             ((comp
-                               space
-                               (juxt (comp
-                                      t-s
-                                      first)
-                                     (comp
-                                      (partial * -1)
-                                      t-s
-                                      second)))
-                              point)
-
-                             ]))
-                          ([[:arc [:A r1 r2 angle f1 f2
-                                   point]]]
-                           (space [(name :A) r1 r2 angle (if f1 1 0) (if f2 1 0)
-                                   ((comp
-                                     space
-                                     (juxt (comp
-                                            t-x
-                                            first)
-                                           (comp
-                                            t-y
-                                            second)))
-                                    point)])
-                           )
-                          ([[:line [:l points]]]
-                           ((comp
-                             space
-                             (juxt first (comp
-                                          space
-                                          second)))
-                            [(name :l)
-                             (map
-                              (comp
-                               space
-                               (juxt (comp
-                                      t-s
-                                      first)
-                                     (comp
-                                      (partial * -1)
-                                      t-s
-                                      second)))
-                              points)])
-                           )
-                          ([[:curve-c [:c points]]]
-                           ((comp
-                             space
-                             (juxt first (comp
-                                          space
-                                          second)))
-                            [(name :c)
-                             (map
-                              (comp
-                               space
-                               (juxt (comp
-                                      t-s
-                                      first)
-                                     (comp
-                                      (partial * -1)
-                                      t-s
-                                      second)))
-                              points)])
-                           )
-                          ([[:curve-q [:q points]]]
-                           ((comp
-                             space
-                             (juxt first (comp
-                                          space
-                                          second)))
-                            [(name :q)
-                             (map
-                              (comp
-                               space
-                               (juxt (comp
-                                      t-s
-                                      first)
-                                     (comp
-                                      (partial * -1)
-                                      t-s
-                                      second)))
-                              points)])
-                           )
-                          ([[:line [:L points]]]
-                           ((comp
-                             space
-                             (juxt first (comp
-                                          space
-                                          second)))
-                            [(name :L)
-                             (map
-                              (comp
-                               space
-                               (juxt (comp
-                                      t-x
-                                      first)
-                                     (comp
-                                      t-y
-                                      second)))
-
-                              points)]))
-                          ([[:curve-c [:C points]]]
-                           ((comp
-                             space
-                             (juxt first (comp
-                                          space
-                                          second)))
-                            [(name :C)
-                             (map
-                              (comp
-                               space
-                               (juxt (comp
-                                      t-x
-                                      first)
-                                     (comp
-                                      t-y
-                                      second)))
-
-                              points)]))
-                          ([[:curve-q [:Q points]]]
-                           ((comp
-                             space
-                             (juxt first (comp
-                                          space
-                                          second)))
-                            [(name :Q)
-                             (map
-                              (comp
-                               space
-                               (juxt (comp
-                                      t-x
-                                      first)
-                                     (comp
-                                      t-y
-                                      second)))
-
-                              points)]))
-                          )
-                         l)))
-                 second))
-          (fn [x]
-            (s/conform :math2/path x))
-          (comp
-    (fn [e]
-      (if (s/valid? :math2/path e)
-        e))
-    (juxt
-     (comp
-      (juxt :x :y)
-      :m)
-
-     (comp
-      (fn  [l]
-        (map
-         (comp
-          (fun
-           ([[:line p]]
-            ((juxt :l
-                   (comp
-                    (fn [l]
-                      (map
-                       (juxt :x :y)
-                       l))
-                    :points) ) p)
-            )
-           ([[:arc  x]]
-            (let [{:keys [a r1 r2 angle f1 f2  end]} x]
-              [a r1 r2 angle f1 f2 ((juxt :x :y) end)]))
-           ([[:curve-c  c]]
-            ((juxt :c
-                   (comp
-                    (fn [l]
-                      (map
-                       (juxt :x :y)
-                       l))
-                    :points) ) c)
-            )
-           ([[:curve-q  q]]
-            ((juxt :q
-                   (comp
-                    (fn [l]
-                      (map
-                       (juxt :x :y)
-                       l))
-                    :points) ) q))
-           ))
-         l))
-      :d))
-    (fn [x]
-      (s/conform :math2/svg-path x)))))))
-
-
 (def s
   (fn [step factor]
     (fn [data]
@@ -972,23 +745,26 @@
 
 (comment
   (let [[s tx ty] [(s 40 10) (partial + 200) (partial + -400)]
+        m-add (fn [m] (str "M " m))
         space (fn [p] (str/join " " p))
-        path (comp
-      space
-      flatten
-      (juxt
-       (comp
-        (juxt (comp ty s :x)
-              (comp ty s :y))
-        :m)
-
+        path
+        (comp
+         m-add
+         space
+         flatten
+         (juxt
+          (comp
+           (juxt (comp ty s :x)
+                 (comp ty s :y))
+           :m)
        (comp
         (fn  [l]
           (map
            (comp
             (fun
              ([[:line p]]
-              ((juxt :l
+              ((juxt (comp
+                      name :l)
                      (comp
                       (fn [l]
                         (map
@@ -998,11 +774,13 @@
               )
              ([[:arc  x]]
               (let [{:keys [a r1 r2 angle f1 f2  end]} x]
-                [a r1 r2 angle (if f1 1 0) (if f2 1 0)
+                [(name a) r1 r2 angle (if f1 1 0) (if f2 1 0)
                  ((juxt (comp ty s :x)
                         (comp ty s :y)) end)]))
              ([[:curve-c  c]]
-              ((juxt :c
+              ((juxt (comp
+                      name
+                      :c)
                      (comp
                       (fn [l]
                         (map
@@ -1011,7 +789,9 @@
                       :points) ) c)
               )
              ([[:curve-q  q]]
-              ((juxt :q
+              ((juxt (comp
+                      name
+                      :q)
                      (comp
                       (fn [l]
                         (map
@@ -1024,8 +804,14 @@
       (fn [x]
         (s/conform :math2/svg-path x)))
         ]
-    (path
-     (nth (gen/sample (s/gen :math2/svg-path 10)) 4))))
+    (map
+     (comp
+      (fn [d] [:path {:d d}
+               :stroke (c [20 50 50])
+               :stroke-width 2
+               :fill :none])
+      path)
+     (gen/sample (s/gen :math2/svg-path 10)))))
 
 ;; 01741775277 ethan mom maliha
 ;; 01716980473  angira mom maliha
@@ -3651,10 +3437,49 @@
              [
               [[0 0] [(+ 0 start) 0]
                :l
-               [x 0] [0 0]
-               [n 0] [0 0]
-               [0 0] [(* -1 (+ x m)) 0]]
-              ]])
+               [x 0] [0 0] [n 0] [0 0]
+               [0 0] [(* -1 (+ y m)) 0]]
+              ]
+
+             [
+              [[ (* 3 (/ n 4)) 0] [(+ -20 start) 0]
+               :l
+               [(/ n 4) 0] [0 0]
+               [0 0] [(/ n 4) 0]
+               [(ve (/ n 4)) 0] [0 0]
+               [0 0] [(ve (/ n 4)) 0]
+               [(/ n 4) 0] [0 0]
+               [(/ x 4) 0] [0 0]
+               [0 0] [(/ x 4) 0]
+               [(ve (/ x 4)) 0] [0 0]
+               [0 0] [(ve (/ x 4)) 0]
+
+
+               ]
+
+
+              [[0 0] [(+ -20 start) 0]
+               :l
+               [(+ x n) 0] [0 0]]
+
+
+
+
+              [[n 0] [(+ -23 start) 0]
+               :l
+               [(+ (/ x 4) 0) 0] [0 0]
+               [0 0] [(+ (/ x 4) 0) 0]
+               [(ve (+ (/ x 4) 0)) 0] [0 0]
+               [0 0] [(ve (+ (/ x 4) 0)) 0]
+               ]
+
+
+              ]
+
+
+
+
+             ])
 
 
 
@@ -3744,5 +3569,390 @@
           data))
        ]]]))
 
+
+(defn grid13 []
+  (let [ve (fn [n] (* n -1))
+        [s tx ty] [(comp
+                    (fn [[x y]] (+ x y))
+                    (juxt (comp (fn [x] (* x 30))  first)
+                          (comp (fn [x] (* x 6) ) second)))
+                   (fn [x] (+ (* 40 (ve 2)) x))
+                   (fn [y] (- (+ (* 40 (- 12 4)) 0) y))]
+        m-add (fn [m] (str "M " m))
+        space (fn [p] (str/join " " p))
+        grad2 (fn [n]
+                [4
+                 -5 :% (+ n .5) 70 70 0.3
+                 20 :% (+ n n .5) 70 70 0.2
+                 80 :% (+ n n .5)  70 70 0.3])
+        mm m
+        [m1 n1] [36 24]
+        [start x1 m n] [9 2 (* 2 m1) (* 2 n1)]
+        dx 1
+        dy 1
+        x (* x1 dx)
+        y (* x1 dy)
+        v 'h
+
+        vb (str/join
+            " "
+            [(* 40 -0.55) (* 40 0.5)
+             (* 40 60) (* 40 60)])
+
+
+        tfun-e1 [s (comp tx s) (comp ty s)]]
+    [:div {:style
+           {:background-color (c [90 70 70])
+            :display :grid
+            :height (size [100 :vh])
+            :width (size [100 :vw])
+            :grid-template-columns (size (apply concat (take 12 (repeat [10 :vh]))))
+            :grid-template-rows (size (apply concat (take 10 (repeat [10 :vh]))))}}
+
+     [:div (g [[9 2] [2 4] [10 .5]]
+              {:flex :center
+               :size [20 :rem]
+               :d (grad2 2.3)})
+
+      "÷"]
+
+
+     (comment solve )
+     (let []
+       (map-indexed
+        (fn [i eq]
+          [:div  (g [[(inc i) 1] [8 7] [10 1]]
+                    {:d (grad2 (inc i))
+                     :size [1.7 :rem]
+                     :flex :center})
+           [mm eq]
+
+           ])
+        [
+
+
+
+         ]))
+
+     [:div {
+            :style
+            {:z-index 2
+             :overflow :hidden
+             :color :#444
+             :grid-row (str/join "/" [2 -2])
+             :grid-column (str/join "/" [2 -2])
+             :background-color (c [70 70 70])
+             }}
+      [:svg {:style {:background-color (c [150 70 70])
+                     :height (size [100 :%])
+                     :width (size [100 :%])}
+             :viewBox vb
+             }
+
+       [:defs
+        [:marker {:id "i"
+                  :refY 0
+                  :refX 0
+                  :orient :auto
+                  :style {:overflow :visible}}
+
+         ((paths (fn [d]
+                   [:path {:d d
+                           :style {:fill-rule :evenodd
+                                   :stroke (c [70 70 70])
+                                   :stroke-width 1
+                                   :stroke-opacity 1
+                                   :fill (c [330 70 70])
+                                   :fill-opacity 1}
+                           :transform (tranfrom [[:scale .4]
+                                                 [:rotate 180]
+                                                 [:translate [12.5 0]]])
+
+
+                           }])
+                 [(fn [[x _]] x)
+                  (fn [[x _]] x)
+                  (fn [[x _]] x)])
+          [[[0 0] [0 0] :L [5 0] [-5 0] :L [-12.5 0] [0 0]
+            :L [3 0] [5 0] :L [0 0] [0 0]]])
+         ]]
+
+
+
+       (comment [s tx ty] [(s 40 10) (partial + 200) (partial + -400)])
+       (comment
+         (let []
+           (map
+            path
+            (gen/sample (s/gen :math2/svg-path 10)))
+           ))
+
+
+
+
+       (map (paths
+             (fn [d]
+               [:path {:d d
+                       :stroke (c [20 70 80])
+                       :stroke-width 2
+                       :fill  (c [80 70 80])
+                       }])
+             [s (comp tx s) (comp ty s)])
+            [
+
+
+             (for [i (range 0 (/ n1 6))
+                   :let [k 12
+                         x1 (+ x (* i k))]
+                   j (range 0 (/ m1 6))
+                   :let [k 12
+                         y1 (+ (- start y) (* j k -1))]
+                   ;;:when (not (and (= 16 j) (> i 4) ))
+                   ]
+               [[x1 0] [y1 0]
+                :l [k 0] [0 0] [0 0] [(* k -1) 0]
+                [(* k -1) 0] [0 0] [0 0] [k 0]])])
+       (comment
+
+         ((paths
+           (fn [d]
+             [:path {:d d
+                     :stroke (c [120 70 50])
+                     :stroke-width 1
+                     :fill (c [10 70 70])}])
+           [s (comp tx s) (comp ty s)])
+          (for [i (range  n1)
+                :let [k 2
+                      x1 (+ 2 (* i k))]
+                j (range 6)
+                :let [k 2
+                      y1 (+ start 0
+                            (* j k -1)  -2 )]
+                :when (not (and (= j 5) (> i 4) ))
+
+                ]
+            [[x1 0] [y1 0]
+             :l [k 0] [0 0] [0 0] [(* k -1) 0]
+             [(* k -1) 0] [0 0] [0 0] [k 0]])))
+       (comment
+         ((paths
+           (fn [d]
+             [:path {:d d
+                     :stroke (c [120 70 50])
+                     :stroke-width 1
+                     :fill (c [310 70 70])}])
+           [s (comp tx s) (comp ty s)])
+          (for [i (range  n1)
+                :let [k 2
+                      x1 (+ 2 (* i k))]
+                j (range 7)
+                :let [k 2
+                      y1 (+ start -10
+                            (* j k -1)  -2 )]
+                ;;:when (not (and (= j 0) (< i 5) ))
+
+                ]
+            [[x1 0] [y1 0]
+             :l [k 0] [0 0] [0 0] [(* k -1) 0]
+             [(* k -1) 0] [0 0] [0 0] [k 0]])))
+
+       (comment
+         ((paths
+           (fn [d]
+             [:path {:d d
+                     :stroke (c [120 70 50])
+                     :stroke-width 1
+                     :fill (c [210 70 70])}])
+           [s (comp tx s) (comp ty s)])
+          (for [i (range  n1)
+                :let [k 2
+                      x1 (+ 2 (* i k))]
+                j (range 6)
+                :let [k 2
+                      y1 (+ start -22
+                            (* j k -1)  -2 )]
+                ;;:when (not (and (= j 5) (> i 4) ))
+
+                ]
+            [[x1 0] [y1 0]
+             :l [k 0] [0 0] [0 0] [(* k -1) 0]
+             [(* k -1) 0] [0 0] [0 0] [k 0]])))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       (comment   a + b)
+       (comment
+         (map (paths
+               (fn [d]
+                 [:path {:d d
+                         :stroke (c [120 70 50])
+                         :stroke-width 4
+                         :marker-end (url "i")
+                         :fill :none}])
+               [s (comp tx s) (comp ty s)])
+              [
+               [
+                [
+                 [0 0] [(- start y (/ m 4)) 0]
+                 :a 4 4 0 true true [0 3] [0 0]
+                 :a 4 4 0 true true [0 -3] [0 0]
+                 :l
+                 [0 -3] [0  0]
+                 [0 0] [(+ y (/ m 4))  2]
+                 [9 0] [ 0 0]
+                 [0 0] [ -2 0]
+                 :a 4 4 0 true true [0 3] [0 0]
+                 :a 4 4 0 true true [0 -3] [0 0]
+                 :l
+                 [0 0] [2 0]
+                 [8 0] [0 0]
+                 [0 0] [-7 0]
+                 [2 0] [0 0]
+                 ]
+
+
+
+                #_[[0 0] [(- start y) 0]
+                   :l
+                   [x 0] [0 0]
+                   [0 0] [(* n -1) 0 ]
+                   [(* -1 x) 0] [0 0]]]]))
+
+
+
+
+
+       (comment  pink  [x a][x b] )
+       (comment
+         (map (paths
+               (fn [d]
+                 [:path {:d d
+                         :stroke (c [400 70 80])
+                         :stroke-width 4
+                         :marker-end (url "i")
+                         :fill :none}])
+               [s (comp tx s) (comp ty s)])
+              [
+               [
+                [[0 0] [(+ 0 start) 0]
+                 :l
+                 [x 0] [0 0]
+                 [n 0] [0 0]
+                 [0 0] [(* -1 (+ x m)) 0]]
+                ]]))
+
+
+
+
+
+       (comment blue kkx2)
+       (comment
+         (map (paths
+               (fn [d]
+                 [:path {:d d
+                         :stroke (c [250 70 80])
+                         :stroke-width 2
+                         :marker-end (url "i")
+                         :fill :none}])
+               [s (comp tx s) (comp ty s)])
+              [
+               [
+
+                [
+                 [0 3] [start -3]
+                 :a 4 4 0 true true [0 3] [0 0]
+                 :a 4 4 0 true true [0 -3] [0 0]
+                 :l
+                 [0 0] [0 4]
+                 [15 0] [0 0]
+                 [0 0] [-4 0]
+                 [2 0] [0 0]
+                 ]
+
+                ]]))
+
+       (comment purple one a*b )
+       (comment
+         (map (paths
+               (fn [d]
+                 [:path {:d d
+                         :stroke (c [10 70 50])
+                         :stroke-width 3
+                         :marker-end (url "i")
+                         :fill :none}])
+               [s (comp tx s) (comp ty s)])
+              [
+               [
+
+                [
+                 [(+ x  (/ n 2)) 3] [(- start y (/ m 4)) 0]
+                 :a 4 4 0 true true [0 3] [0 0]
+                 :a 4 4 0 true true [0 -3] [0 0]
+                 :l
+                 [0 0] [-4 0]
+                 [10 0] [0 0]
+
+                 ]
+
+                ]]))
+       (let [[txt-fn circle-fn]
+            [(fn [x y s]
+               [:text {:x x
+                       :y  y
+                       :font-size (size [2 :rem])} s])
+             (fn [x y r] [:circle
+                          {:cx x
+                           :cy  y
+                           :r  r
+                           :fill (c [70 70 70])}
+                          ])]
+             #_ (gen/sample (s/gen :math2/svg-circle))
+             m (map (fn [x]
+                      [[(+ 0 (* 2  x)) 0 ] [(- start 2) 0]  (str x)]
+                      ) (range 1 25))
+             m2 (map (fn [y]
+                       [[(+ 0 0) 0 ]
+                        [(- start (* 2 y) 1) 0]
+                        (str y)])
+                     (range 1 37))
+             data (into (into []
+                              m
+                              ) m2)
+             ]
+         (map
+          (comp
+           (fn [[x y f v]]
+             (f x y v))
+           (partial mapcat identity )
+           (juxt
+            (comp
+             (juxt
+              (comp tx s :x)
+              (comp ty s :y)) :point)
+            (comp
+             (juxt (comp
+                    (fn [n]
+                      (condp = n
+                        :text txt-fn
+                        :r circle-fn))
+                    first) (comp
+                            second))
+             :attr))
+           (fn [n]
+             (s/conform :math2/svg-circle n)))
+          data))
+       ]]]))
+
 (defn template1 []
-  [grid12])
+  [grid13])
