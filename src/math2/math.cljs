@@ -3586,7 +3586,7 @@
                  20 :% (+ n n .5) 70 70 0.2
                  80 :% (+ n n .5)  70 70 0.3])
         mm m
-        [m1 n1] [36 24]
+        [m1 n1] [14 10]
         [start x1 m n] [9 2 (* 2 m1) (* 2 n1)]
         dx 1
         dy 1
@@ -3594,13 +3594,19 @@
         y (* x1 dy)
         v 'h
 
-        vb (str/join
-            " "
-            [(* 40 -0.55) (* 40 0.5)
-             (* 40 60) (* 40 60)])
+
+
+        vb (nth
+            [(space [(* 40 -0.55) (* 40 0.5)
+                     (* 40 24) (* 40 24)])
+             (space [(* 40 14.55) (* 40 0.5)
+                     (* 4   60) (* 4 60)])]
+                0)
 
 
         tfun-e1 [s (comp tx s) (comp ty s)]]
+
+
     [:div {:style
            {:background-color (c [90 70 70])
             :display :grid
@@ -3610,16 +3616,33 @@
             :grid-template-rows (size (apply concat (take 10 (repeat [10 :vh]))))}}
 
 
+
+
+
+     [:div  (g [[2 1] [8 7] [10 1]]
+               {:d (grad2 2)
+                :size [1.7 :rem]
+                :flex :center})
+      "Expressing One Quantity as a Percentage of Another"
+
+      ]
+
      (map-indexed
       (fn [i eq]
-        [:div  (g [[(inc i) 1] [8 7] [10 1]]
+        [:div  (g [[(+ 2 (inc i)) 1] [8 7] [10 1]]
                   {:d (grad2 (inc i))
-                   :size [1.7 :rem]
+                   :size [2 :rem]
                    :flex :center})
          [mm eq]
 
          ])
-      [[1 10]])
+      [ '[= m
+         [* n [p 100]]]
+
+       ]
+
+      )
+
 
      [:div {
             :style
@@ -3696,21 +3719,43 @@
                        }])
              [s (comp tx s) (comp ty s)])
             [
-
-
-
-
-             (for [i (range 0 (/ n1 6))
-                   :let [k 12
+             (for [i (range 0 n1)
+                   :let [k 2
                          x1 (+ x (* i k))]
-                   j (range 0 (/ m1 6))
-                   :let [k 12
+                   j (range 0 m1)
+                   :let [k 2
                          y1 (+ (- start y) (* j k -1))]
                    ;;:when (not (and (= 16 j) (> i 4) ))
                    ]
                [[x1 0] [y1 0]
                 :l [k 0] [0 0] [0 0] [(* k -1) 0]
                 [(* k -1) 0] [0 0] [0 0] [k 0]])])
+
+
+       (map (paths
+             (fn [d]
+               [:path {:d d
+                       :stroke (c [20 70 80])
+                       :stroke-width 2
+                       :fill  (c [140 70 80])
+                       }])
+             [s (comp tx s) (comp ty s)])
+            [
+             (for [i (range 0 n1)
+                   :let [k 2
+                         x1 (+ x (* i k))]
+                   j (range 0 4)
+                   :let [k 2
+                         y1 (+ (- start y) (* j k -1))]
+                   ;;:when (not (and (= 2 j)
+                   ;;                (> i 9) ))
+                   ]
+               [[x1 0] [y1 0]
+                :l [k 0] [0 0] [0 0] [(* k -1) 0]
+                [(* k -1) 0] [0 0] [0 0] [k 0]])])
+
+
+
        (let [[txt-fn circle-fn]
             [(fn [x y s]
                [:text {:x x
@@ -3727,13 +3772,13 @@
              (for [i [(map
                        (fn [x]
                          [[(+ .2 (* 2  x)) 0 ] [(- start 2) 3]  (str x)])
-                       (range 1 25))
+                       (range 1 (+ 1 n1)))
 
                       (map (fn [y]
                              [[(+ 0 0) 0 ]
                               [(- start (* 2 y) 1) 0]
                               (str y)])
-                           (range 1 37))
+                           (range 1 (+ 1 m1)))
                       ]
                    j (range (count i))
                    :let [k (nth i j)]
