@@ -4443,13 +4443,36 @@
                (partial + (* step 4))
                (partial - (* step 4))]
         cir1 ((circle22 trans)
-                 [txt-fn circle-fn])
+              [txt-fn circle-fn])
+        cir2 ((circle22 trans)
+              [(fn [x y s]
+                 [x y s])
+               (fn [x y r]
+                 (space [r x y]))])
         path1 (comp
                (fn [d] [:path {:d d
                                :id (name :p122222)
                                :stroke (c [20 50 50])
                                :stroke-width 5
                                :fill (c [70 50 50])}])
+               (path22 [(ss step 1)
+                        (partial + (/ (last view-box) 4))
+                        (partial - (/ (last view-box) 4))]))
+
+        path2 (comp
+               (fn [d] [:path {:d (str d "z")
+                               :id (name :p122222)
+                               :stroke (c [20 50 50])
+                               :stroke-width 5
+                               :fill (c [70 50 50])}
+                        [:animateTransform
+                         {:attributeType :XML
+                          :attributeName :transform
+                          :type :rotate
+                          :from (cir2 [[2 0] [-2 0] 2])
+                          :to (cir2 [[2 0] [-2 0] 362])
+                          :dur (str 2 (name :s))
+                          :repeatCount :indefinite}]])
                (path22 [(ss step 1)
                         (partial + (/ (last view-box) 4))
                         (partial - (/ (last view-box) 4))]))]
@@ -4479,6 +4502,9 @@
          ]]
        (comment
          )
+
+
+
        (map path1
             [[[1 0] [8 0] :c [0 1] [0 -2] [2 0] [0 -1]
               [0 0] [-3 0]]
@@ -4503,7 +4529,7 @@
              j (range 0 8)
              :let [jj (ve j)]]
          (cir1 [[i 0] [jj 0] 10]))
-
+       (path2 [[0 0] [0 0] :l [4 0] [2 0] [0 -3] [-3 0]])
 
        (cir1 [[3 0] [5 0] "3"])
        (cir1 [[6 2] [5 0] "200 + 12"])
@@ -4517,10 +4543,65 @@
 
        ]]]))
 
+(comment
+  (let [step 30
+        [txt-fn circle-fn]
+        [(fn [x y s]
+           [:text {:x x
+                   :y  y
+                   :font-size (size [1.5 :rem])} s])
+         (fn [x y r] [:circle
+                      {:cx x
+                       :cy  y
+                       :r  r
+                       :fill (c [70 70 70])}
+                      ])]
+
+        box [[-2 -2 24 24]
+             [0 0 12 12]]
+        view-box (map (partial * step)  (nth box 0))
+        trans [(ss step 1)
+               (partial + (* step 4))
+               (partial - (* step 4))]
+        cir1 ((circle22 trans)
+              [txt-fn circle-fn])
+        cir2 ((circle22 trans)
+              [(fn [x y s]
+                 [x y s])
+               (fn [x y r]
+                 (space [r x y]))])
+        path1 (comp
+               (fn [d] [:path {:d d
+                               :id (name :p122222)
+                               :stroke (c [20 50 50])
+                               :stroke-width 5
+                               :fill (c [70 50 50])}])
+               (path22 [(ss step 1)
+                        (partial + (/ (last view-box) 4))
+                        (partial - (/ (last view-box) 4))]))
+
+        path2 (comp
+               (fn [d] [:path {:d (str d "z")
+                               :id (name :p122222)
+                               :stroke (c [20 50 50])
+                               :stroke-width 5
+                               :fill (c [70 50 50])}
+                        [:animateTransform
+                         {:attributeType :XML
+                          :attributeName :transform
+                          :type :rotate
+                          :from 0
+                          :to 0
+                          :dur (str 10 (name :s))
+                          :repeatCount :indefinite}]])
+               (path22 [(ss step 1)
+                        (partial + (/ (last view-box) 4))
+                        (partial - (/ (last view-box) 4))]))]
+    (cir2 [[0 0] [0 0] 3]))
+  )
 
 
-
-
+;;https://css-tricks.com/guide-svg-animations-smil/
 
 (defn template1 []
   [grid16])
