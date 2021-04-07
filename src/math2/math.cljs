@@ -787,9 +787,9 @@
 
 (def grad2 (fn [n]
              [4
-              -5 :% (+ n .5) 70 70 0.3
-              20 :% (+ n n .5) 70 70 0.2
-              80 :% (+ n n .5)  70 70 0.3]))
+              -5 :% (+ n .5) 70 70 0.6
+              20 :% (+ n n .5) 70 70 0.3
+              80 :% (+ n n .5)  70 70 0.7]))
 
 (def grid22 {:background-color (c [90 70 70])
              :display :grid
@@ -4045,7 +4045,8 @@
 
 
 
-       (let [[txt-fn circle-fn]
+       (let [
+            [txt-fn circle-fn]
             [(fn [x y s]
                [:text {:x x
                        :y  y
@@ -4163,25 +4164,57 @@
 
        ]]]))
 
+
+(defn circle22 [[s tx ty]]
+  (fn [[txt-fn circle-fn]]
+    (comp
+     (fn [[x y f v]]
+       (f x y v))
+     (partial mapcat identity )
+     (juxt
+      (comp
+       (juxt
+        (comp tx s :x)
+        (comp ty s :y)) :point)
+      (comp
+       (juxt (comp
+              (fn [n]
+                (condp = n
+                  :text txt-fn
+                  :r circle-fn))
+              first) (comp
+                      second))
+       :attr))
+     (fn [n]
+       (s/conform :math2/svg-circle n)))))
+
+(def marker
+  (comp
+   (fn [d]
+     [:path {:d d
+             :style {:fill-rule :evenodd
+                     :stroke (c [70 70 70])
+                     :stroke-width 1
+                     :stroke-opacity 1
+                     :fill (c [330 70 70])
+                     :fill-opacity 1}
+             :transform
+             (tranfrom [[:scale .4]
+                        [:rotate 180]
+                        [:translate [12.5 0]]])}])
+   (path22 [(fn [[x _]] x)
+            (fn [x] x)
+            (fn [x] x)])))
+
+
 (defn grid15 []
   (let [step 30
-        marker
-        (comp
-         (fn [d]
-           [:path {:d d
-                   :style {:fill-rule :evenodd
-                           :stroke (c [70 70 70])
-                           :stroke-width 1
-                           :stroke-opacity 1
-                           :fill (c [330 70 70])
-                           :fill-opacity 1}
-                   :transform
-                   (tranfrom [[:scale .4]
-                              [:rotate 180]
-                              [:translate [12.5 0]]])}])
-         (path22 [(fn [[x _]] x)
-                  (fn [x] x)
-                  (fn [x] x)]))
+        [txt-fn circle-fn]
+        [(fn [x y s]
+           [:text {:x x :y  y
+                   :font-size (size [1.5 :rem])} s])
+         (fn [x y r] [:circle {:cx x :cy  y :r  r
+                               :fill (c [70 70 70])}])]
 
         box [[-4 -4 24 24]
              [0 0 12 12]]
@@ -4189,16 +4222,247 @@
         trans [(ss step 1)
                (partial + (* step 4))
                (partial - (* step 4))]
+        cir1 ((circle22 trans)
+              [txt-fn circle-fn])
         path1 (comp
                (fn [d] [:path {:d d
+                               :fill-rule :nonzero
                                :marker-end (url "i")
+                               :stroke (c [20 50 50])
+                               :stroke-width 5
+                               :fill :none}])
+               (path22 [(ss step 1)
+                        (partial + (/ (last view-box) 4))
+                        (partial - (/ (last view-box) 4))]))
+        trans2 [(ss step 1)
+                (partial + 0)
+                (partial - (/ (last view-box) 1.3))]
+        cir2 ((circle22 trans2)
+              [txt-fn circle-fn])
+
+        path2 (comp
+               (fn [d] [:path {:d d
+                               :fill-rule :nonzero
+                               :marker-end (url "i")
+                               :stroke (c [180 20 10])
+                               :stroke-width 4
+                               :fill :none}])
+               (path22 trans2))]
+
+    [:div {:style grid22}
+     [:div (g [[2 8] [8 8] [3 .8]]
+              {:flex :center :size [1.5 :rem]
+               :d (grad2 3)})
+      [m '[= F [* k extention]]]
+      [m '[= N [* [N m] m]]]
+      [m '[= Weight [* Mass 10]]]]
+
+     [:div (g [[2 8] [8 8] [21 1]]
+              {:flex :center :size [2 :rem]
+               :d (grad2 3)})
+      [:svg {:viewBox view-box}
+       [:defs
+        [:marker {:id "i"
+                  :refY 0
+                  :refX 0
+                  :orient :auto
+                  :style {:overflow :visible}}
+         (marker [[0 0] [0 0] :L [5 0] [-5 0]
+                  :L [-12.5 0] [0 0]
+                  :L [3 0] [5 0] :L [0 0] [0 0]])
+         ]]
+
+
+
+
+
+       (map path2
+            [[[0 0] [0 0] :l [20 0] [0 0]]
+             [[0 0] [0 0] :l [0 0] [20 0]]])
+       (map cir2
+            (map
+             (fn [x]
+               [[(* 2 x) 0] [0 -4] (str x)])
+             (range 0 10)))
+
+       (map cir2
+            (map
+             (fn [x]
+               [[(* 2 x) 0] [0 -4] (str x)])
+             (range 0 10)))
+
+       (map cir2
+            (map
+             (fn [y]
+               [[-1 0] [(* 2 y)  0] (str (* 5 y))])
+             (range 0 10)))
+       (cir2 [[10 0] [-1 -2] "Force"])
+       (cir2 [[-2 0] [20 3] "extension (mm)"])
+       (cir2 [[2 0] [3 4] 4])
+       (cir2 [[4 0] [8 0] 4])
+
+       ]
+
+      ]
+
+
+     [:div (g [[2 8] [2 8] [3 .5]]
+              {:flex :center :size [2 :rem]
+               :d (grad2 3)})
+
+      [:svg {:viewBox view-box}
+       [:defs
+        [:marker {:id "i"
+                  :refY 0
+                  :refX 0
+                  :orient :auto
+                  :style {:overflow :visible}}
+         (marker [[0 0] [0 0] :L [5 0] [-5 0]
+                  :L [-12.5 0] [0 0]
+                  :L [3 0] [5 0] :L [0 0] [0 0]])
+         ]]
+       (comment
+         )
+       (cir1 [[-4 0] [-6 0] "50 mm"])
+       (comment
+         )
+
+       (map path1 [[[-8 0] [8 0] :l [0 0] [-16 0] ]
+
+                   [[8 0] [8 0] :l [0 0] [-16 0] ]
+                   [[0 0] [4 0] :l [0 0] [-3 0]
+                    :a 40 40 0 true false [0 1] [0 0]]
+
+                   [[0 0] [6 2] :l [0 0] [-3 0]]
+
+                   [[-4 0] [-4 0] :l [2 0] [0 0] ]
+                   [[-4 0] [-6 0] :l [4 0] [0 0] ]
+
+
+                   [[-3 0] [-4 0] :l [0 0] [-2 0] ]
+
+                   [[-4 0] [-8 0] :l [11 0] [0 0] ]
+
+
+
+                   [[-3 0] [-4 0] :l [0 0] [-4 0]]
+
+
+                   [[-8 0] [8 0] :a 1 .2 0 true false [16 0] [0 0]]
+                   [[-8 0] [8 0] :a 1 .5 0 true false [16 0] [0 0]]
+
+                     #_[[0 0] [8 0] :l
+                        [0 0] [-2 0]
+                        [2 0] [0 0]
+                        [0 0] [-2 0]
+                        [-2 0] [0 0]
+                        [0 0] [-2 0]
+                        [2 0] [0 0]
+                        [0 0] [-2 0]
+                        [-2 0] [0 0]
+                        [0 0] [-2 0]
+                        [2 0] [0 0]
+                        [0 0] [-2 0]
+                        [-2 0] [0 0]
+                        [0 0] [-2 0]
+                        :a 40 40 0 true false [0 1] [0 0]]
+                   [[-2 0] [8 0] :q
+                    [-3 0] [1 0]
+                    [0 0] [2 0]
+                    [3 0] [1 0]
+                    [0 0] [2 0]
+                    [-3 0] [1 0]
+                    [0 0] [2 0]
+                    [3 0] [1 0]
+                    [0 0] [2 0]
+                    [-3 0] [1 0]
+                    [0 0] [2 0]
+                    :l [0 0] [-2 0]]
+
+                    [[2 0] [8 0]
+                      :q
+                      [-3 0] [1.5 0]
+                      [0 0] [3 0]
+                      [3 0] [1.5 0]
+                      [0 0] [3 0]
+                      [-3 0] [1.5 0]
+                      [0 0] [3 0]
+                      [3 0] [1.5 0]
+                      [0 0] [3 0]
+
+                      :l [0 0] [-2 0]
+                      :a 40 40 0 true false [0 1] [0 0]]
+
+                     [[7 0] [8 0]
+                      :q
+                      [-3 0] [1.5 0]
+                      [0 0] [3 0]
+                      [3 0] [1.5 0]
+                      [0 0] [3 0]
+                      [-3 0] [1.5 0]
+                      [0 0] [3 0]
+                      [3 0] [1.5 0]
+                      [0 0] [3 0]
+
+                      :l [0 0] [-4 0]
+                      :a 60 60 0 true false [0 1] [0 0]]
+
+
+
+
+                     ])
+
+
+
+       (cir1 [[3 0] [-10 0] "1 N"])
+       (cir1 [[0 0] [-8 0] "58 mm"])
+       (cir1 [[8 0] [-12 0] "2 N"])
+       (cir1 [[8 0] [-10 0] "70 mm"])
+
+       ]]]))
+
+
+(defn grid16 []
+  (let [step 30
+        [txt-fn circle-fn]
+        [(fn [x y s]
+           [:text {:x x
+                   :y  y
+                   :font-size (size [1.5 :rem])} s])
+         (fn [x y r] [:circle
+                      {:cx x
+                       :cy  y
+                       :r  r
+                       :fill (c [70 70 70])}
+                      ])]
+
+        box [[-2 -2 24 24]
+             [0 0 12 12]]
+        view-box (map (partial * step)  (nth box 0))
+        trans [(ss step 1)
+               (partial + (* step 4))
+               (partial - (* step 4))]
+        cir1 ((circle22 trans)
+                 [txt-fn circle-fn])
+        path1 (comp
+               (fn [d] [:path {:d d
+                               :id (name :p122222)
                                :stroke (c [20 50 50])
                                :stroke-width 5
                                :fill (c [70 50 50])}])
                (path22 [(ss step 1)
                         (partial + (/ (last view-box) 4))
                         (partial - (/ (last view-box) 4))]))]
+
+
     [:div {:style grid22}
+
+     [:div (g [[2 8] [8 16] [3 1]]
+              {:flex :center :size [1.6 :rem]
+               :d (grad2 3)})
+      [m '[= [+ [* Divisor quotient] remainder] dividen]]
+      [m '[= [+ [* 3 [:b [+ 200 12]]] 2] 638]]
+      ]
      [:div (g [[2 8] [2 8] [3 .5]]
               {:flex :center :size [2 :rem]
                :d (grad2 3)})
@@ -4213,81 +4477,45 @@
                   :L [-12.5 0] [0 0]
                   :L [3 0] [5 0] :L [0 0] [0 0]])
          ]]
-       (map path1 [[[-4 0] [8 0] :l [8 0] [0 0] ]
-                   #_[[0 0] [8 0] :l
-                    [0 0] [-2 0]
-                    [2 0] [0 0]
-                    [0 0] [-2 0]
-                    [-2 0] [0 0]
-                    [0 0] [-2 0]
-                    [2 0] [0 0]
-                    [0 0] [-2 0]
-                    [-2 0] [0 0]
-                    [0 0] [-2 0]
-                    [2 0] [0 0]
-                    [0 0] [-2 0]
-                    [-2 0] [0 0]
-                    [0 0] [-2 0]
-                    :a 40 40 0 true false [0 1] [0 0]]
-                   [[-2 0] [8 0] :q
-                    [-3 0] [1 0]
-                    [0 0] [2 0]
-                    [3 0] [1 0]
-                    [0 0] [2 0]
-                    [-3 0] [1 0]
-                    [0 0] [2 0]
-                    [3 0] [1 0]
-                    [0 0] [2 0]
-                    [-3 0] [1 0]
-                    [0 0] [2 0]
-                    :l [0 0] [-2 0]
-                    ]
+       (comment
+         )
+       (map path1
+            [[[1 0] [8 0] :c [0 1] [0 -2] [2 0] [0 -1]
+              [0 0] [-3 0]]
+             [[4 0] [8 0]
+              :l
+              [0 0] [-4 0] ]
+             [[0 0] [5 4] :l [4 0] [0 0] ]
+             [[0 0] [4 0] :l [4 0] [0 0] ]
+             [[-2 -2] [3 -2] :l [10 0] [0 0]
+              [0 0] [-1 0] [-10 0] [0 0] [0 0]
+              [1 0]]
+             [[-2 -2] [2 -2] :l [10 0] [0 0]
+              [0 0] [-1 0] [-10 0] [0 0] [0 0]
+              [1 0]]
+             [[-2 -2] [1 -2] :l [10 0] [0 0]
+              [0 0] [-1 0] [-10 0] [0 0] [0 0]
+              [1 0]]
 
-                   [[2 0] [8 0]
-                    :q
-                    [-3 0] [1.5 0]
-                    [0 0] [3 0]
-                    [3 0] [1.5 0]
-                    [0 0] [3 0]
-                    [-3 0] [1.5 0]
-                    [0 0] [3 0]
-                    [3 0] [1.5 0]
-                    [0 0] [3 0]
+             ])
 
-                    :l [0 0] [-2 0]
-                    :a 40 40 0 true false [0 1] [0 0]]
+       (for [i (range 0 10)
+             j (range 0 8)
+             :let [jj (ve j)]]
+         (cir1 [[i 0] [jj 0] 10]))
 
-                   ])]]]))
 
-(comment
-  (let [step 30
-        marker
-        (comp
-         (fn [d]
-           d)
-         (path22 [(fn [[x _]] x)
-                  (fn [x] x)
-                  (fn [x] x)]))
+       (cir1 [[3 0] [5 0] "3"])
+       (cir1 [[6 2] [5 0] "200 + 12"])
+       (cir1 [[4 0] [5 0] "638"])
+       (cir1 [[4 0] [4 0] "600"])
+       (cir1 [[4 0] [3 0] "038"])
+       (cir1 [[4 0] [2 0] "036"])
+       (cir1 [[4 0] [1 0] "002"])
+       (cir1 [[4 0] [0 0] ""])
 
-        box [[-4 -4 24 24]
-             [0 0 12 12]]
-        view-box (map (partial * step)  (nth box 0))
-        trans [(ss step 1)
-               (partial + (* step 4))
-               (partial - (* step 4))]
-        path1 (comp
-               (fn [d] [:path {:d d
-                               :stroke (c [20 50 50])
-                               :stroke-width 5
-                               :fill (c [70 50 50])}])
-               (path22 [(ss step 1)
-                        (partial + 200)
-                        (partial - 200)]))]
-    (marker
-     [[0 0] [0 0] :L [5 0] [-5 0]
-      :L [-12.5 0] [0 0]
-      :L [3 0] [5 0] :L [0 0] [0 0]])))
 
+       ]]]))
 
 
 
@@ -4295,4 +4523,4 @@
 
 
 (defn template1 []
-  [grid15])
+  [grid16])
