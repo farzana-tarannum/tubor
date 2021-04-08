@@ -4331,213 +4331,42 @@
                     :L [-12.5 0] [0 0]
                     :L [3 0] [5 0] :L [0 0] [0 0]])
            ]]
-         (cir1 [[-4 0] [-6 0] "50 mm"])
 
-         (map path1 [
-                     [[-6 0] [8 0] :l [15 0] [0 0]]
-
-                     [[-4 0] [-4 0] :l [2 0] [0 0] ]
-                     [[-4 0] [-6 0] :l [4 0] [0 0] ]
-
-
-                     [[-3 0] [-4 0] :l [0 0] [-2 0] ]
-
-                     [[-4 0] [-8 0] :l [11 0] [0 0] ]
-
-
-
-                     [[-3 0] [-4 0] :l [0 0] [-4 0]]
-
-                     #_[[0 0] [8 0] :l
-                        [0 0] [-2 0]
-                        [2 0] [0 0]
-                        [0 0] [-2 0]
-                        [-2 0] [0 0]
-                        [0 0] [-2 0]
-                        [2 0] [0 0]
-                        [0 0] [-2 0]
-                        [-2 0] [0 0]
-                        [0 0] [-2 0]
-                        [2 0] [0 0]
-                        [0 0] [-2 0]
-                        [-2 0] [0 0]
-                        [0 0] [-2 0]
-                        :a 40 40 0 true false [0 1] [0 0]]
-                     [[-2 0] [8 0] :q
-                      [-3 0] [-1 0]
-                      [0 0] [-2 0]
-                      [3 0] [-1 0]
-                      [0 0] [-2 0]
-                      [-3 0] [-1 0]
-                      [0 0] [-2 0]
-                      [3 0] [-1 0]
-                      [0 0] [-2 0]
-                      [-3 0] [-1 0]
-                      [0 0] [-2 0]
-                      :l [0 0] [-2 0]]
-
-                     [[2 0] [8 0]
-                      :q
-                      [-3 0] [-1.5 0]
-                      [0 0] [-3 0]
-                      [3 0] [-1.5 0]
-                      [0 0] [-3 0]
-                      [-3 0] [-1.5 0]
-                      [0 0] [-3 0]
-                      [3 0] [-1.5 0]
-                      [0 0] [-3 0]
-
-                      :l [0 0] [-2 0]
-                      :a 40 40 0 true false [0 1] [0 0]]
-
-                     [[7 0] [8 0]
-                      :q
-                      [-3 0] [-1.5 0]
-                      [0 0] [-3 0]
-                      [3 0] [-1.5 0]
-                      [0 0] [-3 0]
-                      [-3 0] [-1.5 0]
-                      [0 0] [-3 0]
-                      [3 0] [-1.5 0]
-                      [0 0] [-3 0]
-
-                      :l [0 0] [-4 0]
-                      :a 60 60 0 true false [0 1] [0 0]]
-
-
-
-
-                     ])
-
-
-
-         (cir1 [[3 0] [-10 0] "1 N"])
-         (cir1 [[0 0] [-8 0] "58 mm"])
-         (cir1 [[8 0] [-12 0] "2 N"])
-         (cir1 [[8 0] [-10 0] "70 mm"])
+         (map path1
+              (let [str -1.5
+                    str-e .5]
+                [(mapcat
+                  (fn [x] x)
+                  [[[0 0] [8 0]]
+                   (mapcat (fn [x] x)
+                           (repeat 4 [:a 2 1 0 true false [0 0] [str 0]
+                                      :q [1 0] [0 2] [0 0] [str-e 0]]))
+                   [:a 2 1 0 true false [0 0] [str 0]
+                    :l [0 0] [-2 0]]
+                   ])
+                 (if false
+                   [[0 0] [(+ 8 -2 -2.4 str (* 4  (+ str str-e))) 0]
+                    :a 40 40 0 true true [0 1] [0 0]]
+                   []
+                   )
+                 [[-6 0] [8 0] :l [15 0] [0 0]]
+                 [[-4 0] [(+ 8 -2  str (* 4  (+ str str-e))) 0]
+                  :l [4 0] [0 0] ]]))
+         (comment
+           (cir1 [[-4 0] [-6 0] "50 mm"])
+           (cir1 [[3 0] [-10 0] "1 N"])
+           (cir1 [[0 0] [-8 0] "58 mm"])
+           (cir1 [[8 0] [-12 0] "2 N"])
+           (cir1 [[8 0] [-10 0] "70 mm"]))
 
          ]]
 
-     (comment
-       [:div (g [[2 8] [2 8] [3 .5]]
-                {:flex :center :size [2 :rem]
-                 :d (grad2 3)})
-
-        [:svg {:viewBox view-box}
-         [:defs
-          [:marker {:id "i"
-                    :refY 0
-                    :refX 0
-                    :orient :auto
-                    :style {:overflow :visible}}
-           (marker [[0 0] [0 0] :L [5 0] [-5 0]
-                    :L [-12.5 0] [0 0]
-                    :L [3 0] [5 0] :L [0 0] [0 0]])
-           ]]
-         (comment
-           )
-         (cir1 [[-4 0] [-6 0] "50 mm"])
-         (comment
-           )
-
-
-
-         (map path1 [[[-8 0] [8 0] :l [0 0] [-16 0] ]
-
-                     [[8 0] [8 0] :l [0 0] [-16 0] ]
-                     [[0 0] [4 0] :l [0 0] [-3 0]
-                      :a 40 40 0 true false [0 1] [0 0]]
-
-                     [[0 0] [6 2] :l [0 0] [-3 0]]
-
-                     [[-4 0] [-4 0] :l [2 0] [0 0] ]
-                     [[-4 0] [-6 0] :l [4 0] [0 0] ]
-
-
-                     [[-3 0] [-4 0] :l [0 0] [-2 0] ]
-
-                     [[-4 0] [-8 0] :l [11 0] [0 0] ]
-
-
-
-                     [[-3 0] [-4 0] :l [0 0] [-4 0]]
-
-
-                     [[-8 0] [8 0] :a 1 .2 0 true false [16 0] [0 0]]
-                     [[-8 0] [8 0] :a 1 .5 0 true false [16 0] [0 0]]
-
-                     #_[[0 0] [8 0] :l
-                        [0 0] [-2 0]
-                        [2 0] [0 0]
-                        [0 0] [-2 0]
-                        [-2 0] [0 0]
-                        [0 0] [-2 0]
-                        [2 0] [0 0]
-                        [0 0] [-2 0]
-                        [-2 0] [0 0]
-                        [0 0] [-2 0]
-                        [2 0] [0 0]
-                        [0 0] [-2 0]
-                        [-2 0] [0 0]
-                        [0 0] [-2 0]
-                        :a 40 40 0 true false [0 1] [0 0]]
-                     [[-2 0] [8 0] :q
-                      [-3 0] [1 0]
-                      [0 0] [2 0]
-                      [3 0] [1 0]
-                      [0 0] [2 0]
-                      [-3 0] [1 0]
-                      [0 0] [2 0]
-                      [3 0] [1 0]
-                      [0 0] [2 0]
-                      [-3 0] [1 0]
-                      [0 0] [2 0]
-                      :l [0 0] [-2 0]]
-
-                     [[2 0] [8 0]
-                      :q
-                      [-3 0] [1.5 0]
-                      [0 0] [3 0]
-                      [3 0] [1.5 0]
-                      [0 0] [3 0]
-                      [-3 0] [1.5 0]
-                      [0 0] [3 0]
-                      [3 0] [1.5 0]
-                      [0 0] [3 0]
-
-                      :l [0 0] [-2 0]
-                      :a 40 40 0 true false [0 1] [0 0]]
-
-                     [[7 0] [8 0]
-                      :q
-                      [-3 0] [1.5 0]
-                      [0 0] [3 0]
-                      [3 0] [1.5 0]
-                      [0 0] [3 0]
-                      [-3 0] [1.5 0]
-                      [0 0] [3 0]
-                      [3 0] [1.5 0]
-                      [0 0] [3 0]
-
-                      :l [0 0] [-4 0]
-                      :a 60 60 0 true false [0 1] [0 0]]
-
-
-
-
-                     ])
-
-
-
-         (cir1 [[3 0] [-10 0] "1 N"])
-         (cir1 [[0 0] [-8 0] "58 mm"])
-         (cir1 [[8 0] [-12 0] "2 N"])
-         (cir1 [[8 0] [-10 0] "70 mm"])
-
-         ]])]
+     ]
 
 
     ))
+
+
 
 
 (defn grid16 []
@@ -4567,6 +4396,9 @@
                  [x y s])
                (fn [x y r]
                  (space [r x y]))])
+        cir3 (circle22 trans)
+        path3 (path22 trans)
+
         path1 (comp
                (fn [d] [:path {:d d
                                :id (name :p122222)
@@ -4577,29 +4409,44 @@
                         (partial + (/ (last view-box) 4))
                         (partial - (/ (last view-box) 4))]))
 
+
+
         path2 (comp
-               (fn [d] [:path {:d (str d "z")
+               (fn [d] [:path {:d d
                                :id (name :p122222)
                                :stroke (c [20 50 50])
                                :stroke-width 5
-                               :fill (c [70 50 50])}
-                        [:animateTransform
+                               :fill :none}
+                        #_[:animateTransform
+                           {:attributeType :XML
+                            :attributeName :transform
+                            :type :rotate
+                            :from (cir2 [[2 0] [-2 0] 2])
+                            :to (cir2 [[2 0] [-2 0] 362])
+                            :dur (str 2 (name :s))
+                            :begin :click
+                            :fill :freeze
+                            }]
+                        #_[:animateTransform
                          {:attributeType :XML
                           :attributeName :transform
-                          :type :rotate
-                          :from (cir2 [[2 0] [-2 0] 2])
-                          :to (cir2 [[2 0] [-2 0] 362])
+                          :type :skewY
+                          :from 0
+
+                          :to 30
                           :dur (str 2 (name :s))
                           :begin :click
                           :fill :freeze
                           }]
+
+
                         [:animate
                          {:attributeType :CSS
                           :attributeName :opacity
                           :from 0
                           :to 1
                           :dur (str 2 (name :s))
-                          :repeatCount :indefinite}]])
+                          :fill :freeze}]])
                (path22 [(ss step 1)
                         (partial + (/ (last view-box) 4))
                         (partial - (/ (last view-box) 4))]))]
@@ -4610,7 +4457,6 @@
      [:div (g [[2 8] [8 16] [3 1]]
               {:flex :center :size [1.6 :rem]
                :d (grad2 3)})
-      [m '[= [+ [* Divisor quotient] remainder] dividen]]
       [m '[= [+ [* 12 80] 4] 724]]
 
       ]
@@ -4628,91 +4474,43 @@
                   :L [-12.5 0] [0 0]
                   :L [3 0] [5 0] :L [0 0] [0 0]])
          ]]
+
+
+       (path2
+        [[0 0] :l [10 0] [0 0] [0 0] [-2 0]
+         [-2 0] [0 0] [0 0] [2 0]])
+
        (comment
-         )
+         (for [i (range 0 10)
+               :let [ii (- 15 (* 1 i))]
+               j (range 0 10)
+               :let [deg (if (> j 4) 70 120)
+                     jj (* 1 (ve j))]]
+           ((cir3
+             [(fn [x y s]
+                [x y s])
+              (fn [x y r] [:circle
+                           {:cx x
+                            :cy  y
+                            :r  r
+                            :fill (c [deg 70 70])}
+                           ])]
+             )
+            [[ii 0] [jj 0] 15])))
 
 
 
-       (map path1
-            [[[1 0] [8 0] :c [0 1] [0 -2] [2 0] [0 -1]
-              [0 0] [-3 0]]
-             [[4 0] [8 0]
-              :l
-              [0 0] [-4 0] ]
-             [[0 0] [5 4] :l [4 0] [0 0] ]
-             [[0 0] [4 0] :l [4 0] [0 0] ]
-             [[-2 -2] [3 -2] :l [10 0] [0 0]
-              [0 0] [-1 0] [-10 0] [0 0] [0 0]
-              [1 0]]
-             [[-2 -2] [2 -2] :l [10 0] [0 0]
-              [0 0] [-1 0] [-10 0] [0 0] [0 0]
-              [1 0]]
-             [[-2 -2] [1 -2] :l [10 0] [0 0]
-              [0 0] [-1 0] [-10 0] [0 0] [0 0]
-              [1 0]]
 
-             ])
 
-       (for [i (range 0 10)
-             j (range 0 8)
-             :let [jj (ve j)]]
-         (cir1 [[i 0] [jj 0] 10]))
-       (path2 [[0 0] [0 0] :l [4 0] [2 0] [0 -3] [-3 0]])
 
-       (cir1 [[3 0] [5 0] "15"])
-       (cir1 [[6 2] [5 0] "80"])
-       (cir1 [[4 0] [5 0] "910"])
-       (cir1 [[4 0] [4 0] ""])
-       (cir1 [[4 0] [3 0] ""])
-       (cir1 [[4 0] [2 0] ""])
-       (cir1 [[4 0] [1 0] ""])
-       (cir1 [[4 0] [0 0] ""])
 
 
        ]]]))
 
-(comment
-  (let[step 30
-        [txt-fn circle-fn]
-        [(fn [x y s]
-           [:text {:x x :y  y
-                   :font-size (size [1.5 :rem])} s])
-         (fn [x y r] [:circle {:cx x :cy  y :r  r
-                               :fill (c [70 70 70])}])]
 
-        box [[-4 -4 24 24]
-             [0 0 12 12]]
-        view-box (map (partial * step)  (nth box 0))
-        trans [(ss step 1)
-               (partial + (* step 4))
-               (partial - (* step 4))]
-        cir1 ((circle22 trans)
-              [txt-fn circle-fn])
-        path1 (comp
-               (fn [d] [:path {:d d
-                               :fill-rule :nonzero
-                               :marker-end (url "i")
-                               :stroke (c [20 50 50])
-                               :stroke-width 5
-                               :fill (c [90 70 70])}])
-               (path22 [(ss step 1)
-                        (partial + (/ (last view-box) 4))
-                        (partial - (/ (last view-box) 4))]))
-        trans2 [(ss step 1)
-                (partial + 0)
-                (partial - (/ (last view-box) 1.3))]
-        cir2 ((circle22 trans2)
-              [txt-fn circle-fn])
-
-        path2 (comp
-               (fn [d] d)
-               (path22 trans2))]
-    (path2
-     [[0 0] [0 0] :L [10 0] [8 0] :Q [12 0] [10  2] [14 0] [15 0]]))
-  )
 
 
 ;;https://css-tricks.com/guide-svg-animations-smil/
 
 (defn template1 []
-  [grid15])
+  [grid16])
