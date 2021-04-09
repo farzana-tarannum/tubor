@@ -3935,7 +3935,6 @@
                        }])
              [s (comp tx s) (comp ty s)])
             [
-
              (for [i (range 0 m1)
                    :let [y (+ 2 (* i 2))]]
                [[0 -3] [(- start y 2) 0] :l [0 0] [0 4] [0 0]
@@ -4367,8 +4366,6 @@
     ))
 
 
-
-
 (defn grid16 []
   (let [step 30
         [txt-fn circle-fn]
@@ -4508,9 +4505,194 @@
        ]]]))
 
 
+(defn grid17 []
+  (let [step 30
+        [txt-fn circle-fn]
+        [(fn [x y s]
+           [:text {:x x :y  y
+                   :font-size (size [1.5 :rem])} s])
+         (fn [x y r] [:circle {:cx x :cy  y :r  r
+                               :fill (c [70 70 70])}])]
+
+        box [[-4 -4 24 24]
+             [0 0 12 12]]
+        view-box (map (partial * step)  (nth box 0))
+        trans [(ss step 1)
+               (partial + (* step 4))
+               (partial - (* step 4))]
+        cir1 ((circle22 trans)
+              [txt-fn circle-fn])
+        path1 (comp
+               (fn [d] [:path {:d d
+                               :fill-rule :nonzero
+                               :marker-end (url "i")
+                               :stroke (c [20 50 50])
+                               :stroke-width 5
+                               :fill (c [90 70 70])}])
+               (path22 [(ss step 1)
+                        (partial + (/ (last view-box) 4))
+                        (partial - (/ (last view-box) 4))]))
+        path4 (comp
+               (fn [d] [:path {:d d
+                               :fill-rule :nonzero
+                               :stroke (c [20 50 50])
+                               :stroke-width 5
+                               :fill (c [90 70 70])}])
+               (path22 [(ss step 1)
+                        (partial + (/ (last view-box) 4))
+                        (partial - (/ (last view-box) 4))]))
+
+        path6 (comp
+               (fn [d] [:path {:d d
+                               :fill-rule :nonzero
+                               :stroke (c [220 50 50])
+                               :stroke-width 5
+                               :fill (c [190 70 70])}])
+               (path22 [(ss step 1)
+                        (partial + (/ (last view-box) 4))
+                        (partial - (/ (last view-box) 4))]))
+
+        trans2 [(ss step 1)
+                (partial + 0)
+                (partial - (/ (last view-box) 1.3))]
+        cir2 ((circle22 trans2)
+              [txt-fn circle-fn])
+        bx '☐
+        path2 (comp
+               (fn [d] [:path {:d d
+                               :fill-rule :nonzero
+                               :marker-end (url "i")
+                               :stroke (c [180 20 10])
+                               :stroke-width 4
+                               :fill :none}])
+               (path22 trans2))]
+
+    [:div {:style grid22}
+     [:div (g [[2 8] [8 8] [3 .8]]
+              {:flex :center :size [1.5 :rem]
+               :d (grad2 3)})
+
+      [m ['= ['- 500 50] ['- ['+ ['* 90 bx] 50] 50]] ]
+
+
+
+
+
+
+
+
+      ]
+
+
+
+     [:div (g [[2 8] [2 8] [3 .5]]
+                {:flex :center :size [2 :rem]
+                 :d (grad2 3)})
+
+        [:svg {:viewBox view-box}
+         [:defs
+          [:marker {:id "i"
+                    :refY 0
+                    :refX 0
+                    :orient :auto
+                    :style {:overflow :visible}}
+           (marker [[0 0] [0 0] :L [5 0] [-5 0]
+                    :L [-12.5 0] [0 0]
+                    :L [3 0] [5 0] :L [0 0] [0 0]])
+           ]]
+         (for [i (range 0 10)
+               :let [ii (* 2 i)
+                     yy (- ii 10)]
+               j (range 0 10)
+
+               :let [x 2
+                     jj (* 2 j)
+                     xx (+ -10 jj)
+                     ]
+               ]
+           (path4 [[xx 0] [yy 0] :l
+                   [x 0] [0 0]
+                   [0 0] [(ve x) 0]
+                   [(ve x) 0] [0 0]
+                   [0 0] [x 0]
+                   ]))
+
+
+
+
+
+
+
+
+
+         (for [i (range 0 3)
+               :let [ii (* 2 i)
+                     yy (- ii 10)]
+               j (range 0 10)
+
+               :let [x 2
+                     jj (* 2 j)
+                     xx (+ -10 jj)
+                     ]
+               ]
+           (path6 [[xx 0] [yy 0] :l
+                   [x 0] [0 0]
+                   [0 0] [(ve x) 0]
+                   [(ve x) 0] [0 0]
+                   [0 0] [x 0]
+                   ]))
+         (comment
+           (let [i 0
+                 ii (* 2 i)
+                 yy (- 8 ii )
+                 j 0
+                 x 2
+                 jj (* 2 j)
+                 xx (+ -10 jj)
+
+                 ]
+             (path4 [[xx 2] [yy 2] :l
+                     [x 0] [0 -4]
+                     [0 0] [(ve (* 2 x)) 8]
+                     [(ve x) 0] [0 -4]
+                     [0 0] [(* x 2) 0]])))
+
+
+         (let [i 0
+               ii (* 2 i)
+               yy (- 8 ii )
+               j 0
+               x 2
+               jj (* 2 j)
+               xx (+ -10 jj)
+
+               ]
+           (path4 [[xx 2] [yy 2] :c
+                   [x 0] [0 -4]
+                   [x 0] [(ve (* 2 x)) 4]
+                   [0 0] [(ve (* x 2)) 0]]))
+
+
+         (cir1 [[3 0] [-14 0] ""])
+         (comment )
+         (comment)
+
+         (comment
+
+
+           (cir1 [[0 0] [-8 0] "58 mm"])
+           (cir1 [[8 0] [-12 0] "2 N"])
+           (cir1 [[8 0] [-10 0] "70 mm"]))
+
+         ]]
+
+     ]
+
+
+    ))
 
 
 ;;https://css-tricks.com/guide-svg-animations-smil/
 
 (defn template1 []
-  [grid16])
+  [grid17])
