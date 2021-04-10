@@ -1,15 +1,15 @@
 (ns math2.math
-   (:require
-    [react]
-    [clojure.string :as str]
-    [clojure.test.check.generators :as gen2]
-    [clojure.spec.gen.alpha :as gen]
-    [clojure.spec.alpha :as s]
-    [math2.bdmap :as bmap]
-    [math2.file :as file]
-    [defun.core :refer [defun fun]]
-    [moment]
-    [math2.math-test :as mt]))
+  (:require
+   [react]
+   [clojure.string :as str]
+   [clojure.test.check.generators :as gen2]
+   [clojure.spec.gen.alpha :as gen]
+   [clojure.spec.alpha :as s]
+   [math2.bdmap :as bmap]
+   [math2.file :as file]
+   [defun.core :refer [defun fun]]
+   [moment]
+   [math2.math-test :as mt]))
 
 
 
@@ -109,20 +109,20 @@
         (s/cat
          :c #{:c :C}
          :points (s/+ :math2/svg-point))
-         :curve-q
-         (s/cat
-          :q #{:q :Q}
-          :points (s/+ :math2/svg-point)
-          )
+        :curve-q
+        (s/cat
+         :q #{:q :Q}
+         :points (s/+ :math2/svg-point)
+         )
 
-         :arc (s/cat
-               :a #{:a :A}
-               :r1 :math2/r
-               :r2 :math2/r
-               :angle number?
-               :f1 boolean?
-               :f2 boolean?
-               :end :math2/svg-point )))))
+        :arc (s/cat
+              :a #{:a :A}
+              :r1 :math2/r
+              :r2 :math2/r
+              :angle number?
+              :f1 boolean?
+              :f2 boolean?
+              :end :math2/svg-point )))))
 
 
 (comment
@@ -4502,7 +4502,90 @@
 
 
 
+
        ]]]))
+
+(s/def :math7/point
+  (s/cat
+   :x number?
+   :y number?))
+
+
+
+
+(s/def :math7/path
+  (s/cat
+   :m :math7/point
+   :d (s/+
+       (s/alt
+        :line (s/cat
+               :l #{:l :L}
+               :points (s/+ :math7/point))
+        :curve-c (s/cat
+                  :c #{:c :C}
+                  :control-point1 :math7/point
+                  :control-point2 :math7/point
+                  :end-point :math7/point)
+        :curve-q (s/cat
+                  :q #{:q :Q}
+                  :control-point :math7/point
+                  :end-point :math7/point)
+
+        :arc (s/cat
+              :a #{:a :A}
+              :r1 number?
+              :r2 number?
+              :angle number?
+              :f1 boolean?
+              :f2 boolean?
+              :end :math7/point)))))
+
+
+
+(def m-add (fn [m] (str "M " m)))
+(def path33
+  (comp
+   m-add
+   space
+   (partial mapcat identity)
+   (juxt (comp
+          (juxt :x :y)
+          :m)
+         (comp
+          (partial
+           mapcat
+           (fun
+            ([[:line {:l :l :points p}]]
+             (cons (name :l)  (mapcat (juxt :x :y)   p)))
+            ([[:line {:l :L :points p}]]
+             (cons (name :L) (mapcat (juxt :x :y) p)))
+            ([[:curve-c {:c :c
+                         :control-point1 control-point1
+                         :control-point2 control-point2
+                         :end-point end-point}]]
+             (cons (name :c)
+                   (mapcat (juxt :x :y)  [control-point1 control-point2 end-point])))
+            ([[:curve-c {:c :C
+                         :control-point1 control-point1
+                         :control-point2 control-point2
+                         :end-point end-point}]]
+             (cons (name :C)
+                   (mapcat (juxt :x :y)  [control-point1 control-point2 end-point])))
+
+            ([[:curve-q
+               {:q :q :control-point control-point :end-point end-point}]]
+             (cons (name :q) (mapcat (juxt :x :y)
+                                     [control-point end-point])))
+            ([[:curve-q
+               {:q :Q :control-point control-point :end-point end-point}]]
+             (cons (name :Q) (mapcat (juxt :x :y)
+                                     [control-point end-point])))
+            ([[:arc {:a :a :r1 r1 :r2 r2 :angle angle :f1 f1 :f2 f2 :end end}]]
+             [(name :a)  r1 r2  angle (if f1 1 0) (if f2 1 0) (:x end) (:y end)])
+            ([[:arc {:A :a :r1 r1 :r2 r2 :angle angle :f1 f1 :f2 f2 :end end}]]
+             [(name :A)  r1 r2  angle (if f1 1 0) (if f2 1 0) (:x end) (:y end)])))
+          :d))
+   (partial s/conform :math7/path)))
 
 
 (defn grid17 []
@@ -4510,7 +4593,7 @@
         [txt-fn circle-fn]
         [(fn [x y s]
            [:text {:x x :y  y
-                   :font-size (size [1.5 :rem])} s])
+                   :font-size (size [3 :rem])} s])
          (fn [x y r] [:circle {:cx x :cy  y :r  r
                                :fill (c [70 70 70])}])]
 
@@ -4574,15 +4657,10 @@
 
       [m ['= ['- 500 50] ['- ['+ ['* 90 bx] 50] 50]] ]
 
+      [m ['= ['* 90 5]
+          ['* 90 bx]] ]
 
-
-
-
-
-
-
-      ]
-
+      [m ['= 5 bx] ]]
 
 
      [:div (g [[2 8] [2 8] [3 .5]]
@@ -4616,9 +4694,6 @@
                    [(ve x) 0] [0 0]
                    [0 0] [x 0]
                    ]))
-
-
-
 
 
 
@@ -4671,9 +4746,20 @@
                    [x 0] [0 -4]
                    [x 0] [(ve (* 2 x)) 4]
                    [0 0] [(ve (* x 2)) 0]]))
+         [:path {:d (path33 [0 0 :c 30 90 30 200 0 220
+                             :l  220 0
+                             :c -30 -90 -30 -200 0 -220
+                             :l  -220 0])
+                 :fill-rule :nonzero
+                 :stroke (c [60 50 40])
+                 :stroke-width 5
+                 :fill (c [90 70 70])}]
 
-
-         (cir1 [[3 0] [-14 0] ""])
+         (cir1 [[-5 -2] [0 0] "51"])
+         (cir1 [[-2 0] [0 0] "359"])
+         (cir1 [[4 0] [0 0] "7"])
+         (cir1 [[-2 0] [-2 0] "357"])
+         (cir1 [[-2 0] [-5 0] "002"])
          (comment )
          (comment)
 
@@ -4692,7 +4778,47 @@
     ))
 
 
+
+(defn grid18 []
+  (let [
+
+        bx '☐
+        ]
+
+    [:div {:style grid22}
+     [:div (g [[2 8] [8 8] [3 .8]]
+              {:flex :center :size [1.5 :rem]
+               :d (grad2 3)})
+
+      [m ['= ['- 500 50] ['- ['+ ['* 90 bx] 50] 50]] ]
+
+      ]
+
+
+     [:div (g [[2 8] [2 8] [32 .5]]
+              {:flex :center :size [2 :rem]
+               :d (grad2 3)})
+      [:svg {:viewBox  (space [-20 -20 40 40])
+             :style {:width (size [100 :%])
+                     :height (size [100 :%])}}
+
+       [:path {:d (path33 [0 0 :l 40 0
+                           0 40])
+               :transform (tranfrom [
+                                     [:skewY 30]])
+               :fill-rule :nonzero
+               :stroke (c [60 50 40])
+               :stroke-width .3
+               :fill (c [90 70 70])}]
+       ]]
+
+     ]
+
+
+    ))
+
+
 ;;https://css-tricks.com/guide-svg-animations-smil/
 
 (defn template1 []
-  [grid17])
+  [grid18])
