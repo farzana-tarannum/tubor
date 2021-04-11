@@ -281,47 +281,18 @@
                 {:background-color (hsl color)}
                 {})
         ]
-    (comment (merge (cell span) g color (partial apply merge other)))
+    (comment (merge (cell span) g color (partial )))
     (merge
      (cell (s/conform :math7/span sp))
      color
-     g)))
+     g
+     (apply merge other)
+     )))
 
+()
 
 (comment
-  (comp
-   (fn [n] (update n :font-size
-                   (comp
-                    not-space
-                    (juxt :size (comp name :scale)))))
-   (partial apply merge)
-   (juxt (comp
-          (partial into {:display :flex})
-          (juxt
-           (comp
-            (partial vector :grid-row)
-            span
-            (juxt :row :span)
-            :grid-row)
-           (comp
-            (partial vector :grid-column)
-            span
-            (juxt :row :span)
-            :grid-column)
-           :flex
-           )
-          :span)
-         (comp
-          :flex)
-         (comp
-          (partial vector :background-color)
-          hsla
-          :color)
-         (comp
-          (partial vector :background-image)
-          linear-gradient
-          :linear-gradient))
-   (partial s/conform :math7/cell))
+
   (comment
     (s/conform :math7/cell [[1 2 3 4 1 :rem]
                             [1 70 70 1]
@@ -448,22 +419,44 @@
 
 (defn template []
   [:div {:style
-         (grid [100 :vh 100 :vw
-                (take 15 (repeat [8 :vh]))
-                (take 15 (repeat [8 :vh]))])}
+         (merge
+          (grid [100 :vh 100 :vw
+                 (take 15 (repeat [8 :vh]))
+                 (take 15 (repeat [8 :vh]))])
+          {:background-color (hsl [1 70 70 .8])})}
 
-   (for [i (range 0 15)
-         j (range 0 15)]
+   (for [[i rd]  (map
+                  (fn [x y] [x y])
+                  (range 0 10)
+                  (into [["a" "b" "c"]]
+                        (take 14 (repeat ["x" "y" "z"]))))
+         j (range 0 3)
+         :let [r (+ i 1)
+               c (+ j 1)
+               v (str (get rd j) (+ i 1))]
+         ]
      [:div {:key (gensym)
             :style
             (css
-             [[(+ i 1) 1 (+ j 1) 1 :center :center 2 :rem]
-              [(* i j) 30 70 .8]
+             [[r 1 c 1 :center :center 2 :rem]
+              [(* i j) 30 70 .2]
               [(* i j)
-               30 :% (* (inc i) (inc j)) 30 60 0.4
-               40 :% (* (inc i) (inc j)) 20 40 0.5
-               70 :% (* (inc i) (inc j)) 0 80 0.3]
+               30 :% (* (inc i) (inc j)) 30 60 0.1
+               40 :% (* (inc i) (inc j)) 20 40 0.1
+               70 :% (* (inc i) (inc j)) 0 80 0.1]
               ]
-             )}
-      "h"])
+             )} v])
+   [:div {:key (gensym)
+          :style
+          (css
+           [[1 12 1 12 :center :center 2 :rem]
+            [3 30 70 .5] []]
+           )}
+    [:svg {:viewBox (space [-40 -40 80 80])
+           :style {:height (size {:size 100 :scale :%})
+                   :width  (size {:size 100 :scale :%})}}
+     [:path {:d (path [0 0 :l 10 0 0 10])
+             :stroke (hsl [1.2 70 50 1])
+             :stroke-width .2
+             :fill (hsl [3.2 70 70 .5])}]]]
    ])
