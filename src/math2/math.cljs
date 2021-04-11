@@ -4810,12 +4810,7 @@
                :stroke (c [60 50 40])
                :stroke-width .3
                :fill (c [90 70 70])}]
-       ]]
-
-     ]
-
-
-    ))
+       ]]]))
 
 
 ;;https://css-tricks.com/guide-svg-animations-smil/
