@@ -795,8 +795,10 @@
              :display :grid
              :height (size [100 :vh])
              :width (size [100 :vw])
-             :grid-template-columns (size (apply concat (take 12 (repeat [10 :vh]))))
-             :grid-template-rows (size (apply concat (take 10 (repeat [10 :vh]))))})
+             :grid-template-columns
+             (size (apply concat (take 12 (repeat [10 :vh]))))
+             :grid-template-rows
+             (size (apply concat (take 10 (repeat [10 :vh]))))})
 
 (defn path-temp2 []
   (let [[s tx ty] [(ss 40 10) (partial + 200) (partial + -400)]

@@ -2,11 +2,9 @@
   (:require [reagent.dom :as rdom]
             [reagent.core :as r]
             [clojure.string :as str]
-            [math2.template :as t]
             [math2.file :as file]
-            [math2.bdmap :as bmap]
             [math2.math :as math]
-            [math2.gradient :as gradient]
+            [math2.math7 :as math7]
             [react]))
 
 ;;(defn ^:before-load my-before-reload-callback []
@@ -23,7 +21,7 @@
 
 (defn render-simple []
   (rdom/render
-   (math/template1)
+   (math7/template)
    (js/document.getElementById "app") functional-compiler))
 
 (render-simple)

@@ -53,7 +53,9 @@
    )
   (gen2/sample (gen2/choose 5  12)))
 
-
+(defn conjj [i]
+  (fn [arr]
+    (conj arr i)))
 (def ve (fn [x] (* x -1)))
 (def m-add (fn [m] (str "M " m)))
 
@@ -210,6 +212,12 @@
   ((comp hsla
          (partial s/conform :math7/hsl)) a))
 
+(def size
+  (comp
+   not-space
+   (juxt :size (comp name :scale))))
+
+
 
 
 (def linear-gradient
@@ -219,7 +227,11 @@
     wrap
     not-space
     (partial interpose ",")
-    (juxt :angle
+    (juxt (comp
+           not-space
+           (conjj (name :rad))
+           vector
+           :angle)
           (comp
            not-space
            (partial interpose ",")
@@ -230,8 +242,7 @@
                            hsla
                            :color)
                           (comp
-                           not-space
-                           (juxt :size (comp name :scale))
+                           size
                            :size))))
            :colors)))))
 
@@ -247,10 +258,7 @@
 (defn css [[sp color gradient & other]]
   (let [cell
         (comp
-         (fn [n] (update n :font-size
-                         (comp
-                          not-space
-                          (juxt :size (comp name :scale)))))
+         (fn [n] (update n :font-size size))
          (partial into {:display :flex})
          (juxt
           (comp
@@ -269,10 +277,10 @@
              (linear-gradient
               (s/conform :math7/linear-gradient gradient))}
             {})
-        color (if color {:background-color (hsl [1 70 70 1])}
-                  {})
+        color (if (> (count color) 0)
+                {:background-color (hsl color)}
+                {})
         ]
-    (comment (cell sp))
     (comment (merge (cell span) g color (partial apply merge other)))
     (merge
      (cell (s/conform :math7/span sp))
@@ -342,7 +350,7 @@
   (css
    [[1 2 3 4 :center :center 1 :rem ]
     [1 70 70 1]
-    ])
+    []])
   ((comp
     (fn [n] (update n :font-size
                     (comp
@@ -366,8 +374,13 @@
    (s/conform :math7/span [1 2 3 4 :center :center 1 :rem :row]))
   (css [[1 2 3 4 :center :center 1 :rem :row]
         [1 70 70 1]
-        []
+        [2
+         1 :rem  1 70 70 1
+         2 :%  1 70 70 1
+         3 :%  1 70 70 1]
         {}])
+
+
   (linear-gradient
    (s/conform :math7/linear-gradient [2
                                       1 :rem  1 70 70 1
@@ -375,3 +388,82 @@
                                       3 :%  1 70 70 1]))
 
   )
+
+
+(s/def :math7/grid
+  (s/cat
+   :height  :math7/size
+   :width :math7/size
+   :grid-template-columns (s/spec
+                           (s/+
+                            (s/spec :math7/size)))
+   :grid-template-rows (s/spec
+                        (s/+
+                         (s/spec :math7/size)))
+   ))
+
+
+(def grid
+  (comp
+   (partial into {:display :grid})
+   (juxt (comp
+          (partial vector :height)
+          size
+          :height)
+         (comp
+          (partial vector :width)
+          size
+          :width)
+         (comp
+          (partial vector :grid-template-columns)
+          space
+          (partial map size)
+          :grid-template-columns)
+         (comp
+          (partial vector :grid-template-rows)
+          space
+          (partial map size)
+          :grid-template-rows))
+   (partial s/conform :math7/grid)))
+
+(comment
+  (s/valid? :math7/grid
+            [100 :vh 100 :vw
+             (take 10 (repeat [10 :vh]))
+             (take 14 (repeat [10 :vh]))])
+
+  (
+   [100 :vh 100 :vw
+    (take 10 (repeat [10 :vh]))
+    (take 14 (repeat [10 :vh]))]))
+
+
+(comment
+  (def grid22 {:background-color (c [90 70 70])
+               :display :grid
+               :height [100 :vh]
+               :width [100 :vw]
+               :grid-template-columns (take 12 (repeat [10 :vh]))
+               :grid-template-rows (take 10 (repeat [10 :vh]))}))
+
+(defn template []
+  [:div {:style
+         (grid [100 :vh 100 :vw
+                (take 15 (repeat [8 :vh]))
+                (take 15 (repeat [8 :vh]))])}
+
+   (for [i (range 0 15)
+         j (range 0 15)]
+     [:div {:key (gensym)
+            :style
+            (css
+             [[(+ i 1) 1 (+ j 1) 1 :center :center 2 :rem]
+              [(* i j) 30 70 .8]
+              [(* i j)
+               30 :% (* (inc i) (inc j)) 30 60 0.4
+               40 :% (* (inc i) (inc j)) 20 40 0.5
+               70 :% (* (inc i) (inc j)) 0 80 0.3]
+              ]
+             )}
+      "h"])
+   ])
