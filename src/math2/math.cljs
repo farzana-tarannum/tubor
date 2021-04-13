@@ -13,6 +13,8 @@
 
 
 
+
+
 (s/def :math2/point
   (s/tuple
    (s/tuple
@@ -4818,4 +4820,4 @@
 ;;https://css-tricks.com/guide-svg-animations-smil/
 
 (defn template1 []
-  [grid18])
+  [grid15])

@@ -11,6 +11,258 @@
    [moment]))
 
 
+;; 01741775277 ethan mom maliha
+;; 01716980473  angira mom maliha
+
+
+
+(s/def ::op-plus '#{+})
+(s/def ::op-equal '#{=})
+
+(s/def ::op-mul '#{*})
+(s/def ::op-mul2 #{:m})
+(s/def ::op-b #{:b :c :s})
+
+(s/def ::op-minus '#{-})
+(s/def ::op-sqroot #{:sq})
+(s/def ::op-pow #{:p})
+(s/def ::op-sub  #{:s})
+
+(s/def ::betas (s/or
+               :α #{:alpha}
+               :β #{:beta}))
+
+
+(s/def ::ops (s/or
+              :+ ::op-plus
+              :> '#{>}
+              :< '#{<}
+              :<= '#{<=}
+              :>= '#{>=}
+              :- ::op-minus
+              :× ::op-mul
+              := ::op-equal
+              :op-mul2 ::op-mul2))
+
+
+
+(s/def ::element
+  (s/or
+   :mn number?
+   :betas ::betas
+   :mi symbol?
+   :expr ::expr))
+
+(s/def ::element2
+  (s/or
+   :mn number?
+   :mi symbol?
+   :expr ::expr2))
+
+(s/def ::p-exp
+  (s/cat
+   :mo ::ops
+   :first-elem ::element
+   :elem (s/+ ::element)))
+
+
+
+(s/def ::m-exp
+  (s/cat
+   :mo (s/or :- ::op-minus
+             :sq ::op-sqroot)
+   :elem ::element))
+
+
+(s/def ::b-exp
+  (s/cat
+   :mo ::op-b
+   :elem ::element))
+
+(s/def ::f-exp
+  (s/cat
+   :elem-left ::element
+   :elem-right ::element))
+
+(s/def ::e-exp
+  (s/cat
+   :mo (s/or
+             :p ::op-pow
+             :k #{:k}
+             :s ::op-sub)
+   :elem-left ::element
+   :elem-right ::element))
+
+
+(s/def ::expr
+  (s/or
+   :p-exp ::p-exp
+   :b-exp ::b-exp
+   :m-exp ::m-exp
+   :e-exp ::e-exp
+   :f-exp ::f-exp))
+
+(s/def ::expr2
+  (s/alt
+   :p-exp ::p-exp
+   :m-exp ::m-exp
+   :f-exp ::f-exp))
+
+
+
+(declare expr)
+
+
+
+(defn p-exp [{:keys [mo first-elem elem ]}]
+  (reduce
+   (fn [acc e]
+     (let [[exp elem] e]
+       (conj
+        (if (= (first mo)
+               :op-mul2 )
+          acc
+          (conj acc [:mo (name (first mo))]))
+        (if (= exp :expr)
+          (expr e)
+          [exp (str elem)])))
+     )
+   [:mrow
+        (let [[exp elem] first-elem]
+          (if (= exp :expr) (expr first-elem) first-elem))]
+   elem))
+
+(defn m-exp [{:keys [mo elem]}]
+  (let [[op-a op] mo]
+    (cond
+      (= op-a :-)
+      [:mrow
+       [:mo "-"]
+       (let [[exp e] elem]
+         (if (= exp :expr)
+           (expr elem)
+           elem))]
+      (= op-a :sq)
+      [:msqrt (let [[exp e] elem]
+                (if (= exp :expr)
+                  (expr elem)
+                  elem))])))
+
+(defn e-exp [{:keys [mo elem-left elem-right]}]
+  ((fun ([[:p _]]
+         [:msup
+          (if (= (first elem-left) :expr)
+            (expr elem-left)
+            elem-left)
+          (if (= (first elem-right) :expr)
+            (expr elem-right)
+            elem-right)
+          ])
+        ([[:k _]]
+         [:msub
+          (if (= (first elem-left) :expr)
+            (expr elem-left)
+            elem-left)
+          (if (= (first elem-right) :expr)
+            (expr elem-right)
+            elem-right)
+          ])
+        ([[:s _]]
+         [:mroot
+          (if (= (first elem-left) :expr)
+            (expr elem-left)
+            elem-left)
+          (if (= (first elem-right) :expr)
+            (expr elem-right)
+            elem-right)
+          ])
+        ([[:= _]]
+         [:mrow
+
+          (if (= (first elem-left) :expr)
+            (expr elem-left)
+            elem-left)
+
+          [:mo "="]
+          (if (= (first elem-right) :expr)
+            (expr elem-right)
+            elem-right)])) mo))
+
+
+
+
+(defn b-exp [{:keys [mo elem]}]
+  [:mrow [:mo "("]
+   (expr elem)
+   [:mo ")"]])
+
+
+
+(defn f-exp [e]
+  (let [ {:keys [elem-left elem-right]} e]
+    [:mrow
+     [:mfrac
+      (if (= (first elem-left) :expr)
+        (expr elem-left) elem-left )
+      (if (= (first elem-right) :expr)
+        (expr elem-right) elem-right )
+      ]]))
+
+
+(defn expr [e]
+  (let [expr-f (juxt first (comp  first second)
+                     (comp  second second))
+        [_ t-expr expr-1] (expr-f e)]
+    (( {:p-exp p-exp
+        :m-exp m-exp
+        :b-exp b-exp
+        :f-exp f-exp
+        :e-exp e-exp} t-expr)
+     expr-1)))
+
+
+
+
+(comment
+  (expr2 (s/conform ::element '(:s x 2) ))  )
+
+(comment
+  (expr (s/conform ::element '(:m 2 x))))
+
+(comment (expr (s/conform ::element [:m 2 'x])))
+
+(comment
+  (expr
+   (s/conform ::element
+              '(+ :alpha x (- 5 2 4)
+                  ((- x ) 1)))))
+
+(s/conform ::element
+           '(= (- 2) (:c (:p x 3))
+               ))
+(comment
+  (expr
+   (s/conform ::element
+              '(+ 2 x 4
+                  (:sq a)))))
+
+(comment (expr
+         (s/conform ::element
+                    '(= 3 (+ 2 x 4
+                             )))))
+
+(comment
+  (expr (s/conform ::element '(1 2))))
+
+
+(defn e [ex]
+  (expr (s/conform ::element ex)))
+
+(defn m [ex]
+  [:math (e ex)])
+
+
+
 (s/def :math7/point
   (s/cat
    :x number?
@@ -62,6 +314,12 @@
 (def f-add (fn [m]
              (fn [st]
                (str (name m) st))))
+
+(def l-add (fn [m]
+             (fn [st]
+               (str st (name m) ))))
+
+(def sec (l-add :s))
 (def rel #{:l :c :a :q})
 (def abs #{:L :C :A :Q})
 (def space (fn [p] (str/join " " p)))
@@ -417,46 +675,102 @@
                :grid-template-columns (take 12 (repeat [10 :vh]))
                :grid-template-rows (take 10 (repeat [10 :vh]))}))
 
-(defn template []
-  [:div {:style
-         (merge
-          (grid [100 :vh 100 :vw
-                 (take 15 (repeat [8 :vh]))
-                 (take 15 (repeat [8 :vh]))])
-          {:background-color (hsl [1 70 70 .8])})}
+(defn tranfrom [t]
+  ((partial str/join " ")
+   (map
+    (comp
+     (partial str/join "")
+     (juxt
+      (comp
+       name
+       first)
+      (comp
+       (fn [n]
+         (str "(" n ")"))
+       (fn [n]
+         (if (vector? n)
+           (str/join "," n)
+           (str n)))
+       second)))
 
-   (for [[i rd]  (map
-                  (fn [x y] [x y])
-                  (range 0 10)
-                  (into [["a" "b" "c"]]
-                        (take 14 (repeat ["x" "y" "z"]))))
-         j (range 0 3)
-         :let [r (+ i 1)
-               c (+ j 1)
-               v (str (get rd j) (+ i 1))]
-         ]
-     [:div {:key (gensym)
-            :style
-            (css
-             [[r 1 c 1 :center :center 2 :rem]
-              [(* i j) 30 70 .2]
-              [(* i j)
-               30 :% (* (inc i) (inc j)) 30 60 0.1
-               40 :% (* (inc i) (inc j)) 20 40 0.1
-               70 :% (* (inc i) (inc j)) 0 80 0.1]
-              ]
-             )} v])
-   [:div {:key (gensym)
-          :style
-          (css
-           [[1 12 1 12 :center :center 2 :rem]
-            [3 30 70 .5] []]
-           )}
-    [:svg {:viewBox (space [-40 -40 80 80])
-           :style {:height (size {:size 100 :scale :%})
-                   :width  (size {:size 100 :scale :%})}}
-     [:path {:d (path [0 0 :l 10 0 0 10])
-             :stroke (hsl [1.2 70 50 1])
-             :stroke-width .2
-             :fill (hsl [3.2 70 70 .5])}]]]
-   ])
+    t)))
+
+(defn template []
+  [:div
+
+
+
+
+
+
+
+
+   [:div {:style
+          (merge
+           (grid [100 :vh 100 :vw
+                  (take 15 (repeat [8 :vh]))
+                  (take 15 (repeat [8 :vh]))])
+           {:background-color (hsl [1.4 70 70 .8])})}
+
+
+
+
+    [:div {:key (gensym)
+           :style (css
+                   [[1 6 2 12 :center :center 2 :rem]
+                    [.2 30 70 .9] []
+                    {:z-index 22}]
+                   )}
+
+     (let [bm 250
+           bm2 (/ bm 2)
+           angle-x 0
+           angle-y 15]
+       [:svg {:viewBox (space (nth [[-65  -65 170 170 ]
+                                    [-10 -160 80 80]] 0))
+              :style {:height (size {:size 100 :scale :%})
+                      :width  (size {:size 100 :scale :%})}}
+
+        [:path {:d (path [(ve (+ bm2 angle-x)) angle-y
+                          :l (+ bm (* 2 angle-x)) 0
+                          (ve angle-x) (ve (* 2 angle-y))
+                          (ve bm)  0
+                          (ve angle-x) (* angle-y 2)
+                          ])
+                :stroke (hsl [0.5 50 50 1])
+                :stroke-width 1
+                :fill (hsl [4 70 70 .9])}]
+        [:path {:d (path
+                    [(ve bm2) (/ angle-y 2)
+                     :a 400 400 0 false false
+                     bm 0])
+                :stroke (hsl [1 70 70 1])
+                :stroke-width 1.2
+                :fill :none}]
+        (comment
+          [:path {:d (path
+                      [(ve (- bm2 angle-x)) (ve (/ angle-y 2))
+                       :a 400 400 0 false false
+                       (- bm (* 2 angle-x)) 0])
+                  :stroke (hsl [1 70 70 1])
+                  :stroke-width 1.2
+                  :fill :none}])
+
+
+        [:path {:d (path [(ve bm2) 0 :l bm 0])
+                :stroke (hsl [3.3 70 70 1])
+                :stroke-width 1
+                :fill :none
+                :stroke-dasharray 2
+                }]
+
+        [:circle {:cx 0
+                  :cy 0
+                  :r 1
+                  :stroke (hsl [1.8 70 70 1])
+                  :fill (hsl [2.8 70 70 1])}]
+
+        ])]
+
+
+    ]])

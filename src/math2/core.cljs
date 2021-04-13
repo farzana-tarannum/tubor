@@ -3,8 +3,8 @@
             [reagent.core :as r]
             [clojure.string :as str]
             [math2.file :as file]
-            [math2.math :as math]
             [math2.math7 :as math7]
+            [math2.physics11 :as p11]
             [react]))
 
 ;;(defn ^:before-load my-before-reload-callback []
@@ -18,10 +18,16 @@
 
 (def functional-compiler (r/create-compiler {:function-components true}))
 
+(defn template []
+  [:div
+   [p11/template]
+   [math7/template]
+   ])
+
 
 (defn render-simple []
   (rdom/render
-   (math7/template)
+   (template)
    (js/document.getElementById "app") functional-compiler))
 
 (render-simple)
