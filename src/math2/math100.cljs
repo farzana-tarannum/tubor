@@ -312,24 +312,27 @@
            [:text {:key (gensym)
                    :x x
                    :y y
-                   :style {:font-size ".2rem"}
+                   :dx -2
+                   :dy 3
+                   :style {:font-size ".3rem"}
 
 
-                   } "A"])
+                   } "Ab"])
+         (let [[_ & rest] (reduce
+                           (fn [acc  [x y]]
+                             (let [[x1 y1] (last acc)]
+                               (conj acc [(+ x x1) (+ y y1)]))
+                             )
 
-         (reduce
-          (fn [acc  [x y]]
-            (let [[x1 y1] (last acc)]
-              (conj acc [(+ x x1) (+ y y1)]))
-            )
+                           [[0 0]]
+                           (partition 2
+                                      (
+                                       (comp
+                                        (partial into [-18 -18])
+                                        (partial map (partial * 33)))
+                                       [1 0 0 1 (ve 1) 0 0 (ve 1)])))]
 
-          [[0 0]]
-          (partition 2
-                     (
-                      (comp
-                       (partial into [-18 -18])
-                       (partial map (partial * 33)))
-                      [1 0 0 1 (ve 1) 0 0 (ve 1)]))))
+           rest))
 
 
         (comment
