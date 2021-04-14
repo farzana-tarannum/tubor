@@ -250,3 +250,68 @@
              :stroke-width .5
              :fill :none
              }]]]])
+
+
+(defn template2 []
+  [:div
+   [:div {:style
+          (merge
+           (grid [100 :vh 100 :vw
+                  (take 15 (repeat [8 :vh]))
+                  (take 15 (repeat [8 :vh]))])
+           {:background-color (hsl [1.4 70 70 .8])})}
+
+    [:div {:key (gensym)
+           :style (css
+                   [[1 6 2 12 :center :center 2 :rem]
+                    [.2 30 70 .9] []
+                    {:z-index 22}]
+                   )}
+
+     (let [bm 250
+           bm2 (/ bm 2)
+           angle-x 0
+           angle-y 15]
+       [:svg {:viewBox (space (nth [[-65  -65 170 170 ]
+                                    [-10 -160 80 80]] 0))
+              :style {:height (size {:size 100 :scale :%})
+                      :width  (size {:size 100 :scale :%})}}
+
+        [:path {:d (path [(ve (+ bm2 angle-x)) angle-y
+                          :l (+ bm (* 2 angle-x)) 0
+                          (ve angle-x) (ve (* 2 angle-y))
+                          (ve bm)  0
+                          (ve angle-x) (* angle-y 2)
+                          ])
+                :stroke (hsl [0.5 50 50 1])
+                :stroke-width 1
+                :fill (hsl [4 70 70 .9])}]
+
+
+        [:path {:d (path
+                    [(ve bm2) (/ angle-y 2)
+                     :a 400 400 0 false false
+                     bm 0])
+                :stroke (hsl [1 70 70 1])
+                :stroke-width 1.2
+                :fill :none}]
+
+
+
+        [:path {:d (path [(ve bm2) 0 :l bm 0])
+                :stroke (hsl [3.3 70 70 1])
+                :stroke-width 1
+                :fill :none
+                :stroke-dasharray 2
+                }]
+
+        [:circle {:cx 0
+                  :cy 0
+                  :r 1
+                  :stroke (hsl [1.8 70 70 1])
+                  :fill (hsl [2.8 70 70 1])}]
+
+        ])]
+
+
+    ]])

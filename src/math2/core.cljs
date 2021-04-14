@@ -5,6 +5,7 @@
             [math2.file :as file]
             [math2.math7 :as math7]
             [math2.physics11 :as p11]
+            [math2.math100 :as m100]
             [react]))
 
 ;;(defn ^:before-load my-before-reload-callback []
@@ -21,7 +22,9 @@
 (defn template []
   [:div
    [p11/template]
-   [math7/template]
+   [p11/template2]
+   [m100/template]
+   [m100/template2]
    ])
 
 
