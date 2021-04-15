@@ -25,6 +25,7 @@
    [p11/template2]
    [m100/template]
    [m100/template2]
+   [m100/template3]
    ])
 
 

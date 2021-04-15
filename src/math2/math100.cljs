@@ -208,11 +208,11 @@
 
 (defn template2 []
   [:div {:style
-          (merge
-           (grid [100 :vh 100 :vw
-                  (take 15 (repeat [8 :vh]))
-                  (take 15 (repeat [8 :vh]))])
-           {:background-color (hsl [1.4 70 70 .8])})}
+         (merge
+          (grid [100 :vh 100 :vw
+                 (take 15 (repeat [8 :vh]))
+                 (take 15 (repeat [8 :vh]))])
+          {:background-color (hsl [1.4 70 70 .8])})}
 
 
    [:div {:key (gensym)
@@ -220,7 +220,7 @@
                   [[2 7 2 7 :center :center 3 :rem :column]
                    []
                    []
-                   {:z-index 20}])}
+                   {:z-index 29}])}
     [:svg {:viewBox (space [-100 -100 200 200]) }
      [:circle {:cx -45
                :cy -10
@@ -250,7 +250,7 @@
            :style (css
                    [[2 11 2 11 :center :center 2 :rem]
                     [.5 70 70 .9] []
-                    {:z-index 22}]
+                    {:z-index 30}]
                    )}
 
      (let [bm 30
@@ -323,8 +323,7 @@
 
          [:path {:d
                  (path
-                  (
-                   (comp
+                  ((comp
                     (partial into [-15 -15])
                     (partial cons :l)
                     (partial map (partial * 30)))
@@ -368,13 +367,12 @@
    ])
 
 (comment
-  (partition 2
-             ((comp
-               (partial into [0 0])
-               (partial map (partial * -33)))
-              [1 0
-               0 1 (ve 1) 0
-               0 (ve 1)]))
+  (partition
+   2
+   ((comp
+     (partial into [-33 -33])
+     (partial map (partial * 33)))
+    [1 0 0 1 (ve 1) 0 0 (ve 1)]))
 
   (partition 2
              ((comp
@@ -383,3 +381,65 @@
               [1 0
                0 1 (ve 1) 0
                0 (ve 1)])))
+
+
+(defn template3 []
+  (let [dx [1 0 0 1 -1 0 0 -1 ]
+        l 45
+        l2 (/ l 2)
+        base [(ve l2) (ve l2)]
+        s2 (comp
+            (partial into (conj base :l))
+            (partial map (partial * l)))
+        sq-path (s2 dx)
+        ]
+    [:div {:style
+           (merge
+            (grid [100 :vh 100 :vw
+                   (take 15 (repeat [8 :vh]))
+                   (take 15 (repeat [8 :vh]))])
+            {:background-color (hsl [2.4 70 70 1])})}
+
+     [:div {:key (gensym)
+            :style (css
+                    [[2 11 2 11 :center :center 2 :rem]
+                     [-2 70 70 1] []
+                     {:z-index 2}]
+                    )}
+
+      [:svg {:viewBox (space (nth [[-100  -100 200 200 ]
+                                   [-10 -160 80 80]] 0))
+             :style {:height (size {:size 100 :scale :%})
+                     :width  (size {:size 100 :scale :%})}}
+
+       [:circle {:cx 0 :cy 0 :r 1 :fill (hsl [1 70 70 1])}]
+       [:path {:d (path sq-path)
+               :stroke (hsl [1 70 70 1])
+               :stroke-width 1
+               :fill :none}]
+       ]]]))
+
+(comment
+  (get [1 0 0 1 -1 0 0 -1 ] 2)
+
+  [1 0   0  1 -1  0  0 -1 ]
+  (let [dx [1 0 0 1 -1 0 0 -1 ]
+        dd  [0 1  -1  0  0 -1  1  0 ]
+        l 45
+        l2 (/ l 2)
+        base [(ve l2) (ve l2)]
+        s2 (comp
+            (fn [matrix]
+              (for [i (range 0 4)
+                    j (range 0 3)]
+                (get-in matrix [j i])))
+            (partial mapv
+                     (comp
+                      vec
+                      (partial partition 2)))
+            (juxt
+             (partial mapv (partial * 3))
+             (partial mapv (partial * -3))
+             (partial mapv (partial * l))))
+        ]
+    (s2 dx)))
