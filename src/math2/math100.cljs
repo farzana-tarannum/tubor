@@ -648,39 +648,22 @@
                      {:z-index 2}]
                     )}
 
-      [:svg {:viewBox (space (nth [[-100  -100 200 200 ]
+      [:svg {:viewBox (space (nth [[-100  -100 200 200]
                                    [-10 -160 80 80]] 0))
              :style {:height (size {:size 100 :scale :%})
                      :width  (size {:size 100 :scale :%})}}
 
-       [:circle {:cx 0 :cy 0 :r 1 :fill (hsl [1 70 70 1])}]
+       [:circle {:cx 0 :cy 0 :r .1 :fill (hsl [1 70 70 1])}]
 
 
 
 
-       [:path {:d (path [(ve (* l2 3)) 0 :l
-                         (* 6 l2) 0])
-               :stroke (hsl [1 70 70 1])
-               :stroke-width 1
-               :fill :none}]
 
 
 
-       (map
-        (fn [i]
-          [:path {:key (gensym)
-                  :d
-                  (path [(* (/ l2 2) i) 0 :l
-                         l2 0
-                         0 5])
-                  :stroke (hsl [(+ (* i .8)
-                                   (* .6 (rand-int 20)))
 
-                                (+ i 70)
-                                (-  70 i) 1])
-                  :stroke-width 1
-                  :fill :none}])
-        (range -6 6))
+
+
 
 
 
