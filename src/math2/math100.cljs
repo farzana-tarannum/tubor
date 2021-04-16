@@ -384,7 +384,8 @@
 
 
 (defn template3 []
-  (let [dx [1 0 0 1 -1 0 0 -1 ]
+  (let [dx [1 0  0 1 -1  0 0 -1 ]
+        dy [0 1 -1 0  0 -1 1  0 ]
         l 45
         l2 (/ l 2)
         base [(ve l2) (ve l2)]
@@ -411,9 +412,35 @@
               (map + e v))
             (juxt (comp
                    (partial mapcat identity) s3)
-                  (partial mapv (partial * 10))))
+                  (partial mapv (partial * 12))))
         points (s4 dx)
-        ]
+        angles (map
+                (fn [[a b] [c d]]
+                  [a b :l c d])
+                points
+                (partition 2
+                           (map +
+                                (map (comp
+                                      (partial * 10)
+                                      ve) dx)
+                                (map (partial * 10) dy))))
+
+        ag (comp
+            (partial partition 2)
+            (fn [[x y]]
+              (map + x y))
+            (juxt (comp
+                   (partial map (partial * 12))
+                   (partial map ve)
+                   first)
+                  (comp
+                   (partial map (partial * 12))
+                   second)))
+
+        angles2 (map (fn [[a b] [c d]]
+                       [a b :a 12 12 0 false true c d])
+                     points
+                     (ag [dx dy]))]
     [:div {:style
            (merge
             (grid [100 :vh 100 :vw
@@ -443,7 +470,76 @@
                         :cx x :cy y :r 1 :fill (hsl [1 70 70 1])}])
             points)
 
+       (map (comp
+             (fn [d]
+               [:path {:d d
+                       :stroke (hsl [1 70 70 1])
+                       :stroke-width 1
+                       :fill :none}])
+             path)
+            angles2)
+
        ]]]))
 
 (comment
-  )
+  (let
+      [dx [1 0  0 1 -1  0 0 -1 ]
+       dy [0 1 -1 0  0 -1 1  0 ]
+       l 45
+       l2 (/ l 2)
+       base [(ve l2) (ve l2)]
+       s2 (comp
+           (partial into (conj base :l))
+           (partial map (partial * l)))
+       sq-path (s2 dx)
+       s3  (comp
+            (fn [n]
+              (subvec n  0 (dec (count n))))
+            vec
+            rest
+            (partial reduce
+                     (fn [acc  [x y]]
+                       (let [[x1 y1] (last acc)]
+                         (conj acc [(+ x x1) (+ y y1)])))  [[0 0]])
+            (partial partition 2)
+            (partial into base)
+            (partial mapv (partial * l)))
+       s4 (comp
+           vec
+           (partial partition 2)
+           (fn [[e v]]
+             (map + e v))
+           (juxt (comp
+                  (partial mapcat identity) s3)
+                 (partial mapv (partial * 10))))
+       points (s4 dx)
+       angles (map
+               (fn [[a b] [c d]]
+                 [a b :l c d])
+               points
+               (partition 2
+                          (map +
+                               (map (comp
+                                     (partial * 10)
+                                     ve) dx)
+                               (map (partial * 10) dy))))
+
+       ag (comp
+           (partial partition 2)
+           (fn [[x y]]
+             (map + x y))
+           (juxt (comp
+                  (partial map (partial * 10))
+                  (partial map ve)
+                  first)
+                 (comp
+                  (partial map (partial * 10))
+                  second)))
+
+       angles2 (map (fn [[a b] [c d]]
+                      [a b :l c d])
+                    points
+                    (ag [dx dy]))
+
+       ]
+    angles2)  )
