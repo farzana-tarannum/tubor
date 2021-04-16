@@ -461,85 +461,228 @@
                      :width  (size {:size 100 :scale :%})}}
 
        [:circle {:cx 0 :cy 0 :r 1 :fill (hsl [1 70 70 1])}]
-       [:path {:d (path sq-path)
-               :stroke (hsl [1 70 70 1])
-               :stroke-width 1
-               :fill :none}]
-       (map (fn [[x y]]
-              [:circle {:key (gensym)
-                        :cx x :cy y :r 1 :fill (hsl [1 70 70 1])}])
-            points)
 
-       (map (comp
-             (fn [d]
-               [:path {:d d
-                       :stroke (hsl [1 70 70 1])
-                       :stroke-width 1
-                       :fill :none}])
-             path)
-            angles2)
+
+
+       [:circle {:cx (+ 5 (ve l2)) :cy (+ 40 (ve l2)) :r 1
+                 :fill (hsl [1 70 70 1])}]
+
+
+       [:text {:x (+ 5 (ve l2)) :y (+ 30 (ve l2)) :r 1
+               :style {:font-size "1rem"}
+               :fill (hsl [1 70 70 1])}
+        "1716"]
+
+
+       [:circle {:cx (ve l) :cy 0 :r 1 :fill (hsl [1 70 70 1])}]
+
+
+       [:text {:x (ve (+ l l2)) :y 10
+               :style {:font-size ".8rem"}
+               :fill (hsl [1 70 70 1])}
+        "80 - 2"]
+
+       [:text {:x (+ 10 l2) :y 10
+               :style {:font-size ".6rem"}
+               :fill (hsl [1 70 70 1])}
+        "20 + 2"]
+
+       [:text {:x (+ 5 (ve l2)) :y (+ 30 l2) :r 1
+               :style {:font-size "1rem"}
+               :fill (hsl [1 70 70 1])}
+        "1560"]
+
+
+
+       [:g
+        [:path {:d (path sq-path)
+                :stroke (hsl [1 70 70 1])
+                :stroke-width 1
+                :fill :none}]
+
+
+        (map (comp
+              (fn [d]
+                [:path {:d d
+                        :key (gensym)
+                        :stroke (hsl [1 70 70 1])
+                        :stroke-width 1
+                        :fill :none}])
+              path)
+             angles2)]
+
+       [:g {:transform (m7/tranfrom
+                        [[:translate [-45 0]
+                          ]
+                         ])}
+        [:path {:d (path sq-path)
+                :stroke (hsl [1 70 70 1])
+                :stroke-width 1
+                :fill :none}]
+
+
+        (map (comp
+              (fn [d]
+                [:path {:d d
+                        :key (gensym)
+                        :stroke (hsl [1 70 70 1])
+                        :stroke-width 1
+                        :fill (hsl [1 70 70 1])}])
+              path)
+             angles2)]
+
+       [:g {:transform (m7/tranfrom
+                        [[:translate [45 0]
+                          ]
+                         ])}
+        [:path {:d (path sq-path)
+                :stroke (hsl [1 70 70 1])
+                :stroke-width 1
+                :fill :none}]
+
+
+        (map (comp
+              (fn [d]
+                [:path {:d d
+                        :key (gensym)
+                        :stroke (hsl [1 70 70 1])
+                        :stroke-width 1
+                        :fill (hsl [1 70 70 1])}])
+              path)
+             angles2)]
+
+       [:g {:transform (m7/tranfrom
+                        [[:translate [0 45]
+                          ]
+                         ])}
+        [:path {:d (path sq-path)
+                :stroke (hsl [1 70 70 1])
+                :stroke-width 1
+                :fill :none}]
+
+
+        (map (comp
+              (fn [d]
+                [:path {:d d
+                        :key (gensym)
+                        :stroke (hsl [1 70 70 1])
+                        :stroke-width 1
+                        :fill (hsl [1 70 70 1])}])
+              path)
+             angles2)]
 
        ]]]))
 
-(comment
-  (let
-      [dx [1 0  0 1 -1  0 0 -1 ]
-       dy [0 1 -1 0  0 -1 1  0 ]
-       l 45
-       l2 (/ l 2)
-       base [(ve l2) (ve l2)]
-       s2 (comp
-           (partial into (conj base :l))
-           (partial map (partial * l)))
-       sq-path (s2 dx)
-       s3  (comp
-            (fn [n]
-              (subvec n  0 (dec (count n))))
+
+
+
+(defn template4 []
+  (let [dx [1 0  0 1 -1  0 0 -1 ]
+        dy [0 1 -1 0  0 -1 1  0 ]
+        l 45
+        l2 (/ l 2)
+        base [(ve l2) (ve l2)]
+        s2 (comp
+            (partial into (conj base :l))
+            (partial map (partial * l)))
+        sq-path (s2 dx)
+        s3  (comp
+             (fn [n]
+               (subvec n  0 (dec (count n))))
+             vec
+             rest
+             (partial reduce
+                      (fn [acc  [x y]]
+                        (let [[x1 y1] (last acc)]
+                          (conj acc [(+ x x1) (+ y y1)])))  [[0 0]])
+             (partial partition 2)
+             (partial into base)
+             (partial mapv (partial * l)))
+        s4 (comp
             vec
-            rest
-            (partial reduce
-                     (fn [acc  [x y]]
-                       (let [[x1 y1] (last acc)]
-                         (conj acc [(+ x x1) (+ y y1)])))  [[0 0]])
             (partial partition 2)
-            (partial into base)
-            (partial mapv (partial * l)))
-       s4 (comp
-           vec
-           (partial partition 2)
-           (fn [[e v]]
-             (map + e v))
-           (juxt (comp
-                  (partial mapcat identity) s3)
-                 (partial mapv (partial * 10))))
-       points (s4 dx)
-       angles (map
-               (fn [[a b] [c d]]
-                 [a b :l c d])
-               points
-               (partition 2
-                          (map +
-                               (map (comp
-                                     (partial * 10)
-                                     ve) dx)
-                               (map (partial * 10) dy))))
+            (fn [[e v]]
+              (map + e v))
+            (juxt (comp
+                   (partial mapcat identity) s3)
+                  (partial mapv (partial * 12))))
+        points (s4 dx)
+        angles (map
+                (fn [[a b] [c d]]
+                  [a b :l c d])
+                points
+                (partition 2
+                           (map +
+                                (map (comp
+                                      (partial * 10)
+                                      ve) dx)
+                                (map (partial * 10) dy))))
 
-       ag (comp
-           (partial partition 2)
-           (fn [[x y]]
-             (map + x y))
-           (juxt (comp
-                  (partial map (partial * 10))
-                  (partial map ve)
-                  first)
-                 (comp
-                  (partial map (partial * 10))
-                  second)))
+        ag (comp
+            (partial partition 2)
+            (fn [[x y]]
+              (map + x y))
+            (juxt (comp
+                   (partial map (partial * 12))
+                   (partial map ve)
+                   first)
+                  (comp
+                   (partial map (partial * 12))
+                   second)))
 
-       angles2 (map (fn [[a b] [c d]]
-                      [a b :l c d])
-                    points
-                    (ag [dx dy]))
+        angles2 (map (fn [[a b] [c d]]
+                       [a b :a 12 12 0 false true c d])
+                     points
+                     (ag [dx dy]))]
+    [:div {:style
+           (merge
+            (grid [100 :vh 100 :vw
+                   (take 15 (repeat [8 :vh]))
+                   (take 15 (repeat [8 :vh]))])
+            {:background-color (hsl [2.4 70 70 1])})}
 
-       ]
-    angles2)  )
+     [:div {:key (gensym)
+            :style (css
+                    [[2 11 2 11 :center :center 2 :rem]
+                     [-2 70 70 1] []
+                     {:z-index 2}]
+                    )}
+
+      [:svg {:viewBox (space (nth [[-100  -100 200 200 ]
+                                   [-10 -160 80 80]] 0))
+             :style {:height (size {:size 100 :scale :%})
+                     :width  (size {:size 100 :scale :%})}}
+
+       [:circle {:cx 0 :cy 0 :r 1 :fill (hsl [1 70 70 1])}]
+
+
+
+
+       [:path {:d (path [(ve (* l2 3)) 0 :l
+                         (* 6 l2) 0])
+               :stroke (hsl [1 70 70 1])
+               :stroke-width 1
+               :fill :none}]
+
+
+
+       (map
+        (fn [i]
+          [:path {:key (gensym)
+                  :d
+                  (path [(* (/ l2 2) i) 0 :l
+                         l2 0
+                         0 5])
+                  :stroke (hsl [(+ (* i .8)
+                                   (* .6 (rand-int 20)))
+
+                                (+ i 70)
+                                (-  70 i) 1])
+                  :stroke-width 1
+                  :fill :none}])
+        (range -6 6))
+
+
+
+
+       ]]]))
