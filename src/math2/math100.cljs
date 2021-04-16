@@ -392,6 +392,27 @@
             (partial into (conj base :l))
             (partial map (partial * l)))
         sq-path (s2 dx)
+        s3  (comp
+             (fn [n]
+               (subvec n  0 (dec (count n))))
+             vec
+             rest
+             (partial reduce
+                      (fn [acc  [x y]]
+                        (let [[x1 y1] (last acc)]
+                          (conj acc [(+ x x1) (+ y y1)])))  [[0 0]])
+             (partial partition 2)
+             (partial into base)
+             (partial mapv (partial * l)))
+        s4 (comp
+            vec
+            (partial partition 2)
+            (fn [[e v]]
+              (map + e v))
+            (juxt (comp
+                   (partial mapcat identity) s3)
+                  (partial mapv (partial * 10))))
+        points (s4 dx)
         ]
     [:div {:style
            (merge
@@ -417,29 +438,12 @@
                :stroke (hsl [1 70 70 1])
                :stroke-width 1
                :fill :none}]
+       (map (fn [[x y]]
+              [:circle {:key (gensym)
+                        :cx x :cy y :r 1 :fill (hsl [1 70 70 1])}])
+            points)
+
        ]]]))
 
 (comment
-  (get [1 0 0 1 -1 0 0 -1 ] 2)
-
-  [1 0   0  1 -1  0  0 -1 ]
-  (let [dx [1 0 0 1 -1 0 0 -1 ]
-        dd  [0 1  -1  0  0 -1  1  0 ]
-        l 45
-        l2 (/ l 2)
-        base [(ve l2) (ve l2)]
-        s2 (comp
-            (fn [matrix]
-              (for [i (range 0 4)
-                    j (range 0 3)]
-                (get-in matrix [j i])))
-            (partial mapv
-                     (comp
-                      vec
-                      (partial partition 2)))
-            (juxt
-             (partial mapv (partial * 3))
-             (partial mapv (partial * -3))
-             (partial mapv (partial * l))))
-        ]
-    (s2 dx)))
+  )
