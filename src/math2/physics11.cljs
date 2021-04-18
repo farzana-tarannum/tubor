@@ -135,12 +135,12 @@
                    :width  (size {:size 100 :scale :%})}}
 
      (comment
-
-
        [:animate {:attributeName :viewBox
                   :to (space [-10 -60 70 70])
                   :dur "5s"
-                  :fill :freeze}])
+                  :fill :freeze}]
+
+       )
 
      [:circle {:cx 0
                :cy 0
