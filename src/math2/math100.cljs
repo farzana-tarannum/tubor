@@ -269,8 +269,7 @@
                :cy -10
                :r 4
                :fill (hsl [2 70 70 1])}]]]
-   (comment
-     )
+
    [:div {:key (gensym)
           :style (css
                   [[2 7 2 7 :center :center 3 :rem :column]
@@ -281,7 +280,8 @@
 
 
    (comment
-     [:div {:key (gensym)
+     )
+   [:div {:key (gensym)
             :style (css
                     [[2 11 2 11 :center :center 2 :rem]
                      [.5 70 70 .9] []
@@ -398,7 +398,7 @@
                    :cy 0
                    :r 1
                    :stroke (hsl [1.8 70 70 1])
-                   :fill (hsl [2.8 70 70 1])}]])])
+                   :fill (hsl [2.8 70 70 1])}]])]
    ])
 
 (comment
@@ -667,7 +667,7 @@
                    second)))
         f (fn [n] (/ 1 n))
         pi 'π
-        view-box? false
+        view-box? true
         angles2 (map (fn [[a b] [c d]]
                        [a b :a 12 12 0 false true c d])
                      points
@@ -678,34 +678,6 @@
                    (take 15 (repeat [8 :vh]))
                    (take 15 (repeat [8 :vh]))])
             {:background-color (hsl [2.4 70 70 1])})}
-
-     [:div
-      {:key (gensym)
-       :style (css
-               [[2 6 2 11 :center :center 3 :rem :column]
-                [-0.5 70 70 1] []
-                {:z-index 4}]
-               )}
-      [m7/m ['= 'U [:m pi [:b ['+ 'r 'h]]]]]
-
-      [m7/m ['= 'U   [:m [22 7] [:b ['+ 'r 'h]]]]]
-
-      [m7/m ['= ['* 'U [7 22]]   [:m [7 22] [22 7]  [:b ['+ 'r 'h]]]]]
-
-
-
-
-
-      ]
-
-     [:div
-      {:key (gensym)
-       :style (css
-               [[7 2 2 11 :center :center 2 :rem :column]
-                [1.5 70 70 1] []
-                {:z-index 4}])}
-      [:div ""]
-      ]
 
      [:div {:key (gensym)
             :style (css
@@ -722,7 +694,7 @@
 
        (if view-box?
            [:animate {:attributeName :viewBox
-                      :to [-2 -2 4 4]
+                      :to [-4 -4 8 8]
                       :dur "1s"
                       :fill :freeze}])
 
@@ -741,14 +713,35 @@
 
 
        [:path {:d (path
-                   [(ve (f 2)) (ve (f 2))
-                    :l (f 4) 0  :a (f 4) (f 4) 0 false true (ve (f 4)) (f 4)
-                    :l 0 (ve (f 4))
-                    1 0  0 1 (ve 1)  0 0 (ve 1)
-                     -1 0  0 1 1  0 0 (ve 1)])
+                   (let  [dx [1 0  0 1 -1  0 0 -1 ]
+                          sq2 (partition
+                               2
+                               (map (partial * (f 3)) dx))
+                          toggle (fn [[x & r]]
+                                   (conj (vec r) x))
+                          add (fn [[x y] [u v]]
+                                [(+ x u)
+                                 (+ y v)])
+
+                          ]
+                     (flatten
+                      [
+                       [(ve (f 2)) (ve (f 2))]
+                       :l
+                       (interleave
+                        (map
+                         (fn [[a b c d]]
+                           [a :a (f 2) (f 2) 0 false true  (add b c) :l d])
+                         (reduce
+                          (fn [acc _]
+                            (conj acc (toggle
+                                       (last acc))))
+                          [sq2]
+                          (range 3)))
+                        (partition 2  dx))]))
+                   )
                :stroke (hsl [1 70 70 1])
                :fill (hsl [(f 2) 70 70 1])
-
                :stroke-width (f 50)
                }]
 
@@ -764,7 +757,32 @@
 
 
 (comment
-  (let [dx [1 0  0 1 -1  0 0 -1 ]
-        ]
-    small-box
-    ))
+
+  (defn transpose [m]
+    (apply mapv vector m))
+
+
+  (partition 2
+             (for [i (range 0 2)
+                   j (range 0 2)]
+               (get-in [[1 2] [3 4]] [j i])))
+
+  (let  [dx [1 0  0 1 -1  0 0 -1]
+         f (fn [x] (/ 1 x))
+         sq2 (partition
+              2
+              (map (partial * (f 4)) dx))
+
+         toggle (fn [[x & r]]
+                  (conj (vec r) x))
+         ]
+    (flatten
+     [
+      [(ve (f 2)) (ve (f 2))]
+      :l
+      (interleave
+       [sq2
+        (toggle sq2)
+        (toggle (toggle sq2))
+        (toggle (toggle (toggle sq2)))]
+       (partition 2  dx))])))
