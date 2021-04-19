@@ -681,6 +681,44 @@
 
      [:div {:key (gensym)
             :style (css
+                    [[2 5 2 11 :center :center 2 :rem
+                      :column]
+                     [-2 70 70 1] []
+                     {:z-index 3}]
+                    )}
+
+      [m7/m '[=
+              y [[:m 5 [:b [- x 32]]] 9]]]
+
+      [m7/m '[=
+              y [[:m 5 [:b [- 80 32]]] 9]]]
+
+      [m7/m '[=
+              y [[* 5 [:b [- 50 2]]] 9]]]
+
+      [m7/m '[=
+              y [80
+                 3] 26.7]]
+
+
+      ]
+
+
+     [:div {:key (gensym)
+            :style (css
+                    [[8 5 2 11 :center :center 2 :rem
+                      :column]
+                     [-2 70 70 1] []
+                     {:z-index 3}]
+                    )}
+      "todo"
+
+
+
+      ]
+
+     [:div {:key (gensym)
+            :style (css
                     [[2 11 2 11 :center :center 2 :rem]
                      [-2 70 70 1] []
                      {:z-index 2}]
@@ -786,3 +824,30 @@
         (toggle (toggle sq2))
         (toggle (toggle (toggle sq2)))]
        (partition 2  dx))])))
+
+
+
+
+
+
+(comment
+  (let  [f (fn [n] (/ 1 n))
+         dx [1 0  0 1 -1  0 0 -1 ]
+         sq-fn (fn [n]
+                 (comp
+                  (partial partition 2)
+                  (partial map (partial * (f n)))))
+         add (fn [[x y] [u v]]
+               [(+ x u)
+                (+ y v)])
+         c ((comp
+             cycle
+             (sq-fn 4))
+            dx)]
+    (interpose
+     (map
+      (fn [n]
+        (take 4 (drop n c)))
+      (range 0 4))
+     ((sq-fn 1) dx)))
+)
