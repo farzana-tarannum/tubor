@@ -6,6 +6,7 @@
             [math2.math7 :as math7]
             [math2.physics11 :as p11]
             [math2.math100 :as m100]
+            [math2.math :as mtemp]
             [react]))
 
 ;;(defn ^:before-load my-before-reload-callback []
@@ -27,6 +28,8 @@
    [m100/template2]
    [m100/template3]
    [m100/template4]
+   [m100/template5]
+   [mtemp/template1]
    ])
 
 

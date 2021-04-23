@@ -377,6 +377,59 @@
           :d))
    (partial s/conform :math7/path)))
 
+
+
+(defn path2 [[fx fy]]
+  (comp
+   m-add
+   space
+   (partial mapcat identity)
+   (juxt (comp
+          (juxt
+           (comp fx :x) (comp fy :y))
+          :m)
+         (comp
+          (partial
+           mapcat
+           (fun
+            ([[:line {:l :l :points p}]]
+             (cons (name :l)
+                   (mapcat (juxt (comp fx :x) (comp fy :y))   p)))
+            ([[:line {:l :L :points p}]]
+             (cons (name :L) (mapcat (juxt (comp fx :x) (comp fy :y)) p)))
+            ([[:curve-c {:c :c
+                         :control-point1 control-point1
+                         :control-point2 control-point2
+                         :end-point end-point}]]
+             (cons (name :c)
+                   (mapcat (juxt (comp fx  :x)
+                                 (comp fy :y))
+                            [control-point1 control-point2 end-point])))
+            ([[:curve-c {:c :C
+                         :control-point1 control-point1
+                         :control-point2 control-point2
+                         :end-point end-point}]]
+             (cons (name :C)
+                   (mapcat (juxt (comp fx :x)
+                                 (comp fy :y))
+                           [control-point1 control-point2 end-point])))
+
+            ([[:curve-q
+               {:q :q :control-point control-point :end-point end-point}]]
+             (cons (name :q) (mapcat (juxt
+                                      (comp fx :x) (comp fy :y))
+                                     [control-point end-point])))
+            ([[:curve-q
+               {:q :Q :control-point control-point :end-point end-point}]]
+             (cons (name :Q) (mapcat (juxt (comp  fx :x) (comp fy :y))
+                                     [control-point end-point])))
+            ([[:arc {:a :a :r1 r1 :r2 r2 :angle angle :f1 f1 :f2 f2 :end end}]]
+             [(name :a)  r1 r2  angle (if f1 1 0) (if f2 1 0) (fx (:x end)) (fy (:y end))])
+            ([[:arc {:A :a :r1 r1 :r2 r2 :angle angle :f1 f1 :f2 f2 :end end}]]
+             [(name :A)  r1 r2  angle (if f1 1 0) (if f2 1 0) (fx (:x end)) (fy (:y end))])))
+          :d))
+   (partial s/conform :math7/path)))
+
 (comment (interpose :l [1 2 3]))
 (comment
   (path

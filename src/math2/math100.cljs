@@ -18,28 +18,28 @@
         bm 30
         bf (fn [n] (* bm (/ 1 n)))
         base [(ve (bf 2)) (ve (bf 2))]
+        base2 [(ve (+ (bf 8) (bf 2))) (ve (+ (bf 8) (bf 2)))]
         bm2 (/ bm 2)
         angle-x 0
         angle-y 15
 
-        o [[m7/m ['* 1 80]]
+        o [125
            [m7/m ['* 1 1]]
            [m7/m [100 100]]
            [:div st [m7/m [:m 100 '%]]]]
-        f [[m7/m [80
-                  4]]
+        f ['a
            [:div [m7/m [1 4]] ""]
            [:div [m7/m [25 100]]  ""]
            [:div st
-            [m7/m [:m 25 '%]]]]
-        n 3
+            [m7/m [:m 28 '%]]]]
+        n 0
         n2 3
         one (nth o n)
         frac (nth f n)
         one2  (nth o n2)
         frac2 (nth f n2)
         scl (nth [4.2 1.5 1.5 7.5] n)
-        scl2 (nth [4.2 1.5 1.5 7.5] n2)]
+        scl2 (nth [4.2 1.5 1.5 4.5] n2)]
     [:div {:style
            (merge
             (grid [100 :vh 100 :vw
@@ -49,18 +49,33 @@
 
      [:div {:key (gensym)
             :style (css
-                    [[2 2 2 11 :center :center 2 :rem]
+                    [[2 2 2 11 :center :center 3 :rem :column]
                      [.5 70 70 .3] []
                      {:z-index 23}]
                     )}
-      ""
+
+      [m7/m '[+ [3 [- [:m 2 b] [:m 4 c]]] [2 [- [:m 3 b] [:m 6 c]]]]]
+
+      [m7/m '[+ [3 [- [:m 2 b] [:m 4 c]]] [2 [- [:m 3 b] [:m 6 c]]]]]
+
+      [m7/m '[13 [:m 6 [:b [- b [:m 2 c]]]]]]
+
+
+
+
+
+
+
+
+
+
       ]
 
      [:div {:key (gensym)
-              :style (css
-                      [[2 11 2 11 :center :center 2 :rem]
-                       [.5 70 70 .9] []
-                       {:z-index 22}]
+            :style (css
+                    [[4 11 2 11 :center :center 2 :rem]
+                     [.5 70 70 .9] []
+                     {:z-index 22}]
                       )}
         [:svg {:viewBox (space (nth [[-100  -100 200 200 ]
                                      [-10 -160 80 80]] 0))
@@ -176,7 +191,7 @@
 
 
          [:path {:d (path (flatten
-                           [base
+                           [base2
                             :l (map
                                 (partial * (bf 2))
                                 square)]))
@@ -483,6 +498,98 @@
                    (take 15 (repeat [8 :vh]))])
             {:background-color (hsl [2.4 70 70 1])})}
 
+
+
+
+
+
+
+     [:div {:key (gensym)
+            :style (css
+                    [[2 11 2 11 :center :center 2 :rem :column]
+                     [-2 70 70 1] []
+                     {:z-index 2}]
+                    )}
+
+
+      [:div "150 years ago"]
+      [:div {:style {:background-color (hsl [1 70 70 1])}} "sum of age 2961"]
+      [:div "today"]
+      [:div {:style {:background-color (hsl [1 70 70 1])}} "sum of age "
+       (m7/m '[+ 2961 150 150])]
+      [:div "Pine tree is 1432 years old"]
+      [:div "Other tree is "]
+      [:div {:style {:background-color (hsl [1 70 70 1])}}
+       (m7/m '[- [+ 2961 150 150] 1432])
+       " years old"]
+
+      ]]))
+
+(defn template31 []
+  (let [dx [1 0  0 1 -1  0 0 -1 ]
+        dy [0 1 -1 0  0 -1 1  0 ]
+        l 45
+        l2 (/ l 2)
+        base [(ve l2) (ve l2)]
+        s2 (comp
+            (partial into (conj base :l))
+            (partial map (partial * l)))
+        sq-path (s2 dx)
+        s3  (comp
+             (fn [n]
+               (subvec n  0 (dec (count n))))
+             vec
+             rest
+             (partial reduce
+                      (fn [acc  [x y]]
+                        (let [[x1 y1] (last acc)]
+                          (conj acc [(+ x x1) (+ y y1)])))  [[0 0]])
+             (partial partition 2)
+             (partial into base)
+             (partial mapv (partial * l)))
+        s4 (comp
+            vec
+            (partial partition 2)
+            (fn [[e v]]
+              (map + e v))
+            (juxt (comp
+                   (partial mapcat identity) s3)
+                  (partial mapv (partial * 12))))
+        points (s4 dx)
+        angles (map
+                (fn [[a b] [c d]]
+                  [a b :l c d])
+                points
+                (partition 2
+                           (map +
+                                (map (comp
+                                      (partial * 10)
+                                      ve) dx)
+                                (map (partial * 10) dy))))
+
+        ag (comp
+            (partial partition 2)
+            (fn [[x y]]
+              (map + x y))
+            (juxt (comp
+                   (partial map (partial * 12))
+                   (partial map ve)
+                   first)
+                  (comp
+                   (partial map (partial * 12))
+                   second)))
+
+        angles2 (map (fn [[a b] [c d]]
+                       [a b :a 12 12 0 false true c d])
+                     points
+                     (ag [dx dy]))]
+    [:div {:style
+           (merge
+            (grid [100 :vh 100 :vw
+                   (take 15 (repeat [8 :vh]))
+                   (take 15 (repeat [8 :vh]))])
+            {:background-color (hsl [2.4 70 70 1])})}
+
      [:div {:key (gensym)
             :style (css
                     [[2 11 2 11 :center :center 2 :rem]
@@ -630,7 +737,8 @@
              (partial reduce
                       (fn [acc  [x y]]
                         (let [[x1 y1] (last acc)]
-                          (conj acc [(+ x x1) (+ y y1)])))  [[0 0]])
+                          (conj acc [(+ x x1) (+ y y1)])))
+                      [[0 0]])
              (partial partition 2)
              (partial into base)
              (partial mapv (partial * l)))
@@ -679,43 +787,10 @@
                    (take 15 (repeat [8 :vh]))])
             {:background-color (hsl [2.4 70 70 1])})}
 
-     [:div {:key (gensym)
-            :style (css
-                    [[2 5 2 11 :center :center 2 :rem
-                      :column]
-                     [-2 70 70 1] []
-                     {:z-index 3}]
-                    )}
-
-      [m7/m '[=
-              y [[:m 5 [:b [- x 32]]] 9]]]
-
-      [m7/m '[=
-              y [[:m 5 [:b [- 80 32]]] 9]]]
-
-      [m7/m '[=
-              y [[* 5 [:b [- 50 2]]] 9]]]
-
-      [m7/m '[=
-              y [80
-                 3] 26.7]]
-
-
-      ]
-
-
-     [:div {:key (gensym)
-            :style (css
-                    [[8 5 2 11 :center :center 2 :rem
-                      :column]
-                     [-2 70 70 1] []
-                     {:z-index 3}]
-                    )}
-      "todo"
 
 
 
-      ]
+
 
      [:div {:key (gensym)
             :style (css
@@ -795,59 +870,150 @@
 
 
 (comment
-
-  (defn transpose [m]
-    (apply mapv vector m))
-
-
-  (partition 2
-             (for [i (range 0 2)
-                   j (range 0 2)]
-               (get-in [[1 2] [3 4]] [j i])))
-
-  (let  [dx [1 0  0 1 -1  0 0 -1]
-         f (fn [x] (/ 1 x))
-         sq2 (partition
-              2
-              (map (partial * (f 4)) dx))
-
-         toggle (fn [[x & r]]
-                  (conj (vec r) x))
-         ]
-    (flatten
-     [
-      [(ve (f 2)) (ve (f 2))]
-      :l
-      (interleave
-       [sq2
-        (toggle sq2)
-        (toggle (toggle sq2))
-        (toggle (toggle (toggle sq2)))]
-       (partition 2  dx))])))
-
-
-
-
-
-
-(comment
-  (let  [f (fn [n] (/ 1 n))
-         dx [1 0  0 1 -1  0 0 -1 ]
-         sq-fn (fn [n]
-                 (comp
-                  (partial partition 2)
-                  (partial map (partial * (f n)))))
-         add (fn [[x y] [u v]]
-               [(+ x u)
-                (+ y v)])
-         c ((comp
-             cycle
-             (sq-fn 4))
-            dx)]
+  (let [f (fn [n] (/ 1 n))
+        dx [1 0  0 1 -1  0 0 -1 ]
+        sq-fn (fn [n]
+                (comp
+                 (partial partition 2)
+                 (partial map (partial * (f n)))))
+        add (fn [[x y] [u v]]
+              [(+ x u)
+               (+ y v)])
+        c ((comp
+            cycle
+            (sq-fn 4))
+           dx)]
     (interpose
-     (map
+     (mapcat
       (fn [n]
         (take 4 (drop n c)))
       (range 0 4))
-     ((sq-fn 1) dx)))
-)
+     ((sq-fn 1) dx))))
+
+
+(defn template5 []
+  (let [f (fn [n] (/ 1 n))
+        dx [1 0  0 1 -1  0 0 -1 ]
+        sq-fn (fn [n]
+                (comp
+                 (partial partition 2)
+                 (partial map (partial * (f n)))))
+        add (fn [[x y] [u v]]
+              [(+ x u)
+               (+ y v)])
+        c2 (fn [n]
+             (comp
+              cycle
+              (sq-fn n)))]
+    [:div {:style
+           (merge
+            (grid [100 :vh 100 :vw
+                   (take 15 (repeat [8 :vh]))
+                   (take 15 (repeat [8 :vh]))])
+            {:background-color (hsl [3.4 70 70 1])})}
+     [:div {:style (css
+                    [[2 11 2 11 :center :center 2 :rem :column]
+                     [-3 70 70 1] []
+                     {:z-index 3}]
+                    )}
+      (comment [:video {:controls :controls
+                       :width "100%"
+                       :height "100%"
+                       :autoplay true}
+               [:source {:src "space.webm"}]])
+
+      ]
+     [:div {:key (gensym)
+            :style (css
+                    [[2 11 2 11 :center :center 2 :rem :column]
+                     [-3 70 70 1] []
+                     {:z-index 2}]
+                    )}
+      [:svg {:viewBox (space [-6  -6 12 12])
+             :style
+             {:height (size {:size 100 :scale :%})
+              :width  (size {:size 100 :scale :%})}}
+       [:circle {:cx 0 :cy 0 :r (f 8) :fill (hsl [0 70 70 1])}]
+
+
+
+
+       (comment [[3 3] [2 5]])
+
+       (map
+        (fn [i  [a b] [x y]]
+          [:path {:key (gensym)
+                  :d ((m7/path2 [(fn [x]
+                                   (* a x (- 1 (f 3))))
+                                 (fn [y]
+                                   (* b y (- 1 (f 3))))])
+                      (flatten
+                       [(* x (f 3)) (* y (f 3)) :l
+                        (take 4
+                              (drop i ((c2 1) dx)))]))
+                  :stroke (hsl [1 70 70 1])
+                  :stroke-width (f 50)
+                  :fill (hsl [2 70 70 1])}])
+        (range 0 4)
+        (let [[[x1 y1] [x2 y2]]
+              [[1 1] [1 1]]
+              c4 [y1 y2]
+              c3 [x1 y2]
+              c2 [x1 x2]
+              c1 [y1 x2]]
+          [c4 c3 c2 c1 ])
+        [[1 1] [-1 1] [-1 -1] [1 -1]])
+
+
+
+       (map
+        (fn [[x y] [dx dy] i]
+          [:circle {:keys (gensym)
+                    :cx (* x dx)
+                    :cy (* y dy)
+                    :r (f 12)
+                    :fill (hsl [(* i (f 3)) 70 70 1])}])
+        (let [[[x1 y1] [x2 y2]]
+              [[3 3] [2 5]]
+              c4 [y1 y2]
+              c3 [x1 y2]
+              c2 [x1 x2]
+              c1 [y1 x2]]
+          [c4 c3 c2 c1 ])
+        (partition 2
+                   (map + dx
+                        (flatten
+                         (take 4  (drop 1 ((c2 1) dx))))))
+        (range 1 5))]]]))
+
+
+(comment
+  (partition
+   2
+   (interleave
+    (range 0 4)
+    (let [[[x1 y1] [x2 y2]] [[2 3] [3 5]]
+          c4 [y1 y2]
+          c1 [x1 x2]
+          c2 [y1 x2]
+          c3 [x1 y2]]
+      [c1 c2 c3 c4])))
+
+  (let [f (fn [n] (/ 1 n))
+        dx [1 0  0 1 -1  0 0 -1 ]
+        sq-fn (fn [n]
+                (comp
+                 (partial partition 2)
+                 (partial map (partial * (f n)))))
+        add (fn [[x y] [u v]]
+              [(+ x u)
+               (+ y v)])
+        c2 (fn [n]
+             (comp
+              cycle
+              (sq-fn n)))]
+    (map + dx
+         (flatten (take 4  (drop 1 ((c2 1) dx)))))
+    )
+
+  )
