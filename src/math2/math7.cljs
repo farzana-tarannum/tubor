@@ -323,6 +323,8 @@
 (def rel #{:l :c :a :q})
 (def abs #{:L :C :A :Q})
 (def space (fn [p] (str/join " " p)))
+
+(def sami-colon (fn [p] (str/join " ; " p)))
 (def not-space (fn [p] (str/join "" p)))
 (defn wrap [a]
   (str "(" a  ")"))

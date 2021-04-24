@@ -1,6 +1,8 @@
 (ns math2.math100
-  (:require [math2.math7 :as m7 :refer
-             [grid hsl css space size path ve sec]]))
+  (:require
+   [react]
+   [math2.math7 :as m7 :refer
+    [grid hsl css space size path ve sec]]))
 
 
 (def f
@@ -23,15 +25,15 @@
         angle-x 0
         angle-y 15
 
-        o [125
+        o ['b
            [m7/m ['* 1 1]]
            [m7/m [100 100]]
            [:div st [m7/m [:m 100 '%]]]]
         f ['a
-           [:div [m7/m [1 4]] ""]
-           [:div [m7/m [25 100]]  ""]
+           [:div [m7/m [1 'l]] ""]
+           [:div [m7/m ['e 100]]  ""]
            [:div st
-            [m7/m [:m 28 '%]]]]
+            [m7/m [:m 'e '%]]]]
         n 0
         n2 3
         one (nth o n)
@@ -54,20 +56,30 @@
                      {:z-index 23}]
                     )}
 
-      [m7/m '[+ [3 [- [:m 2 b] [:m 4 c]]] [2 [- [:m 3 b] [:m 6 c]]]]]
+      #_[m7/m '[= [:m e %] [e 100] [[e 100] [100 100]] [1 l] [a b]]]
 
-      [m7/m '[+ [3 [- [:m 2 b] [:m 4 c]]] [2 [- [:m 3 b] [:m 6 c]]]]]
+      [m7/m '[= [e 100] [a b]]]
 
-      [m7/m '[13 [:m 6 [:b [- b [:m 2 c]]]]]]
-
-
-
+      #_[m7/m '[= [5 100] [a 80]]]
+      #_[:div "5% of students failed on exam out  of 80 students, how many students failed?"]
 
 
+      [:div
+       "15% profit  is 75tk, so what is total investment?"]
+
+      [m7/m '[= [15 100] [75 Inv]]]
+
+      [m7/m '[= Inv
+              500]]
+      #_[m7/m '[= Inv
+              [7500 15]]]
 
 
+      #_[:div {:style {:font-size "1.5rem"}}
+       "Buying price is 1500 tk, we sold of with 20% profit, what is our profit?"]
 
-
+      #_[m7/m '[=  [20 100]
+              [pofit 1500]]]
 
       ]
 
@@ -191,7 +203,7 @@
 
 
          [:path {:d (path (flatten
-                           [base2
+                           [base
                             :l (map
                                 (partial * (bf 2))
                                 square)]))
@@ -889,10 +901,45 @@
         (take 4 (drop n c)))
       (range 0 4))
      ((sq-fn 1) dx))))
+(comment
+  _ (react/useEffect
+     (fn []
+       (-> ref .-current (.play))))
 
-
+  )
 (defn template5 []
-  (let [f (fn [n] (/ 1 n))
+  (let [ref (react/useRef)
+        [is-playing set-is-playing] (react/useState false)
+        toggle-playing
+        (fn [event]
+          (do
+            (set-is-playing
+             (not is-playing))
+            (if is-playing
+              (-> ref .-current (.pause))
+              (-> ref .-current (.play)))))
+        [media-time  set-media-time] (react/useState 0)
+        [duration set-duration] (react/useState 0)
+        on-loaded-metadata
+        (fn []
+          (set-duration (-> ref
+                            .-current
+                            .-duration)))
+        on-time-update
+        (fn []
+          (set-media-time
+           (-> ref .-current .-currentTime)))
+        on-scrubber-change
+        (fn [e]
+          (do
+            (set-media-time
+             (js/parseFloat
+              (-> e .-target .-value)))
+            (set!
+             (-> ref .-current .-currentTime)
+             (js/parseFloat
+              (-> e .-target .-value)))))
+        f (fn [n] (/ 1 n))
         dx [1 0  0 1 -1  0 0 -1 ]
         sq-fn (fn [n]
                 (comp
@@ -911,31 +958,98 @@
                    (take 15 (repeat [8 :vh]))
                    (take 20 (repeat [8 :vh]))])
             {:background-color (hsl [3.4 70 70 1])})}
-     [:div {:style (css
-                    [[2 11 2 15 :center :center 2 :rem :column]
-                     [-3 70 70 1] []
-                     {:z-index 3}]
-                    )}
-      [:video {:controls :controls
+
+     [:div {:style
+            (css
+             [[1 1 2 11 :center :center 2 :rem]
+              [-2 70 70 1] []
+              {:z-index 4}]
+             )}
+      (comment [:label {:html-for "scrubber"} ])
+      [:input {:type :range
+               :style {:width "100%"}
+               :id "scrubber"
+               :value media-time
+               :on-change on-scrubber-change
+               :min 0
+               :max duration}]
+      ]
+
+     [:div {:style
+            (css
+             [[2 1 2 2 :center :center 2 :rem]
+              [-2 70 70 1] []
+              {:z-index 4}]
+             )}
+      [:button {:on-click toggle-playing
+                :style {
+                        :width "100%"
+                        :height "100%"}}
+       (if is-playing
+         "Play"
+         "Pause")
+       ]
+      ]
+     [:div {:style
+            (css
+             [[2 1 4 6 :center :center 2 :rem]
+              [-2 70 70 1] []
+              {:z-index 4
+               :gap "1rem"}]
+             )}
+      [:span "elapsed time"]
+      [:span media-time]
+      ]
+     [:div {:style
+              (css
+               [[2 1 10 6 :center :center 2 :rem]
+                [-2 70 70 1] []
+                {:z-index 4
+                 :gap "1rem"}]
+               )}
+        [:span "total duration"]
+        [:span duration]
+        ]
+
+     [:div {:style
+            (css
+             [[2 11 2 15 :center :center 2 :rem :column]
+              [-3 70 70 1] []
+              {:z-index 3}]
+             )}
+
+      [:video {:controls true
+               :on-loaded-metadata on-loaded-metadata
+               :on-time-update on-time-update
+               :ref ref
                :width "100%"
                :height "100%"
                :autoplay true}
-       [:source {:src "UnderstandingCarCrashesItsBasicPhysics.mp4"}]]
+       [:source
+        {:src
+         "UnderstandingCarCrashesItsBasicPhysics.mp4"}]]
 
       ]
      [:div {:key (gensym)
             :style (css
-                    [[2 11 2 11 :center :center 2 :rem :column]
+                    [[2 7 2 7 :center :center 2 :rem :column]
                      [-3 70 70 .1] []
                      {:z-index 3}]
                     )}
-      [:svg {:viewBox (space [-6  -6 12 12])
+      [:svg {:viewBox (space [-6 -6 12 12])
              :style
              {:height (size {:size 100 :scale :%})
               :width  (size {:size 100 :scale :%})}}
        [:circle {:cx 0 :cy 0 :r (f 8) :fill (hsl [0 70 70 1])}]
 
 
+
+
+       [:path {:key (gensym)
+               :d (path [0 0 :l -3 -2])
+               :stroke (hsl [1 70 70 1])
+               :stroke-width (f 50)
+               :fill (hsl [2 70 70 1])}]
 
 
        (comment [[3 3] [2 5]])

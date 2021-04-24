@@ -23,19 +23,17 @@
          j (range 0 2)
          :let [r (+ 0 (+ i 1))
                c (+ 1 (* j 2))
-               v (get rd j)]
-         ]
+               v (get rd j)]]
      [:div {:key (gensym)
             :style
             (css
              [[r 1 c 2 :center :center 2 :rem]
-              [(* i j) 30 70 .2]
-              [(* i j)
-               30 :% (* (inc i) (inc j)) 30 60 0.1
-               40 :% (* (inc i) (inc j)) 20 40 0.1
-               70 :% (* (inc i) (inc j)) 0 80 0.1]
-              {:z-index 20}]
-             )} v])
+              [4 30 70 .2]
+              [(+ i -1 j)
+               30 :% (+ i j .1) 30 60 0.3
+               40 :% .3 20 40 0.5
+               70 :% 1 0 80 0.3]
+              {:z-index 20}])} v])
 
 
    [:div {:key (gensym)
@@ -51,11 +49,12 @@
    [:div {:key (gensym)
           :style (css
                   [[1 6 5 12 :center :center 2 :rem]
-                   [.2 30 70 .9] []
+                   [.2 30 70 .2] []
                    {:z-index 22}]
                   )}
 
     (let [bm 250
+          f (fn [i] (/ 1 i))
           bm2 (/ bm 2)
           hi 35
           angle-x 30
@@ -68,11 +67,13 @@
                      :width  (size {:size 100 :scale :%})}}
 
 
+
        [:path {:d (path [(ve bm2) 10
-                         :a 400 400 0 false false  bm 0
+                         :a 300 200 0 false false  bm 0
                          :l (ve angle-x) (ve angle-y)
-                         :a 400 400 0 false true
-                         (ve (- bm 60)) 0 :l
+                         :a 300 200 0 false true
+                         (ve (- bm 60)) 0
+                         :l
                          (ve angle-x) angle-y
                          ])
                :stroke (hsl [0.5 70 70 1])
@@ -84,33 +85,50 @@
           :dur (sec 1)
           :type :scale
           :from 1
-          :to 1.1
+          :to 2
           :fill :freeze
           :id :circ
           }]
 
         ]
+
        [:path {:d
                (path
-                [(ve (- bm2 20)) 0 :a 400 400 0 false false
-                 (- bm 40) 0])
-               :stroke (hsl [1 70 70 1])
+                [(ve (- bm2 20)) 0
+                 :a 400 400 0 false false (- bm 40) 0])
+               :stroke (hsl [2 70 70 1])
                :stroke-width 1.2
-               :fill :none
-
-               }
+               :fill :none}
         [:animateTransform
          {:attributeName :transform
           :begin :circ.begin
           :dur (sec 1)
           :type :scale
           :from 1
-          :to 1.1
+          :to 2
           :fill :freeze
-          }]]
+          }]
+        [:animate
+         {:attributeName :d
+          :begin :circ.begin
+          :dur (sec 4)
+          :keyTimes (m7/sami-colon [0 0.5 0.8 1])
+          :values (m7/sami-colon
+                   (reverse (map
+                             (fn [i]
+                               (path
+                                [(ve (- bm2 20)) 0
+                                 :a i i 0 false false (- bm 40) 0]))
+                             (reverse (range 200 400 50))
+                             )))
+
+          :fill :freeze
+          }]
+        ]
 
 
-       [:path {:d (path [(ve (+ 20 bm2)) 0 :l (+ 40 bm) 0])
+       [:path {:d (path
+                   [(ve (+ 20 bm2)) 0 :l (+ 40 bm) 0])
                :stroke (hsl [3.3 70 70 1])
                :stroke-width 1
                :fill :none
@@ -134,13 +152,11 @@
            :style {:height (size {:size 100 :scale :%})
                    :width  (size {:size 100 :scale :%})}}
 
-     (comment
-       [:animate {:attributeName :viewBox
-                  :to (space [-10 -60 70 70])
-                  :dur "5s"
-                  :fill :freeze}]
+     [:animate {:attributeName :viewBox
+                :to (space [-10 -70 40 40])
+                :dur "4s"
+                :fill :freeze}]
 
-       )
 
      [:circle {:cx 0
                :cy 0
