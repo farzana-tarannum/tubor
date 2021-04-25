@@ -325,13 +325,31 @@
 (def space (fn [p] (str/join " " p)))
 
 (def sami-colon (fn [p] (str/join " ; " p)))
+(def coma (fn [p] (str/join " , " p)))
 (def not-space (fn [p] (str/join "" p)))
+
 (defn wrap [a]
   (str "(" a  ")"))
 
+(defn url [i]
+  (str "url" "(#" i  ")" ))
 
+(defn fs [fnts]
+  (let [wrap (fn [a]
+               (str "'" a  "'"))]
+    {:font-family "'Amstelvar VF'"
+     :font-variation-settings
+     (coma
+      (map (fn [x y]
+             (str x " " y))
+           (map wrap ["wdth" "wght" "CNTR"  "opsz" "PWGT"
+                      "PWDT" "GRAD" "XOPQ" "XTRA" "YOPQ"])
+           fnts))}))
 
 (comment
+
+
+
   (wrap "hello")
   (space [2 3 3]))
 

@@ -907,8 +907,13 @@
        (-> ref .-current (.play))))
 
   )
+
+
+
+
 (defn template5 []
   (let [ref (react/useRef)
+        ref-path (react/useRef)
         [is-playing set-is-playing] (react/useState false)
         toggle-playing
         (fn [event]
@@ -920,13 +925,25 @@
               (-> ref .-current (.play)))))
         [media-time  set-media-time] (react/useState 0)
         [duration set-duration] (react/useState 0)
+        [first-elapsed set-first-elapsed] (react/useState 0)
         on-loaded-metadata
         (fn []
-          (set-duration (-> ref
-                            .-current
-                            .-duration)))
+          (set-duration (-> ref .-current .-duration)))
         on-time-update
         (fn []
+
+          (cond
+            (= first-elapsed 0)
+            (do
+
+              (set-first-elapsed -1)
+              (toggle-playing nil)
+              (set!
+               (-> ref .-current .-currentTime) 215))
+            (> first-elapsed 0) (set-first-elapsed (dec first-elapsed))
+            )
+
+
           (set-media-time
            (-> ref .-current .-currentTime)))
         on-scrubber-change
@@ -939,6 +956,13 @@
              (-> ref .-current .-currentTime)
              (js/parseFloat
               (-> e .-target .-value)))))
+        first-clip
+        (fn []
+          (do
+            (set-first-elapsed 45)
+            (set!
+             (-> ref .-current .-currentTime) 195.909994)
+            (toggle-playing nil)))
         f (fn [n] (/ 1 n))
         dx [1 0  0 1 -1  0 0 -1 ]
         sq-fn (fn [n]
@@ -961,8 +985,8 @@
 
      [:div {:style
             (css
-             [[1 1 2 11 :center :center 2 :rem]
-              [-2 70 70 1] []
+             [[1 1 2 6 :center :center 2 :rem]
+              [.5 70 70 1] []
               {:z-index 4}]
              )}
       (comment [:label {:html-for "scrubber"} ])
@@ -977,39 +1001,43 @@
 
      [:div {:style
             (css
-             [[2 1 2 2 :center :center 2 :rem]
+             [[1 1 8 1 :center :center 2 :rem]
               [-2 70 70 1] []
               {:z-index 4}]
              )}
       [:button {:on-click toggle-playing
-                :style {
-                        :width "100%"
+                :style {:width "100%"
                         :height "100%"}}
-       (if is-playing
-         "Play"
-         "Pause")
-       ]
-      ]
+       (if is-playing  "Pause" "Play")
+       ]]
      [:div {:style
             (css
-             [[2 1 4 6 :center :center 2 :rem]
-              [-2 70 70 1] []
+             [[1 1 9 2 :center :center 1.2 :rem :column]
+              [.5 70 70 1] []
               {:z-index 4
-               :gap "1rem"}]
-             )}
-      [:span "elapsed time"]
+               :gap "1rem"}])}
+      [:span "elapsed"]
       [:span media-time]
       ]
      [:div {:style
-              (css
-               [[2 1 10 6 :center :center 2 :rem]
-                [-2 70 70 1] []
-                {:z-index 4
-                 :gap "1rem"}]
-               )}
-        [:span "total duration"]
-        [:span duration]
-        ]
+            (css
+             [[1 1 11 2 :center :center 1.2 :rem :column]
+              [-0.5 70 70 1] []
+              {:z-index 4 :gap "1rem"}]
+             )}
+      [:span "duration"]
+      [:span duration]
+      ]
+     [:div {:on-click first-clip
+            :style
+            (css
+             [[1 1 13 2 :center :center 1.2 :rem :column]
+              [-0.5 70 70 1] []
+              {:z-index 4 :gap "1rem"}]
+             )}
+      [:span "first"]
+      [:span first-elapsed]
+      ]
 
      [:div {:style
             (css
@@ -1032,73 +1060,164 @@
       ]
      [:div {:key (gensym)
             :style (css
-                    [[2 7 2 7 :center :center 2 :rem :column]
+                    [[2 7 17 7 :center :center 2 :rem :column]
                      [-3 70 70 .1] []
-                     {:z-index 3}]
+                     {:z-index 4}]
+                    )}
+      [:div {:style {:font-size "2rem"
+                     :font-weigh 700
+                     :color (hsl [.5 70 50 1 ])}}
+       "First Law of Motion"]
+      [:div {:style {:font-size "5rem"
+                     :font-weigh 700
+                     :color (hsl [.5 70 50 1 ])}}
+       "Inertia"]
+      [:div {:style {
+                     :font-size "2.2rem"
+                     :font-weigh 500
+                     :color (hsl [5.7 70 70 1 ])}}
+       [:div  "Property of Matter that causes it to resist any change in motion"]
+
+       ]
+
+
+      ]
+     [:div {:keys (gensym)
+            :style (css
+                    [[7 1 17 7 :center :center 3 :rem]
+                     [-3 70 70 .1] []
+                     {:z-index 1}
+                     (m7/fs [200 500 100 31 26 200 154 75 491 52])]
+                    )}
+      "If forces on a mass are balanced & no resultant force applied"
+      ]
+     [:div {:keys (gensym)
+            :style (css
+                    [[8 2 18 2 :center :center 2.2 :rem]
+                     [-3 70 70 .1] []
+                     {:z-index 5}]
+                    )}
+
+
+
+      [:div "If it is at rest, it stays at rest"]]
+     [:div {:keys (gensym)
+            :style (css
+                    [[9 2 20 2 :center :center 2 :rem]
+                     [-3 70 70 .1] []
+                     {:z-index 5}]
+                    )}
+      [:div
+       "If it is " [:span {:style {:background-color (hsl [1.2 70 70 1])}} "moving"]  ",
+it keep " [:span {:style {:background-color (hsl [1.2 70 70 1])}} "moving"]    " on a constant speed in
+in a straight line"]]
+     [:div {:key (gensym)
+            :style (css
+                    [[2 7 15 7 :center :center 2 :rem :column]
+                     [-3 70 70 .1] []
+                     {:z-index 2}]
                     )}
       [:svg {:viewBox (space [-6 -6 12 12])
              :style
              {:height (size {:size 100 :scale :%})
               :width  (size {:size 100 :scale :%})}}
-       [:circle {:cx 0 :cy 0 :r (f 8) :fill (hsl [0 70 70 1])}]
+       [:g
+        [:circle {:cx 0 :cy 0 :r (f 8) :fill (hsl [0 70 70 1])}]
+
+        (map
+         (fn [i  [a b] [x y]]
+           [:path {:key (gensym)
+                   :d ((m7/path2 [(fn [x]
+                                    (* a x (- 1 (f 3))))
+                                  (fn [y]
+                                    (* b y (- 1 (f 3))))])
+                       (flatten
+                        [(* x (f 3)) (* y (f 3)) :l
+                         (take 4
+                               (drop i ((c2 1) dx)))]))
+                   :stroke (hsl [1 70 70 1])
+                   :stroke-width (f 50)
+                   :fill (hsl [2 70 70 1])}])
+         (range 0 4)
+         (let [[[x1 y1] [x2 y2]]
+               [[1 1] [1 1]]
+               c4 [y1 y2]
+               c3 [x1 y2]
+               c2 [x1 x2]
+               c1 [y1 x2]]
+           [c4 c3 c2 c1 ])
+         [[1 1] [-1 1] [-1 -1] [1 -1]])
 
 
 
+        (map
+         (fn [[x y] [dx dy] i]
+           [:circle {:keys (gensym)
+                     :cx (* x dx)
+                     :cy (* y dy)
+                     :r (f 12)
+                     :fill (hsl [(* i (f 3)) 70 70 1])}])
+         (let [[[x1 y1] [x2 y2]]
+               [[3 3] [2 5]]
+               c4 [y1 y2]
+               c3 [x1 y2]
+               c2 [x1 x2]
+               c1 [y1 x2]]
+           [c4 c3 c2 c1 ])
+         (partition 2
+                    (map + dx
+                         (flatten
+                          (take 4  (drop 1 ((c2 1) dx))))))
+         (range 1 5))]
 
-       [:path {:key (gensym)
-               :d (path [0 0 :l -3 -2])
-               :stroke (hsl [1 70 70 1])
-               :stroke-width (f 50)
-               :fill (hsl [2 70 70 1])}]
+       ]
+      ]
 
+     [:div {:key (gensym)
+            :style (css
+                    [[2 7 4 7 :center :center 2 :rem :column]
+                     [-3 70 70 .1] []
+                     {:z-index 4}]
+                    )}
+      [:svg {:viewBox (space [-100 -100 200 200])
+             :style
+             {:height (size {:size 100 :scale :%})
+              :width  (size {:size 100 :scale :%})}}
+       [:defs
+        [:marker {:id "j"
+                  :refY 0
+                  :refX 0
+                  :orient :auto
+                  :style {:overflow :visible}}
+         [:path {:d (m7/path [0 0 :L 5 -5
+                           :L -12.5  0
+                           :L 3  5  :L 0  0 ])
+                 :style {:fill-rule :evenodd
+                         :stroke (hsl [1 70 70 1])
+                         :stroke-width 1
+                         :stroke-opacity 1
+                         :fill (hsl [4 70 70 1])
+                         :fill-opacity 1}
+                 :transform
+                 (m7/tranfrom [[:scale .2]
+                            [:rotate 180]
+                            [:translate [12.5 0]]])}]
 
-       (comment [[3 3] [2 5]])
+         ]]
+       [:g
 
-       (map
-        (fn [i  [a b] [x y]]
-          [:path {:key (gensym)
-                  :d ((m7/path2 [(fn [x]
-                                   (* a x (- 1 (f 3))))
-                                 (fn [y]
-                                   (* b y (- 1 (f 3))))])
-                      (flatten
-                       [(* x (f 3)) (* y (f 3)) :l
-                        (take 4
-                              (drop i ((c2 1) dx)))]))
-                  :stroke (hsl [1 70 70 1])
-                  :stroke-width (f 50)
-                  :fill (hsl [2 70 70 1])}])
-        (range 0 4)
-        (let [[[x1 y1] [x2 y2]]
-              [[1 1] [1 1]]
-              c4 [y1 y2]
-              c3 [x1 y2]
-              c2 [x1 x2]
-              c1 [y1 x2]]
-          [c4 c3 c2 c1 ])
-        [[1 1] [-1 1] [-1 -1] [1 -1]])
+        [:path {:ref ref-path
+                :style {:stroke-dashoffset 1000
+                        :stroke-dasharray 122
+                        :stroke (m7/hsl [0 70 70 1])
+                        :stroke-width 3}
 
+                :d (m7/path [100 0 :c -20 -20 -80 -20   -100 0])
 
-
-       (map
-        (fn [[x y] [dx dy] i]
-          [:circle {:keys (gensym)
-                    :cx (* x dx)
-                    :cy (* y dy)
-                    :r (f 12)
-                    :fill (hsl [(* i (f 3)) 70 70 1])}])
-        (let [[[x1 y1] [x2 y2]]
-              [[3 3] [2 5]]
-              c4 [y1 y2]
-              c3 [x1 y2]
-              c2 [x1 x2]
-              c1 [y1 x2]]
-          [c4 c3 c2 c1 ])
-        (partition 2
-                   (map + dx
-                        (flatten
-                         (take 4  (drop 1 ((c2 1) dx))))))
-        (range 1 5))]]]))
+                :fill :none
+                :marker-end (m7/url "j")
+                }]]]]
+     ]))
 
 
 (comment
