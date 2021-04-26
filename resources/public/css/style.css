@@ -15,7 +15,7 @@
 
 body {
     box-sizing: border-box;
-    font: 4em "Amazonia VAR", Georgia, serif, Sans-Serif;
+    font: 4em "Amazonia VAR", Georgia, serif, Sans-Serif, DejaVu, Droid;
     margin: 0;
 }
 
