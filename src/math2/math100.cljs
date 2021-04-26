@@ -914,6 +914,7 @@
 (defn template5 []
   (let [ref (react/useRef)
         ref-path (react/useRef)
+        [slider set-slider] (react/useState 0)
         [is-playing set-is-playing] (react/useState false)
         toggle-playing
         (fn [event]
@@ -931,7 +932,6 @@
           (set-duration (-> ref .-current .-duration)))
         on-time-update
         (fn []
-
           (cond
             (= first-elapsed 0)
             (do
@@ -959,10 +959,43 @@
         first-clip
         (fn []
           (do
+            (set-slider 0)
             (set-first-elapsed 45)
             (set!
              (-> ref .-current .-currentTime) 195.909994)
             (toggle-playing nil)))
+        [inertia set-inertia] (react/useState false)
+        toggle-arrow (fn [e]
+                       (set-inertia (not inertia)))
+
+        animate-path
+        (fn [e]
+          (-> ref-path
+              .-current
+              (.animate
+               (clj->js
+                [{:stroke (m7/hsl [0 70 70 0])
+                  :strokeDasharray 100}
+                 {:strokeDasharray 110
+                  :stroke (m7/hsl [0 70 70 .5])}
+                 {:strokeDasharray 120
+                  :stroke (m7/hsl [0 70 70 1])
+                  }
+                 {:opacity 0
+                  :strokeDasharray 120
+                  :stroke (m7/hsl [0 70 70 0])
+                  }
+                 ])
+               (clj->js
+                {:duration 1400
+                 :iterations 2})
+               )))
+        dummy-acc (fn [e]
+                    (toggle-arrow nil)
+                    (set!
+                     (-> ref .-current .-currentTime) 215)
+                    (toggle-playing nil))
+
         f (fn [n] (/ 1 n))
         dx [1 0  0 1 -1  0 0 -1 ]
         sq-fn (fn [n]
@@ -983,21 +1016,34 @@
                    (take 20 (repeat [8 :vh]))])
             {:background-color (hsl [3.4 70 70 1])})}
 
+
      [:div {:style
             (css
-             [[1 1 2 6 :center :center 2 :rem]
+             [[1 1 2 6 :space-around :center 2 :rem]
               [.5 70 70 1] []
-              {:z-index 4}]
+              {:z-index 4
+               :gap "1rem"}]
              )}
       (comment [:label {:html-for "scrubber"} ])
-      [:input {:type :range
-               :style {:width "100%"}
-               :id "scrubber"
-               :value media-time
-               :on-change on-scrubber-change
-               :min 0
-               :max duration}]
-      ]
+      (comment
+        [:input {:type :range
+                 :style {:width "100%"}
+                 :id "scrubber"
+                 :value media-time
+                 :on-change on-scrubber-change
+                 :min 0
+                 :max duration}])
+
+      (map
+       (fn [i v]
+         [:div {:key (gensym)
+                :on-click (fn [e] (set-slider i))
+                :style {:background-color (hsl [i 70 70 1])
+                        :min-width "8vh"
+                        :padding ".3rem"
+                        }}
+          v]) (range 1 5)
+       ["moment" 2 3 4 ])]
 
      [:div {:style
             (css
@@ -1035,7 +1081,7 @@
               [-0.5 70 70 1] []
               {:z-index 4 :gap "1rem"}]
              )}
-      [:span "first"]
+      [:span "Inertia"]
       [:span first-elapsed]
       ]
 
@@ -1057,31 +1103,46 @@
         {:src
          "UnderstandingCarCrashesItsBasicPhysics.mp4"}]]
 
+
       ]
+
      [:div {:key (gensym)
             :style (css
                     [[2 7 17 7 :center :center 2 :rem :column]
                      [-3 70 70 .1] []
                      {:z-index 4}]
                     )}
+
       [:div {:style {:font-size "2rem"
                      :font-weigh 700
                      :color (hsl [.5 70 50 1 ])}}
-       "First Law of Motion"]
-      [:div {:style {:font-size "5rem"
+       (nth ["First Law of Motion" "Second Law of Motion" "velocity & accalaration" "Momentum" "Tense"] slider)]
+
+      [:div {:on-click toggle-arrow
+             :style {:font-size "5rem"
+
                      :font-weigh 700
                      :color (hsl [.5 70 50 1 ])}}
-       "Inertia"]
+       (nth ["Inertia" "Momentum" " ∇ = Rate of change " "Mass times Velocity" "Simple Past"] slider)]
       [:div {:style {
                      :font-size "2.2rem"
                      :font-weigh 500
                      :color (hsl [5.7 70 70 1 ])}}
-       [:div  "Property of Matter that causes it to resist any change in motion"]
+       (nth [[:div  "Property of Matter that causes it to resist any change in motion"]
+             [m7/m '[= F [[:m ∇ [:b [:m  m v]] ] t]]]
+             [:div {:style (m7/fs
+                            [300 500 400 31 26 400 154 75 491 52])}
 
-       ]
+              "Accalaration  is rate of change of velocity (∇v) over time "]
+             [m7/m '[= P [:m m v]]]
+             [:div "Things happen in future"]
+
+             ] slider)
+
+       ]]
 
 
-      ]
+
      [:div {:keys (gensym)
             :style (css
                     [[7 1 17 7 :center :center 3 :rem]
@@ -1089,28 +1150,69 @@
                      {:z-index 1}
                      (m7/fs [200 500 100 31 26 200 154 75 491 52])]
                     )}
-      "If forces on a mass are balanced & no resultant force applied"
+      (nth [
+            [:div "If forces on a mass are balanced & no resultant force applied"]
+            [:div [m7/m '[= [:m F t] [:m ∇ [:b [:m  m v]] ]]]]
+            [:div {:style {:padding "2rem"}}
+             [m7/m  '[= a
+                      [[:m ∇ v] t]
+                      [:m m [:p s -2] ]
+                      [[:b [:m [:b [- 0 60]]
+                            [ [:m 1000 m]
+                             [:m [* 60 60] s]]] ]
+                       [:m 10 s]]
+                      ] ]]
+            [:div ""]
+            ]
+           slider)
       ]
      [:div {:keys (gensym)
             :style (css
                     [[8 2 18 2 :center :center 2.2 :rem]
                      [-3 70 70 .1] []
-                     {:z-index 5}]
+                     {:z-index 5
+                      :padding ".3rem"}]
                     )}
 
 
-
-      [:div "If it is at rest, it stays at rest"]]
+      (nth
+       [[:div "If it is at rest, it stays at rest"]
+        [:div [:span {:style {:background-color (hsl [1.2 70 70 1])}} "mv"]
+         [:span " is the mass times velocity, that is call momentum"]
+         [:div {:style {:padding "1rem"
+                        :display :flex
+                        :justify-content :center}}
+          [m7/m '[= p [:m m v]]]]]
+        [:div
+         [m7/m '[= v  [[:m ∇ s ] t] [:m m [:p sec -1]]
+                 [[:b [=  ∇
+                       [:b [:m [:b [- 20 0  ]] m]]]]
+                  [:m 5 sec]]
+                 ]]
+         [:div
+          [:div {:on-click dummy-acc}
+           "Car"]]]
+        [:div ""]
+        ]
+       slider)]
      [:div {:keys (gensym)
+            :on-click animate-path
             :style (css
                     [[9 2 20 2 :center :center 2 :rem]
                      [-3 70 70 .1] []
                      {:z-index 5}]
                     )}
-      [:div
-       "If it is " [:span {:style {:background-color (hsl [1.2 70 70 1])}} "moving"]  ",
+      (nth [
+            [:div
+             "If it is " [:span {:style {:background-color (hsl [1.2 70 70 1])}}
+                          "moving"]  ",
 it keep " [:span {:style {:background-color (hsl [1.2 70 70 1])}} "moving"]    " on a constant speed in
-in a straight line"]]
+in a straight line"]
+            [:div "Force (F) times change in time is met impluse that is change in momentum"]
+            [:div "Velocity Rate of change ∇  over time "]
+            [:div ""]
+            ]
+           slider)]
      [:div {:key (gensym)
             :style (css
                     [[2 7 15 7 :center :center 2 :rem :column]
@@ -1177,7 +1279,7 @@ in a straight line"]]
             :style (css
                     [[2 7 4 7 :center :center 2 :rem :column]
                      [-3 70 70 .1] []
-                     {:z-index 4}]
+                     {:z-index (if inertia 4 1)}]
                     )}
       [:svg {:viewBox (space [-100 -100 200 200])
              :style
@@ -1209,14 +1311,16 @@ in a straight line"]]
         [:path {:ref ref-path
                 :style {:stroke-dashoffset 1000
                         :stroke-dasharray 122
-                        :stroke (m7/hsl [0 70 70 1])
-                        :stroke-width 3}
+                        :stroke (m7/hsl [0 70 70 0])
+                        :stroke-width 3
+                        }
 
                 :d (m7/path [100 0 :c -20 -20 -80 -20   -100 0])
 
                 :fill :none
                 :marker-end (m7/url "j")
                 }]]]]
+
      ]))
 
 
