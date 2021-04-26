@@ -1129,12 +1129,11 @@
                      :font-weigh 500
                      :color (hsl [5.7 70 70 1 ])}}
        (nth [[:div  "Property of Matter that causes it to resist any change in motion"]
-             [m7/m '[= F [[:m ∇ [:b [:m  m v]] ] t]]]
-             [:div {:style (m7/fs
-                            [300 500 400 31 26 400 154 75 491 52])}
+             [m7/m '[= F [[:m ∇ [:b [:m  m  v]] ] t]]]
+             [:div
 
-              "Accalaration  is rate of change of velocity (∇v) over time "]
-             [m7/m '[= P [:m m v]]]
+              "Accalaration is rate of change of velocity 🠖 (∇v) over time "]
+             [m7/m '[= P [:m m   v]]]
              [:div "Things happen in future"]
 
              ] slider)
