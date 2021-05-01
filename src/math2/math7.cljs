@@ -330,6 +330,11 @@
 
 (defn wrap [a]
   (str "(" a  ")"))
+(defn wrap' [a]
+  (str "'" a  "'"))
+
+(defn wrap-sami-colon [a]
+  (str "\"" a "\""))
 
 (defn url [i]
   (str "url" "(#" i  ")" ))

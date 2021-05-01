@@ -7,6 +7,7 @@
             [math2.physics11 :as p11]
             [math2.math100 :as m100]
             [math2.math :as mtemp]
+            [math2.physics100 :as py100]
             [react]))
 
 ;;(defn ^:before-load my-before-reload-callback []
@@ -30,7 +31,8 @@
    [m100/template4]
    [m100/template5]
    [mtemp/template1]
-   ])
+   [m100/home-work]
+   [py100/template]])
 
 
 (defn render-simple []

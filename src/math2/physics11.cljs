@@ -279,9 +279,17 @@
 
     [:div {:key (gensym)
            :style (css
+                   [[2 6 2 12 :center :center 2 :rem]
+                    [2 70 70 .9] []
+                    {:z-index 4}]
+                   )}
+     "Hello"]
+
+    [:div {:key (gensym)
+           :style (css
                    [[1 6 2 12 :center :center 2 :rem]
                     [.2 30 70 .9] []
-                    {:z-index 22}]
+                    {:z-index 2}]
                    )}
 
      (let [bm 250

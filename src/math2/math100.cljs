@@ -9,7 +9,7 @@
   (fn [m n] (/ m n)))
 (def square [1 0 0 1 (ve 1) 0 0 (ve 1)])
 
-
+;; 01779298654 ref
 (defn template []
   (let [sq2 [1 0 0 (f 3 4) (ve 1) 0 0 (ve (f 3 4))]
         st {:style {:display :flex
@@ -914,7 +914,7 @@
 (defn template5 []
   (let [ref (react/useRef)
         ref-path (react/useRef)
-        [slider set-slider] (react/useState 0)
+        [slider set-slider] (react/useState 3)
         [is-playing set-is-playing] (react/useState false)
         toggle-playing
         (fn [event]
@@ -1133,7 +1133,11 @@
              [:div
 
               "Accalaration is rate of change of velocity 🠖 (∇v) over time "]
-             [m7/m '[= P [:m m   v]]]
+             [:div {:style {:display :flex
+                            :flex-direction :column}}
+              [m7/m '[= P [:m m   v]]]
+              [m7/m '[= P  [:m [* 5.2  [170 1000] ]   [:m Kg [m s]]]]]
+              ]
              [:div "Things happen in future"]
 
              ] slider)
@@ -1323,6 +1327,8 @@ in a straight line"]
      ]))
 
 
+
+
 (comment
   (partition
    2
@@ -1352,4 +1358,139 @@ in a straight line"]
          (flatten (take 4  (drop 1 ((c2 1) dx)))))
     )
 
+  )
+
+
+
+(defn home-work []
+  (let [[slider get-slider] (react/useState 0)
+        f (fn [n] (/ 1 n))
+        dx [1 0  0 1 -1  0 0 -1 ]
+        sq (fn [n]
+                (comp
+                 (partial map (partial * n))))
+]
+    [:div {:style (merge
+                   (grid [100 :vh 100 :vw
+                   (take 15 (repeat [8 :vh]))
+                   (take 20 (repeat [8 :vh]))])
+                   {:background-color (hsl [1 70 70 1])
+                    :gap "1rem"})}
+
+
+
+
+
+     [:div {:style (m7/css
+                    [[2 5 1 20 :center :center 2 :rem :column]
+                     [(+ 1 (f 3)) 70 90 1] [] {:z-index 3
+                                               :gap "1rem"}])}
+      [:div "Before Collision"]
+      [m7/m '[= [+ P1 P2] [+ [* [:m 0.56 [m s]] [:m 0.039 Kg]]
+                           [* [:m m2 kg ] 0] ]]]
+
+
+      [:div "After Collision"]
+      [m7/m '[= [+ P3 P4] [+ [* [:m 170 kg ] v1]
+                           [:m m2 v1]]]]
+
+      [m7/m '[= [+ P3 P4]
+
+              [:m 0.26 [m s] [:b [+ 170 m2]]]
+              ]]
+
+
+      [:div "According to rule of conservation"]
+      [:div "Sum of Momentums Before Collision = Sum of Momentums After Collision "]
+
+     [m7/m '[= [+ P1 P2] [+ P3 P4 ]]]
+      [m7/m '[= [* [:m 0.56 [m s]] [:m 0.039 Kg]]
+              [:m 0.26 [m s] [:b [+ 0.039 m2]]]]]
+
+      [m7/m '[= [* [[:m 0.56 [m s]] [:m 0.26 [m s] ]] [:m 0.039 Kg]]
+              [+ 0.039 m2] ]]
+
+      [m7/m '[= [- [* [56 26] [:m 0.039 Kg]] [:m 0.039 Kg]]
+              m2]]
+
+
+
+      [m7/m '[= m2 [:m 0.039 Kg [:b [- [56 26]  1] ]]]]
+
+      [m7/m '[= m2 [:m 0.039 Kg [:b [- 2.16  1] ]]]]
+
+
+      [:div "For two trucks"]
+      [m7/m '[= [:m  [* 2 m2] V]
+              [* [:m 0.56 [m s]] [:m 0.039 Kg]]]]]
+
+
+
+
+
+
+     [:div {:style (m7/css
+                    [[2 10 1 20 :center :center 3 :rem]
+                     [(+ 1 (f 3)) 70 90 1] [] {:gap "1rem"}])}
+      [:svg {:style {:height "100%"
+                     :width "100%"}
+             :viewBox (m7/space
+                       [-150 -100  300 200])}
+       [:circle {:cx 0
+                 :cy 0
+                 :fill (hsl [-1 50 50 1])
+                 :r 1}]
+
+       [:path {:d (path (flatten [100 0 :l ((sq 15) dx)]))
+               :stroke (hsl [-1 50 50 1])
+               :stroke-width .2
+               :fill (hsl [-1 10 50 1]) }
+        [:animateTransform
+         {:id :sq1
+          :attributeName :transform
+          :begin :sq.end
+          :dur (sec 5)
+          :type :translate
+          :from (m7/space [0 0])
+          :to (m7/space [100 0])
+          :fill :freeze
+          }]
+
+        ]
+
+       [:path {:d (path (flatten [0 0 :l ((sq 10) dx)]))
+               :stroke (hsl [-1 50 50 1])
+               :stroke-width .2
+               :fill (hsl [-1 50 90 1]) }
+        [:animateTransform
+         {:id :sq
+          :attributeName :transform
+          :begin :click
+          :dur (sec 5)
+          :type :translate
+          :from (m7/space [0 0])
+          :to (m7/space [100 0])
+          :fill :freeze
+          }]
+        [:animateTransform
+         {:id :sq2
+          :attributeName :transform
+          :begin :sq.end
+          :dur (sec 5)
+          :type :translate
+          :from (m7/space [100 0])
+          :to (m7/space [200 0])
+          :fill :freeze
+          }]
+        ]
+
+       ]]]))
+
+(comment
+  (let [ f (fn [n] (/ 1 n))
+        dx [1 0  0 1 -1  0 0 -1 ]
+        sq (fn [n]
+                (comp
+                 (partial map (partial * n))))]
+    )
   )
