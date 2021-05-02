@@ -17,7 +17,8 @@
     :rm/name ""
     :rm/age 38 :rm/phone "880-1712192643" :rm/email ""
     :rm/summery "I teach computer science, mathematics, physics  by leveraging my hands on programming skill on computer graphics, animation, user interaction and web technologies. By teaching with better visual interaction helps students get better at receaving intuation of scence & technologies."
-    :rm/projects [2 3 4]
+    :rm/projects [2 5 7 8]
+    :rm/jobs []
     :rm/projects.title "Projects and accomplishment"}
    {:db/id 2
     :rm/task "Online classes on Virtual notebooks"
@@ -45,5 +46,11 @@
     :rm/symmery "I have worked with people over the globe, over time I have gotten better at communicaing in professional context both on presentation and at work."
     :rm/referane ""}
 
-
-   ])
+   {:db/id 9
+    :rm/job "System Engineer at Operations System and Software"
+    :rm/company "Grameenphone"
+    :rm/duratoin "2009-2013"}
+   {:db/id 10
+    :rm/job "Lead Engineer at Mobile Development"
+    :rm/company "Samsuang R&D"
+    :rm/duration "2013-2015"}])
