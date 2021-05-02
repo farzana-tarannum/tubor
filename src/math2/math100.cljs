@@ -511,31 +511,23 @@
             {:background-color (hsl [2.4 70 70 1])})}
 
 
-
-
-
-
-
      [:div {:key (gensym)
             :style (css
-                    [[2 11 2 11 :center :center 2 :rem :column]
-                     [-2 70 70 1] []
-                     {:z-index 2}]
-                    )}
+                    [[2 11 2 20 :center :center 3 :rem :column]
+                     [0 70 70 1] []
+                     {:z-index 2}
+                     ]
 
+                    )
+            }
 
-      [:div "150 years ago"]
-      [:div {:style {:background-color (hsl [1 70 70 1])}} "sum of age 2961"]
-      [:div "today"]
-      [:div {:style {:background-color (hsl [1 70 70 1])}} "sum of age "
-       (m7/m '[+ 2961 150 150])]
-      [:div "Pine tree is 1432 years old"]
-      [:div "Other tree is "]
-      [:div {:style {:background-color (hsl [1 70 70 1])}}
-       (m7/m '[- [+ 2961 150 150] 1432])
-       " years old"]
-
-      ]]))
+      [:div "Impulse is change in momentum"]
+      [m7/m '[= [:m F t] [- [:m m v ] [:m m u ]]]]
+      [m7/m '[= [:m F t] [- [* m 0 ] [:m m u ]]]]
+      [m7/m '[= [* F [:m 0.070 s]] [- [* m 0 ] [:m 0.5 kg [:b [- 3.1] ] [m s] ]]]]
+      [m7/m '[= [* F [:m 0.070 s]] [:m 1.55 kg  [m s] ]]]
+      [m7/m '[= F
+              [[:m 1.55 N] 0.07]]]]]))
 
 (defn template31 []
   (let [dx [1 0  0 1 -1  0 0 -1 ]
