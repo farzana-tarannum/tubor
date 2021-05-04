@@ -82,13 +82,6 @@ communicating in professional context both on presentation and at work."
 
 
 
-
-
-
-
-
-
-
 (def fontf
   (comp
    m7/coma
@@ -343,6 +336,58 @@ communicating in professional context both on presentation and at work."
             :where
             [?e :rm/code :abc]
             [?e :rm/summery ?s]] @conn))]
+
+
+   (map identity
+        (reduce
+         (fn [acc [task sum row col]]
+           (conj
+            (conj acc
+                  [:div {:key (gensym)
+                         :style (m7/css
+                                 [[(+ 10 (* row 20)) 3 (+ 2 (* col 15)) 15 :center :center 2 :rem]
+                                  [1 70 90 1] [] {:gap "1rem"}
+                                  (fv [[1 4] [1 1] [1 2] [2 1]])])}
+
+                   task])
+            [:div {:key (gensym)
+                   :style (m7/css
+                           [[(+ 13 (* row 20)) 15 (+ 2 (* col 15)) 15 :center :center 2 :rem]
+                            [1 70 90 1] [] {:gap "1rem"}])}
+
+             sum]))
+         []
+         (d/q '[:find ?t ?s ?r ?c
+                :where
+                [?e :rm/code :abc]
+                [?e :rm/projects ?p]
+                [?p :rm/task ?t]
+                [?p :rm/summery ?s]
+                [?p :rm/row ?r]
+                [?p :rm/col ?c]
+                ] @conn)))
+
+
+   ])
+
+
+
+
+
+
+(defn template2 []
+  [:div {:style (merge (m7/grid [300 :vh 100 :vw
+                                 (take 38 (repeat [5 :vh]))
+                                 (take 20 (repeat [5 :vh]))])
+                       {:background-color (hsl [1.5 70 70 1])
+                        :gap ".5rem"})}
+   [:div {:key (gensym)
+          :style (m7/css
+                  [[2 8 2 30 :center :center 2.3 :rem]
+                   [1 70 90 .2] [] {:gap "1rem"}
+                   (fv [[1 4] [1 1] [1 2] [2 1]])])}
+
+    ]
 
 
    (map identity

@@ -795,7 +795,6 @@
 
 
 
-
      [:div {:key (gensym)
             :style (css
                     [[2 11 2 11 :center :center 2 :rem]
@@ -870,7 +869,90 @@
                :stroke (hsl [1 70 70 1])
                :fill :none
                :stroke-width (f 50)
-               }]]]]))
+               }]]
+
+      ]
+
+     [:div {:key (gensym)
+            :style (css
+                    [[2 11 2 20 :center :center 3 :rem :column]
+                     [-2 70 70 1] []
+                     {:z-index 2}]
+                    )}
+
+      [:div "Area of Triangle A, where b is the base and h is height"]
+      [:div [m7/m '[= b 20 cm]] " , " [m7/m '[= h 45 cm]]]
+      [m7/m '[= A [* [1 2] 20 45]]]
+      [m7/m '[= A [:m 450 [:p cm 2]]]]
+
+
+
+
+
+      ]
+
+     [:div {:key (gensym)
+            :style (css
+                    [[2 11 2 11 :center :center 2 :rem]
+                     [-2 70 70 .1] []
+                     {:z-index 2}]
+                    )}
+
+      [:svg {:viewBox (space (nth [[-100  -100 200 200]
+                                   [-10 -160 80 80]] 0))
+             :style
+             {:height (size {:size 100 :scale :%})
+              :width  (size {:size 100 :scale :%})}}
+
+       (if view-box?
+           [:animate {:attributeName :viewBox
+                      :to [-4 -4 8 8]
+                      :dur "1s"
+                      :fill :freeze}])
+
+       [:circle {:cx 0 :cy 0 :r (f 20) :fill (hsl [1 70 70 1])}]
+
+
+
+
+       [:path {:d (path
+                   [0 -2 :l 1 2 -2 0 1  -2])
+               :stroke (hsl [1 70 70 1])
+               :fill :none
+               :stroke-width (f 50)
+               }]
+
+
+       [:path {:d (path
+                   [0 -2 :l 1 0 0 ])
+               :stroke (hsl [2.5 70 70 1])
+               :fill :none
+               :stroke-width (f 50)
+               }]
+
+
+       [:path {:d (path
+                   [0 0 :l 0 -2])
+               :stroke (hsl [0 70 70 1])
+               :fill :none
+               :stroke-width (f 20)
+               }]
+
+       [:path {:d (path
+                   [-1 0 :l  2 0])
+               :stroke (hsl [.5 70 70 1])
+               :fill :none
+               :stroke-width (f 20)
+               }]
+
+
+
+
+       ]
+
+      ]
+
+     ]))
 
 
 (comment
