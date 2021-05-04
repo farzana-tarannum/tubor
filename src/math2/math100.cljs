@@ -1360,8 +1360,7 @@ in a straight line"]
         dx [1 0  0 1 -1  0 0 -1 ]
         sq (fn [n]
                 (comp
-                 (partial map (partial * n))))
-]
+                 (partial map (partial * n))))]
     [:div {:style (merge
                    (grid [100 :vh 100 :vw
                    (take 15 (repeat [8 :vh]))
@@ -1377,44 +1376,31 @@ in a straight line"]
                     [[2 5 1 20 :center :center 2 :rem :column]
                      [(+ 1 (f 3)) 70 90 1] [] {:z-index 3
                                                :gap "1rem"}])}
-      [:div "Before Collision"]
-      [m7/m '[= [+ P1 P2] [+ [* [:m 0.56 [m s]] [:m 0.039 Kg]]
-                           [* [:m m2 kg ] 0] ]]]
+      [:div "Before"]
+      [m7/m '[= [+ P1 P2] [+ [:m 43.2 kg 4.2 [m s]] [:m 2.50 Kg  0 [m s]]] ]]
+
+      [m7/m '[= [+ P1 P2] [:m 43.2 kg 4.2 [m s]]]]
+      [m7/m '[= [+ P1 P2] [:m 181.44 kg  [m s]]]]
 
 
-      [:div "After Collision"]
-      [m7/m '[= [+ P3 P4] [+ [* [:m 170 kg ] v1]
-                           [:m m2 v1]]]]
+      [:div "Combined velocity of body and skateboard After boy land on it"]
+      [m7/m '[= P3 [:m  [:b [+ m1 m2]] v]]]
 
-      [m7/m '[= [+ P3 P4]
+      [m7/m '[= P3 [:m  [:b [+ 43.2 2.50]] kg v]]]
 
-              [:m 0.26 [m s] [:b [+ 170 m2]]]
-              ]]
+      [m7/m '[= P3 [:m  45.7 kg v]]]
 
 
       [:div "According to rule of conservation"]
-      [:div "Sum of Momentums Before Collision = Sum of Momentums After Collision "]
+      [:div "Sum of Momentums Before  = Sum of Momentums After "]
 
-     [m7/m '[= [+ P1 P2] [+ P3 P4 ]]]
-      [m7/m '[= [* [:m 0.56 [m s]] [:m 0.039 Kg]]
-              [:m 0.26 [m s] [:b [+ 0.039 m2]]]]]
+      [m7/m '[= [+ P1 P2] P3]]
 
-      [m7/m '[= [* [[:m 0.56 [m s]] [:m 0.26 [m s] ]] [:m 0.039 Kg]]
-              [+ 0.039 m2] ]]
+      [m7/m '[= [:m 181.44 kg  [m s]] [:m  45.7 kg v]] ]
 
-      [m7/m '[= [- [* [56 26] [:m 0.039 Kg]] [:m 0.039 Kg]]
-              m2]]
+      [m7/m '[= [:m [181.44 [:m  45.7 kg ]] kg  [m s]] v ] ]
 
-
-
-      [m7/m '[= m2 [:m 0.039 Kg [:b [- [56 26]  1] ]]]]
-
-      [m7/m '[= m2 [:m 0.039 Kg [:b [- 2.16  1] ]]]]
-
-
-      [:div "For two trucks"]
-      [m7/m '[= [:m  [* 2 m2] V]
-              [* [:m 0.56 [m s]] [:m 0.039 Kg]]]]]
+      ]
 
 
 
