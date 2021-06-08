@@ -21,18 +21,25 @@
 
 (def functional-compiler (r/create-compiler {:function-components true}))
 
+
 (defn template []
   [:div
    [p11/template]
    [p11/template2]
    [m100/template]
    [m100/template2]
+   [m100/template2-1]
    [m100/template3]
    [m100/template4]
    [m100/template5]
    [mtemp/template1]
    [m100/home-work]
-   [py100/template]])
+   ] )
+
+
+(defn template3 []
+  [:div
+   [py100/template]] )
 
 
 (defn render-simple []

@@ -279,11 +279,17 @@
 
     [:div {:key (gensym)
            :style (css
-                   [[2 6 2 12 :center :center 2 :rem]
+                   [[2 6 2 12 :center :center 2 :rem :column]
                     [2 70 70 .9] []
                     {:z-index 4}]
                    )}
-     "Hello"]
+
+     [m7/m '[:m K [:k NO 3]]]
+
+     [m7/m '[:m K CL]]
+
+     [m7/m '[= [+ [:m 2 K] [:m 2 [:k H 2] 0]]
+             [+ [:m 2 KOH] [:k H 2]] ]]]
 
     [:div {:key (gensym)
            :style (css

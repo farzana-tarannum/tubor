@@ -73,7 +73,7 @@ communicating in professional context both on presentation and at work."
    :rm/col 1
    :rm/job "System Engineer at Operations System and Software"
    :rm/company "Grameenphone"
-   :rm/duratoin "2009-2013"}
+   :rm/duration "2009-2013"}
   {:db/id 10
    :rm/row 3
    :rm/job "Lead Engineer at Mobile Development"
@@ -239,15 +239,15 @@ communicating in professional context both on presentation and at work."
 
 
 
-(r ballot-rule people-db)
+#_(r ballot-rule people-db)
 
 
 
 
-
+(comment
   (->>
-    (d/datoms (d/db-with people-db (r ballot-rule people-db)) :eavt)
-    (map (juxt :e :a :v)))
+   (d/datoms (d/db-with people-db (r ballot-rule people-db)) :eavt)
+   (map (juxt :e :a :v))))
 
 
 (def crime-db
@@ -318,6 +318,48 @@ communicating in professional context both on presentation and at work."
     (infer rules)
     (d/pull [:person/criminal?] [:person/name "Robert"]))
 
+(comment
+  (d/q '[:find ?t ?s ?r ?c
+         :where
+         [?e :rm/code :abc]
+         [?e :rm/projects ?p]
+         [?p :rm/task ?t]
+         [?p :rm/summery ?s]
+         [?p :rm/row ?r]
+         [?p :rm/col ?c]
+         ]
+       @conn)
+
+  (def rm-rule
+    '{:when [[?e :rm/code :abc]
+             [?e :rm/projects ?p]
+             [?p :rm/task ?t]
+             [?p :rm/summery ?s]
+             [?p :rm/row ?r]
+             [?p :rm/col ?c]]
+      :then [[:db/add ?p :rm/col-span (* ?c 10)]
+             [:db/add ?p :rm/row-span (* ?r 10)]]})
+
+  (r rm-rule @conn)
+
+
+  (d/q '[:find ?r ?c
+         :where
+         [?e :rm/code :abc]
+         [?e :rm/projects ?p]
+         [?p :rm/task ?t]
+         [?p :rm/summery ?s]
+         [?p :rm/row-span ?r]
+         [?p :rm/col-span ?c]
+         ]
+       @conn)
+
+  (->>
+   (d/datoms (d/db-with @conn (r )) :eavt)
+   (map (juxt :e :a :v)))
+  )
+
+
 
 (defn template []
   [:div {:style (merge (m7/grid [300 :vh 100 :vw
@@ -325,6 +367,11 @@ communicating in professional context both on presentation and at work."
                                  (take 20 (repeat [5 :vh]))])
                        {:background-color (hsl [1.5 70 70 1])
                         :gap ".5rem"})}
+
+
+
+
+
    [:div {:key (gensym)
           :style (m7/css
                   [[2 8 5 20 :center :center 2.3 :rem]
@@ -339,6 +386,24 @@ communicating in professional context both on presentation and at work."
             [?e :rm/summery ?s]] @conn))]
 
 
+
+   [:div {:key (gensym)
+          :style (m7/css
+                  [[18 12 14 10 :center :center 2.3 :rem :column]
+                   [3 70 90 .8] [] {:gap "1rem"
+                                    :z-index 10
+                                    :padding "2rem"}
+                   (fv [[1 4] [1 1] [1 2] [2 1]])])}
+
+    [:div "ASHIK AHMED"]
+    [:div "01712192643"]
+    [:img {:src "m.jpg"
+           :style {:height "100%"
+                   :width "100%"}}]
+
+    ]
+
+
    (map identity
         (reduce
          (fn [acc [task sum row col]]
@@ -346,16 +411,19 @@ communicating in professional context both on presentation and at work."
             (conj acc
                   [:div {:key (gensym)
                          :style (m7/css
-                                 [[(+ 10 (* row 20)) 3 (+ 5 (* col 10)) 10 :center :center 2 :rem]
-                                  [2 70 90 .7] [] {:gap "1rem"}
+                                 [[(+ 10 (* row 20)) 3 (+ 5 (* col 10))
+                                   10 :center :center 2 :rem]
+                                  [2 70 90 .7] [] {:gap "1rem"
+                                                   :padding "2rem"}
                                   (fv [[1 4] [1 1] [1 2] [2 1]])])}
 
                    task])
             [:div {:key (gensym)
                    :style (m7/css
                            [[(+ 13 (* row 20)) 15 (+ 5 (* col 10)) 10 :center
-                             :center 2 :rem]
-                            [1 70 90 1] [] {:gap "1rem"}])}
+                             :flex-start 2 :rem]
+                            [1 70 90 1] [] {:padding "1rem"
+                                            :gap "1rem"}])}
 
              sum]))
          []
@@ -368,6 +436,30 @@ communicating in professional context both on presentation and at work."
                 [?p :rm/row ?r]
                 [?p :rm/col ?c]
                 ] @conn)))
+   (let [row 2 col 1
+         sum (mapcat identity
+                     (d/q '[:find  ?job ?c ?dr
+                            :where
+                            [?e :rm/code :abc]
+                            [?e :rm/jobs ?j]
+                            [?j :rm/company ?c]
+                            [?j :rm/job ?job]
+                            [?j :rm/duration ?dr]
+
+                            ] @conn))]
+     [:div {:key (gensym)
+            :style (m7/css
+                    [[(+ 10 (* row 20)) 15 (+ 5 (* col 10)) 10 :center
+                      :center 2 :rem :column]
+                     [1 70 90 1] [] {:padding "1rem"
+                                     :gap "1rem"}])}
+
+      (map (fn [x]
+             [:div
+              {:style {:background-color (hsl [.5 70 70 1])}}
+              x]) sum)])
+
+
 
 
    ])
