@@ -34,6 +34,12 @@
    [m100/template5]
    [mtemp/template1]
    [m100/home-work]
+   [m100/home-work2]
+   [m100/home-work3]
+   [m100/home-work5]
+   [m100/home-work7]
+   [m100/home-work8]
+   #_[py100/template]
    ] )
 
 
