@@ -21,6 +21,7 @@
 
 (s/def ::op-mul '#{*})
 (s/def ::op-mul2 #{:m})
+(s/def ::op-dev '#{/})
 (s/def ::op-b #{:b :c :s})
 
 (s/def ::op-minus '#{-})
@@ -42,7 +43,8 @@
               :- ::op-minus
               :× ::op-mul
               := ::op-equal
-              :op-mul2 ::op-mul2))
+              :op-mul2 ::op-mul2
+              :÷ ::op-dev))
 
 
 
