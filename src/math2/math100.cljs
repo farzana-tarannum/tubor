@@ -6524,7 +6524,7 @@ the gravitational PE at its highest point"]
                      [(* 10 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
                                                            :z-index 7}])}
 
-      ;; [:div "A ball is thrown vertically upwards at 20 m/s ignoring air resistance and taking g = 10 m/s2,"]
+      #_[:div "A ball is thrown vertically upwards at 20 m/s ignoring air resistance and taking g = 10 m/s2,"]
 
       ;; [:div "how high it goes"]
 
