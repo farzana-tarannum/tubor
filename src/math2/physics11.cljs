@@ -113,14 +113,20 @@
           :begin :circ.begin
           :dur (sec 4)
           :keyTimes (m7/sami-colon [0 0.5 0.8 1])
-          :values (m7/sami-colon
-                   (reverse (map
-                             (fn [i]
-                               (path
-                                [(ve (- bm2 20)) 0
-                                 :a i i 0 false false (- bm 40) 0]))
-                             (reverse (range 200 400 50))
-                             )))
+          :values (let [bm 250
+                        f (fn [i] (/ 1 i))
+                        bm2 (/ bm 2)
+                        hi 35
+                        angle-x 30
+                        angle-y 30]
+                    (m7/sami-colon
+                     (reverse (map
+                               (fn [i]
+                                 (path
+                                  [(ve (- bm2 20)) 0
+                                   :a i i 0 false false (- bm 40) 0]))
+                               (reverse (range 200 400 50))
+                               ))))
 
           :fill :freeze
           }]
