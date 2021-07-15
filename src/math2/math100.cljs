@@ -4189,83 +4189,41 @@ the gravitational PE at its highest point"]
                                                           :z-index 4}])}
 
 
-      [:div "Force is rate of change of momentum"]
-      [m7/m '[= F [[- mv mu] t]]]
+      "Solving Simultaneous Linear Equations Using Algebraic Methods"
 
-      [m7/m '[= Ft [- mv mu]]]
-
-
-      [m7/m '[= [:m F [:m 0.070 s]] [- [:m 0.5 Kg 0] [:m 0.50 Kg [:m [:b [- 3.1]] [m s]]]]]]
-
-      [m7/m ['= [:m 0.070 'F ] ['* 0.50 3.1]]]
-      [m7/m ['=  'F [:m (/ (* 0.50 3.1) 0.070) 'N]]]
 
       ]
 
 
      [:div {:style (m7/css
-                    [[2 10 (+ 2 (* 0 2)) 12  :center :flex-start  3 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
-                                                          :z-index 4}])}
-
-      [:div  "The mass of the hammer is 0.50kg"]
-      [:div "When it hits the mail, the hammer is travelling downwards with a velocity of 3.1m/s"]
-      [:div "The hammer stops quickly when it hits the mail and the momentum of the hammer reduce to 0 ant 0.070s. "]
-      [:div "Calculate the amount of force that causes this to happen"]
-
-
-      ]
-
-     #_[:div {:style (m7/css
-                    [[2 10 (+ 2 (* 0 2)) 12  :center :flex-start  1.8 :rem :column]
+                    [[2 10 (+ 2 (* 0 2)) 12  :center :center  3 :rem :column]
                      [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
 
-      [:div "momentum of the train when it reach out of the slope"]
-      [m7/m '[= P mv]]
-      [m7/m '[= P [:m 0.039 Kg 0.56 [m s]]]]
+      [:div
+       [m7/m '[= [+ [:m 4 x] [:m 6 y]] 14]]
+       "---------------------(1)"]
 
-      [m7/m '[= P [:m [* 0.039  0.56] Kg [m s]]]]
-
-
-      [m7/m ['= 'P [:m 0.02184 'Kg ['m 's]]]]
-
-      [:div "momentum of the track is 0. As it was not moving"]
-      [:div "Net momentum before hit the truck"]
-
-      [m7/m ['+  [:m 0.02184 'Kg ['m 's]] 0 ]]
-
-
-      [:div "After hit the truck they stick together, total mass and momentum"]
-
-      [m7/m '[:m [:b [+ [:m 0.039 Kg] m]] 0.026 [m s]]]
-      #_[:div "Net momentum after hit the truck"]
-      [:div "due to law of conservation of momentum, net momentum before train hit the truck and after  would be same"]
-
-      [m7/m ['=  [:m 0.02184 'Kg ['m 's]] [:m [:b ['+ [:m 0.039 'Kg] 'm]] 0.026 ['m 's]] ]]
-
-      [m7/m ['=  0.02184 [:m [:b ['+ 0.039 'm] ] .026 ] ]]
-
-      [m7/m ['=  0.02184  ['+ ['* 0.039 .026] [:m 'm .026]]]]
-
-      [m7/m ['=  0.02184  ['+ (* 0.039 .026) [:m 'm .026]]]]
-
-      [m7/m ['=  (- 0.02184 (* 0.039 .026))  [:m 'm .026]]]
-
-      [m7/m ['=  [(- 0.02184 (* 0.039 .026)) .026]  'm]]
-
-      [m7/m ['=  [:m (/ (- 0.02184 (* 0.039 .026)) .026) 'Kg]  'm]]
-
-      ]
+      [:div [m7/m '[= [- [:m 3 x] [:m 6 y]] 7]]
+       "--------------------(2)"]
 
 
 
-     #_[:div {:style (m7/css
-                    [[7 6 (+ 1 (* 0 2)) 7  :center :center  5 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
-                                                          :z-index 4}])}
-      [:div ""]
+      [:div "(1) + (2)"]
+
+      [m7/m '[= [+ [:m 4 x] [:m 6 y] [- [:m 3 x] [:m 6 y]]] [+ 14 7]]]
+
+      [m7/m '[= [:m 7 x]
+              21]]
+
+      [m7/m '[= x
+              [21 7] 3]]
+
+
+      [m7/m '[= [:m 6 y] 2]]
+      [m7/m '[= y [2 6] [1 3]]]
+
 
 
       ]
@@ -6218,28 +6176,43 @@ the gravitational PE at its highest point"]
                    :fill (hsl [5 70 70 .2])}]
 
 
-           #_[:path {:d (path [0 0 :l 200 0])
+
+
+
+           (map
+            (fn [i]
+              [:g
+
+               [:circle {:cx 0
+                         :cy -150
+                         :r 10
+                         :transform (m7/tranfrom [[:rotate (* i (/ 360 12))]])
+                         :fill (hsl [2 70 70 1])}
+                ]
+
+               [:text {:x 0
+                       :y -150
+                       :transform (m7/tranfrom [[:rotate (* i (/ 360 12))]])
+                       :style {:font-size ".5rem"}}
+                (if (= i 0) 12 i)
+                ]
+               ])
+            (range 0 12))
+
+           #_[:path {:d (path
+                       [ 0 0  :l  100 0 ])
+                     :marker-end (m7/url (name :dot))
                    :stroke (hsl [2 70 70 1])
                    :stroke-width 2
                    :fill :none}
-
-            [:animateTransform {:id :dec
-                                :attributeName :transform
-                                :begin (sec 0)
-                                :dur (sec 4)
-                                :type :rotate
-
-                                :from 0
-                                :to -210
-                                :fill :freeze}]
             ]
 
 
            #_[:path {:d (path
-                       [ 0 0  :l  100 0 -10 -55])
+                       [ 100 0  :l  -100 0 ])
                    :marker-end (m7/url (name :dot))
-                   :stroke (hsl [2 70 70 1])
-                   :stroke-width 1.5
+                   :stroke (hsl [5 70 70 1])
+                   :stroke-width 2
                    :fill :none}
             ]
 
@@ -6254,32 +6227,13 @@ the gravitational PE at its highest point"]
 
 
 
-           [:text {:dy -5
-                   :style {:font-size "1rem"}}
-            [:textPath {:href :#f2
-                        :startOffset 40}
-             "F"
-             [:tspan {:dy 5} 2]]]
 
 
 
 
 
-           #_[:text {:dx 25
-                     :dy -10
-                     :style {:font-size "1rem"}}
-              "F"
-              [:tspan {:dy 5} 1]
 
 
-              "+"
-              "F"
-              [:tspan {:dy 5} 3]
-              "+"
-              "F"
-              [:tspan {:dy 5} 2]
-              "=" 0
-              ]
 
 
            #_[:path {:d (path
@@ -6311,13 +6265,19 @@ the gravitational PE at its highest point"]
 
 
 
-           [:g
+
+           ;; F2
+           #_[:g
+
+
+
             [:path {:d (path
-                        [ 0 0  :l  120 0])
-                    :id :f2
+                        [ 0 0  :l  80 0])
+                    :id :ft2
                     :transform (m7/tranfrom [
-                                             [:translate [120 0]]
-                                             [:rotate -120]])
+                                             [:translate [120 -10]]
+                                             [:rotate -75]])
+
                     :marker-end (m7/url (name :dot))
                     :stroke (hsl [3.5 70 70 1])
                     :stroke-width 2
@@ -6326,13 +6286,14 @@ the gravitational PE at its highest point"]
              ]
 
 
+
             [:path {:d (path
-                        [ 0 0  :l  120 0])
-                    :id :fb2
+                        [ 0 0  :l  80 0])
+                    :id :f2
                     :transform (m7/tranfrom [
-                                             #_[:translate [120 0]]
-                                             [:rotate -120]])
-                    :stroke-dasharray (m7/space [5 2])
+                                             [:translate [0 0]]
+                                             [:rotate -75]])
+                    :stroke-dasharray (m7/space [5 5])
                     :marker-end (m7/url (name :dot))
                     :stroke (hsl [3.5 70 70 1])
                     :stroke-width 2
@@ -6342,10 +6303,16 @@ the gravitational PE at its highest point"]
 
             [:text {:dy -5
                     :style {:font-size "1rem"}}
-             [:textPath {:href :#f4
+             [:textPath {:href :#ft2
                          :startOffset 40}
               "F"
-              [:tspan {:dy 5} 3]]]]
+              [:tspan {:dy 10} 2]]]
+
+
+
+
+            ]
+
 
            #_[:path {:d (path
                        [ 0 0  :l  120 0])
@@ -6404,22 +6371,52 @@ the gravitational PE at its highest point"]
             ]
 
 
-           [:g
+           ;; F1
+           #_[:g
             [:text {:dy -5
                     :style {:font-size "1rem"}}
              [:textPath {:href (str "#" (name :f1))
                          :startOffset 40}
               "F"
-              [:tspan {:dy 5} 1]]]
+              [:tspan {:dy 10} 1]]]
             [:path {:d (path
-                        [ 0 0  :l  120 0])
+                        [ 0 0  :l  120 -10])
                     :id (name :f1)
                     :transform (m7/tranfrom [[:rotate 0]])
                     :marker-end (m7/url (name :dot))
-                    :stroke (hsl [3 70 70 1])
+                    :stroke (hsl [4.2 70 70 1])
                     :stroke-width 2
                     :fill :none}
              ]]
+
+           ;; F1 F2
+           #_[:g
+            [:text {:dy -5
+                    :style {:font-size "1rem"}}
+             [:textPath {:href (str "#" (name :fr1))
+                         :startOffset 40}
+              "F"
+              [:tspan {:dy 10} 3]
+
+              [:tspan {:dy -10} "= F"]
+              [:tspan {:dy 10} 1]
+              [:tspan {:dy -10} " + F"]
+              [:tspan {:dy 10} 2]
+
+              ]]
+            [:path {:d (path
+                        [ 0 0  :l  140 -87])
+                    :id (name :fr1)
+                    :transform (m7/tranfrom [[:rotate 0]])
+                    :marker-end (m7/url (name :dot))
+                    :stroke (hsl [0 70 70 1])
+                    :stroke-width 2
+                    :fill :none}
+             ]]
+
+
+
+
 
            #_(let [ag -180
                  rd 6]
@@ -6448,7 +6445,7 @@ the gravitational PE at its highest point"]
                       :fill :none}
                ]])
 
-           [:text {:dy -10
+           #_[:text {:dy -10
 
                    :style {:font-size ".8rem"}}
             [:textPath {:href :#f3
@@ -6464,6 +6461,29 @@ the gravitational PE at its highest point"]
               "= 0"]
              ]]
 
+           [:path {:d (path [0 0 :l 150 0])
+                   :stroke (hsl [2 70 70 1])
+                   :stroke-width 2
+                   :marker-end (m7/url (name :dot))
+                   :fill :none}
+
+            [:animateTransform {:id :dec
+                                :attributeName :transform
+                                :begin :click
+                                :dur (sec 4)
+                                :type :rotate
+                                :from 0
+                                :to 271
+                                :fill :freeze}]
+            ]
+
+
+
+           [:path {:d (path [160 0 :a 160 160 0 true true   -160 -160])
+                   :stroke (hsl [0 70 70 1])
+                   :stroke-width 2
+                   :marker-end (m7/url (name :dot))
+                   :fill :none}]
 
 
            ;; [:path {:d (path [0 0 :l 200 0])
@@ -6520,7 +6540,7 @@ the gravitational PE at its highest point"]
                     :gap ".1rem"})}
 
      [:div {:style (m7/css
-                    [[2 8 2 15  :center :center  5 :rem :column]
+                    [[2 8 2 15  :center :center  4 :rem :column]
                      [(* 10 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
                                                            :z-index 7}])}
 
@@ -6539,8 +6559,40 @@ the gravitational PE at its highest point"]
 
       ;; [m7/m '[= 0 [+ 20 [:m [- 10] t]]]]
 
-      [:div ""]
-      #_[m7/m '[= [- Na [:p e -]]  [:p Na +]]]
+      ;; [m7/m '[= y [k x]]]
+
+      ;; [m7/m '[= xy k]]
+
+
+      ;; [m7/m '[= [* 72 6] k]]
+
+      ;; [m7/m '[= 432 k]]
+
+
+
+      ;; [m7/m '[= y [k x]]]
+      ;; [m7/m '[= y [432 (- 72 18)]]]
+
+
+      ;; [m7/m '[= y [432 54] 8]]
+
+      #_[m7/m '[= [- [:m 2 Cu] [:m 4 [:p e -]]]  [:m 2 [:p Cu +]]]]
+
+
+      #_[m7/m '[= [+ [:k O 2] [:m 4 [:p e -]]]  [:m 2 [:p O -]]]]
+
+      [m7/m '[- [:b [+ x 5]]]]
+
+      [m7/m '[- [- x] 5]]
+
+
+
+
+
+      #_[m7/m '[=
+              [+ [:m 2 K] [:k Cl 2] ]
+              [:m [:m 2 [:p K +]]
+               [:p Cl -]]]]
       #_[m7/m '[= Na  [+ [:p Na +] [:p e -]]]]
 
 
