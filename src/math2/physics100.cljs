@@ -11,14 +11,14 @@
 
 
 (def schema
-  { :rm/projects {:db/cardinality :db.cardinality/many
-                  :db/valueType   :db.type/ref}
+  {:rm/projects {:db/cardinality :db.cardinality/many
+                 :db/valueType   :db.type/ref}
    :rm/jobs   {:db/cardinality :db.cardinality/many
                :db/valueType   :db.type/ref}
    :rm/code {:db/unique :db.unique/identity}
    })
-(def conn   (d/create-conn schema))
 
+(def conn   (d/create-conn schema))
 (d/transact!
  conn
  [
@@ -26,7 +26,9 @@
    :rm/code :abc
    :rm/occupation "Computer Engineer"
    :rm/name ""
-   :rm/age 38 :rm/phone "880-1712192643" :rm/email ""
+   :rm/age 38
+   :rm/phone "880-1712192643"
+   :rm/email ""
    :rm/summery "I teach computer science, mathematics, physics  by leveraging my hands on programming skill on computer graphics, animation, user interaction and web technologies. By teaching with better visual interaction helps students get better at receaving intuation of scence & technologies."
    :rm/projects [2 3 5 7 8]
    :rm/jobs [9 10]
@@ -36,13 +38,13 @@
    :rm/col 0
    :rm/task "Online classes on Virtual notebooks"
    :rm/summery "Collaboration between teachers and students is hard using web Camera and limited zoom experience. Data scientist uses virtual notebooks to collaborate between themself. I have developed similar experience that would rather focus on student productivity that made a simple and elegant way of writing equation on web at the same speed on pen and paper. So that people can collaborate online. Moreover I made it visually more appealing by making use of digital typography and making use of computer animation and develop ways where computer can assist students helping with their homework."
-    :rm/referane ""}
+   :rm/referane ""}
   {:db/id 3
    :rm/row 0
    :rm/col 1
    :rm/task "Modeling Math and Physics problem with computer aided vector graphics"
    :rm/summery "Simulating Math and Physics and computer science problems using animation vector graphics helps uploading the information on students brain and keep it stay inside long time memory."
-    :rm/referane ""}
+   :rm/referane ""}
 
   {:db/id 5
    :rm/row 1
@@ -78,7 +80,92 @@ communicating in professional context both on presentation and at work."
    :rm/row 3
    :rm/job "Lead Engineer at Mobile Development"
    :rm/company "Samsuang R&D"
-   :rm/duration "2013-2015"}])
+   :rm/duration "2013-2015"}
+  {:db/id 11
+   :rm/code :sap
+   :rm/occupation "Computer Engineer"
+   :rm/name ""
+   :rm/age 38
+   :rm/phone "880-1712192643"
+   :rm/email ""
+   :rm/summery "I am a skilled IT professional with years of experience on
+                System & database Administration. Thought my carrier I have nailed
+                every kind of task an IT professional asked for. I am spetialized on
+                SAP based DevOps, continuous integration systems"
+   :rm/projects [12 3 13 7 8]
+   :rm/jobs [9 10]
+   :rm/projects.title "Projects and accomplishment"}
+  {:db/id 12
+   :rm/row 0
+   :rm/col 0
+   :rm/task "Tech Lead at Software Global Consultancy // SGC"
+   :rm/summery [:div
+                "I have been working as technical leader for the projects "
+                [:span {:style {:background-color (m7/hsl [.8 70 70 .8])}} "since 2013"]
+                " as the owner of the technological vision for projects of software consultancy shop I have been facilitating teams both multinational
+   & medium size companies by automating their jobs, maintain cloud based infrastructure,
+   choosing right set of technologies for them as I always look forward the big picture.
+   "]
+   :rm/referane ""}
+
+  {:db/id 13
+   :rm/row 1
+   :rm/col 0
+   :rm/task "System Engineer at Grameenphone. (2007-2009)"
+   :rm/summery [:div {:style {:font-size "1.5rem"}}
+                "I worked in Grameenphone as System Automation Expert in Operations System
+and Software department (OSS). Main goal is to develop and maintain mediation servers which
+is in a nut shell modern days "
+                [:span {:style {:background-color (m7/hsl [.8 70 70 .8])}} "Microvies"]
+                " with lot of bells and whistle. In order to telecommunication system properly every single nodes has to communicate with other systems and often in multivendor system
+ things are not compatible so intermediate system are needed to be developed. Back then we have saved ton money and man hours by develop and maintian those systems."]
+   :rm/referane ""}
+
+  {:db/id 14
+   :rm/row 0
+   :rm/col 0
+   :rm/task "ASHIK AHMED"
+   :rm/summery [:div
+                "I have been working as technical leader for the projects "
+                [:span {:style {:background-color (m7/hsl [.8 70 70 .8])}} "since 2013"]
+                " as the owner of the technological vision for projects of software consultancy shop I have been facilitating teams both multinational
+   & medium size companies by automating their jobs, maintain cloud based infrastructure,
+   choosing right set of technologies for them as I always look forward the big picture.
+   "]
+   :rm/referane ""}
+
+  {:db/id 15
+   :rm/row 1
+   :rm/col 1
+   :rm/task "Assistant Director - Bangladesh Telecommunication Regulatory Commision - BTRC (2009-2011)"
+   :rm/summery [:div {:style {:font-size "1.5rem"}}
+                "I was active member of National Telecommunication committee, I used to inspect Telecommunication and IT infrastructure, primary goal is to find out potential reverse or Tax leak from those infrastructure. As only person that had proper communication background my job was exostive some time it was extended 24/7."
+                ]
+   :rm/referane ""}
+
+  {:db/id 16
+   :rm/row 1
+   :rm/col 1
+   :rm/task "Lead Engineer - SAMSUNG R&D Institute Bangladesh (2011-2013)"
+   :rm/summery [:div {:style {:font-size "1.5rem"}}
+                "I used to lead mobile device driver team on Real time kernel.
+                 As Embedded system engineer my primary goat is to fix bug dirver relatied
+issues and help engineers to pin down the bugs they were dealing with and walk then
+thought the jTAG and tracing equipment and technical know how for fixing the driver related issues"
+                ]
+   :rm/referane ""}
+
+  {:db/id 17
+   :rm/row 1
+   :rm/col 1
+   :rm/task "Software Engineer - GENUITY Systems Limited (2006-2007)"
+   :rm/summery [:div {:style {:font-size "1.5rem"}}
+                "Reach and Develop IP multimedia communicating system"
+                ]
+   :rm/referane ""}
+
+
+  ])
 
 
 
@@ -382,24 +469,24 @@ communicating in professional context both on presentation and at work."
     (ffirst
      (d/q '[:find  ?s
             :where
-            [?e :rm/code :abc]
+            [?e :rm/code :sap]
             [?e :rm/summery ?s]] @conn))]
 
 
 
    [:div {:key (gensym)
           :style (m7/css
-                  [[18 12 14 10 :center :center 2.3 :rem :column]
+                  [[20 8 16 8 :center :center 2.3 :rem :column]
                    [3 70 90 .8] [] {:gap "1rem"
                                     :z-index 10
                                     :padding "2rem"}
                    (fv [[1 4] [1 1] [1 2] [2 1]])])}
 
-    [:div "ASHIK AHMED"]
+    [:div "ASHR. AHMED"]
     [:div "01712192643"]
     [:img {:src "m.jpg"
-           :style {:height "100%"
-                   :width "100%"}}]
+           :style {:height "80%"
+                   :width "80%"}}]
 
     ]
 
@@ -429,7 +516,7 @@ communicating in professional context both on presentation and at work."
          []
          (d/q '[:find ?t ?s ?r ?c
                 :where
-                [?e :rm/code :abc]
+                [?e :rm/code :sap]
                 [?e :rm/projects ?p]
                 [?p :rm/task ?t]
                 [?p :rm/summery ?s]

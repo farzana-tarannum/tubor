@@ -48,7 +48,8 @@
    [m100/home-work13]
    [m100/home-work14]
    [m100/home-work15]
-   #_[py100/template]
+   [m100/home-work16]
+   [py100/template]
    ] )
 
 
