@@ -63,8 +63,8 @@
 
 
   {:db/id 8
-   :rm/row 2
-   :rm/col 0
+   :rm/row 3
+   :rm/col 1
    :rm/task "English communication skill on professional context"
    :rm/summery "I have worked with people over the globe, over time I have gotten better at
 communicating in professional context both on presentation and at work."
@@ -92,19 +92,20 @@ communicating in professional context both on presentation and at work."
                 System & database Administration. Thought my carrier I have nailed
                 every kind of task an IT professional asked for. I am spetialized on
                 SAP based DevOps, continuous integration systems"
-   :rm/projects [12 3 13 7 8]
+   :rm/projects [12 14 13 15 16 17 22 8]
    :rm/jobs [9 10]
    :rm/projects.title "Projects and accomplishment"}
   {:db/id 12
    :rm/row 0
-   :rm/col 0
+   :rm/col 1
    :rm/task "Tech Lead at Software Global Consultancy // SGC"
    :rm/summery [:div
                 "I have been working as technical leader for the projects "
-                [:span {:style {:background-color (m7/hsl [.8 70 70 .8])}} "since 2013"]
-                " as the owner of the technological vision for projects of software consultancy shop I have been facilitating teams both multinational
+                [:span {:style {:background-color (m7/hsl [.8 70 70 .8])}}
+                 "since 2013"]
+                ", acting as the owner of the technological vision, I have been facilitating teams both multinational
    & medium size companies by automating their jobs, maintain cloud based infrastructure,
-   choosing right set of technologies for them as I always look forward the big picture.
+   choosing right set of technologies for them as I always look forward to the big picture.
    "]
    :rm/referane ""}
 
@@ -116,22 +117,28 @@ communicating in professional context both on presentation and at work."
                 "I worked in Grameenphone as System Automation Expert in Operations System
 and Software department (OSS). Main goal is to develop and maintain mediation servers which
 is in a nut shell modern days "
-                [:span {:style {:background-color (m7/hsl [.8 70 70 .8])}} "Microvies"]
-                " with lot of bells and whistle. In order to telecommunication system properly every single nodes has to communicate with other systems and often in multivendor system
- things are not compatible so intermediate system are needed to be developed. Back then we have saved ton money and man hours by develop and maintian those systems."]
+                [:span {:style {:background-color (m7/hsl [.8 70 70 .8])}} "Micro-servies"]
+                " with lot of bells and whistle. In order to telecommunication system work properly every single nodes has to communicate with other systems and often in multivendor system
+ things are not compatible so intermediate system are needed to be developed. Back then we have saved ton money and man hours by developing and maintianing those systems."]
    :rm/referane ""}
 
   {:db/id 14
    :rm/row 0
    :rm/col 0
-   :rm/task "ASHIK AHMED"
-   :rm/summery [:div
-                "I have been working as technical leader for the projects "
-                [:span {:style {:background-color (m7/hsl [.8 70 70 .8])}} "since 2013"]
-                " as the owner of the technological vision for projects of software consultancy shop I have been facilitating teams both multinational
-   & medium size companies by automating their jobs, maintain cloud based infrastructure,
-   choosing right set of technologies for them as I always look forward the big picture.
-   "]
+   :rm/task [:div
+             [:div "ASHR. AHMED"]
+             [:div {:style {:font-size "1.5rem"
+                            }}
+              "+8801712192643, ashik.ahmed1144@gmail.com"]
+             ]
+   :rm/summery [:div 
+                [:img {:src "m.jpg"
+                       :style {:height "80%"
+                               :width "80%"}}]
+                [:div {:style {:font-size "1rem"
+                               :padding "1rem"}}
+                 "H# 192, R# 2, Avenue# 3, Mirpur DOHS, Dhaka - 1216"
+                 ]]
    :rm/referane ""}
 
   {:db/id 15
@@ -139,30 +146,38 @@ is in a nut shell modern days "
    :rm/col 1
    :rm/task "Assistant Director - Bangladesh Telecommunication Regulatory Commision - BTRC (2009-2011)"
    :rm/summery [:div {:style {:font-size "1.5rem"}}
-                "I was active member of National Telecommunication committee, I used to inspect Telecommunication and IT infrastructure, primary goal is to find out potential reverse or Tax leak from those infrastructure. As only person that had proper communication background my job was exostive some time it was extended 24/7."
+                "I was an active member of National Telecommunication committee, I used to inspect Telecommunication and IT infrastructure, primary goal is to find out potential reverse or Tax leak from those infrastructure. As only person that had proper communication background my job was very extensive, some time it was extended 24/7."
                 ]
    :rm/referane ""}
 
   {:db/id 16
-   :rm/row 1
-   :rm/col 1
+   :rm/row 2
+   :rm/col 0
    :rm/task "Lead Engineer - SAMSUNG R&D Institute Bangladesh (2011-2013)"
    :rm/summery [:div {:style {:font-size "1.5rem"}}
                 "I used to lead mobile device driver team on Real time kernel.
                  As Embedded system engineer my primary goat is to fix bug dirver relatied
 issues and help engineers to pin down the bugs they were dealing with and walk then
-thought the jTAG and tracing equipment and technical know how for fixing the driver related issues"
+thought the debuging and tracing equipment and technical know how for fixing the device driver related issues"
                 ]
    :rm/referane ""}
 
   {:db/id 17
-   :rm/row 1
+   :rm/row 2
    :rm/col 1
    :rm/task "Software Engineer - GENUITY Systems Limited (2006-2007)"
    :rm/summery [:div {:style {:font-size "1.5rem"}}
-                "Reach and Develop IP multimedia communicating system"
+                "I have started my carrer as communcation server developer i.e video conference server that is concurrent, distribued that can handle millions of request per second."
                 ]
    :rm/referane ""}
+  {:db/id 22
+   :rm/row 3
+   :rm/col 0
+   :rm/task "Video conferencing solution with Virtual notebooks"
+   :rm/summery "Collaboration between professionals i.e engineers, managers is hard using web Camera and limited zoom experience. Using my solution virtual notebooks in video conferencing make collaborate between themself more productive. Moreover I made it visually more appealing by making use of digital typography and making use of computer animation and develop ways where computer can assist prefessional with their work."
+   :rm/referane ""}
+  
+
 
 
   ])
@@ -449,7 +464,7 @@ thought the jTAG and tracing equipment and technical know how for fixing the dri
 
 
 (defn template []
-  [:div {:style (merge (m7/grid [300 :vh 100 :vw
+  [:div {:style (merge (m7/grid [400 :vh 100 :vw
                                  (take 38 (repeat [5 :vh]))
                                  (take 20 (repeat [5 :vh]))])
                        {:background-color (hsl [1.5 70 70 1])
@@ -474,7 +489,7 @@ thought the jTAG and tracing equipment and technical know how for fixing the dri
 
 
 
-   [:div {:key (gensym)
+   #_[:div {:key (gensym)
           :style (m7/css
                   [[20 8 16 8 :center :center 2.3 :rem :column]
                    [3 70 90 .8] [] {:gap "1rem"
@@ -484,9 +499,9 @@ thought the jTAG and tracing equipment and technical know how for fixing the dri
 
     [:div "ASHR. AHMED"]
     [:div "01712192643"]
-    [:img {:src "m.jpg"
-           :style {:height "80%"
-                   :width "80%"}}]
+      [:img {:src "m.jpg"
+             :style {:height "80%"
+                     :width "80%"}}]
 
     ]
 
@@ -523,7 +538,7 @@ thought the jTAG and tracing equipment and technical know how for fixing the dri
                 [?p :rm/row ?r]
                 [?p :rm/col ?c]
                 ] @conn)))
-   (let [row 2 col 1
+   #_ (let [row 2 col 1
          sum (mapcat identity
                      (d/q '[:find  ?job ?c ?dr
                             :where
