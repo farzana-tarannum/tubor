@@ -176,10 +176,6 @@ thought the debuging and tracing equipment and technical know how for fixing the
    :rm/task "Video conferencing solution with Virtual notebooks"
    :rm/summery "Collaboration between professionals i.e engineers, managers is hard using web Camera and limited zoom experience. Using my solution virtual notebooks in video conferencing make collaborate between themself more productive. Moreover I made it visually more appealing by making use of digital typography and making use of computer animation and develop ways where computer can assist prefessional with their work."
    :rm/referane ""}
-  
-
-
-
   ])
 
 
