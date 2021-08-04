@@ -51,6 +51,8 @@
    [m100/home-work16]
    [m100/home-work17]
    [m100/home-work18]
+   [m100/home-work19]
+   [m100/home-work20]
    #_[py100/template]
    ] )
 
@@ -62,7 +64,8 @@
 
 (defn render-simple []
   (rdom/render
-   (template3)
-   (js/document.getElementById "app") functional-compiler))
+   (template)
+   (js/document.getElementById "app")
+   functional-compiler))
 
 (render-simple)

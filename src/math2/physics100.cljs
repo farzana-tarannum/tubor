@@ -92,7 +92,7 @@ communicating in professional context both on presentation and at work."
                 System & database Administration. Thought my carrier I have nailed
                 every kind of task an IT professional asked for. I am spetialized on
                 SAP based DevOps, continuous integration systems"
-   :rm/projects [12 14 13 15 16 17 22 8]
+   :rm/projects [12 14 13 15 16 17 22 8 23 24 25 26]
    :rm/jobs [9 10]
    :rm/projects.title "Projects and accomplishment"}
   {:db/id 12
@@ -131,7 +131,7 @@ is in a nut shell modern days "
                             }}
               "+8801712192643, ashik.ahmed1144@gmail.com"]
              ]
-   :rm/summery [:div 
+   :rm/summery [:div
                 [:img {:src "m.jpg"
                        :style {:height "80%"
                                :width "80%"}}]
@@ -175,6 +175,42 @@ thought the debuging and tracing equipment and technical know how for fixing the
    :rm/col 0
    :rm/task "Video conferencing solution with Virtual notebooks"
    :rm/summery "Collaboration between professionals i.e engineers, managers is hard using web Camera and limited zoom experience. Using my solution virtual notebooks in video conferencing make collaborate between themself more productive. Moreover I made it visually more appealing by making use of digital typography and making use of computer animation and develop ways where computer can assist prefessional with their work."
+   :rm/referane ""}
+  {:db/id 23
+   :rm/row 4
+   :rm/col 0
+   :rm/task [:div
+             [:div "BSC in Computer Engineering from American University of Bangladesh (AIUB)"]
+             [:div "2001-2005"]]
+   :rm/summery "I did lot of project works, research, programming contest besides formal Education
+where I scored CGPA of 3.69 out of 4. I was a programming contestant which help me solving problems in constraint environment with limited resources."
+   :rm/referane ""}
+
+  {:db/id 24
+   :rm/row 4
+   :rm/col 1
+   :rm/task [:div
+             [:div "Secondary and Higher Secondary from Rajshahi Cadet College."]
+             [:div "1998-2000"]]
+   :rm/summery ""
+   :rm/referane ""}
+
+  {:db/id 25
+   :rm/row 5
+   :rm/col 0
+   :rm/task [:div
+             [:div "Personal Summery"]
+             [:div ""]]
+   :rm/summery ""
+   :rm/referane ""}
+
+  {:db/id 26
+   :rm/row 5
+   :rm/col 1
+   :rm/task [:div
+             [:div "Reference"]
+             [:div ""]]
+   :rm/summery ""
    :rm/referane ""}
   ])
 
@@ -460,7 +496,7 @@ thought the debuging and tracing equipment and technical know how for fixing the
 
 
 (defn template []
-  [:div {:style (merge (m7/grid [400 :vh 100 :vw
+  [:div {:style (merge (m7/grid [600 :vh 100 :vw
                                  (take 38 (repeat [5 :vh]))
                                  (take 20 (repeat [5 :vh]))])
                        {:background-color (hsl [1.5 70 70 1])
