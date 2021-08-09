@@ -525,6 +525,7 @@
    ])
 
 
+
 (defn template2 []
   [:div {:style
          (merge
@@ -732,7 +733,7 @@
                    (fn [i]
                      (path (flatten
                             [0 0
-                             (repeat 10
+                            (repeat 10
                                      [
                                       :a 2 1 0 false false  0 (+ 10 i)
                                       :a 2 1 0 true false  0 -3])
@@ -7341,7 +7342,7 @@ the gravitational PE at its highest point"]
            ;;         :stroke-width 2
            ;;         :fill :none}
 
-           ;;  [:animateTransform {:id :dec
+           ;; [:animateTransform {:id :dec
            ;;                      :attributeName :transform
            ;;                      :begin (sec 0)
            ;;                      :dur (sec 4)
@@ -7760,13 +7761,13 @@ the gravitational PE at its highest point"]
           ax-dy 40
 
           cor [[5 2] [10 9] [15 19] [20 34] [25 58] [30 95] [32 125]]
-          points (into ["x"] (range 0 10))
+          points (into ["x"] (range -5 10))
           ts (into [
                     [:div {:style {:font-size "1rem"}}
-                     [m7/m '[= y [:p [:b [- x 3]]
-                                  2]]]]]
+                     [m7/m '[= y [- [:p [:b [+ x 3]]
+                                   2] 24]]]]]
                    (map (fn [x] (-
-                                 (* (- x 3) (- x 3)) 20)) (range 0 10)))
+                                 (* (+ x 3) (+ x 3)) 24)) (range -5 10)))
           vb (fn [z]
                (nth [[0 -200  400 400]
                      [0 -180  200 200]
@@ -7820,45 +7821,75 @@ the gravitational PE at its highest point"]
                 [3.5 70 (+ 50 (* 5 5))  .7] []
                 {:gap ".1rem"
                  :z-index 10}])}
-        [m7/m '[= y [- [:p [:b [- x 3]] 2] 20]]]
+        [m7/m '[= y [- [:p [:b [+ x 3]] 2] 24]]]
 
-        [m7/m '[= 0 [- [:p [:b [- x 3]] 2] 20]]]
-        [m7/m '[= mid 3 ]]
+        [m7/m '[= y [- [:p [:b [+ x 3]] 2] [:p 4.898 2]]]]
 
-        [m7/m '[= [:p d 2] 20 ]]
+        [m7/m '[= 0 [- [:p [:b [+ x 3]] 2] [:p 4.898 2]]]]
 
-        [m7/m '[= d [:sq 20] ]]
-        [m7/m '[= x [+ mid 4.5]]]
-        [m7/m '[= x [- mid 4.5]]]
-        [m7/m '[= y [- [:p [:b [- x 3]] 2] [:p d 2]]]]
+        [m7/m '[= 0 [- [:b [+ [:p x 2] [- [:m 6 x]] 9]] [:p 4.898 2]]]]
 
-        [m7/m '[= 0 [- [:b [+ [- [:p x 2] [* 2 [:m 3 x]] ]
+        [m7/m '[= 0 [- [:b [+ [:p x 2] [- [:m 6 x]] 9]] 24]]]
+
+        [m7/m '[= 0 [- [:b [+ [:p x 2] [- [:m 6 x]] 9]] 24]]]
+
+        [m7/m '[= [- [:p x 2] [- [:m 6 x] 15]] 0]]
+
+        #_[m7/m '[= 0 [- [:p [:b [- x 3]] 2] 20]]]
+        #_[m7/m '[= m 3 ]]
+
+        #_[m7/m '[= [:p d 2] 20 ]]
+
+        #_[m7/m '[= d [:sq 20] ]]
+        #_[m7/m '[= x [+ m 4.5]]]
+        #_[m7/m '[= x [- m 4.5]]]
+        #_[m7/m '[= y [- [:p [:b [- x 3]] 2] [:p d 2]]]]
+
+        #_[m7/m '[= 0 [- [:b [+ [- [:p x 2] [* 2 [:m 3 x]] ]
                             [:p 3 2]]]
                      [:p d 2]]]]
 
-        [m7/m '[= [+ [- [:p x 2] [* 2 [:m mid x]] ]
-                   [- [:p mid 2] [:p d 2]]] 0 ]]
+        #_[m7/m '[= [+ [- [:p x 2] [* 2 [:m m x]] ]
+                   [- [:p m 2] [:p d 2]]] 0 ]]
 
 
 
         ]
 
-       [:div {:style
+       #_[:div {:style
               (m7/css
-               [[3 4 12 9
+               [[3 8 12 9
                  :center :center  2 :rem :column]
                 [0 70 (+ 50 (* 5 5))  .7] []
                 {:gap ".1rem"
                  :z-index 10}])}
 
-        [m7/m '[= [+ [- [:p x 2] [:m 2 mid x] ]
-                   [- [:p mid 2] [:p d 2]]] 0 ]]
+        [m7/m '[= [+ [- [:p x 2] [:m 2 m x] ]
+                   [- [:p m 2] [:p d 2]]] 0 ]]
 
-        [m7/m '[= [+ [:p x 2] [:m 6 x]  15] 0]]
+        [m7/m '[= [- [+ [:p x 2] [:m 6 x]]
+                   15] 0]]
 
-        [m7/m '[= [- [:m 2 mid x]] [:m 6 x] ]]
+        [m7/m '[= [- [:m 2 m x]] [:m 6 x] ]]
 
-        [m7/m '[= [- [:m 2 mid ]] 6]]
+        [m7/m '[= [- [:m 2 m ]] 6]]
+        [m7/m '[= m -3]]
+
+        [m7/m '[= [- [:p m 2] [:p d 2]] [- 15]]]
+
+        [m7/m '[= [- [:p [:b [- 3]] 2] [:p d 2]] [- 15]]]
+
+        [m7/m '[= [- 9
+                   [:p d 2]] [- 15]]]
+
+        [m7/m '[= [:p d 2] [+  15 9]]]
+        [m7/m '[= [:p d 2] 24]]
+        [m7/m '[= d 4.898]]
+
+        [m7/m '[= x [+ [- 3] 4.898]]]
+
+        [m7/m '[= x [- [- 3] 4.898]]]
+
 
         ]
 
@@ -7906,7 +7937,7 @@ the gravitational PE at its highest point"]
                              ])
                    :transform (m7/tranfrom
                                [
-                                [:translate [60 40]]
+                                [:translate [-60 48]]
                                 [:scale [1 1]]
                                 ])
                    :stroke (hsl [4 70 70 1])
@@ -7914,7 +7945,7 @@ the gravitational PE at its highest point"]
                    :fill :none}
             ]
 
-           [:path {:d (path [ (* 20 3) 0 :l
+           [:path {:d (path [ (* 20 -3) 0 :l
                              -90 0])
                    :stroke (hsl [10 70 70 1])
                    :stroke-width 3
@@ -7922,7 +7953,7 @@ the gravitational PE at its highest point"]
                    :fill :none}
             ]
 
-           [:path {:d (path [  (* 20 3) 0 :l
+           [:path {:d (path [  (* 20 -3) 0 :l
                              90 0])
                    :stroke (hsl [5 70 70 1])
                    :stroke-width 3
@@ -7931,7 +7962,7 @@ the gravitational PE at its highest point"]
             ]
 
 
-           [:path {:d (path [  (* 20 3) 100 :l
+           [:path {:d (path [  (* 20 -3) 100 :l
                             0 (ve 500)])
                    :stroke (hsl [2 70 70 1])
                    :stroke-width 3
@@ -7939,21 +7970,21 @@ the gravitational PE at its highest point"]
                    :fill :none}
             ]
 
-           [:text {:x 20
+           [:text {:x (- -60 60)
                    :y 0
                    :style {:font-size "1rem"}}
             "-d"]
 
-           [:text {:x (+ 60 20)
+           [:text {:x (- 60 60)
                    :y 0
                    :style {:font-size "1rem"}}
             "d"]
 
 
-           [:text {:x (+ 60 0)
+           [:text {:x (- -60 0)
                    :y (ve 50)
                    :style {:font-size "1rem"}}
-            "mid"]
+            "m"]
 
            [:path {:d (path [ 0 0 :c
                              (* 20 3.5) (ve (* 2 2 2))
@@ -7965,12 +7996,13 @@ the gravitational PE at its highest point"]
                              (* 20 6) (ve (- (* 2 13 13) (* 2 7 7)))
                              ])
                    :transform (m7/tranfrom
-                               [[:translate [60 40]]
+                               [[:translate [-60 48]]
                                 [:scale [-1 1]]
                                 ])
                    :stroke (hsl [4 70 70 1])
                    :stroke-width 2
                    :fill :none}
+
             ]
 
 
@@ -7986,12 +8018,12 @@ the gravitational PE at its highest point"]
 
 
                 (map (fn [x]
-                       (* 20 x)) (range 0 20 .25))
+                       (* 20 x)) (range -10 20 .25))
 
                 (map (fn [x]
-                       (ve (- (* 2 (* (- x 3) (- x 3))) 40
+                       (ve (- (* 2 (* (+ x 3) (+ x 3))) 48
                               )))
-                     (range 0 20 .25)))
+                     (range -10 20 .25)))
            ])]
 
 
@@ -8114,14 +8146,49 @@ the gravitational PE at its highest point"]
         (nth tem 3)]
 
 
-       #_[:div {:style
+       [:div {:style
               (m7/css
-               [[3 2 3 7
-                 :center :center  5 :rem :column]
+               [[4 3 10 7
+                 :center :center  4 :rem :column]
                 [3.5 70 (+ 50 (* 5 5))  .7] []
                 {:gap ".1rem"
                  :z-index 10}])}
-        [m7/m '[= g [:m 9.8 [:m m [:p s -2]]]]]
+
+        [:div ""]
+        #_[:div  {:style {:font-size "2rem"}} "g is an acceleration duo to gravitational pull" ]
+
+
+
+
+        #_[m7/m '[= g [:m 9.8 [:m m [:p s -2]]]]]
+
+
+        #_[m7/m '[= [:m ρ A h]
+                m]]
+
+        #_[m7/m '[= W mg [:m 9.8 m N]]]
+
+        #_[m7/m '[= P [W A] [ [:m ρ A h g] A] ]]
+
+        #_[m7/m '[=  P [F A] [N [:p m 2]] [:m N [:p m -2]] Pa]]
+
+
+
+        #_[m7/m '[= Density ρ [m V] [ Kg [:p m 3]] [:m Kg [:p m -3]]]]
+
+
+
+        #_[m7/m '[= [1 [:p x 3] ] [:p x -3] ]]
+
+
+        ;; [m7/m '[= ρV [:m V [m V]] ]]
+
+
+        ;; [m7/m '[= m ρV ]]
+
+        ;; [m7/m '[= W mg [:m ρ V g] ]]
+
+        ;; [m7/m '[= P [W A] [[:m ρ A h g] A]  [:m ρ h g]  ]]
 
 
         ]
@@ -8203,6 +8270,79 @@ the gravitational PE at its highest point"]
                  :viewBox (m7/space
                            viewbox)}
 
+           [:filter#flames
+            {:height "300%",
+             :width "100%",
+             :y "-100%",
+             :x "0%",
+             :filterunits "objectBoundingBox"}
+            [:feTurbulence
+             {:stitchtiles "stitch",
+              :result "noise",
+              :numoctaves "1",
+              :basefrequency "0.1",
+              :type "fractalNoise"}]
+            [:feOffset
+             {:result "off1", :dy "0"}
+             [:animate
+              {:repeatcount "indefinite",
+               :dur "6s",
+               :to "-300",
+               :from "0",
+               :attributename "dy",
+               :attributetype "XML"}]]
+            [:feOffset
+             {:result "off2", :dy "60", :in "noise"}
+             [:animate
+              {:repeatcount "indefinite",
+               :dur "6s",
+               :to "0",
+               :from "300",
+               :attributename "dy",
+               :attributetype "XML"}]
+             ]
+            [:feMerge
+             {:result "scrolling-noise"}
+             [:feMergeNode {:in "off1"}]
+             [:feMergeNode {:in "off2"}]]
+            [:feComponentTransfer
+             {:result "brighter-noise"}
+             [:feFuncA {:exponent "0.5", :amplitude "1", :type "gamma"}]]
+            [:feComposite
+             {:result "gradient-noise",
+              :operator "in",
+              :in2 "brighter-noise",
+              :in "SourceGraphic"}]
+            [:feComponentTransfer
+             {:result "threshhold"}
+             [:feFuncR {:tablevalues "0 1", :type "discrete"}]
+             [:feFuncG {:tablevalues "0 1", :type "discrete"}]
+             [:feFuncB {:tablevalues "0 1", :type "discrete"}]
+             [:feFuncA {:tablevalues "0 1", :type "discrete"}]]
+            [:feFlood {:result "yellow", :flood-color "#ff9"}]
+            [:feComposite
+             {:result "yellow-threshhold",
+              :operator "in",
+              :in "yellow",
+              :in2 "threshhold"}]
+            [:feFlood {:result "red", :flood-color "#f33"}]
+            [:feComponentTransfer
+             {:result "exponent-gradient", :in "SourceGraphic"}
+             [:feFuncA {:exponent "3", :type "gamma"}]]
+            [:feComposite
+             {:result "red-gradient",
+              :operator "in",
+              :in2 "exponent-gradient",
+              :in "red"}]
+            [:feComposite
+             {:result "red-gradient-threshhold",
+              :operator "in",
+              :in "red-gradient",
+              :in2 "threshhold"}]
+            [:feMerge
+             [:feMergeNode {:in "yellow-threshhold"}]
+             [:feMergeNode {:in "red-gradient-threshhold"}]]]
+
            [:pattern {:id (name :star)
                       :viewBox (space [0 0 10 10])
                       :width "10%"
@@ -8226,12 +8366,12 @@ the gravitational PE at its highest point"]
             [:stop  {:offset .77
                      :stop-color (hsl [3 70 70 .4])}
              [:animate {:attributeName :offset
-                        :from 0.0
+                        :from 0
                         :to 1
-                        :dur (m7/not-space [2 "s"])
-                        :repeatCount :indefinite}]]
+                        :dur (m7/not-space [3 "s"])
+                        :repeatCount 10}]]
             ]
-
+           ;; :indefinite
            [:marker {:id (name :dot2)
                      :viewBox (m7/space [-5 -5 10 10])
                      :refX 0
@@ -8242,7 +8382,7 @@ the gravitational PE at its highest point"]
             [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
                     :stroke-width .1
-                    :transform (m7/tranfrom [[:rotate 0]])
+ :transform (m7/tranfrom [[:rotate 0]])
                     :fill (m7/hsl [.4 70 70 1])}]]
 
            [:animate {:attributeName :viewBox
@@ -8252,7 +8392,9 @@ the gravitational PE at its highest point"]
 
            #_(grid-on 1 10)
 
-           #_[:path {:d (path [-60 80 :l 0 (ve 675)])
+           ;;:filter (m7/url "flames")
+           ;; Height
+           #_[:path {:d (path [-60 80 :l 0 (ve 185)])
                    :marker-end (m7/url (name :dot))
                    :marker-start (m7/url (name :dot))
                    :stroke (hsl [4 70 70 1])
@@ -8265,12 +8407,14 @@ the gravitational PE at its highest point"]
               [:path {:d pth
                       :stroke (hsl [4 70 70 1])
                       :stroke-width 2
+                      :filter (m7/url "flames")
                       :fill (m7/url (name :lg1))}]
 
               [:path {:d pth
                       :transform (m7/tranfrom [[:scale [-1 1]]])
                       :stroke (hsl [4 70 70 1])
                       :stroke-width 2
+                      :filter (m7/url "flames")
                       :fill (m7/url (name :lg1))}
                ]])
 
@@ -8285,6 +8429,26 @@ the gravitational PE at its highest point"]
                    :stroke-width 1.5
                    :fill (hsl [4 40 50 1])}
             ]
+
+
+           [:g {:transform (m7/tranfrom [[:rotate 0]])}
+            [:path {:d (path [-1200 80
+                              :l 2400 0])
+                    :id :dpp2
+                    :stroke (hsl [0 70 70 1])
+                    :stroke-width 2
+                    :fill :none}
+             ]
+
+            [:text {
+                    :style {:font-size "5rem"}
+                    }
+             [:textPath {:href :#dpp2
+                         :startOffset 1220}
+
+              (str "Height" )
+              ]
+             ]]
 
 
            (let [y 90
@@ -8308,7 +8472,7 @@ the gravitational PE at its highest point"]
 
               ])
 
-           [:path {:d (path [400 120
+           #_[:path {:d (path [400 120
                              :l 20 0 0 (ve 120) -40 0 0 120 40 0])
                    :stroke (hsl [5 70 70 1])
                    :stroke-width 1
@@ -8318,7 +8482,8 @@ the gravitational PE at its highest point"]
            #_[:text {:x 0
                    :y 0
                    :style {:font-size "1rem"}}
-            "101 kN/m2"]
+              "101 kN/m2"]
+           ;; bar
            (let [y 0
                  d 3.5]
              [:g {:transform (m7/tranfrom [[:translate [0 0]]
@@ -8328,7 +8493,16 @@ the gravitational PE at its highest point"]
                                 :l 0 (ve 120)  400 80 0 40 -8 0 0 (ve 32) -385 -80 0 120])
                       :stroke (hsl [0 70 70 1])
                       :stroke-width 1
-                      :fill (hsl [2 70 70 .3])}
+                      :fill (m7/url (name :lg1))
+                      }
+               ]
+              ;; :fill (hsl [2 70 70 .3])
+              #_[:path {:d (path [0 d
+                                :l 0 (ve 170)  8 0  0 120])
+                      :stroke (hsl [0 70 70 1])
+                      :stroke-width 1
+                      :fill (m7/url (name :lg1))
+                      }
                ]
               #_(map (fn [d]
                      )
@@ -8395,6 +8569,7 @@ the gravitational PE at its highest point"]
           vms (into ["v (m/s)"] [ 0 0])
           vb (fn [z]
                (nth [[0 -200  400 400]
+                     [0 -1100  1600 1200]
                      [0 -180  200 200]
                      [0 -50  100 100]
                      [0 -90  100 100]
@@ -8405,13 +8580,13 @@ the gravitational PE at its highest point"]
                      [0 40  100 100]
                      [75 -175  150 150]
                      [-20 -20  100 100]
-                     [-400 -200  800 200]] z))
+                     [0 -500  800 600]] z))
           temmat [["4" "3" "abc@kmail.com" "017555224" "2" "abc abc" "chrismas 2" "due at 13"]
                   ["2" "5" "daf@kmail.com" "01855224" "5" "def def" "cake" "none"]]
           tem (nth temmat
                    1)
           viewbox (vb 0)
-          viewbox2 (vb 0)
+          viewbox2 (vb 1)
           st (fn [aa row]
                {:style (m7/css
                         [[row 1 (+ 3 (* aa 1)) 1  :center :center  1.5 :rem :column]
@@ -8466,17 +8641,19 @@ the gravitational PE at its highest point"]
                  :viewBox (m7/space
                            viewbox)}
 
-           [:marker {:id (name :dot)
+           [:marker {:id (name :dot3)
                      :viewBox (m7/space [-5 -5 10 10])
                      :refX 0
                      :refY 0
                      :orient :auto-start-reverse
                      :markerWidth 5
                      :markerHeight 5}
-            [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
+            [:path {:d (m7/path [-5 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
                     :stroke-width .1
-                    :transform (m7/tranfrom [[:rotate 0]])
+                    :transform (m7/tranfrom [[:scale [2 2]]
+                                             [:rotate 0]
+                                             ])
                     :fill (m7/hsl [.4 70 70 1])}]]
 
            [:animate {:attributeName :viewBox
@@ -8484,7 +8661,10 @@ the gravitational PE at its highest point"]
                       :dur "4s"
                       :fill :freeze}]
 
-           (let [z -90]
+
+
+
+           #_(let [z -90]
              [:g {:transform (m7/tranfrom [[:rotate z]])}
               [:path {:d (path [-1200 140
                                 :l 2400 0])
@@ -8800,6 +8980,20 @@ the gravitational PE at its highest point"]
 
                   ])
                [1 -1])])
+
+
+           (map
+            (fn [y]
+              (map
+               (fn [x]
+                 [:path {:d (path [(* x 80) (ve (* 60 y)) :l 80 0 0 -60 -80 0 0 60])
+                         :stroke (hsl [3 70 70 1])
+                         :stroke-width 4
+                         :fill (hsl [4 70 70 1])}
+                  ])
+               (range 9)))
+            (range 12))
+
            (let [y 0]
              [:g {:transform (m7/tranfrom [[:rotate y]])}
               [:path {:d (path [-1200 (ve 20)
@@ -8818,7 +9012,43 @@ the gravitational PE at its highest point"]
 
                 (str "y=" 10)
                 ]
-               ]])
+               ]
+
+
+
+              ])
+
+           (let [y 0]
+             [:g {:transform (m7/tranfrom [[:rotate y]])}
+              [:path {:d (path [0 0
+                                :l (* 3 3 80) 0])
+                      :marker-end (m7/url (name :dot3))
+                      :id :appp2
+                      :stroke (hsl [5 70 70 1])
+                      :stroke-width 10
+                      :fill :none}
+               ]
+
+              [:text {
+                      :style {:font-size "3rem"}
+                      }
+               [:textPath {:href :#appp2
+                           :startOffset 120}
+
+                (str (* 3 12))
+                ]
+               ]
+
+              [:animateTransform {:id :dec
+                                  :attributeName :transform
+
+                                  :begin :click
+                                  :dur (sec 4)
+                                  :type :rotate
+
+                                  :from 0
+                                  :to -90
+                                  :fill :freeze}]])
 
 
 
