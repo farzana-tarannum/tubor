@@ -35,7 +35,7 @@
 
      [:img {:src (if (> (count img) 0) img (.getItem js/localStorage "file-input-img" ))
             :style {
-                    :height "100%"
+                    :height "300px"
                     :width "100%"
                     :object-fit :cover}}]
      [:input {:type :file

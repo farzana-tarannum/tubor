@@ -8141,6 +8141,7 @@ on time?"]
 
 
 
+
 (defn home-work19 []
   (let [[slider get-slider] (react/useState 0)
         f (fn [n] (/ 1 n))
@@ -8150,13 +8151,15 @@ on time?"]
                 (comp
                  (partial map (partial * n))))]
     (let [zoom 4
+
           ax-dx 80
           ax-dy 40
+          m (/ -10 2)
+          d (- (* m m) -24 )
           points (into ["x"] (range -5 10))
           ts (into [
                     [:div {:style {:font-size "1rem"}}
-                     [m7/m '[= y [- [:p [:b [+ x 3]]
-                                   2] 24]]]]]
+                     ""]]
                    (map (fn [x] (-
                                  (* (+ x 3) (+ x 3)) 24)) (range -5 10)))
           vb (fn [z]
@@ -8258,8 +8261,8 @@ on time?"]
 
        [:div {:style
               (m7/css
-               [[3 9 12 7
-                 :center :center  2.5 :rem :column]
+               [[3 9 12 9
+                 :center :center  3.5 :rem :column]
                 [1 70 (+ 50 (* 5 5))  .7]
                 []
                 {:gap ".1rem"
@@ -8278,17 +8281,14 @@ on time?"]
 
         ;; [m7/m '[= 0 [- [:b [+ [:p x 2] [- [:m 6 x]] 9]] 24]]]
 
-        [m7/m '[= [- [:p x 2] [- [:m 4 x] 32]] 0]]
+        [m7/m ['= ['- ['- [:p 'x 2] [:m 10 'x] ] (- 49 25)] 0]]
 
-        [m7/m '[= [:m [- 2] m] [- 4]]]
-        [m7/m '[= [:m [- 2] m] [* [- 2] 2]]]
-        [m7/m '[= m 2]]
+        [m7/m ['= ['- [:m 2 'm ]] ['- 10]] ]
+        [m7/m ['= 'm 5] ]
+        [m7/m ['= ['- [:p 'm 2]  [:p 'd 2]] ['- 24]] ]
 
-
-
-        [m7/m '[= -32 [- 4 [:p d 2]]]]
-
-        [m7/m '[= [:p d 2] 36]]
+        [m7/m ['= [:p 7 2]
+               [:p 'd 2]] ]
         #_[m7/m '[= 0 [- [:p [:b [- x 3]] 2] 20]]]
         #_[m7/m '[= m 3 ]]
 
@@ -9948,6 +9948,581 @@ on time?"]
                          :startOffset 1220}
 
               (str "Heighering ..." )
+              ]
+             ]]
+
+
+           (let [y 90
+                 d 3.5]
+             [:g {:transform (m7/tranfrom [[:translate [0 (ve 60)]]
+                                           [:rotate y]
+
+                                           ])}
+
+              [:path {:d (path [0 d
+                                :l (ve 540) 0
+                                0 d 5 40 0 (ve d) 0 ])
+
+                      :id :pp2
+                      :stroke (hsl [0 70 70 1])
+                      :stroke-width 1.5
+                      :fill (hsl [3 70 70 1])}
+               ]
+
+
+
+              ])
+
+           #_[:path {:d (path [400 120
+                             :l 20 0 0 (ve 120) -40 0 0 120 40 0])
+                   :stroke (hsl [5 70 70 1])
+                   :stroke-width 1
+                   :fill (hsl [2 70 70 .3])}
+            ]
+
+           #_[:text {:x 0
+                   :y 0
+                   :style {:font-size "1rem"}}
+              "101 kN/m2"]
+           ;; bar
+           (let [y 0
+                 d 3.5]
+             [:g {:transform (m7/tranfrom [[:translate [0 0]]
+                                           [:rotate 0]])}
+
+              [:path {:d (path [0 d
+                                :l 0 (ve 120)  400 80 0 40 -8 0 0 (ve 32) -385 -80 0 120])
+                      :stroke (hsl [0 70 70 1])
+                      :stroke-width 1
+                      :fill (m7/url (name :lg1))
+                      }
+               ]
+              ;; :fill (hsl [2 70 70 .3])
+              #_[:path {:d (path [0 d
+                                :l 0 (ve 170)  8 0  0 120])
+                      :stroke (hsl [0 70 70 1])
+                      :stroke-width 1
+                      :fill (m7/url (name :lg1))
+                      }
+               ]
+              #_(map (fn [d]
+                     )
+                   [d (ve d)])])
+
+           #_(let [y 0
+                 d 9
+                 ]
+
+             [:g {:transform (m7/tranfrom [[:rotate 10]])}
+              (map
+               (fn [s]
+                 [:g  {:transform (m7/tranfrom
+                                   [
+                                    [:translate
+                                     [120 (ve 100)]]
+                                    [:scale [s 1]]
+                                    ])}
+                  (map (fn [d]
+                         [:path {:d (path [0 d
+                                           :l 120 0 0 d])
+                                 :stroke (hsl [0 70 70 1])
+                                 :stroke-width 1
+                                 :fill :none}
+                          ])
+                       [d (ve d)])
+
+
+
+                  ])
+               [1 -1])])
+
+
+
+           ]
+          )]])))
+
+
+
+(defn banner2 []
+  (let [[slider get-slider] (react/useState 0)
+        f (fn [n] (/ 1 n))
+        tt 'θ
+        dx [1 0  0 1 -1  0 0 -1 ]
+        sq (fn [n]
+                (comp
+                 (partial map (partial * n))))]
+    (let [zoom 4
+          ax-dx 80
+          ax-dy 40
+
+          cor [[5 2] [10 9] [15 19] [20 34] [25 58] [30 95] [32 125]]
+          points (into ["x"] (range 0 10))
+          ts (into [
+                    [:div {:style {:font-size "1rem"}}
+                     [m7/m '[= y [:p x
+                                  2]]]]]
+                   (map (fn [x] (* (- x 3) (- x 3))) (range 0 10)))
+          vms (into ["v (m/s)"] [ 0 0])
+          vb (fn [z]
+               (nth [[0 -200  400 400]
+                     [0 -180  200 200]
+                     [0 -50  100 100]
+                     [0 -25  50 50]
+                     [-100 -200  800 200]
+                     [40 120  80 80]
+                     [0 40  100 100]
+                     [75 -175  150 150]
+                     [-20 -20  100 100]
+                     [-400 -200  800 200]] z))
+          temmat [["4" "3" "abc@kmail.com" "017555224" "2" "abc abc" "chrismas 2" "due at 13"]
+                  ["2" "5" "daf@kmail.com" "01855224" "5" "def def" "cake" "none"]]
+          tem (nth temmat
+                   1)
+          viewbox (vb 0)
+          viewbox2 (vb 0)
+          st (fn [aa row]
+               {:style (m7/css
+                        [[row 1 (+ 3 (* aa 1)) 1  :center :center  1.5 :rem :column]
+                         [(* 3 .2) 70 (+ 50 (* 5 5))  .7] []
+                         {:gap ".1rem"
+                          :z-index 10}])})]
+      [:div {:style (merge
+                     (grid [100 :vh 100 :vw
+                            (take 15 (repeat [8 :vh]))
+                            (take 20 (repeat [8 :vh]))])
+                     {:background-color (hsl [1 70 70 1])
+                      :gap ".1rem"})}
+       #_(map
+        (fn [i j]
+          [:div {:style
+                 (m7/css
+                  [[2 1 (* i 3) 3
+                    :center :center  2 :rem :column]
+                   [5 70 (+ 50 (* 5 5))  .7] []
+                   {:gap ".1rem"
+                    :z-index 10}])}
+           j])
+        (range 1 10)
+        ["House no" "Road no" "email" "phone #" "Roll No" "Name" "Gift Name" "Comments"])
+
+
+       #_(map
+        (fn [i j]
+          [:div {:style
+                 (m7/css
+                  [[3 1 (* i 3) 3
+                    :center :center  2 :rem :column]
+                   [5 70 (+ 50 (* 5 5))  .7] []
+                   {:gap ".1rem"
+                    :z-index 10}])}
+           j])
+        (range 1 10)
+        ["4" "3" "abc@kmail.com" "017555224" "2" "abc abc" "chrismas 2" "due at 13"])
+
+       #_(map
+        (fn [i j]
+          [:div {:style
+                 (m7/css
+                  [[4 1 (* i 3) 3
+                    :center :center  2 :rem :column]
+                   [2 70 (+ 50 (* 5 5))  .7] []
+                   {:gap ".1rem"
+                    :z-index 10}])}
+           j])
+        (range 1 10)
+        ["2" "5" "daf@kmail.com" "01855224" "5" "def def" "cake" "none"]
+        )
+
+
+       #_[:div {:style
+              (m7/css
+               [[8 1 3 3
+                 :center :center  1.5 :rem :column]
+                [3 70 (+ 50 (* 5 5))  .7] []
+                {:gap ".1rem"
+                 :z-index 10}])}
+        (str "Dear "
+             (nth tem 5)
+
+             ) ]
+
+
+       #_[:div {:style
+              (m7/css
+               [[8 1 9 3
+                 :center :center  1.5 :rem :column]
+                [3 70 (+ 50 (* 5 5))  .7] []
+                {:gap ".1rem"
+                 :z-index 10}])}
+        (nth tem 3)]
+
+
+       [:div {:style
+              (m7/css
+               [[4 10 5 12
+                 :center :center  4 :rem :column]
+                [3.5 70 (+ 50 (* 5 5))  .7] []
+                {:gap ".1rem"
+                 :z-index 10}])}
+
+        [:div ""]
+
+        (map
+         (fn [fld inp]
+           [:div {:style {:display :flex
+                          :width "100%"
+                          :background-color (hsl [1 80 80 1])
+                          :justify-content :space-between}}
+            [:div  {:style {:width "200px"
+                            :font-size "2rem"}} fld]
+
+            inp
+
+            ])
+         ["name" "scc" "hsc" "education" "experience" "contact no." "e-mail" "address"  "NID"]
+         [[:input {:style {:flex-grow 2}} ]
+
+          [:input {:style {:flex-grow 2}} ]
+          [:div {:style {:display :flex
+                         :flex-grow 2}}
+           [:div {:style {:font-size "2rem"}} "year"]
+           [:input ]
+           [:div {:style {:font-size "2rem"}} "GPA"]
+           [:input ]
+           ]
+
+          [:div {:style {:display :flex
+                         :flex-grow 2}}
+           [:div {:style {:font-size "2rem"}} "year"]
+           [:input ]
+           [:div {:style {:font-size "2rem"}} "GPA"]
+           [:input ]
+           ]
+          [:textarea {:rows 10
+                      :style {:flex-grow 2}} ]
+          [:textarea {:rows 10
+                      :style {:flex-grow 2}} ]
+          [:input {:style {:flex-grow 2}} ]
+          [:input {:style {:flex-grow 2}} ]
+          [:div {:style {:flex-grow 2
+                         :height "400px"
+                         :width "400px"}}
+           [file/file-input]]
+          ])
+
+
+        #_[:div {:style {:display :flex
+                       :justify-content :space-between}}
+         [:div  {:style {:width "200px"
+                         :background-color (hsl [1 70 70 1])
+                         :font-size "2rem"}} "NID"]
+
+         [:div {:style {:flex-grow 2
+                        :height "20vh"
+                        :width "20vw"}}
+          [file/file-input]]
+
+         ]
+
+
+
+
+        #_[m7/m '[= g [:m 9.8 [:m m [:p s -2]]]]]
+
+
+        #_[m7/m '[= [:m ρ A h]
+                m]]
+
+        #_[m7/m '[= W mg [:m 9.8 m N]]]
+
+        #_[m7/m '[= P [W A] [ [:m ρ A h g] A] ]]
+
+        #_[m7/m '[=  P [F A] [N [:p m 2]] [:m N [:p m -2]] Pa]]
+
+
+
+        #_[m7/m '[= Density ρ [m V] [ Kg [:p m 3]] [:m Kg [:p m -3]]]]
+
+
+
+        #_[m7/m '[= [1 [:p x 3] ] [:p x -3] ]]
+
+
+        ;; [m7/m '[= ρV [:m V [m V]] ]]
+
+
+        ;; [m7/m '[= m ρV ]]
+
+        ;; [m7/m '[= W mg [:m ρ V g] ]]
+
+        ;; [m7/m '[= P [W A] [[:m ρ A h g] A]  [:m ρ h g]  ]]
+
+
+        ]
+
+
+       #_[:div {:style
+              (m7/css
+               [[4 4 7 7
+                 :center :center  5 :rem :column]
+                [3.5 70 (+ 50 (* 5 5))  .7] []
+                {:gap ".1rem"
+                 :z-index 10}])}
+          [m7/m '[= P pgh]]
+
+
+        ]
+
+       #_[:div {:style
+              (m7/css
+               [[11 1 3 3
+                 :center :center  1.5 :rem :column]
+                [3.5 70 (+ 50 (* 5 5))  .7] []
+                {:gap ".1rem"
+                 :z-index 10}])}
+        (str "H# "  (nth tem 0))]
+
+       #_[:div {:style
+              (m7/css
+               [[11 1 6 3
+                 :center :center  1.5 :rem :column]
+                [3.5 70 (+ 50 (* 5 5))  .7] []
+                {:gap ".1rem"
+                 :z-index 10}])}
+        (str "Road# "  (nth tem 1))]
+
+
+
+       #_[:div {:style
+              (m7/css
+               [[9 3 3 7
+                 :center :center  2 :rem :column]
+                [3.5 70 (+ 50 (* 5 5))  .7] []
+                {:gap ".1rem"
+                 :z-index 10}])}
+        "Pressure of Liquid"
+        [m7/m '[= P pgh]]
+        [m7/m '[= g [:m 9.8 m [:p s -2]]]]]
+
+
+
+
+       #_(map-indexed
+        (fn [x v]
+          [:div (st x 2) v]) ts)
+
+
+
+       #_[:div (st 3 4) [m7/m '[= P [F A]]]]
+       #_[:div (st 3 4) [m7/m '[= P
+                              [N [:p m 2]]
+                              [:m N [:p m -2]]
+                              ]
+                       ]]
+
+       #_(map-indexed
+        (fn [x v]
+          [:div (st x 3) v]) vms)
+
+
+
+
+
+       [:div {:style (m7/css
+                      [[2 10 1 20 :center :center 3 :rem]
+                       [1 70 90 1] [] {:gap "1rem"}])}
+        (let []
+          [:svg {:style {:height "100%"
+                         :width "100%"}
+                 :viewBox (m7/space
+                           viewbox)}
+
+           [:filter#flames
+            {:height "300%",
+             :width "100%",
+             :y "-100%",
+             :x "0%",
+             :filterunits "objectBoundingBox"}
+            [:feTurbulence
+             {:stitchtiles "stitch",
+              :result "noise",
+              :numoctaves "1",
+              :basefrequency "0.1",
+              :type "fractalNoise"}]
+            [:feOffset
+             {:result "off1", :dy "0"}
+             [:animate
+              {:repeatcount "indefinite",
+               :dur "6s",
+               :to "-300",
+               :from "0",
+               :attributename "dy",
+               :attributetype "XML"}]]
+            [:feOffset
+             {:result "off2", :dy "60", :in "noise"}
+             [:animate
+              {:repeatcount "indefinite",
+               :dur "6s",
+               :to "0",
+               :from "300",
+               :attributename "dy",
+               :attributetype "XML"}]
+             ]
+            [:feMerge
+             {:result "scrolling-noise"}
+             [:feMergeNode {:in "off1"}]
+             [:feMergeNode {:in "off2"}]]
+            [:feComponentTransfer
+             {:result "brighter-noise"}
+             [:feFuncA {:exponent "0.5", :amplitude "1", :type "gamma"}]]
+            [:feComposite
+             {:result "gradient-noise",
+              :operator "in",
+              :in2 "brighter-noise",
+              :in "SourceGraphic"}]
+            [:feComponentTransfer
+             {:result "threshhold"}
+             [:feFuncR {:tablevalues "0 1", :type "discrete"}]
+             [:feFuncG {:tablevalues "0 1", :type "discrete"}]
+             [:feFuncB {:tablevalues "0 1", :type "discrete"}]
+             [:feFuncA {:tablevalues "0 1", :type "discrete"}]]
+            [:feFlood {:result "yellow", :flood-color "#ff9"}]
+            [:feComposite
+             {:result "yellow-threshhold",
+              :operator "in",
+              :in "yellow",
+              :in2 "threshhold"}]
+            [:feFlood {:result "red", :flood-color "#f33"}]
+            [:feComponentTransfer
+             {:result "exponent-gradient", :in "SourceGraphic"}
+             [:feFuncA {:exponent "3", :type "gamma"}]]
+            [:feComposite
+             {:result "red-gradient",
+              :operator "in",
+              :in2 "exponent-gradient",
+              :in "red"}]
+            [:feComposite
+             {:result "red-gradient-threshhold",
+              :operator "in",
+              :in "red-gradient",
+              :in2 "threshhold"}]
+            [:feMerge
+             [:feMergeNode {:in "yellow-threshhold"}]
+             [:feMergeNode {:in "red-gradient-threshhold"}]]]
+
+           [:pattern {:id (name :star)
+                      :viewBox (space [0 0 10 10])
+                      :width "10%"
+                      :height "10%"}
+            [:circle {:cx 5
+                      :cy 5
+                      :r 4
+                      :fill (hsl [0 70 70 1])
+                      }]]
+
+           [:linearGradient {:x1 .5
+                             :y1 1
+                             :x2 .5
+                             :y2 0
+                             :id (name :lg1)
+                             :gradientTransform (m7/tranfrom [[:rotate 0]])}
+            [:stop  {:offset 0
+                     :stop-color (hsl [2 70 70 1])}]
+            [:stop  {:offset .33
+                     :stop-color (hsl [2.3 70 70 .7])}]
+            [:stop  {:offset .77
+                     :stop-color (hsl [3 70 70 .4])}
+             [:animate {:attributeName :offset
+                        :from 0
+                        :to 1
+                        :dur (m7/not-space [3 "s"])
+                        :repeatCount 10}]]
+            ]
+           ;; :indefinite
+           [:marker {:id (name :dot2)
+                     :viewBox (m7/space [-5 -5 10 10])
+                     :refX 0
+                     :refY 0
+                     :orient :auto-start-reverse
+                     :markerWidth 5
+                     :markerHeight 5}
+            [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
+                    :stroke (hsl [5 70 70 1])
+                    :stroke-width .1
+ :transform (m7/tranfrom [[:rotate 0]])
+                    :fill (m7/hsl [.4 70 70 1])}]]
+
+           [:animate {:attributeName :viewBox
+                      :to (m7/space viewbox2)
+                      :dur "4s"
+                      :fill :freeze}]
+
+           #_(grid-on 1 10)
+
+           ;;:filter (m7/url "flames")
+           ;; Height
+           #_[:path {:d (path [-60 80 :l 0 (ve 185)])
+                   :marker-end (m7/url (name :dot))
+                   :marker-start (m7/url (name :dot))
+                   :stroke (hsl [4 70 70 1])
+                   :stroke-width 2
+                   :fill (m7/url (name :lg1))}]
+
+           (let [pth
+                 (path [-10 0 :a 40 40 0 true false  20 0 :l 0 -60  10 0 0 -4 -20 0])]
+             [:g
+              [:path {:d pth
+                      :stroke (hsl [4 70 70 1])
+                      :stroke-width 2
+                      ;; :filter (m7/url "flames")
+                      :fill (m7/url (name :lg1))}]
+
+              [:path {:d pth
+                      :transform (m7/tranfrom [[:scale [-1 1]]])
+                      :stroke (hsl [4 70 70 1])
+                      :stroke-width 2
+                      :filter (m7/url "flames")
+                      :fill (m7/url (name :lg1))}
+               ]])
+
+
+
+           [:path {:d (path [-18 -50
+                             :l 40 0
+                             0 -20 -40 0 0 20])
+
+                   :id :pp2
+                   :stroke (hsl [0 70 70 1])
+                   :stroke-width 1.5
+                   :fill (hsl [4 40 50 1])}
+            ]
+
+
+           [:g {:transform (m7/tranfrom [[:rotate 10]])}
+
+            [:circle {:cx 600
+                      :cy 80
+                      :r 5
+                      :fill (hsl [5 70 70 1])}
+             ]
+            [:path {:d (path [-600 80
+                              :l 1200 0 ])
+                    :id :dpp2
+                    :stroke (hsl [0 70 70 1])
+                    :stroke-width 2
+                    :fill (hsl [3 70 70 1])}
+             ]
+
+            [:text {
+                    :style {:font-size "4rem"
+                            :stroke-width 1
+                            :stroke (hsl [0 70 70 1])
+                            :fill (hsl [0.3 70 85 1])}
+                    }
+             [:textPath {:href :#dpp2
+                         :startOffset 1220}
+
+              (str "Registration ..." )
               ]
              ]]
 

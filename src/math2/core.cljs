@@ -55,6 +55,7 @@
    [m100/home-work20]
    [m100/home-work21]
    [m100/banner1]
+   [m100/banner2]
    #_[py100/template]
    ] )
 
