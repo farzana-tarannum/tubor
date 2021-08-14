@@ -4029,26 +4029,32 @@ the gravitational PE at its highest point"]
 
 
       [:div
-       [m7/m '[= [+ [:m 4 x] [:m 6 y]] 14]]
-       "---------------------(1)"]
+       [m7/m '[= [+ [:m 4 x] [:m 6 y]] 14]]]
 
-      [:div [m7/m '[= [- [:m 3 x] [:m 6 y]] 7]]
-       "--------------------(2)"]
+      [:div [m7/m '[= [- [:m 3 x] [:m 6 y]] 7]]]
+
+      [:div {:style {:height "10px"
+                     :width "100%"
+                     :background-color (hsl [3 30 30 1])}}]
 
 
 
-      [:div "(1) + (2)"]
+      [:div [m7/m '[= [- [:m 7 x] 0] 21]]]
 
-      [m7/m '[= [+ [:m 4 x] [:m 6 y] [- [:m 3 x] [:m 6 y]]] [+ 14 7]]]
+
+
+
 
       [m7/m '[= [:m 7 x]
               21]]
 
       [m7/m '[= x
-              [21 7] 3]]
+             [21 7] 3]]
 
+      [m7/m '[= [+ [* 4 3] [:m 6 y]] 14]]
 
-      [m7/m '[= [:m 6 y] 2]]
+      [m7/m '[=   [:m 6 y] 2]]
+      #_[m7/m '[= [:m 6 y] 2]]
       [m7/m '[= y [2 6] [1 3]]]
 
 
@@ -7867,14 +7873,17 @@ on time?"]
 
           ax-dx 80
           ax-dy 40
-          m (/ -10 2)
-          d (- (* m m) -24 )
+          m 8
+          d 9
           points (into ["x"] (range -5 10))
           ts (into [
                     [:div {:style {:font-size "1rem"}}
                      ""]]
-                   (map (fn [x] (-
-                                 (* (+ x 3) (+ x 3)) 24)) (range -5 10)))
+                   (map (fn [x]
+                          (-
+                           (* (- x 8) (- x 8))
+                           (* 9 9)))
+                        (range -5 10)))
           vb (fn [z]
                (nth [[0 -200  400 400]
                      [0 -180  200 200]
@@ -7924,7 +7933,7 @@ on time?"]
        [:div {:style
               (m7/css
                [[3 6 3 7
-                 :center :center  3.5 :rem :column]
+                 :center :center  2.5 :rem :column]
                 [3.5 70 (+ 50 (* 5 5))  .7]
                 []
                 {:gap ".1rem"
@@ -7936,37 +7945,17 @@ on time?"]
          [m7/m ['= [:m [:b ['- 'x 'm 'd]]  [:b ['+ ['- 'x 'm] 'd]]] 0 ]]]
 
         [m7/m ['= ['+ ['- 'x 'm] 'd] 0]]
+
+        [m7/m ['= ['+ ['- 'x 8] 9] 0]]
+        [m7/m ['= 'x -1]]
         [:div "or"]
 
         [m7/m ['= ['- 'x 'm 'd] 0]]
-        ;; [m7/m '[= y [- [:p [:b [+ x 3]] 2] [:p 4.898 2]  ]]]
 
-        ;; [m7/m '[= 0 [- [:p [:b [+ x 3]] 2] [:p 4.898 2]]]]
+        [m7/m ['= ['- 'x 8 9] 0]]
 
-        ;; [m7/m '[= 0 [- [:b [+ [:p x 2] [- [:m 6 x]] 9]] [:p 4.898 2]]]]
+        [m7/m ['= ['- 'x 8 9] 0]]
 
-        ;; [m7/m '[= 0 [- [:b [+ [:p x 2] [- [:m 6 x]] 9]] 24]]]
-
-        ;; [m7/m '[= 0 [- [:b [+ [:p x 2] [- [:m 6 x]] 9]] 24]]]
-
-        ;; [m7/m '[= [- [:p x 2] [- [:m 6 x] 15]] 0]]
-
-        #_[m7/m '[= 0 [- [:p [:b [- x 3]] 2] 20]]]
-        #_[m7/m '[= m 3 ]]
-
-        #_[m7/m '[= [:p d 2] 20 ]]
-
-        #_[m7/m '[= d [:sq 20] ]]
-        #_[m7/m '[= x [+ m 4.5]]]
-        #_[m7/m '[= x [- m 4.5]]]
-        #_[m7/m '[= y [- [:p [:b [- x 3]] 2] [:p d 2]]]]
-
-        #_[m7/m '[= 0 [- [:b [+ [- [:p x 2] [* 2 [:m 3 x]] ]
-                            [:p 3 2]]]
-                     [:p d 2]]]]
-
-        #_[m7/m '[= [+ [- [:p x 2] [* 2 [:m m x]] ]
-                   [- [:p m 2] [:p d 2]]] 0 ]]
 
 
 
@@ -7974,7 +7963,7 @@ on time?"]
 
        [:div {:style
               (m7/css
-               [[3 9 12 9
+               [[3 7 12 7
                  :center :center  3.5 :rem :column]
                 [1 70 (+ 50 (* 5 5))  .7]
                 []
@@ -7984,84 +7973,32 @@ on time?"]
 
         [m7/m ['= ['- [:p [:b ['- 'x 'm]] 2] [:p 'd 2]] 0 ]]
 
-        ;; [m7/m '[= y [- [:p [:b [+ x 3]] 2] [:p 4.898 2]  ]]]
 
-        ;; [m7/m '[= 0 [- [:p [:b [+ x 3]] 2] [:p 4.898 2]]]]
 
-        [m7/m '[= [- [+ [:p x 2] [- [:m 2 m x]] [:p m 2]] [:p d 2]] 0 ]]
+        [m7/m '[= [- [+ [:p x 2] [- [:m 2 m x]] [:p m 2]]
+                   [:p d 2]] 0 ]]
 
-        ;; [m7/m '[= 0 [- [:b [+ [:p x 2] [- [:m 6 x]] 9]] 24]]]
+        [m7/m ['= ['- ['- [:p 'x 2] [:m 16 'x] ] (ve (- (* 8 8 ) (* 9 9)))] 0]]
 
-        ;; [m7/m '[= 0 [- [:b [+ [:p x 2] [- [:m 6 x]] 9]] 24]]]
+        [m7/m ['= ['- [:m 2 'm ]] ['- 16]] ]
+        [m7/m ['= 'm 8]]
+        ;; [m7/m ['= 'm 5] ]
+        [m7/m '[= [+ 64
+                   17]  [:p d 2]]]
 
-        [m7/m ['= ['- ['- [:p 'x 2] [:m 10 'x] ] (- 49 25)] 0]]
+        [m7/m '[= 81
+                [:p d 2]]]
 
-        [m7/m ['= ['- [:m 2 'm ]] ['- 10]] ]
-        [m7/m ['= 'm 5] ]
-        [m7/m ['= ['- [:p 'm 2]  [:p 'd 2]] ['- 24]] ]
 
-        [m7/m ['= [:p 7 2]
-               [:p 'd 2]] ]
-        #_[m7/m '[= 0 [- [:p [:b [- x 3]] 2] 20]]]
-        #_[m7/m '[= m 3 ]]
+        [m7/m '[= d 9]]
 
-        #_[m7/m '[= [:p d 2] 20 ]]
+        ;; [m7/m ['= [:p 7 2]
+        ;;        [:p 'd 2]] ]
 
-        #_[m7/m '[= d [:sq 20] ]]
-        #_[m7/m '[= x [+ m 4.5]]]
-        #_[m7/m '[= x [- m 4.5]]]
-        #_[m7/m '[= y [- [:p [:b [- x 3]] 2] [:p d 2]]]]
-
-        #_[m7/m '[= 0 [- [:b [+ [- [:p x 2] [* 2 [:m 3 x]] ]
-                            [:p 3 2]]]
-                     [:p d 2]]]]
-
-        #_[m7/m '[= [+ [- [:p x 2] [* 2 [:m m x]] ]
-                   [- [:p m 2] [:p d 2]]] 0 ]]
 
 
 
         ]
-
-       #_[:div {:style
-              (m7/css
-               [[3 8 12 9
-                 :center :center  2 :rem :column]
-                [0 70 (+ 50 (* 5 5))  .7] []
-                {:gap ".1rem"
-                 :z-index 10}])}
-
-        [m7/m '[= [+ [- [:p x 2] [:m 2 m x] ]
-                   [- [:p m 2] [:p d 2]]] 0 ]]
-
-        [m7/m '[= [- [+ [:p x 2] [:m 6 x]]
-                   15] 0]]
-
-        [m7/m '[= [- [:m 2 m x]] [:m 6 x] ]]
-
-        [m7/m '[= [- [:m 2 m ]] 6]]
-        [m7/m '[= m -3]]
-
-        [m7/m '[= [- [:p m 2] [:p d 2]] [- 15]]]
-
-        [m7/m '[= [- [:p [:b [- 3]] 2] [:p d 2]] [- 15]]]
-
-        [m7/m '[= [- 9
-                   [:p d 2]] [- 15]]]
-
-        [m7/m '[= [:p d 2] [+  15 9]]]
-        [m7/m '[= [:p d 2] 24]]
-        [m7/m '[= d 4.898]]
-
-        [m7/m '[= x [+ [- 3] 4.898]]]
-
-        [m7/m '[= x [- [- 3] 4.898]]]
-
-
-        ]
-
-
-
 
 
        [:div {:style (m7/css
@@ -8104,73 +8041,49 @@ on time?"]
                              ])
                    :transform (m7/tranfrom
                                [
-                                [:translate [-60 48]]
+                                [:translate [(* m 20)
+                                             (* 2 d d)]]
                                 [:scale [1 1]]
                                 ])
                    :stroke (hsl [4 70 70 1])
-                   :stroke-width 2
-                   :fill :none}
-            ]
-
-           [:path {:d (path [ (* 20 -3) 0 :l
-                             -90 0])
-                   :stroke (hsl [10 70 70 1])
-                   :stroke-width 3
-                   :marker-end (m7/url (name :dot))
-                   :fill :none}
-            ]
-
-           [:path {:d (path [  (* 20 -3) 0 :l
-                             90 0])
-                   :stroke (hsl [5 70 70 1])
-                   :stroke-width 3
-                   :marker-end (m7/url (name :dot))
+                   :stroke-width 1
                    :fill :none}
             ]
 
 
-           [:path {:d (path [  (* 20 -3) 100 :l
-                            0 (ve 500)])
+           [:g
+            [:path {:d (path [(* 20 m) 0 :l (* 20 d) 0])
+                    :stroke (hsl [5 70 70 1])
+                    :stroke-width .7
+                    :id :qd2
+                    :marker-end (m7/url (name :dot))
+                    :fill :none}
+             ]
+            [:text
+             [:textPath {:href :#qd2
+                         :startOffset "50%"
+                         :style {
+                                 :font-size "0.7rem"}
+                         } "k"]
+             ]]
+
+
+           [:path {:d (path [  (* 20 m) 100 :l
+                             0 (ve 500)])
                    :stroke (hsl [2 70 70 1])
-                   :stroke-width 3
+                   :stroke-width 1
+                   :id :mmpt
                    :marker-end (m7/url (name :dot))
                    :fill :none}
             ]
 
-           [:text {:x (- -60 60)
-                   :y 0
-                   :style {:font-size "1rem"}}
-            "-d"]
 
-           [:text {:x (- 60 60)
-                   :y 0
-                   :style {:font-size "1rem"}}
-            "d"]
-
-
-           [:text {:x (- -60 0)
-                   :y (ve 50)
-                   :style {:font-size "1rem"}}
-            "m"]
-
-           [:path {:d (path [ 0 0 :c
-                             (* 20 3.5) (ve (* 2 2 2))
-                             (* 20 5.5) (ve (* 2 5 5))
-                             (* 20 7) (ve (* 2 7 7))
-                             :c
-                             (* 20 2) (ve (- (* 2 9 9) (* 2 7 7)))
-                             (* 20 4) (ve (- (* 2 11 11 ) (* 2 7 7)))
-                             (* 20 6) (ve (- (* 2 13 13) (* 2 7 7)))
-                             ])
-                   :transform (m7/tranfrom
-                               [[:translate [-60 48]]
-                                [:scale [-1 1]]
-                                ])
-                   :stroke (hsl [4 70 70 1])
-                   :stroke-width 2
-                   :fill :none}
-
+           [:text
+            [:textPath {:href :#mmpt
+                        :style {:font-size ".7rem"}} "m"]
             ]
+
+
 
 
 
@@ -8183,12 +8096,12 @@ on time?"]
                         :style {:font-size ".6rem"}}]
                   )
 
-
                 (map (fn [x]
                        (* 20 x)) (range -10 20 .25))
 
                 (map (fn [x]
-                       (ve (- (* 2 (* (+ x 3) (+ x 3))) 48
+                       (ve (- (* 2 (* (- x m) (- x m)))
+                              (* 2 d d)
                               )))
                      (range -10 20 .25)))
            ])]
