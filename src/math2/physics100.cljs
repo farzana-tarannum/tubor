@@ -2,7 +2,9 @@
   (:require
    [react]
    [cljs.reader :as edn]
+   [math2.file :as file]
    [datascript.core :as d]
+   [clojure.string :as str]
    [math2.math7 :as m7 :refer
     [grid hsl css space size path ve sec]]
    [clojure.walk :as walk]))
@@ -493,107 +495,205 @@ where I scored CGPA of 3.69 out of 4. I was a programming contestant which help 
    (map (juxt :e :a :v)))
   )
 
+(defn greeting [message]
+  [:h1 message])
+
+(defn clock [time-color]
+  (let [[timer update-time] (react/useState (js/Date.))
+        time-str (-> timer .toTimeString (str/split " ") first)]
+    (react/useEffect
+     (fn []
+       (let [i (js/setInterval #(update-time (js/Date.)) 1000)]
+         (fn []
+           (js/clearInterval i)))))
+    [:div.example-clock
+     {:style {:color time-color}}
+     time-str]))
+
+(defn color-input [time-color update-time-color]
+  [:div.color-input
+   "Time color: "
+   [:input {:type "text"
+            :autoFocus true
+            :value time-color
+            :on-change #(update-time-color (-> % .-target .-value))}]])
+
+(defn simple-example []
+  (let [[time-color update-time-color] (react/useState "#f34")]
+    [:div
+     [greeting "Hello world, it is now"]
+     [clock time-color]
+     [color-input time-color update-time-color]
 
 
+     ]))
+
+
+(comment
+  _ (react/useEffect (fn []
+                       (if (-> ref .-current)
+                         (-> ref
+                             .-current
+                             (.focus)))))
+  _ (react/useEffect (fn []
+                       (-> ref
+                           .-current
+                           (.focus)))))
 (defn template []
-  [:div {:style (merge (m7/grid [600 :vh 100 :vw
-                                 (take 38 (repeat [5 :vh]))
-                                 (take 20 (repeat [5 :vh]))])
-                       {:background-color (hsl [1.5 70 70 1])
-                        :gap ".5rem"})}
+  (let [[name set-name] (react/useState "")
+        ref (react/useRef)
+
+        ]
+      [:div {:style (merge (m7/grid [600 :vh 100 :vw
+                                     (take 38 (repeat [5 :vh]))
+                                     (take 20 (repeat [5 :vh]))])
+                           {:background-color (hsl [1.5 70 70 1])
+                            :gap ".5rem"})}
 
 
 
 
 
-   [:div {:key (gensym)
-          :style (m7/css
-                  [[2 8 5 20 :center :center 2.3 :rem]
-                   [1 70 90 .2] [] {:gap "1rem"
-                                    :padding "2rem"}
-                   (fv [[1 4] [1 1] [1 2] [2 1]])])}
-
-    (ffirst
-     (d/q '[:find  ?s
-            :where
-            [?e :rm/code :sap]
-            [?e :rm/summery ?s]] @conn))]
 
 
+       [:div {:key (gensym)
+              :style (m7/css
+                      [[2 8 5 20 :center :center 2.3 :rem]
+                       [1 70 90 .2] [] {:gap "1rem"
+                                        :padding "2rem"}
+                       (fv [[1 4] [1 1] [1 2] [2 1]])])}
 
-   #_[:div {:key (gensym)
-          :style (m7/css
-                  [[20 8 16 8 :center :center 2.3 :rem :column]
-                   [3 70 90 .8] [] {:gap "1rem"
-                                    :z-index 10
-                                    :padding "2rem"}
-                   (fv [[1 4] [1 1] [1 2] [2 1]])])}
-
-    [:div "ASHR. AHMED"]
-    [:div "01712192643"]
-      [:img {:src "m.jpg"
-             :style {:height "80%"
-                     :width "80%"}}]
-
-    ]
+        (ffirst
+         (d/q '[:find  ?s
+                :where
+                [?e :rm/code :sap]
+                [?e :rm/summery ?s]] @conn))]
 
 
-   (map identity
-        (reduce
-         (fn [acc [task sum row col]]
-           (conj
-            (conj acc
-                  [:div {:key (gensym)
-                         :style (m7/css
-                                 [[(+ 10 (* row 20)) 3 (+ 5 (* col 10))
-                                   10 :center :center 2 :rem]
-                                  [2 70 90 .7] [] {:gap "1rem"
-                                                   :padding "2rem"}
-                                  (fv [[1 4] [1 1] [1 2] [2 1]])])}
+       [:div {:key (gensym)
+              :style (m7/css
+                      [[2 3 25 8 :center :center 2.3 :rem :column]
+                       [3 70 90 .8] [] {:gap "1rem"
+                                        :z-index 10
+                                        :padding "2rem"}
+                       (fv [[1 4] [1 1] [1 2] [2 1]])])}
+        [:div name]
+        [:input {
+                 :value name
+                 :type :text
+                 :on-change (fn [e]
+                              (set-name (-> e .-target .-value)))}]]
 
-                   task])
+       #_[:div {:key (gensym)
+                :style (m7/css
+                        [[2 30 25 8 :center :center 2.3 :rem :column]
+                         [3 70 90 .8] [] {:gap "1rem"
+                                          :z-index 10
+                                          :padding "2rem"}
+                         (fv [[1 4] [1 1] [1 2] [2 1]])])}
+
+        ;; :flex-grow 2
+
+        (
+         (fn [fld inp]
+           (inp fld))
+         (first ["name" "scc" "hsc" "education" "experience" "contact no." "e-mail" "address"  "NID"])
+         (first
+          [(fn [a]
+             (let []
+               ))
+
+           [:input {:style {:flex-grow 2}} ]
+           [:div {:style {:flex-direction :column
+                          :display :flex
+                          :flex-grow 2}}
+            [:div {:style {:font-size "2rem"}} "year"]
+            [:input ]
+            [:div {:style {:font-size "2rem"}} "GPA"]
+            [:input ]
+            ]
+
+           [:div {:style {:display :flex
+                          :flex-direction :column
+                          :flex-grow 2}}
+            [:div {:style {:font-size "2rem"}} "year"]
+            [:input ]
+            [:div {:style {:font-size "2rem"}} "GPA"]
+            [:input ]
+            ]
+           [:textarea {:rows 10
+                       :style {:flex-grow 2}} ]
+           [:textarea {:rows 10
+                       :style {:flex-grow 2}} ]
+           [:input {:style {:flex-grow 2}} ]
+           [:input {:style {:flex-grow 2}} ]
+           [:div {:style {:flex-grow 2
+                          :height "200px"
+                          :width "200px"}}
+            [file/file-input]]
+           ]))
+
+
+
+        ]
+
+
+       (map identity
+            (reduce
+             (fn [acc [task sum row col]]
+               (conj
+                (conj acc
+                      [:div {:key (gensym)
+                             :style (m7/css
+                                     [[(+ 10 (* row 20)) 3 (+ 5 (* col 10))
+                                       10 :center :center 2 :rem]
+                                      [2 70 90 .7] [] {:gap "1rem"
+                                                       :padding "2rem"}
+                                      (fv [[1 4] [1 1] [1 2] [2 1]])])}
+
+                       task])
+                [:div {:key (gensym)
+                       :style (m7/css
+                               [[(+ 13 (* row 20)) 15 (+ 5 (* col 10)) 10 :center
+                                 :flex-start 2 :rem]
+                                [1 70 90 1] [] {:padding "1rem"
+                                                :gap "1rem"}])}
+
+                 sum]))
+             []
+             (d/q '[:find ?t ?s ?r ?c
+                    :where
+                    [?e :rm/code :sap]
+                    [?e :rm/projects ?p]
+                    [?p :rm/task ?t]
+                    [?p :rm/summery ?s]
+                    [?p :rm/row ?r]
+                    [?p :rm/col ?c]
+                    ] @conn)))
+       #_ (let [row 2 col 1
+                sum (mapcat identity
+                            (d/q '[:find  ?job ?c ?dr
+                                   :where
+                                   [?e :rm/code :abc]
+                                   [?e :rm/jobs ?j]
+                                   [?j :rm/company ?c]
+                                   [?j :rm/job ?job]
+                                   [?j :rm/duration ?dr]
+
+                                   ] @conn))]
             [:div {:key (gensym)
                    :style (m7/css
-                           [[(+ 13 (* row 20)) 15 (+ 5 (* col 10)) 10 :center
-                             :flex-start 2 :rem]
+                           [[(+ 10 (* row 20)) 15 (+ 5 (* col 10)) 10 :center
+                             :center 2 :rem :column]
                             [1 70 90 1] [] {:padding "1rem"
                                             :gap "1rem"}])}
 
-             sum]))
-         []
-         (d/q '[:find ?t ?s ?r ?c
-                :where
-                [?e :rm/code :sap]
-                [?e :rm/projects ?p]
-                [?p :rm/task ?t]
-                [?p :rm/summery ?s]
-                [?p :rm/row ?r]
-                [?p :rm/col ?c]
-                ] @conn)))
-   #_ (let [row 2 col 1
-         sum (mapcat identity
-                     (d/q '[:find  ?job ?c ?dr
-                            :where
-                            [?e :rm/code :abc]
-                            [?e :rm/jobs ?j]
-                            [?j :rm/company ?c]
-                            [?j :rm/job ?job]
-                            [?j :rm/duration ?dr]
-
-                            ] @conn))]
-     [:div {:key (gensym)
-            :style (m7/css
-                    [[(+ 10 (* row 20)) 15 (+ 5 (* col 10)) 10 :center
-                      :center 2 :rem :column]
-                     [1 70 90 1] [] {:padding "1rem"
-                                     :gap "1rem"}])}
-
-      (map (fn [x]
-             [:div
-              {:style {:background-color (hsl [.5 70 70 1])}}
-              x]) sum)])
+             (map (fn [x]
+                    [:div
+                     {:style {:background-color (hsl [.5 70 70 1])}}
+                     x]) sum)])
 
 
 
 
-   ])
+       ]))
