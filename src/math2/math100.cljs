@@ -11806,6 +11806,311 @@ on time?"]
           ax-dy 40
           vb (fn [z]
                (nth [[100 -450  500 500]
+                     [200 -300  600 600]
+                     [0 -50  100 100]
+                     [0 -25  50 50]
+                     [-100 -200  800 200]
+                     [40 120  80 80]
+                     [0 40  100 100]
+                     [75 -175  150 150]
+                     [-20 -20  100 100]
+                     [-400 -200  800 200]] z))
+          viewbox (vb 1)
+          viewbox2 (vb 1)
+          ]
+      [:div {:style (merge
+                     (grid [100 :vh 100 :vw
+                            (take 15 (repeat [8 :vh]))
+                            (take 20 (repeat [8 :vh]))])
+                     {:background-color (hsl [1 70 70 1])
+                      :gap ".1rem"})}
+
+
+       [:div {:style
+              (m7/css
+               [[2 3 10 7
+                 :center :center  4 :rem :column]
+                [3.5 70 (+ 50 (* 5 5))  .7] []
+                {:gap ".1rem"
+                 :z-index 10}])}
+
+
+
+        #_[m7/m '[= v [:m [[-  [- 400] 0] 3]  [m s]]]]
+
+
+        #_[m7/m '[= [:m ρ A h]
+                  m]]
+
+        #_[m7/m '[= F [[:m ∇ [:b [:m  m  v]] ]  t]]]
+
+
+        #_[m7/m '[= F [[:m ∇ m v] t]
+                  [[- [:m m v] [:m m u]] t]
+                  ]]
+
+
+        [m7/m '[= Ft [:m ∇ m v]]]
+
+
+        [:div {:style {:font-size "1rem"}} "Conservation of momentum where"]
+
+
+
+        [m7/m '[= [+ [:m [:k m 1] [:k u 1] ] [:m [:k m 2] [:k u 2] ] ]  [+ [:m [:k m 1] [:k v 1] ] [:m [:k m 2] [:k v 2] ] ]]]
+
+
+
+
+
+        #_[m7/m '[= P [W A] [ [:m ρ A h g] A] ]]
+
+        #_[m7/m '[=  P [F A] [N [:p m 2]] [:m N [:p m -2]] Pa]]
+
+
+
+        #_[m7/m '[= Density ρ [m V] ]]
+
+
+
+        #_[m7/m '[= [1 [:p x 3] ] [:p x -3] ]]
+
+
+        ;; [m7/m '[= ρV [:m V [m V]] ]]
+
+
+        ;; [m7/m '[= m ρV ]]
+
+        ;; [m7/m '[= W mg [:m ρ V g] ]]
+
+        ;; [m7/m '[= P [W A] [[:m ρ A h g] A]  [:m ρ h g]  ]]
+
+
+        ]
+
+
+
+
+       [:div {:style
+              (m7/css
+               [[9 3 5 7
+                 :center :center  4 :rem :column]
+                [1.5 70 (+ 50 (* 5 5))  .7] []
+                {:gap ".1rem"
+                 :z-index 10}])}
+
+
+
+        [m7/m '[= [:k u 1] [:m 5.2  [m s]]]]
+
+        [m7/m '[= [:k m 1] [:m 170 Kg]]]
+
+        ]
+
+
+       [:div {:style
+              (m7/css
+               [[9 3 15 4
+                 :center :center  4 :rem :column]
+                [3.5 70 (+ 50 (* 5 5))  .7] []
+                {:gap ".1rem"
+                 :z-index 10}])}
+
+
+
+        [m7/m '[= [:k u 2] [:m 0  [m s]]]]
+
+        [m7/m '[= [:k m 2] [:m 160 Kg]]]
+
+        ]
+
+       [:div {:style (m7/css
+                      [[2 10 1 20 :center :center 3 :rem]
+
+                       [1 70 90 1] [] {:gap "1rem"}])}
+        (let []
+          [:svg {:style {:height "100%"
+                         :width "100%"}
+                 :viewBox (m7/space
+                           viewbox)}
+
+           (flames)
+           [:pattern {:id (name :star)
+                      :viewBox (space [0 0 10 10])
+                      :width "10%"
+                      :height "10%"}
+            [:circle {:cx 5
+                      :cy 5
+                      :r 4
+                      :fill (hsl [0 70 70 1])
+                      }]]
+
+           [:animate {:attributeName :viewBox
+                      :to (m7/space viewbox2)
+                      :dur "4s"
+                      :fill :freeze}]
+
+           [:path {:d (m7/path [540 0 :l 40 0 0 (ve 40) (ve 40) 0 0 (ve (ve 40))
+                                ])
+                   :stroke-width 1
+                   :stroke (hsl [0 70 70 1])
+                   :fill (hsl [3 70 70 1])}]
+
+
+
+           (grid-on 20 20)
+
+           (let [y 40]
+             [:g
+
+
+              #_[:g
+               (line3 0 [0 (ve y)] "e")
+               (line3 0 [0  y] "e")
+
+
+
+               (line3 -130 [(- y 17)  0] "l")
+               (line3 -130 [(ve (- y 17)) 0] "l")]
+
+
+              [:animateTransform
+               {:attributeName :transform
+                :begin :click
+                :dur (sec 3)
+                :type :translate
+                :fill :freeze
+                :values (m7/sami-colon
+                         (map
+                          m7/space
+                          (map (fn [i]
+                                 [(* i 120) 0])
+                               (range 0 12))))
+                :keyTimes (m7/sami-colon
+                           [0 .3 .55 .7 .8 .87 .92 .95 .97 .98 .985  1])
+
+                }]
+
+              [:g {:transform (m7/tranfrom [[:rotate 0]
+                                            [:scale [.3 .3]]])}
+
+               [:path {:d (m7/path [0 0 :l 0 (ve y) 240 0 0 (* 2 y) -290 0
+                                    0 (* 2 (ve y))
+                                    50 0])
+                       :stroke-width 1
+                       :stroke (hsl [0 70 70 1])
+                       :fill (hsl [5 70 70 .5])}]
+
+
+               [:g {:transform (m7/tranfrom [[:translate [-100 0]]])}
+                [:path {:d (m7/path [0 0 :l 50 0 0 -40 :c -60 15 -80 20   -100 40
+                                     ])
+                        :stroke-width 1
+                        :stroke (hsl [0 70 70 1])
+                        :fill (hsl [1 70 70 1])}]
+
+                [:path {:d (m7/path [0 0 :l 50 0 0 -40 :c -60 15 -80 20   -100 40
+                                     ])
+                        :transform (m7/tranfrom [[:scale [1 -1]]])
+                        :stroke-width 1
+                        :stroke (hsl [0 70 70 1])
+                        :fill (hsl [1 70 70 1])
+                        }]
+
+                ]
+
+               #_{:transform (m7/tranfrom [[:translate [-140 0]]
+                                           [:skewX -140]
+                                           [:scale [1.3 .4]]
+                                           ])}
+
+               [:g {:transform (m7/tranfrom [[:translate [-140 0]]
+
+                                             ])}
+                [:path {:d (m7/path [0 0 :l  20 0 0 -200 -40 0 0 200 20 0
+                                     ])
+                        :transform (m7/tranfrom [
+                                                 [:skewX -140]
+                                                 [:scale [1 0.35]]
+                                                 ])
+                        :stroke-width 1
+                        :stroke (hsl [0 70 70 1])
+                        :fill (hsl [3 70 70 1])}]
+
+                [:path {:d (m7/path [0 0 :l  20 0 0 -200 -40 0 0 200 20 0])
+                        :transform (m7/tranfrom [[:skewX 140]
+                                                 [:scale [1 -0.35]]])
+                        :stroke-width 1
+                        :stroke (hsl [0 70 70 1])
+                        :fill (hsl [3 70 70 1])}]
+
+
+
+
+                ]
+
+
+               [:g
+                [:g {:transform (m7/tranfrom [[:translate [120 (ve y)]]
+                                              [:skewX -140]])}
+                 [:path {:d (m7/path [0 0 :l  20 0 0 -200 -40 0 0 100 -60 100
+                                      ])
+                         :stroke-width 1
+                         :stroke (hsl [3 70 70 1])
+                         :fill (hsl [3 70 70 1])}]]
+                [:g {:transform (m7/tranfrom [[:translate [120 y]]
+                                              [:scale [1 -1]]
+                                              [:skewX -140]
+                                              ])}
+                 [:path {:d (m7/path [0 0 :l  20 0 0 -200 -40 0 0 100 -60 100
+                                      ])
+                         :stroke-width 1
+                         :stroke (hsl [3 70 70 1])
+                         :fill (hsl [3 70 70 1])}]]
+                ]
+
+
+
+               [:g {:transform (m7/tranfrom [[:translate [240 0]]])}
+                [:path {:d (m7/path [0 0 :l 0 (ve y)
+                                     :c 30 -5 100 0  120 y])
+                        :stroke-width 1
+                        :stroke (hsl [0 70 70 1])
+                        :fill (hsl [1 70 70 1])}]
+                [:path {:d (m7/path [0 0 :l 0 (ve y)
+                                     :c 30 -5 100 0  120 y])
+                        :stroke-width 1
+                        :stroke (hsl [0 70 70 1])
+                        :transform (m7/tranfrom [[:scale [1 -1]]])
+                        :fill (hsl [1 70 70 1])}]]
+
+
+               ]])
+
+
+
+
+           ]
+          )]
+
+
+       ])))
+
+
+
+(defn amd []
+  (let [[slider get-slider] (react/useState 0)
+        f (fn [n] (/ 1 n))
+        tt 'θ
+        dx [1 0  0 1 -1  0 0 -1 ]
+        sq (fn [n]
+                (comp
+                 (partial map (partial * n))))]
+    (let [zoom 4
+          ax-dx 80
+          ax-dy 40
+          vb (fn [z]
+               (nth [[100 -450  500 500]
                      [0 -180  200 200]
                      [0 -50  100 100]
                      [0 -25  50 50]
@@ -11874,7 +12179,7 @@ on time?"]
         #_[m7/m '[= F [[:m ∇ [:b [:m  m  v]] ]  t]]]
 
 
-        [m7/m '[= F ma [[:m ∇ m   v] t]
+        #_[m7/m '[= F ma [[:m ∇ m   v] t]
                 [[:m m  [:b [- v u]]] t]
                 ]]
 
@@ -11888,7 +12193,12 @@ on time?"]
 
 
 
-        #_[m7/m '[= Density ρ [m V] ]]
+        #_[m7/m '[= ρ [m V] ]]
+
+
+
+
+
 
 
 
@@ -11900,7 +12210,13 @@ on time?"]
 
         ;; [m7/m '[= m ρV ]]
 
-        ;; [m7/m '[= W mg [:m ρ V g] ]]
+        [m7/m '[=  [:m [:k ρ w] V ] [:m  ρ [:k V 1] ] ]]
+
+
+        [m7/m '[=  [V V1] [  ρ [:k ρ w]] ]]
+
+
+
 
         ;; [m7/m '[= P [W A] [[:m ρ A h g] A]  [:m ρ h g]  ]]
 
@@ -11953,30 +12269,7 @@ on time?"]
 
 
 
-            #_[:g
-             [:text {:x 0
-                     :y 0
-                     :dy 15
-                     :style {:font-size "1.5rem"}
-                     } "A"]
 
-             [:text {:x 200
-                     :y 0
-                     :dy 15
-                     :style {:font-size "1.5rem"}
-                     } "B"]
-
-             [:text {:x 200
-                     :y -150
-                     :dy -15
-                     :style {:font-size "1.5rem"}
-                     } "C"]
-
-             [:text {:x 0
-                     :y -150
-                     :dy -15
-                     :style {:font-size "1.5rem"}
-                     } "D"]]
             [:path {:d (m7/path [0 0 :l 200 0 0 -150 -200 0 0 150])
                     :stroke-dasharray "200 150 120 80"
                     :stroke-dashoffset "400"
@@ -11986,21 +12279,7 @@ on time?"]
 
 
 
-            #_[:path {:d (m7/path [120 -150 :l 50 0 0 -50 -50 0 0 50])
-                      :stroke-width 3
-                      :stroke (hsl [0.5 90 90 1])
-                      :fill (hsl [0.5 90 90 1])}
-               [:animateTransform
-                {:attributeName :transform
-                 :begin (sec 0)
-                 :dur (sec 1)
-                 :type :translate
-                 :from (m7/space [0 0])
-                 :to (m7/space [0 50])
-                 :fill :freeze
-                 :id :rfff1
-                 }]
-               ]
+
 
             [:g
              [:path {:d (m7/path [120 -150 :l 50 0 0 -50 -50 0 0 50])
@@ -12016,7 +12295,7 @@ on time?"]
                 :from (m7/space [0 0])
                 :to (m7/space [0 20])
                 :fill :freeze
-                :id :rfff1
+                :id :ark1
                 }]
               ]
 
@@ -12068,7 +12347,24 @@ on time?"]
                     }]
 
 
-            [:path {:d (m7/path [200 0 :l 100 0 0 -20  -100 0 0 20])
+            #_[:path {:d (m7/path [200 0 :l 100 0 0 -20  -100 0 0 20])
+                      :stroke-width 3
+                      :stroke (hsl [0 70 70 1])
+                      :fill (hsl [3.7 70 70 1])
+                      }
+               [:animateTransform
+                {:attributeName :transform
+                 :begin (sec 0)
+                 :dur (sec 1)
+                 :type :scale
+                 :from (m7/space  [1 .05])
+                 :to (m7/space  [1 1.8])
+                 :fill :freeze
+                 :id :rff1
+                 }]]
+
+
+            [:path {:d (m7/path [200 0 :l 50 0 0 -15  -50 0 0 15])
                     :stroke-width 3
                     :stroke (hsl [0 70 70 1])
                     :fill (hsl [3.7 70 70 1])
@@ -12102,27 +12398,28 @@ on time?"]
              [:path {:d (m7/path [0 0 :l 150 0  -75 -200 -75 200 75 0 0 -75 45 0 -90 0 ])
                      :stroke-width 2
                      :stroke (hsl [1.5 70 70 1])
-                     :fill  (hsl [2.5 70 70 1])}]
+                     :fill (hsl [2.5 70 70 1])}]
 
              [:text {:x 20
                      :y -20
                      :style {:font-size "2rem"}
-                     } "F"]
+                     } "ρ"]
 
 
              [:text {:x 90
                      :y -20
                      :style {:font-size "2rem"}
-                     } "t"]
+                     } "V"]
 
              [:text {:x 75
                      :dx -10
                      :y -100
-                     :style {:font-size "2rem"}
-                     } [m7/m '[:m ∇ [:b [:m  m  v]] ]] ]
+                     :style {:font-size "2rem"
+                             }
+                     } "m"]
 
 
-             [:foreignObject
+             #_[:foreignObject
               {:x 45
                :y -120
                :width 100
@@ -12139,7 +12436,7 @@ on time?"]
              #_[:text {:x 10
                      :y 0
                      :style {:font-size "2rem"}
-                     } "ρ"]
+                       } "ρ"]
 
              ]
 
@@ -12185,66 +12482,9 @@ on time?"]
 
 
 
-           (grid-on 20 20)
-
-          (let [y 40]
-             [:g
-              (line3 0 [0 (ve y)] "e")
-              (line3 0 [0  y] "e")
+           #_(grid-on 20 20)
 
 
-
-              (line3 -130 [(- y 17)  0] "l")
-              (line3 -130 [(ve (- y 17)) 0] "l")
-
-
-              [:g {:transform (m7/tranfrom [[:skewX -140]])}
-               [:path {:d (m7/path [0 0 :l  20 0 0 -200 -40 0 0 200 20 0
-                                    ])
-                       :stroke-width 1
-                       :stroke (hsl [0 70 70 1])
-                       :fill :none}]
-
-
-
-
-               ]
-              [:g
-               [:g {:transform (m7/tranfrom [[:translate [120 (ve y)]]
-                                             [:skewX -140]])}
-                [:path {:d (m7/path [0 0 :l  20 0 0 -200 -40 0 0 100 -60 100
-                                     ])
-                        :stroke-width 1
-                        :stroke (hsl [3 70 70 1])
-                        :fill :none}]]
-               [:g {:transform (m7/tranfrom [[:translate [120 y]]
-                                             [:scale [1 -1]]
-                                             [:skewX -140]
-                                             ])}
-                [:path {:d (m7/path [0 0 :l  20 0 0 -200 -40 0 0 100 -60 100
-                                     ])
-                        :stroke-width 1
-                        :stroke (hsl [3 70 70 1])
-                        :fill :none}]]
-               ]
-
-
-
-              [:g {:transform (m7/tranfrom [[:translate [240 0]]])}
-               [:path {:d (m7/path [0 0 :l 0 (ve y)
-                                    :c 30 -5 100 0  120 y])
-                       :stroke-width 1
-                       :stroke (hsl [0 70 70 1])
-                       :fill :none}]
-               [:path {:d (m7/path [0 0 :l 0 (ve y)
-                                    :c 30 -5 100 0  120 y])
-                       :stroke-width 1
-                       :stroke (hsl [0 70 70 1])
-                       :transform (m7/tranfrom [[:scale [1 -1]]])
-                       :fill :none}]]
-
-
-              ])
 
 
 

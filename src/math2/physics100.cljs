@@ -12,6 +12,74 @@
 
 
 
+(def fontf
+  (comp
+   m7/coma
+   (partial map
+            (comp
+             m7/space
+             (juxt (comp
+                    m7/wrap-sami-colon
+                    name
+                    first) second)))
+   vec))
+
+(def var-vf
+  {:wght 431.85
+
+   :wdth 100
+   :opsz 14
+   :GRAD 88
+   :XOPQ 88
+   :XTCH 1000
+   :YTAS 750
+   :YTRA 1000
+   :YTUC 750
+   :YTLC 500
+   :YTSE 18
+   :YTCH 1000
+   :PWDT 402
+   :PWGT 88
+   :YOPQ 50
+   :XTRA 402
+   :YTDE 250})
+
+
+(defn fv1 [n]
+  {:font-family "'Amstelvar VF'"
+   :font-variation-settings
+   (fontf
+    (update
+     var-vf
+     (get [:wght :wdth :opsz :GRAD]
+          0)
+     (fn [k] (+ k (/ 880 n)))))})
+
+(defn fconf [elms]
+  (let [f (fn [n d] (/ n d))]
+    (map
+     (fn [[u [mn mx]] [n d]]
+       [u (fn [k]
+            (+ k (* k (f n d))))])
+     [[:wght  [100 900]]
+      [:wdth  [35 10]]
+      [:opsz  [10 72]]
+      [:GRAD  [88 150]]]
+     elms)))
+
+(defn fv [elms]
+  {:font-family "'Amstelvar VF'"
+   :font-variation-settings
+   (fontf
+    (reduce
+     (fn [vf [w f]]
+       (update vf w f))
+     var-vf
+     (fconf elms)))})
+
+
+
+
 (def schema
   {:rm/projects {:db/cardinality :db.cardinality/many
                  :db/valueType   :db.type/ref}
@@ -88,17 +156,17 @@ communicating in professional context both on presentation and at work."
    :rm/occupation "Computer Engineer"
    :rm/name ""
    :rm/age 38
-   :rm/phone "880-1712192643"
+   :rm/phone ""
    :rm/email ""
    :rm/summery "I am a skilled IT professional with years of experience on
                 System & database Administration. Thought my carrier I have nailed
                 every kind of task an IT professional asked for. I am spetialized on
                 SAP based DevOps, continuous integration systems"
-   :rm/projects [12 14 13 15 16 17 22 8 23 24 25 26]
+   :rm/projects [12 14 13 16 17 22 8 23 24 25 26 27]
    :rm/jobs [9 10]
    :rm/projects.title "Projects and accomplishment"}
   {:db/id 12
-   :rm/row 0
+   :rm/row 1
    :rm/col 1
    :rm/task "Tech Lead at Software Global Consultancy // SGC"
    :rm/summery [:div
@@ -110,6 +178,9 @@ communicating in professional context both on presentation and at work."
    choosing right set of technologies for them as I always look forward to the big picture.
    "]
    :rm/referane ""}
+
+
+
 
   {:db/id 13
    :rm/row 1
@@ -131,7 +202,7 @@ is in a nut shell modern days "
              [:div "ASHR. AHMED"]
              [:div {:style {:font-size "1.5rem"
                             }}
-              "+8801712192643, ashik.ahmed1144@gmail.com"]
+              "+8801710229179, lmohibbul.islam@gmail.com"]
              ]
    :rm/summery [:div
                 [:img {:src "m.jpg"
@@ -214,74 +285,21 @@ where I scored CGPA of 3.69 out of 4. I was a programming contestant which help 
              [:div ""]]
    :rm/summery ""
    :rm/referane ""}
+
+  {:db/id 27
+   :rm/row 0
+   :rm/col 1
+   :rm/task [:div {:style {:font-size "1.5rem"}}
+             "Verilog HDL Modeling Systhesis and FPGA-based Place and Route of a 32-Bit Multicycle and Pipelined RISC Processor"]
+   :rm/summery [:div {:style {:font-size "1.5rem"}}
+                "This design project modeled and verified a multi-cycle and 5-stage pipelined version of 32-bit RISC processor - MIPS - with "
+                [:span {:style (into {:background-color (hsl [1 70 70 1])}
+                                     (fv [[1 4] [1 1] [1 2] [2 1]]))}
+                 "Verilog Hardware Description Language (HDL)."] " A multi-cycle version was modeled and Register Transfer (RT) level with distinct partition between the control unit (FSM) and the datapath unit. The FSM, in this version, was modeled in explicit style maintaining the partition between combinational and sequential logic. This versoin was synthezied and the place-and-route and implemented on a Xilinx Spartan-2 (XC2S50PQ208) FPGA.
+The pipelined version also modeled at RTL level."]
+   :rm/referane ""}
   ])
 
-
-
-(def fontf
-  (comp
-   m7/coma
-   (partial map
-            (comp
-             m7/space
-             (juxt (comp
-                    m7/wrap-sami-colon
-                    name
-                    first) second)))
-   vec))
-
-(def var-vf
-  {:wght 431.85
-
-   :wdth 100
-   :opsz 14
-   :GRAD 88
-   :XOPQ 88
-   :XTCH 1000
-   :YTAS 750
-   :YTRA 1000
-   :YTUC 750
-   :YTLC 500
-   :YTSE 18
-   :YTCH 1000
-   :PWDT 402
-   :PWGT 88
-   :YOPQ 50
-   :XTRA 402
-   :YTDE 250})
-
-
-(defn fv1 [n]
-  {:font-family "'Amstelvar VF'"
-   :font-variation-settings
-   (fontf
-    (update
-     var-vf
-     (get [:wght :wdth :opsz :GRAD]
-          0)
-     (fn [k] (+ k (/ 880 n)))))})
-
-(defn fconf [elms]
-  (let [f (fn [n d] (/ n d))]
-    (map
-     (fn [[u [mn mx]] [n d]]
-       [u (fn [k]
-            (+ k (* k (f n d))))])
-     [[:wght  [100 900]]
-      [:wdth  [35 10]]
-      [:opsz  [10 72]]
-      [:GRAD  [88 150]]]
-     elms)))
-
-(defn fv [elms]
-  {:font-family "'Amstelvar VF'"
-   :font-variation-settings
-   (fontf
-    (reduce
-     (fn [vf [w f]]
-       (update vf w f))
-     var-vf
-     (fconf elms)))})
 
 
 
