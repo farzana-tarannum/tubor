@@ -11,6 +11,146 @@
   (fn [m n] (/ m n)))
 (def square [1 0 0 1 (ve 1) 0 0 (ve 1)])
 
+(defn alkine [n1]
+  [:g {:transform (m7/tranfrom [[:scale [.7 .7]]
+                                         [:rotate 10]])}
+
+
+
+           (let [n n1]
+              [:g
+
+               [:foreignObject {:x 20
+                                :y -150
+                                :height 50
+                                :width 450
+                                :style {:font-size "1.7rem"}}
+                [m7/m [:m [:k 'C n] [:k 'H ['+ ['* 2 n] 2]]]]
+
+                #_[m7/m ['= ['+ [:m [:k 'C n] [:k 'H  (+ (* 2 n) 2)]] [:m 2[:k 'O 2]] ]
+                       ['+ [:m 'C [:k 'O 2]] [:m 2 [:k 'H 2] 'O]]
+                       ]]
+                ]
+
+               [:text {:x 250
+                       :y -220
+                       :style {:font-size "2rem"}}
+                (nth ["methane" "ethane" "propane" "butane" "pentane" "hexane" "heptane" "octane"]
+                     (- n 1))]
+               (map
+                (fn [i j]
+                  [:g
+                   (if (not (= i 0))
+                     [:g
+
+                      #_[:path {:d (path
+                                    [(-  (* i 75) 60 ) -10 :l  40 0])
+                                :stroke (hsl [4 70 70 1])
+                                :stroke-width 2
+                                :fill (hsl [5 70 70 .2])}]
+
+
+                      [:path {:d (path [(-  (* i 75) 60 ) 0 :l  40 0])
+                              :stroke (hsl [4 70 70 1])
+                              :stroke-width 2
+                              :fill (hsl [5 70 70 .2])}]
+
+                      #_[:path {:d (path [(-  (* i 75) 60 ) 10 :l  40 0])
+                                :stroke (hsl [4 70 70 1])
+                                :stroke-width 2
+                                :fill (hsl [5 70 70 .2])}]]
+                     [:g ])
+
+
+                   [:path {:d (path [(* i 75)
+                                     0 :l 0 40  ])
+                           :stroke (hsl [4 70 70 1])
+                           :stroke-width 2
+                           :fill (hsl [5 70 70 .2])}]
+
+
+                   [:path {:d (path [(* i 75)
+                                     0 :l 0 -40  ])
+                           :stroke (hsl [4 70 70 1])
+                           :stroke-width 2
+                           :fill (hsl [5 70 70 .2])}]
+
+
+                   [:circle {:cx (* i 75)
+                             :cy 0
+                             :r 20
+                             ;;:transform (m7/tranfrom [[:rotate (* i (/ 360 4))]])
+                             :fill (hsl [(/ i 5) 60 70 1])}]
+                   [:text {:x (* i 75)
+                           :y 0
+                           :dy 7
+                           :dx -7
+                           ;;:transform (m7/tranfrom [[:rotate (* i (/ 360 4))]])
+                           :style {:font-size "1.5rem"}}
+                    "C"]
+
+                   [:circle {:cx (* i 75)
+                             :cy 50
+                             :r 12
+                             ;;:transform (m7/tranfrom [[:rotate (* i (/ 360 4))]])
+                             :fill (hsl [(/ i 5) 60 70 1])}]
+                   #_[:text {:x (* i 75)
+                           :y 55
+                           :dy 0
+                           :dx -10
+                           ;;:transform (m7/tranfrom [[:rotate (* i (/ 360 4))]])
+                           :style {:font-size "1.5rem"}}
+                      "H"]
+
+                   [:circle {:cx (* i 75)
+                             :cy -40
+                             :r 12
+                             :dy -5
+                             :dx -10
+                             :fill (hsl [(/ i 5) 60 70 1])
+                             ;;:transform (m7/tranfrom [[:rotate (* i (/ 360 4))]])
+                             }
+                    ]
+
+                   #_[:text {:x (* i 75)
+                             :y -40
+                             :dy 0
+                             :dx -10
+                             ;;:transform (m7/tranfrom [[:rotate (* i (/ 360 4))]])
+                             :style {:font-size "1.5rem"}}
+                      "H"]
+
+                   ])
+                (range 0 n))
+
+               [:path {:d (path [(-  (* n 75) 60 ) 0 :l  40 0])
+                       :stroke (hsl [4 70 70 1])
+                       :stroke-width 2
+                       :fill (hsl [5 70 70 .2])}]
+
+               [:path {:d (path [(-  (* 0 75) 60 ) 0 :l  40 0])
+                       :stroke (hsl [4 70 70 1])
+                       :stroke-width 2
+                       :fill (hsl [5 70 70 .2])}]
+
+               [:text {:x -75
+                       :y 0
+                       :dy 10
+                       :dx 0
+                       ;;:transform (m7/tranfrom [[:rotate (* i (/ 360 4))]])
+                       :style {:font-size "1.5rem"}}
+                "H"]
+
+               [:text {:x (* n 75)
+                       :y 0
+                       :dy 10
+                       :dx -18
+                       ;;:transform (m7/tranfrom [[:rotate (* i (/ 360 4))]])
+                       :style {:font-size "1.5rem"}}
+                "H"]
+               ])
+            ])
+
 (defn grid-on
   ([] (grid-on 5 5))
   ([X Y]
@@ -199,25 +339,25 @@
 
 
 (defn marker [a]
-  [:defs
-   [:marker {:id a
-             :refY 0
-             :refX 0
-             :orient :auto
-             :style {:overflow :visible}}
-    [:path {:d [0 0 :L 5 -5
-                :L -12.5 0
-                :L 3 5 :L 0 0]
-            :style {:fill-rule :evenodd
-                    :stroke (m7/hsl [1 70 70 1])
-                    :stroke-width 1
-                    :stroke-opacity 1
-                    :fill (m7/hsl [3 70 70 1])
-                    :fill-opacity 1}
-            :transform (m7/tranfrom [[:scale .4]
-                                     [:rotate 180]
-                                     [:translate [12.5 0]]])
-            }]]])
+  [:marker {:id a
+            :refY 0
+            :refX 0
+            :orient :auto
+            :style {:overflow :visible}}
+   [:path {:d (m7/path [0 0 :L 5 -5
+                        :L -12.5 0
+                        :L 3 5 :L 0 0])
+           :style {:fill-rule :evenodd
+                   :stroke (m7/hsl [1 70 70 1])
+                   :stroke-width 1
+                   :stroke-opacity 1
+                   :fill (m7/hsl [3 70 70 1])
+                   :fill-opacity 1}
+           :transform (m7/tranfrom [[:scale .4]
+                                    [:rotate 180]
+                                    [:translate [12.5 0]]])
+           }]]
+  )
 
 ;; 01779298654 ref
 (defn template []
@@ -8005,8 +8145,8 @@ on time?"]
   [:g {:transform
        (m7/tranfrom [[:translate ts]
                      [:rotate y]])}
-   [:path {:d (path [-1200 0
-                     :l 2400 0])
+   [:path {:d (path [-3000 0
+                     :l 6000 0])
            :id :pp2
            :stroke (hsl [2 70 70 .5])
            :stroke-width 1
@@ -8493,145 +8633,7 @@ on time?"]
 
 
 
-(defn alkine [n1]
-  [:g {:transform (m7/tranfrom [[:scale [.7 .7]]
-                                         [:rotate 10]])}
 
-
-
-           (let [n n1]
-              [:g
-
-               [:foreignObject {:x 20
-                                :y -150
-                                :height 50
-                                :width 450
-                                :style {:font-size "1.7rem"}}
-                [m7/m [:m [:k 'C n] [:k 'H ['+ ['* 2 n] 2]]]]
-
-                #_[m7/m ['= ['+ [:m [:k 'C n] [:k 'H  (+ (* 2 n) 2)]] [:m 2[:k 'O 2]] ]
-                       ['+ [:m 'C [:k 'O 2]] [:m 2 [:k 'H 2] 'O]]
-                       ]]
-                ]
-
-               [:text {:x 250
-                       :y -220
-                       :style {:font-size "2rem"}}
-                (nth ["methane" "ethane" "propane" "butane" "pentane" "hexane" "heptane" "octane"]
-                     (- n 1))]
-               (map
-                (fn [i j]
-                  [:g
-                   (if (not (= i 0))
-                     [:g
-
-                      #_[:path {:d (path
-                                    [(-  (* i 75) 60 ) -10 :l  40 0])
-                                :stroke (hsl [4 70 70 1])
-                                :stroke-width 2
-                                :fill (hsl [5 70 70 .2])}]
-
-
-                      [:path {:d (path [(-  (* i 75) 60 ) 0 :l  40 0])
-                              :stroke (hsl [4 70 70 1])
-                              :stroke-width 2
-                              :fill (hsl [5 70 70 .2])}]
-
-                      #_[:path {:d (path [(-  (* i 75) 60 ) 10 :l  40 0])
-                                :stroke (hsl [4 70 70 1])
-                                :stroke-width 2
-                                :fill (hsl [5 70 70 .2])}]]
-                     [:g ])
-
-
-                   [:path {:d (path [(* i 75)
-                                     0 :l 0 40  ])
-                           :stroke (hsl [4 70 70 1])
-                           :stroke-width 2
-                           :fill (hsl [5 70 70 .2])}]
-
-
-                   [:path {:d (path [(* i 75)
-                                     0 :l 0 -40  ])
-                           :stroke (hsl [4 70 70 1])
-                           :stroke-width 2
-                           :fill (hsl [5 70 70 .2])}]
-
-
-                   [:circle {:cx (* i 75)
-                             :cy 0
-                             :r 20
-                             ;;:transform (m7/tranfrom [[:rotate (* i (/ 360 4))]])
-                             :fill (hsl [(/ i 5) 60 70 1])}]
-                   [:text {:x (* i 75)
-                           :y 0
-                           :dy 7
-                           :dx -7
-                           ;;:transform (m7/tranfrom [[:rotate (* i (/ 360 4))]])
-                           :style {:font-size "1.5rem"}}
-                    "C"]
-
-                   [:circle {:cx (* i 75)
-                             :cy 50
-                             :r 12
-                             ;;:transform (m7/tranfrom [[:rotate (* i (/ 360 4))]])
-                             :fill (hsl [(/ i 5) 60 70 1])}]
-                   #_[:text {:x (* i 75)
-                           :y 55
-                           :dy 0
-                           :dx -10
-                           ;;:transform (m7/tranfrom [[:rotate (* i (/ 360 4))]])
-                           :style {:font-size "1.5rem"}}
-                      "H"]
-
-                   [:circle {:cx (* i 75)
-                             :cy -40
-                             :r 12
-                             :dy -5
-                             :dx -10
-                             :fill (hsl [(/ i 5) 60 70 1])
-                             ;;:transform (m7/tranfrom [[:rotate (* i (/ 360 4))]])
-                             }
-                    ]
-
-                   #_[:text {:x (* i 75)
-                             :y -40
-                             :dy 0
-                             :dx -10
-                             ;;:transform (m7/tranfrom [[:rotate (* i (/ 360 4))]])
-                             :style {:font-size "1.5rem"}}
-                      "H"]
-
-                   ])
-                (range 0 n))
-
-               [:path {:d (path [(-  (* n 75) 60 ) 0 :l  40 0])
-                       :stroke (hsl [4 70 70 1])
-                       :stroke-width 2
-                       :fill (hsl [5 70 70 .2])}]
-
-               [:path {:d (path [(-  (* 0 75) 60 ) 0 :l  40 0])
-                       :stroke (hsl [4 70 70 1])
-                       :stroke-width 2
-                       :fill (hsl [5 70 70 .2])}]
-
-               [:text {:x -75
-                       :y 0
-                       :dy 10
-                       :dx 0
-                       ;;:transform (m7/tranfrom [[:rotate (* i (/ 360 4))]])
-                       :style {:font-size "1.5rem"}}
-                "H"]
-
-               [:text {:x (* n 75)
-                       :y 0
-                       :dy 10
-                       :dx -18
-                       ;;:transform (m7/tranfrom [[:rotate (* i (/ 360 4))]])
-                       :style {:font-size "1.5rem"}}
-                "H"]
-               ])
-            ])
 
 
 (defn home-work20 []
@@ -11363,7 +11365,7 @@ on time?"]
           ax-dy 40
           vb (fn [z]
                (nth [[100 -200  400 400]
-                     [0 -180  200 200]
+                     [0 -280  400 400]
                      [0 -50  100 100]
                      [0 -25  50 50]
                      [-100 -200  800 200]
@@ -11373,7 +11375,7 @@ on time?"]
                      [-20 -20  100 100]
                      [-400 -200  800 200]] z))
           viewbox (vb 0)
-          viewbox2 (vb 0)
+          viewbox2 (vb 1)
           ]
       [:div {:style (merge
                      (grid [100 :vh 100 :vw
@@ -11383,61 +11385,23 @@ on time?"]
                       :gap ".1rem"})}
 
 
-
-
-
-
-       #_[:div {:style
+       [:div {:style
                 (m7/css
-                 [[4 4 15 7
+                 [[4 3 15 7
                    :center :center  2 :rem :column]
                   [3.5 70 (+ 50 (* 5 5))  .7] []
                   {:gap ".1rem"
                    :z-index 10}])}
 
-        [m7/m '[= g [:m 9.8 [:m m [:p s -2]]]]]
-        [m7/m '[= [:m ρ A h]
-                m]]
+        #_[:div "hydrocarbon + oxygen = water + carbondioxide"]
+        #_[:div "carbonmonoxide CO"]
+        #_[:div "Nitrus oxide NO"]
+        [:div "Volume of Pyramid"]
+
+        [m7/m '[= V  [* [1 3] base-area height]]]
 
 
-        [m7/m '[= W mg [:m 9.8 m N]]]
-
-        [m7/m '[= P [mg A] ]]
-
-        [m7/m '[= P [[:m ρ A h g] A] ]]
-
-        [m7/m '[= P [:m ρ h g]]]
-
-
-        [m7/m '[= P [:m 101.3 k Pa] [:m 101.3 k N [:p m -2]]]]
-
-        #_[m7/m '[=  P [F A] [N [:p m 2]] [:m N [:p m -2]] Pa]]
-
-
-
-        #_[m7/m '[= Density ρ [m V] [ Kg [:p m 3]] [:m Kg [:p m -3]]]]
-
-
-
-        #_[m7/m '[= [1 [:p x 3] ] [:p x -3] ]]
-
-
-        ;; [m7/m '[= ρV [:m V [m V]] ]]
-
-
-        ;; [m7/m '[= m ρV ]]
-
-        ;; [m7/m '[= W mg [:m ρ V g] ]]
-
-        ;; [m7/m '[= P [W A] [[:m ρ A h g] A]  [:m ρ h g]  ]]
-
-        #_[:div [m7/m '[=  9 [* 3 3] ]]]
-
-        #_[:div [m7/m '[=  12 [* 3 2 2] ]]]
-
-        #_[:div [m7/m '[=  18 [* 3 3 2] ]]]
-
-
+        [m7/m '[= V  [* [1 3] 100 80 160]]]
         #_[:div "Things don't always go how you want them to"]
 
           #_[:div "This project ended up a lot massier I thought it whould be"]
@@ -11477,78 +11441,7 @@ on time?"]
                  :viewBox (m7/space
                            viewbox)}
 
-           [:filter#flames
-            {:height "300%",
-             :width "100%",
-             :y "-100%",
-             :x "0%",
-             :filterunits "objectBoundingBox"}
-            [:feTurbulence
-             {:stitchtiles "stitch",
-              :result "noise",
-              :numoctaves "2",
-              :basefrequency "0.2",
-              :type "fractalNoise"}]
-            [:feOffset
-             {:result "off1", :dy "0"}
-             [:animate
-              {:repeatcount "indefinite",
-               :dur "6s",
-               :to "-300",
-               :from "0",
-               :attributename "dy",
-               :attributetype "XML"}]]
-            [:feOffset
-             {:result "off2", :dy "60", :in "noise"}
-             [:animate
-              {:repeatcount "indefinite",
-               :dur "6s",
-               :to "0",
-               :from "300",
-               :attributename "dy",
-               :attributetype "XML"}]
-             ]
-            [:feMerge
-             {:result "scrolling-noise"}
-             [:feMergeNode {:in "off1"}]
-             [:feMergeNode {:in "off2"}]]
-            [:feComponentTransfer
-             {:result "brighter-noise"}
-             [:feFuncA {:exponent "0.5", :amplitude "1", :type "gamma"}]]
-            [:feComposite
-             {:result "gradient-noise",
-              :operator "in",
-              :in2 "brighter-noise",
-              :in "SourceGraphic"}]
-            [:feComponentTransfer
-             {:result "threshhold"}
-             [:feFuncR {:tablevalues "0 1", :type "discrete"}]
-             [:feFuncG {:tablevalues "0 1", :type "discrete"}]
-             [:feFuncB {:tablevalues "0 1", :type "discrete"}]
-             [:feFuncA {:tablevalues "0 1", :type "discrete"}]]
-            [:feFlood {:result "yellow", :flood-color "#ff9"}]
-            [:feComposite
-             {:result "yellow-threshhold",
-              :operator "in",
-              :in "yellow",
-              :in2 "threshhold"}]
-            [:feFlood {:result "red", :flood-color "#f33"}]
-            [:feComponentTransfer
-             {:result "exponent-gradient", :in "SourceGraphic"}
-             [:feFuncA {:exponent "3", :type "gamma"}]]
-            [:feComposite
-             {:result "red-gradient",
-              :operator "in",
-              :in2 "exponent-gradient",
-              :in "red"}]
-            [:feComposite
-             {:result "red-gradient-threshhold",
-              :operator "in",
-              :in "red-gradient",
-              :in2 "threshhold"}]
-            [:feMerge
-             [:feMergeNode {:in "yellow-threshhold"}]
-             [:feMergeNode {:in "red-gradient-threshhold"}]]]
+
 
            [:pattern {:id (name :star)
                       :viewBox (space [0 0 10 10])
@@ -11620,7 +11513,98 @@ on time?"]
                       :dur "4s"
                       :fill :freeze}]
 
-           #_(grid-on 1 1)
+           (grid-on 20 20)
+
+           #_(alkine 2)
+
+
+
+           (line3 161 [-700 0]  "h1")
+           (line3 175 [-700 0]  "h2")
+
+           (line3 167.9 [-700 0]  "h2")
+
+           (line3 176.8 [-700 0]  "h2")
+
+
+
+
+
+           (line3 3.5 [700 0]  "h2")
+           (line3 5 [700 0]  "h2")
+           (line3 13.6 [700 0]  "h2")
+           (line3 19 [700 0]  "h2")
+           #_[:path {:d (m7/path [0 -60 :l 0 -180])
+                   :stroke-width 2
+                   :stroke (hsl [5 70 70 1])}]
+
+           #_[:path {:d (m7/path [-120 -50 :l 0 -150  280 14])
+                   :stroke-width 1
+                   :stroke (hsl [5 70 70 1])
+                   :stroke-dasharray "4"
+                   :fill :none}]
+
+           [:path {:d (m7/path [-120 -50 :l 140  -140 -20  130 -110 8 ])
+                   :stroke-width 1
+                   :stroke (hsl [5 70 70 1])
+
+                   :fill (hsl [5 70 70 .9])}]
+
+
+           [:path {:d (m7/path [-120 -50 :l 140  -140 -20  130 -110 8 ])
+                   :stroke-width 1
+                   :stroke (hsl [5 70 70 1])
+
+                   :fill (hsl [5 70 70 .9])}]
+
+
+           [:path {:d (m7/path [0 -60 :l 20 -130 137 143 ])
+                   :stroke-width 1
+                   :stroke (hsl [4 70 70 1])
+
+                   :fill (hsl [3.5 70 70 .9])}]
+
+
+           #_[:path {:d (m7/path [160 -30 :l 0 -194])
+                   :stroke-width 2
+                   :stroke (hsl [5 70 70 1])}]
+
+
+           [:path {:d (m7/path [0 -60 :l -120 8 150 10 126 -4.5])
+                   :stroke-width 2
+                   :stroke (hsl [4 70 70 1])
+                   :fill (hsl [4 70 70 .8])}]
+
+
+           #_[:g
+
+
+
+            [:circle {:cx 160
+                      :cy 0
+                      :r 20
+                      :fill (hsl [2 70 70 1]) }]
+
+            [:circle {:cx 180
+                      :cy 0
+                      :r 20
+                      :fill (hsl [2 70 70 1]) }]
+
+
+            [:text {:x 180
+                    :y 0
+                    :dy 10
+                    :text-anchor :middle
+                    :style {:font-size "1.5rem"
+                            :fill (hsl [2 90 90 1])}} "O"]
+
+
+            [:text {:x 160
+                    :y 0
+                    :dy 10
+                    :text-anchor :middle
+                    :style {:font-size "1.5rem"
+                            :fill (hsl [2 90 90 1])}} "O"]]
 
 
 
@@ -11638,28 +11622,100 @@ on time?"]
                                        [:scale 2]])}
 
 
-           [:path {:d (str
-                       (m7/path [0 0 :l 150 0
-                                  0 -80 -150 0 0 80 ])
-                       " "
-                       (m7/path [0 0 :l 150 -80])
-                       " "
-                       (m7/path [0 0 :l 30 0 :a 40 40 0 false false -30 -30])
-                       " "
-                       (m7/path [0 0 :l 150 -80
-                                 -30 0 :a 40 40 0 false false 30 30]))
-                   :stroke-width 1
-                   :id :qdr
-                   :transform (m7/tranfrom [
-                                            [:skewX -20]])
-                   :stroke (hsl [4 70 70 1])
-                   :fill :none}]
+           (let [x 100
+                 y 80
+                 px 20]
+             [:g {:transform (m7/tranfrom [[:skewX -0]])}
+
+
+              [:text {:x px
+                      :y -200
+                      :style {:font-size "1rem"}
+                      :fill (hsl [0 70 70 1])}
+               "Apex"]
+
+              [:circle {:cx px
+                        :cy -200
+                        :r 2
+                        :fill (hsl [0 70 70 1])}]
+
+              [:path {:d (m7/path [(/ x 2) (ve (/ y 2)) :l (ve (- (/ x 2) px)) (+ -200 (/ y 2))])
+                      :stroke-width 1
+                      :id :phr
+                      :stroke-dasharray "2 3"
+                      :stroke (hsl [3 70 70 1])}
+               ]
+
+              [:text
+               [:textPath {:href :#phr
+                           :startOffset 50
+                           :style {:font-size "1rem"}}
+                "height"]]
+
+
+              [:path {:d (str
+                          (m7/path [0 0 :l x 0
+                                    0 (ve y) (ve x) 0 0 y])
+
+                          " ")
+                      :stroke-width 1
+                      :id :qdr
+                      :transform (m7/tranfrom [
+                                               [:skewX -0]])
+                      :stroke (hsl [4 70 70 1])
+                      :fill (hsl [4 70 70 .3])}]
+
+
+              [:path {:d (str
+
+
+                          (m7/path [0 0 :l x (ve y)])
+
+                          " "
+                          (m7/path [0 (ve y) :l x  y])
+                          " "
+                          (m7/path [0 0 :l 30 0 :a 40 40 0 false false -30 -30])
+                          " "
+                          (m7/path [0 0 :l x (ve y)
+                                    -30 0 :a 40 40 0 false false 30 30]))
+                      :stroke-width 1
+                      :id :qdr
+                      :stroke-dasharray "2 3"
+                      :transform (m7/tranfrom [
+                                               [:skewX -0]])
+                      :stroke (hsl [4 70 70 1])
+                      :fill :none}]
+
+
+
+
+
+              [:path {:d (str
+                          (m7/path [0 0 :l px -200
+                                    ])
+
+                          (m7/path [0 -80 :l px -120
+                                    ])
+
+                          (m7/path [x 0 :l (+ (ve x) px) -200
+                                    ])
+
+                          (m7/path [x (ve y) :l (+ (ve x) px) (-  y 200)
+                                    ])
+
+                          )
+                      :stroke-width 1
+                      :id :qdr
+                      :transform (m7/tranfrom [
+                                               [:skewX -0]])
+                      :stroke (hsl [2 70 70 1])
+                      :fill :none}]])
 
            [:text {
                    }
             [:textPath {:href  :#qdr
                         :method :stretch}
-                   "abcd"]]
+             ""]]
 
            #_[:g
 
@@ -11828,36 +11884,46 @@ on time?"]
 
        [:div {:style
               (m7/css
-               [[2 3 10 7
-                 :center :center  4 :rem :column]
+               [[2 3 6 11
+                 :center :center  3 :rem :column]
                 [3.5 70 (+ 50 (* 5 5))  .7] []
                 {:gap ".1rem"
                  :z-index 10}])}
 
 
-
+        [:div ""]
         #_[m7/m '[= v [:m [[-  [- 400] 0] 3]  [m s]]]]
 
 
-        #_[m7/m '[= [:m ρ A h]
-                  m]]
-
-        #_[m7/m '[= F [[:m ∇ [:b [:m  m  v]] ]  t]]]
-
-
         #_[m7/m '[= F [[:m ∇ m v] t]
-                  [[- [:m m v] [:m m u]] t]
+                  [[- [:m m v] [:m m u]]
+                   t]
                   ]]
 
 
-        [m7/m '[= Ft [:m ∇ m v]]]
+        #_[m7/m '[= Ft [:m ∇ [:k m p] [:k v p]] [- [:m [:k m p] [:k v p]] [:m [:k m p] [:k u p]]]]]
+
+
+        #_[m7/m '[= [- Ft] [:m ∇ [:k m w] [:k v w]] [- [:m [:k m w] [:k v w]] [:m [:k m w] [:k u w]]]]]
+
+
+        #_[m7/m '[= [- [:m [:k m p] [:k v p]] [:m [:k m p] [:k u p]]]
+                [- [:b [- [:m [:k m w] [:k v w]] [:m [:k m w] [:k u w]]]]]]]
+
+        #_[m7/m '[= [- Ft] [:m ∇ m v] [- [:m m v] [:m m u]]]]
 
 
         [:div {:style {:font-size "1rem"}} "Conservation of momentum where"]
 
 
 
-        [m7/m '[= [+ [:m [:k m 1] [:k u 1] ] [:m [:k m 2] [:k u 2] ] ]  [+ [:m [:k m 1] [:k v 1] ] [:m [:k m 2] [:k v 2] ] ]]]
+        #_[m7/m '[= [+ [:m [:k m p] [:k u p] ] [:m [:k m w] [:k u w] ] ]
+                [+ [:m [:k m p] [:k v p] ]
+                 [:m [:k m w] [:k v w] ] ]]]
+
+
+        #_[m7/m '[= [:m .494  [m s] ]
+                [:k v p]]]
 
 
 
@@ -11891,7 +11957,7 @@ on time?"]
 
 
 
-       [:div {:style
+       #_[:div {:style
               (m7/css
                [[9 3 5 7
                  :center :center  4 :rem :column]
@@ -11901,14 +11967,14 @@ on time?"]
 
 
 
-        [m7/m '[= [:k u 1] [:m 5.2  [m s]]]]
+        [m7/m '[= [:k u p] [:m 5.2  [m s]]]]
 
-        [m7/m '[= [:k m 1] [:m 170 Kg]]]
+        [m7/m '[= [:k m p] [:m 170 Kg]]]
 
         ]
 
 
-       [:div {:style
+       #_[:div {:style
               (m7/css
                [[9 3 15 4
                  :center :center  4 :rem :column]
@@ -11918,9 +11984,9 @@ on time?"]
 
 
 
-        [m7/m '[= [:k u 2] [:m 0  [m s]]]]
+        [m7/m '[= [:k u w] [:m 0  [m s]]]]
 
-        [m7/m '[= [:k m 2] [:m 160 Kg]]]
+        [m7/m '[= [:k m w] [:m 160 Kg]]]
 
         ]
 
@@ -11933,7 +11999,24 @@ on time?"]
                          :width "100%"}
                  :viewBox (m7/space
                            viewbox)}
-
+           [:marker {:id (name :abcdblablabla2)
+                     :refY 0
+                     :refX 0
+                     :orient :auto
+                     :style {:overflow :visible}}
+            [:path {:d (m7/path [0 0 :L 5 -5
+                                 :L -12.5 0
+                                 :L 3 5 :L 0 0])
+                    :style {:fill-rule :evenodd
+                            :stroke (m7/hsl [1 70 70 1])
+                            :stroke-width 1
+                            :stroke-opacity 1
+                            :fill (m7/hsl [3 70 70 1])
+                            :fill-opacity 1}
+                    :transform (m7/tranfrom [[:scale .4]
+                                             [:rotate 180]
+                                             [:translate [12.5 0]]])
+                    }]]
            (flames)
            [:pattern {:id (name :star)
                       :viewBox (space [0 0 10 10])
@@ -11950,11 +12033,35 @@ on time?"]
                       :dur "4s"
                       :fill :freeze}]
 
-           [:path {:d (m7/path [540 0 :l 40 0 0 (ve 40) (ve 40) 0 0 (ve (ve 40))
-                                ])
+
+           [:path {:d (m7/path [0 -40 :l 200 0])
+                   :stroke-width 2
+                   :marker-end (m7/url (name :dot2))
+                   :stroke (hsl [0 70 70 1])
+                   :fill (hsl [0 70 70 1])}]
+
+
+           [:path {:d (m7/path [500 -40 :l -200 0])
+                   :stroke-width 2
+                   :marker-end (m7/url (name :abcdblablabla2))
+                   :stroke (hsl [0 70 70 1])
+                   :fill (hsl [0 70 70 1])}]
+
+           [:path {:d (m7/path [540 0 :l 40 0 0 (ve 80) (ve 40) 0 0 (ve (ve 80))])
+
                    :stroke-width 1
                    :stroke (hsl [0 70 70 1])
-                   :fill (hsl [3 70 70 1])}]
+                   :fill (hsl [3 70 70 1])}
+            [:animateTransform
+             {:attributeName :transform
+              :begin :plane2.end
+              :dur (sec 7)
+              :type :translate
+              :fill :freeze
+              :from (m7/space [0 0])
+              :to (m7/space [850 0])
+
+              }]]
 
 
 
@@ -11969,13 +12076,26 @@ on time?"]
                (line3 0 [0  y] "e")
 
 
+                 (comment
+                   )
 
                (line3 -130 [(- y 17)  0] "l")
                (line3 -130 [(ve (- y 17)) 0] "l")]
 
+              (comment
+                {
+                 :values (m7/sami-colon
+                          (map
+                           m7/space
+                           (map (fn [i]
+                                  [(* i 120) 0])
+                                (range 0 4))))
+                 :keyTimes (m7/sami-colon
+                            [0 .25 .45 .70 .8 .87 .92 .95 .97 .98 .985  1])})
 
               [:animateTransform
-               {:attributeName :transform
+               {:id :plane2
+                :attributeName :transform
                 :begin :click
                 :dur (sec 3)
                 :type :translate
@@ -11983,11 +12103,28 @@ on time?"]
                 :values (m7/sami-colon
                          (map
                           m7/space
-                          (map (fn [i]
-                                 [(* i 120) 0])
-                               (range 0 12))))
+                          [[0 0]  [470 0]]))
                 :keyTimes (m7/sami-colon
-                           [0 .3 .55 .7 .8 .87 .92 .95 .97 .98 .985  1])
+                           [0  1])
+
+
+
+                }]
+              [:animateTransform
+               {:id :plane4
+                :attributeName :transform
+                :begin :plane2.end
+                :dur (sec 62)
+                :type :translate
+                :fill :freeze
+                :values (m7/sami-colon
+                         (map
+                          m7/space
+                          [[570 0]  [1470 0]]))
+                :keyTimes (m7/sami-colon
+                           [0  1])
+
+
 
                 }]
 

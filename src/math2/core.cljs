@@ -69,7 +69,7 @@
 
  ;;    [m100/banner2]
  ;;    [py100/template]
-   [py100/template]
+   #_[py100/template]
    ] )
 
 
