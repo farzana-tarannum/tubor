@@ -24,12 +24,12 @@
 
 (defn template []
   [:div
-;;   [m100/map-asia]
-   [m100/airplane]
-   #_[m100/home-work3]
-   ;;  [m100/home-work19]
-   ;; [m100/amd]
-    [m100/home-pressure2]
+  ;; [m100/map-asia]
+  ;;  [m100/airplane]
+  ;;  [m100/home-work3]
+     #_[m100/home-work19]
+  ;;  [m100/amd]
+  ;;   [m100/home-pressure2]
   ;; [m100/home-pressure]
 
 
@@ -44,7 +44,7 @@
   ;;   [m100/template5]
   ;;  [mtemp/template1]
   ;;   [m100/home-work]
-   #_[m100/home-work2]
+  ;;  #_[m100/home-work2]
   ;;    [m100/home-work3]
   ;;   [m100/home-work5]
   ;;   [m100/home-work7]
@@ -64,12 +64,13 @@
   ;;    [m100/home-work20]
   ;;    [m100/home-work21]
   ;;    [m100/home-work22]
-  ;;    [m100/banner1]
+   #_[m100/banner1]
+   [m100/banner-brand]
   ;;    [m100/banner2]
 
- ;;    [m100/banner2]
- ;;    [py100/template]
-   #_[py100/template]
+  ;;   [m100/banner2]
+  ;;   [py100/template]
+  ;;  [py100/template]
    ] )
 
 

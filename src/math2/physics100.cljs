@@ -559,20 +559,12 @@ The pipelined version also modeled at RTL level."]
                            (.focus)))))
 (defn template []
   (let [[name set-name] (react/useState "")
-        ref (react/useRef)
-
-        ]
+        ref (react/useRef)]
       [:div {:style (merge (m7/grid [600 :vh 100 :vw
                                      (take 38 (repeat [5 :vh]))
                                      (take 20 (repeat [5 :vh]))])
                            {:background-color (hsl [1.5 70 70 1])
                             :gap ".5rem"})}
-
-
-
-
-
-
 
        [:div {:key (gensym)
               :style (m7/css
