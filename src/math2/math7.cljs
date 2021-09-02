@@ -226,7 +226,7 @@
 
 
 (comment
-  (expr2 (s/conform ::element '(:s x 2) ))  )
+  (expr (s/conform ::element '(:s x 2) ))  )
 
 (comment
   (expr (s/conform ::element '(:m 2 x))))

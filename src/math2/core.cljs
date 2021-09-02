@@ -40,32 +40,42 @@
   ;;    [m100/template2]
   ;;   [m100/template2-1]
   ;;   [m100/template3]
-  ;;    [m100/template4]
-  ;;   [m100/template5]
-  ;;  [mtemp/template1]
-  ;;   [m100/home-work]
-  ;;  #_[m100/home-work2]
-  ;;    [m100/home-work3]
+   ;;    [m100/template4]
+   ;; physics video
+   ;;   [m100/template5]
+   ;;  [mtemp/template1]
+   ;; robin hood
+   ;;   [m100/home-work]
+   ;; momentum math
+   ;; [m100/home-work2]
+   ;; velocity
+   ;;  [m100/home-work3]
+   ;; pyramid
   ;;   [m100/home-work5]
   ;;   [m100/home-work7]
-  ;;   [m100/home-work7-1]
-  ;;   [m100/home-work8]
-  ;;   [m100/home-work9]
+   ;;     [m100/home-work7-1]
+   ;; solving linear equation
+      [m100/home-work8]
+   ;; hcl + haolh
+   ;;   [m100/home-work9]
+   ;; pyramid
   ;;   [m100/home-work10]
   ;;   [m100/home-work11]
   ;;   [m100/home-work12]
   ;;   [m100/home-work13]
   ;;   [m100/home-work14]
-  ;;   [m100/home-work15]
-  ;;  [m100/home-work16]
-  ;;    [m100/home-work17]
+   ;;   [m100/home-work15]
+   ;; alkane
+   ;;  [m100/home-work16]
+   ;; temp vs time latent heat
+;;      [m100/home-work17]
   ;;    [m100/home-work18]
   ;;    [m100/home-work19]
   ;;    [m100/home-work20]
   ;;    [m100/home-work21]
   ;;    [m100/home-work22]
    #_[m100/banner1]
-   [m100/banner-brand]
+   ;; [m100/banner-brand]
   ;;    [m100/banner2]
 
   ;;   [m100/banner2]
