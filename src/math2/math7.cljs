@@ -17,6 +17,8 @@
 
 
 (s/def ::op-plus '#{+})
+
+
 (s/def ::op-equal '#{=})
 
 (s/def ::op-mul '#{*})
@@ -212,8 +214,10 @@
 
 
 (defn expr [e]
-  (let [expr-f (juxt first (comp  first second)
-                     (comp  second second))
+  (let [expr-f (juxt
+                first
+                (comp  first second)
+                (comp  second second))
         [_ t-expr expr-1] (expr-f e)]
     (( {:p-exp p-exp
         :m-exp m-exp
@@ -224,9 +228,21 @@
 
 
 
+(comment
+  (symbol (name `x)))
 
 (comment
-  (expr (s/conform ::element '(:s x 2) ))  )
+  (expr
+   (s/conform ::element
+              (vec (map
+                    (fn [x]
+                      (if (symbol? x)
+                        (symbol (name x))
+                        x))
+                    (let [ay 133]
+                        `(+ x ~ay))))))
+
+  (expr (s/conform ::element 'x)))
 
 (comment
   (expr (s/conform ::element '(:m 2 x))))
@@ -249,9 +265,20 @@
                   (:sq a)))))
 
 (comment (expr
-         (s/conform ::element
-                    '(= 3 (+ 2 x 4
-                             )))))
+          (s/conform ::element
+                     '(= 3 (+ 2 x 4
+                              )))))
+
+
+(comment
+
+  (s/conform ::element
+             1)
+
+  (expr
+   (s/conform ::element
+              '(= 3 (+ 2 x 4
+                       )))))
 
 (comment
   (expr (s/conform ::element '(1 2))))
