@@ -227,20 +227,43 @@
      expr-1)))
 
 
+(defn mx [eq]
+  [:math
+   (expr
+    (s/conform ::element
+               (vec (clojure.walk/postwalk
+                     (fn [x]
+                       (if (symbol? x)
+                         (symbol (name x))
+                         x))
+                     eq))))])
 
 (comment
+
+  (let [eq `[= [- [:m 3 x] [:m 2 y]] 7] ]
+    (clojure.walk/postwalk (fn [x]
+                             (if (symbol? x)
+                               (symbol (name x))
+                               x))
+                           eq)))
+
+(comment
+  (s/conform ::element
+             (vec (map
+                   (fn [x]
+                     (if (symbol? x)
+                       (symbol (name x))
+                       x))
+                   `[= [- [:m 3 x] [:m 2 y]] 7])))
+  (mx `[= [- [:m 3 x] [:m 2 y]] 7])
   (symbol (name `x)))
 
 (comment
   (expr
    (s/conform ::element
-              (vec (map
-                    (fn [x]
-                      (if (symbol? x)
-                        (symbol (name x))
-                        x))
-                    (let [ay 133]
-                        `(+ x ~ay))))))
+              (clr (let [ay 1]
+                     `(+ x ~(+ ay 2)))))
+   )
 
   (expr (s/conform ::element 'x)))
 

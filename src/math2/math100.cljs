@@ -4440,9 +4440,14 @@ the gravitational PE at its highest point"]
                      [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
+      (let [a 3
+            b 4
+            c 7]
+        (m7/mx
+         `[= [- [:m ~a x]
+              [:m ~b y]] ~c]))
+      (m7/m '[= [- [:m 3 x] [:m 2 y]] 7])
 
-
-      [m7/m '[= [- [:m 3 x] [:m 2 y]] 7]]
       [m7/m '[= [+ [:m 2 x ] [:m 3 y]] 9]]
 
 
