@@ -24,58 +24,80 @@
 
 (defn template []
   [:div
-  ;; [m100/map-asia]
-  ;;  [m100/airplane]
-  ;;  [m100/home-work3]
-     #_[m100/home-work19]
-  ;;  [m100/amd]
-  ;;   [m100/home-pressure2]
-  ;; [m100/home-pressure]
+   #_[m100/map-asia]
+   #_[m100/airplane]
+   ;; airplane .5
+    ;; [m100/home-work3]
+   #_[m100/home-work19]
+   ;; pressure
+     [m100/amd]
+   [m100/home-pressure2]
+   ;; [m100/home-pressure]
 
 
-
-  ;;     [p11/template]
-  ;;   [p11/template2]
-  ;;   [m100/template]
-  ;;    [m100/template2]
-  ;;   [m100/template2-1]
-  ;;   [m100/template3]
-   ;;    [m100/template4]
+   ;; spring force
+   ;; [p11/template]
+   ;; chemistry
+   ;; [p11/template2]
+   ;; frictions
+   ;; [m100/template]
+   ;; spring force
+   ;; [m100/template2]
+   ;; trigono
+   ;; [m100/template2-1]
+   ;; extra
+   ;; [m100/template3]
+   ;; taibles
+   ;;       [m100/template4]
    ;; physics video
-   ;;   [m100/template5]
-   ;;  [mtemp/template1]
+      #_[m100/template5]
+     #_[mtemp/template1]
    ;; robin hood
-   ;;   [m100/home-work]
+      #_[m100/home-work]
    ;; momentum math
    ;; [m100/home-work2]
    ;; velocity
    ;;  [m100/home-work3]
    ;; pyramid
-  ;;   [m100/home-work5]
-  ;;   [m100/home-work7]
-   ;;     [m100/home-work7-1]
+   ;;   [m100/home-work5]
+   ;; garden math
+   ;;   [m100/home-work7]
+   ;; quad algo
+;;        [m100/home-work7-1]
    ;; solving linear equation
-      [m100/home-work8]
+;;   [m100/linear-equation]
+
+;;   [m100/force-diagram]
+
+;;    [m100/banner-qd]
    ;; hcl + haolh
-   ;;   [m100/home-work9]
+
+;;   [m100/home-work9]
    ;; pyramid
-  ;;   [m100/home-work10]
-  ;;   [m100/home-work11]
-  ;;   [m100/home-work12]
-  ;;   [m100/home-work13]
-  ;;   [m100/home-work14]
+   ;;   [m100/home-work10]
+   ;; boxes
+   ;;   [m100/home-work11]
+   ;; accelaration
+   ;;     [m100/home-work12]
+   ;; v + u at
+   ;;   [m100/home-work13]
+   ;; clock
+   ;;   [m100/home-work14]
+   ;; line to curves
    ;;   [m100/home-work15]
    ;; alkane
-   ;;  [m100/home-work16]
+   [m100/home-work16]
    ;; temp vs time latent heat
-;;      [m100/home-work17]
-  ;;    [m100/home-work18]
-  ;;    [m100/home-work19]
-  ;;    [m100/home-work20]
-  ;;    [m100/home-work21]
-  ;;    [m100/home-work22]
+      #_[m100/home-work17]
+   #_[m100/home-work18]
+   #_[m100/home-work19]
+   ;; distillation2
+   #_[m100/home-work20]
+   ;;    [m100/home-work21]
+   ;; distillation
+      #_[m100/home-work22]
    #_[m100/banner1]
-   ;; [m100/banner-brand]
+  ;;    [m100/banner-brand]
   ;;    [m100/banner2]
 
   ;;   [m100/banner2]
