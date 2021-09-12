@@ -27,12 +27,15 @@
    #_[m100/map-asia]
    #_[m100/airplane]
    ;; airplane .5
-    ;; [m100/home-work3]
+    #_[m100/home-work3]
    #_[m100/home-work19]
    ;; pressure
-     [m100/amd]
-   [m100/home-pressure2]
-   ;; [m100/home-pressure]
+   [m100/pressure]
+   #_[m100/triangle]
+   #_[m100/home-pressure2]
+   #_[m100/home-pressure]
+
+   #_[m100/home-planets]
 
 
    ;; spring force
@@ -42,7 +45,7 @@
    ;; frictions
    ;; [m100/template]
    ;; spring force
-   ;; [m100/template2]
+   #_[m100/template2]
    ;; trigono
    ;; [m100/template2-1]
    ;; extra
@@ -65,14 +68,14 @@
    ;; quad algo
 ;;        [m100/home-work7-1]
    ;; solving linear equation
-;;   [m100/linear-equation]
+   #_[m100/linear-equation]
 
 ;;   [m100/force-diagram]
 
-;;    [m100/banner-qd]
-   ;; hcl + haolh
+   #_[m100/banner-qd]
 
-;;   [m100/home-work9]
+   #_[m100/banner-factor-identities]
+
    ;; pyramid
    ;;   [m100/home-work10]
    ;; boxes
@@ -85,23 +88,16 @@
    ;;   [m100/home-work14]
    ;; line to curves
    ;;   [m100/home-work15]
-   ;; alkane
-   [m100/home-work16]
+
    ;; temp vs time latent heat
-      #_[m100/home-work17]
+   #_[m100/home-work17]
    #_[m100/home-work18]
    #_[m100/home-work19]
-   ;; distillation2
-   #_[m100/home-work20]
-   ;;    [m100/home-work21]
-   ;; distillation
-      #_[m100/home-work22]
+   ;; temp
+   #_[m100/home-work21]
    #_[m100/banner1]
-  ;;    [m100/banner-brand]
-  ;;    [m100/banner2]
-
-  ;;   [m100/banner2]
-  ;;   [py100/template]
+   #_[m100/banner-brand]
+   ;;   [py100/template]
   ;;  [py100/template]
    ] )
 
@@ -111,9 +107,23 @@
    [py100/template]] )
 
 
+(defn chemistry []
+  [:div
+   ;; alkane
+   [m100/home-work16]
+   ;; distillation
+   [m100/home-work22]
+   ;; hcl + haolh
+   [m100/home-work9]
+   ;; distillation2
+   [m100/home-work20]
+
+   ] )
+
+
 (defn render-simple []
   (rdom/render
-   (template)
+   (chemistry)
    (js/document.getElementById "app")
    functional-compiler))
 
