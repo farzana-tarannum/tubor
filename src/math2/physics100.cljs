@@ -557,14 +557,38 @@ The pipelined version also modeled at RTL level."]
                        (-> ref
                            .-current
                            (.focus)))))
+
+
+(defn t2 []
+  [:div {:style {:height "100%"
+                 :width "100%"
+                 :display :grid
+                 :grid-template-columns "200vh"
+                 :grid-template-rows "100vw"}
+         }
+   [:div {:style {:z-index 1
+                  :width "100vw"
+                  :height "200vh"
+                  :display :flex
+                  :justify-content :center
+                  :align-items :center
+                  :grid-row "1/1"
+                  :grid-column "1/1"}}
+    [file/file-input-background2]]
+
+   ])
+
+
+
 (defn template []
   (let [[name set-name] (react/useState "")
         ref (react/useRef)]
-      [:div {:style (merge (m7/grid [600 :vh 100 :vw
-                                     (take 38 (repeat [5 :vh]))
-                                     (take 20 (repeat [5 :vh]))])
-                           {:background-color (hsl [1.5 70 70 1])
-                            :gap ".5rem"})}
+    [:div {:style (merge
+                   (m7/grid [600 :vh 100 :vw
+                             (take 38 (repeat [5 :vh]))
+                             (take 20 (repeat [5 :vh]))])
+                         {:background-color (hsl [1.5 70 70 1])
+                          :gap ".5rem"})}
 
        [:div {:key (gensym)
               :style (m7/css

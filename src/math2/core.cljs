@@ -74,7 +74,7 @@
 
    #_[m100/banner-qd]
 
-   #_[m100/banner-factor-identities]
+   [m100/banner-factor-identities]
 
    ;; pyramid
    ;;   [m100/home-work10]
@@ -104,7 +104,11 @@
 
 (defn template3 []
   [:div
-   [py100/template]] )
+   [py100/t2]
+   #_[py100/template]
+
+   ] )
+
 
 
 (defn chemistry []
@@ -123,7 +127,7 @@
 
 (defn render-simple []
   (rdom/render
-   (chemistry)
+   (template)
    (js/document.getElementById "app")
    functional-compiler))
 

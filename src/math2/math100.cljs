@@ -246,16 +246,25 @@
                            ;;:transform (m7/tranfrom [[:rotate (* i (/ 360 4))]])
                            :style {:font-size "1.5rem"}}
                       "H"]
-
-                   [:circle {:cx (* i 75)
-                             :cy -40
-                             :r 12
-                             :dy -5
-                             :dx -10
-                             :fill (hsl [(/ i 5) 60 70 1])
+                   (if (= i 5)
+                     [:text {:x (* i 75)
+                             :y -40
+                             :dy 10
+                             :dx -28
                              ;;:transform (m7/tranfrom [[:rotate (* i (/ 360 4))]])
-                             }
-                    ]
+                             :style {:font-size "1.5rem"}}
+                      "OH"]
+
+
+                     [:circle {:cx (* i 75)
+                               :cy -40
+                               :r 12
+                               :dy -5
+                               :dx -10
+                               :fill (hsl [(/ i 5) 60 70 1])
+                               ;;:transform (m7/tranfrom [[:rotate (* i (/ 360 4))]])
+                               }
+                      ])
 
                    #_[:text {:x (* i 75)
                              :y -40
@@ -278,6 +287,26 @@
                        :stroke-width 2
                        :fill (hsl [5 70 70 .2])}]
 
+
+               #_[:circle {:cx (* n 75)
+                         :cy 0
+                         :r 12
+                         :dy -5
+                         :dx -10
+                         :fill (hsl [5 60 70 1])
+                         ;;:transform (m7/tranfrom [[:rotate (* i (/ 360 4))]])
+                         }
+                  ]
+
+               [:text {:x (* n 75)
+                       :y 0
+                       :dy 10
+                       :dx 0
+                       ;;:transform (m7/tranfrom [[:rotate (* i (/ 360 4))]])
+                       :style {:font-size "1.5rem"}}
+                "OH"]
+
+
                [:text {:x -75
                        :y 0
                        :dy 10
@@ -286,13 +315,7 @@
                        :style {:font-size "1.5rem"}}
                 "H"]
 
-               [:text {:x (* n 75)
-                       :y 0
-                       :dy 10
-                       :dx -28
-                       ;;:transform (m7/tranfrom [[:rotate (* i (/ 360 4))]])
-                       :style {:font-size "1.5rem"}}
-                "OH"]
+
                ])
             ])
 
@@ -5334,21 +5357,21 @@ there are three forces on it."]
       [:svg {:style {:height "100%"
                      :width "100%"}
              :viewBox (m7/space
-                       [-80 -40  400 400])}
+                       [-300 -200  600 600])}
 
 
-       [:path {:d (m7/path `[0 20 :l 200 0])
+       #_[:path {:d (m7/path `[0 20 :l 200 0])
                :stroke-width 10
                :stroke  (hsl  [2 90 60 1])
                :fill (hsl  [2 90 60 1])}]
 
 
-       [:path {:d (m7/path `[0 60 :l 200 0])
+       #_[:path {:d (m7/path `[0 60 :l 200 0])
                :stroke-width 10
                :stroke  (hsl  [2 90 60 1])
                :fill (hsl  [2 90 60 1])}]
 
-       #_(grid-on 1 1)
+       (grid-on .5 .5)
 
 
        (map
@@ -5360,7 +5383,7 @@ there are three forces on it."]
                  [:g
 
                   [:path {:d (m7/path `[ ~x ~y1 :l ~@(map #(* 40 %) dx)])
-                          :fill (hsl  [(if (not y) .1 .8) 90 60 .3])
+                          :fill (hsl  [(if (not y) .1 .8) 90 60 .7])
                           :stroke :#aaa
                           :stroke-width 2
                           }]
@@ -5368,13 +5391,71 @@ there are three forces on it."]
                           :y y1}
                    #_(+ 1 x1)
                    ]]))
-             (range 0 7)
-             (cycle [true true false false false false false])
+             (range 0 8)
+             (cycle [false false false false ])
              )))
-        (range 0 4)
-        (range 0 4))
+        (range 0 8)
+        (range 0 8))
 
-       [:g {:transform (m7/tranfrom [[:translate [0 0]]
+
+
+
+
+       [:g  {:transform (m7/tranfrom [[:translate [(ve (* 40 3)) (ve (* 40 3)) ]]
+                                      [:scale [1 1]]])}
+        (map
+         (fn [y111 y11]
+           (let [y1 (* y11 40)]
+             (map
+              (fn [x1 y]
+                (let [x (* x1 40)]
+                  [:g
+
+                   [:path {:d (m7/path `[ ~x ~y1 :l ~@(map #(* 40 %) dx)])
+                           :fill (hsl  [(if (not y) .1 .8) 90 60 .8])
+                           :stroke :#aaa
+                           :stroke-width 2
+                           }]
+                   [:text {:x x
+                           :y y1}
+                    #_(+ 1 x1)
+                    ]]))
+              (range 0 11)
+              (cycle [true true])
+              )))
+         (range 0 11)
+         (range 0 11))]
+
+
+       [:g  {:transform (m7/tranfrom [[:scale [-1 -1]]
+                                      [:translate [0 0]]])}
+        (map
+         (fn [y111 y11]
+           (let [y1 (* y11 40)]
+             (map
+              (fn [x1 y]
+                (let [x (* x1 40)]
+                  [:g
+
+                   [:path {:d (m7/path `[ ~x ~y1 :l ~@(map #(* 40 %) dx)])
+                           :fill (hsl  [(if (not y) 3 3.5) 90 60 1])
+                           :stroke :#aaa
+                           :stroke-width 2
+                           }]
+                   [:text {:x x
+                           :y y1}
+                    #_(+ 1 x1)
+                    ]]))
+              (range 0 3)
+              (cycle [true true])
+              )))
+         (range 0 3)
+         (range 0 3))]
+
+
+
+
+       #_[:g {:transform (m7/tranfrom [[:translate [0 0]]
                                      [:rotate 90]])}
         (map
          (fn [y11]
@@ -5408,7 +5489,7 @@ there are three forces on it."]
 
 
      [:div {:style (m7/css
-                    [[2 10 (+ 2 (* 0 2)) 12  :center :center  5 :rem :column]
+                    [[2 10 (+ 2 (* 0 2)) 12  :center :center  3.2 :rem :column]
                      [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
@@ -5418,12 +5499,36 @@ there are three forces on it."]
 
 
       #_[m7/m '[= [- [:p a 2] [:p b 2]]
-              [:m [:b [+ a b]] [:b [- a b]]]]]
-      #_[m7/m '[= [:p
-                 [:b [+ a b]] 2]
+                [:m [:b [+ a b]] [:b [- a b]]]]]
+      #_[m7/m '[=  [:p [:b [- 8 3]] 2]  [+ [:p 8 2] [:p [:b [- 3]] 2]
+                                       [* 2 [- 3] 8]]]]
 
-                ]]
-      [m7/m '[= [2 5] [[* 2 2] [* 5 2]] [4 10] ]]
+      (let [a 'a
+            b 'b
+            aa 4
+            bb 6]
+        [m7/mx `[=
+                 [:p
+
+                  [:b [- [:m ~aa ~a] [:m ~bb ~b] ]] 2]
+                 [- [+ [:p [:b [:m ~aa  ~a]] 2]
+                     [:p [:b [:m ~bb ~b]] 2]
+
+                     ] [* 2  [:m ~aa ~a] [:m ~bb ~b]]]]])
+
+      (let [a 'a
+            b 'b
+            aa 4
+            bb 6]
+        [m7/mx `[=
+                 [:p
+
+                  [:b [- [:m ~aa ~a] [:m ~bb ~b] ]] 2]
+                 [- [+ [:m ~(* aa aa)  [:p ~a 2]]
+                     [:m ~(* bb bb)  [:p ~b 2]]
+
+                     ] [:m  ~(* 2 aa bb) [:m ~a ~b]]]]])
+      #_[m7/m '[= [2 5] [[* 2 2] [* 5 2]] [4 10] ]]
 
       #_[m7/mx `[= [:m [:b [+ [:m 4 a] [:m 9 b]]]  [:b [- [:m 4 a] [:m 9 b]]]]
                [- [:p [:b [:m 4 a]] 2]  [:p [:b [:m 9 b]] 2]]]]
@@ -5500,13 +5605,29 @@ there are three forces on it."]
                      [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
-      [:div  {:style {:font-size "1.5rem"}}  " At high temperatures (700–1100 °C) and in the presence of a metal-based catalyst (nickel), steam reacts with methane to yield a mixture of CO and H2, known as \"water gas\" or \"syngas\":  "]
+      #_[:div  {:style {:font-size "1.5rem"}}  " At high temperatures (700–1100 °C) and in the presence of a metal-based catalyst (nickel), steam reacts with methane to yield a mixture of CO and H2, known as \"water gas\" or \"syngas\":  "]
 
 
 
-      [m7/m '[= [+ [:m C [:k H 4]]
+      #_[:div  {:style {:font-size "4.5rem"
+                      :padding "10.4rem"}}  " At high temperatures (700–1100 °C)  in the presence  of a metal-named catalyst"
+
+       [:span {:style {:background-color (hsl [1 80 50 1])}} " nickel, "]
+
+
+       [:span {:style {:background-color (hsl [2 80 50 1])}} " stream "]
+       [:span "reacts with  "]
+       [:span {:style {:background-color (hsl [1.3 80 50 1])}} " ethane "]
+
+       [:sapn  "to yield a mixture of"]
+       [:span {:style {:background-color (hsl [1.3 80 50 1])}} " ethanol "]
+       ]
+
+
+
+      [m7/m '[= [+ [:m [:k C 2] [:k H 4]]
                  [:m [:k H 2] O]]
-              [+  CO [:k H 2]]]]
+              [:m [:k C 2] [:k H 5] OH]]]
 
 
 
@@ -5522,12 +5643,12 @@ there are three forces on it."]
 
 
 
-      [:div  {:style {:font-size "1.5rem"}}
+      #_[:div  {:style {:font-size "1.5rem"}}
        " This reaction is strongly endothermic (consumes heat, ΔHr = 206 kJ/mol). Additional hydrogen is obtained by the reaction of CO with water via the water-gas shift reaction "]
 
 
 
-      [m7/m '[= [+  CO [:m [:k H 2] O]]
+      #_[m7/m '[= [+  CO [:m [:k H 2] O]]
               [+ [:k H 2] [:m C [:k O 2]]]]]
 
 
@@ -10386,7 +10507,12 @@ on time?"]
 
            #_(grid-on 1 1)
 
-           #_(alkine 6)
+           [:g
+            {:transform (m7/tranfrom [[:translate [150 -50]]])}
+            (alkine 2)]
+           [:g
+            {:transform (m7/tranfrom [[:translate [250  50]]])}
+            (alkine-oh 2)]
 
            ;;:filter (m7/url "flames")
            ;; Height
@@ -10435,7 +10561,8 @@ on time?"]
 
 
 
-           [:path {:d (path [-25 0
+
+           [:path {:d (path [-205 0
                              :l 0 (ve 190)
                              50 0 0 190
                              ])
@@ -10445,6 +10572,8 @@ on time?"]
                    :fill (m7/url (name :lg1))
                    }
             ]
+
+
 
            [:path {:d (path [-100 80
                              :l 0 (ve 190)
@@ -14559,23 +14688,55 @@ on time?"]
                      {:background-color (hsl [1 70 70 1])
                       :gap ".1rem"})}
 
-       #_[:div {:style
+       [:div {:style
               (m7/css
                [[2 8 2 7
-                 :center :center  4 :rem :column]
+                 :center :center  3 :rem :column]
                 [3.5 70 (+ 50 (* 5 5))  .7] []
                 {:gap ".1rem"
                  :z-index 10}])}
 
 
-        [:div "Specific Gravity"]
+        #_[:div "Specific Gravity"]
 
-        [:div {:style {:font-size "1.8rem"}}
+        #_[:div {:style {:font-size "1.8rem"}}
          "Ratio of density of a substance to the density of a given reference material"]
+        #_[:k  r]
+
+        #_[m7/m '[= [[:k ρ s]
+                     ρ] 1.3]]
+
+        [m7/m '[= W weight]]
+
+        [m7/m '[= [:k W d] displaced-water]]
+
+        [m7/m '[= [:k W r] resultent-weight]]
+
+        #_[m7/m '[= [:k F r] [+ W  [:k F b]]]]
+        #_[m7/m '[= [:k W r] [+ W  [:k F ]]]]
+
+        [m7/m '[= [:k W r] [+ [:m 100 N] [:k W d]]]]
 
 
-        #_[m7/m '[[:k ρ s]
-                [:k ρ r]]]
+        [m7/m '[= [:m 94 N] [+ [:m 100 N] [:k W d]]]]
+
+
+
+        [m7/m '[= [:k W d] [:m 10 ρ [:k V crown] N]]]
+
+
+        #_[m7/m '[= [:m 94 N] [- [:m 100 N] [:m 10 [:k m d] ]]]]
+
+
+        #_[m7/m '[= [:m 94 N] [- [:m 100 N] [:m 10 [:k m d] ]]]]
+
+
+        #_[m7/m '[= [:m 6 N] [:m 10  ρ [:k V crown] ]]]
+
+
+        #_[m7/m '[=  [:k V crown]  [[:m 6 N] [:m 10  ρ ]] ]]
+
+
 
 
         [:div {:style {:background-color (hsl [0 70 70 .31])}}
@@ -14583,7 +14744,7 @@ on time?"]
                    [:m  [:p 10 3]  Kg  [:p m -3]]]]
 
 
-         [m7/m '[[:p 19.3 2 ]
+         #_[m7/m '[[:p 19.3 2 ]
                  [:p 10 3]]]]
 
 
@@ -14707,7 +14868,7 @@ on time?"]
 
             (let [x -60
                   y 0]
-              [:g  {:transform (m7/tranfrom [[:scale [10 1]]])}
+              [:g  {:transform (m7/tranfrom [[:scale [1 1]]])}
 
                [:path {:d (m7/path `[~x ~y :l ~@(map #(* 120 %) dx)])
                        :stroke-dasharray (m7/space [(* 2 120) 120])
@@ -14754,10 +14915,10 @@ on time?"]
                :begin (sec 0)
                :dur (sec 10)
                :type :translate
-               :from (m7/space [0 -110])
-               :to (m7/space [600 -110])
+               :from (m7/space [0 -50])
+               :to (m7/space [0 -50])
                :fill :freeze
-
+               :repeatCount :indefinite
                }]
              #_[:path {:d (m7/path [120 -150 :l 50 0 0 -50 -50 0 0 50])
                      :stroke-width 3
@@ -14766,8 +14927,8 @@ on time?"]
                      :fill (hsl [0.5 70 80 1])}
 
                 ]
-             [:g
-              [:text [:textPath {:href :#pasw2lr
+             #_[:g
+             [:text [:textPath {:href :#pasw2lr
                                  :startOffset 50
                                  :font-size 20} "friction"]]
 
@@ -14793,14 +14954,14 @@ on time?"]
 
                ]]
 
-             [:path {:d bdmap/helicopter1
+             #_[:path {:d bdmap/helicopter1
                      :fill (hsl [0.5 50 40 1])
                      :stroke :none
                      :transform (m7/tranfrom [[:translate [0 -140]]
                                               [:scale [.05 .05]]])
                      }]
 
-             [:g
+             #_[:g
               [:text [:textPath {:href :#pasw2l
                                  :startOffset 150
                                  :font-size 20} "Thrust"]]
@@ -14812,16 +14973,101 @@ on time?"]
 
                       :stroke (hsl [0.5 70 80 .3])
                       :fill (hsl [0.5 70 80 1])}
-               #_[:animateTransform
-                  {:attributeName :transform
-                   :begin (sec 0)
-                   :dur (sec 1)
-                   :type :translate
-                   :from (m7/space [0 0])
-                   :to (m7/space [0 20])
-                   :fill :freeze
-                   :id :rfff1
-                   }]
+
+
+
+               ]]
+
+
+
+
+
+             #_[:g {:transform (m7/tranfrom [[:translate [70 -100]]])}
+
+
+              [:g
+               [:text [:textPath {:href :#pasw2ll
+                                  :startOffset 150
+                                  :font-size 20} "Air Resistance"]]
+
+               [:path {:d (m7/path [0 0 :l -240 0 ])
+                       :id :pasw2ll
+                       :stroke-width 4
+                       :marker-end (m7/url (name :dot3))
+
+                       :stroke (hsl [0.5 70 80 .3])
+                       :fill (hsl [0.5 70 80 1])}
+
+
+
+                ]]
+
+              [:g
+               [:text [:textPath {:href :#pasw2l
+                                  :startOffset 150
+                                  :font-size 20} "Thrust"]]
+
+               [:path {:d (m7/path [0 0 :l 240 0 ])
+                       :id :pasw2l
+                       :stroke-width 4
+                       :marker-end (m7/url (name :dot3))
+
+                       :stroke (hsl [0.5 70 80 .3])
+                       :fill (hsl [0.5 70 80 1])}
+                #_[:animateTransform
+                   {:attributeName :transform
+                    :begin (sec 0)
+                    :dur (sec 1)
+                    :type :translate
+                    :from (m7/space [0 0])
+                    :to (m7/space [0 20])
+                    :fill :freeze
+                    :id :rfff1
+                    }]
+
+
+                ]]
+
+              [:g
+               [:text {:dy -10} [:textPath {
+                                            :href :#pasw3
+                                            :startOffset 50
+                                            :font-size 15}
+                                 "lift"]]
+
+
+               [:path {:d (m7/path [0 0 :l 0 -70 ])
+                       :id :pasw3
+                       :stroke-width 4
+                       :marker-end (m7/url (name :dot3))
+
+                       :stroke (hsl [0.5 70 80 .5])
+                       :fill (hsl [0.5 70 80 1])}
+                [:animateTransform
+                 {:attributeName :transform
+                  :begin (sec 0)
+                  :dur (sec 1)
+                  :type :translate
+                  :from (m7/space [0 0])
+                  :to (m7/space [0 0])
+                  :fill :freeze
+                  :id :rfff1
+                  }]
+                ]]
+
+
+              [:text [:textPath {:href :#pasw2
+                                 :startOffset 50
+                                 :font-size 20} "W"]]
+
+              [:path {:d (m7/path [0 0 :l 0 70 ])
+                      :id :pasw2
+                      :stroke-width 4
+                      :marker-end (m7/url (name :dot3))
+
+                      :stroke (hsl [0.5 70 80 .3])
+                      :fill (hsl [0.5 70 80 1])}
+
 
 
                ]]
@@ -14829,33 +15075,57 @@ on time?"]
 
 
              ;; arrow
-             [:text [:textPath {:href :#pasw2
-                                :startOffset 50
-                                :font-size 20} "W"]]
-
-             [:path {:d (m7/path [0 0 :l 0 140 ])
-                     :id :pasw2
-                     :stroke-width 4
-                     :marker-end (m7/url (name :dot3))
-
-                     :stroke (hsl [0.5 70 80 .3])
-                     :fill (hsl [0.5 70 80 1])}
-              #_[:animateTransform
-                 {:attributeName :transform
-                  :begin (sec 0)
-                  :dur (sec 1)
-                  :type :translate
-                  :from (m7/space [0 0])
-                  :to (m7/space [0 20])
-                  :fill :freeze
-                  :id :rfff1
-                  }]
 
 
-              ]
-             [ship [[:translate [-60 0]]
+
+
+
+             [:g
+              [:text [:textPath {:href :#pasw2
+                                 :startOffset 50
+                                 :font-size 20} "W"]]
+
+              [:path {:d (m7/path [0 0 :l 0 140 ])
+                      :id :pasw2
+                      :stroke-width 4
+                      :marker-end (m7/url (name :dot3))
+
+                      :stroke (hsl [1.5 70 80 1])
+                      :fill (hsl [1.5 70 80 1])}
+               [:animateTransform
+                  {:attributeName :transform
+                   :begin (sec 0)
+                   :dur (sec 3)
+                   :type :translate
+                   :from (m7/space [0 -150])
+                   :to (m7/space [0 0])
+                   :fill :freeze
+                   :id :shipw33
+                   }]
+
+
+               ]]
+
+             [:g
+              [:text [:textPath {:href :#paswr2
+                                 :startOffset 0
+                                 :font-size 20} "Wr"]
+               ]
+
+              [:path {:d (m7/path [0 0 :l 0 50 ])
+                      :id :paswr2
+                      :stroke-width 4
+                      :marker-end (m7/url (name :dot3))
+
+                      :stroke (hsl [4.5 70 80 1])
+                      :fill (hsl [4.5 70 80 1])}
+
+
+
+               ]]
+             #_[ship [[:translate [-60 0]]
                     [:scale [0.01 -0.01]]]]
-             #_[:path {:d (m7/path `[-25 0 :l ~@(map #(* 50 %) dx)])
+             [:path {:d (m7/path `[-25 0 :l ~@(map #(* 50 %) dx)])
                      :stroke-dasharray (m7/space [100 50])
                      :stroke (hsl [1 70 70 1])
                      :stroke-width 2
@@ -14864,31 +15134,32 @@ on time?"]
 
              #_"buoyancy"
              #_"upthrust"
-             [:text {:dy -10} [:textPath {
-                                :href :#pasw3
-                                :startOffset 50
-                                :font-size 15}
-                               "upthrust"]]
+             [:g
+              [:text {:dy -10} [:textPath {
+                                           :href :#pasw3
+                                           :startOffset 0
+                                           :font-size 12}
+                                "buoyancy"]]
 
 
-             [:path {:d (m7/path [0 0 :l 0 -140 ])
-                     :id :pasw3
-                     :stroke-width 4
-                     :marker-end (m7/url (name :dot3))
+              [:path {:d (m7/path [0 0  :l 0 -70 ])
+                      :id :pasw3
+                      :stroke-width 4
+                      :marker-end (m7/url (name :dot3))
 
-                     :stroke (hsl [0.5 70 80 .5])
-                     :fill (hsl [0.5 70 80 1])}
-              [:animateTransform
-               {:attributeName :transform
-                :begin (sec 0)
-                :dur (sec 1)
-                :type :translate
-                :from (m7/space [0 0])
-                :to (m7/space [0 0])
-                :fill :freeze
-                :id :rfff1
-                }]
-             ]
+                      :stroke (hsl [0.5 70 80 .5])
+                      :fill (hsl [0.5 70 80 1])}
+               [:animateTransform
+                {:attributeName :transform
+                 :begin :#shipw33.end
+                 :dur (sec 5)
+                 :type :translate
+                 :from (m7/space [0 0])
+                 :to (m7/space [0 140])
+                 :fill :freeze
+
+                 }]
+               ]]
 
 
              #_[:path {:d (m7/path [150 -150 :l 0 70 ])
