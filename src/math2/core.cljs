@@ -27,7 +27,7 @@
    #_[m100/map-asia]
    #_[m100/airplane]
    ;; airplane .5
-    #_[m100/home-work3]
+   #_[m100/home-work3]
    #_[m100/home-work19]
    ;; pressure
    [m100/pressure]
@@ -74,7 +74,7 @@
 
    #_[m100/banner-qd]
 
-   [m100/banner-factor-identities]
+   #_[m100/banner-factor-identities]
 
    ;; pyramid
    ;;   [m100/home-work10]

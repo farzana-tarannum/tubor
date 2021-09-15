@@ -324,32 +324,7 @@
   ([X Y]
    (grid-on X Y 40 60))
   ([X Y ax-dx ax-dy]
-   (let [zoom 0
-         cor [[5 2] [10 9] [15 19] [20 34] [25 58] [30 95] [32 125]]
-         ts (into ["t(s)"] [ 1 2 3 4 5 6 6.3])
-         vms (into ["v(m/s)"] [ 1 4.5 9.5 17 29 47 62.5])
-         vb (fn [z]
-              (nth [
-                    [0 -200  400 400]
-                    [0 -180  200 200]
-                    [0 -50  100 100]
-                    [0 -25  50 50]
-                    [-100 -200  800 200]
-
-                    [-100 -200 200 100]
-                    [40 120  80 80]
-                    [0 40  100 100]
-                    [75 -175  150 150]
-                    [-20 -20  100 100]
-                    ] z))
-         viewbox (vb zoom)
-         viewbox2 (vb zoom)
-         st (fn [aa row]
-              {:style (m7/css
-                       [[row 1 (+ 3 (* aa 1)) 1  :center :center  2 :rem :column]
-                        [(* 3 .2) 70 (+ 50 (* 5 5))  .7] []
-                        {:gap ".1rem"
-                         :z-index 10}])})]
+   (let [zoom 0]
      [:g
 
       ;; small
@@ -398,7 +373,9 @@
           [:text {:x (* 20 x)
                   :y 5
                   :style {:font-size "0.4rem"}}
-           (* x X)]])
+           (.toFixed (* x X) 1)
+           #_(* x X)
+           ]])
        (range -20 40))
 
 
@@ -424,8 +401,8 @@
           [:text {:x -10
                   :y (ve (* 20 y))
                   :style {:font-size "0.4rem"}}
-           #_(.toFixed (* y Y) 1)
-           (* y Y)
+           (.toFixed (* y Y) 1)
+           #_(* y Y)
            ]])
        (range -20 20))
 
@@ -4694,7 +4671,7 @@ there are three forces on it."]
                                true false)] )]
                    (if minus
                      (m7/mx
-                      `[= [-  [* ~a ~x]
+                      `[= [-  [:m ~a ~x]
                            [:m ~b ~y]] ~c])
                      (m7/mx
                       `[= [+ [:m ~a ~x]
@@ -4734,32 +4711,94 @@ there are three forces on it."]
                 :transform (m7/tranfrom [[:scale [.6 .6]]
                                          [:rotate 0]])
                 :fill (m7/hsl [.4 70 70 1])}]]
+
+       [:foreignObject {:x 40
+                        :y 0
+                        :font-size 10
+                        :width 100
+                        :height 20}
+        [m7/m '[:m [:b [+ x y 2]] cm]]
+        ]
+
+
+       [:foreignObject {:x 5
+                        :y 40
+                        :font-size 10
+                        :width 100
+                        :height 20}
+        [m7/m '[:m [:b [:m 2 y]] cm]]
+        ]
+
+       [:foreignObject {:x 180
+                        :y 40
+                        :font-size 10
+                        :width 100
+                        :height 20}
+        [m7/m '[:m [:b [+ x 2]] cm]]
+        ]
+
+
+       [:foreignObject {:x 40
+                        :y 80
+                        :font-size 10
+                        :width 100
+                        :height 20}
+        [m7/m '[:m [:b [+ [:m 3 x] 1] ] cm]]
+        ]
+
+       [:path {:d (m7/path `[0 0 :l ~@(map #(* 80 %) dx )])
+               :id :ffrect3
+               :fill :none
+               :stroke-width 3
+               :transform (m7/tranfrom [[:scale [3 1]]])
+               :stroke (hsl [2 50 70 1])}
+        ]
+
        #_(grid-on 1 1)
 
 
        ]]
 
      [:div {:style (m7/css
-                    [[2 10 (+ 2 (* 0 2)) 12  :center :center  3 :rem :column]
+                    [[2 10 (+ 2 (* 0 2)) 12  :center :center  7 :rem :column]
                      [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
 
 
 
-      (lin  (map #(* 2 %) [13 -6 20]))
-      (lin (map #(* 3 %) [7 4 18]))
+      #_[:div "sum of 2 numbers is 67 and there difference is 3. find out those numbers"]
+
+      #_[m7/m '[= [+ [:m [- 2] x] y  ] [- 1]]]
+
+      #_(lin  (map #(* -2 %) [-2 1 -1]))
+      #_[m7/m '[= [+ [- x] [:m 2 y]] 2]]
+      #_[m7/m '[= [+ [:m 2 x]  [- y]  ] 1 ]]
+
+      #_[m7/m '[= [- [:m 5 x] [:m 3 x]] [:m 2 x]]]
+      #_[m7/m '[= [+ [- x] [:m    2 y]] [+ x [- x] 2]]]
+      [m7/m '[= [:m 3 y] [:m [* [- 3] [- 1]] y]]]
+      #_(lin (map #(* -1 %) [2 -1 1]))
+      #_[m7/m '[= [+ [- x] [:m    2 y]] 2]]
+      #_(lin (map #(* 2 %) [-1 2 2]))
+
       [:div {:style {:width "100%"
                      :height ".5rem"
                      :background-color :#aaa}}]
 
-      (lin (map #(+ %1 %2)
-                (map #(* 2 %) [13 -6 20])
-                (map #(* 3 %) [7 4 18])))
+      #_(lin (map #(+ %1 %2)
+                (map #(* 1 %) [2 -1 1])
+                (map #(* 2 %) [-1 2 2])
+                ))
 
-      [m7/m '[= x [94 47] 2]]
-      (lin (map #(* 1 %) [13 -6 20]))
-      ((lin2 2 'y) (map #(* 1 %) [13 -6 20]))
+      #_[m7/m '[= [:m [3 3] y] [5 3]]]
+
+      #_[m7/m '[= y [[* 5 2] [* 2 3]]]]
+
+
+      #_[m7/m '[= [+ 0 y] 32] ]
+      #_(lin (map #(* 1 %) [13 -6 20]))
+      #_((lin2 2 'y) (map #(* 1 %) [13 -6 20]))
       #_(lin [1 0 2])
 
       ]
@@ -8390,7 +8429,7 @@ on time?"]
 
 
 
-
+;
 
 (defn home-work16 []
   (let [[slider get-slider] (react/useState 0)
@@ -8406,7 +8445,7 @@ on time?"]
           poly true
           vb (fn [z]
                (nth [
-                     [0 -200  400 400]
+                     [600 -150  300 800]
                      [0 -180  200 200]
                      [0 -50  100 100]
                      [0 -25  50 50]
@@ -8484,7 +8523,7 @@ on time?"]
                       :dur "4s"
                       :fill :freeze}]
 
-          (grid-on)
+           #_(grid-on)
 
 
 
@@ -8503,7 +8542,9 @@ on time?"]
                                 :height 50
                                 :width 450
                                 :style {:font-size "1.7rem"}}
-                [m7/m [:m [:k 'C n] [:k 'H ['* 2 n]]]]
+                (if poly
+                  [m7/m [:k [:b [:m '- [:k 'C n] [:k 'H ['* 2 n]] '- ]]   'n]]
+                  [m7/m [:m [:k 'C n] [:k 'H ['* 2 n]]]])
 
                 #_[m7/m ['= ['+ [:m [:k 'C n] [:k 'H  (+ (* 2 n) 2)]] [:m 2[:k 'O 2]] ]
                        ['+ [:m 'C [:k 'O 2]] [:m 2 [:k 'H 2] 'O]]
@@ -10389,25 +10430,11 @@ on time?"]
           ax-dx 80
           ax-dy 40
 
-          cor [[5 2] [10 9] [15 19] [20 34] [25 58] [30 95] [32 125]]
-          points (into ["x"] (range 0 10))
-          ts (into [
-                    [:div {:style {:font-size "1rem"}}
-                     [m7/m '[= y [:p x
-                                  2]]]]]
-                   (map (fn [x] (* (- x 3) (- x 3))) (range 0 10)))
-          vms (into ["v (m/s)"] [ 0 0])
+
           vb (fn [z]
-               (nth [[100 -200  400 400]
-                     [0 -180  200 200]
-                     [0 -50  100 100]
-                     [0 -25  50 50]
-                     [-100 -200  800 200]
-                     [40 120  80 80]
-                     [0 40  100 100]
-                     [75 -175  150 150]
-                     [-20 -20  100 100]
-                     [-400 -200  800 200]] z))
+               (nth [[100 -200  400 400]] z))
+
+
           viewbox (vb 0)
           viewbox2 (vb 0)
           st (fn [aa row]
@@ -14676,8 +14703,8 @@ on time?"]
                      [-20 -20  100 100]
                      [-400 -200  800 200]
                      [-200 -300  600 400]] z))
-          viewbox (vb 10)
-          viewbox2 (vb 10)
+          viewbox (vb 1)
+          viewbox2 (vb 1)
           ]
 
 
@@ -14688,15 +14715,15 @@ on time?"]
                      {:background-color (hsl [1 70 70 1])
                       :gap ".1rem"})}
 
-       [:div {:style
+       #_[:div {:style
               (m7/css
-               [[2 8 2 7
-                 :center :center  3 :rem :column]
+               [[2 8 2 8
+                 :center :center  4.5 :rem :column]
                 [3.5 70 (+ 50 (* 5 5))  .7] []
                 {:gap ".1rem"
                  :z-index 10}])}
 
-
+        #_[m7/m '[= [6 15] [[* 3 2] [* 3 5]] [2 5]]]
         #_[:div "Specific Gravity"]
 
         #_[:div {:style {:font-size "1.8rem"}}
@@ -14706,23 +14733,36 @@ on time?"]
         #_[m7/m '[= [[:k ρ s]
                      ρ] 1.3]]
 
-        [m7/m '[= W weight]]
+        #_[m7/m '[= W weight]]
 
-        [m7/m '[= [:k W d] displaced-water]]
+        #_[m7/m '[= [:k W d] displaced-water]]
 
-        [m7/m '[= [:k W r] resultent-weight]]
+        #_[m7/m '[= [:k W r] resultent-weight]]
 
         #_[m7/m '[= [:k F r] [+ W  [:k F b]]]]
         #_[m7/m '[= [:k W r] [+ W  [:k F ]]]]
 
-        [m7/m '[= [:k W r] [+ [:m 100 N] [:k W d]]]]
+        #_[m7/m '[= [:k W r] [+ W [:k W d]]]]
+
+        #_[m7/m '[= [- [:k m r]] [+ [- m] [:k m d]]]]
+
+        #_[m7/m '[= [:m ρ  [:k V crown]] [- m [:k m r]]]]
+
+        #_[m7/m '[= [:m [- 94] N] [+ [:m [- 100] N] [:k W d]]]]
 
 
-        [m7/m '[= [:m 94 N] [+ [:m 100 N] [:k W d]]]]
+
+        #_[m7/m '[= [:m 6 N] [:k W d] [:m 10 ρ [:k V crown] N]]]
+
+
+        #_[m7/m '[= [:m [* .6 [:p 10 -3]] [:p m 3]] [:k V crown]]]
 
 
 
-        [m7/m '[= [:k W d] [:m 10 ρ [:k V crown] N]]]
+        #_[m7/m '[=  [:k ρ crown] [[:m 10 Kg] [:k V crown]]]]
+
+        #_(/ (js/Math.pow 10 5) 6)
+        #_[m7/m '[=  [:k ρ crown] [[:m [:p 10 5]  Kg] [:m 6 [:p m 3]]]]]
 
 
         #_[m7/m '[= [:m 94 N] [- [:m 100 N] [:m 10 [:k m d] ]]]]
@@ -14836,8 +14876,9 @@ on time?"]
             [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
                     :stroke-width .1
-                    :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :transform (m7/tranfrom [[:scale [.4 .4]]
+                                             [:rotate 1]])
+                    :fill (m7/hsl [2 70 70 1])}]]
            [:pattern {:id (name :star)
                       :viewBox (space [0 0 10 10])
                       :width "10%"
@@ -14853,7 +14894,31 @@ on time?"]
                       :dur "4s"
                       :fill :freeze}]
 
+           (grid-on .1 .1)
 
+           [:g
+            (map (fn [i]
+                   [:path {:stroke-width 2
+                           :fill (hsl [(if (< i 2) 1 2) 70 70 1])
+                           :stroke (hsl [7 70 70 1])
+                           :d (m7/path
+                               `[~(* i 40) 0 :l ~@(map #(* 20 %1 %2)
+                                                       dx
+                                                       (cycle [2 1]))])}])
+                 (range 0 5))]
+
+
+
+           [:g
+            (map (fn [i]
+                   [:path {:stroke-width 2
+                           :fill (hsl [(if (< i 4) 1 2) 70 70 1])
+                           :stroke (hsl [7 70 70 1])
+                           :d (m7/path
+                               `[~(* i 20) 40 :l ~@(map #(* 20 %1 %2)
+                                                       dx
+                                                       (cycle [1 1]))])}])
+                 (range 0 10))]
 
 
 
@@ -14862,11 +14927,11 @@ on time?"]
             #_(water [[:translate  [-60 -120]]
                     [:scale [-1 1]]])
 
-            (water [[:translate  [60 -120]]
+            #_(water [[:translate  [60 -120]]
                     [:scale [1 1]]])
 
 
-            (let [x -60
+            #_(let [x -60
                   y 0]
               [:g  {:transform (m7/tranfrom [[:scale [1 1]]])}
 
@@ -14890,7 +14955,7 @@ on time?"]
                ])
 
 
-            [:path {:d (m7/path `[70 0 :l ~@(map #(* 50 %) dx)])
+            #_[:path {:d (m7/path `[70 0 :l ~@(map #(* 50 %) dx)])
                     :stroke-dasharray (m7/space [100 50])
                     :stroke (hsl [1 70 70 1])
                     :stroke-width 2
@@ -15079,53 +15144,107 @@ on time?"]
 
 
 
+             (let [f1 [140 0]
+                   f2 [-80 0]]
+               [:g
+                [:text {:dy -6}
+                 [:textPath {:href :#pasw2
+                             :fill (hsl [0 70 70 .7])
+                             :startOffset "30%"
+                             :font-size 10} "F1"]]
 
-             [:g
-              [:text [:textPath {:href :#pasw2
-                                 :startOffset 50
-                                 :font-size 20} "W"]]
+                [:path {:d (m7/path `[0 0 :l ~@f1])
+                        :id :pasw2
+                        :stroke-width 4
+                        :marker-end (m7/url (name :dot3))
 
-              [:path {:d (m7/path [0 0 :l 0 140 ])
-                      :id :pasw2
-                      :stroke-width 4
-                      :marker-end (m7/url (name :dot3))
-
-                      :stroke (hsl [1.5 70 80 1])
-                      :fill (hsl [1.5 70 80 1])}
-               [:animateTransform
+                        :stroke (hsl [1.5 70 80 1])
+                        :fill (hsl [1.5 70 80 1])}
+                 [:animateTransform
                   {:attributeName :transform
                    :begin (sec 0)
                    :dur (sec 3)
                    :type :translate
-                   :from (m7/space [0 -150])
+                   :from (m7/space [0 0])
                    :to (m7/space [0 0])
                    :fill :freeze
                    :id :shipw33
                    }]
 
 
-               ]]
-
-             [:g
-              [:text [:textPath {:href :#paswr2
-                                 :startOffset 0
-                                 :font-size 20} "Wr"]
-               ]
-
-              [:path {:d (m7/path [0 0 :l 0 50 ])
-                      :id :paswr2
-                      :stroke-width 4
-                      :marker-end (m7/url (name :dot3))
-
-                      :stroke (hsl [4.5 70 80 1])
-                      :fill (hsl [4.5 70 80 1])}
+                 ]
+                [:g
+                 [:text {:dy -5
+                         :fill (hsl [0 70 70 0])
+}
 
 
+                  [:textPath {
+                           :href :#paswr2
+                           :startOffset "20%"
+                           :font-size 10} "F1+F2"]
+                  [:animate
+                   {:attributeName :fill
+                    :begin :buoyancy3.end
+                    :dur (sec 5)
+                    :from (hsl [0 70 70 0])
+                    :to (hsl [.5 50 50 1])
+                    :fill :freeze
 
-               ]]
+                 }]]
+
+
+              [:g
+               [:text {:dy -10} [:textPath {
+                                            :href :#pasw3
+                                            :startOffset 20
+                                            :font-size 12}
+                                 "F2"]]
+
+
+               [:path {:d (m7/path `[0 0  :l ~@f2])
+                       :id :pasw3
+                       :stroke-width 4
+                       :marker-end (m7/url (name :dot3))
+
+                       :stroke (hsl [0.5 70 80 .5])
+                       :fill (hsl [0.5 70 80 1])}
+                [:animateTransform
+                 {:attributeName :transform
+                  :begin :shipw33.end
+                  :dur (sec 5)
+                  :type :translate
+                  :from (m7/space [0 0])
+                  :to (m7/space [140 0])
+                  :fill :freeze
+                  :id :buoyancy3
+                  }]
+                ]]
+
+                 (let [[x1 y1] f1
+                       [x2 y2] f2]
+                   [:path {:d (m7/path [0 0 :l (+ x1 x2) (+ y1 y2) ])
+                        :id :paswr2
+                        :stroke-width 0
+                        :marker-end (m7/url (name :dot3))
+                        :stroke (hsl [4.5 70 80 1])
+                        :fill (hsl [4.5 70 80 1])}
+
+                    [:animate
+                     {:attributeName :stroke-width
+                      :begin :buoyancy3.end
+                      :dur (sec 5)
+                      :from 0
+                      :to 4
+                      :fill :freeze}]])
+
+
+                 ]])
+
+
              #_[ship [[:translate [-60 0]]
                     [:scale [0.01 -0.01]]]]
-             [:path {:d (m7/path `[-25 0 :l ~@(map #(* 50 %) dx)])
+             #_[:path {:d (m7/path `[-25 0 :l ~@(map #(* 50 %) dx)])
                      :stroke-dasharray (m7/space [100 50])
                      :stroke (hsl [1 70 70 1])
                      :stroke-width 2
@@ -15134,32 +15253,7 @@ on time?"]
 
              #_"buoyancy"
              #_"upthrust"
-             [:g
-              [:text {:dy -10} [:textPath {
-                                           :href :#pasw3
-                                           :startOffset 0
-                                           :font-size 12}
-                                "buoyancy"]]
 
-
-              [:path {:d (m7/path [0 0  :l 0 -70 ])
-                      :id :pasw3
-                      :stroke-width 4
-                      :marker-end (m7/url (name :dot3))
-
-                      :stroke (hsl [0.5 70 80 .5])
-                      :fill (hsl [0.5 70 80 1])}
-               [:animateTransform
-                {:attributeName :transform
-                 :begin :#shipw33.end
-                 :dur (sec 5)
-                 :type :translate
-                 :from (m7/space [0 0])
-                 :to (m7/space [0 140])
-                 :fill :freeze
-
-                 }]
-               ]]
 
 
              #_[:path {:d (m7/path [150 -150 :l 0 70 ])
@@ -15179,42 +15273,8 @@ on time?"]
                 :id :rfff1
                 }]
               ]
-
              ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             ]
-
-
-
-
-           #_(grid-on 20 20)
-
-
-
-
-
-
            ]
           )]
 
