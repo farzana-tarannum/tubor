@@ -28,9 +28,12 @@
    #_[m100/airplane]
    ;; airplane .5
    #_[m100/home-work3]
-   #_[m100/home-work19]
+   [m100/home-work19]
    ;; pressure
-   [m100/pressure]
+   #_[m100/pressure]
+
+   #_[m100/energy]
+   #_[m100/frection]
    #_[m100/triangle]
    #_[m100/home-pressure2]
    #_[m100/home-pressure]
@@ -39,13 +42,13 @@
 
 
    ;; spring force
-   ;; [p11/template]
+    #_[p11/template]
    ;; chemistry
    ;; [p11/template2]
    ;; frictions
    ;; [m100/template]
    ;; spring force
-   #_[m100/template2]
+    #_[m100/template2]
    ;; trigono
    ;; [m100/template2-1]
    ;; extra
@@ -53,10 +56,10 @@
    ;; taibles
    ;;       [m100/template4]
    ;; physics video
-      #_[m100/template5]
-     #_[mtemp/template1]
+   #_[m100/template5]
+   #_[mtemp/template1]
    ;; robin hood
-      #_[m100/home-work]
+   #_[m100/home-work]
    ;; momentum math
    ;; [m100/home-work2]
    ;; velocity
@@ -64,7 +67,7 @@
    ;; pyramid
    ;;   [m100/home-work5]
    ;; garden math
-   ;;   [m100/home-work7]
+   #_[m100/home-work7]
    ;; quad algo
 ;;        [m100/home-work7-1]
    ;; solving linear equation
@@ -74,12 +77,12 @@
 
    #_[m100/banner-qd]
 
-   #_[m100/banner-factor-identities]
+   #_[m100/banner-factor-identities ]
 
    ;; pyramid
    ;;   [m100/home-work10]
    ;; boxes
-   ;;   [m100/home-work11]
+     ;; [m100/home-work11]
    ;; accelaration
    ;;     [m100/home-work12]
    ;; v + u at
@@ -104,7 +107,7 @@
 
 (defn template3 []
   [:div
-   [py100/t2]
+   [py100/t3]
    #_[py100/template]
 
    ] )
@@ -116,6 +119,7 @@
    ;; alkane
    [m100/home-work16]
    ;; distillation
+   [m100/chem-pop2]
    [m100/home-work22]
    ;; hcl + haolh
    [m100/home-work9]

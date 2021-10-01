@@ -559,24 +559,241 @@ The pipelined version also modeled at RTL level."]
                            (.focus)))))
 
 
-(defn t2 []
-  [:div {:style {:height "100%"
-                 :width "100%"
-                 :display :grid
-                 :grid-template-columns "200vh"
-                 :grid-template-rows "100vw"}
-         }
-   [:div {:style {:z-index 1
-                  :width "100vw"
-                  :height "200vh"
-                  :display :flex
-                  :justify-content :center
-                  :align-items :center
-                  :grid-row "1/1"
-                  :grid-column "1/1"}}
-    [file/file-input-background2]]
+#_(-> js/localStorage
+    (.setItem  "bd-cer2"
+               (-> js/localStorage
+                   (.getItem "file-input-img"))))
+#_(.getItem js/localStorage "bd-cer2")
 
-   ])
+#_(* 70 (js/Math.sqrt 2))
+
+
+(defn t3 []
+  [:div {:style {:background (hsl [0 70 70 .1])
+                 :height (m7/np [100 :vh])
+                 :width (m7/np [100 :vw])}}
+   [file/file-input-background3]])
+
+
+(defn t2 []
+  [:div
+   [:div {:style {:height "200vh"
+                  :width "100vw"
+                  :display :flex
+                  :transform (m7/tranfrom [[:rotate ".6deg"]])
+                  :background-image (str "url(" (.getItem js/localStorage "bd-cer2" )   ")")
+                  :justify-content :center
+                  :background-position :center
+                  :background-repeat :no-repeat
+                  :background-size :contain}}
+
+    #_[file/file-input-background2]
+    [:svg
+
+
+     [:g
+      [:path {:d (m7/path [800 800 :l 400 -7 ])
+              :id :bdinfo1
+              :stroke (hsl [0 70 70 1])
+              :stroke-width 0
+              :fill :none}]
+      [:text {}
+       [:textPath {:font-size 24
+                   :startOffset 10
+                   :href :#bdinfo1}
+        [:tspan {:dy -25
+                 :dx 20} "MD GOLAM KIBRIA" ]
+        [:tspan  {:dy 40
+                  :dx -240}
+         "KHAN CHOUDHURY"]]
+
+       ]
+
+      ]
+
+
+     [:g
+      [:path {:d (m7/path [450 800 :l 400 -7 ])
+              :id :bdinfo4
+              :stroke (hsl [0 70 70 1])
+              :stroke-width 0
+              :fill :none}]
+      [:text {}
+       [:textPath {:font-size 24
+                   :startOffset 10
+                   :href :#bdinfo4}
+        [:tspan {:dy -25
+                 :dx 40} "GOLAM KIBRIA" ]
+        [:tspan  {:dy 40
+                  :dx -240}
+         "KHAN CHOUDHURY"]]
+
+       ]
+
+      ]
+
+     [:g
+      [:path {:d (m7/path [1200 800 :l 400 -7 ])
+              :id :bdinfo3
+              :stroke (hsl [0 70 70 1])
+              :stroke-width 0
+              :fill :none}]
+      [:text {}
+       [:textPath {:font-size 15
+                   :startOffset 0
+                   :href :#bdinfo3}
+        [:tspan {:dy -25
+                 :dx 0} "জাতীয় পরিচয় পত্র সাথে ঠিক রেখে নামের আগে" ]
+        [:tspan  {:dy 40
+                  :dx -120}
+         " MD যোগ করা"]]
+
+       ]
+
+      ]
+
+
+     #_[:g
+        [:path {:d (m7/path [480 800 :l 400 -7 ])
+                :id :bdinfo2
+                :stroke (hsl [0 70 70 1])
+                :stroke-width 0
+                :fill :none}]
+        [:text {}
+         [:textPath {:font-size 14
+                     :startOffset 25
+                     :href :#bdinfo2}
+          "GOLAM KIBRIA KHAN CHOUDHURY"]
+
+         ]
+
+        ]
+
+
+     [:g
+      [:path {:d (m7/path [760 430 :l 400 -7 ])
+              :id :bd32
+              :stroke (hsl [0 70 70 1])
+              :stroke-width 0
+              :fill :none}]
+      [:text {}
+       [:textPath {:font-size 30
+                   :startOffset 20
+                   :href :#bd32}
+        "২৪"
+        [:tspan {:dx 25} "০৮"]
+        [:tspan {:dx 25}
+         "২০২১"]]
+
+       ]
+
+      ]
+
+
+
+     [:g
+      [:path {:d (m7/path [711 570 :l 400 -7 ])
+              :id :bd33
+              :stroke (hsl [0 70 70 1])
+              :stroke-width 0
+              :fill :none}]
+      [:text {}
+       [:textPath {:font-size 30
+                   :startOffset 20
+                   :href :#bd33}
+        "০১"
+        [:tspan {:dx 25} "০১"]
+        [:tspan {:dx 25}
+         "১৯৫২"]]
+
+       ]
+
+      ]
+
+     [:g
+      [:path {:d (m7/path [666 520 :l 800 -18 ])
+              :id :bd31
+              :stroke (hsl [0 70 70 1])
+              :stroke-width 0
+              :fill :none}]
+      [:text {}
+       [:textPath {:font-size 36
+                   :letter-spacing 3
+                   :startOffset 100
+                   :href :#bd31}
+        "মোঃ গোলাম কিবরিয়া খান চৌধুরী"]
+       ]
+
+      ]
+
+
+     [:g
+      [:path {:d (m7/path [666 930 :l 800 -18 ])
+              :id :bdack1
+              :stroke (hsl [0 70 70 1])
+              :stroke-width 0
+              :fill :none}]
+      [:text {}
+       [:textPath {:font-size 30
+                   :startOffset 40
+                   :href :#bdack1}
+        "আমি সজ্ঞানে ঘোষণা করিতেছি যে উপরোক্ত তথ্য সত্য"]
+       ]
+
+      ]
+
+
+     [:g
+      [:path {:d (m7/path [600 1030 :l 800 -18 ])
+              :id :bdat1
+              :stroke (hsl [0 70 70 1])
+              :stroke-width 0
+              :fill :none}]
+      [:text {}
+       [:textPath {:font-size 30
+                   :startOffset 40
+                   :href :#bdat1}
+        "জাতীয় পরিচয় পত্র, আবেদনকারীর জাতীয় পরিচয় পত্র"
+        [:tspan {:dx -600
+                 :dy 35} "জন্ম নিবধন সনদ, আবেদনকারীর জন্ম নিবধন সনদ "]]
+       ]
+
+      ]
+
+     [:g
+      [:path {:d (m7/path [1200 1130 :l 800 -18 ])
+              :id :bdsign1
+              :stroke (hsl [0 70 70 1])
+              :stroke-width 0
+              :fill :none}]
+      [:text {}
+       [:textPath {:font-size 30
+                   :startOffset 40
+                   :href :#bdsign1}
+        "আছিয়া আক্তার খাতুন"
+        [:tspan {:dx -200
+                 :dy 35} "সম্পর্ক - স্ত্রী"]]
+       ]
+
+      ]
+
+
+
+
+     [:g
+      [:path {:d (m7/path [680 380 :l 800 -12 ])
+              :id :bd3
+              :stroke (hsl [0 70 70 1])
+              :stroke-width 0
+              :fill :none}]
+      [:text {:letter-spacing 22
+              :font-size 40}
+       [:textPath {:href :#bd3}
+        "১৯৫২২৬৫০৮৯৮০৫০৩৩০"]
+       ]]]
+    ]]
+
+  )
 
 
 

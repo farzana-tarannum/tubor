@@ -6,7 +6,6 @@
    [clojure.test.check.generators :as gen2]
    [clojure.spec.gen.alpha :as gen]
    [clojure.spec.alpha :as s]
-   [math2.file :as file]
    [defun.core :refer [defun fun]]
    [moment]))
 
@@ -379,6 +378,14 @@
 (def sami-colon (fn [p] (str/join " ; " p)))
 (def coma (fn [p] (str/join " , " p)))
 (def not-space (fn [p] (str/join "" p)))
+
+
+(def np (fn [p]
+          (not-space
+           (map
+            (fn [aa]
+              (if (keyword? aa) (name aa) aa))
+            p))))
 
 (defn wrap [a]
   (str "(" a  ")"))
