@@ -24,25 +24,28 @@
 
 (defn template []
   [:div
-   #_[m100/map-asia]
-   #_[m100/airplane]
+
+   ;;[m100/map-asia]
+   [m100/airplane]
    ;; airplane .5
    #_[m100/home-work3]
-   [m100/home-work19]
+   #_[m100/home-work19]
    ;; pressure
    #_[m100/pressure]
+
+   #_[m100/pressure2]
 
    #_[m100/energy]
    #_[m100/frection]
    #_[m100/triangle]
    #_[m100/home-pressure2]
    #_[m100/home-pressure]
-
    #_[m100/home-planets]
+   #_[m100/home-planets-banners]
 
 
    ;; spring force
-    #_[p11/template]
+   #_[p11/template]
    ;; chemistry
    ;; [p11/template2]
    ;; frictions
@@ -50,13 +53,13 @@
    ;; spring force
     #_[m100/template2]
    ;; trigono
-   ;; [m100/template2-1]
+   #_[m100/template2-1]
    ;; extra
    ;; [m100/template3]
    ;; taibles
    ;;       [m100/template4]
    ;; physics video
-   #_[m100/template5]
+  #_[m100/template5]
    #_[mtemp/template1]
    ;; robin hood
    #_[m100/home-work]
@@ -107,7 +110,11 @@
 
 (defn template3 []
   [:div
-   [py100/t3]
+   [py100/t2]
+   [m100/map-family]
+   [m100/map-family3]
+   [m100/map-family2]
+
    #_[py100/template]
 
    ] )
@@ -117,6 +124,7 @@
 (defn chemistry []
   [:div
    ;; alkane
+   [m100/chem-mole]
    [m100/home-work16]
    ;; distillation
    [m100/chem-pop2]
@@ -131,7 +139,7 @@
 
 (defn render-simple []
   (rdom/render
-   (template)
+   (chemistry)
    (js/document.getElementById "app")
    functional-compiler))
 

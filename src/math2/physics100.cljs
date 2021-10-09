@@ -572,7 +572,7 @@ The pipelined version also modeled at RTL level."]
   [:div {:style {:background (hsl [0 70 70 .1])
                  :height (m7/np [100 :vh])
                  :width (m7/np [100 :vw])}}
-   [file/file-input-background3]])
+   [file/file-input-background]])
 
 
 (defn t2 []

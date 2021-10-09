@@ -172,6 +172,9 @@
                       file
                       (fn [data]
                         (do
+                          (js/console.log  (str
+                                            "file-input-img"
+                                            "-bio" n))
                           (.setItem js/localStorage
                                     (str
                                      "file-input-img"
