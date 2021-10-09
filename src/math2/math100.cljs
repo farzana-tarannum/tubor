@@ -13810,12 +13810,13 @@ on time?"]
           )]
 
 
-       ])))
+      ])))
 
 
 
 (defn chem-mole []
   (let [[slider get-slider] (react/useState 0)
+        dd '☐
         f (fn [n] (/ 1 n))
         tt 'θ
         dx [1 0  0 1 -1  0 0 -1 ]
@@ -13862,11 +13863,33 @@ on time?"]
 
 
        [:div {:style (m7/css
-                      [[3 7 4 15 :center :center 4.5 :rem :column]
+                      [[3 7 10 8 :center :center 4.5 :rem :column]
                        [1 70 90 .01] []
                        {:gap "1rem"
                         :color (hsl [3 10 80 1])
                         :z-index 2}])}
+
+        #_[m7/mx `[= ~(symbol (str "sin" (name tt))) [op r]]]
+
+
+        #_[m7/mx `[= ~(symbol (str "cos" (name tt))) [adj r]]]
+
+
+
+        #_[m7/m '[= [* 3 28 ]
+                op]]
+
+
+        [m7/mx `[= [* 3 30] op]]
+
+
+        [m7/mx `[= [* 3 30] ~dd]]
+
+
+
+        #_[m7/mx `[= [1 2] [op 140]]]
+
+
 
         #_[m7/m '[= [2 9] [- [[* 2 3] [* 3 3]] [4 [* 3 3]] ]]]
 
@@ -13908,13 +13931,13 @@ on time?"]
 
            (flames)
 
-           [:pattern {:id (name :star)
+           [:pattern {:id (name :star5)
                       :viewBox (space [0 0 10 10])
                       :width "10%"
                       :height "10%"}
             [:circle {:cx 5
                       :cy 5
-                      :r 4
+                      :r 2
                       :fill (hsl [0 70 70 1])
                       }]]
 
@@ -14025,17 +14048,30 @@ on time?"]
 
 
 
-            [:circle {:r 120
+
+
+
+
+            [:circle {:r 140
                       :cx 0
                       :cy 0
                       :filter (m7/url "flames")
                       :fill (m7/url (name :lg2))}]
 
-            #_[:circle {:r 250
+            [:circle {:r 140
                       :cx 0
                       :cy 0
                       :filter (m7/url "flames")
-                      :fill (m7/url (name :lg2))}]
+                      :fill (m7/url (name :star5))}]
+
+
+
+            [:circle {:r 350
+                      :cx 0
+                      :cy 0
+                      :stroke  (hsl [0 70 70 1])
+                      :stroke-width .5
+                      :fill :none}]
 
 
 
@@ -14052,6 +14088,9 @@ on time?"]
                       :stroke (hsl [3 70 70 1])
                       :stroke-width .5
                       :fill (m7/url (name :lg2))}
+
+
+
 
              [:animateTransform {
                                  :attributeName :transform
@@ -14084,6 +14123,82 @@ on time?"]
 
 
 
+
+            [:circle {:r 2
+                      :cx 0
+                      :cy 0
+                      :fill (hsl [1 70 70 1])}]
+
+
+            [:path {:d (m7/path [0 0 :l 140 0
+                                 (ve (* 140 (js/Math.cos (/ js/Math.PI 3)))) 0
+
+                                 0  (ve (* 140 (js/Math.sin (/ js/Math.PI 3))))
+                                 ])
+
+                    :id :tri22
+                    :stroke (hsl [5 70 70 1])
+                    :stroke-width 3
+                    :fill (hsl [5 70 70 .5])}]
+
+
+            [:path {:d (m7/path [0 0 :l 140 0 :a 140 140 0 false false
+                                 (ve (* 140 (js/Math.cos (/ js/Math.PI 3))))
+                                 (ve (* 140 (js/Math.sin (/ js/Math.PI 3))))
+                                 ])
+
+
+                    :stroke (hsl [3 70 70 1])
+                    :transform (m7/tranfrom [[:scale [.4 .4]]])
+                    :stroke-width 3
+                    :fill (hsl [3 70 70 .5])}]
+
+
+            [:path {:d (m7/path [0 0 :l 140 0 ])
+                    :id :rrr2
+                    :transform (m7/tranfrom [[:rotate -60]])
+                    :stroke (hsl [5 70 70 1])
+                    :stroke-width 3}]
+
+
+
+
+            [:text
+             [:textPath {:href :#rrr2
+                         :font-size 40
+                         :startOffset "30%"}
+              "r"]
+
+
+             ]
+
+            [:text
+             [:textPath {:href :#tri22
+                         :font-size 15
+                         :startOffset "70%"}
+              "op"]
+
+
+             ]
+
+            [:text {:x 30
+                    :y 0
+                    :dy 15
+                    :font-size 15}
+
+             "adj"
+
+             ]
+
+
+
+
+            [:text {:x 0
+                    :style {:font-size 30}
+                    :dy -10
+                    :dx 23
+                    :y 0}
+             (name tt)]
 
 
             [:circle {:r 580

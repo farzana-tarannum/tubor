@@ -26,7 +26,7 @@
   [:div
 
    ;;[m100/map-asia]
-   [m100/airplane]
+   #_[m100/airplane]
    ;; airplane .5
    #_[m100/home-work3]
    #_[m100/home-work19]
@@ -114,7 +114,6 @@
    [m100/map-family]
    [m100/map-family3]
    [m100/map-family2]
-
    #_[py100/template]
 
    ] )
