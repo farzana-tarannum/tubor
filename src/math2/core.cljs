@@ -26,7 +26,7 @@
   [:div
 
    ;;[m100/map-asia]
-   #_[m100/airplane]
+   [m100/airplane]
    ;; airplane .5
    #_[m100/home-work3]
    #_[m100/home-work19]
@@ -110,11 +110,11 @@
 
 (defn template3 []
   [:div
-   [py100/t2]
+   #_[py100/t2]
    [m100/map-family]
    [m100/map-family3]
    [m100/map-family2]
-   #_[py100/template]
+   [py100/template]
 
    ] )
 
@@ -123,15 +123,17 @@
 (defn chemistry []
   [:div
    ;; alkane
-   [m100/chem-mole]
-   [m100/home-work16]
+   #_[m100/chem-mole]
+
+   [m100/home-planets]
+   #_[m100/home-work16]
    ;; distillation
-   [m100/chem-pop2]
-   [m100/home-work22]
+   #_[m100/chem-pop2]
+   #_[m100/home-work22]
    ;; hcl + haolh
-   [m100/home-work9]
+   #_[m100/home-work9]
    ;; distillation2
-   [m100/home-work20]
+   #_[m100/home-work20]
 
    ] )
 
