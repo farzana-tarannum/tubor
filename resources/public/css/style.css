@@ -13,9 +13,25 @@
   font-display: swap;
 }
 
+
+@font-face {
+  font-family: "Roboto Flex";
+  src: url("https://pixelambacht.nl/remote/RobotoFlex[slnt,wdth,wght,opsz].woff2")
+       format("woff2 supports variations"),
+       url("https://pixelambacht.nl/remote/RobotoFlex[slnt,wdth,wght,opsz].woff2")
+          format("woff2-variations");
+  font-weight: 100 1000;
+  font-stretch: 25% 151%;
+}
+
+
+
+
+
+
 body {
     box-sizing: border-box;
-    font: 4em "Amazonia VAR", Georgia, serif, Sans-Serif, DejaVu, Droid;
+    font: 4em "Amazonia VAR","Roboto Flex"   Georgia, serif, Sans-Serif, DejaVu, Droid;
     margin: 0;
 }
 

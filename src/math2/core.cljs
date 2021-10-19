@@ -41,7 +41,7 @@
    #_[m100/home-pressure2]
    #_[m100/home-pressure]
    #_[m100/home-planets]
-   #_[m100/home-planets-banners]
+
 
 
    ;; spring force
@@ -59,7 +59,7 @@
    ;; taibles
    ;;       [m100/template4]
    ;; physics video
-  #_[m100/template5]
+   #_[m100/template5]
    #_[mtemp/template1]
    ;; robin hood
    #_[m100/home-work]
@@ -110,11 +110,14 @@
 
 (defn template3 []
   [:div
+   [m100/home-planets-banners]
+   [m100/home-work19]
    #_[py100/t2]
-   [m100/map-family]
-   [m100/map-family3]
-   [m100/map-family2]
-   [py100/template]
+   #_[m100/map-family]
+   #_[m100/map-family3]
+   #_[m100/map-family2]
+   #_[py100/template2]
+   #_[py100/template]
 
    ] )
 
@@ -123,9 +126,12 @@
 (defn chemistry []
   [:div
    ;; alkane
-   #_[m100/chem-mole]
 
-   [m100/home-planets]
+   #_[m100/chem-rate]
+   #_[m100/chem-pop2]
+   [m100/chem-mole]
+
+   #_[m100/home-planets]
    #_[m100/home-work16]
    ;; distillation
    #_[m100/chem-pop2]

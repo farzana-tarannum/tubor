@@ -7,14 +7,152 @@
    [math2.math7 :as m7 :refer
     [grid hsl css space size path ve sec]]))
 
+(defn airplane2 [t]
+  (let [y 40]
+    [:g {:transform (m7/tranfrom t)}
+
+                [:path {:d (m7/path [0 0 :l 0 (ve y) 240 0 0 (* 2 y) -290 0
+                                     0 (* 2 (ve y))
+                                     50 0])
+                        :stroke-width 1
+                        :stroke (hsl [4 70 70 1])
+                        :fill (hsl [4.2 80 70 1])}]
+
+
+                [:g {:transform (m7/tranfrom [[:translate [-100 0]]])}
+                 [:path {:d (m7/path [0 0 :l 50 0 0 -40 :c -60 15 -80 20   -100 40
+                                      ])
+                         :stroke-width 1
+                         :stroke (hsl [0 70 70 1])
+                         :fill (hsl [4 70 70 1])}]
+
+                 [:path {:d (m7/path [0 0 :l 50 0 0 -40 :c -60 15 -80 20   -100 40
+                                      ])
+                         :transform (m7/tranfrom [[:scale [1 -1]]])
+                         :stroke-width 1
+                         :stroke (hsl [0 70 70 1])
+                         :fill (hsl [4 70 70 1])
+                         }]
+
+                 ]
+
+                #_{:transform (m7/tranfrom [[:translate [-140 0]]
+                                            [:skewX -140]
+                                            [:scale [1.3 .4]]
+                                            ])}
+
+                [:g {:transform (m7/tranfrom [[:translate [-140 0]]
+
+                                              ])}
+                 [:path {:d (m7/path [0 0 :l  20 0 0 -200 -40 0 0 200 20 0
+                                      ])
+                         :transform (m7/tranfrom [
+                                                  [:skewX -140]
+                                                  [:scale [1 0.35]]
+                                                  ])
+                         :stroke-width 1
+                         :stroke (hsl [0 70 70 1])
+                         :fill (hsl [4 70 70 1])}]
+
+                 [:path {:d (m7/path [0 0 :l  20 0 0 -200 -40 0 0 200 20 0])
+                         :transform (m7/tranfrom [[:skewX 140]
+                                                  [:scale [1 -0.35]]])
+                         :stroke-width 1
+                         :stroke (hsl [0 70 70 1])
+                         :fill (hsl [4 70 70 1])}]
+
+
+
+
+                 ]
+
+
+                [:g
+                 [:g {:transform (m7/tranfrom [[:translate [120 (ve y)]]
+                                               [:skewX -140]])}
+                  [:path {:d (m7/path [0 0 :l  20 0 0 -200 -40 0 0 100 -60 100
+                                       ])
+                          :stroke-width 1
+                          :stroke (hsl [3 70 70 1])
+                          :fill (hsl [4 70 70 1])}]]
+                 [:g {:transform (m7/tranfrom [[:translate [120 y]]
+                                               [:scale [1 -1]]
+                                               [:skewX -140]
+                                               ])}
+                  [:path {:d (m7/path [0 0 :l  20 0 0 -200 -40 0 0 100 -60 100
+                                       ])
+                          :stroke-width 1
+                          :stroke (hsl [3 70 70 1])
+                          :fill (hsl [4 70 70 1])}]]
+                 ]
+
+
+
+                [:g {:transform (m7/tranfrom [[:translate [240 0]]])}
+                 [:path {:d (m7/path [0 0 :l 0 (ve y)
+                                      :c 30 -5 100 0  120 y])
+                         :stroke-width 1
+                         :stroke (hsl [0 70 70 1])
+                         :fill (hsl [4 70 70 1])}]
+                 [:path {:d (m7/path [0 0 :l 0 (ve y)
+                                      :c 30 -5 100 0  120 y])
+                         :stroke-width 1
+                         :stroke (hsl [0 70 70 1])
+                         :transform (m7/tranfrom [[:scale [1 -1]]])
+                         :fill (hsl [4 70 70 1])}]]
+
+
+                ]))
+
 
 (def f
   (fn [m n] (/ m n)))
 (def square [1 0 0 1 (ve 1) 0 0 (ve 1)])
 
 
+
+(def fontf2
+  (comp
+   m7/coma
+   (partial map
+            (comp
+             m7/space
+             (juxt (comp
+                    m7/wrap-sami-colon
+                    name
+                    first) second)))
+   vec))
+
+(def var-vf2
+  {:wght 581
+   :opsz 10
+   :wdth 100
+   :PWDT 402
+   :PWGT 124
+   :GRAD 105
+   :XOPQ 96
+   :XTRA 402
+   :YOPQ 67
+   :YTUC 860
+   :XTCH 1000
+   :YTAS 794
+   :YTRA 1000
+   :YTLC 500
+   :YTSE 18
+   :YTCH 1000
+   :YTDE 250})
+
+
+
+
+
+
+
 (defn fix [fr n]
-  (.toFixed fr n))
+  (js/parseFloat (.toFixed fr n)))
+
+(defn fixint [fr n]
+  (js/parseInt (.toFixed fr n)))
 
 (comment
   (fix 9.983 2))
@@ -22,30 +160,27 @@
 (defn alkine [n1]
   [:g {:transform (m7/tranfrom [[:scale [.7 .7]]
                                          [:rotate 10]])}
+   (let [n n1]
+     [:g
 
+      [:foreignObject {:x 20
+                       :y -150
+                       :height 50
+                       :width 450
+                       :style {:font-size "1.7rem"}}
+       [m7/m [:m [:k 'C n] [:k 'H ['+ ['* 2 n] 2]]]]
 
+       #_[m7/m ['= ['+ [:m [:k 'C n] [:k 'H  (+ (* 2 n) 2)]] [:m 2[:k 'O 2]] ]
+                ['+ [:m 'C [:k 'O 2]] [:m 2 [:k 'H 2] 'O]]
+                ]]
+       ]
 
-           (let [n n1]
-              [:g
-
-               [:foreignObject {:x 20
-                                :y -150
-                                :height 50
-                                :width 450
-                                :style {:font-size "1.7rem"}}
-                [m7/m [:m [:k 'C n] [:k 'H ['+ ['* 2 n] 2]]]]
-
-                #_[m7/m ['= ['+ [:m [:k 'C n] [:k 'H  (+ (* 2 n) 2)]] [:m 2[:k 'O 2]] ]
-                       ['+ [:m 'C [:k 'O 2]] [:m 2 [:k 'H 2] 'O]]
-                       ]]
-                ]
-
-               [:text {:x 250
-                       :y -220
-                       :style {:font-size "2rem"}}
-                (nth ["methane" "ethane" "propane" "butane" "pentane" "hexane" "heptane" "octane"
-                      9 10 11 12 13 14 15 16 17 18 19 20]
-                     (- n 1))]
+      [:text {:x 250
+              :y -220
+              :style {:font-size "2rem"}}
+       (nth ["methane" "ethane" "propane" "butane" "pentane" "hexane" "heptane" "octane"
+             9 10 11 12 13 14 15 16 17 18 19 20]
+            (- n 1))]
                (map
                 (fn [i j]
                   [:g
@@ -5630,7 +5765,7 @@ there are three forces on it."]
         sq (fn [n]
                 (comp
                  (partial map (partial * n))))
-        hidden true
+        hidden false
         [ax ay av sma] [6 6 (not (not true)) 1]
         [bx by bv smb] [7 7 (not (not true)) 3]
         ]
@@ -5641,11 +5776,9 @@ there are three forces on it."]
                    {:background-color (hsl [1 70 70 1])
                     :gap ".1rem"})}
 
-
-
-
      [:div {:style (m7/css
-                    [[1 12 10 13  :center :center  2 :rem :column]
+                    [[1 12 10 13
+                      :center :center 2 :rem :column]
                      [(* 5 .2) 70 (+ 50 (* 5 5))  .1]
                      [] {:gap ".1rem"
                          :z-index 4}])}
@@ -5739,11 +5872,14 @@ there are three forces on it."]
 
      [:div {:style
             (m7/css
-             [[2 10 (+ 2 (* 0 2)) 12  :center :center  2.2 :rem :column]
+             [[2 10 (+ 2 (* 0 2)) 12  :center :center  3 :rem :column]
               [(* 5 .2) 70 (+ 50 (* 5 5))  .1]
               []
               {:gap ".1rem"
                :z-index 4}])}
+
+
+
 
       #_[m7/m '[= [- [:p a 2] [:p b 2]]
                 [:m [:b [+ a 1]]
@@ -5768,8 +5904,7 @@ there are three forces on it."]
 
 
 
-
-      (let [a sma
+      #_(let [a sma
             b (ve smb)
             aa ax
             bb bx
@@ -5787,23 +5922,26 @@ there are three forces on it."]
                           ]
                    ~(* 2 aa  a bb b)
                    ]]]])
+
+
       (if hidden
-        (let [a sma
-              b (ve smb)
-              aa ax
-              bb bx
-              hidden false
-              sign '+
-              msign '*
-              ]
-          [:div {:style {:font-size "1.8rem"}}
-           [m7/mx `[=
-                    ~(if hidden '_
-                         `[:p
-                           [:b [~sign [~msign ~aa ~a] [~msign ~bb ~b] ]] 2])
-                    [~sign [~sign [:p [:b [~msign ~aa  ~a]] 2]
-                            [:p [:b [~msign ~bb ~b]] 2]]
-                     [~msign 2  [:b [~msign ~aa ~a]] [:b [~msign ~bb ~b]]]]]]]))
+          (let [a sma
+                b (ve smb)
+                aa ax
+                bb bx
+                hidden false
+                sign '+
+                msign '*
+                ]
+            [:div {:style {:font-size "1.8rem"}}
+             [m7/mx `[=
+                      ~(if hidden '_
+                           `[:p
+                             [:b [~sign [~msign ~aa ~a] [~msign ~bb ~b] ]] 2])
+                      [~sign [~sign [:p [:b [~msign ~aa  ~a]] 2]
+                              [:p [:b [~msign ~bb ~b]] 2]]
+                       [~msign 2  [:b [~msign ~aa ~a]] [:b [~msign ~bb ~b]]]]]]]
+            ))
 
       (if hidden
         (let [a 'a
@@ -5821,6 +5959,29 @@ there are three forces on it."]
                    [~sign [~sign [:p [:b [~msign ~aa  ~a]] 2]
                            [:p [:b [~msign ~bb ~b]] 2]]
                     [~msign 2  [:b [~msign ~aa ~a]] [:b [~msign ~bb ~b]]]]]]))
+
+
+      (if true
+        (let [a 'a
+              b 'b
+              aa 2
+              bb 5
+              hidden true
+              sign '+
+              msign :m
+              ]
+          [m7/mx `[=
+                   ~(if hidden
+                       `[:p
+                        [:b
+                         [~sign
+                          [~msign ~aa ~a]
+                          [~msign ~bb ~b] ]] 2]
+                       '_)
+                   [~sign [+ [:m ~(* aa aa)  [:p ~a 2]]
+                           [:p [:b [~msign ~bb ~b]] 2]]
+                    [~msign 2  [:b [~msign ~aa ~a]]
+                     [:b [~msign ~bb ~b]]]]]]))
 
 
       #_(let [a sma
@@ -9319,7 +9480,7 @@ on time?"]
                                   (sf 9 7) (sf 14 36)
                                   (sf 14 48) (sf 14 57)
                                   (sf 21 7) (sf 22 37) (sf 23 30) (sf 25 0)])
-          ts (into ["T (c)"] [0 0 1 2 3 4 18 49 87 88 89 99 100 102 102])
+          ts (into [[m7/m '[:m V [:p cm 3]]]] [0 0 1 2 3 4 18 49 87 88 89 99 100 102 102])
           vms (into ["v (m/s)"] [ 0 0])
           vb (fn [z]
                (nth [
@@ -9829,16 +9990,17 @@ on time?"]
                               (comp
                                (partial map (partial * n))))
         [point set-point] (react/useState false)]
-    (let [ ax-dx    -40
-          ax-dy    0
+    (let [ ax-dx 40
+          ax-dy    (* 20 10)
           m          0
-          d          4
+          d          0
           vb       (fn [z]
-                     (nth [[0 -200  600 600]
+                     (nth [[-250 -450  600 600]
                            [0 -25  50 50]
-                           [-100 -150  200 200]
-                           [-100 -85  150 155]
+                           [-25 -40  50 50]
+                           [-20 -65  300 70]
                            [-200 -200  800 200]
+                           [-400 -200  800 200]
                            [40 120  80 80]
                            [0 -40  100 100]
                            [75 -175  150 150]
@@ -9846,26 +10008,27 @@ on time?"]
                            [-400 -350  800 400]
                            [-250 -120  800 400]
                            ] z))
-          fix true
-          viewbox  (vb 3)
+          fix false
+          viewbox  (vb 2)
           viewbox2 (vb 3)
-          rn (range -10   22 1)
+          rn (range 0 200 5)
           scales [1 -1]
           dfl [:div {:style
                      (m7/css
-                      [[4 4 3 10
+                      [[4 2 3 4
                         :center :center  4 :rem :column]
-                       [3.5 70 (+ 50 (* 5 5))  .7]
+                       [3.5 70 75 .5]
                        []
                        {:gap     ".1rem"
                         :z-index 10}])}
-               #_[m7/m '[= y [:p x 2]]]
+               [m7/m '[= y [:m .22 [:p t 2]]]]
+
                #_[m7/m '[= y [- [:p x 2] [:p d 2]]]]
 
 
                #_[m7/m '[= 0 [:m [:b (- x 2)] [:b  (+ x 2)]]]]
 
-               [m7/m '[= y [- [:p x 2] [:p 4 2]]]]
+               #_[m7/m '[= y [- [:p x 2] [:p 4 2]]]]
 
                #_[m7/m '[= y [- [:p x 2] [:p 1 2]]]]
 
@@ -9876,28 +10039,45 @@ on time?"]
 
                #_[m7/m '[= y [:p 7 2]]]
                #_[m7/m '[= x
-                         [-  d]]]
+                         [-  d]]]]
 
 
 
 
-               ]
           extra [:g
 
                  #_[line3 ]
 
+
                  [:circle {:cx 0
-                           :cy (* 2 d d)
-                           :fill (hsl [5 60 60 .5] )
-                           :r 0}
+                           :cy 0
+                           :fill (hsl [5 60 60 1] )
+                           :r 1}
                   [:animate {:attributeName :r
-                             :from 0
-                             :to 7
-                             :dur (m7/not-space [1 "s"])
+                             :from 1
+                             :to .5
+                             :dur (m7/not-space [3 "s"])
                              :repeatCount :indefinite}]
                   ]
 
-                 (map
+
+
+
+
+
+
+                 #_[:circle {:cx 0
+                             :cy (* 2 d d)
+                             :fill (hsl [5 60 60 .5] )
+                             :r 2}
+                    [:animate {:attributeName :r
+                               :from 0
+                               :to 3
+                               :dur (m7/not-space [3 "s"])
+                               :repeatCount :indefinite}]
+                    ]
+
+                 #_(map
                   (fn [ne]
                     [:circle {:cx (* ne (* 20 d))
                               :cy (ve (* 2 0))
@@ -9913,8 +10093,7 @@ on time?"]
 
 
                  [:path {:d (m7/path [0 0 :l
-                                      0 (+ -3  (* 2 (* d d)))]
-                                     )
+                                      0 (+ -3  (* 2 (* d d)))])
                          :fill :none
                          :stroke-width 1
 
@@ -9995,7 +10174,7 @@ on time?"]
 
            d])
         (range 0 24)
-        (into ["x"] rn)
+        (into ["t"] rn)
 
         )
 
@@ -10018,10 +10197,10 @@ on time?"]
                 "y"
                 ]]
               (map (fn [x]
-                     [:div {:style {:font-size "2rem"}}
+                     [:div {:style {:font-size "1.2rem"}}
                       (if fix
-                        (- (* (- x m) (- x m)) (* d d))
-                        (.toFixed (- (* (- x m) (- x m)) (* d d)) 2))
+                        (* 0.22 (- (* (- x m) (- x m)) (* d d)))
+                        (.toFixed (* 0.22 (- (* (- x m) (- x m)) (* d d))) 1))
 
 
                       ])
@@ -10287,9 +10466,9 @@ on time?"]
 
                 (map
                  (fn [x]
-                   (ve (- (* 2 (* (- x m) (- x m)))
-                          (* 2 d d)
-                          )))
+                   (ve (* .22 (- (* 2 (* (- x m) (- x m)))
+                                 (* 2 d d)
+                                 ))))
 
 
 
@@ -10297,6 +10476,360 @@ on time?"]
 
 
                  (range -10 20 .25)))
+
+           extra
+           ])
+
+
+        ]
+
+
+       ])))
+
+
+(defn chem-rate []
+  (let [[slider set-slider] (react/useState false)
+        animate-ref (react/useRef)
+        animate-ref2 (react/useRef)
+        font-ref (react/useRef)
+        _ (react/useEffect
+           (fn []
+             (if (and animate-ref (-> animate-ref .-current))
+               (-> animate-ref
+                   .-current
+                   (.animate
+                    (clj->js
+                     [{
+                       :background (hsl [.5 70 70 .1])
+                       :transform (m7/tranfrom [[:rotate "10deg"]])
+                       }
+                      {:background (hsl [.9 70 70 .7])
+                       :transform (m7/tranfrom [[:rotate "-10deg"]])
+
+                       }
+
+                      {:background (hsl [2 70 70 .9])
+                       :transform (m7/tranfrom [[:scale .9]])
+                       :offset (/ 9 14)}
+
+                      {:background (hsl [3.5 70 70 .7])
+                       :transform (m7/tranfrom [[:scale 1]])
+                       }])
+                    (clj->js
+                     {:duration 2000
+                      :iterations 1})
+                    )))
+             (js/console.log "3")
+             ))
+        _ (react/useEffect
+           (fn []
+             (if (and animate-ref2 (-> animate-ref .-current))
+               (-> animate-ref2
+                   .-current
+                   (.animate
+                    (clj->js
+                     [{
+                       :background (hsl [.5 70 70 .1])
+                       :transform (m7/tranfrom [[:rotate "10deg"]])
+                       }
+                      {:background (hsl [.9 70 70 .7])
+                       :transform (m7/tranfrom [[:rotate "-10deg"]])
+
+                       }
+
+                      {:background (hsl [2 70 70 .9])
+                       :transform (m7/tranfrom [[:scale .9]])
+                       :offset (/ 9 14)}
+
+                      {:background (hsl [3.5 70 70 .7])
+                       :transform (m7/tranfrom [[:scale 1]])
+                       }])
+                    (clj->js
+                     {:duration 2000
+                      :iterations 1})
+                    )))
+             (js/console.log "1")
+             ))
+
+
+        _ (react/useEffect
+           (fn []
+             (if (and font-ref (-> font-ref .-current))
+               (-> font-ref
+                   .-current
+                   (.animate
+                    (clj->js
+                     [{
+                       :background (hsl [.5 70 70 .1])
+                       :transform (m7/tranfrom [[:rotate "10deg"]])
+                       }
+                      {:background (hsl [.9 70 70 .7])
+                       :transform (m7/tranfrom [[:rotate "-10deg"]])
+
+                       }
+
+                      { :background (hsl [2 70 70 .9])
+                       :transform (m7/tranfrom [[:scale .1]])
+                       :offset (/ 9 14)}
+
+                      {
+                       :background (hsl [3.5 70 70 .7])
+                       :transform (m7/tranfrom [[:scale 1]])
+                       }])
+                    (clj->js
+                     {:duration 12000
+                      :iterations 1})
+                    )))
+             (js/console.log "")
+             ))
+        f                   (fn [n] (/ 1 n))
+        tt                  'θ
+        dx                  [1 0  0 1 -1  0 0 -1 ]
+        sq                  (fn [n]
+                              (comp
+                               (partial map (partial * n))))
+        [point set-point] (react/useState false)]
+    (let [ ax-dx 40
+          ax-dy    (* 20 10)
+          m          0
+          d          0
+          vb       (fn [z]
+                     (nth [[-250 -450  600 600]
+                           [0 -25  50 50]
+                           [-25 -40  50 50]
+                           [-20 -65  300 70]
+                           [-200 -200  800 200]
+                           [-400 -200  800 200]
+                           [40 120  80 80]
+                           [0 -40  100 100]
+                           [75 -175  150 150]
+                           [-20 -20  100 100]
+                           [-400 -350  800 400]
+                           [-250 -120  800 400]
+                           ] z))
+          fix false
+          viewbox  (vb 3)
+          viewbox2 (vb 3)
+          rn (range 0 0)
+          scales []
+          dfl [:div {:style
+                     (m7/css
+                      [[4 2 3 19
+                        :center :center  4 :rem :column]
+                       [3.5 70 75 .5]
+                       []
+                       {:gap     ".1rem"
+                        :z-index 10}])}
+
+
+               [m7/m '[= [+ [:m Ca C [:k O 3 ]]
+                          [:m 2 [:m H Cl]]]
+                       [+ [:m Ca  [:k Cl 2 ]]
+                        [:m [:k H 2] O]
+                        [:m C [:k O 2 ]]]
+                       ]]
+               ]
+
+
+
+
+          extra [:g
+
+
+
+
+                 ]
+
+          ]
+      [:div {
+             :style (merge
+                     (grid [100 :vh 100 :vw
+                            (take 24 (repeat [8 :vh]))
+                            (take 24 (repeat [8 :vh]))])
+                     {:background (hsl [1.5 70 70 .9])
+                      :gap              ".1rem"})}
+
+
+       (map
+        (fn [n d]
+          [:div
+           {:style
+            (m7/css
+             [[2 1 (+ 2 (* n 1)) 1  :center :center  2 :rem :column]
+              [(* n .2) 70 (+ 50 (* 1 n))  .7] []
+              {:gap ".1rem"
+               :z-index 4}])}
+
+           d])
+        (range 0 24)
+        (into ["t"] rn)
+
+        )
+
+       (map
+        (fn [n d]
+          [:div
+           {:style
+            (m7/css
+             [[3 1 (+ 2 (* n 1)) 1  :center :center  2 :rem :column]
+              [(* n .2) 70 (+ 50 (* 1 n))  .7]
+              []
+              {:gap ".1rem"
+               :z-index 4}])}
+           d])
+        (range 0 24)
+        (into [[:div {:style {:cursor :pointer
+                              :color (hsl [3 90 90 1])
+                              :font-size "1.2rem"}
+                      :on-click (fn [e]
+                                  (set-slider (not slider))
+                                  (js/console.log "slide r " slider))}
+                #_[m7/m '[= y [:p x 2]]]
+                "V"
+                ]]
+              (map (fn [x]
+                     [:div {:style {:font-size "1.2rem"}}
+                      x])
+                   rn))
+        )
+
+
+       (if slider
+         [:div {:ref animate-ref
+                :style
+                (m7/css
+                 [[4 6 3 7
+                   :center :center  2 :rem :column]
+                  [3.5 70 (+ 50 (* 5 5))  .7]
+                  []
+                  {:gap     ".1rem"
+                   :z-index 10}])}
+
+          "A group of students are studying the effect of surface area on rate on reaction. They use marble chips (calcium carbonate) reacting the dilute hydrochloric acid."
+
+          ]
+
+         dfl)
+       (if slider
+         [:div {:ref animate-ref2
+                :style
+                  (m7/css
+                   [[4 7 14 12
+                     :center :center  4 :rem :column]
+                    [1 70 (+ 50 (* 5 5))  .7]
+                    []
+                    {:gap     ".1rem"
+                     :z-index 10}])}
+
+          [:div "What did the students investigating the reaction have to do to make it a fair test?"]
+
+
+            ]
+           [:div ""])
+
+
+       [:div {:style (m7/css
+                      [[2 10 1 24 :center :center 3 :rem]
+                       [1 70 90 1] [] {:gap "1rem"}])}
+        (let []
+          [:svg {:style   {:height "100%"
+                           :width  "100%"}
+                 :viewBox (m7/space
+                           viewbox)}
+
+           [:animate {:attributeName :viewBox
+                      :to            (m7/space viewbox2)
+                      :dur           "4s"
+                      :fill          :freeze}]
+
+           #_(flames)
+
+           #_(grid-on 1 10 ax-dx ax-dy)
+
+
+           [:path {:d (m7/path [0 0 :l (* 5 20)
+                                (ve (* 3 20))])
+                   :stroke (hsl [0 70 70 1])
+                   :stroke-width 1}]
+
+           [:pattern {:id (name :starg)
+                      :viewBox (space [0 0 10 10])
+                      :width "10%"
+                      :height "10%"}
+            [:circle {:cx 5
+                      :cy 5
+                      :r 4
+                      :fill (hsl [0 70 70 1])
+                      }]]
+
+
+
+           [:g {:transform (m7/tranfrom [[:translate [100 20]]])}
+            [:path {:d (m7/path [0 0 :l 50 0
+                                 -30 (ve (* 4 20))
+                                 0 (ve 40)
+                                 -20 0
+                                 ])
+                    :transform (m7/tranfrom [[:scale [.5 .5]]])
+                    :fill :none
+                    :stroke (hsl [4 70 70 1])
+                    :stroke-width 1}]
+
+
+
+            [:path {:d (m7/path [0 0 :l 50 0
+                                 -30 (ve (* 4 20))
+                                 0 (ve 40)
+                                 -20 0
+                                 ])
+                    :transform (m7/tranfrom [[:scale [-0.5 .5]]])
+                    :fill :none
+                    :stroke (hsl [4 70 70 1])
+                    :stroke-width 1}]]
+
+           [:clipPath {:id :ca}
+            [:path
+             {
+              :d (m7/path [0 0 :l 50 0 0 -20 -50 0 0 20])
+              :fill :none
+              :stroke (hsl [3 70 70 1])
+              :stroke-width 1}]]
+
+
+
+
+           [:g {:transform (m7/tranfrom [[:translate [100 20]]])
+                }
+            [:path {:d (m7/path [0 0 :l 50 0
+                                 -30 (ve (* 4 20))
+                                 0 (ve 40)
+                                 -20 0
+                                 ])
+                    :clip-path (m7/url (name :ca))
+                    :transform (m7/tranfrom [[:scale [.5 .5]]])
+                    :fill (m7/url (name :starg))
+                    :stroke (hsl [3 70 70 1])
+                    :stroke-width 1}]
+
+
+
+            [:path {:d (m7/path [0 0 :l 50 0
+                                 -30 (ve (* 4 20))
+                                 0 (ve 40)
+                                 -20 0
+                                 ])
+                    :clip-path (m7/url (name :ca))
+                    :transform (m7/tranfrom [[:scale [-0.5 .5]]])
+                    :fill :none
+                    :stroke (hsl [3 70 70 1])
+                    :stroke-width 1}]]
+
+
+
+
+
+           (line2 0 "y=0")
+
 
            extra
            ])
@@ -12942,9 +13475,6 @@ on time?"]
                        {:gap "1rem"
                         :color (hsl [3 20 30 1])
                         :z-index 2}])}
-
-
-
         #_[:h1 "Electrical motor converts Electrical energy into"
 
          [:span  {:style {:background-color (hsl [1 70 70 1])}} " rotation, that is a from of K.E"]]
@@ -13281,9 +13811,13 @@ on time?"]
 
 
            #_{:transform (m7/tranfrom [[:translate [200 0]]
+
+
                                        [:scale 2]])}
 
-           [:g
+
+           (let [chain 2]
+             [:g
 
 
 
@@ -13291,152 +13825,152 @@ on time?"]
 
 
 
-            #_[:circle {:r 120
-                      :cx 0
-                      :cy 0
-                      :filter (m7/url "flames")
-                      :fill (m7/url (name :lg2))}]
+              #_[:circle {:r 120
+                          :cx 0
+                          :cy 0
+                          :filter (m7/url "flames")
+                          :fill (m7/url (name :lg2))}]
 
-            #_[:circle {:r 250
-                      :cx 0
-                      :cy 0
-                      :filter (m7/url "flames")
-                      :fill (m7/url (name :lg1))}]
-
-
-
-            [:circle {:r 350
-                      :cx 0
-                      :cy 0
-                      :stroke  (hsl [0 70 70 1])
-                      :stroke-width .5
-                      :fill :none}]
-
-
-            #_:fill (m7/url (name :lg2))
-            #_:fill (m7/url (name :star))
-            [:circle {:r 70
-                      :cx 470
-                      :cy 0
-                      :stroke (hsl [3 70 70 1])
-                      :stroke-width .5
-                      :fill (m7/url (name :star2))
-
-                      }
-
-             [:animateTransform {
-                                 :attributeName :transform
-                                 :begin (sec 0)
-                                 :dur (sec 15)
-                                 :type :rotate
-                                 :from 0
-                                 :to 0
-                                 :repeatCount :indefinite
-                                 :fill :freeze}]]
-
-
-               #_[:text {:font-size 23
-                    :x 470
-                    :y 0
-                    :dx -40
-                    :fill (hsl [3 10 10 1])
-                    }
-             #_"1g of H is"
-             "1mol H 1g 6.023x10"
-             [:tspan {:dy -10} 23]
-
-
-             ]
+              #_[:circle {:r 250
+                          :cx 0
+                          :cy 0
+                          :filter (m7/url "flames")
+                          :fill (m7/url (name :lg1))}]
 
 
 
+              [:circle {:r 350
+                        :cx 0
+                        :cy 0
+                        :stroke  (hsl [0 70 70 1])
+                        :stroke-width .5
+                        :fill :none}]
 
 
+              #_:fill (m7/url (name :lg2))
+              #_:fill (m7/url (name :star))
+              [:circle {:r 70
+                        :cx 570
+                        :cy 0
+                        :stroke (hsl [3 70 70 1])
+                        :stroke-width .5
+                        :fill (m7/url (name :star2))
 
-            [:circle {:r 70
-                      :cx 250
-                      :cy 0
-                      :stroke (hsl [3 70 70 1])
-                      :stroke-width .5
-                      :fill (m7/url (name :star))}
+                        }
 
-
-
-
-             ]
-
-            #_[:text {:dx -100
-                    :font-size 20
-                    :x 250
-                    :y 0
-                    :fill (hsl [1 18 27 1])}
-
-             "1mol O 16g   6.023x10"
-             [:tspan {:dy -10} 23]
-
-             #_"16g of O is 6.023x10"
-             ]
+               [:animateTransform {
+                                   :attributeName :transform
+                                   :begin (sec 0)
+                                   :dur (sec 15)
+                                   :type :rotate
+                                   :from 0
+                                   :to 0
+                                   :repeatCount :indefinite
+                                   :fill :freeze}]]
 
 
-            [:circle {:r 250
-                      :cx 0
-                      :cy 0
-                      :stroke  (hsl [1 70 70 1])
-                      :stroke-width .5
-                      :fill :none}]
+              #_[:text {:font-size 23
+                        :x 470
+                        :y 0
+                        :dx -40
+                        :fill (hsl [3 10 10 1])
+                        }
+                 #_"1g of H is"
+                 "1mol H 1g 6.023x10"
+                 [:tspan {:dy -10} 23]
+
+
+                 ]
 
 
 
 
 
-            [:circle {:r 470
-                      :cx 0
-                      :cy 0
-                      :stroke  (hsl [2 70 70 1])
-                      :stroke-width .3
-                      :fill :none}]
 
-            #_[:text {:dx 0
-                    :transform (m7/tranfrom
-                                [[:rotate -15]])
-                    :font-size 20
-                    :x 570
-                    :y 0
-                    :fill (hsl [1 18 27 1])}
-
-             "1 mol H"
-             [:tspan {:dy 10} 2]
-             [:tspan {:dy -10} "O is 18g"]
-             #_[:tspan {:dy -10} 23]
-
-             #_"16g of O is 6.023x10"
-             ]
-
-
-            [:circle {:r 70
-                      :transform (m7/tranfrom
-                                  [[:rotate -15]])
-                      :cx 570
-                      :cy 0
-                      :stroke (hsl [3 70 70 .5])
-                      :stroke-width .5
-                      :fill (m7/url (name :water22))}
+              [:circle {:r 70
+                        :cx 570
+                        :cy 0
+                        :stroke (hsl [3 70 70 1])
+                        :stroke-width .5
+                        :fill (m7/url (name :star))}
 
 
 
 
-             ]
+               ]
+
+              #_[:text {:dx -100
+                        :font-size 20
+                        :x 250
+                        :y 0
+                        :fill (hsl [1 18 27 1])}
+
+                 "1mol O 16g   6.023x10"
+                 [:tspan {:dy -10} 23]
+
+                 #_"16g of O is 6.023x10"
+                 ]
 
 
-            [:circle {:r 580
-                      :cx 0
-                      :cy 0
-                      :stroke  (hsl [2.7 70 70 1])
-                      :stroke-width .3
-                      :fill :none}]
+              [:circle {:r 250
+                        :cx 0
+                        :cy 0
+                        :stroke  (hsl [1 70 70 1])
+                        :stroke-width .5
+                        :fill :none}]
 
 
-            ]
+
+
+
+              [:circle {:r 470
+                        :cx 0
+                        :cy 0
+                        :stroke  (hsl [2 70 70 1])
+                        :stroke-width .3
+                        :fill :none}]
+
+              #_[:text {:dx 0
+                        :transform (m7/tranfrom
+                                    [[:rotate -15]])
+                        :font-size 20
+                        :x 570
+                        :y 0
+                        :fill (hsl [1 18 27 1])}
+
+                 "1 mol H"
+                 [:tspan {:dy 10} 2]
+                 [:tspan {:dy -10} "O is 18g"]
+                 #_[:tspan {:dy -10} 23]
+
+                 #_"16g of O is 6.023x10"
+                 ]
+
+
+              [:circle {:r 70
+                        :transform (m7/tranfrom
+                                    [[:rotate -15]])
+                        :cx 570
+                        :cy 0
+                        :stroke (hsl [3 70 70 .5])
+                        :stroke-width .5
+                        :fill (m7/url (name :water22))}
+
+
+
+
+               ]
+
+
+              [:circle {:r 580
+                        :cx 0
+                        :cy 0
+                        :stroke  (hsl [2.7 70 70 1])
+                        :stroke-width .3
+                        :fill :none}]
+
+
+              ])
 
 
 
@@ -13453,8 +13987,17 @@ on time?"]
 
 
            (let [d 50
-                 e (- d 20)]
-             [:g {:transform (m7/tranfrom [[:scale 1.5]])}
+                 chain 8
+                 space-h (map
+                          (fn [i]
+                            (+ 1.5 (* 2 i)))
+                          (range 0 chain))
+                 rr (range 1 (+ chain 1))
+
+                 chem `["H"  ~@(repeat chain "c" )  "OH" ]
+                 e (- d 20)
+                 ]
+             [:g {:transform (m7/tranfrom [[:scale .8]])}
 
               #_[:path {:d (m7/path [(ve e) (ve 10) :l (* e 2) 0])
                         :stroke (hsl [1 23 23 1])
@@ -13468,11 +14011,17 @@ on time?"]
                          :dy 17
                          :y 0}
                   c])
-               (range 0 6)
-               ["H" "C"  "C" "C" "H"])
+               (range 0 (* 2 chain))
+               chem)
 
 
-              [:path {:d (m7/path [0 0  :l (* (+ 3 1) 2 d) 0])
+              [:text {:style {:font-family "'Amazonia VAR'"}
+                      :x 0
+                      :y -80}
+               "buthanol"]
+
+
+              [:path {:d (m7/path [0 0  :l (* (+ chain 1) 2 d) 0])
                       :stroke (hsl [1 23 23 1])
                       :stroke-dasharray (m7/space [(* d 1) (* d 1)])
                       :stroke-width 5}]
@@ -13490,98 +14039,54 @@ on time?"]
                        [[:translate [(* 2 d) 10]]
                         [:rotate 0]])
                       :stroke (hsl [1 70 70 1])
-                      :stroke-width 5}]
-
-              [:path {:d (m7/path [0 0  :l d 0])
-                      :id :bond1
-                      :transform
-                      (m7/tranfrom
-                       [[:translate [(* 1.5 d) 20]]
-                        [:rotate 90]])
-                      :stroke (hsl [1 70 70 1])
-                      :stroke-width 5}]
-
-              [:path {:d (m7/path [0 0  :l 0 (* 1 d) ])
-                      :id :bond2
-                      :transform
-                      (m7/tranfrom
-                       [[:translate [(* 3.5 d) 20]]
-                        ])
-                      :stroke (hsl [1 70 70 1])
-                      :stroke-width 5}]
-
-              [:path {:d (m7/path [0 0  :l d 0])
-                      :id :bond3
-                      :transform
-                      (m7/tranfrom
-                       [[:translate [(* 1.5 d) (ve (* .5 d))]]
-                        [:rotate -90]])
-                      :stroke (hsl [0 70 70 1])
-                      :stroke-width 5}]
-
-
-              [:path {:d (m7/path [0 0  :l 0 (* 1 d) ])
-                      :id :bond5
-                      :transform
-                      (m7/tranfrom
-                       [[:translate [(* 5.5 d) 20]]
-                        ])
-                      :stroke (hsl [1 70 70 1])
-                      :stroke-width 5}]
-
-
-              [:path {:d (m7/path [0 0  :l d 0])
-                      :id :bond4
-                      :transform
-                      (m7/tranfrom
-                       [[:translate [(* 3.5 d) (ve (* .5 d))]]
-                        [:rotate -90]])
-                      :stroke (hsl [0 70 70 1])
-                      :stroke-width 5}]
+                        :stroke-width 5}]
 
 
 
+              (map
+               (fn [sp i]
+                 [:g
+                  [:path {:d (m7/path [0 0  :l d 0])
+                          :id (keyword (str "bond" i))
+                          :transform
+                          (m7/tranfrom
+                           [[:translate [(* sp d) 20]]
+                            [:rotate 90]])
+                          :stroke (hsl [1 70 70 1])
+                          :stroke-width 5}]
+                  [:path {:d (m7/path [0 0  :l d 0])
+                          :id (keyword (str "bondd" i))
+                          :transform
+                          (m7/tranfrom
+                           [[:translate [(* sp d) (ve (* .5 d))]]
+                            [:rotate -90]])
+                          :stroke (hsl [0 70 70 1])
+                          :stroke-width 5}]
 
-
-
-
-              [:path {:d (m7/path [0 0  :l d 0])
-                      :id :bond6
-                      :transform
-                      (m7/tranfrom
-                       [[:translate [(* 5.5 d) (ve (* .5 d))]]
-                        [:rotate -90]])
-                      :stroke (hsl [0 70 70 1])
-                      :stroke-width 5}]
+                  ])
+               space-h
+               rr)
 
 
 
 
 
               [:text {}
-               [:textPath {:href :#bond1
-                           :startOffset "20%"}
-                "H"]
+               (map
+                (fn [i]
+                  [:textPath {:href (keyword (str  "#bond" i))
+                              :startOffset "20%"}
+                   "H"])
+                rr)
 
-               [:textPath {:href :#bond4
-                           :startOffset "20%"}
-                "H"]
+               (map
+                (fn [i]
+                  [:textPath {:href (keyword (str  "#bondd" i))
+                              :startOffset "20%"}
+                   "H"])
+                rr)
 
-
-               [:textPath {:href :#bond5
-                           :startOffset "20%"}
-                "H"]
-               [:textPath {:href :#bond6
-                           :startOffset "20%"}
-                "H"]
-
-               [:textPath {:href :#bond3
-                           :startOffset "20%"}
-                "H"]
-
-               [:textPath {:href :#bond2
-                           :startOffset "20%"}
-                "H"]]
+               ]
 
 
               #_(map               (fn [i c]
@@ -13651,6 +14156,9 @@ on time?"]
                      [-400 -200  800 200]] z))
           viewbox (vb 0)
           viewbox2 (vb 0)
+          m 30
+          d 9.4
+          scale2 [[.5 .5] [-0.5 .5]]
           ]
       [:div {:style (merge
                      (grid [100 :vh 100 :vw
@@ -13659,20 +14167,23 @@ on time?"]
                      {:background-color (hsl [1 70 70 .1])
                       :gap ".1rem"})}
 
-       (map
+       #_(map
         (fn [n d]
-          [:div {:style (m7/css
-                         [[2 1 (+ 10 (* n 5)) 5  :center :center  1.5 :rem :column]
-                          [(* n .2) 70 (+ 50 (* 1 n))  .1] [] {:gap ".1rem"
-                                                               :z-index 4}])}
-
+          [:div {:style
+                 (m7/css
+                  [[2 1 (+ 10 (* n 5)) 5  :center :center  1.5 :rem :column]
+                   [(* n .2) 70 (+ 50 (* 1 n))  .1] []
+                   (into
+                    {:gap ".1rem"
+                     :z-index 4}
+                    {})])}
            d])
         (range 0 4)
         ["11:00 PM" "11:00 PM" "11:00 PM"]
         )
 
 
-       (map
+       #_(map
         (fn [n d]
           [:div {:style (m7/css
                          [[3 1 (+ 10 (* n 5)) 5  :center :center  1.5 :rem :column]
@@ -13686,22 +14197,25 @@ on time?"]
         )
 
        [:div {:style (m7/css
-                      [[5 4 4 8 :center :center 10 :rem ]
-                       [1 90 90 .01] [] {:gap "1rem"
-                                        :color (hsl [1 60 80 1])
-                                        :z-index 2}])}
+                      [[5 4 4 8 :center :center 24 :rem ]
+                       [1 90 90 .01] []
+                       (into
+                        {:gap "1rem"
+                         :font-family "Roboto Flex"
+                         :color (hsl [0 60 60 1])
+                         :z-index 2}
+                        )
+                       ])
+              }
 
-        [:div {:style {:font-size "10rem"}}  "IEL"]
-        [:div {:style {:color (hsl [.8 90 50 1])}}
-         "TS"]
-
-
-
-
-
-
-
-
+        #_{:font-family "'Roboto Flex'"
+         :font-variation-settings
+         (fontf2
+          (update
+           var-vf
+           :wght
+           (fn [k] (+ k 100))))}
+        [:div {:style {}}  "IELTS"]
         ]
 
 
@@ -13735,6 +14249,31 @@ on time?"]
                            viewbox)}
 
            [flames]
+
+
+           [:linearGradient {:x1 .5
+                             :y1 1
+                             :x2 .5
+                             :y2 0
+                             :id (name :lgg1)
+                             :gradientTransform (m7/tranfrom [[:rotate 10]])}
+            [:stop  {:offset 0
+                     :stop-color (hsl [1 70 70 .1])}]
+            [:stop  {:offset .33
+                     :stop-color (hsl [.3 70 70 .7])}
+             [:animate {:attributeName :offset
+                        :from .2
+                        :to .5
+                        :dur (m7/not-space [3 "s"])
+                        :repeatCount :indefinite}]]
+            [:stop  {:offset .5
+                     :stop-color (hsl [.6 70 70 .4])}
+             [:animate {:attributeName :offset
+                        :from .3
+                        :to 1
+                        :dur (m7/not-space [3 "s"])
+                        :repeatCount :indefinite}]]
+            ]
 
            [:pattern {:id (name :star)
                       :viewBox (space [0 0 10 10])
@@ -13776,9 +14315,9 @@ on time?"]
                              :id (name :lg2)
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
-                     :stop-color (hsl [3 40 40 1])}]
+                     :stop-color (hsl [3 40 40 .7])}]
             [:stop  {:offset .55
-                     :stop-color (hsl [3.3 60 60 1])}]
+                     :stop-color (hsl [3.3 60 60 .8])}]
 
 
             [:stop  {:offset .97
@@ -13831,9 +14370,72 @@ on time?"]
                       :dur "4s"
                       :fill :freeze}]
 
+
+           (map
+            (fn [x]
+              [:g
+
+               [:path
+                {:d
+                 (str (path
+                       [ 0 0 :c
+                        (* 20 3) (ve (* 2 2 2))
+                        (* 20 5) (ve (* 2 5 5))
+                        (* 20 7) (ve (* 2 7 7))
+                        :c
+                        (* 20 1)
+                        (ve (- (* 2 9 9) (* 2 7 7)))
+                        (* 20 2) (ve (- (* 2 11 11 ) (* 2 7 7)))
+                        (* 20 4) (ve (- (* 2 13 13) (* 2 7 7)))
+                        :l (ve (* 20 9))  0
+                        ])
+                      "z")
+
+                       :transform
+                       (m7/tranfrom
+                        [
+                         [:translate [(* m 20)
+                                      (* 2 d d)]]
+                         [:scale x]
+                         ])
+                       :stroke (hsl [4 70 70 1])
+                       :stroke-width 10
+                       :fill  (hsl [0 70 70 1])
+                       }
+                ]
+
+
+
+
+
+
+
+
+
+               [:g
+                [:path {:d            (path [0 0 :l (* 20 d) 0])
+                        :transform    (m7/tranfrom
+                                    [[:translate [(* 20 m) 0]]
+                                     [:scale [x 1]]
+                                     ])
+                        :stroke       (hsl [5 70 70 1])
+                        :stroke-width .7
+                        :id           (str "dd2" x)
+                        :marker-end   (m7/url (name :dot))
+                        :fill         :none}
+                 ]
+                [:text
+                 [:textPath {:href        (str "#dd2" x)
+                             :startOffset "20%"
+                             :style       {
+                                           :font-size ".4rem"}
+                             } (str "d=" d)]
+                 ]]])
+            scale2)
+
            #_(grid-on 1 1)
 
-           [:image {:height 300
+           #_[:image {:height 300
                     :width 300
                     :x 350
                     :y -60
@@ -13845,6 +14447,12 @@ on time?"]
            #_{:transform (m7/tranfrom [[:translate [200 0]]
                                        [:scale 2]])}
 
+
+
+           [airplane2 [
+                       [:translate [600 120]]
+                       [:scale [.3 .3]]
+                       [:rotate -90]]]
            [:g
 
 
@@ -13852,7 +14460,7 @@ on time?"]
 
 
 
-            [:circle {:r 120
+            [:circle {:r 90
                       :cx 0
                       :cy 0
                       :filter (m7/url "flames")
@@ -13863,6 +14471,27 @@ on time?"]
                       :cy 0
                       :filter (m7/url "flames")
                       :fill (m7/url (name :lg2))}]
+
+
+            [:circle {:r 90
+                      :cx 0
+                      :cy 0
+                      :stroke (hsl [3 70 70 .5])
+                      :stroke-width .5
+                      :fill (m7/url (name :star))}
+
+             #_[:animateTransform {
+                                   :attributeName :transform
+                                   :begin (sec 0)
+                                   :dur (sec 15)
+                                   :type :rotate
+                                   :from 0
+                                   :to -360
+                                   :repeatCount :indefinite
+                                   :fill :freeze}]
+
+
+             ]
 
 
 
@@ -13916,26 +14545,39 @@ on time?"]
 
 
 
+            [:path {:id :com-id
+                    :d (m7/path `[450 -150 :l ~@(map
+                                           (fn [d x]
+                                             (* d x))
+                                           dx (cycle [ 300 70]))])
+                    :fill (hsl [.2 60 55 .5])}]
 
-            [:circle {:r 70
-                      :cx 250
-                      :cy 0
-                      :stroke (hsl [3 70 70 1])
-                      :stroke-width .5
-                      :fill (m7/url (name :star))}
+            [:text {}
+             [:textPath {:startOffset (m7/np [10 :%])
+                         :href :#com-id}
+              "ALPHA"]]
 
-             #_[:animateTransform {
-                                   :attributeName :transform
-                                   :begin (sec 0)
-                                   :dur (sec 15)
-                                   :type :rotate
-                                   :from 0
-                                   :to -360
-                                   :repeatCount :indefinite
-                                   :fill :freeze}]
+
+
+            #_[:text {:font-size 56
+                    :x 0
+                    :y 0
+                    :dx -40
+                    :fill (hsl [2 70 70 1])
+                    }
+
+             "BDT 999"
+
 
 
              ]
+
+
+
+
+
+
+
 
             [:text {:dx -18
                     :x 250
@@ -14006,7 +14648,9 @@ on time?"]
       ])))
 
 
-
+#_(js/parseInt
+ (fix
+  (/ (js/parseInt time-str) 6) 1))
 (defn chem-mole []
   (let [[timer update-time]
         (react/useState (js/Date.))
@@ -14016,10 +14660,11 @@ on time?"]
                      first
                      (str/split ":" )
                      (nth 2))
-        sec2  (js/parseInt
-               (fix
-                (/ (js/parseInt time-str) 6) 1))
-        turns [9 6 4 3 2.5 3 3 3 3 2 ]
+        sec2 2
+        angle {:font-size 15
+               :dy -5
+               :dx 30}
+        turns [9 6 4 3 2.9 2.7 2.5 2.3 2.1 2 ]
         _ (react/useEffect
            (fn []
              (let [i (js/setInterval #(update-time (js/Date.)) 100)]
@@ -14062,41 +14707,35 @@ on time?"]
 
 
        [:div {:style (m7/css
-                      [[3 8 12 4 :center :center 1.5 :rem :column]
+                      [[3 8 15 5 :center :center 4.5 :rem :column]
                        [1 70 90 .01] []
                        {:gap "1rem"
-                        :color (hsl [3 50 70 1])
+                        :color (hsl [3 50 40 1])
                         :z-index 2}])}
 
 
 
         [m7/mx `[= [:m r ~(symbol (str "sin" (name tt)))] op]]
 
-        (let [
-              op
-              (* 150 (js/parseFloat (fix (js/Math.sin (/ js/Math.PI (nth turns sec2))) 3)))]
-          [m7/mx `[= [* 150
+        (let [r 100
+              op  (fix (* r (js/Math.sin (/ js/Math.PI (nth turns sec2)))) 2)
+              ]
+          [m7/mx `[= [* ~r
                       [:m sin
-                       [:p ~(/
-                             180 (nth turns sec2))
+                       [:p ~(fix (/
+                                  180 (nth turns sec2)) 1)
                         ~deg]]]
                    ~op]])
 
 
-        #_[m7/mx `[= [* r [:m sin  [:p 30 ~deg]]] op]]
-
-        #_[m7/mx `[= [* 150 [1 2]] op]]
-
-        #_[m7/mx `[= [* 140 [:m sin  [:p 60 ~deg]]] op]]
-        [:div time-str]
-        [:div sec2]
 
         [m7/mx `[= [:m r ~(symbol (str "cos" (name tt)))] adj]]
 
         (let [tn (nth turns sec2)
-              op
-              (js/parseFloat (fix (* 150 (js/parseFloat (fix (js/Math.cos (/ js/Math.PI tn)) 3)))  3))]
-          [m7/mx `[= [* 150 [:m cos [:p ~(/ 180 tn)
+              r 100
+              op (fix (* r  (js/Math.cos (/ js/Math.PI tn)))  2)
+              ]
+          [m7/mx `[= [* ~r [:m cos [:p ~(fix (/ 180 tn) 1)
                                      ~deg]]]
                    ~op]])
 
@@ -14451,7 +15090,7 @@ on time?"]
 
 
 
-              #_[:path {:d (m7/path [0 0 :l r 0 :a r r 0 false false
+              [:path {:d (m7/path [0 0 :l r 0 :a r r 0 false false
                                    (ve (- r (* r (js/Math.cos (/ js/Math.PI rad)))))
                                    (ve (* r (js/Math.sin (/ js/Math.PI rad))))
                                    ])
@@ -14463,7 +15102,8 @@ on time?"]
 
               [:path {:d (m7/path [0 0 :l
                                    (* r (js/Math.cos (/ js/Math.PI rad)))
-                                   0 0 (ve (* r (js/Math.sin (/ js/Math.PI rad))))
+                                   0 0
+                                   (ve (* r (js/Math.sin (/ js/Math.PI rad))))
                                    ])
                       :id :tri22
                       :stroke (hsl [1 70 70 1])
@@ -14474,7 +15114,7 @@ on time?"]
               [:text
                [:textPath {:href :#tri22
                            :font-size 15
-                           :startOffset "70%"}
+                           :startOffset "50%"}
                 "op"]
 
                ]
@@ -14483,24 +15123,21 @@ on time?"]
                       :y 0
                       :dy 15
                       :font-size 15}
-
                "adj"
-
                ]
 
 
 
 
               [:text {:x 0
-                      :style {:font-size 20}
-                      :dy 0
-                      :dx 23
+                      :style {:font-size (:font-size angle)}
+                      :dy (:dy angle)
+                      :dx (:dx angle)
                       :y 0}
                #_(name tt)
-               (/ 180 (nth turns sec2))
-
-
-
+               (fix (/ 180 (nth turns sec2)) 1)
+               [:tspan {:dy -6}
+                (name deg)]
                ]
 
 
@@ -15736,102 +16373,7 @@ on time?"]
        ])))
 
 
-(defn airplane2 [t]
-  (let [y 40]
-    [:g {:transform (m7/tranfrom t)}
 
-                [:path {:d (m7/path [0 0 :l 0 (ve y) 240 0 0 (* 2 y) -290 0
-                                     0 (* 2 (ve y))
-                                     50 0])
-                        :stroke-width 1
-                        :stroke (hsl [0 70 70 1])
-                        :fill (hsl [5 70 70 .5])}]
-
-
-                [:g {:transform (m7/tranfrom [[:translate [-100 0]]])}
-                 [:path {:d (m7/path [0 0 :l 50 0 0 -40 :c -60 15 -80 20   -100 40
-                                      ])
-                         :stroke-width 1
-                         :stroke (hsl [0 70 70 1])
-                         :fill (hsl [1 70 70 1])}]
-
-                 [:path {:d (m7/path [0 0 :l 50 0 0 -40 :c -60 15 -80 20   -100 40
-                                      ])
-                         :transform (m7/tranfrom [[:scale [1 -1]]])
-                         :stroke-width 1
-                         :stroke (hsl [0 70 70 1])
-                         :fill (hsl [1 70 70 1])
-                         }]
-
-                 ]
-
-                #_{:transform (m7/tranfrom [[:translate [-140 0]]
-                                            [:skewX -140]
-                                            [:scale [1.3 .4]]
-                                            ])}
-
-                [:g {:transform (m7/tranfrom [[:translate [-140 0]]
-
-                                              ])}
-                 [:path {:d (m7/path [0 0 :l  20 0 0 -200 -40 0 0 200 20 0
-                                      ])
-                         :transform (m7/tranfrom [
-                                                  [:skewX -140]
-                                                  [:scale [1 0.35]]
-                                                  ])
-                         :stroke-width 1
-                         :stroke (hsl [0 70 70 1])
-                         :fill (hsl [3 70 70 1])}]
-
-                 [:path {:d (m7/path [0 0 :l  20 0 0 -200 -40 0 0 200 20 0])
-                         :transform (m7/tranfrom [[:skewX 140]
-                                                  [:scale [1 -0.35]]])
-                         :stroke-width 1
-                         :stroke (hsl [0 70 70 1])
-                         :fill (hsl [3 70 70 1])}]
-
-
-
-
-                 ]
-
-
-                [:g
-                 [:g {:transform (m7/tranfrom [[:translate [120 (ve y)]]
-                                               [:skewX -140]])}
-                  [:path {:d (m7/path [0 0 :l  20 0 0 -200 -40 0 0 100 -60 100
-                                       ])
-                          :stroke-width 1
-                          :stroke (hsl [3 70 70 1])
-                          :fill (hsl [3 70 70 1])}]]
-                 [:g {:transform (m7/tranfrom [[:translate [120 y]]
-                                               [:scale [1 -1]]
-                                               [:skewX -140]
-                                               ])}
-                  [:path {:d (m7/path [0 0 :l  20 0 0 -200 -40 0 0 100 -60 100
-                                       ])
-                          :stroke-width 1
-                          :stroke (hsl [3 70 70 1])
-                          :fill (hsl [3 70 70 1])}]]
-                 ]
-
-
-
-                [:g {:transform (m7/tranfrom [[:translate [240 0]]])}
-                 [:path {:d (m7/path [0 0 :l 0 (ve y)
-                                      :c 30 -5 100 0  120 y])
-                         :stroke-width 1
-                         :stroke (hsl [0 70 70 1])
-                         :fill (hsl [1 70 70 1])}]
-                 [:path {:d (m7/path [0 0 :l 0 (ve y)
-                                      :c 30 -5 100 0  120 y])
-                         :stroke-width 1
-                         :stroke (hsl [0 70 70 1])
-                         :transform (m7/tranfrom [[:scale [1 -1]]])
-                         :fill (hsl [1 70 70 1])}]]
-
-
-                ]))
 
 
 
@@ -15844,9 +16386,9 @@ on time?"]
                      (str/split ":" )
                      (nth 2))
 
-        sec2  (* 6 (js/parseInt
+        sec2  (* 5 (js/parseInt
                     (fix
-                     (/ (js/parseInt time-str) 6) 1)))
+                     (/ (js/parseInt time-str) 5) 1)))
 
         _ (react/useEffect
          (fn []
@@ -15886,13 +16428,13 @@ on time?"]
        (let [d 'ε]
          [:div {:style
                 (m7/css
-                 [[2 4 5 10
+                 [[2 6  5 12
                    :center :center  2.2 :rem :column]
                   [3.5 70 (+ 50 (* 5 5))  .7] []
                   {:gap ".1rem"
-                   :color (hsl [0 30 90 1])
+                   :color (hsl [0 30 60 1])
                    :z-index 10}])}
-          [:div {:style {:font-size "1.1rem"}}
+          #_[:div {:style {:font-size "1.1rem"}}
            [:div time-str]]
           #_[m7/mx `[= y [:m 10 t]]]
           #_[m7/mx `[= ~(* 10 time-str) [* 10 ~(* 1 time-str)]]]
@@ -15903,22 +16445,54 @@ on time?"]
 
 
 
-
-
-
-
-
-
-
-
-
           #_[m7/mx `[= 0.22 a]]
           [:div {:style {:color (hsl [2 33 33 1])}}
-           [m7/mx `[= y  [* 0.22 [:p
-                                  t 2]]]]]
+           [m7/mx `[= [:m s [:b [:k  t o]  ]]  y
+                    [:m 0.22 [:p [:k t o] 2]]]]]
+          [:div {:style {:font-size "1.5rem"}}
+           "let, time dt, where " [m7/mx `[= [:p dt 2]
+                                     0]]]
+
+          [:div {:style {:color (hsl [2 33 33 1])}}
+           [m7/mx `[= [:m s [:b [+ t dt]  ]]    [:m 0.22 [:p
+                                                          [:b [+ t dt]] 2]]]]]
 
 
-          (let [time-str sec2
+          [:div {:style {:color (hsl [2 33 33 1])}}
+           [m7/mx `[= [:m s [:b [+ t dt]  ]]
+                    [+ [:m 0.22 [:p
+                                 t 2]]
+                     [:m 0.22 [:p
+                               dt 2]]
+
+                     [* 0.22 [:m 2 t dt]]]]]]
+
+          [:div {:style {:color (hsl [2 33 33 1])}}
+           [m7/mx `[= [:m s [:b [+ [:k t o] dt]  ]]
+                    [+ [:m 0.22 [:p [:k t o] 2]]
+                     [* 0.22 [:m 2 t dt]]]]]]
+
+          [:div {:style {:color (hsl [2 33 33 1])}}
+           [m7/mx `[= [:m s [:b [+ [:k t o] dt]  ]]
+                    [+ [:m s [:b [:k t o]  ]]
+                     [:m ds dt]]]]]
+
+
+          [:div {:style {:color (hsl [2 33 33 1])}}
+           [m7/mx `[= ds
+                    [* 0.22 [:m 2 t dt]]]]]
+
+
+          [:div {:style {:color (hsl [2 33 33 1])}}
+           [m7/mx `[= ds
+                    [* 0.22 [:m 2 t dt]]]]]
+
+          [:div {:style {:color (hsl [2 33 33 1])}}
+           [m7/mx `[= v [ds dt]
+                    [* 0.22 [:m 2 t ]]]]]
+
+
+          #_(let [time-str sec2
                 tmp-tmp (js/parseFloat (fix (* 0.22 time-str time-str) 2))]
             [m7/mx `[= ~tmp-tmp  [* 0.22 [:p
                                           ~(* 1 time-str ) 2]]]])
@@ -15940,9 +16514,7 @@ on time?"]
 
 
 
-          #_[:div {:style {:font-size "2rem"}}
-             "let ε, where " [m7/mx `[= [:p ~d 2]
-                                      0]]]
+
 
           #_[m7/mx `[= [:k y 4] [:m [2 9] [:p 4 2]]]]
           #_[m7/mx `[= [:k y [+ t 2]] [:m [2 9] [:p  [:b [+ t 2]] 2]]]]
@@ -16089,9 +16661,9 @@ on time?"]
                  }]
 
 
-               [airplane2 [[:rotate 0]
-                           [:translate [-110 0]]
-                           [:scale [.3 .3]]]]
+             [airplane2 [[:rotate 0]
+                         [:translate [-110 0]]
+                         [:scale [.3 .3]]]]
 
 
 
@@ -16837,7 +17409,7 @@ on time?"]
                   [:textPath {
                            :href :#paswr2
                            :startOffset "10%"
-                           :font-size 25} "W+F2"]
+                           :font-size 20} "W+F2"]
                   [:animate
                    {:attributeName :fill
                     :begin :buoyancy3.end
@@ -16853,7 +17425,7 @@ on time?"]
                [:text {:dy -3} [:textPath {
                                           :fill (hsl [0 70 70 .7])
                                           :href :#pasw3
-                                          :startOffset "20%"
+                                          :startOffset "21%"
                                           :font-size 10}
                                  "F2"]]
 

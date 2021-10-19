@@ -800,12 +800,13 @@ The pipelined version also modeled at RTL level."]
 (defn template []
   (let [[name set-name] (react/useState "")
         ref (react/useRef)]
-    [:div {:style (merge
-                   (m7/grid [600 :vh 100 :vw
-                             (take 38 (repeat [5 :vh]))
-                             (take 20 (repeat [5 :vh]))])
-                         {:background-color (hsl [1.5 70 70 1])
-                          :gap ".5rem"})}
+    [:div {:style
+           (merge
+            (m7/grid [600 :vh 100 :vw
+                      (take 38 (repeat [5 :vh]))
+                      (take 20 (repeat [5 :vh]))])
+            {:background-color (hsl [1.5 70 70 1])
+             :gap ".5rem"})}
 
        [:div {:key (gensym)
               :style (m7/css
@@ -947,4 +948,49 @@ The pipelined version also modeled at RTL level."]
 
 
 
+     ]))
+
+
+
+
+
+
+(defn template2 []
+  (let [[name set-name] (react/useState "")
+        ref (react/useRef)]
+    [:div {:style
+           {:display :grid,
+            :height (m7/np [1000 :px])
+            :width (m7/np [700 :px])
+            :grid-template-columns
+            (m7/space
+             [(m7/np [1 :fr])
+              (m7/np [2 :fr])
+              (m7/np [1 :fr])])
+            :grid-template-rows
+            (m7/space (mapv
+                       (fn [n]
+                         (m7/np [n :fr]))
+                       (range 1 5)))
+            :background-color (hsl [3 20 98 1])
+            :gap ".5rem"}}
+
+       [:div {:key (gensym)
+              :style {:align-items :center,
+                      :font-size "2.3rem",
+                      :background-color "hsla(1rad,70%,90%,0.2)",
+                      :grid-column "5/25",
+                      :grid-row "2/10",
+                      :padding "2rem",
+                      :justify-content :center,
+                      :gap "1rem",
+                      :display :flex,
+                      }
+              }
+
+        (ffirst
+         (d/q '[:find  ?s
+                :where
+                [?e :rm/code :sap]
+                [?e :rm/summery ?s]] @conn))]
        ]))
