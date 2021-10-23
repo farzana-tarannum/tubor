@@ -26,7 +26,7 @@
   [:div
 
    ;;[m100/map-asia]
-   [m100/airplane]
+   #_[m100/airplane]
    ;; airplane .5
    #_[m100/home-work3]
    #_[m100/home-work19]
@@ -62,7 +62,7 @@
    #_[m100/template5]
    #_[mtemp/template1]
    ;; robin hood
-   #_[m100/home-work]
+   [m100/home-work]
    ;; momentum math
    ;; [m100/home-work2]
    ;; velocity
@@ -80,7 +80,7 @@
 
    #_[m100/banner-qd]
 
-   #_[m100/banner-factor-identities ]
+   #_[m100/banner-factor-identities]
 
    ;; pyramid
    ;;   [m100/home-work10]
@@ -126,7 +126,6 @@
 (defn chemistry []
   [:div
    ;; alkane
-
    #_[m100/chem-rate]
    #_[m100/chem-pop2]
    [m100/chem-mole]
@@ -146,7 +145,7 @@
 
 (defn render-simple []
   (rdom/render
-   (chemistry)
+   (template)
    (js/document.getElementById "app")
    functional-compiler))
 
