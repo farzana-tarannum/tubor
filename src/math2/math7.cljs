@@ -18,6 +18,9 @@
 (s/def ::op-plus '#{+})
 
 
+(s/def ::op-arrow #{:a})
+
+
 (s/def ::op-equal '#{=})
 
 (s/def ::op-mul '#{*})
@@ -36,6 +39,7 @@
 
 
 (s/def ::ops (s/or
+              :→ ::op-arrow
               :+ ::op-plus
               :> '#{>}
               :< '#{<}
@@ -269,7 +273,7 @@
 (comment
   (expr (s/conform ::element '(:m 2 x))))
 
-(comment (expr (s/conform ::element [:m 2 'x])))
+(comment (expr (s/conform ::element [:m 2 'x 3 4])))
 
 (comment
   (expr

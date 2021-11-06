@@ -30,6 +30,8 @@
    #_(js/Math.pow 5 12)
    #_[m100/map-asia]
    [m100/airplane]
+   #_[m100/home-work22]
+   #_[m100/chem-rate]
    ;; airplane .5
    #_[m100/home-work3]
    ;; [m100/home-work19]
@@ -38,7 +40,7 @@
 
    ;; [m100/pressure2]
 
-    [m100/energy]
+   #_[m100/energy]
    ;; [m100/frection]
    ;; [m100/triangle]
    ;; [m100/home-pressure2]
@@ -62,7 +64,7 @@
    ;; taibles
    ;; [m100/template4]
    ;; physics video
-   ;; [m100/template5]
+    #_[m100/template5]
    ;; [mtemp/template1]
    ;; robin hood
    ;; [m100/home-work]
@@ -75,7 +77,7 @@
    ;; garden math
    ;; [m100/home-work7]
    ;; quad algo
-        [m100/home-work7-1]
+   #_[m100/home-work7-1]
    ;; solving linear equation
    ;; [m100/linear-equation]
 
@@ -83,7 +85,7 @@
 
    ;; [m100/banner-qd]
 
-   ;; [m100/banner-factor-identities]
+    [m100/banner-factor-identities]
 
    ;; pyramid
    ;; [m100/home-work10]
@@ -139,7 +141,7 @@
    #_[m100/home-planets]
    #_[m100/home-work16]
    ;; distillation
-   #_[m100/chem-pop2]
+   [m100/chem-pop2]
    [m100/home-work22]
    ;; hcl + haolh
    #_[m100/home-work9]
