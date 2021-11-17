@@ -22,19 +22,23 @@
 (def functional-compiler (r/create-compiler {:function-components true}))
 
 
+
+
+
+
 (defn template []
   [:div
 
 
-   [m100/home-planets-banners]
+   #_[m100/home-planets-banners-exp]
    #_(js/Math.pow 5 12)
    #_[m100/map-asia]
-   [m100/airplane]
+   #_[m100/airplane]
    #_[m100/home-work22]
    #_[m100/chem-rate]
    ;; airplane .5
    #_[m100/home-work3]
-   ;; [m100/home-work19]
+   #_[m100/home-work19]
    ;; pressure
    ;; [m100/pressure]
 
@@ -85,7 +89,7 @@
 
    ;; [m100/banner-qd]
 
-    [m100/banner-factor-identities]
+   [m100/banner-factor-identities2]
 
    ;; pyramid
    ;; [m100/home-work10]
@@ -125,8 +129,7 @@
    #_[m100/map-family2]
    #_[py100/template2]
    #_[py100/template]
-
-   ] )
+   ])
 
 
 
@@ -156,5 +159,4 @@
    (template)
    (js/document.getElementById "app")
    functional-compiler))
-
 (render-simple)

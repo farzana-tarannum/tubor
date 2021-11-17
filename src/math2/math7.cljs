@@ -200,7 +200,8 @@
 
 (defn b-exp [{:keys [mo elem]}]
   [:mrow [:mo "("]
-   (expr elem)
+   (if true
+       (expr elem))
    [:mo ")"]])
 
 
@@ -271,9 +272,15 @@
   (expr (s/conform ::element 'x)))
 
 (comment
-  (expr (s/conform ::element '(:m 2 x))))
+  (expr (s/conform ::element '(:m 2 x)))
+
+  (expr (s/conform ::element '(:b 2))))
 
 (comment (expr (s/conform ::element [:m 2 'x 3 4])))
+
+(comment
+
+  (s/conform ::element [:b [:b 3]]))
 
 (comment
   (expr
