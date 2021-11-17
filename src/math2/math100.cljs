@@ -6568,7 +6568,7 @@ there are three forces on it."]
 
 
 
-      [m7/m '[=  [:m f t] [+ bt  [:m a [:p t 2]] ]]]
+      [m7/m '[=  [:m f [:b  t]] [+ bt  [:m a [:p t 2]] ]]]
 
 
 
@@ -6605,15 +6605,15 @@ there are three forces on it."]
       #_[m7/m '[= [:m f [:b [+ t dt]]]
               [+ [:m b t]  [:m a [:p t 2]]   [:m dt [:b [+ b [:m 2  a t ]]]]]]]
 
-      [m7/m '[= [:m f [:b [+ t dt]]]
-              [+ [:m f t]   [:m dt [:b [+ b [:m 2  a t ]]]]]]]
+      [m7/m '[= [:m f [:b [+ t [:k d t]]]]
+              [+ [:m f [:b t]]   [:m [:k d t] [:b [+ b [:m 2  a t ]]]]]]]
 
 
-      [m7/m '[= [:m f [:b [+ t dt]]]
-              [+ [:m f t]   [:m dt g t]]]]
+      [m7/m '[= [:m f [:b [+ t [:k d t]]]]
+              [+ [:m f [:b t]]   [:m [:k d t] g [:b t]]]]]
 
 
-      [:div "where " [m7/m '[=  [:m g t]  [+ b [:m 2 at]]] ]]
+      [:div "where " [m7/m '[=  [:m g [:b t]]  [+ b [:m 2 at]]] ]]
 
 
       #_[m7/m '[= [:m f [:b [+ t dt]]]

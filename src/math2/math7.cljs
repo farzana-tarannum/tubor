@@ -200,8 +200,7 @@
 
 (defn b-exp [{:keys [mo elem]}]
   [:mrow [:mo "("]
-   (if true
-       (expr elem))
+   (expr elem)
    [:mo ")"]])
 
 
@@ -218,17 +217,19 @@
 
 
 (defn expr [e]
-  (let [expr-f (juxt
-                first
-                (comp  first second)
-                (comp  second second))
-        [_ t-expr expr-1] (expr-f e)]
-    (( {:p-exp p-exp
-        :m-exp m-exp
-        :b-exp b-exp
-        :f-exp f-exp
-        :e-exp e-exp} t-expr)
-     expr-1)))
+  (if (= (first e) :expr)
+      (let [expr-f (juxt
+                    first
+                    (comp  first second)
+                    (comp  second second))
+            [_ t-expr expr-1] (expr-f e)]
+        (( {:p-exp p-exp
+            :m-exp m-exp
+            :b-exp b-exp
+            :f-exp f-exp
+            :e-exp e-exp} t-expr)
+         expr-1))
+      e))
 
 
 (defn mx [eq]
@@ -241,6 +242,11 @@
                          (symbol (name x))
                          x))
                      eq))))])
+
+
+(comment
+  (expr (s/conform ::element '[+ 1 3]))
+  (s/conform ::element '[:b 3]))
 
 (comment
 
@@ -269,7 +275,7 @@
                      `(+ x ~(+ ay 2)))))
    )
 
-  (expr (s/conform ::element 'x)))
+  (expr (s/conform ::element 1)))
 
 (comment
   (expr (s/conform ::element '(:m 2 x)))
@@ -285,12 +291,12 @@
 (comment
   (expr
    (s/conform ::element
-              '(+ :alpha x (- 5 2 4)
-                  ((- x ) 1)))))
-
-(s/conform ::element
-           '(= (- 2) (:c (:p x 3))
-               ))
+              '(+ :alpha) x (- 5 2 4)
+              ((- x ) 1))))
+(comment
+  (s/conform ::element
+             '(= (- 2) (:c (:p x 3))
+                 )))
 (comment
   (expr
    (s/conform ::element
