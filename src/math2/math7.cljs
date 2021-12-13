@@ -243,10 +243,65 @@
                          x))
                      eq))))])
 
+(defn x [eq]
+  [:math
+   (expr
+    (s/conform ::element
+               (let [r (vec (clojure.walk/postwalk
+                             (fn [x]
+                               (if (symbol? x)
+                                 (symbol (name x))
+                                 x))
+                             eq))]
+                 (if (s/valid? ::element r)
+                   r
+                   0)
+                 )))])
+
+
+(defn sx [eq x2 tt]
+  [:math
+   (expr
+    (s/conform ::element
+               (let [r (vec (clojure.walk/postwalk
+                             (fn [x]
+                               (if (symbol? x)
+                                 (let [x1 (symbol (name x))]
+                                   (if (= x1 x2)
+                                     tt
+                                     x1))
+                                 x))
+                             eq))
+                     ]
+                 (if (s/valid? ::element r)
+                   r
+                   0)
+                 )))])
+
 
 (comment
+
+  (sx `[= [:m g [:b t]]  [+ b [:m 2 a t]]] 't '[+ t 3])
+
+  (let [eq `[= [:m g [:b t]]  [+ b [:m 2 a t]]]
+        x2 't
+        tt '[+ t 3]]
+    (let [r (vec (clojure.walk/postwalk
+                  (fn [x]
+                    (if (symbol? x)
+                      (let [x1 (symbol (name x))]
+                        (if (= x1 x2)
+                          tt
+                          x1))
+                      x))
+                  eq))]
+      r))
+
+  (s/valid? ::element '[:b 1 3])
+  (x `[:t 3 5 ~(+ 3 4)])
   (expr (s/conform ::element '[+ 1 3]))
-  (s/conform ::element '[:b 3]))
+  (s/conform ::element
+             '[:b 3]))
 
 (comment
 
