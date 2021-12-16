@@ -31,9 +31,10 @@
   [:div
 
    #_[m100/home-planets-banners-exp]
-   [m100/chem-mole]
-
+   #_[m100/chem-mole]
+   #_[m100/sine-wave2]
    [m100/sine-wave]
+
    #_[m100/home-planets-banners]
    #_[m100/grammer-eng]
 

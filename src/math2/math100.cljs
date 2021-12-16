@@ -20038,12 +20038,106 @@ on time?"]
 
 
 
-#_[ 9 7.5  6 4 3 2.75 2.5 2.25 2 1.75 1.5]
+(defn grid-circle
+  ([X Y]
+   (grid-circle X Y 40 60 false))
+  ([X Y ax-dx ax-dy]
+   (grid-circle X Y ax-dx ax-dy false))
+  ([X Y ax-dx ax-dy frac]
+   (let [zoom 0]
+     [:g
+      ;; small
+      #_(map
+       (fn [i]
+         [:path {:d (path [-400 (ve (+ ax-dx (* i 2))) :l 1200 0])
+                 :stroke (hsl [4 70 70 .5])
+                 :stroke-width .5
+                 :fill :none}
+          ] )
+       (range 0 11))
 
+
+      #_(map
+       (fn [i]
+         [:path {:d (path [(+ ax-dy (* i 2)) -400 :l 0 1200 ])
+
+                 :stroke (hsl [4 70 70 .5])
+                 :stroke-width .5
+                 :fill :none}
+          ] )
+       (range 0 11))
+
+
+
+
+
+
+      (map
+       (fn [x]
+         [:g
+
+          [:path {:d (path [ (* 100 x)  0 :l 0 -400])
+                  :stroke (hsl [(if (= (mod x 2) 0)  5 0) 70 70 1])
+                  :stroke-width .5
+                  :fill :none}
+           ]
+
+
+          [:path {:d (path [ (* 64 x)  0 :l 0 400])
+
+                  :stroke (hsl [0 70 70 1])
+                  :stroke-width .5
+                  :fill :none}
+           ]
+
+          [:text {:x (* 100 x)
+                  :fill (hsl [0 40 20 1])
+                  :y 4.5
+                  :font-size 3}
+           (if frac
+             (.toFixed (* x X) 1)
+             (* x X))
+           ]])
+       (range -20  20 (/ js/Math.PI 32)))
+
+
+
+      (map
+       (fn [y]
+         [:g
+          [:path {:d (path [0 (ve (* 20 y))   :l 1200 0])
+
+                  :stroke (hsl [1 70 70 1])
+                  :stroke-width 1
+                  :fill :none}
+           ]
+
+          [:text {:x -4.5
+                  :dy -1
+                  :fill (hsl [0 40 20 1])
+                  :y (ve (* 20 y))
+                  :font-size 3}
+           (if frac
+             (.toFixed (* y Y) 1)
+             (* y Y))
+           ]
+
+
+          [:path {:d (path [0 (ve (* 20 y))   :l -1200 0])
+
+                  :stroke (hsl [1 70 70 1])
+                  :stroke-width 1
+                  :fill :none}
+           ]
+
+          ])
+       (range -20 20))])))
+
+#_[ 9 7.5  6 4 3 2.75 2.5 2.25 2 1.75 1.5]
+#_(* timer js/Math.PI (/ 1 32))
 (defn sine-wave []
   (let [[timer update-time]
         (react/useState 0)
-
         sec2 (* timer js/Math.PI (/ 1 32))
         angle {:font-size 12
                :dy -5
@@ -20081,7 +20175,9 @@ on time?"]
           ax-dx 80
           ax-dy 40
           vb (fn [z]
-               (nth [ (map  #(* % 15) [10 -22  40 45])
+               (nth [(map  #(* % 20) [15 -20  40 45])
+                     (map  #(* % 20) [-50 -25  100 50])
+                     (map  #(* % 10) [-10 -25  100 50])
                      [0 -180  200 200]
                      [0 -50  100 100]
                      [0 -25  50 50]
@@ -20092,9 +20188,8 @@ on time?"]
                      [-20 -20  100 100]
                      [-400 -200  800 200]
                      ] z))
-          viewbox (vb 0)
-          viewbox2 (vb 0)
-          ]
+          viewbox (vb 2)
+          viewbox2 (vb 2)]
       [:div {:style (merge
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
@@ -20102,142 +20197,16 @@ on time?"]
                      {:background-color (hsl [1 70 70 .1])})}
 
 
-
        [:div {:style (m7/css
-                      [[2 10 2 9 :center :center
-                        3.8 :rem :column]
+                      [[2 5 3 23 :center :center 3 :rem :column]
                        [1 70 90 .1] []
                        {:gap "1rem"
-                        :color (hsl [3 50 30 1])
                         :z-index 2}])}
-        [m7/x `[= ~pi  [c [:m 2 r]]]]
-
-
-        #_[:div "what would be angle with arc length of 3 of an unit circle?"]
-
-
-        #_[:div "what is the circumference of unit circle?"]
-
-
-        [m7/x `[= [[:m 2 ~pi] 32]  [[* 2 ~(fix js/Math.PI 4)] 32] [c 32]]]
-
-        #_[m7/x `[= [:m 2 ~pi ] c ~(fix (* 2 js/Math.PI) 4) [:m 360 ~deg]]]
-
-        #_[:div "what would be angle with arc length of 3 of an unit circle?"]
-
-        #_[m7/x `[= Arc [c 16] [~pi 8]  ~(fix (* 2 js/Math.PI (/ 1 16)) 4)]]
-
-
-        #_[m7/x `[=  [:p 3 c] [:m ~(fix (/ (* 3 360) (* 2 js/Math.PI)) 2) ~deg]]]
-
-
-
-        #_[m7/x `[= [~pi 8] [[:m 360 ~deg] 16] [:m ~(/ 360 16) ~deg]]]
-
-
-        #_[:div "for unit circle what degree makes up arc length of " [m7/x `[~pi 8]] "?"]
-
-
-
-
-        #_[:div "when r is a unit"]
-        #_[m7/x `[= [:m 2 ~pi  ] c]]
-
-        #_[:div "cutting the perimeter into 28 peaces makes each arch"]
-
-
-        #_[m7/x `[ [:m 2 ~pi  ] 28]]
-
-        #_[m7/x `[= ~pi ~js/Math.PI ]]
-
-
-
-        #_[m7/m '[= c [* 2 3.1427  r ]]]
-        #_[m7/m '[=  Time_Period T]]
-
-       #_[:div "How long it goes on time T is the wave length"]
-
-
-        #_[m7/x '[= [:m 60 Hz] [:m [1 60] s]]]
-
-        #_[m7/m '[= frequency f [1 T]]]
-
-        #_[m7/m '[= clock-frequency f [1 [:m 60 s]]
-                [:m [1 60] Hz]]]
-
-        ]
-
+        ""]
 
 
        [:div {:style (m7/css
-                      [[2 10 14 9 :center :center
-                        2.8 :rem :column]
-                       [1 70 90 .1] []
-                       {:gap "1rem"
-                        :color (hsl [3 50 30 1])
-                        :z-index 2}])}
-
-
-
-        #_[m7/m '[c [:m 2 r]]]
-
-        #_[m7/mx `[= BC ~adj]]
-
-        #_[m7/mx `[= ~(symbol (str "tan" (name tt)))
-                 [[:k opp 1] [:k adj 1]]]]
-
-
-
-
-        [m7/x `[[:m ~timer ~pi] 32]]
-        #_[:div tn]
-
-
-
-
-
-        #_[m7/mx `[= [:m r ~(symbol (str "tan" (name tt)))] [:k opp 1]]]
-        [m7/mx `[= [:m r ~(symbol (str "sin" (name tt)))]
-                 opp]]
-
-
-        [m7/x `[= [:m sin [[:m ~timer ~pi] 32]] ~(fix (js/Math.sin tn) 2)]]
-
-
-        [m7/mx `[= [:m r ~(symbol (str "cos" (name tt)))]
-                   adj]]
-
-        #_[m7/mx `[= ~tt [:p ~(fix (/ 180 tn) 1)
-                        ~deg]]]
-
-        #_[m7/mx `[= [:k ~tt 2] [:p ~(fix (/ 180 tn2) 1)
-                        ~deg]]]
-
-
-        #_[m7/mx `[= [* ~r [:m tan [:p ~(fix (/ 180 tn) 1)
-                                  ~deg]]]
-                 [:k opp 1]]]
-
-
-        #_[m7/mx `[= [* ~r [:m tan [:p ~(fix (/ 180 tn) 1)
-                                  ~deg]]]
-                 ~opp1]]
-
-
-
-
-
-
-
-
-
-
-        ]
-
-
-
-       [:div {:style (m7/css
-                      [[2 10 3 23 :center :center 3 :rem]
+                      [[2 10 2 23 :center :center 3 :rem]
                        [1 70 90 1] []
                        {:gap "1rem"
                         :z-index 1}])}
@@ -20252,25 +20221,19 @@ on time?"]
                       :to (m7/space viewbox2)
                       :dur "4s"
                       :fill :freeze}]
-           (grid-on 1 1)
 
-           (let [rad tn
-                 r (* r 20)]
+           (let [r (* r 20)
+                 ps 16
+                 angle (* js/Math.PI  (/ 1 ps))]
              [:g
-
               [:circle {:r r
                         :cx 0
                         :cy 0
-                        :stroke-width 5
+                        :stroke-width 1
                         :stroke-dashoffset 0
                         :stroke-dasharray 0
-                        :stroke (hsl [1 30 70 1])
-                        :fill (hsl [.6 95 70 .5])}]
-
-
-
-
-
+                        :stroke (hsl [1 20 20 .8])
+                        :fill (hsl [.6 95 70 .2])}]
 
 
 
@@ -20279,11 +20242,178 @@ on time?"]
               [:g#arcs
                (map
                 (fn [se]
-                  [:circle {:r 4
-                            :cx (* r (js/Math.cos (* js/Math.PI se (/ 1 32))))
-                            :cy (ve (* r (js/Math.sin (* js/Math.PI se (/ 1 32)))))
-                            :fill (hsl [4 70 70 1])}])
-                (range 0 (* 2 32)))]
+                  [:g
+                   [:circle {:r 4
+                             :cx (* r (js/Math.cos (* se angle)))
+                             :cy (ve (* r (js/Math.sin (* se angle))))
+                             :fill (hsl [(mod se 8) 70 70 .9])}]
+                   [:text {:x (* r (js/Math.cos  (* se angle)))
+                           :y (ve (* r (js/Math.sin (* se  angle))))
+                           :font-size 15
+                           :fill (hsl [4 70 70 .4])} se]])
+                (range 0 (* 2 ps)))]
+
+
+              [:g#arcs2
+               (map
+                (fn [se]
+                  [:g
+                   [:circle {:r 4
+                             :cx (* r (* se angle))
+                             :cy (ve (* r (js/Math.sin (* se angle))))
+                             :fill (hsl [(mod se 8) 70 70 .9])}]
+                   [:text {:x (* r (js/Math.cos (* se angle)))
+                           :y (ve (* r (js/Math.sin (* se angle))))
+                           :font-size 15
+                           :fill (hsl [4 70 70 .4])} se]])
+                (range 0 (* 2 ps)))]
+
+
+              (map
+               (fn [se]
+                 [:g
+                  [:path {:d (m7/path [(* r js/Math.PI se (/ 1 ps)) 1200 :l 0 -2400])
+                          :stroke (hsl [(mod se 8) 70 70 .9])
+                          :stroke-width 1
+                          :fill :none
+                          }]
+                  [:text {:x (* r js/Math.PI se (/ 1 ps))
+                          :y 0
+                          :dy 10
+                          :dx -5
+                          :font-size 10
+                          :fill (hsl [4 10 10 .5])
+                          }
+                   (mod se (* 2 ps))]
+                  ])
+               (range (ve (+ 1 (* 2 ps)))   (* 6 (+ 1 (* 2 ps)))))
+              [:path#rad1 {:d (m7/path [  0 0 :c
+                                        0 0
+                                        (* 4 r angle) (ve (* r (js/Math.sin (* angle 4)) ))
+                                        (* 4 r angle) (ve (* r (js/Math.sin (* angle 4)) ))])
+                           :fill :none
+                           :stroke (hsl [.2 30 30 .5])
+                           :stroke-width 2}]
+
+              [:circle {:r 20
+                        :cx 0
+                        :cy 50
+                        :fill (hsl  [1 70 70 1])}
+               [:animate
+                {:attributeName :cy
+
+                 :begin :click
+                 :dur (sec 3)
+                 :from 50
+                 :to 250
+                 :calcMode :spline
+                 :values (m7/sami-colon   [50   250 120 250   170   250   210 250])
+                 :keyTimes (m7/sami-colon [0  0.15  0.3 0.45  0.6   0.75  0.9 1])
+                 :keySplines (m7/sami-colon
+                              (map m7/space
+                                   [[.42 0 1 1]
+                                    [0 0 .59 1]
+                                    [.42 0 1 1]
+                                    [0 0 .59 1]
+                                    [.42 0 1 1]
+                                    [0 0 .59 1]
+                                    [.42 0 1 1]
+
+                                    ]))
+                 :fill :freeze}]]
+
+
+              #_[:path {:d (path (flatten
+                             [0 0
+
+                               (repeat 12
+                                       [
+                                        :a  1 2 0 false false   10 0
+                                        :a  1 2 0 true false   -3 0])
+                               :a 1 2  0 false false   10 0
+                               :l 4 0
+                               :a 1 1 0 false true    3 0
+                               :a 1 1 0 false true   -3 0
+                              ]))
+                      :transform (m7/tranfrom [[:translate [(* 2 r) 0]]
+                                               [:scale -2]
+                                            ])
+                   :stroke (hsl [2 70 70 1])
+                   :stroke-width 3
+                   :fill :none}
+                [:animate
+                 {:attributeName :d
+                  :begin :click
+                  :dur (sec 10)
+                  :repeatCount 20
+                  :keyTimes (m7/sami-colon [0 0.3  0.4 .5
+                                            0.6 0.75 0.9 1])
+                  :values (m7/sami-colon
+                           (map
+                            (fn [i j]
+                              (path (flatten
+                                     [0 0
+                                      (repeat 12
+                                              [
+                                               :a j 2 0 false false   (+ 10 i) 0
+                                               :a j 2 0 true false   -3 0])
+                                      :a j 2 0 false false   (+ i 10) 0
+                                      :l 4 0
+                                      :a j 2  0 false true    3 0
+                                      :a j 2  0 false true   -3 0
+                                      ]))
+                              )
+                            (map #(* % 8) [0.1 0.50 0.7   1
+                                           0.70 0.5  .3  0
+                                           ])
+                            [1 1.1 1.2 1.5
+                             1.5 1.2 1.1 1]
+                         ))
+
+                  :fill :freeze
+               }]]
+
+
+
+              ]
+
+
+
+
+
+
+             )
+
+
+
+
+
+
+           #_(grid-circle 1 1)
+
+           #_(let [rad tn
+                 r (* r 20)]
+             [:g
+
+
+
+
+              (if true
+                [:g#arcs
+                 (map
+                  (fn [se]
+                    [:g
+
+                     [:circle {:r 4
+                               :cx (* r (js/Math.cos (* js/Math.PI se (/ 1 32))))
+                               :cy (ve (* r (js/Math.sin (* js/Math.PI se (/ 1 32)))))
+                               :fill (hsl [4 70 70 .5])}]
+                     [:text {:x (* r (js/Math.cos (* js/Math.PI se (/ 1 32))))
+                             :y (ve (* r (js/Math.sin (* js/Math.PI se (/ 1 32)))))
+                             :font-size 10
+                             }
+                      se]])
+                  (range 0 (* 2 32)))])
 
 
 
@@ -20389,27 +20519,27 @@ on time?"]
 
 
 
-
-              [:g
-               [:path#angle {:d
-                             (m7/path
-                              [0 0 :l r 0 :a r r 0 false false
-                               (ve (- r (* 20 adj))) (ve (* 20  op))])
-                             :stroke (hsl [3 70 70 1])
-                             :transform (m7/tranfrom [[:scale [.2 .2]]])
-                             :stroke-width 3
-                             :fill (hsl [3 70 70 .5])}]
-
-
+              (if false
+                [:g
+                 [:path#angle {:d
+                               (m7/path
+                                [0 0 :l r 0 :a r r 0 (if (< op 0) true false) false
+                                 (ve (- r (* 20 adj))) (ve (* 20  op))])
+                               :stroke (hsl [3 70 70 1])
+                               :transform (m7/tranfrom [[:scale [.2 .2]]])
+                               :stroke-width 3
+                               :fill (hsl [3 70 70 .5])}]
 
 
 
-               [:path#sin {:d
-                           (m7/path [0 0 :l (* 20 adj) 0 0 (ve (* 20 op))])
-                           :id :tri22
-                           :stroke (hsl [1 70 70 1])
-                           :stroke-width 1
-                           :fill (hsl [1.5 70 70 .5])}]]
+
+
+                 [:path#sin {:d
+                             (m7/path [0 0 :l (* 20 adj) 0 0 (ve (* 20 op))])
+                             :id :tri22
+                             :stroke (hsl [1 70 70 1])
+                             :stroke-width 1
+                             :fill (hsl [1.5 70 70 .5])}]])
 
 
               #_[:g {:transform (m7/tranfrom [[:translate [73 0]]])}
@@ -20522,23 +20652,97 @@ on time?"]
                 #_(str "opp" "")
 
                 op
-                ]]
+                  ]]
 
-              [:g#wave
-               (map
+              #_[:path {:d (m7/path [0 -40 :l 2200 0])
+                      :fill :none
+                      :stroke-width 4
+                      :stroke (hsl [2 70 70 1])}]
 
-                (fn [i]
-                  [:g
-                   [:circle {:cx (* i r)
-                             :cy (ve (* r (js/Math.sin i)))
-                             :r 3
-                             :fill (hsl [0 70 70 1])}]
 
-                   [:circle {:cx (* i r)
-                             :cy 0
-                             :r 3
-                             :fill (hsl [4 70 70 1])}]])
-                (range -5 20 (/ js/Math.PI 32)))]
+              [:path#lam {:d (m7/path [0 40 :l (* 2 js/Math.PI r) 0])
+                          :fill :none
+                          :stroke-width 4
+                          :stroke (hsl [0 50 40 1])}]
+
+              [:path#lam2 {:d (m7/path [0 0 :l (*  2 r) 0])
+                           :fill :none
+                           :stroke-width 4
+                           :stroke (hsl [1 50 40 1])}]
+
+              [:text
+               #_[:textPath {:href :#lam
+                           :startOffset "30%"}
+                "Periodic Time, T"]
+
+               [:textPath {:href :#lam
+                           :dy -20
+                           :startOffset "30%"}
+                "c"]
+
+
+               [:textPath {:href :#lam2
+                           :dy -20
+                           :startOffset "30%"}
+                "d"]
+
+               ]
+              (if true
+                  [:g#wave
+                   (map-indexed
+
+                    (fn [index i]
+                      [:g
+
+                       #_[:circle {:cx (* i r)
+                                   :cy (ve (* 1.3 r (js/Math.sin i)))
+                                   :r 3
+                                   :fill (hsl [2 70 70 1])}]
+
+
+
+                       #_[:circle {:cx (* i r)
+                                   :cy (ve (- (* 1.0 r (js/Math.sin i)) (* 0.9 r (js/Math.sin i))))
+                                   :r 3
+                                   :fill (hsl [2 70 70 1])}]
+
+                       #_[:circle {:cx (* i r)
+                                   :cy (+ -40 (ve (* 1.0 r (js/Math.sin i))))
+                                   :r 3
+                                   :fill (hsl [1 70 70 1])}]
+
+
+                       #_[:circle {:cx (* i r)
+                                 :cy (ve (* 1.0 r (js/Math.sin i)))
+                                 :r 3
+                                 :fill (hsl [0 70 70 1])}]
+                       #_[:circle {:cx (* i r)
+                                   :cy (ve (ve (* 0.9 r (js/Math.sin i))))
+                                   :r 3
+                                   :fill (hsl [1 70 70 1])}]
+
+                       [:circle {:cx (* i r)
+                                 :cy 0
+                                 :r 3
+                                 :fill (hsl [4 70 70 1])}]
+                       (if (= (mod index 2) 0)
+                         [:text {:x (* i r)
+                                 :y 0
+                                 :dx -10
+                                 :dy 15
+                                 :font-size 10
+                                 :fill (hsl [4 20 20 1])}
+                          index
+                          #_(str index (name pi))
+                          #_[:tspan {:dy 12
+                                   :dx -13}
+                           32]
+
+                          ])
+
+
+                       ])
+                    (range 0 20 (/ js/Math.PI 32)))])
 
 
 
@@ -20574,7 +20778,1354 @@ on time?"]
                ]
 
 
-              ])])]])))
+              ])
+
+           ])]])))
+
+
+(defn sine-wave3 []
+  (let [[timer update-time]
+        (react/useState 0)
+
+        sec2 (* timer js/Math.PI (/ 1 32))
+        angle {:font-size 12
+               :dy -5
+               :dx 30}
+
+        tn sec2
+        tn2 sec2
+        r 10
+        adj (fix (* r  (js/Math.cos tn))  2)
+        op (fix (* r  (js/Math.sin tn))  2)
+        opp1 (fix (* r  (js/Math.tan tn))  2)
+
+        adj2 (fix (* r  (js/Math.cos tn))  2)
+        op2 (fix (* r  (js/Math.sin tn))  2)
+        opp12 (fix (* r  (js/Math.tan tn))  2)
+
+        _ (react/useEffect
+           (fn []
+             (let [i (js/setInterval #(update-time (mod (+ timer 1) 128)) 1000)]
+               (fn []
+                 (js/clearInterval i)))))
+
+        [slider get-slider] (react/useState 0)
+        dd '☐
+        deg '°
+        pi 'π
+        f (fn [n] (/ 1 n))
+        tt 'θ
+        dx [1 0  0 1 -1  0 0 -1]
+
+        sq (fn [n]
+                (comp
+                 (partial map (partial * n))))]
+    (let [zoom 4
+          ax-dx 80
+          ax-dy 40
+          vb (fn [z]
+               (nth [(map  #(* % 15) [20 -22  40 45])
+
+                     [0 -180  200 200]
+                     [0 -50  100 100]
+                     [0 -25  50 50]
+                     [-100 -200  800 200]
+                     [40 120  80 80]
+                     [0 40  100 100]
+                     [75 -175  150 150]
+                     [-20 -20  100 100]
+                     [-400 -200  800 200]
+                     ] z))
+          viewbox (vb 0)
+          viewbox2 (vb 0)
+          ]
+      [:div {:style (merge
+                     (grid [100 :vh 100 :vw
+                            (take 24 (repeat [8 :vh]))
+                            (take 20 (repeat [8 :vh]))])
+                     {:background-color (hsl [1 70 70 .1])})}
+
+
+       (if false
+         [:div {:style (m7/css
+                        [[2 7 2 9 :center :center
+                          3.8 :rem :column]
+                         [1 70 90 .1] []
+                         {:gap "1rem"
+                          :color (hsl [3 50 30 1])
+                          :z-index 2}])}
+
+
+
+
+          [m7/mx `[= c [* ~pi [:m 2 r]]]]
+          [m7/mx `[= c [* ~(fix js/Math.PI 5) [:m 2 r]]]]
+          #_[m7/x `[= ~pi  [c [:m 2 r]]]]
+
+
+          #_[:div "what would be angle with arc length of 3 of an unit circle?"]
+
+
+          #_[:div "what is the circumference of unit circle?"]
+
+
+          #_[m7/x `[= [[:m 2 ~pi] 64]  [[* 2 ~(fix js/Math.PI 4)] 64] [c 64]]]
+
+          #_[m7/x `[= [:m 2 ~pi ] c ~(fix (* 2 js/Math.PI) 4) [:m 360 ~deg]]]
+
+          #_[:div "what would be angle with arc length of 3 of an unit circle?"]
+
+          #_[m7/x `[= Arc [c 16] [~pi 8]  ~(fix (* 2 js/Math.PI (/ 1 16)) 4)]]
+
+
+          #_[m7/x `[=  [:p 3 c] [:m ~(fix (/ (* 3 360) (* 2 js/Math.PI)) 2) ~deg]]]
+
+
+
+          #_[m7/x `[= [~pi 8] [[:m 360 ~deg] 16] [:m ~(/ 360 16) ~deg]]]
+
+
+          #_[:div "for unit circle what degree makes up arc length of " [m7/x `[~pi 8]] "?"]
+
+
+
+
+          #_[:div "when r is a unit"]
+          #_[m7/x `[= [:m 2 ~pi  ] c]]
+
+          #_[:div "cutting the perimeter into 28 peaces makes each arch"]
+
+
+          #_[m7/x `[ [:m 2 ~pi  ] 28]]
+
+          #_[m7/x `[= ~pi ~js/Math.PI ]]
+
+
+
+          #_[m7/m '[= c [* 2 3.1427  r ]]]
+          #_[m7/m '[=  Time_Period T]]
+
+          #_[:div "How long it goes on time T is the wave length"]
+
+
+          #_[m7/x '[= [:m 60 Hz] [:m [1 60] s]]]
+
+          #_[m7/m '[= frequency f [1 T]]]
+
+          #_[m7/m '[= clock-frequency f [1 [:m 60 s]]
+                    [:m [1 60] Hz]]]
+
+          ])
+
+
+       (if false
+         [:div {:style (m7/css
+                        [[2 10 14 9 :center :center
+                          2.8 :rem :column]
+                         [1 70 90 .1] []
+                         {:gap "1rem"
+                          :color (hsl [3 50 30 1])
+                          :z-index 2}])}
+
+
+
+          #_[m7/m '[c [:m 2 r]]]
+
+          #_[m7/mx `[= BC ~adj]]
+
+          #_[m7/mx `[= ~(symbol (str "tan" (name tt)))
+                     [[:k opp 1] [:k adj 1]]]]
+
+          [m7/x `[= [:m g [:b [+ t dt]]] [+ [:m g [:b t]]  [:m d x ~(symbol "g\u030A")  [:b t]]]]
+
+           [:div "g\u030A g \u030A"]]
+          [m7/x `[[:m  ~timer ~pi] 32]]
+
+          [:div "Periodic Time"]
+          [m7/x `[=  T [:m 64 s]]]
+          [:div "Wave length, \u03BB"]
+          [m7/x `[= ~(symbol "\u03BB") ~(fix (* 2 js/Math.PI ) 2)]]
+
+
+          [m7/m '[= f [1 T] [:m [1 64] Hz] ]]
+          #_[:div tn]
+
+
+
+
+
+          #_[m7/mx `[= [:m r ~(symbol (str "tan" (name tt)))] [:k opp 1]]]
+          [m7/mx `[= [:m r ~(symbol (str "sin" (name tt)))]
+                   opp]]
+
+
+          [m7/x `[= [:m sin [[:m ~timer ~pi] 64]] ~(fix (js/Math.sin tn) 2)]]
+
+
+          [m7/mx `[= [:m r ~(symbol (str "cos" (name tt)))]
+                   adj]]
+
+          #_[m7/mx `[= ~tt [:p ~(fix (/ 180 tn) 1)
+                            ~deg]]]
+
+          #_[m7/mx `[= [:k ~tt 2] [:p ~(fix (/ 180 tn2) 1)
+                                   ~deg]]]
+
+
+          #_[m7/mx `[= [* ~r [:m tan [:p ~(fix (/ 180 tn) 1)
+                                      ~deg]]]
+                     [:k opp 1]]]
+
+
+          #_[m7/mx `[= [* ~r [:m tan [:p ~(fix (/ 180 tn) 1)
+                                      ~deg]]]
+                     ~opp1]]
+
+
+
+
+
+
+
+
+
+
+          ])
+
+
+
+       [:div {:style (m7/css
+                      [[2 10 3 23 :center :center 3 :rem]
+                       [1 70 90 1] []
+                       {:gap "1rem"
+                        :z-index 1}])}
+        (let []
+          [:svg {:style {:height "100%"
+                         :width "100%"}
+                 :viewBox (m7/space
+                           viewbox)}
+
+
+           [:animate {:attributeName :viewBox
+                      :to (m7/space viewbox2)
+                      :dur "4s"
+                      :fill :freeze}]
+           (grid-on 1 1)
+
+           (let [rad tn
+                 r (* r 20)]
+             [:g
+
+              [:circle {:r r
+                        :cx 0
+                        :cy 0
+                        :stroke-width 5
+                        :stroke-dashoffset 0
+                        :stroke-dasharray 0
+                        :stroke (hsl [1 30 70 1])
+                        :fill (hsl [.6 95 70 .5])}]
+
+
+              (if true
+                [:g#arcs
+                 (map
+                  (fn [se]
+                    [:g
+
+                     [:circle {:r 4
+                               :cx (* r (js/Math.cos (* js/Math.PI se (/ 1 32))))
+                               :cy (ve (* r (js/Math.sin (* js/Math.PI se (/ 1 32)))))
+                               :fill (hsl [4 70 70 .5])}]
+                     [:text {:x (* r (js/Math.cos (* js/Math.PI se (/ 1 32))))
+                             :y (ve (* r (js/Math.sin (* js/Math.PI se (/ 1 32)))))
+                             :font-size 10
+                             }
+                      se]])
+                  (range 0 (* 2 32)))])
+
+
+
+              #_[:g#r1
+               (map
+                (fn [ang]
+                  [:path {:d (m7/path [0 0 :l r 0 ])
+                          :id :rrr2
+                          :fill :none
+                          :transform (m7/tranfrom
+                                      [[:rotate ang]])
+                          :stroke (hsl [5 70 80 .6])
+                          :stroke-width 3}])
+                [(ve tn) 0])]
+
+              #_[:g#tan2
+               (map
+                (fn [ang]
+                  [:path {:d (str
+                              (m7/path [0 0 :l r 0 0
+                                        (*  r (js/Math.tan
+                                               (/ js/Math.PI
+                                                  (nth turns sec2))))])
+                              "z")
+                          :id :rrrt1
+                          :fill (hsl [4 70 80 .6])
+                          :transform (m7/tranfrom [[:rotate ang]])
+                          :stroke (hsl [4 70 80 .6])
+                          :stroke-width 3}])
+                [(ve (/ 180 rad))])]
+
+
+
+              #_[:g#tan
+               (map
+                (fn [ang]
+                  [:path {:d (str
+                              (m7/path [0 0 :l r 0 0
+                                        (*  r (js/Math.tan
+                                               (/ js/Math.PI
+                                                  (nth turns sec2))))])
+                              "z")
+                          :id :rrrt1
+                          :fill (hsl [4 70 80 .6])
+                          :transform (m7/tranfrom [
+                                                   [:rotate ang]])
+                          :stroke (hsl [4 70 80 .6])
+                          :stroke-width 3}])
+                [(ve (/ 180 rad))])
+
+
+                 (map
+                  (fn [ang]
+                    [:path {:d (m7/path [0 0 :l  0
+                                         20 -20 0 0 -20 ])
+
+                            :fill (hsl [0 70 80 .6])
+                            :transform (m7/tranfrom [
+                                                     [:rotate ang]
+                                                     [:translate [r 0]]])
+                            :stroke (hsl [0 70 80 1])
+                            :stroke-width 3}])
+                  [(ve (/ 180 rad))])
+                 [:text
+
+
+                  [:textPath {:href :#rrrt1
+                              :font-size 20
+                              :startOffset (+ r (*  r (js/Math.tan
+                                                       (/ js/Math.PI
+                                                          (nth turns sec2))))
+                                              r)}
+                   "hyp"
+                   [:tspan {:dy 10} 1]]
+
+
+
+                  [:textPath {:href :#rrrt1
+                              :font-size 20
+                              :startOffset
+                              (+ r (* .5 r
+                                      (js/Math.tan
+                                       (/ js/Math.PI
+                                          (nth turns sec2)))))}
+                   "opp"
+                   [:tspan {:dy 10} 1]]]
+                 ]
+
+
+
+
+
+
+
+
+
+              #_[:text
+               [:textPath {:href :#rrr2
+                           :font-size 10
+                           :startOffset "30%"}
+                "R"]]
+
+
+
+
+              (if false
+                [:g
+                 [:path#angle {:d
+                               (m7/path
+                                [0 0 :l r 0 :a r r 0 (if (< op 0) true false) false
+                                 (ve (- r (* 20 adj))) (ve (* 20  op))])
+                               :stroke (hsl [3 70 70 1])
+                               :transform (m7/tranfrom [[:scale [.2 .2]]])
+                               :stroke-width 3
+                               :fill (hsl [3 70 70 .5])}]
+
+
+
+
+
+                 [:path#sin {:d
+                             (m7/path [0 0 :l (* 20 adj) 0 0 (ve (* 20 op))])
+                             :id :tri22
+                             :stroke (hsl [1 70 70 1])
+                             :stroke-width 1
+                             :fill (hsl [1.5 70 70 .5])}]])
+
+
+              #_[:g {:transform (m7/tranfrom [[:translate [73 0]]])}
+               [:path#angle2 {:d
+                              (m7/path
+                               [0 0 :l r 0 :a r r 0 false false
+                                (ve (- r (* 20 adj2))) (ve (* 20  op2))])
+                              :stroke (hsl [4 70 70 1])
+                              :transform (m7/tranfrom [[:scale [.2 .2]]])
+                              :stroke-width 3
+                              :fill (hsl [3 70 70 .5])}]
+
+
+               [:path#sin2 {:d
+                            (m7/path [0 0 :l (* 20 adj2) 0 0 (ve (* 20 op2))])
+                            :id :tri222
+                            :stroke (hsl [4.5 70 70 1])
+                            :stroke-width 1
+                            :fill (hsl [2.5 70 70 .5])}]
+
+
+               [:text
+
+                [:textPath {:href :#tri222
+                            :font-size 10
+                            :startOffset (+ 0 (* adj2 20))}
+
+                 (str "B" "")]
+
+
+                [:textPath {:href :#tri222
+                            :font-size 10
+                            :startOffset (+ (* .95 op2 20) (* adj2 20))}
+
+                 (str "A1" "")]
+
+
+                [:textPath {:href :#tri222
+                            :font-size 10
+                            :dy 10
+                            :startOffset (+ 0 0)}
+                 (str "C1" "")]
+
+                ]
+
+
+
+               ]
+
+
+
+
+
+              #_[:path.tri2 {:d (m7/path
+                          [0 0 :l (* .3 adj 20) 0 0 (ve (* 20 op))])
+                      :transform (m7/tranfrom
+                                  [[:translate [(* .7 20 adj) 0]]])
+                      :stroke (hsl [1 70 70 1])
+                      :stroke-width 3
+                      :fill (hsl [3.5 70 70 .5])}]
+
+
+              #_[:text
+               [:textPath {:href :#tri22
+                           :font-size 10
+                           :startOffset (+ 0 0)}
+                (str "C" "")]
+
+               [:textPath {:href :#tri22
+                           :font-size 10
+                           :startOffset (+ 0 (* adj 20))}
+
+                (str "B" "")]
+
+
+
+
+               #_[:textPath {:href :#tri22
+                           :font-size 15
+                           :startOffset (+ 0 (* 20 .7 adj))}
+
+                (str "T" "")]
+
+               [:textPath {:href :#tri22
+                           :font-size 10
+                           :startOffset (+ (* .95 op 20) (* adj 20))}
+
+                (str "A" "")]
+
+
+
+
+               #_[:textPath {:href :#tri22
+                           :font-size 10
+                           :startOffset (+ (* .3 adj 20) 0)}
+
+                #_(str "adj" "")
+                adj
+
+                ]
+
+
+               #_[:textPath {:href :#tri22
+                           :font-size 10
+                           :startOffset
+                           (+
+                            (* 20 adj)
+                            (* .4 20 op))}
+
+                #_(str "opp" "")
+
+                op
+                  ]]
+
+              #_[:path {:d (m7/path [0 -40 :l 2200 0])
+                      :fill :none
+                      :stroke-width 4
+                      :stroke (hsl [2 70 70 1])}]
+
+
+              [:path#lam {:d (m7/path [0 40 :l (* 2 js/Math.PI r) 0])
+                          :fill :none
+                          :stroke-width 4
+                          :stroke (hsl [0 50 40 1])}]
+
+              [:path#lam2 {:d (m7/path [0 0 :l (*  2 r) 0])
+                           :fill :none
+                           :stroke-width 4
+                           :stroke (hsl [1 50 40 1])}]
+
+              [:text
+               #_[:textPath {:href :#lam
+                           :startOffset "30%"}
+                "Periodic Time, T"]
+
+               [:textPath {:href :#lam
+                           :dy -20
+                           :startOffset "30%"}
+                "c"]
+
+
+               [:textPath {:href :#lam2
+                           :dy -20
+                           :startOffset "30%"}
+                "d"]
+
+               ]
+              (if true
+                  [:g#wave
+                   (map-indexed
+
+                    (fn [index i]
+                      [:g
+
+                       #_[:circle {:cx (* i r)
+                                   :cy (ve (* 1.3 r (js/Math.sin i)))
+                                   :r 3
+                                   :fill (hsl [2 70 70 1])}]
+
+
+
+                       #_[:circle {:cx (* i r)
+                                   :cy (ve (- (* 1.0 r (js/Math.sin i)) (* 0.9 r (js/Math.sin i))))
+                                   :r 3
+                                   :fill (hsl [2 70 70 1])}]
+
+                       #_[:circle {:cx (* i r)
+                                   :cy (+ -40 (ve (* 1.0 r (js/Math.sin i))))
+                                   :r 3
+                                   :fill (hsl [1 70 70 1])}]
+
+
+                       #_[:circle {:cx (* i r)
+                                 :cy (ve (* 1.0 r (js/Math.sin i)))
+                                 :r 3
+                                 :fill (hsl [0 70 70 1])}]
+                       #_[:circle {:cx (* i r)
+                                   :cy (ve (ve (* 0.9 r (js/Math.sin i))))
+                                   :r 3
+                                   :fill (hsl [1 70 70 1])}]
+
+                       [:circle {:cx (* i r)
+                                 :cy 0
+                                 :r 3
+                                 :fill (hsl [4 70 70 1])}]
+                       (if (= (mod index 2) 0)
+                         [:text {:x (* i r)
+                                 :y 0
+                                 :dx -10
+                                 :dy 15
+                                 :font-size 10
+                                 :fill (hsl [4 20 20 1])}
+                          index
+                          #_(str index (name pi))
+                          #_[:tspan {:dy 12
+                                   :dx -13}
+                           32]
+
+                          ])
+
+
+                       ])
+                    (range 0 20 (/ js/Math.PI 32)))])
+
+
+
+              [:circle {:cx (* r sec2)
+                        :cy (ve (* 20 op))
+                        :r 5
+                        :fill (hsl [5 70 70 1])}]
+
+
+              [:circle {:cx (* 20 adj)
+                        :cy (ve (* 20 op))
+                        :r 5
+                        :fill (hsl [5 70 70 1])}]
+
+
+              [:circle {:cx (* r sec2)
+                        :cy 0
+                        :r 5
+                        :fill (hsl [4 70 70 1])}]
+
+
+              #_[:text {:x 0
+                      :style {:font-size (:font-size angle)}
+                      :dy (:dy angle)
+                      :dx (:dx angle)
+                      :y 0}
+               #_(name tt)
+               #_(fix (* (/ 180 js/Math.PI) (js/Math.asin .92)
+                       ) 2)
+               (fix (/ 180 (nth turns sec2)) 1)
+               [:tspan {:dy -6}
+                (name deg)]
+               ]
+
+
+              ])
+
+           ])]])))
+
+
+
+(defn sine-wave2 []
+  (let [[timer update-time]
+        (react/useState 0)
+
+        sec2 (* timer js/Math.PI (/ 1 32))
+        angle {:font-size 12
+               :dy -5
+               :dx 30}
+
+        tn sec2
+        tn2 sec2
+        r 10
+        adj (fix (* r  (js/Math.cos tn))  2)
+        op (fix (* r  (js/Math.sin tn))  2)
+        opp1 (fix (* r  (js/Math.tan tn))  2)
+
+        adj2 (fix (* r  (js/Math.cos tn))  2)
+        op2 (fix (* r  (js/Math.sin tn))  2)
+        opp12 (fix (* r  (js/Math.tan tn))  2)
+
+        _ (react/useEffect
+           (fn []
+             (let [i (js/setInterval #(update-time (mod (+ timer 1) 128)) 1000)]
+               (fn []
+                 (js/clearInterval i)))))
+
+        [slider get-slider] (react/useState 0)
+        dd '☐
+        deg '°
+        pi 'π
+        f (fn [n] (/ 1 n))
+        tt 'θ
+        dx [1 0  0 1 -1  0 0 -1]
+
+        sq (fn [n]
+                (comp
+                 (partial map (partial * n))))]
+    (let [zoom 4
+          ax-dx 80
+          ax-dy 40
+          vb (fn [z]
+               (nth [(map  #(* % 15) [20 -22  40 45])
+
+                     [0 -180  200 200]
+                     [0 -50  100 100]
+                     [0 -25  50 50]
+                     [-100 -200  800 200]
+                     [40 120  80 80]
+                     [0 40  100 100]
+                     [75 -175  150 150]
+                     [-20 -20  100 100]
+                     [-400 -200  800 200]
+                     ] z))
+          viewbox (vb 0)
+          viewbox2 (vb 0)
+          ]
+      [:div {:style (merge
+                     (grid [100 :vh 100 :vw
+                            (take 24 (repeat [8 :vh]))
+                            (take 20 (repeat [8 :vh]))])
+                     {:background-color (hsl [1 70 70 .1])})}
+
+
+       (if false
+         [:div {:style (m7/css
+                        [[2 7 2 9 :center :center
+                          3.8 :rem :column]
+                         [1 70 90 .1] []
+                         {:gap "1rem"
+                          :color (hsl [3 50 30 1])
+                          :z-index 2}])}
+
+
+
+
+          [m7/mx `[= c [* ~pi [:m 2 r]]]]
+          [m7/mx `[= c [* ~(fix js/Math.PI 5) [:m 2 r]]]]
+          #_[m7/x `[= ~pi  [c [:m 2 r]]]]
+
+
+          #_[:div "what would be angle with arc length of 3 of an unit circle?"]
+
+
+          #_[:div "what is the circumference of unit circle?"]
+
+
+          #_[m7/x `[= [[:m 2 ~pi] 64]  [[* 2 ~(fix js/Math.PI 4)] 64] [c 64]]]
+
+          #_[m7/x `[= [:m 2 ~pi ] c ~(fix (* 2 js/Math.PI) 4) [:m 360 ~deg]]]
+
+          #_[:div "what would be angle with arc length of 3 of an unit circle?"]
+
+          #_[m7/x `[= Arc [c 16] [~pi 8]  ~(fix (* 2 js/Math.PI (/ 1 16)) 4)]]
+
+
+          #_[m7/x `[=  [:p 3 c] [:m ~(fix (/ (* 3 360) (* 2 js/Math.PI)) 2) ~deg]]]
+
+
+
+          #_[m7/x `[= [~pi 8] [[:m 360 ~deg] 16] [:m ~(/ 360 16) ~deg]]]
+
+
+          #_[:div "for unit circle what degree makes up arc length of " [m7/x `[~pi 8]] "?"]
+
+
+
+
+          #_[:div "when r is a unit"]
+          #_[m7/x `[= [:m 2 ~pi  ] c]]
+
+          #_[:div "cutting the perimeter into 28 peaces makes each arch"]
+
+
+          #_[m7/x `[ [:m 2 ~pi  ] 28]]
+
+          #_[m7/x `[= ~pi ~js/Math.PI ]]
+
+
+
+          #_[m7/m '[= c [* 2 3.1427  r ]]]
+          #_[m7/m '[=  Time_Period T]]
+
+          #_[:div "How long it goes on time T is the wave length"]
+
+
+          #_[m7/x '[= [:m 60 Hz] [:m [1 60] s]]]
+
+          #_[m7/m '[= frequency f [1 T]]]
+
+          #_[m7/m '[= clock-frequency f [1 [:m 60 s]]
+                    [:m [1 60] Hz]]]
+
+          ])
+
+
+       (if false
+         [:div {:style (m7/css
+                        [[2 10 14 9 :center :center
+                          2.8 :rem :column]
+                         [1 70 90 .1] []
+                         {:gap "1rem"
+                          :color (hsl [3 50 30 1])
+                          :z-index 2}])}
+
+
+
+          #_[m7/m '[c [:m 2 r]]]
+
+          #_[m7/mx `[= BC ~adj]]
+
+          #_[m7/mx `[= ~(symbol (str "tan" (name tt)))
+                     [[:k opp 1] [:k adj 1]]]]
+
+          [m7/x `[= [:m g [:b [+ t dt]]] [+ [:m g [:b t]]  [:m d x ~(symbol "g\u030A")  [:b t]]]]
+
+           [:div "g\u030A g \u030A"]]
+          [m7/x `[[:m  ~timer ~pi] 32]]
+
+          [:div "Periodic Time"]
+          [m7/x `[=  T [:m 64 s]]]
+          [:div "Wave length, \u03BB"]
+          [m7/x `[= ~(symbol "\u03BB") ~(fix (* 2 js/Math.PI ) 2)]]
+
+
+          [m7/m '[= f [1 T] [:m [1 64] Hz] ]]
+          #_[:div tn]
+
+
+
+
+
+          #_[m7/mx `[= [:m r ~(symbol (str "tan" (name tt)))] [:k opp 1]]]
+          [m7/mx `[= [:m r ~(symbol (str "sin" (name tt)))]
+                   opp]]
+
+
+          [m7/x `[= [:m sin [[:m ~timer ~pi] 64]] ~(fix (js/Math.sin tn) 2)]]
+
+
+          [m7/mx `[= [:m r ~(symbol (str "cos" (name tt)))]
+                   adj]]
+
+          #_[m7/mx `[= ~tt [:p ~(fix (/ 180 tn) 1)
+                            ~deg]]]
+
+          #_[m7/mx `[= [:k ~tt 2] [:p ~(fix (/ 180 tn2) 1)
+                                   ~deg]]]
+
+
+          #_[m7/mx `[= [* ~r [:m tan [:p ~(fix (/ 180 tn) 1)
+                                      ~deg]]]
+                     [:k opp 1]]]
+
+
+          #_[m7/mx `[= [* ~r [:m tan [:p ~(fix (/ 180 tn) 1)
+                                      ~deg]]]
+                     ~opp1]]
+
+
+
+
+
+
+
+
+
+
+          ])
+
+
+
+       [:div {:style (m7/css
+                      [[2 10 3 23 :center :center 3 :rem]
+                       [1 70 90 1] []
+                       {:gap "1rem"
+                        :z-index 1}])}
+        (let []
+          [:svg {:style {:height "100%"
+                         :width "100%"}
+                 :viewBox (m7/space
+                           viewbox)}
+
+
+           [:animate {:attributeName :viewBox
+                      :to (m7/space viewbox2)
+                      :dur "4s"
+                      :fill :freeze}]
+
+
+
+
+           (grid-on 1 1)
+
+
+
+
+           (let [rad tn
+                 r (* r 20)]
+             [:g
+
+              [:circle {:r r
+                        :cx 0
+                        :cy 0
+                        :stroke-width 5
+                        :stroke-dashoffset 0
+                        :stroke-dasharray 0
+                        :stroke (hsl [1 30 70 1])
+                        :fill (hsl [.6 95 70 .5])}]
+
+
+              (if true
+                [:g#arcs
+                 (map
+                  (fn [se]
+                    [:g
+
+                     [:circle {:r 4
+                               :cx (* r (js/Math.cos (* js/Math.PI se (/ 1 32))))
+                               :cy (ve (* r (js/Math.sin (* js/Math.PI se (/ 1 32)))))
+                               :fill (hsl [4 70 70 .5])}]
+                     [:text {:x (* r (js/Math.cos (* js/Math.PI se (/ 1 32))))
+                             :y (ve (* r (js/Math.sin (* js/Math.PI se (/ 1 32)))))
+                             :font-size 10
+                             }
+                      se]])
+                  (range 0 (* 2 32)))])
+
+
+
+              #_[:g#r1
+               (map
+                (fn [ang]
+                  [:path {:d (m7/path [0 0 :l r 0 ])
+                          :id :rrr2
+                          :fill :none
+                          :transform (m7/tranfrom
+                                      [[:rotate ang]])
+                          :stroke (hsl [5 70 80 .6])
+                          :stroke-width 3}])
+                [(ve tn) 0])]
+
+              #_[:g#tan2
+               (map
+                (fn [ang]
+                  [:path {:d (str
+                              (m7/path [0 0 :l r 0 0
+                                        (*  r (js/Math.tan
+                                               (/ js/Math.PI
+                                                  (nth turns sec2))))])
+                              "z")
+                          :id :rrrt1
+                          :fill (hsl [4 70 80 .6])
+                          :transform (m7/tranfrom [[:rotate ang]])
+                          :stroke (hsl [4 70 80 .6])
+                          :stroke-width 3}])
+                [(ve (/ 180 rad))])]
+
+
+
+              #_[:g#tan
+               (map
+                (fn [ang]
+                  [:path {:d (str
+                              (m7/path [0 0 :l r 0 0
+                                        (*  r (js/Math.tan
+                                               (/ js/Math.PI
+                                                  (nth turns sec2))))])
+                              "z")
+                          :id :rrrt1
+                          :fill (hsl [4 70 80 .6])
+                          :transform (m7/tranfrom [
+                                                   [:rotate ang]])
+                          :stroke (hsl [4 70 80 .6])
+                          :stroke-width 3}])
+                [(ve (/ 180 rad))])
+
+
+                 (map
+                  (fn [ang]
+                    [:path {:d (m7/path [0 0 :l  0
+                                         20 -20 0 0 -20 ])
+
+                            :fill (hsl [0 70 80 .6])
+                            :transform (m7/tranfrom [
+                                                     [:rotate ang]
+                                                     [:translate [r 0]]])
+                            :stroke (hsl [0 70 80 1])
+                            :stroke-width 3}])
+                  [(ve (/ 180 rad))])
+                 [:text
+
+
+                  [:textPath {:href :#rrrt1
+                              :font-size 20
+                              :startOffset (+ r (*  r (js/Math.tan
+                                                       (/ js/Math.PI
+                                                          (nth turns sec2))))
+                                              r)}
+                   "hyp"
+                   [:tspan {:dy 10} 1]]
+
+
+
+                  [:textPath {:href :#rrrt1
+                              :font-size 20
+                              :startOffset
+                              (+ r (* .5 r
+                                      (js/Math.tan
+                                       (/ js/Math.PI
+                                          (nth turns sec2)))))}
+                   "opp"
+                   [:tspan {:dy 10} 1]]]
+                 ]
+
+
+
+
+
+
+
+
+
+              #_[:text
+               [:textPath {:href :#rrr2
+                           :font-size 10
+                           :startOffset "30%"}
+                "R"]]
+
+
+
+
+              (if false
+                [:g
+                 [:path#angle {:d
+                               (m7/path
+                                [0 0 :l r 0 :a r r 0 (if (< op 0) true false) false
+                                 (ve (- r (* 20 adj))) (ve (* 20  op))])
+                               :stroke (hsl [3 70 70 1])
+                               :transform (m7/tranfrom [[:scale [.2 .2]]])
+                               :stroke-width 3
+                               :fill (hsl [3 70 70 .5])}]
+
+
+
+
+
+                 [:path#sin {:d
+                             (m7/path [0 0 :l (* 20 adj) 0 0 (ve (* 20 op))])
+                             :id :tri22
+                             :stroke (hsl [1 70 70 1])
+                             :stroke-width 1
+                             :fill (hsl [1.5 70 70 .5])}]])
+
+
+              #_[:g {:transform (m7/tranfrom [[:translate [73 0]]])}
+               [:path#angle2 {:d
+                              (m7/path
+                               [0 0 :l r 0 :a r r 0 false false
+                                (ve (- r (* 20 adj2))) (ve (* 20  op2))])
+                              :stroke (hsl [4 70 70 1])
+                              :transform (m7/tranfrom [[:scale [.2 .2]]])
+                              :stroke-width 3
+                              :fill (hsl [3 70 70 .5])}]
+
+
+               [:path#sin2 {:d
+                            (m7/path [0 0 :l (* 20 adj2) 0 0 (ve (* 20 op2))])
+                            :id :tri222
+                            :stroke (hsl [4.5 70 70 1])
+                            :stroke-width 1
+                            :fill (hsl [2.5 70 70 .5])}]
+
+
+               [:text
+
+                [:textPath {:href :#tri222
+                            :font-size 10
+                            :startOffset (+ 0 (* adj2 20))}
+
+                 (str "B" "")]
+
+
+                [:textPath {:href :#tri222
+                            :font-size 10
+                            :startOffset (+ (* .95 op2 20) (* adj2 20))}
+
+                 (str "A1" "")]
+
+
+                [:textPath {:href :#tri222
+                            :font-size 10
+                            :dy 10
+                            :startOffset (+ 0 0)}
+                 (str "C1" "")]
+
+                ]
+
+
+
+               ]
+
+
+
+
+
+              #_[:path.tri2 {:d (m7/path
+                          [0 0 :l (* .3 adj 20) 0 0 (ve (* 20 op))])
+                      :transform (m7/tranfrom
+                                  [[:translate [(* .7 20 adj) 0]]])
+                      :stroke (hsl [1 70 70 1])
+                      :stroke-width 3
+                      :fill (hsl [3.5 70 70 .5])}]
+
+
+              #_[:text
+               [:textPath {:href :#tri22
+                           :font-size 10
+                           :startOffset (+ 0 0)}
+                (str "C" "")]
+
+               [:textPath {:href :#tri22
+                           :font-size 10
+                           :startOffset (+ 0 (* adj 20))}
+
+                (str "B" "")]
+
+
+
+
+               #_[:textPath {:href :#tri22
+                           :font-size 15
+                           :startOffset (+ 0 (* 20 .7 adj))}
+
+                (str "T" "")]
+
+               [:textPath {:href :#tri22
+                           :font-size 10
+                           :startOffset (+ (* .95 op 20) (* adj 20))}
+
+                (str "A" "")]
+
+
+
+
+               #_[:textPath {:href :#tri22
+                           :font-size 10
+                           :startOffset (+ (* .3 adj 20) 0)}
+
+                #_(str "adj" "")
+                adj
+
+                ]
+
+
+               #_[:textPath {:href :#tri22
+                           :font-size 10
+                           :startOffset
+                           (+
+                            (* 20 adj)
+                            (* .4 20 op))}
+
+                #_(str "opp" "")
+
+                op
+                  ]]
+
+              #_[:path {:d (m7/path [0 -40 :l 2200 0])
+                      :fill :none
+                      :stroke-width 4
+                      :stroke (hsl [2 70 70 1])}]
+
+
+              [:path#lam {:d (m7/path [0 40 :l (* 2 js/Math.PI r) 0])
+                          :fill :none
+                          :stroke-width 4
+                          :stroke (hsl [0 50 40 1])}]
+
+              [:path#lam2 {:d (m7/path [0 0 :l (*  2 r) 0])
+                           :fill :none
+                           :stroke-width 4
+                           :stroke (hsl [1 50 40 1])}]
+
+              [:text
+               #_[:textPath {:href :#lam
+                           :startOffset "30%"}
+                "Periodic Time, T"]
+
+               [:textPath {:href :#lam
+                           :dy -20
+                           :startOffset "30%"}
+                "c"]
+
+
+               [:textPath {:href :#lam2
+                           :dy -20
+                           :startOffset "30%"}
+                "d"]
+
+               ]
+              (if true
+                  [:g#wave
+                   (map-indexed
+
+                    (fn [index i]
+                      [:g
+
+                       #_[:circle {:cx (* i r)
+                                   :cy (ve (* 1.3 r (js/Math.sin i)))
+                                   :r 3
+                                   :fill (hsl [2 70 70 1])}]
+
+
+
+                       #_[:circle {:cx (* i r)
+                                   :cy (ve (- (* 1.0 r (js/Math.sin i)) (* 0.9 r (js/Math.sin i))))
+                                   :r 3
+                                   :fill (hsl [2 70 70 1])}]
+
+                       #_[:circle {:cx (* i r)
+                                   :cy (+ -40 (ve (* 1.0 r (js/Math.sin i))))
+                                   :r 3
+                                   :fill (hsl [1 70 70 1])}]
+
+
+                       #_[:circle {:cx (* i r)
+                                 :cy (ve (* 1.0 r (js/Math.sin i)))
+                                 :r 3
+                                 :fill (hsl [0 70 70 1])}]
+                       #_[:circle {:cx (* i r)
+                                   :cy (ve (ve (* 0.9 r (js/Math.sin i))))
+                                   :r 3
+                                   :fill (hsl [1 70 70 1])}]
+
+                       [:circle {:cx (* i r)
+                                 :cy 0
+                                 :r 3
+                                 :fill (hsl [4 70 70 1])}]
+                       (if (= (mod index 2) 0)
+                         [:text {:x (* i r)
+                                 :y 0
+                                 :dx -10
+                                 :dy 15
+                                 :font-size 10
+                                 :fill (hsl [4 20 20 1])}
+                          index
+                          #_(str index (name pi))
+                          #_[:tspan {:dy 12
+                                   :dx -13}
+                           32]
+
+                          ])
+
+
+                       ])
+                    (range 0 20 (/ js/Math.PI 32)))])
+
+
+
+              [:circle {:cx (* r sec2)
+                        :cy (ve (* 20 op))
+                        :r 5
+                        :fill (hsl [5 70 70 1])}]
+
+
+              [:circle {:cx (* 20 adj)
+                        :cy (ve (* 20 op))
+                        :r 5
+                        :fill (hsl [5 70 70 1])}]
+
+
+              [:circle {:cx (* r sec2)
+                        :cy 0
+                        :r 5
+                        :fill (hsl [4 70 70 1])}]
+
+
+              #_[:text {:x 0
+                      :style {:font-size (:font-size angle)}
+                      :dy (:dy angle)
+                      :dx (:dx angle)
+                      :y 0}
+               #_(name tt)
+               #_(fix (* (/ 180 js/Math.PI) (js/Math.asin .92)
+                       ) 2)
+               (fix (/ 180 (nth turns sec2)) 1)
+               [:tspan {:dy -6}
+                (name deg)]
+                 ]
+
+              [:g#spring {:transform (m7/tranfrom [
+                                                   [:rotate 90]
+                                                   [:translate [0 (ve (* 2 r))]]
+                                                   [:scale 4.2]
+                                                   ])}
+               [:path {:d (path (flatten
+                                 [0 0
+
+                               (repeat 10
+                                       [
+                                        :a 2 1 0 false false  0 10
+                                        :a 2 1 0 true false  0 -3])
+                               :a 2 1 0 false false  0 10
+                               :l 0 7
+                               :a 1.5 1 0 false true   0 3
+                               :a 1.5 1 0 false true   0 -3
+                               ]))
+                    :stroke (hsl [2 70 70 1])
+                    :stroke-width 1
+                    :fill :none}
+                [:animate
+                 {:attributeName :d
+                  :begin :click
+                  :dur (sec 10)
+                  :keyTimes (m7/sami-colon [0 0.3  0.4 .5
+                                            0.6 0.75 0.9 1])
+                  :values (m7/sami-colon
+                           (map
+                            (fn [i j]
+                              (path (flatten
+                                     [0 0
+                                      (repeat 10
+                                              [
+                                               :a 2 j 0 false false  0 (+ 10 i)
+                                               :a 2 j 0 true false  0 -3])
+                                      :a 2 j 0 false false  0 (+ i 10)
+                                      :l 0 7
+                                      :a 2 j 0 false true   0 3
+                                      :a 2 j 0 false true   0 -3
+                                      ]))
+                              )
+                            (map #(* % 5) [0 .50 .7 1
+                                           1 .7 .5 0
+                                           -0.7 .5  ])
+                            [1 1.1 1.2 1.5
+                             1.5 1.2 1.1 1]
+                         ))
+
+               :fill :freeze
+               }]]
+               ;; :ccr2.begin
+               #_[:path {:d (path (flatten
+                              [0 (* 7 12)
+                               :a 1 1 0 false false  0 20
+                               :a 1 1 0 false false  0 -20
+                               ]))
+                    :stroke (hsl [2 70 70 1])
+                    :stroke-width 2
+                    :fill (hsl [2 70 70 1])}
+
+             [:animateTransform
+              {:id :ccr2
+               :attributeName :transform
+               :begin :click
+               :dur (sec 1)
+               :type :translate
+               :keyTimes (m7/sami-colon [0 0.5 0.8 1])
+               :values (m7/sami-colon (map m7/space
+                                           (map
+                                            (fn [[x y]]
+                                              [0 (* y 10)])
+                                            [
+                                             [0 0] [0 (* .5 10)]
+                                             [0 (* 1 10)] [0 (* 1.5 10)]])))
+               :fill :freeze
+               }]
+             ]
+            ]
+
+
+              ])
+
+
+
+           ])]])))
 
 
 
