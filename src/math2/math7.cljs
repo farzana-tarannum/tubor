@@ -199,9 +199,13 @@
 
 
 (defn b-exp [{:keys [mo elem]}]
-  [:mrow [:mo "("]
-   (expr elem)
-   [:mo ")"]])
+  (if (= mo :b)
+    [:mrow [:mo "("]
+     (expr elem)
+     [:mo ")"]]
+    [:mrow [:mo "["]
+     (expr elem)
+     [:mo "]"]]))
 
 
 
@@ -259,7 +263,7 @@
                  )))])
 
 
-(defn sx [eq x2 tt]
+(defn sx2 [eq x2 tt]
   [:math
    (expr
     (s/conform ::element
@@ -270,6 +274,23 @@
                                    (if (= x1 x2)
                                      tt
                                      x1))
+                                 x))
+                             eq))
+                     ]
+                 (if (s/valid? ::element r)
+                   r
+                   0)
+                 )))])
+
+
+(defn sx [eq x2 tt]
+  [:math
+   (expr
+    (s/conform ::element
+               (let [r (vec (clojure.walk/postwalk
+                             (fn [x]
+                               (if (= x x2)
+                                 tt
                                  x))
                              eq))
                      ]

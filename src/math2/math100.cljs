@@ -3476,18 +3476,93 @@ in a straight line"]
     ;;         (map #(.toFixed (/ 1 (js/Math.sqrt (/ 1 (* 19.6 %)))) 2) (range 1 11))))
 
      [:div {:style (m7/css
-                    [[1 4 (+ 9 (* 0 2)) 10  :center :center  3 :rem :column]
+                    [[2 4 (+ 5 (* 0 2)) 15  :center :center  3 :rem :column]
                      [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
 
-      [m7/m '[= F [[- mv mu] t]]]
-      [m7/m '[= Ft [- mv mu]]]
+      #_[m7/m '[= F [[- mv mu] t]]]
+      #_[m7/m '[= Ft [- mv mu]]]
+
+
+
+
+      #_[:div "some of mass time velocity before collision"]
+
+      #_[m7/m '[+ [:m [:k m g] [:k u g]]  [:m [:k m b] [:k u b]]]]
+
+      #_[:div "some of mass time velocity after collision"]
+
+      #_[m7/m '[+ [:m [:k m g] [:k v g]]  [:m [:k m b] [:k v b]]]]
+
 
 
       [:div {:style {:font-size "2rem"}} "conservation Law of momentum"]
 
-      [m7/m '[= [+ m1u1  m2u2 ] [+ m1v1  m2v2 ]]]
+      [m7/mx '[= [+ [:m [:k m g] [:k u g]]  [:m [:k m b] [:k u b]]]
+               [+ [:m [:k m g] [:k v g]]  [:m [:k m b] [:k v b]]]]]
+
+
+      #_(let [eq-repl ((fn [x  [e1 e2]]
+                       (if (= x e1)
+                         e2
+                         x)))]
+        (clojure.walk/postwalk
+         (fn [x]
+           (eq-repl x ['[:k m g] '[:m 170 g] ]))
+         '[= [+ [:m [:k m g] [:k u g]]  [:m [:k m b] [:k u b]]]
+           [+ [:m [:k m g] [:k v g]]  [:m [:k m b] [:k v b]]]]))
+
+
+      #_[m7/m
+
+         (clojure.walk/postwalk
+          (fn [x]
+            ((fn [[e1 e2]]
+               (if (= x e1)
+                 e
+.                 x))
+             ['[:k m g] '[:m 170 g] ]))
+          '[= [+ [:m [:k m g] [:k u g]]  [:m [:k m b] [:k u b]]]
+            [+ [:m [:k m g] [:k v g]]  [:m [:k m b] [:k v b]]]])]
+
+
+
+      #_[m7/sx '[= [+ [:m [:k m g] [:k u g]]  [:m [:k m b] [:k u b]]]
+               [+ [:m [:k m g] [:k v g]]  [:m [:k m b] [:k v b]]]]
+       '[:k m g] '[:m 170 g]]
+
+
+      #_(reduce
+
+       (fn [e [x y]]
+         (m7/sx e x y))
+
+       [['[:k m g] 5]
+        ['[:k m b] 5.2]]
+       )
+
+
+
+      #_[m7/mx '[= [+ [* [:m 170 g] [:m 5.2 [m s]]] 0]
+               [+ [* [:m 170 g] [:k v g]]  [* [:m 160 g] [:m 5 [m s]]]]]]
+
+
+
+      #_[m7/mx '[= [- [:m 884 g [m s]] [* [:m 170 g] [:k v g]]]
+                 [+ [- [* [:m 170 g] [:k v g]]] [* [:m 170 g] [:k v g]]  [:m 800 g [m s]]]]]
+
+
+      #_[m7/mx '[= [:k v g]
+               [[:m 84  [m s]]
+                [* 170 1]]
+               [:m 0.494 [m s]]]]
+
+
+      #_[m7/m '[= [+ [:m [:k m g] [:k u g]]  [:m [:k m b] [:k u b]]]
+              [+ [:m [:k m g] [:k v g]]  [:m [:k m b] [:k v b]]]]]
+
+      #_[m7/m '[= [+ m1u1  m2u2 ] [+ m1v1  m2v2 ]]]
 
       #_[m7/m ['= 'a [ [:m (- 7.76 4.43) ['m 's]]
                       [:m .29 's]]]]
@@ -3504,18 +3579,19 @@ in a straight line"]
       ]
 
      [:div {:style (m7/css
-                    [[2 4 (+ 1 (* 0 2)) 7  :center :center  3 :rem :column]
+                    [[8 4 (+ 1 (* 0 2)) 20  :center :center  3 :rem :column]
                      [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
 
-      [:div "The green ball collides with a stationary black ball. the mass of the green ball is 170g"]
+      [:div "The green ball collides with a stationary black ball. the mass of the green ball is 170g and velocity is 5.2 m/s before hit  and mass of brown ball is 160g
+ after green ball hits brown ball, brown ball velocity is 5.0 m/s. find the velocity of green ball after collision?"]
 
       ]
 
 
 
-     [:div {:style (m7/css
+     #_[:div {:style (m7/css
                     [[7 6 (+ 1 (* 0 2)) 7  :center :center  2 :rem :column]
                      [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
                                                           :z-index 4}])}
@@ -3529,7 +3605,7 @@ in a straight line"]
       ]
 
 
-     [:div {:style (m7/css
+     #_[:div {:style (m7/css
                     [[7 6 (+ 10 (* 0 2)) 7  :center :center  2 :rem :column]
                      [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
                                                           :z-index 4}])}
@@ -3563,7 +3639,7 @@ in a straight line"]
 
      [:div {:style (m7/css
                     [[2 10 1 20 :center :center 3 :rem]
-                     [1 70 90 1] [] {:gap "1rem"}])}
+                     [1 70 90 1] [] {:gap "2rem"}])}
       [:svg {:style {:height "100%"
                      :width "100%"
                      }
@@ -3578,22 +3654,21 @@ in a straight line"]
                    :stroke (hsl [2 70 70 1])
                    :stroke-width 6
                    :fill :none}
-             (if (= pl 0)
-               [:animateTransform {:id :green
-                                   :attributeName :transform
-                                   :begin (sec 0)
-                                   :dur (sec 5)
-                                   :from (space [0 0])
-                                   :to (space [150 0])
-                                   :type :translate
-                                   :fill :freeze}])
+          [:animateTransform {:id :green
+                              :attributeName :transform
+                              :begin :click
+                              :dur (sec 5)
+                              :from (space [0 0])
+                              :to (space [150 0])
+                              :type :translate
+                              :fill :freeze}]
 
           [:animateTransform {:id :green2
                               :attributeName :transform
                               :begin :green.end
                               :dur (sec 5)
                               :from (space [150 0])
-                              :to (space [200 0])
+                              :to (space [350 0])
                               :type :translate
                               :fill :freeze}]
 
@@ -3616,7 +3691,7 @@ in a straight line"]
                             :begin :green.end
                             :dur (sec 5)
                             :from (space [0 0])
-                            :to (space [150 0])
+                            :to (space [550 0])
                             :type :translate
                             :fill :freeze}]
         ]
@@ -11254,12 +11329,12 @@ on time?"]
 
           #_[m7/m ['= ['- [:p [:b ['- 'x m]] 2] [:p d 2]] 0 ]]
 
+          #_[m7/m '[+ [:m 2 [:p x 2]] 1]]
+
+          #_[m7/m ['= ['- ['+ [:p 'x 2] ['- [:m 2 'm 'x]] [:p 'm 2]] [:p 'd 2]]  0]]
 
 
-          [m7/m ['= ['- ['+ [:p 'x 2] ['- [:m 2 'm 'x]] [:p 'm 2]] [:p 'd 2]]  0]]
-
-
-          [m7/m ['= ['+ [:p 'x 2] [:m (* 2 m) 'x] (- (* m m) (* d d)) ]  0]]
+          #_[m7/m ['= ['+ [:p 'x 2] [:m (* 2 m) 'x] (- (* m m) (* d d)) ]  0]]
 
           #_[m7/m ['= ['- ['- [:p 'x 2] [:m 5 'x] ] 15] 0]]
 
@@ -11619,7 +11694,7 @@ on time?"]
           scales []
           dfl [:div {:style
                      (m7/css
-                      [[3 2 3 20
+                      [[3 6 3 20
                         :center :center  3.5 :rem :column]
                        [3.5 70 75 .5]
                        []
@@ -11631,15 +11706,69 @@ on time?"]
                               :background-color (hsl [1 90 90 1])
                               :justify-content :space-between
                               :display :flex}}
-                [:div "Calcium Carbonate"]
-                [:div "Hydrochoric Acid"]]
+                #_[:div "Calcium Carbonate"]
+                #_[:div "Hydrochoric Acid"]]
+               [:div "Redox Reaction"]
+               [m7/m '[:a [- K
+                           [:m 1 [:m e -]]]
+                       [:p K +]]]
 
-               [m7/m '[:a [+ [:m Ca C [:k O 3 ]]
-                            [:m 2 [:m H Cl]]]
-                       [+ [:m Ca  [:k Cl 2 ]]
-                        [:m [:k H 2] O]
-                        [:m C [:k O 2 ]]]
-                       ]]
+               [m7/m '[:a [ [:m  O H]
+                           [:m 1 [:m e -]]]
+                       [:p OH -]]]
+
+               #_[:div {:style {:background-color (hsl [2 40 40 1])
+                              :height "4px"
+                              :width "100%"}}]
+
+               #_[m7/mx `[:a [+ [:m 2 Fe] [:m 3 O]]
+
+                        [:m [:p Fe [:m 3 +]]
+                         [:p O [:m 2 -]]]]]
+
+               #_[m7/mx `[:a [+ [:m 2 Fe] [:m 3 O]]
+
+                        [:m [:k Fe 2]
+                         [:k O 3]]]]
+               ]
+          dfl2 [:div {:style
+                     (m7/css
+                      [[3 6 3 20
+                        :center :center  3.5 :rem :column]
+                       [3.5 70 75 .5]
+                       []
+                       {:color (hsl [.5 80 45 1])
+                        :gap (m7/np [1 :rem])
+                        :z-index 10}])}
+               [:div {:style {:font-size "1rem"
+                              :width "50%"
+                              :background-color (hsl [1 90 90 1])
+                              :justify-content :space-between
+                              :display :flex}}
+                #_[:div "Calcium Carbonate"]
+                #_[:div "Hydrochoric Acid"]]
+               [:div "Redox Reaction"]
+               [m7/m '[:a [- [:m 2 Fe]
+                           [:m 6 [:m e -]]]
+                       [:m 2 [:p Fe [:m 3 +]]]]]
+
+               [m7/m '[:a [+ [:m 3 O]
+                           [:m 6 [:m e -]]]
+                       [:m 3 [:p O [:m 2 -]]]]]
+
+               [:div {:style {:background-color (hsl [2 40 40 1])
+                              :height "4px"
+                              :width "100%"}}]
+
+               [m7/mx `[:a [+ [:m 2 Fe] [:m 3 O]]
+
+                        [:m [:p Fe [:m 3 +]]
+                         [:p O [:m 2 -]]]]]
+
+               [m7/mx `[:a [+ [:m 2 Fe] [:m 3 O]]
+
+                        [:m [:k Fe 2]
+                         [:k O 3]]]]
                ]
 
 
@@ -15366,7 +15495,7 @@ on time?"]
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
                             (take 20 (repeat [8 :vh]))])
-                     {:background-color (hsl [1 70 70 .1])
+                     {:background-color (hsl [1 70 70 .5])
                       :gap ".2rem"})}
 
        (map-indexed
@@ -15393,13 +15522,470 @@ on time?"]
        [:div {:style
               (m7/css
                [[2 10  4 15
-                 :center :center  1.8 :rem :column]
+                 :center :center  2.3 :rem :column]
                 [1.5 70 80  .5] []
                 {:gap ".1rem"
-                 :color (hsl [0 30 60 1])
+                 :color (hsl [0 30 30 1])
                  :z-index 10}])}
-        [:div ""]
-        #_[m7/m '[= s  [k [- t 2]]]]
+
+
+
+
+        [m7/m
+         '[= [+ x y] 1]]
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #_[m7/m '[= y [- 1 x]]]
+
+
+        #_[m7/m '[= [+ [:m 2 [:p x 2]]
+                   [:m x y]
+                   [:p y 2]]
+                22]]
+        #_[m7/m '[= [+ [:m 2 [:p x 2]] [:m x [:b [- 1 x]]] [:p [:b [- 1 x]] 2]] 22]]
+
+
+        #_[m7/m '[= [+ [:m 2 [:p x 2]] [- x [:p x 2]]
+                   [:p [:b [- 1 x]] 2]] 22]]
+
+        #_[m7/m '[= [- [:m 2 [:p x 2]]  [:m x [:b [- 1 2]]] [- 21]] 0]]
+
+
+        #_[m7/m '[= [- [:m 2 [:p x 2]] x 21] 0]]
+
+
+
+
+
+
+
+        #_[:div "A car weight 1000Kg moving right at 9 m/s and it strikes a stationary 2000Kg of truck. When the hit the truck they stuck together and they started moving together. what would be the final velocity"]
+
+
+        #_[:div "let, velocity of the car and the trucks after collision is v"  ]
+
+
+        #_[m7/m '[= [+ [* [:m 9 [m s]] [:m 1000 Kg]] 0]
+                [:m [:b [:m [:b [+ 1000 2000]] Kg]] v]
+
+                ]]
+
+        #_[m7/m '[= v
+                [:m 3 [m s] ]
+
+
+                ]]
+
+
+        #_[:div "break"]
+
+
+        #_(reduce
+           (fn [acc e]
+             (if (some #(= e %)  ["broke"] )
+               (conj acc
+                     [:span " "
+                      [:span {:style {:background-color (hsl [1 70 70 1])
+                                      :color (hsl [1 20 40 1])
+                                      :font-weight 600}}
+                       (str  e)]])
+
+
+
+               (conj acc [:span (str " "  e)])))
+
+           [:div ]
+
+
+
+
+           (str/split "last year covid situation broke out." #"\s+"))
+
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["was"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+
+
+
+         (str/split "Once up on a time there was a lady" #"\s+"))
+
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["was"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+
+
+
+         (str/split "She was sick" #"\s+"))
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["were"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+         (str/split "There were school teachers that were women" #"\s+"))
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["was"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+         (str/split "My mother was angry" #"\s+"))
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["was"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+         (str/split "My brother  was playing" #"\s+"))
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["were"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+         (str/split "My friends were going to school" #"\s+"))
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["were"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+         (str/split "They were happy" #"\s+"))
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["was" "held"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+         (str/split "she was held responsible for careless driving" #"\s+"))
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["was" "held"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+         (str/split "she held her baby with one hand" #"\s+"))
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["was" "kept"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+         (str/split "she kept watching movies until it was midnight " #"\s+"))
+
+
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["was" "led"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+         (str/split "In August of 2012, I led mjy first expedition on north pool." #"\s+"))
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #_(reduce
+           (fn [acc e]
+             (if (some #(= e %)  ["broke"] )
+               (conj acc
+                     [:span " "
+                      [:span {:style {:background-color (hsl [1 70 70 1])
+                                      :color (hsl [1 20 40 1])
+                                      :font-weight 600}}
+                       (str  e)]])
+
+
+
+               (conj acc [:span (str " "  e)])))
+
+           [:div ]
+
+
+
+
+           (str/split "last year covid situation broke out." #"\s+"))
+
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["thought" "brought" "could" "was" "began" "kept" "delevered"
+                                "didn't," "deployed" "decided" "jumped"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+         [:div ]
+
+
+
+
+
+         (str/split "About a decade ago, the government thought that if it brought this system online, it could save taxpayer dollars and prove a better service, it was a great idea. So, the typical government process began . Six years and 1.2 billion dollars later, no working product was delevered . At this point they could have kept pouring money into the failing program. Sadly that what often happens, that's the status quo today. But they didn't, the dedicated people inside the agency decided to stand up and call for change. We deployed a small team of just six people. The team jumped in side-by-side to support the agency in transitioning this project into more modern business practices." #"\s+"))
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["thought" "brought" "could" "was" "began" "kept" "delevered"
+                                "didn't," "deployed" "decided" "jumped"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+
+
+
+         (str/split "I felt very lucky because yesterday I nearly survived an
+                       accident" #"\s+"))
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["began"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+         (str/split "Yesterday I began our journey to school at 10:30 am" #"\s+"))
+
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["saw" ""] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 40 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+         (str/split "I saw a beautiful bird on 31st December." #"\s+"))
+
+        #_[m7/mx `[+ 3 [- [/ [:s [+ [* [:b [- 14 10]]
+                                   [:b [- 20 15]]]
+                                4]]
+                         25] 4]
+                 ]]
+
+        #_[m7/mx `[+ 3 [- [/ [:s [+ [* 4 5] 4]] 25] 4]]]
+
+
+        #_[m7/mx `[+ 3 [- [/ [:s [+ 20 4]] 25] 4]]]
+
+
+        #_[m7/mx `[+ 3 [- 0.96 4]]]
+
+        #_[m7/mx `[= [- 3.96 ~(symbol (str "4.00"))] -0.04]]
+        #_[:div ""]
+        #_[m7/mx '[357 9900]]
+
+        #_[m7/mx '[- 3570000 35700]]
+        #_[m7/mx '[* 357 [:b [-  2]]]]
+
+
+        #_[m7/m 1176]
+
+        #_[m7/mx '[* 14 [:b [+ 10000 1000]]]]
+
+        #_[m7/mx '[+ 140000 14000]]
+
+        #_[m7/m 154000]
+        #_[m7/m '[* [:b [- 1000 1]] 12]]
+
+        #_[m7/m '[* [:b [- 1000 1]] 12]]
+
+
+        #_[m7/m '[= [- 12000 10 2] [- 11990 2]]]
+
+
+
 
         #_[m7/m '[= [* 6 3] k]]
 
@@ -15614,7 +16200,7 @@ on time?"]
                [m7/mx `[:p 2 ~i]])
              (range 0 11)))
 
-       [:div {:style (m7/css
+       #_[:div {:style (m7/css
                       [[5 4 2 8 :center :center 1.8 :rem :column]
                        [1 90 90 .01] []
                        (into
@@ -15803,6 +16389,29 @@ on time?"]
 
 
            (grid-on 1 1)
+
+
+           [:g
+            [:path {:d (m7/path [0 0 :l 0 (ve (* 1 30 ))
+                                 (* 4 20) 0 0 (* 1 30 )
+                                 (* 4 -20) 0])
+                    :stroke-width 1
+                    :fill (hsl [2 70 70 1])}
+             [:animateTransform {:id :green-car
+                                 :attributeName :transform
+                                 :begin 0
+                                 :dur (sec 5)
+                                 :from (space [0 0])
+                                 :to (space [150 0])
+                                 :type :translate
+                                 :fill :freeze}]]
+            [:path {:d (m7/path [200 0 :l 0 (ve (* 1 30 ))
+                                 (* 4 20) 0 0 (* 1 30 )
+                                 (* 4 -20) 0])
+                    :stroke-width 1
+                    :fill (hsl [2 70 70 1])}]
+
+            ]
 
            [:g {:transform (m7/tranfrom [[:translate [180 50] ]
                                          [:scale [3 3]]
@@ -17623,9 +18232,9 @@ on time?"]
                  :z-index 10}])}
 
 
+        [m7/mx `[* 999 112]]
 
 
-        #_[m7/m '[= [:m 3 x y z] 9]]
 
 
         #_[m7/m '[= [:m 3  y z] 9]]
@@ -17780,7 +18389,7 @@ on time?"]
 
 
 
-        #_(reduce
+       #_(reduce
          (fn [acc e]
            (if (some #(= e %)  ["worked"] )
              (conj acc
@@ -17834,7 +18443,7 @@ on time?"]
 
         #_(reduce
          (fn [acc e]
-           (if (some #(= e %)  ["had" ""] )
+           (if (some #(= e %)  ["had"] )
              (conj acc
                    [:span " "
                     [:span {:style {:background-color (hsl [.5 95 70 1])
@@ -17852,7 +18461,7 @@ on time?"]
 
         #_(reduce
          (fn [acc e]
-           (if (some #(= e %)  ["ha" "seen"] )
+           (if (some #(= e %)  ["seen"] )
              (conj acc
                    [:span " "
                     [:span {:style {:background-color (hsl [.5 95 70 1])
@@ -17869,21 +18478,21 @@ on time?"]
 
 
         #_(reduce
-         (fn [acc e]
-           (if (some #(= e %)  ["saw" ""] )
-             (conj acc
-                   [:span " "
-                    [:span {:style {:background-color (hsl [1 70 70 1])
-                                    :color (hsl [1 40 40 1])
-                                    :font-weight 600}}
-                     (str  e)]])
+           (fn [acc e]
+             (if (some #(= e %)  ["saw" ""] )
+               (conj acc
+                     [:span " "
+                      [:span {:style {:background-color (hsl [1 70 70 1])
+                                      :color (hsl [1 40 40 1])
+                                      :font-weight 600}}
+                       (str  e)]])
 
 
 
-             (conj acc [:span (str " "  e)])))
+               (conj acc [:span (str " "  e)])))
 
-         [:div ]
-         (str/split "I saw the video" #"\s+"))
+           [:div ]
+           (str/split "I saw the video" #"\s+"))
 
 
 
@@ -17894,7 +18503,7 @@ on time?"]
 
         #_(reduce
          (fn [acc e]
-           (if (some #(= e %)  ["were" "lived" "was" "had" "made" "poured" "walked" "might" "called" "looked"
+           (if (some #(= e %)  ["tasted"  "lived" "was" "had" "made" "poured" "walked" "might" "called" "looked"
                                 "sent" "peeped" "lifted"
                                 "did" "suspected" "would" "opened" "went" "saw" "waited"] )
              (conj acc
@@ -20175,9 +20784,9 @@ on time?"]
           ax-dx 80
           ax-dy 40
           vb (fn [z]
-               (nth [(map  #(* % 20) [15 -20  40 45])
-                     (map  #(* % 20) [-50 -25  100 50])
-                     (map  #(* % 10) [-10 -25  100 50])
+               (nth [(map  #(* % 9) [15 -20  40 45])
+                     (map  #(* % 10) [-50 -25  100 50])
+                     (map  #(* % 10) [-20 -25  100 50])
                      [0 -180  200 200]
                      [0 -50  100 100]
                      [0 -25  50 50]
@@ -20198,11 +20807,40 @@ on time?"]
 
 
        [:div {:style (m7/css
-                      [[2 5 3 23 :center :center 3 :rem :column]
+                      [[2 5 3 10 :center :center 3 :rem :column]
                        [1 70 90 .1] []
                        {:gap "1rem"
                         :z-index 2}])}
-        ""]
+
+        #_[m7/mx `[= [c [:m 2 r]] [64 [* 2 10.18]] ~pi ]]
+
+        [m7/mx `[= r 1]]
+        [m7/mx `[= c [:m 2 ~pi ] [:m 360 ~deg]]]
+
+        #_[m7/mx `[= A [[:m 8 c] 64] [[* 8 2 ~pi ] 64] [:p [:b [[* 360 8] 64]] ~deg] ]]
+
+
+        [:div {:style {:background-color (hsl [1 70 70 1])
+                       :padding "6px"}
+               } "convert " [m7/mx `[[:m 2 ~pi] 3]] " into degree" ]
+
+
+        [m7/mx `[=  [[:m 2 ~pi ] 3] [:m [360 3] ~deg]]]
+
+
+        #_[m7/mx `[= [:m [1 3] ~pi ] [:m [180 3] ~deg]]]
+
+        #_[m7/mx `[= arc [ [* 6 c] 64] [:m [:m 2 r] ~pi] ]]
+
+
+
+        #_[m7/mx `[= c [:m 2 ~pi] ]]
+
+
+
+        ]
+
+
 
 
        [:div {:style (m7/css
@@ -20223,10 +20861,20 @@ on time?"]
                       :fill :freeze}]
 
            (let [r (* r 20)
-                 ps 16
+                 ps 32
                  angle (* js/Math.PI  (/ 1 ps))]
              [:g
               [:circle {:r r
+                        :cx 0
+                        :cy 0
+                        :stroke-width 1
+                        :stroke-dashoffset 0
+                        :stroke-dasharray 0
+                        :stroke (hsl [1 20 20 .8])
+                        :fill (hsl [.6 95 70 .2])}]
+
+
+              [:circle {:r (* 2 r)
                         :cx 0
                         :cy 0
                         :stroke-width 1
@@ -20258,7 +20906,7 @@ on time?"]
                (map
                 (fn [se]
                   [:g
-                   [:circle {:r 4
+                   [:circle {:r 2
                              :cx (* r (* se angle))
                              :cy (ve (* r (js/Math.sin (* se angle))))
                              :fill (hsl [(mod se 8) 70 70 .9])}]
@@ -20267,6 +20915,18 @@ on time?"]
                            :font-size 15
                            :fill (hsl [4 70 70 .4])} se]])
                 (range 0 (* 2 ps)))]
+
+
+              [:path#rad1 {:d (m7/path [  0 0 :l
+                                        (* 8 r angle) (ve (* r (js/Math.sin (* angle 8)) ))
+
+
+
+                                        ])
+
+                           :fill :none
+                           :stroke (hsl [.2 30 30 1])
+                           :stroke-width 2}]
 
 
               (map
@@ -20288,9 +20948,28 @@ on time?"]
                   ])
                (range (ve (+ 1 (* 2 ps)))   (* 6 (+ 1 (* 2 ps)))))
               [:path#rad1 {:d (m7/path [  0 0 :c
-                                        0 0
-                                        (* 4 r angle) (ve (* r (js/Math.sin (* angle 4)) ))
-                                        (* 4 r angle) (ve (* r (js/Math.sin (* angle 4)) ))])
+                                        (* 0.2 r angle) (ve (* r 0.04))
+                                        (* 7.5 r angle) (ve (* r (js/Math.sin (* angle 8)) ))
+                                        (* 8 r angle) (ve (* r (js/Math.sin (* angle 8)) ))
+                                        :c
+                                        (* 6 r angle) (ve (* r .4))
+                                        (* 10 r angle) (ve (* r .4))
+                                        (* 16 r angle) (ve (* r (- (js/Math.sin (* angle 24)) (js/Math.sin (* angle 8))) ))
+                                        :c
+                                        (* .1 r angle) (ve (* r .07))
+                                        (* 15.8 r angle) (ve (* r (+ -0.07 (- (js/Math.sin (* angle 40)) (js/Math.sin (* angle 24)))) ))
+                                        (* 16 r angle) (ve (* r (- (js/Math.sin (* angle 40)) (js/Math.sin (* angle 24))) ))
+                                        :c
+                                        (* 6 r angle) (ve (ve (* r .4)))
+                                        (* 10 r angle) (ve (ve (* r .4)))
+                                        (* 16 r angle) (ve (* r (- (js/Math.sin (* angle 24)) (js/Math.sin (* angle 8))) ))
+                                        :c
+                                        (* 0.2 r angle) (ve (ve (* r 0.04)))
+                                        (* 7.5 r angle) (ve (* r (js/Math.sin (* angle 8)) ))
+                                        (* 8 r angle) (ve (* r (js/Math.sin (* angle 8)) ))
+
+                                        ])
+
                            :fill :none
                            :stroke (hsl [.2 30 30 .5])
                            :stroke-width 2}]

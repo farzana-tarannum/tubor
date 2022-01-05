@@ -33,9 +33,9 @@
    #_[m100/home-planets-banners-exp]
    #_[m100/chem-mole]
    #_[m100/sine-wave2]
-   [m100/sine-wave]
+   #_[m100/sine-wave]
 
-   #_[m100/home-planets-banners]
+   [m100/home-planets-banners]
    #_[m100/grammer-eng]
 
    #_[:div "50,67,72,75,46,47,55,81,87,94,83"]
@@ -81,14 +81,14 @@
    ;; extra
    #_[m100/template3]
    ;; taibles
-   #_ [m100/template4]
+   #_[m100/template4]
    ;; physics video
     #_[m100/template5]
-   #_ [mtemp/template1]
+   #_[mtemp/template1]
    ;; robin hood
-   #_ [m100/home-work]
+   #_[m100/home-work]
    ;; momentum math
-   #_  [m100/home-work2]
+   #_[m100/home-work2]
    ;; velocity
    #_ [m100/home-work3]
    ;; pyramid
@@ -128,8 +128,8 @@
    #_[m100/banner1]
    #_[m100/banner-brand]
    #_[m100/map-asia]
-      #_[py100/template]
-    #_ [py100/template]
+   #_[py100/template]
+   #_[py100/template]
 
    ] )
 
