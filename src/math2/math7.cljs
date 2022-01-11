@@ -45,6 +45,7 @@
               :< '#{<}
               :<= '#{<=}
               :>= '#{>=}
+              :!= '#{!=}
               :- ::op-minus
               :× ::op-mul
               := ::op-equal
@@ -261,6 +262,13 @@
                    r
                    0)
                  )))])
+(defn eq2 [eq]
+  (vec (clojure.walk/postwalk
+        (fn [x]
+          (if (symbol? x)
+            (symbol (name x))
+            x))
+        eq)))
 
 
 (defn sx2 [eq x2 tt]
@@ -301,6 +309,8 @@
 
 
 (comment
+  (s/unform   (s/conform ::element
+                         (eq2 `[= [:m g [:b t]]  [+ b [:m 2 a t]]])))
 
   (sx `[= [:m g [:b t]]  [+ b [:m 2 a t]]] 't '[+ t 3])
 
@@ -640,7 +650,7 @@
 (s/def :math7/size
   (s/cat
    :size number?
-   :scale #{:rem :px :vh :vw :%}))
+   :scale #{:rem :px :vh :vw :% :fr}))
 
 (s/def :math7/linear-gradient
   (s/cat
@@ -771,11 +781,11 @@
         ]
     (comment (merge (cell span) g color (partial )))
     (merge
-     (cell (s/conform :math7/span sp))
+     (cell
+      (s/conform :math7/span sp))
      color
      g
-     (apply merge other)
-     )))
+     (apply merge other))))
 
 ()
 
@@ -792,6 +802,10 @@
                                       1 :rem  1 70 70 1
                                       2 :%  1 70 70 1
                                       3 :%  1 70 70 1]))
+
+  (css [[1 2 3 4 1 :rem]
+        [1 70 70 1]
+        []])
   (s/valid? :math7/cell
             [
              [1 70 70 1]
@@ -807,9 +821,12 @@
   (let [v ]
     )
   (css
-   [[1 2 3 4 :center :center 1 :rem ]
+   [[1 2 3 4 :center :center 1 :rem]
     [1 70 70 1]
-    []])
+    [2
+     1 :rem  1 70 70 1
+     2 :%  1 70 70 1
+     3 :%  1 70 70 1]])
   ((comp
     (fn [n] (update n :font-size
                     (comp

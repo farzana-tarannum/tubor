@@ -28,14 +28,18 @@
 
 
 (defn template []
-  [:div
+  [:div {:style {:display :flex
+                 :justify-content :center}}
+
 
    #_[m100/home-planets-banners-exp]
    #_[m100/chem-mole]
    #_[m100/sine-wave2]
    #_[m100/sine-wave]
 
+   #_[m100/app]
    [m100/home-planets-banners]
+
    #_[m100/grammer-eng]
 
    #_[:div "50,67,72,75,46,47,55,81,87,94,83"]

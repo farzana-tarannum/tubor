@@ -4,8 +4,10 @@
    [react]
    [math2.bdmap :as bdmap]
    [clojure.string :as str]
+   [clojure.walk :as w]
+   [defun.core :refer [defun fun]]
    [math2.math7 :as m7 :refer
-    [grid hsl css space size path ve sec]]))
+   [grid hsl css space size path ve sec]]))
 
 
 
@@ -15430,6 +15432,9 @@ on time?"]
 
 
 
+
+
+
 (defn home-planets-banners []
   (let [[text set-text] (react/useState "")
         [slider set-slider] (react/useState -1)
@@ -15475,7 +15480,7 @@ on time?"]
           ax-dx 80
           ax-dy 40
           vb (fn [z]
-               (nth [[100 -200  400 400]
+               (nth [(map #(* .25 %) [0 -20  83 40])
                      [0 -180  200 200]
                      [0 -50  100 100]
                      [0 -25  50 50]
@@ -15499,46 +15504,281 @@ on time?"]
                       :gap ".2rem"})}
 
        (map-indexed
-        (fn [n d]
+        (fn [n [d r c f1 f2]]
           [:div {:ref (if (= n slider) animate-ref nil)
                  :on-mouse-enter (fn [e]
-                             (set-slider n))
+                                   (set-slider n))
+                 :style (m7/css
+                         [[(+ 0 (* 3 r)) 3 (+ 12 (* 3 c)) 3  f1 f2  1.5 :rem :column]
+                          [(if (= slider n) 3 1) 70 (+ 50 (* 2 n)) .1] []
+                          (into
+                           {:font-size (m7/np [3.7 :rem])
+                            :font-family "Roboto Flex"
+                            :gap (m7/np [1 :rem])
+                            :color (hsl [1 30 (if (= slider n) 20 20) 1])
+                            :z-index 4
+                            :cursor :grab}
+                           {:z-index 19})])
+                 }
+           d])
+        [[[m7/x `[:p x 2]] 1 1 :center :center]
+         [[m7/x `[*  2 [- 1]]] 2 2 :center :center]
+         [[m7/x `[:m 2 x]] 2 1 :center :center]
+         [[m7/x `[:m [- 1] x]] 1 2 :center :center]
+         ["x" 1 1 :flex-end :center] ["x" 1 1 :center :flex-start]
+         [2 2 2 :center :flex-start] [-1 2 2 :flex-end  :center]])
+
+
+
+
+
+
+
+
+
+       #_(map-indexed
+        (fn [n [d r c]]
+          [:div {:ref (if (= n slider) animate-ref nil)
+                 :on-mouse-enter (fn [e]
+                                   (set-slider n))
                  :style
                  (m7/css
-                  [[1 1 (+ 1 (* 4 n)) 4  :center :center  1.5 :rem :column]
+                  [[r 1 (* c 4) 4  :center :flex-end  1.5 :rem :column]
                    [(if (= slider n) 3 1) 70 (+ 50 (* 2 n)) 1] []
                    (into
                     {:font-size (m7/np [1.7 :rem])
                      :font-family "Roboto Flex"
                      :gap (m7/np [1 :rem])
-                     :color (hsl [1 70 (if (= slider n) 40 90) 1])
-                     :z-index 4
+                     :color (hsl [1 30 (if (= slider n) 20 40) 1])
+                     :z-index 10
                      :cursor :grab}
                     {})])}
            d])
-        ["Math" "Physics" "Chemistry" "CSE" "Arts & Fation" "English"])
+        [[[m7/x `[* [:m 2 x] x]] 4 1][ [m7/x `[:m [- 7] x]] 4 2] [[m7/x `[* 3 [:m 2 x]]] 5 1] [[m7/m '[* 3 [- 7]]] 5 2]])
 
 
        [:div {:style
               (m7/css
-               [[2 10  4 15
-                 :center :center  2.3 :rem :column]
-                [1.5 70 80  .5] []
+               [[2 8  8 8
+                 :center :flex-start  2.3 :rem :column]
+                [1.5 70 80  .3] []
                 {:gap ".1rem"
                  :color (hsl [0 30 30 1])
                  :z-index 10}])}
 
-
-
-
-        [m7/m
-         '[= [+ x y] 1]]
+        #_"lie lose make mean meet pay put run say sell send set sit speak spend stand take teach tell think understand wear win write "
 
 
 
 
+        #_[:div "symbol"]
+        #_[:div "exponent"]
+        #_[:div "coefficent"]
+        (comment
+          [:div "Don’t put off your homework to the last minute."]
+          [:div "The storm put the game off by a week."]
+          [:div "Please be quiet. I’m trying to concentrate and you’re putting me off."]
+          [:div "Almost drowning put him off swimming."]
+          [:div  "They frequently put down their little sister for walking slowly."]
+          [:div "My mom always put me down for eating slowly"]
+          [:div "We put down a $1,000 deposit."]
+          [:div "Put it down in the paper what we have learned today"]
+         #_[:div "Put down
+
+Meaning: Insult, belittle, or demean
+Example: They frequently put down their little sister for walking slowly.
+Put down
+
+Meaning: Pay
+Example: We put down a $1,000 deposit.
+Put down
+
+Meaning: Halt, eliminate, stop, or squelch, often by force
+Example: The government quickly put down the insurrection.
+Put down
+
+Meaning: Euthanize (an animal)
+Example: Rex was in so much pain, they had to put him down.
+Put down
+
+Meaning: Write (something)
+Example: Put down the first thing you think of on this piece of paper.
+Put down
+
+Meaning: Terminate a call; to hang up.
+Example: Don’t put the phone down. I want a quick word with him,too.
+Put down
+
+Meaning: Add a name to a list
+Example: I’ve put myself down for the new Spanish conversation course.
+Put down
+
+Meaning: Make prices, or taxes, lower
+Example: BP are putting petrol and diesel down in what could be the start of a price war.
+Put down
+
+Meaning: Place a baby somewhere to sleep
+Example: I had just put Mary down when you rang. So now she’s crying again.
+Put down
+
+Meaning: Land
+Example: The pilot managed to put down in a nearby farm field.
+Put down
+
+Meaning: Drop someone off, or let them out of a vehicle
+Example: The taxi put him down outside the hotel.
+Put down
+
+Meaning: Cease, temporarily or permanently, reading (a book)
+Example: I was unable to put down The Stand: it was that exciting.
+Put down as
+
+Meaning: Assume someone has a particular character from very little information
+Example: I put him down as ignorant, but then discovered he is, in fact, a university professor!
+Put down for
+
+Meaning: Record that someone has offered to help, or contribute something
+Example: Put me down for one of the drivers.
+Put down to
+
+Meaning: State the cause of a situation
+Example: I put the high crime rate down to the high unemployment."])
+        #_[:div "
+Meaning: Distract; to disturb the concentration of
+Example: Please be quiet. I’m trying to concentrate and you’re putting me off.
+Put off
+
+Meaning: Cause to dislike; to discourage (from doing)
+Example: Almost drowning put him off swimming."]
+        #_[m7/x `[= [+ [:m 2 x] 1] y]]
+
+        #_[m7/x
+           (m7/eq2 `[= [+ [+ [:m 8 [:p x 2]] x] 6
+                        [:m 5 y] [:m 6 x y] [:m 9 [:p x 2] y]
+                        [:m 2 y] [:m 3 x y] [:m 2 [:p x 2] y]
+
+                        ] 0])
+           ]
 
 
+
+        [m7/x
+         (m7/eq2 `[= [- 3 [:p x 2]]  [+ x 1]])]
+
+
+
+        [m7/x
+         (m7/eq2 `[= [+ [:p x 2] x [- 2]] 0])]
+
+
+        [m7/x
+         (m7/eq2 `[= [+ [:p x 2] x [- 2]] 0])]
+
+
+
+        [m7/x
+         (m7/eq2 `[= [+ [:p x 2] [:m x [:b [- 2 1]]] [* 2 [- 1]]] 0])]
+
+        [m7/x
+         (m7/eq2 `[= [+ [:p x 2] [- [:m 2 x] x] [* 2 [- 1]]] 0])]
+
+
+        [m7/x
+         (m7/eq2 `[= [- [:m x [:b [+ x 2]]] [:m 1 [:b [+ x 2]]]] 0])]
+
+
+        [m7/x '[= [:m [:b [+ x 2]]  [:b [- x 1]]] 0] ]
+
+
+
+        [m7/m  '[= [+ [- x 1 ] 1] 1]]
+        [:div "or"]
+
+        [m7/m  '[= [+ x 2] 0]]
+        #_[m7/x
+         (m7/eq2 `[= [+ x 1] y])]
+
+
+        (comment
+
+
+          [:div {:style {:background-color (hsl [3 20 20 1])
+                         :width "100%"
+                         :height "3px"}
+                 }]
+
+          [m7/x
+           (m7/eq2 `[= [- 3 [:p x 2]] [+ x 1]])]
+
+
+          [m7/x
+           (m7/eq2 `[=  [+ [- [:p x 2]] [- x ] 2 ] 0])]
+
+
+          [m7/x
+           (m7/eq2 `[=  [+ [- [:p x 2]] [- x [:m 2 x]] 2 ] 0])]
+
+
+          [m7/x
+           (m7/eq2 `[- [:m [- x] [:b [- x 1]]]  [:m 2 [:b [- x 1]]]])]
+
+
+
+          [m7/x
+           (m7/eq2 `[= [:m  [:b [- x 1]] ] 0])])
+
+
+
+        #_[m7/x '[+ x 2]]
+
+
+
+        #_[m7/x
+         (m7/eq2 `[= [- 2 [:p x 2] ] x])]
+
+
+
+          #_(w/postwalk (fn [x] x) '[:apply
+                                 [= [+ x y] 1]
+                                 [- x]])
+
+        #_(m7/x
+         (m7/eq2
+          (map
+           (fun ([(n :guard number?)] (conj `[+ [- x]] n))
+                ([(m :guard vector?)] (conj m `[- x]))
+                ([n] n))
+           )))
+
+
+        #_(comment
+          [m7/x `[= [- [:m 2 [:p x 2]]
+                     x [* 7 3]] 0]]
+
+
+
+          [m7/x `[= [+ [:m 2 [:p x 2]]
+                     [:m x [:b [- [* 2 3] 7]]] [* [- 7] 3]] 0]]
+
+
+
+          [m7/x `[= [+ [:m 2 [:p x 2]]
+                     [- [:m [* 2 3] x] [:m 7 x]] [* [- 7] 3]] 0]]
+
+
+
+          [m7/x `[= [+ [:m [:m 2 x] [:b [+ x 3]]]
+                     [:m [- 7] [:b [+ x 3]]]] 0]]
+
+
+          [m7/x `[= [:m [:b [+ x 3]] [:b [- [:m 2 x] 7]]] 0]]
+
+
+
+          #_[m7/x `[= [+ [:m x [:b [- [:m 2 x]
+                                    7]]]
+                       [:m 3 [:b [- [:m 2 x]
+                                  7]]]] 0]])
 
 
 
@@ -15614,8 +15854,81 @@ on time?"]
 
 
 
+
         #_(reduce
          (fn [acc e]
+           (if (some #(= e %)  ["lay"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+
+
+
+         (str/split "Last night I was so tired and I lay down into the bed." #"\s+")
+
+         )
+
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["mede"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+
+
+
+         (str/split "Last month my mother made a pizza for us." #"\s+"))
+
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["met"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+
+
+
+         (str/split "Last month I met my friends in the park." #"\s+"))
+
+
+
+
+        #_(reduce
+           (fn [acc e]
            (if (some #(= e %)  ["was"] )
              (conj acc
                    [:span " "
@@ -15652,10 +15965,6 @@ on time?"]
              (conj acc [:span (str " "  e)])))
 
          [:div ]
-
-
-
-
          (str/split "She was sick" #"\s+"))
 
 
@@ -15865,11 +16174,12 @@ on time?"]
            (str/split "last year covid situation broke out." #"\s+"))
 
 
-
+        #_["thought" "brought" "could" "was" "began" "kept" "delevered"
+         "didn't," "deployed" "decided" "jumped"]
         #_(reduce
          (fn [acc e]
-           (if (some #(= e %)  ["thought" "brought" "could" "was" "began" "kept" "delevered"
-                                "didn't," "deployed" "decided" "jumped"] )
+           (if (some #(= e %) ["brought" "thought" "could" "was" "proved" "began" "delevered" "kept"
+                               "decided" "jumped" "deployed"])
              (conj acc
                    [:span " "
                     [:span {:style {:background-color (hsl [1 70 70 1])
@@ -15886,7 +16196,7 @@ on time?"]
 
 
 
-         (str/split "About a decade ago, the government thought that if it brought this system online, it could save taxpayer dollars and prove a better service, it was a great idea. So, the typical government process began . Six years and 1.2 billion dollars later, no working product was delevered . At this point they could have kept pouring money into the failing program. Sadly that what often happens, that's the status quo today. But they didn't, the dedicated people inside the agency decided to stand up and call for change. We deployed a small team of just six people. The team jumped in side-by-side to support the agency in transitioning this project into more modern business practices." #"\s+"))
+         #_(str/split "About a decade ago, the government thought that if it brought this system online, it could save taxpayer dollars and proved a better service, it was a great idea. So, the typical government process began . Six years and 1.2 billion dollars later, no working product was delevered . At this point they could have kept pouring money into the failing program. Sadly that what often happens, that's the status quo today. But they didn't, the dedicated people inside the agency decided to stand up and call for change. We deployed a small team of just six people. The team jumped in side-by-side to support the agency in transitioning this project into more modern business practices." #"\s+"))
 
 
         #_(reduce
@@ -16388,7 +16698,23 @@ on time?"]
 
 
 
-           (grid-on 1 1)
+           #_(grid-on 20 20)
+
+
+           #_(map
+
+            [:path {:d (m7/path [0 0 :l 0 (ve (* 1 30 ))
+                                 (* 4 20) 0 0 (* 1 30 )
+                                 (* 4 -20) 0])
+                    :stroke-width 1
+                    :fill (hsl [2 70 70 1])}
+             ]
+
+
+            (rang 0 5))
+
+
+
 
 
            [:g
@@ -16574,8 +16900,12 @@ on time?"]
              [airplane2 [
                            [:translate [600 120]]
                         [:scale [.3 .3]]
-                        [:rotate -90]]]
+                         [:rotate -90]]]
+
+
             ]
+
+
 
 
 
@@ -16744,7 +17074,54 @@ on time?"]
             ]
 
 
+           (let [p (fn [d stroke-width stroke fill]
+                        [:path {:d (m7/path d)
+                                :stroke-width stroke-width
+                                :stroke (hsl stroke)
+                                :fill (hsl fill)}])]
+             [:g
 
+              (map
+               (fn [y]
+                 [p [-300 y  :l 1600 0] .02
+                  [1.8 70 70 1]
+                  [1.8 70 70 1]])
+               (range -2 3))
+
+
+              (map
+               (fn [x]
+                 [p [x -800  :l 0 1600 ] .02
+                  [2.5 70 70 1]
+                  [2.5 70 70 1]])
+               [-2 -1 0 1 2 3])
+
+
+
+              ]
+
+
+
+             )
+
+
+
+           (map
+            (fn [x]
+              [:circle {:cx x
+                        :cy (ve (+ x 1))
+                        :r .05
+                        :fill (hsl [5 70 70 1])}])
+            (range -200 200 .1))
+
+
+           (map
+            (fn [x]
+              [:circle {:cx x
+                        :cy (ve (- 3 (* x x)))
+                        :r .05
+                        :fill (hsl [0 70 70 1])}])
+            (range -200 200 .1))
 
 
            [:clipPath#anik
@@ -16757,6 +17134,97 @@ on time?"]
 
 
        ])))
+
+
+
+
+
+
+
+(defn app []
+  (let [[c ck] (react/useState "hello")
+        ref (react/useRef)
+        p (fn [svg x y]
+            (let [p (js/DOMPoint. x y)
+                  t (-> svg
+                        (.getScreenCTM)
+                        (.inverse))
+                  xy (-> p
+                         (.matrixTransform t))]
+              (ck [(fix (-> xy .-x) 1)
+                   (fix (-> xy .-y) 1) ])))
+        arr [["মোঃ গোলাম কিবরিয়া  খান চৌধুরী" [137 65] 12]
+             [
+              "11 07 2021"
+              [
+               137 78] 6]
+             [
+              "সম্মিলিত সামরিক হাসপাতালে (সিএমএইচ) ঢাকা ঢাকা সেনানিবাস ঢাকা সেনানিবাস - ১২০৬"
+              [
+               137 84] 6]
+             ["০১ ০১ ১৯৫২ নেত্রকোণা" [137 100] 9]
+             ["মৃত হেকিম উদ্দিন খান চৌধুরী" [137 128] 9]
+             ["মৃত জোবেদা খানম" [137 147] 9]
+             ["আছিয়া আক্তার খাতুন" [137 167] 9]
+             ["বাড়ী# ১৯২, রোড# ২ (নতুন) পুরাতন# ৫, এ্যভিনিউ#৩,  ডিওএইচএস  মিরপুর, মিরপুর পল্লবী ১২১৬" [162 186] 5]
+             ["বাড়ী# ১৯২, রোড# ২ (নতুন) পুরাতন# ৫, এ্যভিনিউ#৩,  ডিওএইচএস  মিরপুর, মিরপুর পল্লবী ১২১৬" [162 200] 5]
+             ["আছিয়া আক্তার খাতুন" [158 219] 7]
+             ["স্ত্রী" [272 219] 7]
+
+             ["01 Jan 1963" [330 219] 5]
+
+             ["আশ্রার আহমেদ  খান চৌধুরী" [158 229] 7]
+             ["পুত্র"  [272 229] 7]
+             ["08 Oct 1982" [330 229] 5]
+
+             ["শায়েখ  আহমেদ  খান চৌধুরী" [158 238] 7]
+             [
+              "পুত্র" [272 238] 7]
+             ["31 Aug 1985" [330 238] 5]
+
+             ["কানিজ ফাতিমা" [158 246] 7]
+             ["কন্যা" [272 246] 7]
+             ["02 Feb 1990" [330 246] 5]
+             ["আছিয়া আক্তার খাতুন" [136 397] 7]
+
+
+             ]]
+    [:svg {:ref ref
+           :on-click (fn [e]
+
+
+                       (p
+                        (-> e .-target)
+                        (-> e  .-clientX)
+                        (-> e  .-clientY) )
+                       #_(js/console.log
+                          "hello2" (-> e .-target (.getBoundingClientRect))))
+
+           :style {:height "100%"
+                   :width "100%"
+
+                   }
+           :viewBox (m7/space
+                     [0 0 400 600])}
+     [:image {:height 600
+              :width 400
+              :x 0
+              :y 0
+              :href "ll.jpg"}]
+
+     (map
+      (fn [[s [x y] sz] ]
+        [:text {:x x
+                :y y
+                :font-size sz}
+         s])
+      arr)
+
+     #_[:text {:x 50
+             :y 50}
+      (m7/space c)]]
+    )
+  )
 
 
 
@@ -19577,7 +20045,7 @@ on time?"]
 
 
 
-       (map
+       #_(map
         (fn [n d]
           [:div {:style (m7/css
                          [[3 1 (+ 2 (* n 2)) 2  :center :center  1.5 :rem :column]
@@ -19592,7 +20060,7 @@ on time?"]
 
         )
 
-       (map
+       #_(map
         (fn [n d]
           [:div {:style (m7/css
                          [[4 1 (+ 2 (* n 2)) 2  :center :center  1.5 :rem :column]
@@ -19605,7 +20073,7 @@ on time?"]
                [m7/mx `[:p 2 ~i]])
              (range 0 11)))
 
-       [:div {:style (m7/css
+       #_[:div {:style (m7/css
                       [[5 4 4 8 :center :center 3 :rem ]
                        [1 90 90 .01] []
                        (into
@@ -24013,7 +24481,11 @@ on time?"]
 
 
 
-
+#_(react/useEffect
+ (fn []
+   (let [i (js/setInterval #(update-time (js/Date.)) 100)]
+     (fn []
+       (js/clearInterval i)))))
 
 (defn airplane []
   (let [[timer update-time] (react/useState (js/Date.))
@@ -24029,10 +24501,10 @@ on time?"]
                      (/ (js/parseInt time-str) 5) 1)))
 
         _ (react/useEffect
-         (fn []
-           (let [i (js/setInterval #(update-time (js/Date.)) 100)]
-             (fn []
-               (js/clearInterval i)))))
+           (fn []
+             (let [i (js/setInterval #(update-time (js/Date.)) 100)]
+               (fn []
+                 (js/clearInterval i)))))
         f (fn [n] (/ 1 n))
         tt 'θ
         dx [1 0  0 1 -1  0 0 -1 ]
@@ -24285,7 +24757,9 @@ on time?"]
            #_(grid-on 20 20)
 
 
-           [:g#scale-1
+           [:g#scale-1 {:transform (m7/tranfrom [
+                                                 [:rotate -90]
+                                                 [:scale [.2 .2]]])}
             (map (fn [x]
                    [:circle {:cx (* 2 2 50 x)
                              :cy 0
@@ -24347,7 +24821,7 @@ on time?"]
 
 
 
-           (let [a .11]
+           #_(let [a .11]
              [:g.scale2
               (map (fn [x]
                      [:circle {:cx (*  2   a  (* 10 x)  (* 10 x))
@@ -26548,7 +27022,7 @@ on time?"]
                       :background-image (str "url(" (.getItem js/localStorage "file-input-img" )   ")")
                       :gap ".1rem"})}
 
-       #_[file/file-input-background2]
+       [file/file-input-background2]
 
 
        (map
