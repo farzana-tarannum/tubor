@@ -15480,7 +15480,7 @@ on time?"]
           ax-dx 80
           ax-dy 40
           vb (fn [z]
-               (nth [(map #(* .25 %) [0 -20  83 40])
+               (nth [(map #(* .25 %) [-10 -20  83 40])
                      [0 -180  200 200]
                      [0 -50  100 100]
                      [0 -25  50 50]
@@ -15512,21 +15512,25 @@ on time?"]
                          [[(+ 0 (* 3 r)) 3 (+ 12 (* 3 c)) 3  f1 f2  1.5 :rem :column]
                           [(if (= slider n) 3 1) 70 (+ 50 (* 2 n)) .1] []
                           (into
-                           {:font-size (m7/np [3.7 :rem])
+                           {:font-size (m7/np [3.0 :rem])
                             :font-family "Roboto Flex"
                             :gap (m7/np [1 :rem])
                             :color (hsl [1 30 (if (= slider n) 20 20) 1])
                             :z-index 4
                             :cursor :grab}
-                           {:z-index 19})])
+                           {:z-index 19}
+                           )])
                  }
            d])
-        [[[m7/x `[:p x 2]] 1 1 :center :center]
-         [[m7/x `[*  2 [- 1]]] 2 2 :center :center]
-         [[m7/x `[:m 2 x]] 2 1 :center :center]
-         [[m7/x `[:m [- 1] x]] 1 2 :center :center]
-         ["x" 1 1 :flex-end :center] ["x" 1 1 :center :flex-start]
-         [2 2 2 :center :flex-start] [-1 2 2 :flex-end  :center]])
+        (let [[f1 f2] [-2 -3]]
+          [[[m7/x `[:p x 2]] 1 1 :center :center]
+           [[m7/x `[* ~f1 ~f2]] 2 2 :center :center]
+           [[m7/x `[:m ~f1 x]] 2 1 :center :center]
+           [[m7/x `[:m ~f2 x]] 1 2 :center :center]
+           ["x" 1 1 :flex-end :center]
+           ["x" 1 1 :center :flex-start]
+           [f1 2 2 :center :flex-start]
+           [f2 2 2 :flex-end  :center]]))
 
 
 
@@ -15560,7 +15564,7 @@ on time?"]
        [:div {:style
               (m7/css
                [[2 8  8 8
-                 :center :flex-start  2.3 :rem :column]
+                 :center :flex-start  3.3 :rem :column]
                 [1.5 70 80  .3] []
                 {:gap ".1rem"
                  :color (hsl [0 30 30 1])
@@ -15660,41 +15664,171 @@ Example: Almost drowning put him off swimming."]
                         ] 0])
            ]
 
+        (comment
+          [m7/x `[= y [+ [- [:p x 2] [:m 3 x ]] 1]]]
+          [m7/x `[= y [-  [:m 2 x] 5]]]
+          [m7/x `[= [-  [:m 2 x ] 5] [+ [- [:p x 2] [:m 2 x ] [:m 2 x ] x]  1]]]
+          [m7/x `[= 0 [+ [- [:p x 2] [:m 5 x] ]  6]]]
 
+          [m7/x `[= 0 [:m [:b [- x 2]] [:b [- x 3]]]]]
+
+
+
+          [m7/x `[= 0 [- x 3]]]
+          [m7/x `[= 3 x]]
+          [m7/x `[= y [-  [* 2 3 ] 5]]]
+          [m7/x `[= y [-  [* 2 3 ] 5]]]
+          [m7/x `[= y 1]]
+
+          [:div ]
+
+          [m7/x `[= 0 [- x 2]]]
+          [m7/x `[= 2 x]]
+          [m7/x `[= y -1]])
+        #_[m7/x `[= [-   5] [+ [:p x 2]  x [- 5] 6 ]]]
+
+
+        #_[m7/x `[= 0 [+ [:p x 2]  x 6 ]]]
 
         [m7/x
-         (m7/eq2 `[= [- 3 [:p x 2]]  [+ x 1]])]
+         (m7/eq2
+          `[= x
+            ~(let [x 'y
+                   p (fn [c d] `[:m ~c [:p ~x ~d]] )
+                   np (fn [c _] `[:m ~c ~x] )
+                   np1 (fn [c _] x)
+                   c (fn [c _] c)]
 
 
-
-        [m7/x
-         (m7/eq2 `[= [+ [:p x 2] x [- 2]] 0])]
-
-
-        [m7/x
-         (m7/eq2 `[= [+ [:p x 2] x [- 2]] 0])]
-
-
-
-        [m7/x
-         (m7/eq2 `[= [+ [:p x 2] [:m x [:b [- 2 1]]] [* 2 [- 1]]] 0])]
-
-        [m7/x
-         (m7/eq2 `[= [+ [:p x 2] [- [:m 2 x] x] [* 2 [- 1]]] 0])]
-
+               (into ['+]
+                     (map (fn [c d ff]
+                            (ff c d))
+                          [ 2 3]
+                          [ 1 0]
+                          [ np c])))])]
 
         [m7/x
-         (m7/eq2 `[= [- [:m x [:b [+ x 2]]] [:m 1 [:b [+ x 2]]]] 0])]
+
+         (w/postwalk
+          (fn [y]
+            (if (= y 'y)
+              (let [[_ _ r]
+                    (m7/eq2
+                     `[= x
+                       ~(let [x 'y
+                              p (fn [c d] `[:m ~c [:p ~x ~d]] )
+                              np (fn [c _] `[:m ~c ~x] )
+                              np1 (fn [c _] x)
+                              c (fn [c _] c)]
 
 
-        [m7/x '[= [:m [:b [+ x 2]]  [:b [- x 1]]] 0] ]
+                          (into ['+]
+                                (map (fn [c d ff]
+                                       (ff c d))
+                                     [ 2 3]
+                                     [ 1 0]
+                                     [ np c])))])]
+                [:b r])
+              y))
+          (m7/eq2
+           `[=
+             27
+             ~(let [cp (fn [c d e] `[:p ~e ~d])
+                    p (fn [c d e] `[:m ~c [:p ~e ~d]] )
+                    np (fn [c _ e] `[:m ~c ~e] )
+                    np1 (fn [c _ e] e)
+                    c (fn [c _ e] c)]
+
+
+                (into ['+]
+                      (map (fn [c d ff e]
+                             (ff c d e))
+                           [ 1 3]
+                           [ 2 2]
+                           [cp p]
+                           ['x 'y])))]))
 
 
 
-        [m7/m  '[= [+ [- x 1 ] 1] 1]]
-        [:div "or"]
 
-        [m7/m  '[= [+ x 2] 0]]
+
+
+
+
+         ]
+
+        [m7/x (m7/eq2 (w/postwalk
+                       (fun ([[:m c [:p [:b [+ a b]] 2]]]
+                             ['+ [:m c [:p a 2]] ['* 2 c a b] ['* c  [:p b 2]]])
+                            ([y] y))
+                       '[= 27 [+ [:p x 2] [:m 3 [:p [:b [+ [:m 2 y] 3]] 2]]]]))]
+
+
+        #_[m7/x
+         (m7/eq2 (w/postwalk (fun ([[:m a [:b c]]] c)
+                                  ([y] y))
+                             (m7/eq2 (w/postwalk
+                                      (fun ([[:p [:b [+ a b]] 2]]
+                                            [:b ['+ [:p a 2] ['* 2 a b] [:p b 2]]])
+                                           ([y] y))
+                                      '[= 27 [+ [:p x 2] [:m 3 [:p [:b [+ [:m 2 y] 3]] 2]]]]))))]
+        (comment
+          )
+        (comment
+          [m7/x
+
+           (m7/eq2 `[= [- [+ [:p x 2] [:m 2 x] ] 3] y])]
+
+
+
+          [m7/x
+           `[= [+ [:m 2 x]  1 ] y]]
+
+
+
+
+          [m7/x
+
+           (m7/eq2 `[= [:p x 2]  4])]
+
+
+          (comment
+            [m7/x
+             (m7/eq2 `[= [- 3 [:p x 2]]  [+ x 1]])]
+
+
+
+            [m7/x
+             (m7/eq2 `[= [+ [:p x 2] x [- 2]] 0])]
+
+
+            [m7/x
+             (m7/eq2 `[= [+ [:p x 2] x [- 2]] 0])]
+
+
+
+            [m7/x
+             (m7/eq2 `[= [+ [:p x 2] [:m x [:b [- 2 1]]] [* 2 [- 1]]] 0])]
+
+            [m7/x
+             (m7/eq2 `[= [+ [:p x 2] [- [:m 2 x] x] [* 2 [- 1]]] 0])]
+
+
+            [m7/x
+             (m7/eq2 `[= [- [:m x [:b [+ x 2]]] [:m 1 [:b [+ x 2]]]] 0])]
+
+
+            [m7/x '[= [:m [:b [+ x 2]]  [:b [- x 1]]] 0] ]
+
+
+
+
+            [m7/m  '[= [+ [- x 1 ] 1] 1]]
+            [:div "or"]
+
+            [m7/m  '[= [+ x 2] 0]]))
+
+
         #_[m7/x
          (m7/eq2 `[= [+ x 1] y])]
 
@@ -17086,7 +17220,7 @@ Example: Almost drowning put him off swimming."]
                  [p [-300 y  :l 1600 0] .02
                   [1.8 70 70 1]
                   [1.8 70 70 1]])
-               (range -2 3))
+               (range -5 5))
 
 
               (map
@@ -17094,7 +17228,7 @@ Example: Almost drowning put him off swimming."]
                  [p [x -800  :l 0 1600 ] .02
                   [2.5 70 70 1]
                   [2.5 70 70 1]])
-               [-2 -1 0 1 2 3])
+               (range -5 5))
 
 
 
@@ -17106,19 +17240,54 @@ Example: Almost drowning put him off swimming."]
 
 
 
+           #_(map
+              (fn [x]
+                [:circle {:cx x
+                          :cy (ve (+ x 1))
+                          :r .05
+                          :fill (hsl [5 70 70 1])}])
+              (range -200 200 .1))
+
+
+
+
            (map
             (fn [x]
               [:circle {:cx x
-                        :cy (ve (+ x 1))
+                        :cy (ve (+ (* 2 x) 1))
                         :r .05
                         :fill (hsl [5 70 70 1])}])
-            (range -200 200 .1))
+            (range -200 200 .5))
+
+
+
+           [:circle {:cx 0
+                     :cy 0
+                     :r .05
+                     :fill (hsl [5 70 70 1])
+                     }]
+
+           #_[:circle {:cx 0
+                     :cy 0
+                     :r (js/Math.sqrt 5)
+                     :fill :none
+                     :stroke-width .01
+                     :stroke (hsl [5 70 70 1])}]
+
+
+           #_(map
+              (fn [x]
+                [:circle {:cx x
+                          :cy (ve (- 3 (* x x)))
+                          :r .05
+                          :fill (hsl [0 70 70 1])}])
+              (range -200 200 .1))
 
 
            (map
             (fn [x]
               [:circle {:cx x
-                        :cy (ve (- 3 (* x x)))
+                        :cy (ve (+ (* x x) (* 2 x ) -3 ))
                         :r .05
                         :fill (hsl [0 70 70 1])}])
             (range -200 200 .1))
@@ -17334,19 +17503,21 @@ Example: Almost drowning put him off swimming."]
                                    (set-slider n))
                  :style
                  (m7/css
-                  [[ (+ 2 n) 1 (+ 1 2) 4  :center :center  1.5 :rem :column]
+                  [[ (+ 2 n) 1 (+ 1 2) 8  :center :center  1.5 :rem :column]
                    [(if (= slider n) 3 1) 70 (+ 50 (* 2 n)) .3] []
                    (into
-                    {:font-size (m7/np [1.7 :rem])
+                    {:font-size (m7/np [3.7 :rem])
                      :font-family "Roboto Flex"
                      :gap (m7/np [1 :rem])
                      :color (hsl [1 70 (if (= slider n) 40 90) 1])
                      :z-index 4
                      :cursor :grab}
                     {})])}
-           [:input  {:type :text
-                     :height "100%"
-                     :width "100%"
+           [:input  {:style {:type :text
+                             :font-size (m7/np [3.7 :rem])
+                             :height "100%"
+                             :width "100%"
+                             }
                      :placeholder d}]])
          ["book"  "race" "tap" "carry"  "Bring"  "catch" "am,is" "are" "cut" "put"])
 
