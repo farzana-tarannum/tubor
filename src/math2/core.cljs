@@ -8,6 +8,10 @@
             [math2.math100 :as m100]
             [math2.math :as mtemp]
             [math2.bdmap :as bdmap]
+            [clojure.walk :as w]
+            [defun.core :refer [defun fun]]
+            [math2.math7 :as m7 :refer
+             [grid hsl css space size path ve sec]]
             [math2.physics100 :as py100]
             [react]))
 
@@ -38,15 +42,113 @@
    #_[m100/sine-wave]
 
    #_[m100/app]
-   [m100/home-planets-banners]
-
+   #_[m100/home-planets-banners]
+   (comment
+     (/ (+  62000 (* 8 104))
+        20000))
    #_[m100/grammer-eng]
-
+   #_(+ 1 3 3 4 )
    #_[:div "50,67,72,75,46,47,55,81,87,94,83"]
    #_[:div "207"]
    #_[:div "54,56,57,59,63,58,69,70,73,6,75,21,13,49,44"]
    #_[m100/grammer-eng]
+   #_[=
+     27
+     ~(let [cp (fn [c d e] `[:p ~e ~d])
+            p (fn [c d e] `[:m ~c [:p ~e ~d]] )
+            np (fn [c _ e] `[:m ~c ~e] )
+            np1 (fn [c _ e] e)
+            c (fn [c _ e] c)]
 
+
+        (into ['+]
+              (map (fn [c d ff e]
+                     (ff c d e))
+                   [ [1 2] 3]
+                   [ 2 2]
+                   [cp p]
+                   ['x 'y])))]
+
+#_(w/postwalk
+        (fn [y]
+          (if (= y 'y)
+            (let [[_ _ r]
+                  (m7/eq2
+                   `[= x
+                     ~(let [x 'y
+                            p (fn [c d] `[:m ~c [:p ~x ~d]] )
+                            np (fn [c _] `[:m ~c ~x] )
+                            np1 (fn [c _] x)
+                            c (fn [c _] c)]
+
+
+                        (into ['+]
+                              (map (fn [c d ff]
+                                     (ff c d))
+                                   [ 2 3]
+                                   [ 1 0]
+                                   [ np c])))])]
+              [:b r])
+            y))
+        (m7/eq2
+         `[=
+           27
+           ~(let [cp (fn [c d e] `[:p ~e ~d])
+                  p (fn [c d e] `[:m ~c [:p ~e ~d]] )
+                  np (fn [c _ e] `[:m ~c ~e] )
+                  np1 (fn [c _ e] e)
+                  c (fn [c _ e] c)]
+
+
+              (into ['+]
+                    (map (fn [c d ff e]
+                           (ff c d e))
+                         [ [1 2] 3]
+                         [ 2 2]
+                         [cp p]
+                         ['x 'y])))]))
+
+   [m100/board2
+    (let [cp (fn [c d e] `[:p ~e ~d])
+          p (fn [c d e] `[:m ~c [:p ~e ~d]] )
+          np (fn [c _ e] `[:m ~c ~e] )
+          np1 (fn [c _ e] e)
+          c (fn [c _ e] c)
+          a1  `[=
+                ~(into ['+]
+                       (map (fn [c d ff e]
+                              (ff c d e))
+                            [2 4 3 2 -56]
+                            [ 2 2 1 1 0]
+                            [p p np np c]
+                            ['x 'y 'x 'y 1]))
+                0]
+
+          a2  `[=
+                
+                ~(into ['+]
+                       (map (fn [c d ff e]
+                              (ff c d e))
+                            [ 5 -2 7]
+                            [  1 1 0]
+                            [ np np c]
+                            [ 'x 'y 1]))
+                0]
+          [_ a3 _] a2]
+      
+      [
+       
+       a1
+       a2
+       a3
+       (w/postwalk
+        (fn [y]
+          (if (= y 'x)
+           [:b a3] 
+            y))
+        (m7/eq2 a1))
+
+       ])]
    #_[m100/home-planets-banners]
    #_[m100/eng-tense]
 

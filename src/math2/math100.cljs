@@ -7,7 +7,7 @@
    [clojure.walk :as w]
    [defun.core :refer [defun fun]]
    [math2.math7 :as m7 :refer
-   [grid hsl css space size path ve sec]]))
+    [grid hsl css space size path ve sec]]))
 
 
 
@@ -15496,6 +15496,10 @@ on time?"]
           d 9.4
           scale2 [[.5 .5] [-0.5 .5]]
           ]
+
+
+
+
       [:div {:style (merge
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
@@ -15512,7 +15516,7 @@ on time?"]
                          [[(+ 0 (* 3 r)) 3 (+ 12 (* 3 c)) 3  f1 f2  1.5 :rem :column]
                           [(if (= slider n) 3 1) 70 (+ 50 (* 2 n)) .1] []
                           (into
-                           {:font-size (m7/np [3.0 :rem])
+                           {:font-size (m7/np [2.1 :rem])
                             :font-family "Roboto Flex"
                             :gap (m7/np [1 :rem])
                             :color (hsl [1 30 (if (= slider n) 20 20) 1])
@@ -15522,14 +15526,18 @@ on time?"]
                            )])
                  }
            d])
-        (let [[f1 f2] [-2 -3]]
-          [[[m7/x `[:p x 2]] 1 1 :center :center]
+        (let [[f1 f2] [7 -2]
+              x 'x]
+          [[[m7/x `[:m 8 [:p ~x 2]]] 1 1 :center :center]
            [[m7/x `[* ~f1 ~f2]] 2 2 :center :center]
-           [[m7/x `[:m ~f1 x]] 2 1 :center :center]
-           [[m7/x `[:m ~f2 x]] 1 2 :center :center]
-           ["x" 1 1 :flex-end :center]
-           ["x" 1 1 :center :flex-start]
-           [f1 2 2 :center :flex-start]
+           [[m7/x `[:m 7 ~x]] 2 1 :center :center]
+           [[m7/x `[:m -16 ~x]] 1 2 :center :center]
+           [[m7/x `[:m 1 ~x]]
+            1 1 :flex-end :center]
+           [[m7/x `[:m 8 ~x]]
+            1 1 :center :flex-start]
+           [f1
+            2 2 :center :flex-start]
            [f2 2 2 :flex-end  :center]]))
 
 
@@ -15561,10 +15569,20 @@ on time?"]
         [[[m7/x `[* [:m 2 x] x]] 4 1][ [m7/x `[:m [- 7] x]] 4 2] [[m7/x `[* 3 [:m 2 x]]] 5 1] [[m7/m '[* 3 [- 7]]] 5 2]])
 
 
+       #_[:div {:style
+              (m7/css
+               [[8 4  15 8
+                 :center :flex-start  3.3 :rem :column]
+                [1.5 70 80  .3] []
+                {:gap ".1rem"
+                 :color (hsl [0 30 30 1])
+                 :z-index 10}])}
+        [m7/x `[:m y [:b [- [3 2] 2]]]]]
+
        [:div {:style
               (m7/css
-               [[2 8  8 8
-                 :center :flex-start  3.3 :rem :column]
+               [[2 8  3 18
+                 :center :flex-start  2.2 :rem :column]
                 [1.5 70 80  .3] []
                 {:gap ".1rem"
                  :color (hsl [0 30 30 1])
@@ -15578,75 +15596,7 @@ on time?"]
         #_[:div "symbol"]
         #_[:div "exponent"]
         #_[:div "coefficent"]
-        (comment
-          [:div "Don’t put off your homework to the last minute."]
-          [:div "The storm put the game off by a week."]
-          [:div "Please be quiet. I’m trying to concentrate and you’re putting me off."]
-          [:div "Almost drowning put him off swimming."]
-          [:div  "They frequently put down their little sister for walking slowly."]
-          [:div "My mom always put me down for eating slowly"]
-          [:div "We put down a $1,000 deposit."]
-          [:div "Put it down in the paper what we have learned today"]
-         #_[:div "Put down
 
-Meaning: Insult, belittle, or demean
-Example: They frequently put down their little sister for walking slowly.
-Put down
-
-Meaning: Pay
-Example: We put down a $1,000 deposit.
-Put down
-
-Meaning: Halt, eliminate, stop, or squelch, often by force
-Example: The government quickly put down the insurrection.
-Put down
-
-Meaning: Euthanize (an animal)
-Example: Rex was in so much pain, they had to put him down.
-Put down
-
-Meaning: Write (something)
-Example: Put down the first thing you think of on this piece of paper.
-Put down
-
-Meaning: Terminate a call; to hang up.
-Example: Don’t put the phone down. I want a quick word with him,too.
-Put down
-
-Meaning: Add a name to a list
-Example: I’ve put myself down for the new Spanish conversation course.
-Put down
-
-Meaning: Make prices, or taxes, lower
-Example: BP are putting petrol and diesel down in what could be the start of a price war.
-Put down
-
-Meaning: Place a baby somewhere to sleep
-Example: I had just put Mary down when you rang. So now she’s crying again.
-Put down
-
-Meaning: Land
-Example: The pilot managed to put down in a nearby farm field.
-Put down
-
-Meaning: Drop someone off, or let them out of a vehicle
-Example: The taxi put him down outside the hotel.
-Put down
-
-Meaning: Cease, temporarily or permanently, reading (a book)
-Example: I was unable to put down The Stand: it was that exciting.
-Put down as
-
-Meaning: Assume someone has a particular character from very little information
-Example: I put him down as ignorant, but then discovered he is, in fact, a university professor!
-Put down for
-
-Meaning: Record that someone has offered to help, or contribute something
-Example: Put me down for one of the drivers.
-Put down to
-
-Meaning: State the cause of a situation
-Example: I put the high crime rate down to the high unemployment."])
         #_[:div "
 Meaning: Distract; to disturb the concentration of
 Example: Please be quiet. I’m trying to concentrate and you’re putting me off.
@@ -15663,6 +15613,29 @@ Example: Almost drowning put him off swimming."]
 
                         ] 0])
            ]
+
+
+        (comment
+          
+          )
+
+        #_[:div "
+A stake-out requires being inconspicuous, but not so for red-winged blackbirds.
+Showing off and making noise is the main objective of their stake-out.
+Male red-winged blackbirds have already staked-out their territories in wetlands and around ponds and lakes.
+Their red-and-yellow shoulder patches add glints of color to the dull landscape.
+And male red-wings don't hesitate to show their colors
+When other birds invade the red-wing's territory, he spreads his tail, droops his wings, and lets out the gurgling Song.
+In February and March, male red-wings come north from their southern wintering grounds
+and find good spots for nesting and feeding.
+They are probably our most numerous songbird.
+"]
+
+
+
+        #_[:img {:style {:width "30%"
+                       }
+               :src "https://www.thespruce.com/thmb/l0_mNoIWGQuwtumjslpdZRgk9fg=/941x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/red-winged-blackbird-identification-385990-hero-bca4cabf8e9743e8b2459ce6421dc642.jpg"}]
 
         (comment
           [m7/x `[= y [+ [- [:p x 2] [:m 3 x ]] 1]]]
@@ -15688,9 +15661,9 @@ Example: Almost drowning put him off swimming."]
         #_[m7/x `[= [-   5] [+ [:p x 2]  x [- 5] 6 ]]]
 
 
-        #_[m7/x `[= 0 [+ [:p x 2]  x 6 ]]]
 
-        [m7/x
+
+        #_[m7/x
          (m7/eq2
           `[= x
             ~(let [x 'y
@@ -15703,11 +15676,13 @@ Example: Almost drowning put him off swimming."]
                (into ['+]
                      (map (fn [c d ff]
                             (ff c d))
-                          [ 2 3]
+                          [ [1 2] [3 2]]
                           [ 1 0]
                           [ np c])))])]
 
-        [m7/x
+
+
+        #_[m7/x
 
          (w/postwalk
           (fn [y]
@@ -15743,7 +15718,7 @@ Example: Almost drowning put him off swimming."]
                 (into ['+]
                       (map (fn [c d ff e]
                              (ff c d e))
-                           [ 1 3]
+                           [ [1 2] 3]
                            [ 2 2]
                            [cp p]
                            ['x 'y])))]))
@@ -15755,9 +15730,1986 @@ Example: Almost drowning put him off swimming."]
 
 
 
-         ]
+           ]
+        (comment 
+          (m7/x
+           (m7/eq2
+            `[=
+              ~(let [cp (fn [c d e] `[:p ~e ~d])
+                     p (fn [c d e] `[:m ~c [:p ~e ~d]] )
+                     np (fn [c _ e] `[:m ~c ~e] )
+                     np1 (fn [c _ e] e)
+                     c (fn [c _ e] c)]
 
-        [m7/x (m7/eq2 (w/postwalk
+
+                 (into ['+]
+                       (map (fn [c d ff e]
+                              (ff c d e))
+                            [2 3]
+                            [1 1]
+                            [np c]
+                            ['y 'y])))
+              x
+              ]))
+
+
+          (m7/x `[= [+ [:p [:b x] 2]
+                     [:m 2 [:p y 2]]] 27])
+
+
+
+
+          (m7/x `[= [+ [:p [:b ~(let [cp (fn [c d e] `[:p ~e ~d])
+                                      p (fn [c d e] `[:m ~c [:p ~e ~d]] )
+                                      np (fn [c _ e] `[:m ~c ~e] )
+                                      np1 (fn [c _ e] e)
+                                      c (fn [c _ e] c)]
+
+
+                                  (into ['+]
+                                        (map (fn [c d ff e]
+                                               (ff c d e))
+                                             [2 3]
+                                             [1 1]
+                                             [np c]
+                                             ['y 'y])))] 2]
+                     [:m 2 [:p y 2]]] 27])
+
+
+          (m7/x `[= [+   ~(let [cp (fn [c d e] `[:p ~e ~d])
+                                p (fn [c d e] `[:m ~c [:p ~e ~d]] )
+                                np (fn [c _ e] `[:m ~c ~e] )
+                                np1 (fn [c _ e] e)
+                                c (fn [c _ e] c)]
+
+
+                            (into ['+]
+                                  (map (fn [c d ff e]
+                                         (ff c d e))
+                                       [(* 2 2) (* 2 3) 1]
+                                       [2 1 2]
+                                       [p np cp]
+                                       ['y 'y 3])))
+                     [:m 2 [:p y 2]]] 27])
+
+
+          (m7/x `[= ~(let [cp (fn [c d e] `[:p ~e ~d])
+                           p (fn [c d e] `[:m ~c [:p ~e ~d]] )
+                           np (fn [c _ e] `[:m ~c ~e] )
+                           np1 (fn [c _ e] e)
+                           c (fn [c _ e] c)]
+                       (conj
+                        (into ['+]
+                              (map (fn [c d ff e]
+                                     (ff c d e))
+                                   [6 (* 2 3) 1]
+                                   [2 1 2]
+                                   [p np cp]
+                                   ['y 'y 3]))
+                        `[- [* 3 [:p 3 2]]])
+                       ) 0]))
+
+
+        #_(m7/x `[= [+ [:m 6 [:p y 2]] [:m 6 y] [:m [:p 3 2] [:b [- 1 3]]]] 0])
+
+
+        #_(m7/x `[= [+ [:m 6 [:p y 2]] [:m 6 y] [* [- 2] [:p 3 2] ]] 0])
+
+
+        #_(m7/x `[= [+ [:m 1 [:p y 2]] [:m 1 y] [- 3]] 0])
+
+        [m7/x `[= [-  [:m 8 [:p x 2]]
+                   [:m 9 x ] 14] 0]]
+
+
+
+
+        #_[m7/x (m7/eq2 (w/postwalk
+                       (fun ([[:m c [:p [:b [+ a b]] 2]]]
+                             ['+ [:m c [:p a 2]] ['* 2 c a b] ['* c  [:p b 2]]])
+                            ([y] y))
+                       '[= 27 [+ [:p x 2] [:m 3 [:p [:b [+ [:m 2 y] 3]] 2]]]]))]
+
+
+        #_[m7/x
+         (m7/eq2 (w/postwalk (fun ([[:m a [:b c]]] c)
+                                  ([y] y))
+                             (m7/eq2 (w/postwalk
+                                      (fun ([[:p [:b [+ a b]] 2]]
+                                            [:b ['+ [:p a 2] ['* 2 a b] [:p b 2]]])
+                                           ([y] y))
+                                      '[= 27 [+ [:p x 2] [:m 3 [:p [:b [+ [:m 2 y] 3]] 2]]]]))))]
+        (comment
+          )
+        (comment
+          [m7/x
+
+           (m7/eq2 `[= [- [+ [:p x 2] [:m 2 x] ] 3] y])]
+
+
+
+          [m7/x
+           `[= [+ [:m 2 x]  1 ] y]]
+
+
+
+
+          [m7/x
+
+           (m7/eq2 `[= [:p x 2]  4])]
+
+
+          (comment
+            [m7/x
+             (m7/eq2 `[= [- 3 [:p x 2]]  [+ x 1]])]
+
+
+
+            [m7/x
+             (m7/eq2 `[= [+ [:p x 2] x [- 2]] 0])]
+
+
+            [m7/x
+             (m7/eq2 `[= [+ [:p x 2] x [- 2]] 0])]
+
+
+
+            [m7/x
+             (m7/eq2 `[= [+ [:p x 2] [:m x [:b [- 2 1]]] [* 2 [- 1]]] 0])]
+
+            [m7/x
+             (m7/eq2 `[= [+ [:p x 2] [- [:m 2 x] x] [* 2 [- 1]]] 0])]
+
+
+            [m7/x
+             (m7/eq2 `[= [- [:m x [:b [+ x 2]]] [:m 1 [:b [+ x 2]]]] 0])]
+
+
+            [m7/x '[= [:m [:b [+ x 2]]  [:b [- x 1]]] 0] ]
+
+
+
+
+            [m7/m  '[= [+ [- x 1 ] 1] 1]]
+            [:div "or"]
+
+            [m7/m  '[= [+ x 2] 0]]))
+
+
+        #_[m7/x
+         (m7/eq2 `[= [+ x 1] y])]
+
+
+        (comment
+
+
+          [:div {:style {:background-color (hsl [3 20 20 1])
+                         :width "100%"
+                         :height "3px"}
+                 }]
+
+          [m7/x
+           (m7/eq2 `[= [- 3 [:p x 2]] [+ x 1]])]
+
+
+          [m7/x
+           (m7/eq2 `[=  [+ [- [:p x 2]] [- x ] 2 ] 0])]
+
+
+          [m7/x
+           (m7/eq2 `[=  [+ [- [:p x 2]] [- x [:m 2 x]] 2 ] 0])]
+
+
+          [m7/x
+           (m7/eq2 `[- [:m [- x] [:b [- x 1]]]  [:m 2 [:b [- x 1]]]])]
+
+
+
+          [m7/x
+           (m7/eq2 `[= [:m  [:b [- x 1]] ] 0])])
+
+
+
+        #_[m7/x '[+ x 2]]
+
+
+
+        #_[m7/x
+         (m7/eq2 `[= [- 2 [:p x 2] ] x])]
+
+
+
+          #_(w/postwalk (fn [x] x) '[:apply
+                                 [= [+ x y] 1]
+                                 [- x]])
+
+        #_(m7/x
+         (m7/eq2
+          (map
+           (fun ([(n :guard number?)] (conj `[+ [- x]] n))
+                ([(m :guard vector?)] (conj m `[- x]))
+                ([n] n))
+           )))
+
+
+        #_(comment
+          [m7/x `[= [- [:m 2 [:p x 2]]
+                     x [* 7 3]] 0]]
+
+
+
+          [m7/x `[= [+ [:m 2 [:p x 2]]
+                     [:m x [:b [- [* 2 3] 7]]] [* [- 7] 3]] 0]]
+
+
+
+          [m7/x `[= [+ [:m 2 [:p x 2]]
+                     [- [:m [* 2 3] x] [:m 7 x]] [* [- 7] 3]] 0]]
+
+
+
+          [m7/x `[= [+ [:m [:m 2 x] [:b [+ x 3]]]
+                     [:m [- 7] [:b [+ x 3]]]] 0]]
+
+
+          [m7/x `[= [:m [:b [+ x 3]] [:b [- [:m 2 x] 7]]] 0]]
+
+
+
+          #_[m7/x `[= [+ [:m x [:b [- [:m 2 x]
+                                    7]]]
+                       [:m 3 [:b [- [:m 2 x]
+                                  7]]]] 0]])
+
+
+
+
+
+
+
+        #_[m7/m '[= y [- 1 x]]]
+
+
+        #_[m7/m '[= [+ [:m 2 [:p x 2]]
+                   [:m x y]
+                   [:p y 2]]
+                22]]
+        #_[m7/m '[= [+ [:m 2 [:p x 2]] [:m x [:b [- 1 x]]] [:p [:b [- 1 x]] 2]] 22]]
+
+
+        #_[m7/m '[= [+ [:m 2 [:p x 2]] [- x [:p x 2]]
+                   [:p [:b [- 1 x]] 2]] 22]]
+
+        #_[m7/m '[= [- [:m 2 [:p x 2]]  [:m x [:b [- 1 2]]] [- 21]] 0]]
+
+
+        #_[m7/m '[= [- [:m 2 [:p x 2]] x 21] 0]]
+
+
+
+
+
+
+
+        #_[:div "A car weight 1000Kg moving right at 9 m/s and it strikes a stationary 2000Kg of truck. When the hit the truck they stuck together and they started moving together. what would be the final velocity"]
+
+
+        #_[:div "let, velocity of the car and the trucks after collision is v"  ]
+
+
+        #_[m7/m '[= [+ [* [:m 9 [m s]] [:m 1000 Kg]] 0]
+                [:m [:b [:m [:b [+ 1000 2000]] Kg]] v]
+
+                ]]
+
+        #_[m7/m '[= v
+                [:m 3 [m s] ]
+
+
+                ]]
+
+
+        #_[:div "break"]
+
+
+        #_(reduce
+           (fn [acc e]
+             (if (some #(= e %)  ["broke"] )
+               (conj acc
+                     [:span " "
+                      [:span {:style {:background-color (hsl [1 70 70 1])
+                                      :color (hsl [1 20 40 1])
+                                      :font-weight 600}}
+                       (str  e)]])
+
+
+
+               (conj acc [:span (str " "  e)])))
+
+           [:div ]
+
+
+
+
+           (str/split "last year covid situation broke out." #"\s+"))
+
+
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["lay"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+
+
+
+         (str/split "Last night I was so tired and I lay down into the bed." #"\s+")
+
+         )
+
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["mede"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+
+
+
+         (str/split "Last month my mother made a pizza for us." #"\s+"))
+
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["met"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+
+
+
+         (str/split "Last month I met my friends in the park." #"\s+"))
+
+
+
+
+        #_(reduce
+           (fn [acc e]
+           (if (some #(= e %)  ["was"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+
+
+
+         (str/split "Once up on a time there was a lady" #"\s+"))
+
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["was"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+         (str/split "She was sick" #"\s+"))
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["were"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+         (str/split "There were school teachers that were women" #"\s+"))
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["was"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+         (str/split "My mother was angry" #"\s+"))
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["was"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+         (str/split "My brother  was playing" #"\s+"))
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["were"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+         (str/split "My friends were going to school" #"\s+"))
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["were"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+         (str/split "They were happy" #"\s+"))
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["was" "held"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+         (str/split "she was held responsible for careless driving" #"\s+"))
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["was" "held"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+         (str/split "she held her baby with one hand" #"\s+"))
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["was" "kept"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+         (str/split "she kept watching movies until it was midnight " #"\s+"))
+
+
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["was" "led"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+         (str/split "In August of 2012, I led mjy first expedition on north pool." #"\s+"))
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #_(reduce
+           (fn [acc e]
+             (if (some #(= e %)  ["broke"] )
+               (conj acc
+                     [:span " "
+                      [:span {:style {:background-color (hsl [1 70 70 1])
+                                      :color (hsl [1 20 40 1])
+                                      :font-weight 600}}
+                       (str  e)]])
+
+
+
+               (conj acc [:span (str " "  e)])))
+
+           [:div ]
+
+
+
+
+           (str/split "last year covid situation broke out." #"\s+"))
+
+
+        #_["thought" "brought" "could" "was" "began" "kept" "delevered"
+         "didn't," "deployed" "decided" "jumped"]
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %) ["brought" "thought" "could" "was" "proved" "began" "delevered" "kept"
+                               "decided" "jumped" "deployed"])
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+         [:div ]
+
+
+
+
+
+         #_(str/split "About a decade ago, the government thought that if it brought this system online, it could save taxpayer dollars and proved a better service, it was a great idea. So, the typical government process began . Six years and 1.2 billion dollars later, no working product was delevered . At this point they could have kept pouring money into the failing program. Sadly that what often happens, that's the status quo today. But they didn't, the dedicated people inside the agency decided to stand up and call for change. We deployed a small team of just six people. The team jumped in side-by-side to support the agency in transitioning this project into more modern business practices." #"\s+"))
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["thought" "brought" "could" "was" "began" "kept" "delevered"
+                                "didn't," "deployed" "decided" "jumped"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+
+
+
+
+         (str/split "I felt very lucky because yesterday I nearly survived an
+                       accident" #"\s+"))
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["began"] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 20 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+         (str/split "Yesterday I began our journey to school at 10:30 am" #"\s+"))
+
+
+
+        #_(reduce
+         (fn [acc e]
+           (if (some #(= e %)  ["saw" ""] )
+             (conj acc
+                   [:span " "
+                    [:span {:style {:background-color (hsl [1 70 70 1])
+                                    :color (hsl [1 40 40 1])
+                                    :font-weight 600}}
+                     (str  e)]])
+
+
+
+             (conj acc [:span (str " "  e)])))
+
+         [:div ]
+         (str/split "I saw a beautiful bird on 31st December." #"\s+"))
+
+        #_[m7/mx `[+ 3 [- [/ [:s [+ [* [:b [- 14 10]]
+                                   [:b [- 20 15]]]
+                                4]]
+                         25] 4]
+                 ]]
+
+        #_[m7/mx `[+ 3 [- [/ [:s [+ [* 4 5] 4]] 25] 4]]]
+
+
+        #_[m7/mx `[+ 3 [- [/ [:s [+ 20 4]] 25] 4]]]
+
+
+        #_[m7/mx `[+ 3 [- 0.96 4]]]
+
+        #_[m7/mx `[= [- 3.96 ~(symbol (str "4.00"))] -0.04]]
+        #_[:div ""]
+        #_[m7/mx '[357 9900]]
+
+        #_[m7/mx '[- 3570000 35700]]
+        #_[m7/mx '[* 357 [:b [-  2]]]]
+
+
+        #_[m7/m 1176]
+
+        #_[m7/mx '[* 14 [:b [+ 10000 1000]]]]
+
+        #_[m7/mx '[+ 140000 14000]]
+
+        #_[m7/m 154000]
+        #_[m7/m '[* [:b [- 1000 1]] 12]]
+
+        #_[m7/m '[* [:b [- 1000 1]] 12]]
+
+
+        #_[m7/m '[= [- 12000 10 2] [- 11990 2]]]
+
+
+
+
+        #_[m7/m '[= [* 6 3] k]]
+
+
+
+        #_[m7/m '[= s  [[* 6 3] [- 7 2]]]]
+        #_[:div "I " [:input {:type :text }]
+         " my keys. could you please help me finding out the keys " ]
+        #_[:textarea {:rows 4
+                    :cols 50
+                    :on-change (fn [e]
+                              (set-text
+                               (-> e
+                                   .-target
+                                   .-value)))}]]
+
+
+        #_(let [d 'ε]
+           [:div {:style
+                  (m7/css
+                   [[2 10  4 15
+                     :center :center  4.0 :rem :column]
+                    [1.5 70 80  .5] []
+                    {:gap ".1rem"
+                     :color (hsl [0 30 60 1])
+                     :z-index 10}])}
+          #_[:div {:style {:font-size "1.1rem"}}
+           [:div time-str]]
+          #_[m7/mx `[= y [:m 10 t]]]
+          #_[m7/mx `[= ~(* 10 time-str) [* 10 ~(* 1 time-str)]]]
+
+
+          [m7/mx `[= y [+ [:p x 2] [:m 5 x]  ]]]
+          #_(= 'x )
+
+          #_(vec (clojure.walk/postwalk
+                (fn [x]
+                  (if (symbol? x)
+                    (let [s (symbol (name x))]
+                      (if (= s 'x)
+                        3
+                        s))
+
+                    x))
+                `[= y [+ [:p x 2] [:m 5 x]]]))
+
+
+
+          [m7/mx `[:a x [+ x ~d]]]
+
+
+          [m7/mx `[= [:k y [+ t 2]] [+ [:p [:b [+ t 2]] 2] [:m 5 [:b [+ t 2]]]  ]]]
+
+
+          [m7/mx `[= [:k y [+ t 2]] [+ [:p [:b [+ t 2]] 2]
+                                     [:m 5 [:b [+ t 2]]]  ]]]
+
+
+          #_[m7/mx `[:p [:b [+ a b]] 2]]
+
+          #_[m7/mx `[= y [+ [:p 7 2] [* 5 7]  ]]]
+
+
+
+          #_[m7/mx `[= y [* 10 5.5]]]
+
+
+
+
+          #_[m7/mx `[= 0.22 a]]
+          #_[:div {:style {:color (hsl [2 33 33 1])}}
+           [m7/mx `[= [:m s [:b [:k  t o]  ]]  y
+                    [:m 0.22 [:p [:k t o] 2]]]]]
+          #_[:div {:style {:font-size "1.5rem"}}
+           "let, time dt, where " [m7/mx `[= [:p dt 2]
+                                     0]]]
+
+          #_[:div {:style {:color (hsl [2 33 33 1])}}
+           [m7/mx `[= [:m s [:b [+ t dt]  ]]    [:m 0.22 [:p
+                                                          [:b [+ t dt]] 2]]]]]
+
+
+          #_[:div {:style {:color (hsl [2 33 33 1])}}
+           [m7/mx `[= [:m s [:b [+ t dt]  ]]
+                    [+ [:m 0.22 [:p
+                                 t 2]]
+                     [:m 0.22 [:p
+                               dt 2]]
+
+                     [* 0.22 [:m 2 t dt]]]]]]
+
+          #_[:div {:style {:color (hsl [2 33 33 1])}}
+           [m7/mx `[= [:m s [:b [+ [:k t o] dt]  ]]
+                    [+ [:m 0.22 [:p [:k t o] 2]]
+                     [* 0.22 [:m 2 t dt]]]]]]
+
+          #_[:div {:style {:color (hsl [2 33 33 1])}}
+           [m7/mx `[= [:m s [:b [+ [:k t o] dt]  ]]
+                    [+ [:m s [:b [:k t o]  ]]
+                     [:m ds dt]]]]]
+
+
+          #_[:div {:style {:color (hsl [2 33 33 1])}}
+           [m7/mx `[= ds
+                    [* 0.22 [:m 2 t dt]]]]]
+
+
+          #_[:div {:style {:color (hsl [2 33 33 1])}}
+           [m7/mx `[= ds
+                    [* 0.22 [:m 2 t dt]]]]]
+
+          #_[:div {:style {:color (hsl [2 33 33 1])}}
+           [m7/mx `[= v [ds dt]
+                    [* 0.22 [:m 2 t ]]]]]
+
+
+          #_(let [time-str sec2
+                tmp-tmp (js/parseFloat (fix (* 0.22 time-str time-str) 2))]
+            [m7/mx `[= ~tmp-tmp  [* 0.22 [:p
+                                          ~(* 1 time-str ) 2]]]])
+
+
+
+          #_[m7/m '[= [:p [:b [+ 10 5]] 2] [+ [:p 10 2] [:p 5 2] [* 2 10 5]]]]
+          #_[m7/m '[= [2 9]  a]]
+
+
+          #_[m7/m '[= [:m [* 10 15] m] [:m 15 s  v ]]]
+
+
+          #_[m7/m '[= 450 [:m 45 k ]]
+             ]
+          ;;
+          #_[m7/m '[- v u]]
+          #_[m7/m '[= v [s t]  [m s] [:m m [:p s -1]]]]
+
+
+
+
+
+          #_[m7/mx `[= [:k y 4] [:m [2 9] [:p 4 2]]]]
+          #_[m7/mx `[= [:k y [+ t 2]] [:m [2 9] [:p  [:b [+ t 2]] 2]]]]
+
+          #_[:div {:style {:font-size "2rem"}}
+           "let ε, where " [m7/mx `[= [:p ~d 2]
+                                    0]]]
+
+          #_[m7/mx `[= [:k y [+ t ~d]] [:m [2 9] [:p  [:b [+ t ~d]] 2]]]]
+
+          #_[m7/mx `[= [:k y [+ t ~d]] [:m [2 9] [:b [+ [:p t 2] [:m 2 t ~d ] [:p ~d  2]]]]]]
+
+          #_[m7/mx `[= [:k y [+ t ~d]] [+ [:m [2 9] [:p t 2]] [:m  [4 9] t ~d ] ]]]
+
+
+
+          #_[m7/m [1 1]]
+          #_[m7/m '[< [:p .00000000000000001 2] .00000000000000001 ]]
+
+          #_[m7/mx `[= [:k y [+ t ~d]] [:m v [:b [+ t ~d] ]]]]
+
+          #_[m7/mx `[= [:k y [+ t ~d]] [+ [:m v t] [:m v ~d]]]]
+
+          #_[m7/mx `[= [:k y [+ t ~d]]
+                   [+ [:k y t] [:m [:p y .] ~d]]]]
+
+          #_[m7/mx `[= [:k y [+ t ~d]]
+                   [+ [:k y t] [:m v ~d]]]]
+
+
+
+          #_[m7/mx `[= ~d
+                     [:sq 0]]]
+
+
+
+
+
+
+
+
+
+            ])
+
+
+
+
+       #_(map
+        (fn [n d]
+          [:div {:style (m7/css
+                         [[3 1 (+ 2 (* n 2)) 2  :center :center  1.5 :rem :column]
+                          [(* n .2) 70 (+ 10 (* 1 n))  .2] [] {:gap ".1rem"
+                                                               :z-index 4}])}
+
+           d])
+        (range 0 11)
+        (map (fn [i]
+               (js/Math.pow 2 i))
+             (range 0 11))
+
+        )
+
+       #_(map
+        (fn [n d]
+          [:div {:style (m7/css
+                         [[4 1 (+ 2 (* n 2)) 2  :center :center  1.5 :rem :column]
+                          [1 70 70  .9] [] {:gap ".1rem"
+                                                               :z-index 4}])}
+
+           d])
+        (range 0 11)
+        (map (fn [i]
+               [m7/mx `[:p 2 ~i]])
+             (range 0 11)))
+
+       #_[:div {:style (m7/css
+                      [[5 4 2 8 :center :center 1.8 :rem :column]
+                       [1 90 90 .01] []
+                       (into
+                        {:gap "1rem"
+                         :font-family "Roboto Flex"
+                         :color (hsl [0 60 60 1])
+                         :z-index 2}
+                        )
+                       ])
+              }
+
+        #_{:font-family "'Roboto Flex'"
+         :font-variation-settings
+         (fontf2
+          (update
+           var-vf
+           :wght
+           (fn [k] (+ k 100))))}
+        #_[:div {:style {}}  ""]
+
+        [m7/m '[= [:p AB 2]
+                [+ [:p BC 2]  [:p AC 2]]]]
+
+
+        [m7/m '[= [:p AB 2]
+                [+ [:p 14 2]  [:p 7 2]]]]
+        #_(js/Math.sqrt (+ 49 (* 16 16)))
+        [m7/m '[= AB
+                [:sq [+ [:p 16 2]  [:p 7 2]]]]]
+        ]
+
+
+       [:div {:style (m7/css
+                      [[8 5 1 18 :center :center 2.2 :rem ]
+                       [1 70 90 .1] [] {:gap "1rem"
+                                        :color (hsl [3 20 30 1])
+                                        :z-index 2}])}
+
+        #_[:span {:style {:background-color (hsl [1 70 70 .5])}}"9th October"]
+
+
+
+
+
+
+
+
+        ]
+
+
+       [:div {:style (m7/css
+                      [[2 10 2 23 :center :center 3 :rem]
+                       [1 70 90 1] [] {:gap "1rem"
+                                       :z-index 1}])}
+        (let []
+          [:svg {:style {:height "100%"
+                         :width "100%"}
+                 :viewBox (m7/space
+                           viewbox)}
+
+           [flames]
+
+
+           [:linearGradient {:x1 .5
+                             :y1 1
+                             :x2 .5
+                             :y2 0
+                             :id (name :lgg1)
+                             :gradientTransform (m7/tranfrom [[:rotate 10]])}
+            [:stop  {:offset 0
+                     :stop-color (hsl [1 70 70 .1])}]
+            [:stop  {:offset .33
+                     :stop-color (hsl [.3 70 70 .7])}
+             [:animate {:attributeName :offset
+                        :from .2
+                        :to .5
+                        :dur (m7/not-space [3 "s"])
+                        :repeatCount :indefinite}]]
+            [:stop  {:offset .5
+                     :stop-color (hsl [.6 70 70 .4])}
+             [:animate {:attributeName :offset
+                        :from .3
+                        :to 1
+                        :dur (m7/not-space [3 "s"])
+                        :repeatCount :indefinite}]]
+            ]
+
+           [:pattern {:id (name :star)
+                      :viewBox (space [0 0 10 10])
+                      :width "10%"
+                      :height "10%"}
+            [:circle {:cx 5
+                      :cy 5
+                      :r 6
+                      :fill (m7/url (name :lg2))
+                      }]]
+
+           [:radialGradient {
+                             :id (name :lg1)
+                             :gradientTransform (m7/tranfrom [[:rotate 0]])}
+            [:stop  {:offset 0
+                     :stop-color (hsl [0 70 70 1])}]
+            [:stop  {:offset .33
+                     :stop-color (hsl [.2 70 70 .9])}]
+            [:stop  {:offset .77
+                     :stop-color (hsl [1 70 70 .8])}
+             [:animate {:attributeName :offset
+                        :id :f113
+                        :begin 0
+                        :from .88
+                        :to 1
+                        :dur (m7/not-space [120 "s"])
+                        :repeatCount :indefinite}]
+
+             [:animate {:attributeName :offset
+                        :begin :f123.end
+                        :from 1
+                        :to .88
+                        :dur (m7/not-space [120 "s"])
+                        :repeatCount :indefinite}]]
+            ]
+
+
+           [:radialGradient {
+                             :id (name :lg2)
+                             :gradientTransform (m7/tranfrom [[:rotate 0]])}
+            [:stop  {:offset 0
+                     :stop-color (hsl [3 40 40 .7])}]
+            [:stop  {:offset .55
+                     :stop-color (hsl [3.3 60 60 .8])}]
+
+
+            [:stop  {:offset .97
+                     :stop-color (hsl [1 70 70 .2])}
+             [:animate {:attributeName :offset
+                        :id :f114
+                        :begin 0
+                        :from .55
+                        :to 1
+                        :dur (m7/not-space [120 "s"])
+                        :repeatCount :indefinite}]
+
+             [:animate {:attributeName :offset
+                        :begin :f114.end
+                        :from 1
+                        :to .55
+                        :dur (m7/not-space [120 "s"])
+                        :repeatCount :indefinite}]
+             [:animate {:attributeName :stop-color
+                        :begin 0
+                        :id :f115
+                        :from (hsl [1 90 80 .2])
+                        :to (hsl [1 90 80 .8])
+                        :dur (m7/not-space [120 "s"])
+                        :repeatCount :indefinite}]
+             [:animate {:attributeName :stop-color
+                        :begin :f115.end
+                        :from (hsl [1 90 80 .2])
+                        :to (hsl [1 90 80 .8])
+                        :dur (m7/not-space [13 "s"])
+                        :repeatCount :indefinite}]]
+
+            ]
+           ;; :indefinite
+           [:marker {:id (name :mb2)
+                     :viewBox (m7/space [-5 -5 10 10])
+                     :refX 0
+                     :refY 0
+                     :orient :auto-start-reverse
+                     :markerWidth 5
+                     :markerHeight 5}
+            [:path {:d (m7/path [-3 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
+                    :stroke (hsl [5 70 70 1])
+                    :stroke-width .1
+                    :transform (m7/tranfrom [[:rotate 0]])
+                    :fill (m7/hsl [.4 70 70 1])}]]
+
+           [:animate {:attributeName :viewBox
+                      :to (m7/space viewbox2)
+                      :dur "4s"
+                      :fill :freeze}]
+
+
+
+
+
+
+           #_(grid-on 20 20)
+
+
+           #_(map
+
+            [:path {:d (m7/path [0 0 :l 0 (ve (* 1 30 ))
+                                 (* 4 20) 0 0 (* 1 30 )
+                                 (* 4 -20) 0])
+                    :stroke-width 1
+                    :fill (hsl [2 70 70 1])}
+             ]
+
+
+            (rang 0 5))
+
+
+
+
+
+           [:g
+            [:path {:d (m7/path [0 0 :l 0 (ve (* 1 30 ))
+                                 (* 4 20) 0 0 (* 1 30 )
+                                 (* 4 -20) 0])
+                    :stroke-width 1
+                    :fill (hsl [2 70 70 1])}
+             [:animateTransform {:id :green-car
+                                 :attributeName :transform
+                                 :begin 0
+                                 :dur (sec 5)
+                                 :from (space [0 0])
+                                 :to (space [150 0])
+                                 :type :translate
+                                 :fill :freeze}]]
+            [:path {:d (m7/path [200 0 :l 0 (ve (* 1 30 ))
+                                 (* 4 20) 0 0 (* 1 30 )
+                                 (* 4 -20) 0])
+                    :stroke-width 1
+                    :fill (hsl [2 70 70 1])}]
+
+            ]
+
+           [:g {:transform (m7/tranfrom [[:translate [180 50] ]
+                                         [:scale [3 3]]
+                                         ])}
+            [:path {:d (m7/path [0 0 :l 0 (ve (* 2 30 ))
+                                 20 0 0 (* 2 30 )
+                                 -20 0])
+                    :stroke-width 1
+                    :fill (hsl [2 70 70 1])}]
+
+
+            [:path#b1 {:d (m7/path [-10 0 :l 0 (ve (* 2 30 ))])
+                       :stroke-width .5
+                       :marker-end (m7/url (name :mb2))
+                       :marker-start (m7/url (name :mb2))
+                       :stroke (hsl [2 30 30 1])
+                       :fill :none}]
+
+
+
+            [:path#tri2 {:d (m7/path [20 (ve (* 2 30 )) :l (* 16 2) (ve (* 2 7 ))
+                                      0 (ve (ve (* 2 7 ))) (ve (* 16 2)) 0])
+                    :stroke (hsl [.5 70 70 1])
+                    :stroke-width .5
+                    :fill (hsl [1 70 70 1])}]
+
+
+
+
+
+
+
+            [:path {:d (m7/path [ (+ 20 32) 0 :l 0 (ve (* 2 37 ))
+                                 20 0 0 (* 2 37 )
+                                 -20 0])
+                    :stroke-width .5
+                    :fill (hsl [2 70 70 1])}]
+
+            [:path#b2 {:d (m7/path [ (+ 50 32) 0 :l
+                                    0 (ve (* 2 37))])
+                       :stroke (hsl [1 20 20 1])
+                       :stroke-width .5
+
+                       :marker-end (m7/url (name :mb2))
+                       :marker-start (m7/url (name :mb2))
+
+                       :fill (hsl [1 70 70 1])}]
+
+
+
+            [:path#b3 {:d (m7/path [(* 1 20) 0 :l (* 16 2) 0])
+                       :stroke (hsl [1 20 20 1])
+                       :stroke-width .5
+
+                       :marker-end (m7/url (name :mb2))
+                       :marker-start (m7/url (name :mb2))
+
+                       :fill (hsl [1 70 70 1])}]
+
+            [:text {:style {:font-size 5}}
+
+             [:textPath {:href :#tri2
+                         :font-size 3}
+              "B"]
+
+             [:textPath {:href :#tri2
+                         :startOffset (* 2 17)
+                         :font-size 3}
+              "A"]
+
+             [:textPath {:href :#tri2
+                         :startOffset (+ 13 (* 2 17))
+                         :font-size 3}
+              "C"]
+
+             [:textPath {:href :#b1
+                         :startOffset "40%"
+                         }
+              "30m"]
+
+             [:textPath {:href :#b2
+                         :startOffset "40%"}
+              "37m"]
+
+             [:textPath {:href :#b3
+                         :startOffset "40%"}
+              "14m"]]
+
+
+
+            ]
+
+
+           [:g
+            [:g#logo
+            (map
+             (fn [x]
+               [:g
+
+
+                [:path
+                 {:d
+                  (str (path
+                        [ 0 0 :l
+                         (* 20 3) (ve (* 2 2 2))
+                         (* 20 5) (ve (* 2 5 5))
+
+
+                         (* 20 1)
+                         (ve (- (* 2 9 9) (* 2 7 7)))
+                          (ve (* 20 9))  0
+                         ])
+                       "z")
+
+                  :transform
+                  (m7/tranfrom
+                   [
+                    [:translate [(* m 20)
+                                 (* 2 d d)]]
+                    [:scale x]
+                    ])
+                  :stroke (hsl [4 70 70 1])
+                  :stroke-width 10
+                  :fill  (hsl [0 70 70 1])
+                  }
+                 ]
+
+                [:path
+                   {:d
+                    (str (path
+                          [ 0 0 :c
+                           (* 20 3) (ve (* 2 2 2))
+                           (* 20 5) (ve (* 2 5 5))
+                           (* 20 7) (ve (* 2 7 7))
+                           :c
+                           (* 20 1)
+                           (ve (- (* 2 9 9) (* 2 7 7)))
+                           (* 20 2) (ve (- (* 2 11 11 ) (* 2 7 7)))
+                           (* 20 4) (ve (- (* 2 13 13) (* 2 7 7)))
+                           :l (ve (* 20 9))  0
+                           ])
+                         "z")
+
+                    :transform
+                    (m7/tranfrom
+                     [
+                      [:translate [(* m 20)
+                                   (* 2 d d)]]
+                      [:scale x]
+                      ])
+                    :stroke (hsl [4 70 70 1])
+                    :stroke-width 10
+                    :fill  (hsl [0 70 70 1])
+                    }
+                   ]
+                ])
+             scale2)
+
+
+             [airplane2 [
+                           [:translate [600 120]]
+                        [:scale [.3 .3]]
+                         [:rotate -90]]]
+
+
+            ]
+
+
+
+
+
+            #_[:circle {:r 90
+                      :cx 0
+                      :cy 0
+                      :filter (m7/url "flames")
+                      :fill (m7/url (name :lg2))}]
+
+            [:circle {:r 250
+                      :cx 0
+                      :cy 0
+                      :filter (m7/url "flames")
+                      :fill (m7/url (name :lg2))}]
+
+
+            #_[:circle {:r 90
+                      :cx 0
+                      :cy 0
+                      :stroke (hsl [3 70 70 .5])
+                      :stroke-width .5
+                      :fill (m7/url (name :star))}
+
+             #_[:animateTransform {
+                                   :attributeName :transform
+                                   :begin (sec 0)
+                                   :dur (sec 15)
+                                   :type :rotate
+                                   :from 0
+                                   :to -360
+                                   :repeatCount :indefinite
+                                   :fill :freeze}]
+
+
+             ]
+
+
+
+            [:circle {:r 350
+                      :cx 0
+                      :cy 0
+                      :stroke  (hsl [0 70 70 1])
+                      :stroke-width .5
+                      :fill :none}]
+
+
+            #_:fill (m7/url (name :lg2))
+            #_:fill (m7/url (name :star))
+            [:circle {:r 40
+                      :cx 470
+                      :cy 0
+                      :stroke (hsl [3 70 70 1])
+                      :stroke-width .5
+                      :fill (m7/url (name :lg2))
+
+                      }
+
+             [:animateTransform {
+                                 :attributeName :transform
+                                 :begin (sec 0)
+                                 :dur (sec 15)
+                                 :type :rotate
+                                 :from 0
+                                 :to -12
+                                 :repeatCount :indefinite
+                                 :fill :freeze}]
+
+
+             ]
+
+
+            [:text {:font-size 56
+                    :x 420
+                    :y 0
+                    :dx -40
+                    :fill (hsl [3 70 70 1])
+                    }
+
+             ""
+
+
+
+             ]
+
+
+
+
+
+            [:path {:id :com-id
+                    :d (m7/path `[450 -150
+                                  :l ~@(map
+                                        (fn [d x]
+                                          (* d x))
+                                        dx (cycle [ 300 70]))])
+                    :fill (hsl [.2 60 55 .5])}]
+
+            [:text {}
+             [:textPath {:startOffset (m7/np [5 :%])
+                         :fill (hsl [1 70 70 1])
+                         :href :#com-id}
+              "SCIENCE Café Scientifique"]]
+
+
+
+            #_[:text {:font-size 56
+                      :x 0
+                      :y 0
+                    :dx -40
+                    :fill (hsl [2 70 70 1])
+                    }
+
+             "BDT 999"
+
+
+
+             ]
+
+
+
+
+
+
+
+
+            [:text {:dx -18
+                    :x 250
+                    :y 0
+                    :fill (hsl [1 18 70 1])}
+
+
+
+
+             ]
+
+
+            [:circle {:r 250
+                      :cx 0
+                      :cy 0
+                      :stroke  (hsl [1 70 70 1])
+                      :stroke-width .5
+                      :fill :none}]
+
+
+
+
+
+            [:circle {:r 470
+                      :cx 0
+                      :cy 0
+                      :stroke  (hsl [2 70 70 1])
+                      :stroke-width .3
+                      :fill :none}]
+
+
+
+
+
+            [:circle {:r 580
+                      :cx 0
+                      :cy 0
+                      :stroke  (hsl [2.7 70 70 1])
+                      :stroke-width .3
+                      :fill :none}]
+
+
+            ]
+
+
+           (let [p (fn [d stroke-width stroke fill]
+                        [:path {:d (m7/path d)
+                                :stroke-width stroke-width
+                                :stroke (hsl stroke)
+                                :fill (hsl fill)}])]
+             [:g
+
+              (map
+               (fn [y]
+                 [p [-300 y  :l 1600 0] .02
+                  [1.8 70 70 1]
+                  [1.8 70 70 1]])
+               (range -5 5))
+
+
+              (map
+               (fn [x]
+                 [p [x -800  :l 0 1600 ] .02
+                  [2.5 70 70 1]
+                  [2.5 70 70 1]])
+               (range -5 5))
+
+
+
+              ]
+
+
+
+             )
+
+
+
+           #_(map
+              (fn [x]
+                [:circle {:cx x
+                          :cy (ve (+ x 1))
+                          :r .05
+                          :fill (hsl [5 70 70 1])}])
+              (range -200 200 .1))
+
+
+
+
+           (map
+            (fn [x]
+              [:circle {:cx x
+                        :cy (ve (+ (* 2 x) 1))
+                        :r .05
+                        :fill (hsl [5 70 70 1])}])
+            (range -200 200 .5))
+
+
+
+           [:circle {:cx 0
+                     :cy 0
+                     :r .05
+                     :fill (hsl [5 70 70 1])
+                     }]
+
+           #_[:circle {:cx 0
+                     :cy 0
+                     :r (js/Math.sqrt 5)
+                     :fill :none
+                     :stroke-width .01
+                     :stroke (hsl [5 70 70 1])}]
+
+
+           #_(map
+              (fn [x]
+                [:circle {:cx x
+                          :cy (ve (- 3 (* x x)))
+                          :r .05
+                          :fill (hsl [0 70 70 1])}])
+              (range -200 200 .1))
+
+
+           (map
+            (fn [x]
+              [:circle {:cx x
+                        :cy (ve (+ (* x x) (* 2 x ) -3 ))
+                        :r .05
+                        :fill (hsl [0 70 70 1])}])
+            (range -200 200 .1))
+
+
+           [:clipPath#anik
+            [:circle {:r 85
+                      :cx 500
+                      :cy 100
+                      :stroke :black
+                      :storke-width 7
+                      :fill :white}  ]]])]
+
+
+       ])))
+
+
+(defn board2 [v]
+  (let [[text set-text] (react/useState "")
+        [slider set-slider] (react/useState -1)
+        animate-ref (react/useRef)
+        _ (react/useEffect
+           (fn []
+             (if (and animate-ref
+                      (-> animate-ref .-current))
+               (-> animate-ref
+                   .-current
+                   (.animate
+                    (clj->js
+                     [{
+                       :background (hsl [.5 70 70 .1])
+                       :transform (m7/tranfrom [[:rotate "10deg"]])
+                       }
+                      {:background (hsl [.9 70 70 .7])
+                       :transform (m7/tranfrom [[:rotate "-10deg"]])
+
+                       }
+
+                      {:background (hsl [2 70 70 .9])
+                       :transform (m7/tranfrom [[:scale .9]])
+                       :offset (/ 9 14)}
+
+                      {:background (hsl [3.5 70 70 .7])
+                       :transform (m7/tranfrom [[:scale 1]])
+                       }])
+                    (clj->js
+                     {:duration 2000
+                      :iterations 1})
+                    )))
+             (js/console.log "1")
+             ))
+
+        f (fn [n] (/ 1 n))
+        tt 'θ
+        dx [1 0  0 1 -1  0 0 -1 ]
+        sq (fn [n]
+                (comp
+                 (partial map (partial * n))))]
+    (let [zoom 4
+          ax-dx 80
+          ax-dy 40
+          vb (fn [z]
+               (nth [(map #(* .25 %) [-10 -20  83 40])
+                     [0 -180  200 200]
+                     [0 -50  100 100]
+                     [0 -25  50 50]
+                     [-100 -200  800 200]
+                     [40 120  80 80]
+                     [0 40  100 100]
+                     [75 -175  150 150]
+                     [-20 -20  100 100]
+                     [-400 -200  800 200]] z))
+          viewbox (vb 0)
+          viewbox2 (vb 0)
+          m 30
+          d 9.4
+          scale2 [[.5 .5] [-0.5 .5]]
+          ]
+
+
+
+
+      [:div {:style (merge
+                     (grid [100 :vh 100 :vw
+                            (take 24 (repeat [8 :vh]))
+                            (take 20 (repeat [8 :vh]))])
+                     {:background-color (hsl [1 70 70 .5])
+                      :gap ".2rem"})}
+
+       (map-indexed
+        (fn [n [d r c f1 f2]]
+          [:div {:ref (if (= n slider) animate-ref nil)
+                 :on-mouse-enter (fn [e]
+                                   (set-slider n))
+                 :style (m7/css
+                         [[(+ 0 (* 3 r)) 3 (+ 12 (* 3 c)) 3  f1 f2  1.5 :rem :column]
+                          [(if (= slider n) 3 1) 70 (+ 50 (* 2 n)) .1] []
+                          (into
+                           {:font-size (m7/np [2.1 :rem])
+                            :font-family "Roboto Flex"
+                            :gap (m7/np [1 :rem])
+                            :color (hsl [1 30 (if (= slider n) 20 20) 1])
+                            :z-index 4
+                            :cursor :grab}
+                           {:z-index 19}
+                           )])
+                 }
+           d])
+        (let [[f1 f2] [7 -2]
+              x 'x]
+          [[[m7/x `[:m 8 [:p ~x 2]]] 1 1 :center :center]
+           [[m7/x `[* ~f1 ~f2]] 2 2 :center :center]
+           [[m7/x `[:m 7 ~x]] 2 1 :center :center]
+           [[m7/x `[:m -16 ~x]] 1 2 :center :center]
+           [[m7/x `[:m 1 ~x]]
+            1 1 :flex-end :center]
+           [[m7/x `[:m 8 ~x]]
+            1 1 :center :flex-start]
+           [f1
+            2 2 :center :flex-start]
+           [f2 2 2 :flex-end  :center]]))
+
+
+
+
+
+
+
+
+
+       #_(map-indexed
+        (fn [n [d r c]]
+          [:div {:ref (if (= n slider) animate-ref nil)
+                 :on-mouse-enter (fn [e]
+                                   (set-slider n))
+                 :style
+                 (m7/css
+                  [[r 1 (* c 4) 4  :center :flex-end  1.5 :rem :column]
+                   [(if (= slider n) 3 1) 70 (+ 50 (* 2 n)) 1] []
+                   (into
+                    {:font-size (m7/np [1.7 :rem])
+                     :font-family "Roboto Flex"
+                     :gap (m7/np [1 :rem])
+                     :color (hsl [1 30 (if (= slider n) 20 40) 1])
+                     :z-index 10
+                     :cursor :grab}
+                    {})])}
+           d])
+        [[[m7/x `[* [:m 2 x] x]] 4 1][ [m7/x `[:m [- 7] x]] 4 2] [[m7/x `[* 3 [:m 2 x]]] 5 1] [[m7/m '[* 3 [- 7]]] 5 2]])
+
+
+       #_[:div {:style
+              (m7/css
+               [[8 4  15 8
+                 :center :flex-start  3.3 :rem :column]
+                [1.5 70 80  .3] []
+                {:gap ".1rem"
+                 :color (hsl [0 30 30 1])
+                 :z-index 10}])}
+        [m7/x `[:m y [:b [- [3 2] 2]]]]]
+
+       [:div {:style
+              (m7/css
+               [[2 8  3 18
+                 :center :flex-start  2.2 :rem :column]
+                [1.5 70 80  .3] []
+                {:gap ".1rem"
+                 :color (hsl [0 30 30 1])
+                 :z-index 10}])}
+
+        #_"lie lose make mean meet pay put run say sell send set sit speak spend stand take teach tell think understand wear win write "
+
+
+
+
+        #_[:div "symbol"]
+        #_[:div "exponent"]
+        #_[:div "coefficent"]
+
+        #_[:div "
+Meaning: Distract; to disturb the concentration of
+Example: Please be quiet. I’m trying to concentrate and you’re putting me off.
+Put off
+
+Meaning: Cause to dislike; to discourage (from doing)
+Example: Almost drowning put him off swimming."]
+        #_[m7/x `[= [+ [:m 2 x] 1] y]]
+
+        #_[m7/x
+           (m7/eq2 `[= [+ [+ [:m 8 [:p x 2]] x] 6
+                        [:m 5 y] [:m 6 x y] [:m 9 [:p x 2] y]
+                        [:m 2 y] [:m 3 x y] [:m 2 [:p x 2] y]
+
+                        ] 0])
+           ]
+
+
+        (comment
+          
+          )
+
+        #_[:div "
+A stake-out requires being inconspicuous, but not so for red-winged blackbirds.
+Showing off and making noise is the main objective of their stake-out.
+Male red-winged blackbirds have already staked-out their territories in wetlands and around ponds and lakes.
+Their red-and-yellow shoulder patches add glints of color to the dull landscape.
+And male red-wings don't hesitate to show their colors
+When other birds invade the red-wing's territory, he spreads his tail, droops his wings, and lets out the gurgling Song.
+In February and March, male red-wings come north from their southern wintering grounds
+and find good spots for nesting and feeding.
+They are probably our most numerous songbird.
+"]
+
+
+
+        #_[:img {:style {:width "30%"
+                       }
+               :src "https://www.thespruce.com/thmb/l0_mNoIWGQuwtumjslpdZRgk9fg=/941x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/red-winged-blackbird-identification-385990-hero-bca4cabf8e9743e8b2459ce6421dc642.jpg"}]
+
+        (comment
+          [m7/x `[= y [+ [- [:p x 2] [:m 3 x ]] 1]]]
+          [m7/x `[= y [-  [:m 2 x] 5]]]
+          [m7/x `[= [-  [:m 2 x ] 5] [+ [- [:p x 2] [:m 2 x ] [:m 2 x ] x]  1]]]
+          [m7/x `[= 0 [+ [- [:p x 2] [:m 5 x] ]  6]]]
+
+          [m7/x `[= 0 [:m [:b [- x 2]] [:b [- x 3]]]]]
+
+
+
+          [m7/x `[= 0 [- x 3]]]
+          [m7/x `[= 3 x]]
+          [m7/x `[= y [-  [* 2 3 ] 5]]]
+          [m7/x `[= y [-  [* 2 3 ] 5]]]
+          [m7/x `[= y 1]]
+
+          [:div ]
+
+          [m7/x `[= 0 [- x 2]]]
+          [m7/x `[= 2 x]]
+          [m7/x `[= y -1]])
+        #_[m7/x `[= [-   5] [+ [:p x 2]  x [- 5] 6 ]]]
+
+
+        
+
+        (map (fn [e]
+               (m7/x e)) v)
+
+
+        #_[m7/x
+
+         
+
+
+
+
+
+
+
+
+           ]
+        (comment 
+          (m7/x
+           (m7/eq2
+            `[=
+              ~(let [cp (fn [c d e] `[:p ~e ~d])
+                     p (fn [c d e] `[:m ~c [:p ~e ~d]] )
+                     np (fn [c _ e] `[:m ~c ~e] )
+                     np1 (fn [c _ e] e)
+                     c (fn [c _ e] c)]
+
+
+                 (into ['+]
+                       (map (fn [c d ff e]
+                              (ff c d e))
+                            [2 3]
+                            [1 1]
+                            [np c]
+                            ['y 'y])))
+              x
+              ]))
+
+
+          (m7/x `[= [+ [:p [:b x] 2]
+                     [:m 2 [:p y 2]]] 27])
+
+
+
+
+          (m7/x `[= [+ [:p [:b ~(let [cp (fn [c d e] `[:p ~e ~d])
+                                      p (fn [c d e] `[:m ~c [:p ~e ~d]] )
+                                      np (fn [c _ e] `[:m ~c ~e] )
+                                      np1 (fn [c _ e] e)
+                                      c (fn [c _ e] c)]
+
+
+                                  (into ['+]
+                                        (map (fn [c d ff e]
+                                               (ff c d e))
+                                             [2 3]
+                                             [1 1]
+                                             [np c]
+                                             ['y 'y])))] 2]
+                     [:m 2 [:p y 2]]] 27])
+
+
+          (m7/x `[= [+   ~(let [cp (fn [c d e] `[:p ~e ~d])
+                                p (fn [c d e] `[:m ~c [:p ~e ~d]] )
+                                np (fn [c _ e] `[:m ~c ~e] )
+                                np1 (fn [c _ e] e)
+                                c (fn [c _ e] c)]
+
+
+                            (into ['+]
+                                  (map (fn [c d ff e]
+                                         (ff c d e))
+                                       [(* 2 2) (* 2 3) 1]
+                                       [2 1 2]
+                                       [p np cp]
+                                       ['y 'y 3])))
+                     [:m 2 [:p y 2]]] 27])
+
+
+          (m7/x `[= ~(let [cp (fn [c d e] `[:p ~e ~d])
+                           p (fn [c d e] `[:m ~c [:p ~e ~d]] )
+                           np (fn [c _ e] `[:m ~c ~e] )
+                           np1 (fn [c _ e] e)
+                           c (fn [c _ e] c)]
+                       (conj
+                        (into ['+]
+                              (map (fn [c d ff e]
+                                     (ff c d e))
+                                   [6 (* 2 3) 1]
+                                   [2 1 2]
+                                   [p np cp]
+                                   ['y 'y 3]))
+                        `[- [* 3 [:p 3 2]]])
+                       ) 0]))
+
+
+        #_(m7/x `[= [+ [:m 6 [:p y 2]] [:m 6 y] [:m [:p 3 2] [:b [- 1 3]]]] 0])
+
+
+        #_(m7/x `[= [+ [:m 6 [:p y 2]] [:m 6 y] [* [- 2] [:p 3 2] ]] 0])
+
+
+        #_(m7/x `[= [+ [:m 1 [:p y 2]] [:m 1 y] [- 3]] 0])
+
+        [m7/x `[= [-  [:m 8 [:p x 2]]
+                   [:m 9 x ] 14] 0]]
+
+
+
+
+        #_[m7/x (m7/eq2 (w/postwalk
                        (fun ([[:m c [:p [:b [+ a b]] 2]]]
                              ['+ [:m c [:p a 2]] ['* 2 c a b] ['* c  [:p b 2]]])
                             ([y] y))
@@ -17503,10 +19455,10 @@ Example: Almost drowning put him off swimming."]
                                    (set-slider n))
                  :style
                  (m7/css
-                  [[ (+ 2 n) 1 (+ 1 2) 8  :center :center  1.5 :rem :column]
+                  [[ (+ 2 n) 1 (+ 1 2) 18  :center :center  1.1 :rem :column]
                    [(if (= slider n) 3 1) 70 (+ 50 (* 2 n)) .3] []
                    (into
-                    {:font-size (m7/np [3.7 :rem])
+                    {:font-size (m7/np [.7 :rem])
                      :font-family "Roboto Flex"
                      :gap (m7/np [1 :rem])
                      :color (hsl [1 70 (if (= slider n) 40 90) 1])
@@ -17514,12 +19466,12 @@ Example: Almost drowning put him off swimming."]
                      :cursor :grab}
                     {})])}
            [:input  {:style {:type :text
-                             :font-size (m7/np [3.7 :rem])
+                             :font-size (m7/np [1.7 :rem])
                              :height "100%"
                              :width "100%"
                              }
                      :placeholder d}]])
-         ["book"  "race" "tap" "carry"  "Bring"  "catch" "am,is" "are" "cut" "put"])
+       ["All the ticket has been booked out"  "You have 8 minutes left, you have finished just one verb out of 12. Your are running against the time." "tapped out" "carry"  "Bring"  "catch" "am,is" "are" "cut" "put"])
 
 
        #_(map-indexed
@@ -17567,7 +19519,7 @@ Example: Almost drowning put him off swimming."]
         ["Yo estoy" "Tu estas" "el esta" "ella esta"  "nosotros estamos" "Usedes estan"
          "Ellos estan"])
 
-       [:div {:style
+       #_[:div {:style
               (m7/css
                [[2 10  12 15
                  :center :center  1.8 :rem :column]
@@ -17590,7 +19542,10 @@ Example: Almost drowning put him off swimming."]
 
              (conj acc [:span (str " "  e)])))
          [:div ]
-         (str/split "One day, long ago, a Jackal was trotting through a narrow and rocky pass, when he came face to face with a Lion, who was coming from the opposite direction. Realising that he was too close to the lion to escape, the Jackal was afraid. In a flash, he thought of a plan. He cowered down on the cliff path, looked above him and cried , \"Help\" " #"\s+"))]
+         (str/split "One day, long ago, a Jackal was trotting through a narrow and rocky pass, when he came face to face with a Lion, who was coming from the opposite direction. Realising that he was too close to the lion to escape, the Jackal was afraid. In a flash, he thought of a plan. He cowered down on the cliff path, looked above him and cried , \"Help\" " #"\s+"))
+
+
+        ]
 
 
 
@@ -18174,6 +20129,25 @@ Example: Almost drowning put him off swimming."]
           m 30
           d 9.4
           scale2 [[.5 .5] [-0.5 .5]]
+          sen   (fn [a b]
+            (reduce
+             (fn [acc e]
+               (if (some #(= e %) a)
+                 (conj acc
+                       [:span " "
+                        [:span {:style {:background-color (hsl [1 70 70 1])
+                                        :color (hsl [1 20 40 1])
+                                        :font-weight 600}}
+                         (str  e)]])
+
+
+
+                 (conj acc [:span (str " "  e)])))
+
+             [:div ]
+
+
+             (str/split b  #"\s+")))
           ]
       [:div {:style (merge
                      (grid [100 :vh 100 :vw
@@ -18182,56 +20156,16 @@ Example: Almost drowning put him off swimming."]
                      {:background-color (hsl [1 70 70 .1])
                       :gap ".2rem"})}
 
-       (map-indexed
-        (fn [n d]
-          [:div {:ref (if (= n slider) animate-ref nil)
-                 :on-mouse-enter (fn [e]
-                                   (set-slider n))
-                 :style
-                 (m7/css
-                  [[6 1 (+ 3 (* 3 n)) 3  :center :center  1.5 :rem :column]
-                   [(if (= slider n) 3 1) 70 (+ 50 (* 2 n)) 1] []
-                   (into
-                    {:font-size (m7/np [1.7 :rem])
-                     :font-family "Roboto Flex"
-                     :gap (m7/np [1 :rem])
-                     :color (hsl [1 70 (if (= slider n) 40 90) 1])
-                     :z-index 4
-                     :cursor :grab}
-                    {})])}
-           d])
-        [[m7/x '[:p x 2]]
-         [m7/x '[:m 4 x]]]
-        )
 
 
-       (map-indexed
-        (fn [n d]
-          [:div {:ref (if (= n slider) animate-ref nil)
-                 :on-mouse-enter (fn [e]
-                                   (set-slider n))
-                 :style
-                 (m7/css
-                  [[7 1 (+ 3 (* 3 n)) 3  :center :center  1.5 :rem :column]
-                   [(if (= slider n) 3 1) 70 (+ 50 (* 2 n)) 1] []
-                   (into
-                    {:font-size (m7/np [1.7 :rem])
-                     :font-family "Roboto Flex"
-                     :gap (m7/np [1 :rem])
-                     :color (hsl [1 70 (if (= slider n) 40 90) 1])
-                     :z-index 4
-                     :cursor :grab}
-                    {})])}
-           d])
-        [[m7/x '[:m [- 8] x]]
-         [m7/x '[* [- 8 ] 4]]]
-        )
+
+
 
 
        [:div {:style
               (m7/css
-               [[2 4  2 8
-                 :center :center  1.8 :rem :column]
+               [[4 10  4 20
+                 :flex-start :flex-start  3.8 :rem :column]
                 [1.5 70 80  .2] []
                 {:gap ".1rem"
                  :color (hsl [.4 30 30 1])
@@ -18239,11 +20173,97 @@ Example: Almost drowning put him off swimming."]
                  }])}
 
 
-        [m7/x '[= [:p [:b [+ x 9]] 2]
+        [m7/x `[= [- [- [:m 4 [:p x 2]]] 
+                   [:m 9 x ]] 14]]
+
+        [m7/x `[= [- [- [:m 4 [:p x 2]]] 
+                   [:m 9 x ] 14] 0]]
+
+      #(sen
+         ["put"] "We put down a $1,000 deposit.")
+
+        #_[:div "last year covid situation broke out."]
+
+        #_[:div "Don’t put off your homework to the last minute."]
+
+        #_[:div "The storm put the game off by a week."]
+        #_[:div "Please be quiet. I’m trying to concentrate and you’re putting me off."]
+        #_[:div "Almost drowning put him off swimming."]
+        #_[:div  "They frequently put down their little sister for walking slowly."]
+        #_[:div "My mom always put me down for eating slowly"]
+
+        #_[:div "Put it down in the paper what we have learned today"]
+
+
+
+        (comment
+         #_[:div "Put down
+
+Meaning: Insult, belittle, or demean
+Example: They frequently put down their little sister for walking slowly.
+Put down
+
+Meaning: Pay
+Example: We put down a $1,000 deposit.
+Put down
+
+Meaning: Halt, eliminate, stop, or squelch, often by force
+Example: The government quickly put down the insurrection.
+Put down
+
+Meaning: Euthanize (an animal)
+Example: Rex was in so much pain, they had to put him down.
+Put down
+
+Meaning: Write (something)
+Example: Put down the first thing you think of on this piece of paper.
+Put down
+
+Meaning: Terminate a call; to hang up.
+Example: Don’t put the phone down. I want a quick word with him,too.
+Put down
+
+Meaning: Add a name to a list
+Example: I’ve put myself down for the new Spanish conversation course.
+Put down
+
+Meaning: Make prices, or taxes, lower
+Example: BP are putting petrol and diesel down in what could be the start of a price war.
+Put down
+
+Meaning: Place a baby somewhere to sleep
+Example: I had just put Mary down when you rang. So now she’s crying again.
+Put down
+
+Meaning: Land
+Example: The pilot managed to put down in a nearby farm field.
+Put down
+
+Meaning: Drop someone off, or let them out of a vehicle
+Example: The taxi put him down outside the hotel.
+Put down
+
+Meaning: Cease, temporarily or permanently, reading (a book)
+Example: I was unable to put down The Stand: it was that exciting.
+Put down as
+
+Meaning: Assume someone has a particular character from very little information
+Example: I put him down as ignorant, but then discovered he is, in fact, a university professor!
+Put down for
+
+Meaning: Record that someone has offered to help, or contribute something
+Example: Put me down for one of the drivers.
+Put down to
+
+Meaning: State the cause of a situation
+Example: I put the high crime rate down to the high unemployment."])
+
+
+        #_[m7/x '[= [:p [:b [+ x 9]] 2]
                 [+ [:p x 2]  [:p [:b [+ x 7]] 2]]]]
 
 
-        (let []
+        #_(let []
           [m7/x '[= 0
                   [-  [:p x 2]   [:m [:b [- 8 4]] x]  (* 4 8)]]])
         #_[m7/x `[= [:p [:b [+ x 9] ] 2]
@@ -18663,14 +20683,14 @@ Example: Almost drowning put him off swimming."]
                                  80 0 0 (* 2 20 )
                                  -80 0])
                     :stroke-width 1
-                    :fill (hsl [2 70 70 1])}]
+                    :fill (hsl [2 70 70 .1])}]
 
 
             [:path#b0 {:d (m7/path [0 0 :l 80 (ve (* 2 20 ))])
-                    :stroke (hsl [2 20 40 1])
+                    :stroke (hsl [2 20 40 .1])
                     :stroke-width .5
 
-                    :fill (hsl [2 70 70 1])}]
+                    :fill (hsl [2 70 70 .1])}]
 
 
 
@@ -18678,7 +20698,7 @@ Example: Almost drowning put him off swimming."]
                        :stroke-width .5
                        :marker-end (m7/url (name :mb2))
                        :marker-start (m7/url (name :mb2))
-                       :stroke (hsl [2 30 30 1])
+                       :stroke (hsl [2 30 30 .1])
                        :fill :none}]
 
 
@@ -18697,34 +20717,34 @@ Example: Almost drowning put him off swimming."]
                        :marker-end (m7/url (name :mb2))
                        :marker-start (m7/url (name :mb2))
 
-                       :fill (hsl [1 70 70 1])}]
+                       :fill (hsl [1 70 70 .1])}]
 
 
 
             [:path#b3 {:d (m7/path [0 10 :l (* 40 2) 0])
-                       :stroke (hsl [1 20 20 1])
+                       :stroke (hsl [1 20 20 .1])
                        :stroke-width .5
 
                        :marker-end (m7/url (name :mb2))
                        :marker-start (m7/url (name :mb2))
 
-                       :fill (hsl [1 70 70 1])}]
+                       :fill (hsl [1 70 70 .1])}]
 
 
             [:path#b4 {:d (m7/path [0 -50 :l (* 40 2) 0])
-                       :stroke (hsl [1 20 20 1])
+                       :stroke (hsl [1 20 20 .1])
                        :stroke-width .5
 
                        :marker-end (m7/url (name :mb2))
                        :marker-start (m7/url (name :mb2))
 
-                       :fill (hsl [1 70 70 1])}]
+                       :fill (hsl [1 70 70 .1])}]
 
 
 
 
 
-            [:text {:style {:font-size 5}}
+            #_[:text {:style {:font-size 5}}
 
 
              [:textPath {:href :#b0
