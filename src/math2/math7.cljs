@@ -186,7 +186,6 @@
           ])
         ([[:= _]]
          [:mrow
-
           (if (= (first elem-left) :expr)
             (expr elem-left)
             elem-left)

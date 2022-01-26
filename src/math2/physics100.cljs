@@ -466,7 +466,6 @@ The pipelined version also modeled at RTL level."]
             [:db/add "invoice" :invoice/buyer ?c]
             [:db/add "invoice" :invoice/object ?o]]}])
 
-
 (-> crime-db (d/pull [:person/criminal?] [:person/name "Robert"]))
 (-> crime-db
     (infer rules)
