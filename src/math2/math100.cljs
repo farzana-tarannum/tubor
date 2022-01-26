@@ -17372,7 +17372,7 @@ They are probably our most numerous songbird.
        ])))
 
 
-(defn board2 [v]
+(defn board2 [v box g]
   (let [[text set-text] (react/useState "")
         [slider set-slider] (react/useState -1)
         animate-ref (react/useRef)
@@ -17463,50 +17463,11 @@ They are probably our most numerous songbird.
                            )])
                  }
            d])
-        (let [[f1 f2] [7 -2]
-              x 'x]
-          [[[m7/x `[:m 8 [:p ~x 2]]] 1 1 :center :center]
-           [[m7/x `[* ~f1 ~f2]] 2 2 :center :center]
-           [[m7/x `[:m 7 ~x]] 2 1 :center :center]
-           [[m7/x `[:m -16 ~x]] 1 2 :center :center]
-           [[m7/x `[:m 1 ~x]]
-            1 1 :flex-end :center]
-           [[m7/x `[:m 8 ~x]]
-            1 1 :center :flex-start]
-           [f1
-            2 2 :center :flex-start]
-           [f2 2 2 :flex-end  :center]]))
+        box)
 
 
 
-
-
-
-
-
-
-       #_(map-indexed
-        (fn [n [d r c]]
-          [:div {:ref (if (= n slider) animate-ref nil)
-                 :on-mouse-enter (fn [e]
-                                   (set-slider n))
-                 :style
-                 (m7/css
-                  [[r 1 (* c 4) 4  :center :flex-end  1.5 :rem :column]
-                   [(if (= slider n) 3 1) 70 (+ 50 (* 2 n)) 1] []
-                   (into
-                    {:font-size (m7/np [1.7 :rem])
-                     :font-family "Roboto Flex"
-                     :gap (m7/np [1 :rem])
-                     :color (hsl [1 30 (if (= slider n) 20 40) 1])
-                     :z-index 10
-                     :cursor :grab}
-                    {})])}
-           d])
-        [[[m7/x `[* [:m 2 x] x]] 4 1][ [m7/x `[:m [- 7] x]] 4 2] [[m7/x `[* 3 [:m 2 x]]] 5 1] [[m7/m '[* 3 [- 7]]] 5 2]])
-
-
-       #_[:div {:style
+       [:div {:style
               (m7/css
                [[8 4  15 8
                  :center :flex-start  3.3 :rem :column]
@@ -17514,7 +17475,9 @@ They are probably our most numerous songbird.
                 {:gap ".1rem"
                  :color (hsl [0 30 30 1])
                  :z-index 10}])}
-        [m7/x `[:m y [:b [- [3 2] 2]]]]]
+        (map (fn [a]
+               a)  g)]
+       
 
        [:div {:style
               (m7/css
@@ -17703,7 +17666,7 @@ They are probably our most numerous songbird.
 
         #_(m7/x `[= [+ [:m 1 [:p y 2]] [:m 1 y] [- 3]] 0])
 
-        [m7/x `[= [-  [:m 8 [:p x 2]]
+        #_[m7/x `[= [-  [:m 8 [:p x 2]]
                    [:m 9 x ] 14] 0]]
 
 
