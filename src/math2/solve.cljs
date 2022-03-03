@@ -126,7 +126,7 @@
 
 (def simplify
   (fn [dd]
-    (vec  
+    (vec
      (map
       (comp
        (fn [[a b]]
@@ -137,7 +137,7 @@
                         (vec (cons '+ a))) first)
          count) identity)
        #(map mkeq2 %)
-       
+
        vec
        #(map (fun [[[e f g] b]]
                   [e b f g]) %)
@@ -155,7 +155,7 @@
 
 (def simplify3
   (fn [dd]
-    (vec  
+    (vec
      (map
       (comp
        (fn [[a b]]
@@ -166,7 +166,7 @@
                         (vec (cons '+ a))) first)
          count) identity)
        #(map mkeq2 %)
-       
+
        vec
        #(map (fun [[[ f g] b]]
                   [f g b]) %)
@@ -221,7 +221,7 @@
 
 (def simplify2
   (fn [dd]
-    (vec  
+    (vec
      (map
       (comp
        (fn [[a b]]
@@ -244,20 +244,20 @@
        #(reduce t2  {} %)
        #(map (fn [[a b c d]]
                [a (if (= (mod b 2) 0)
-                    (/ b 2) 
-                    [b 2]) c d]) %)
+                    (/ b 2)
+                    [b 2]) c d])
+             %)
        )
       dd
       ))))
 
 (defn e3g []
-  [(exp-eq
-    (map mkeq2 dd2))
+  [
    (exp-eq
     (map mkeq2 dd4))
    (cons '=
          (map
-          (comp 
+          (comp
            vec
            (fn [a]
              (cons '+ a))
@@ -265,32 +265,133 @@
           (add-nth dd4 1)))
    (vec (cons '= (simplify (add-nth dd4 1))))
    (vec (cons '= (simplify2 (add-nth dd4 1))))
-   (vec (cons '= (simplify (add-nth dd4 1))))
+
    (vec (cons '=
               (let [[a b]
                     (vec (simplify (add-nth dd4 1)))]
                 [[:p [:b a] 2] [:p [:b b] 2]])))
-   (vec (cons '+
-              ((comp
-                vec
-                (fn [exp] (map mkeqx exp))
-                (fn [[a b]]
-                  [(sq a) (sq b)
-                   (mul 2 a b )] )
-                (fn [exp] (map (fun [[[f g] b]]
-                                    [b f g]) exp))
-                (fn [exp] (filter (fn [[u v]]
-                                    (if (= v 0) false true)) exp))
-                (fn [exp] (reduce simf {} exp))
-                (fn [exp] (conj exp
-                                (inv (get exp 1))))
-                vec
-                (fn [exp] (map mkeq  exp)))
-               dd4)))
-   ]
-  )
+   (exp-eq
+    (map mkeq2 dd2))
+   (let [four-ys (vec (cons '+
+                            ((comp
+                              vec
+                              (fn [exp] (map mkeqx exp))
+                              (fn [[a b]]
+                                [(sq a) (sq b)
+                                 (mul 2 a b)] )
+                              (fn [exp] (map (fun [[[f g] b]]
+                                                  [b f g]) exp))
+                              (fn [exp] (filter (fn [[u v]]
+                                                  (if (= v 0) false true)) exp))
+                              (fn [exp] (reduce simf {} exp))
+                              (fn [exp] (conj exp
+                                              (inv (get exp 1))))
+                              vec
+                              (fn [exp] (map mkeq  exp)))
+                             dd4)))]
+     (postwalk
+      (fun ([[:m 4 [:p y 2]]]
+            four-ys)
+           ([[:m 2 'y]]
+            (first (simplify (add-nth dd4 1))))
+           ([x] x))
+      (exp-eq
+       (map mkeq2 dd2))))
+
+   (exp-eq
+    (map mkeq2 (eq2 `[ [27 2 x ] [78 x]])))
+   (eq2 '[= [:m x  [:b [+ [:m 27 x] 78]]] 0])
+   (exp-eq (map mkeq2 (eq2 `[ [27 x] 78])))
+
+   (exp-eq
+    ((comp
+      vec
+      (fn [exp] (map mkeqx exp))
+      (fn [exp] (map (fun [[[f g] b]]
+                          [b f g]) exp))
+      (fn [exp] (filter (fn [[u v]]
+                          (if (= v 0) false true)) exp))
+      (fn [exp] (reduce (fn [acc a]
+                          (simf acc a)) {} exp))
+      vec
+      (fn [exp] (map mkeq  exp)))
+     dd2))
+
+   ])
 
 
 
+(defn e3g1 []
+  [
+   (exp-eq
+    (map mkeq2 dd4))
+   (cons '=
+         (map
+          (comp
+           vec
+           (fn [a]
+             (cons '+ a))
+           (fn [s] (map mkeq2 s)))
+          (add-nth dd4 1)))
+   (vec (cons '= (simplify (add-nth dd4 1))))
+   (vec (cons '= (simplify2 (add-nth dd4 1))))
+
+   (vec (cons '=
+              (let [[a b]
+                    (vec (simplify (add-nth dd4 1)))]
+                [[:p [:b a] 2] [:p [:b b] 2]])))
+   (exp-eq
+    (map mkeq2 dd2))
+   (let [four-ys (vec (cons '+
+                            ((comp
+                              vec
+                              (fn [exp] (map mkeqx exp))
+                              (fn [[a b]]
+                                [(sq a) (sq b)
+                                 (mul 2 a b)] )
+                              (fn [exp] (map (fun [[[f g] b]]
+                                                  [b f g]) exp))
+                              (fn [exp] (filter (fn [[u v]]
+                                                  (if (= v 0) false true)) exp))
+                              (fn [exp] (reduce simf {} exp))
+                              (fn [exp] (conj exp
+                                              (inv (get exp 1))))
+                              vec
+                              (fn [exp] (map mkeq  exp)))
+                             dd4)))]
+     (postwalk
+      (fun ([[:m 4 [:p y 2]]]
+            four-ys)
+           ([[:m 2 'y]]
+            (first (simplify (add-nth dd4 1))))
+           ([x] x))
+      (exp-eq
+       (map mkeq2 dd2))))
+
+   (exp-eq
+    (map mkeq2 (eq2 `[ [27 2 x ] [78 x]])))
+   (eq2 '[= [:m x  [:b [+ [:m 27 x] 78]]] 0])
+   (exp-eq (map mkeq2 (eq2 `[ [27 x] 78])))
+
+   (exp-eq
+    ((comp
+      vec
+      (fn [exp] (map mkeqx exp))
+      (fn [exp] (map (fun [[[f g] b]]
+                          [b f g]) exp))
+      (fn [exp] (filter (fn [[u v]]
+                          (if (= v 0) false true)) exp))
+      (fn [exp] (reduce (fn [acc a]
+                          (simf acc a)) {} exp))
+      vec
+      (fn [exp] (map mkeq  exp)))
+     dd2))
+
+   ])
+
+
+#_(into (conj (conj
+               (mkeq [-2 'y]) )
+            [-4 2 'y]))
 
 #_(e3g)

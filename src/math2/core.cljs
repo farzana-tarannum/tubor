@@ -29,107 +29,51 @@
 (def functional-compiler (r/create-compiler {:function-components true}))
 
 
-
+(defn math []
+  [:div
+   #_[m100/board2
+      []
+      []
+      []]
+   [m100/index2]
+   #_[m100/sine-wave2]
+   #_[m100/board2
+      (s/e3g)
+      (let [[f1 f2] [7 -2]
+            x 'x]
+        [[[m7/x `[:m 8 [:p ~x 2]]] 1 1 :center :center]
+         [[m7/x `[* ~f1 ~f2]] 2 2 :center :center]
+         [[m7/x `[:m 7 ~x]] 2 1 :center :center]
+         [[m7/x `[:m -16 ~x]] 1 2 :center :center]
+         [[m7/x `[:m 1 ~x]]
+          1 1 :flex-end :center]
+         [[m7/x `[:m 8 ~x]]
+          1 1 :center :flex-start]
+         [f1
+          2 2 :center :flex-start]
+         [f2 2 2 :flex-end  :center]])
+      [
+       [m7/x `[[:m 108
+                [:p y 2] ] 25]]]]
+   ])
 
 
 
 (defn template []
-  [:div {:style {:display :flex
-                 :justify-content :center}}
+  [:div
+
 
 
    #_[m100/home-planets-banners-exp]
-   #_[m100/chem-mole]
-   #_[m100/sine-wave2]
-   #_[m100/sine-wave]
+   [m100/chem-mole]
+   [m100/sine-wave2]
+   [m100/sine-wave]
 
-   #_[m100/app]
-   #_[m100/home-planets-banners]
+   [m100/app]
+   [m100/home-planets-banners]
    (comment
      (/ (+  62000 (* 8 104))
         20000))
-   #_[m100/grammer-eng]
-   #_(+ 1 3 3 4 )
-   #_[:div "50,67,72,75,46,47,55,81,87,94,83"]
-   #_[:div "207"]
-   #_[:div "54,56,57,59,63,58,69,70,73,6,75,21,13,49,44"]
-   #_[m100/grammer-eng]
-   #_[=
-     27
-     ~(let [cp (fn [c d e] `[:p ~e ~d])
-            p (fn [c d e] `[:m ~c [:p ~e ~d]] )
-            np (fn [c _ e] `[:m ~c ~e] )
-            np1 (fn [c _ e] e)
-            c (fn [c _ e] c)]
-
-
-        (into ['+]
-              (map (fn [c d ff e]
-                     (ff c d e))
-                   [ [1 2] 3]
-                   [ 2 2]
-                   [cp p]
-                   ['x 'y])))]
-
-#_(w/postwalk
-        (fn [y]
-          (if (= y 'y)
-            (let [[_ _ r]
-                  (m7/eq2
-                   `[= x
-                     ~(let [x 'y
-                            p (fn [c d] `[:m ~c [:p ~x ~d]] )
-                            np (fn [c _] `[:m ~c ~x] )
-                            np1 (fn [c _] x)
-                            c (fn [c _] c)]
-
-
-                        (into ['+]
-                              (map (fn [c d ff]
-                                     (ff c d))
-                                   [ 2 3]
-                                   [ 1 0]
-                                   [ np c])))])]
-              [:b r])
-            y))
-        (m7/eq2
-         `[=
-           27
-           ~(let [cp (fn [c d e] `[:p ~e ~d])
-                  p (fn [c d e] `[:m ~c [:p ~e ~d]] )
-                  np (fn [c _ e] `[:m ~c ~e] )
-                  np1 (fn [c _ e] e)
-                  c (fn [c _ e] c)]
-
-
-              (into ['+]
-                    (map (fn [c d ff e]
-                           (ff c d e))
-                         [ [1 2] 3]
-                         [ 2 2]
-                         [cp p]
-                         ['x 'y])))]))
-
-
-
-
-   #_[m100/board2
-      [] (let [[f1 f2] [7 -2]
-               x 'x]
-           [[[m7/x `[:m 8 [:p ~x 2]]] 1 1 :center :center]
-            [[m7/x `[* ~f1 ~f2]] 2 2 :center :center]
-            [[m7/x `[:m 7 ~x]] 2 1 :center :center]
-            [[m7/x `[:m -16 ~x]] 1 2 :center :center]
-            [[m7/x `[:m 1 ~x]]
-             1 1 :flex-end :center]
-            [[m7/x `[:m 8 ~x]]
-             1 1 :center :flex-start]
-            [f1
-             2 2 :center :flex-start]
-            [f2 2 2 :flex-end  :center]])
-    [ 
-     [m7/x `[[:m 108
-              [:p y 2] ] 25]]]]
 
 
    [m100/board2
@@ -147,116 +91,388 @@
        [f1
         2 2 :center :flex-start]
        [f2 2 2 :flex-end  :center]])
-    [ 
+    [
      [m7/x `[[:m 108
               [:p y 2] ] 25]]]]
+
    #_[m100/home-planets-banners]
-   #_[m100/eng-tense]
+   [m100/eng-tense]
 
    #_(js/Math.pow 5 12)
-   #_[m100/map-asia]
-   #_[m100/airplane]
-   #_[m100/home-work22]
-   #_[m100/chem-rate]
+   [m100/map-asia]
+   [m100/airplane]
+   [m100/home-work22]
+   [m100/chem-rate]
    ;; airplane .5
-   #_[m100/home-work3]
-   #_[m100/home-work19]
+   [m100/home-work3]
+   [m100/home-work19]
    ;; pressure
-   #_[m100/pressure]
+   [m100/pressure]
 
-   ;; [m100/pressure2]
+   [m100/pressure2]
 
-   #_[m100/energy]
-   #_[m100/frection]
-   #_[m100/triangle]
-   #_[m100/home-pressure2]
-   #_[m100/home-pressure]
+   [m100/energy]
+   [m100/frection]
+   [m100/triangle]
+   [m100/home-pressure2]
+   [m100/home-pressure]
 
 
 
 
    ;; spring force
-   #_[p11/template]
+   [p11/template]
    ;; chemistry
-   #_[p11/template2]
+   [p11/template2]
    ;; frictions
-   #_[m100/template]
+   [m100/template]
    ;; spring force
-   #_[m100/template2]
+   [m100/template2]
    ;; trigono
-   #_[m100/template2-1]
+   [m100/template2-1]
    ;; extra
-   #_[m100/template3]
+   [m100/template3]
    ;; taibles
-   #_[m100/template4]
+   [m100/template4]
    ;; physics video
-    #_[m100/template5]
-   #_[mtemp/template1]
+   [m100/template5]
+   [mtemp/template1]
    ;; robin hood
-   #_[m100/home-work]
+   [m100/home-work]
    ;; momentum math
-   #_[m100/home-work2]
+   [m100/home-work2]
    ;; velocity
-   #_ [m100/home-work3]
+   [m100/home-work3]
    ;; pyramid
-   #_   [m100/home-work5]
+   [m100/home-work5]
    ;; garden math
-   #_[m100/home-work7]
+   [m100/home-work7]
    ;; quad algo
-   #_[m100/home-work7-1]
+   [m100/home-work7-1]
    ;; solving linear equation
-   #_[m100/linear-equation]
+   [m100/linear-equation]
 
-   ;; [m100/force-diagram]
+   [m100/force-diagram]
 
-   #_ [m100/banner-qd]
+   [m100/banner-qd]
 
-   #_[m100/banner-factor-identities2]
+   [m100/banner-factor-identities2]
 
    ;; pyramid
-   ;; [m100/home-work10]
+   [m100/home-work10]
    ;; boxes
-   ;; [m100/home-work11]
+   [m100/home-work11]
    ;; accelaration
-   ;;     [m100/home-work12]
+   [m100/home-work12]
    ;; v + u at
-   ;; [m100/home-work13]
+    [m100/home-work13]
    ;; clock
-   ;;   [m100/home-work14]
+      [m100/home-work14]
    ;; line to curves
-   ;; [m100/home-work15]
+    [m100/home-work15]
 
    ;; temp vs time latent heat
-   #_[m100/home-work17]
-   #_[m100/home-work18]
-   #_[m100/home-work19]
+   [m100/home-work17]
+   [m100/home-work18]
+   [m100/home-work19]
    ;; temp
-   #_[m100/home-work21]
-   #_[m100/banner1]
-   #_[m100/banner-brand]
-   #_[m100/map-asia]
-   #_[py100/template]
-   #_[py100/template]
+   [m100/home-work21]
+   [m100/banner1]
+   [m100/banner-brand]
+   [m100/map-asia]
+   [py100/template]
+   [py100/template]
+   [m100/home-planets-banners]
+   [m100/home-work19]
+   [py100/t2]
+   [m100/map-family]
+   [m100/map-family3]
+   [m100/map-family2]
+   [py100/template2]
+   [py100/template]
+   [m100/home-planets]
+   [m100/chem-rate]
+   [m100/chem-pop2]
 
-   ] )
+   [m100/home-planets]
+   [m100/home-work16]
+   ;; distillation
+   [m100/chem-pop2]
+   [m100/home-work22]
+   ;; hcl + haolh
+   [m100/home-work9]
+   [py100/template]
+   [py100/template2]
+   [py100/template3]
+
+   ;; distillation2
+   [m100/home-work20]])
 
 
 (defn template3 []
   [:div
+
+   #_[m100/pressure]
+   #_[m100/home-work19]
+   #_[m100/home-work3]
+   #_[m100/chem-rate]
+   #_[m100/home-work22]
+   #_[m100/airplane]
+   #_[m100/map-asia]
+   #_[m100/eng-tense]
+   #_[m100/app]
    #_[m100/home-planets-banners]
+   #_[m100/grammer-eng]
+
    #_[m100/home-work19]
    #_[py100/t2]
    #_[m100/map-family]
    #_[m100/map-family3]
    #_[m100/map-family2]
    #_[py100/template2]
-   #_[py100/template]
+   [py100/template3]
    ])
 
+
+(comment
+
+
+
+  [m7/x `[= [+ [:m 2 x] 1] y]]
+
+  [m7/x
+   (m7/eq2 `[= [+ [+ [:m 8 [:p x 2]] x] 6
+                [:m 5 y] [:m 6 x y] [:m 9 [:p x 2] y]
+                [:m 2 y] [:m 3 x y] [:m 2 [:p x 2] y]
+
+                ] 0])
+   ]
+
+          #_(m7/x `[= [+ [:m 6 [:p y 2]] [:m 6 y] [:m [:p 3 2] [:b [- 1 3]]]] 0])
+
+
+        #_(m7/x `[= [+ [:m 6 [:p y 2]] [:m 6 y] [* [- 2] [:p 3 2] ]] 0])
+
+
+        #_(m7/x `[= [+ [:m 1 [:p y 2]] [:m 1 y] [- 3]] 0])
+
+        [m7/x `[= [-  [:m 8 [:p x 2]]
+                   [:m 9 x ] 14] 0]]
+
+
+
+
+        #_[m7/x (m7/eq2 (w/postwalk
+                       (fun ([[:m c [:p [:b [+ a b]] 2]]]
+                             ['+ [:m c [:p a 2]] ['* 2 c a b] ['* c  [:p b 2]]])
+                            ([y] y))
+                       '[= 27 [+ [:p x 2] [:m 3 [:p [:b [+ [:m 2 y] 3]] 2]]]]))]
+
+
+        #_[m7/x
+         (m7/eq2 (w/postwalk (fun ([[:m a [:b c]]] c)
+                                  ([y] y))
+                             (m7/eq2 (w/postwalk
+                                      (fun ([[:p [:b [+ a b]] 2]]
+                                            [:b ['+ [:p a 2] ['* 2 a b] [:p b 2]]])
+                                           ([y] y))
+                                      '[= 27 [+ [:p x 2] [:m 3 [:p [:b [+ [:m 2 y] 3]] 2]]]]))))]
+        (comment
+          )
+        (comment
+          [m7/x
+
+           (m7/eq2 `[= [- [+ [:p x 2] [:m 2 x] ] 3] y])]
+
+
+
+          [m7/x
+           `[= [+ [:m 2 x]  1 ] y]]
+
+
+
+
+          [m7/x
+
+           (m7/eq2 `[= [:p x 2]  4])]
+
+
+          (comment
+            [m7/x
+             (m7/eq2 `[= [- 3 [:p x 2]]  [+ x 1]])]
+
+
+
+            [m7/x
+             (m7/eq2 `[= [+ [:p x 2] x [- 2]] 0])]
+
+
+            [m7/x
+             (m7/eq2 `[= [+ [:p x 2] x [- 2]] 0])]
+
+
+
+            [m7/x
+             (m7/eq2 `[= [+ [:p x 2] [:m x [:b [- 2 1]]] [* 2 [- 1]]] 0])]
+
+            [m7/x
+             (m7/eq2 `[= [+ [:p x 2] [- [:m 2 x] x] [* 2 [- 1]]] 0])]
+
+
+            [m7/x
+             (m7/eq2 `[= [- [:m x [:b [+ x 2]]] [:m 1 [:b [+ x 2]]]] 0])]
+
+
+            [m7/x '[= [:m [:b [+ x 2]]  [:b [- x 1]]] 0] ]
+
+
+
+
+            [m7/m  '[= [+ [- x 1 ] 1] 1]]
+            [:div "or"]
+
+            [m7/m  '[= [+ x 2] 0]]))
+
+
+  #_[m7/x `[= [-   5] [+ [:p x 2]  x [- 5] 6 ]]]
+
+  )
+
+(comment
+
+
+  [:div {:style {:background-color (hsl [3 20 20 1])
+                 :width "100%"
+                 :height "3px"}
+         }]
+
+  [m7/x
+   (m7/eq2 `[= [- 3 [:p x 2]] [+ x 1]])]
+
+
+  [m7/x
+   (m7/eq2 `[=  [+ [- [:p x 2]] [- x ] 2 ] 0])]
+
+
+  [m7/x
+   (m7/eq2 `[=  [+ [- [:p x 2]] [- x [:m 2 x]] 2 ] 0])]
+
+
+  [m7/x
+   (m7/eq2 `[- [:m [- x] [:b [- x 1]]]  [:m 2 [:b [- x 1]]]])]
+
+
+
+  [m7/x
+   (m7/eq2 `[= [:m  [:b [- x 1]] ] 0])])
+
+(comment
+         #_[m7/x '[+ x 2]]
+
+
+
+        #_[m7/x
+         (m7/eq2 `[= [- 2 [:p x 2] ] x])]
+
+
+
+          #_(w/postwalk (fn [x] x) '[:apply
+                                 [= [+ x y] 1]
+                                 [- x]])
+
+        #_(m7/x
+         (m7/eq2
+          (map
+           (fun ([(n :guard number?)] (conj `[+ [- x]] n))
+                ([(m :guard vector?)] (conj m `[- x]))
+                ([n] n))
+           )))
+
+
+        #_(comment
+          [m7/x `[= [- [:m 2 [:p x 2]]
+                     x [* 7 3]] 0]]
+
+
+
+          [m7/x `[= [+ [:m 2 [:p x 2]]
+                     [:m x [:b [- [* 2 3] 7]]] [* [- 7] 3]] 0]]
+
+
+
+          [m7/x `[= [+ [:m 2 [:p x 2]]
+                     [- [:m [* 2 3] x] [:m 7 x]] [* [- 7] 3]] 0]]
+
+
+
+          [m7/x `[= [+ [:m [:m 2 x] [:b [+ x 3]]]
+                     [:m [- 7] [:b [+ x 3]]]] 0]]
+
+
+          [m7/x `[= [:m [:b [+ x 3]] [:b [- [:m 2 x] 7]]] 0]]
+
+
+
+          #_[m7/x `[= [+ [:m x [:b [- [:m 2 x]
+                                    7]]]
+                       [:m 3 [:b [- [:m 2 x]
+                                  7]]]] 0]])
+
+
+
+
+
+
+
+        #_[m7/m '[= y [- 1 x]]]
+
+
+        #_[m7/m '[= [+ [:m 2 [:p x 2]]
+                   [:m x y]
+                   [:p y 2]]
+                22]]
+        #_[m7/m '[= [+ [:m 2 [:p x 2]] [:m x [:b [- 1 x]]] [:p [:b [- 1 x]] 2]] 22]]
+
+
+        #_[m7/m '[= [+ [:m 2 [:p x 2]] [- x [:p x 2]]
+                   [:p [:b [- 1 x]] 2]] 22]]
+
+        #_[m7/m '[= [- [:m 2 [:p x 2]]  [:m x [:b [- 1 2]]] [- 21]] 0]]
+
+
+        #_[m7/m '[= [- [:m 2 [:p x 2]] x 21] 0]]
+
+ )
+
+(comment
+  [m7/x `[= y [+ [- [:p x 2] [:m 3 x ]] 1]]]
+  [m7/x `[= y [-  [:m 2 x] 5]]]
+  [m7/x `[= [-  [:m 2 x ] 5] [+ [- [:p x 2] [:m 2 x ] [:m 2 x ] x]  1]]]
+  [m7/x `[= 0 [+ [- [:p x 2] [:m 5 x] ]  6]]]
+
+  [m7/x `[= 0 [:m [:b [- x 2]] [:b [- x 3]]]]]
+
+
+
+  [m7/x `[= 0 [- x 3]]]
+  [m7/x `[= 3 x]]
+  [m7/x `[= y [-  [* 2 3 ] 5]]]
+  [m7/x `[= y [-  [* 2 3 ] 5]]]
+  [m7/x `[= y 1]]
+
+  [:div ]
+
+  [m7/x `[= 0 [- x 2]]]
+  [m7/x `[= 2 x]]
+  [m7/x `[= y -1]])
 
 
 (defn chemistry []
   [:div
+
+   #_[m100/app]
+   #_[m100/home-planets-banners]
+
    ;; alkane
    #_[m100/home-planets]
    #_[m100/chem-rate]
@@ -276,9 +492,11 @@
    ] )
 
 
+
+
 (defn render-simple []
   (rdom/render
-   (template)
+   (math)
    (js/document.getElementById "app")
    functional-compiler))
 (render-simple)

@@ -26,7 +26,6 @@
 
 (def var-vf
   {:wght 431.85
-
    :wdth 100
    :opsz 14
    :GRAD 88
@@ -92,15 +91,27 @@
 (d/transact!
  conn
  [
+  {:db/id 43
+   :rm/code :couch
+   :rm/occupation "Computer Engineer"
+   :rm/name ""
+   :rm/age 38
+   :rm/phone "880-1711961024"
+   :rm/email ""
+   :rm/summery "I teach computer science, mathematics, physics  by leveraging my hands on programming skill on computer graphics, animation, user interaction and web technologies. By teaching with better visual interaction helps students get better at receaving intuation of scence & technologies."
+   :rm/projects (into [2 3 5 7 8]
+                      [12 14 13 16 17 22 8 23 ])
+   :rm/jobs [9 10]
+   :rm/projects.title "Projects and accomplishment"}
   {:db/id 1
    :rm/code :abc
    :rm/occupation "Computer Engineer"
    :rm/name ""
    :rm/age 38
-   :rm/phone "880-1712192643"
+   :rm/phone "880-1711961024"
    :rm/email ""
    :rm/summery "I teach computer science, mathematics, physics  by leveraging my hands on programming skill on computer graphics, animation, user interaction and web technologies. By teaching with better visual interaction helps students get better at receaving intuation of scence & technologies."
-   :rm/projects [2 3 5 7 8]
+   :rm/projects (into [2 3 5 7 8] [12 14 13 16 17 22 8 23 24 25 26 27])
    :rm/jobs [9 10]
    :rm/projects.title "Projects and accomplishment"}
   {:db/id 2
@@ -119,9 +130,9 @@
   {:db/id 5
    :rm/row 1
    :rm/col 0
-    :rm/task "Hands on knowledge on Computer chips, electronics"
-    :rm/summery "I have gathered knowledge about computer chips and electronics and networking thought my carrier in Industry leaders like SAMSUNG, GrameenPhone. Over the year I have developed better understanding about what is going on under the hood which leads me to resonate those hands on knowledge to the students"
-    :rm/referane ""}
+   :rm/task "Hands on knowledge on Computer chips, electronics"
+   :rm/summery "I have gathered knowledge about computer chips and electronics and networking thought my carrier for Industry leaders like SAMSUNG, GrameenPhone. Over the year I have developed better understanding about what is going on under the hood which leads me to resonate those hands on knowledge to the students better."
+   :rm/referane ""}
 
 
   {:db/id 7
@@ -129,7 +140,7 @@
    :rm/col 1
    :rm/task "Made Virtual Labs for virtual classes."
    :rm/summery "This virtual Lab has been running since last 5 years on a reputed university. More than thousand students can do their Lab works there. I was able to inplement these ahead of time virtual Lab infrastructure with help of professional network engineers and University's cutting age computer network infrastructure. This project was headed by a former Engineer of NASA"
-    :rm/referane ""}
+   :rm/referane ""}
 
 
   {:db/id 8
@@ -199,15 +210,15 @@ is in a nut shell modern days "
    :rm/row 0
    :rm/col 0
    :rm/task [:div
-             [:div "ASHR. AHMED"]
+             [:div "ASHRAF AHMED"]
              [:div {:style {:font-size "1.5rem"
                             }}
-              "+8801710229179, lmohibbul.islam@gmail.com"]
+              "+8801711961024"]
              ]
    :rm/summery [:div
                 [:img {:src "m.jpg"
                        :style {:height "80%"
-                               :width "80%"}}]
+                                  :width "80%"}}]
                 [:div {:style {:font-size "1rem"
                                :padding "1rem"}}
                  "H# 192, R# 2, Avenue# 3, Mirpur DOHS, Dhaka - 1216"
@@ -219,8 +230,7 @@ is in a nut shell modern days "
    :rm/col 1
    :rm/task "Assistant Director - Bangladesh Telecommunication Regulatory Commision - BTRC (2009-2011)"
    :rm/summery [:div {:style {:font-size "1.5rem"}}
-                "I was an active member of National Telecommunication committee, I used to inspect Telecommunication and IT infrastructure, primary goal is to find out potential reverse or Tax leak from those infrastructure. As only person that had proper communication background my job was very extensive, some time it was extended 24/7."
-                ]
+                "I was an active member of National Telecommunication committee, I used to inspect Telecommunication and IT infrastructure, primary goal is to find out potential reverse or Tax leak from those infrastructure. As only person that had proper communication background my job was very extensive, some time it was extended 24/7."]
    :rm/referane ""}
 
   {:db/id 16
@@ -253,7 +263,7 @@ thought the debuging and tracing equipment and technical know how for fixing the
    :rm/row 4
    :rm/col 0
    :rm/task [:div
-             [:div "BSC in Computer Engineering from American University of Bangladesh (AIUB)"]
+             [:div "BSC in Computer Engineering"]
              [:div "2001-2005"]]
    :rm/summery "I did lot of project works, research, programming contest besides formal Education
 where I scored CGPA of 3.69 out of 4. I was a programming contestant which help me solving problems in constraint environment with limited resources."
@@ -393,7 +403,7 @@ The pipelined version also modeled at RTL level."]
 
 
 
-#_(r ballot-rule people-db)
+(r ballot-rule people-db)
 
 
 
@@ -438,6 +448,7 @@ The pipelined version also modeled at RTL level."]
         (= db new-db) new-db
         (= 1 max-iter) new-db
         :else (recur new-db (dec max-iter))))))
+
 (def rules
   '[;; American law
     {:when [[?p :person/american? true]
@@ -471,46 +482,7 @@ The pipelined version also modeled at RTL level."]
     (infer rules)
     (d/pull [:person/criminal?] [:person/name "Robert"]))
 
-(comment
-  (d/q '[:find ?t ?s ?r ?c
-         :where
-         [?e :rm/code :abc]
-         [?e :rm/projects ?p]
-         [?p :rm/task ?t]
-         [?p :rm/summery ?s]
-         [?p :rm/row ?r]
-         [?p :rm/col ?c]
-         ]
-       @conn)
 
-  (def rm-rule
-    '{:when [[?e :rm/code :abc]
-             [?e :rm/projects ?p]
-             [?p :rm/task ?t]
-             [?p :rm/summery ?s]
-             [?p :rm/row ?r]
-             [?p :rm/col ?c]]
-      :then [[:db/add ?p :rm/col-span (* ?c 10)]
-             [:db/add ?p :rm/row-span (* ?r 10)]]})
-
-  (r rm-rule @conn)
-
-
-  (d/q '[:find ?r ?c
-         :where
-         [?e :rm/code :abc]
-         [?e :rm/projects ?p]
-         [?p :rm/task ?t]
-         [?p :rm/summery ?s]
-         [?p :rm/row-span ?r]
-         [?p :rm/col-span ?c]
-         ]
-       @conn)
-
-  (->>
-   (d/datoms (d/db-with @conn (r )) :eavt)
-   (map (juxt :e :a :v)))
-  )
 
 (defn greeting [message]
   [:h1 message])
@@ -821,15 +793,15 @@ The pipelined version also modeled at RTL level."]
                 [?e :rm/summery ?s]] @conn))]
 
 
-       [:div {:key (gensym)
+       #_[:div {:key (gensym)
               :style (m7/css
                       [[2 3 25 8 :center :center 2.3 :rem :column]
                        [3 70 90 .8] [] {:gap "1rem"
                                         :z-index 10
                                         :padding "2rem"}
                        (fv [[1 4] [1 1] [1 2] [2 1]])])}
-        [:div name]
-        [:input {
+        #_[:div name]
+        #_[:input {
                  :value name
                  :type :text
                  :on-change (fn [e]
@@ -861,7 +833,7 @@ The pipelined version also modeled at RTL level."]
             [:div {:style {:font-size "2rem"}} "year"]
             [:input ]
             [:div {:style {:font-size "2rem"}} "GPA"]
-            [:input ]
+           [:input ]
             ]
 
            [:div {:style {:display :flex
@@ -951,6 +923,263 @@ The pipelined version also modeled at RTL level."]
 
 
 
+(d/q '[:find  ?p ?q ?r ?c
+       :where
+       [?p :rm/row ?r]
+       [?p :rm/col ?c]
+       [?q :rm/row ?r]
+       [?q :rm/col ?c]
+       [(> ?p ?q)]]
+
+     @conn)
+(def a (atom 0))
+
+
+(defn my-fn []
+  (swap! a inc))
+
+#_(my-fn)
+
+(fn [x]
+  (d/transact! conn x))
+
+((comp
+  (fn [x]
+    (d/transact! conn x))
+  (fn [xxx]
+    (mapcat (fn [[i x]]
+           [
+            [:db/add x :rm/row (+ 4 (int (/ i 2)))]
+            [:db/add x :rm/col (mod i 2)]]) xxx))
+  (fn [xxx] (map-indexed (fn [i x]
+                           [i x]) xxx)))
+ (d/q '[:find   [?p ...]
+        :where
+        [?a :rm/code :couch]
+        [?a :rm/projects ?p]
+        [?p :rm/row ?r]
+        [?p :rm/col ?c]
+        [?q :rm/row ?r]
+        [?q :rm/col ?c]
+        [(> ?p ?q)]
+        ]
+      @conn))
+
+(d/transact! conn
+             [[:db/add 14 :rm/row 0]
+              [:db/add 2 :rm/col 1]
+              [:db/add 3 :rm/row 1]
+              [:db/add 3 :rm/col 0]
+              [:db/add 5 :rm/row 2]
+              [:db/add 5 :rm/col 1]
+              ])
+
+
+(d/q '[:find   [?p ...]
+       :where
+       [?a :rm/code :couch]
+       [?a :rm/projects ?p]
+       [?p :rm/row ?r]
+       [?p :rm/col ?c]
+       [?q :rm/row ?r]
+       [?q :rm/col ?c]
+       [(> ?p ?q)]
+       ]
+     @conn)
+
+
+(r
+ {
+  :when
+  '[
+    [?a :rm/code :couch]
+    [?a :rm/projects ?p]
+    [?p :rm/row ?r]
+    [?p :rm/col ?c]
+    [?q :rm/row ?r]
+    [?q :rm/col ?c]
+    [(> ?p ?q)]
+    [(my-fn) ?f]]
+  :args {'my-fn my-fn}
+  :then '[[:db/add ?q :rm/row ?f]]}  @conn)
+
+
+(d/q '[:find  ?c  (max ?r)
+       :where
+       [?p :rm/row ?r]
+       [?p :rm/col ?c]
+       ]
+     @conn)
+
+
+(d/q '[:find ?c
+       :where
+       [?p :rm/code ?c]
+
+       ]
+     @conn)
+
+
+
+
+(defn template3 []
+  (let [[name set-name] (react/useState "")
+        ref (react/useRef)
+
+        ]
+    [:div {:style
+           (merge
+            (m7/grid [600 :vh 100 :vw
+                      (take 38 (repeat [5 :vh]))
+                      (take 20 (repeat [5 :vh]))])
+            {:background-color (hsl [1.5 70 70 .1])
+             :gap ".5rem"})}
+
+       [:div {:key (gensym)
+              :style (m7/css
+                      [[2 8 5 20 :center :center 2.3 :rem]
+                       [1 70 90 .2] [] {:gap "1rem"
+                                        :padding "2rem"}
+                       (fv [[1 4] [1 1] [1 2] [2 1]])])}
+
+        (ffirst
+         (d/q '[:find  ?s
+                :where
+                [?e :rm/code :couch]
+                [?e :rm/summery ?s]] @conn))]
+
+
+       #_[:div {:key (gensym)
+              :style (m7/css
+                      [[2 3 25 8 :center :center 2.3 :rem :column]
+                       [3 70 90 .8] [] {:gap "1rem"
+                                        :z-index 10
+                                        :padding "2rem"}
+                       (fv [[1 4] [1 1] [1 2] [2 1]])])}
+        #_[:div name]
+        #_[:input {
+                 :value name
+                 :type :text
+                 :on-change (fn [e]
+                              (set-name (-> e .-target .-value)))}]]
+
+       #_[:div {:key (gensym)
+                :style (m7/css
+                        [[2 30 25 8 :center :center 2.3 :rem :column]
+                         [3 70 90 .8] [] {:gap "1rem"
+                                          :z-index 10
+                                          :padding "2rem"}
+                         (fv [[1 4] [1 1] [1 2] [2 1]])])}
+
+        ;; :flex-grow 2
+
+        (
+         (fn [fld inp]
+           (inp fld))
+         (first ["name" "scc" "hsc" "education" "experience" "contact no." "e-mail" "address"  "NID"])
+         (first
+          [(fn [a]
+             (let []
+               ))
+
+           [:input {:style {:flex-grow 2}} ]
+           [:div {:style {:flex-direction :column
+                          :display :flex
+                          :flex-grow 2}}
+            [:div {:style {:font-size "2rem"}} "year"]
+            [:input ]
+            [:div {:style {:font-size "2rem"}} "GPA"]
+            [:input ]
+            ]
+
+           [:div {:style {:display :flex
+                          :flex-direction :column
+                          :flex-grow 2}}
+            [:div {:style {:font-size "2rem"}} "year"]
+            [:input ]
+            [:div {:style {:font-size "2rem"}} "GPA"]
+            [:input ]
+            ]
+           [:textarea {:rows 10
+                       :style {:flex-grow 2}} ]
+           [:textarea {:rows 10
+                       :style {:flex-grow 2}} ]
+           [:input {:style {:flex-grow 2}} ]
+           [:input {:style {:flex-grow 2}} ]
+           [:div {:style {:flex-grow 2
+                          :height "200px"
+                          :width "200px"}}
+            [file/file-input]]
+           ]))
+
+
+
+        ]
+
+
+       (map identity
+            (reduce
+             (fn [acc [task sum row col nm]]
+               (conj
+                (conj acc
+                      [:div {:key (gensym)
+                             :style (m7/css
+                                     [[(+ 10 (* row 20)) 3 (+ 5 (* col 10))
+                                       10 :center :center 2 :rem]
+                                      [2 70 90 .7] [] {:gap "1rem"
+                                                       :padding "2rem"}
+                                      (fv [[1 4] [1 1] [1 2] [2 1]])])}
+
+
+                      nm task])
+                [:div {:key (gensym)
+                       :style (m7/css
+                               [[(+ 13 (* row 20)) 15 (+ 5 (* col 10)) 10 :center
+                                 :flex-start 2 :rem]
+                                [1 70 90 1] [] {:padding "1rem"
+                                                :gap "1rem"}])}
+
+                 sum]))
+             []
+             (d/q '[:find ?t ?s ?r ?c
+                    :where
+                    [?e :rm/code :couch]
+                    [?e :rm/projects ?p]
+                    [?p :rm/task ?t]
+                    [?p :rm/summery ?s]
+                    [?p :rm/row ?r]
+                    [?p :rm/col ?c]
+                    ] @conn)))
+       #_ (let [row 2 col 1
+                sum (mapcat identity
+                            (d/q '[:find  ?job ?c ?dr
+                                   :where
+                                   [?e :rm/code :abc]
+                                   [?e :rm/jobs ?j]
+                                   [?j :rm/company ?c]
+                                   [?j :rm/job ?job]
+                                   [?j :rm/duration ?dr]
+
+                                   ] @conn))]
+            [:div {:key (gensym)
+                   :style (m7/css
+                           [[(+ 10 (* row 20)) 15 (+ 5 (* col 10)) 10 :center
+                             :center 2 :rem :column]
+                            [1 70 90 1] [] {:padding "1rem"
+                                            :gap "1rem"}])}
+
+             (map (fn [x]
+                    [:div
+                     {:style {:background-color (hsl [.5 70 70 1])}}
+                     x]) sum)])
+
+
+
+
+     ]))
+
+
+
 
 
 
@@ -990,6 +1219,6 @@ The pipelined version also modeled at RTL level."]
         (ffirst
          (d/q '[:find  ?s
                 :where
-                [?e :rm/code :sap]
+                [?e :rm/code :abc]
                 [?e :rm/summery ?s]] @conn))]
        ]))
