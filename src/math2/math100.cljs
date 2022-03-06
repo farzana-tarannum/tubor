@@ -20573,6 +20573,45 @@ They are probably our most numerous songbird.
 
 
 
+(defn board3 [v box g]
+  [:div {:style (merge
+                 (grid [100 :vh 100 :vw
+                        (take 24 (repeat [8 :vh]))
+                        (take 20 (repeat [8 :vh]))])
+                 {:background-color (hsl [1 70 70 .5])
+                  :gap ".2rem"})}
+
+
+   [:div {:style
+          (m7/css
+           [[8 4  15 8
+             :center :flex-start  3.3 :rem :column]
+            [1.5 70 80  .3] []
+            {:gap ".1rem"
+             :color (hsl [0 30 30 1])
+             :z-index 10}])}
+    (map (fn [a]
+           a)  g)]
+
+
+   [:div {:style
+          (m7/css
+           [[2 8  3 18
+             :center :flex-start  2.2 :rem :column]
+            [1.5 70 80  .3] []
+            {:gap ".1rem"
+             :color (hsl [0 30 30 1])
+             :z-index 10}])}
+
+    (map (fn [e]
+           (m7/x e)) v)
+
+
+    ]])
+
+
+
+
 
 
 
