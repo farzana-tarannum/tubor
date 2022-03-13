@@ -98,7 +98,7 @@
    :rm/age 38
    :rm/phone "880-1711961024"
    :rm/email ""
-   :rm/summery "I teach computer science, mathematics, physics  by leveraging my hands on programming skill on computer graphics, animation, user interaction and web technologies. By teaching with better visual interaction helps students get better at receaving intuation of scence & technologies."
+   :rm/summery "I teach computer science, mathematics, physics  by leveraging my hands on programming skill on computer graphics, animation, user interaction and web technologies. By teaching with better visual interaction helps students get better at receaving intuation of science & technologies."
    :rm/projects (into [2 3 5 7 8]
                       [12 14 13 16 17 22 8 23 ])
    :rm/jobs [9 10]
@@ -110,8 +110,8 @@
    :rm/age 38
    :rm/phone "880-1711961024"
    :rm/email ""
-   :rm/summery "I teach computer science, mathematics, physics  by leveraging my hands on programming skill on computer graphics, animation, user interaction and web technologies. By teaching with better visual interaction helps students get better at receaving intuation of scence & technologies."
-   :rm/projects (into [2 3 5 7 8] [12 14 13 16 17 22 8 23 24 25 26 27])
+   :rm/summery "I am a lead software engineer, I write software correct and performant with great documentation and testing. I help companies to transfrom big monoleth code to tiny peaces of microservices and leap them froward to cutting edge technologies without buzzing all sort of complexcities i.e keep things simple. I got an engineer first menatlity where I don't let my engineering skill get out of date with managerial loads."
+   :rm/projects (into [12 14 13 16 17 22 8 23  25 26 27] [2 3 5 7 8 15] )
    :rm/jobs [9 10]
    :rm/projects.title "Projects and accomplishment"}
   {:db/id 2
@@ -121,7 +121,7 @@
    :rm/summery "Collaboration between teachers and students is hard using web Camera and limited zoom experience. Data scientist uses virtual notebooks to collaborate between themself. I have developed similar experience that would rather focus on student productivity that made a simple and elegant way of writing equation on web at the same speed on pen and paper. So that people can collaborate online. Moreover I made it visually more appealing by making use of digital typography and making use of computer animation and develop ways where computer can assist students helping with their homework."
    :rm/referane ""}
   {:db/id 3
-   :rm/row 0
+   :rm/row 2
    :rm/col 1
    :rm/task "Modeling Math and Physics problem with computer aided vector graphics"
    :rm/summery "Simulating Math and Physics and computer science problems using animation vector graphics helps uploading the information on students brain and keep it stay inside long time memory."
@@ -177,8 +177,8 @@ communicating in professional context both on presentation and at work."
    :rm/jobs [9 10]
    :rm/projects.title "Projects and accomplishment"}
   {:db/id 12
-   :rm/row 1
-   :rm/col 1
+   :rm/row 0
+   :rm/col 0
    :rm/task "Tech Lead at Software Global Consultancy // SGC"
    :rm/summery [:div
                 "I have been working as technical leader for the projects "
@@ -213,25 +213,29 @@ is in a nut shell modern days "
              [:div "ASHRAF AHMED"]
              [:div {:style {:font-size "1.5rem"
                             }}
-              "+8801711961024"]
+              "+8801712192643"]
              ]
-   :rm/summery [:div
+   :rm/summery [:div {:style {:display :flex
+                              :flex-direction :column
+                              :justify-content :center}}
                 [:img {:src "m.jpg"
-                       :style {:height "80%"
-                                  :width "80%"}}]
-                [:div {:style {:font-size "1rem"
-                               :padding "1rem"}}
-                 "H# 192, R# 2, Avenue# 3, Mirpur DOHS, Dhaka - 1216"
+                       :style {:height "60%"
+                               :width "60%"}}]
+                [:div {:style {:font-size "1rem"}}
+                 [:div "H# 192, R# 2, Avenue# 3, Mirpur DOHS, Dhaka - 1216"]
+                 [:div "jaharapi@protonmail.com"]
                  ]]
-   :rm/referane ""}
+   }
 
   {:db/id 15
    :rm/row 1
    :rm/col 1
-   :rm/task "Assistant Director - Bangladesh Telecommunication Regulatory Commision - BTRC (2009-2011)"
+   :rm/task [:div {:style {:font-size "1.5rem"}}
+
+             "Assistant Director - Bangladesh Telecommunication Regulatory Commision - BTRC (2009-2011)"]
    :rm/summery [:div {:style {:font-size "1.5rem"}}
                 "I was an active member of National Telecommunication committee, I used to inspect Telecommunication and IT infrastructure, primary goal is to find out potential reverse or Tax leak from those infrastructure. As only person that had proper communication background my job was very extensive, some time it was extended 24/7."]
-   :rm/referane ""}
+   }
 
   {:db/id 16
    :rm/row 2
@@ -270,21 +274,26 @@ where I scored CGPA of 3.69 out of 4. I was a programming contestant which help 
    :rm/referane ""}
 
   {:db/id 24
-   :rm/row 4
+   :rm/row 7
    :rm/col 1
-   :rm/task [:div
-             [:div "Secondary and Higher Secondary from Rajshahi Cadet College."]
-             [:div "1998-2000"]]
+   :rm/task ""
    :rm/summery ""
    :rm/referane ""}
 
   {:db/id 25
-   :rm/row 5
+   :rm/row 6
    :rm/col 0
    :rm/task [:div
              [:div "Personal Summery"]
-             [:div ""]]
-   :rm/summery ""
+             ]
+   :rm/summery [:div
+                [:div "I raised and born on noble family. My late father was an veteran we traveled a lot accross the
+country. I collage was -"]
+                [:div
+                 [:div "Secondary and Higher Secondary from Rajshahi Cadet College."]
+                 [:div "1998-2000"]]
+
+                ]
    :rm/referane ""}
 
   {:db/id 26
@@ -293,11 +302,17 @@ where I scored CGPA of 3.69 out of 4. I was a programming contestant which help 
    :rm/task [:div
              [:div "Reference"]
              [:div ""]]
-   :rm/summery ""
+   :rm/summery [:div [:div
+                      "Salman Maruf Ifee"]
+                [:div "8801711081123"]
+                [:div "Ericsson"]
+                [:div "Sharif Ahmed"]
+                [:div "+1 573-479-0167"]
+                [:div "Microsoft"]]
    :rm/referane ""}
 
   {:db/id 27
-   :rm/row 0
+   :rm/row 6
    :rm/col 1
    :rm/task [:div {:style {:font-size "1.5rem"}}
              "Verilog HDL Modeling Systhesis and FPGA-based Place and Route of a 32-Bit Multicycle and Pipelined RISC Processor"]
@@ -923,7 +938,7 @@ The pipelined version also modeled at RTL level."]
 
 
 
-(d/q '[:find  ?p ?q ?r ?c
+#_(d/q '[:find  ?p ?q ?r ?c
        :where
        [?p :rm/row ?r]
        [?p :rm/col ?c]
@@ -940,10 +955,10 @@ The pipelined version also modeled at RTL level."]
 
 #_(my-fn)
 
-(fn [x]
+#_(fn [x]
   (d/transact! conn x))
 
-((comp
+#_((comp
   (fn [x]
     (d/transact! conn x))
   (fn [xxx]
@@ -965,7 +980,7 @@ The pipelined version also modeled at RTL level."]
         ]
       @conn))
 
-(d/transact! conn
+#_(d/transact! conn
              [[:db/add 14 :rm/row 0]
               [:db/add 2 :rm/col 1]
               [:db/add 3 :rm/row 1]
@@ -975,7 +990,7 @@ The pipelined version also modeled at RTL level."]
               ])
 
 
-(d/q '[:find   [?p ...]
+#_(d/q '[:find   [?p ...]
        :where
        [?a :rm/code :couch]
        [?a :rm/projects ?p]
@@ -988,7 +1003,7 @@ The pipelined version also modeled at RTL level."]
      @conn)
 
 
-(r
+#_(r
  {
   :when
   '[
@@ -1004,7 +1019,7 @@ The pipelined version also modeled at RTL level."]
   :then '[[:db/add ?q :rm/row ?f]]}  @conn)
 
 
-(d/q '[:find  ?c  (max ?r)
+#_(d/q '[:find  ?c  (max ?r)
        :where
        [?p :rm/row ?r]
        [?p :rm/col ?c]
@@ -1012,7 +1027,7 @@ The pipelined version also modeled at RTL level."]
      @conn)
 
 
-(d/q '[:find ?c
+#_(d/q '[:find ?c
        :where
        [?p :rm/code ?c]
 
@@ -1023,6 +1038,86 @@ The pipelined version also modeled at RTL level."]
 
 
 (defn template3 []
+  (let [[name set-name] (react/useState "")
+        ref (react/useRef)]
+    [:div {:style
+           (merge
+            (m7/grid [600 :vh 100 :vw
+                      (take 38 (repeat [5 :vh]))
+                      (take 60 (repeat [5 :vh]))])
+            {:background-color (hsl [1.5 70 70 .1])
+             :gap ".5rem"})}
+
+     [:div {:key (gensym)
+            :spellcheck :true
+            :contenteditable :true
+            :style (m7/css
+                      [[2 8 5 20 :center :center 2.3 :rem]
+                       [1 70 90 .2] [] {:gap "1rem"
+                                        :padding "2rem"}
+                       (fv [[1 4] [1 1] [1 2] [2 1]])])}
+
+        (ffirst
+         (d/q '[:find  ?s
+                :where
+                [?e :rm/code :abc]
+                [?e :rm/summery ?s]] @conn))]
+
+
+
+
+     (mapcat
+      (fn [[p samarry task row1 col1]]
+        (let [[row col]
+              (get  {12 [0 1]
+                     2 [5 0]
+                     5  [5 1]
+                     3 [4 1]
+                     26  [7 0]
+                     15 [6 0]
+                     25 [7 1]} p [row1 col1])]
+          [
+           [:div {:key (gensym)
+                  :spellcheck :true
+                  :contenteditable :true
+                  :style (m7/css
+                          [[(+ 10 (* row 12)) 3
+                            (+ 5 (* col 10)) 10
+                            :center :center 2 :rem]
+                           [2 70 90 .7] [] {:gap "1rem"
+                                            :padding "2rem"}
+                           (fv [[1 4] [1 1] [1 2] [2 1]])])}
+            task
+
+            ]
+           [:div {:key (gensym)
+                  :spellcheck :true
+                  :contenteditable :true
+                  :style (m7/css
+                          [[(+ 10 (* row 12) 3) 9
+                            (+ 5 (* col 10))  10 :center
+                            :flex-start 1.7 :rem]
+                           [1 70 90 1] [] {:padding "1rem"
+                                           :gap "1rem"}])
+                  }
+            samarry
+            #_(str row " " col " " p)
+            ]]
+          ))
+      (d/q '[:find ?p ?s ?t  ?r ?c
+             :where
+             [?e :rm/code :abc]
+             [?e :rm/projects ?p]
+             [?p :rm/task ?t]
+             [?p :rm/summery ?s]
+             [?p :rm/row ?r]
+             [?p :rm/col ?c]
+             ] @conn))]))
+
+
+
+
+(defn template4 []
   (let [[name set-name] (react/useState "")
         ref (react/useRef)
 
@@ -1131,11 +1226,11 @@ The pipelined version also modeled at RTL level."]
                                       (fv [[1 4] [1 1] [1 2] [2 1]])])}
 
 
-                      nm task])
+                       task])
                 [:div {:key (gensym)
                        :style (m7/css
                                [[(+ 13 (* row 20)) 15 (+ 5 (* col 10)) 10 :center
-                                 :flex-start 2 :rem]
+                                 :flex-start 1.5 :rem]
                                 [1 70 90 1] [] {:padding "1rem"
                                                 :gap "1rem"}])}
 

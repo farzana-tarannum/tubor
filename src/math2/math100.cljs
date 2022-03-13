@@ -11096,8 +11096,8 @@ on time?"]
                   [-250 -120  800 400]
                   ] z))
           fix false
-          viewbox  (vb 5)
-          viewbox2 (vb 5)
+          viewbox  (vb 0)
+          viewbox2 (vb 3)
           rn (range -6 7)
           scales [1 -1]
           dfl (if true
@@ -21527,13 +21527,7 @@ They are probably our most numerous songbird.
                  }])}
 
 
-        [m7/x `[= [- [- [:m 4 [:p x 2]]]
-                   [:m 9 x ]] 14]]
-
-        [m7/x `[= [- [- [:m 4 [:p x 2]]]
-                   [:m 9 x ] 14] 0]]
-
-      #(sen
+        #(sen
          ["put"] "We put down a $1,000 deposit.")
 
         #_[:div "last year covid situation broke out."]

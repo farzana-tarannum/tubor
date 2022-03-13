@@ -10,10 +10,6 @@
    [moment]))
 
 
-;; 01741775277 ethan mom maliha
-;; 01716980473  angira mom maliha
-
-
 
 (s/def ::op-plus '#{+})
 

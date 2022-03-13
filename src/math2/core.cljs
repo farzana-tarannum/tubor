@@ -35,10 +35,28 @@
       []
       []
       []]
+
+   [m100/chem-rate]
+   ;; airplane .5
+   #_[m100/home-work3]
+   #_[m100/home-work19]
+   ;; pressure
+   #_[m100/pressure]
+
+   #_[m100/pressure2]
+
+   #_[m100/energy]
+   #_[m100/frection]
+   #_[m100/triangle]
+   #_[m100/home-pressure2]
+   #_[m100/home-pressure]
+
+   #_[m100/airplane]
+   #_[m100/map-asia]
    #_[m100/index2]
    #_[m100/sine-wave2]
-   [m100/board3
-    (s/board3)
+   #_[m100/board3
+    (s/board4)
     []
     []]
    ])
@@ -216,7 +234,8 @@
    #_[m100/map-family3]
    #_[m100/map-family2]
    #_[py100/template2]
-   [py100/template3]
+   #_[py100/template3]
+   [py100/template4]
    ])
 
 
@@ -479,10 +498,11 @@
 
 
 
-
+#_(template3)
 (defn render-simple []
   (rdom/render
    (math)
+
    (js/document.getElementById "app")
    functional-compiler))
 (render-simple)
