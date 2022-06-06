@@ -6,6 +6,7 @@
    [clojure.string :as str]
    [clojure.walk :as w]
    [defun.core :refer [defun fun]]
+   [math2.solution :as sol]
    [math2.math7 :as m7 :refer
     [grid hsl css space size path ve sec]]))
 
@@ -16202,69 +16203,67 @@ on time?"]
 (defn home-planets-banners []
   (let [[text set-text] (react/useState "")
         [slider set-slider] (react/useState -1)
+
+        [viewbox4 set-viewbox4] (react/useState -1)
         animate-ref (react/useRef)
-        _ (react/useEffect
-           (fn []
-             (if (and animate-ref
-                      (-> animate-ref .-current))
-               (-> animate-ref
-                   .-current
-                   (.animate
-                    (clj->js
-                     [{
-                       :background (hsl [.5 70 70 .1])
-                       :transform (m7/tranfrom [[:rotate "10deg"]])
-                       }
-                      {:background (hsl [.9 70 70 .7])
-                       :transform (m7/tranfrom [[:rotate "-10deg"]])
+        anm-style (clj->js
+                   [{
+                     :background (hsl [.5 70 70 .1])
+                     :transform (m7/tranfrom [[:rotate "10deg"]])
+                     }
+                    {:background (hsl [.9 70 70 .7])
+                     :transform (m7/tranfrom [[:rotate "-10deg"]])
 
-                       }
+                     }
 
-                      {:background (hsl [2 70 70 .9])
-                       :transform (m7/tranfrom [[:scale .9]])
-                       :offset (/ 9 14)}
+                    {:background (hsl [2 70 70 .9])
+                     :transform (m7/tranfrom [[:scale .9]])
+                     :offset (/ 9 14)}
 
-                      {:background (hsl [3.5 70 70 .7])
-                       :transform (m7/tranfrom [[:scale 1]])
-                       }])
-                    (clj->js
-                     {:duration 2000
-                      :iterations 1})
-                    )))
-             (js/console.log "1")
-             ))
-
+                    {:background (hsl [3.5 70 70 .7])
+                     :transform (m7/tranfrom [[:scale 1]])
+                     }])
+        anm-fn (fn []
+                 (if (and animate-ref
+                   (-> animate-ref .-current))
+                   (-> animate-ref
+                       .-current
+                       (.animate
+                        anm-style
+                        (clj->js
+                         {:duration 2000
+                          :iterations 1})
+                 )))
+                 (js/console.log "1"))
+        _ (react/useEffect anm-fn)
         f (fn [n] (/ 1 n))
         tt 'θ
         dx [1 0  0 1 -1  0 0 -1 ]
         sq (fn [n]
                 (comp
-                 (partial map (partial * n))))]
-    (let [zoom 4
-          ax-dx 80
-          ax-dy 40
-          vb (fn [z]
-               (nth [(map #(* .25 %) [-10 -20  83 40])
-                     [0 -180  200 200]
-                     [0 -50  100 100]
-                     [0 -25  50 50]
-                     [-100 -200  800 200]
-                     [40 120  80 80]
-                     [0 40  100 100]
-                     [75 -175  150 150]
-                     [-20 -20  100 100]
-                     [-400 -200  800 200]] z))
-          viewbox (vb 0)
-          viewbox2 (vb 0)
-          m 30
-          d 9.4
-          scale2 [[.5 .5] [-0.5 .5]]
-          ]
-
-
-
-
-      [:div {:style (merge
+                 (partial map (partial * n))))
+        zoom 4
+        ax-dx 80
+        ax-dy 40
+        vb (fn [z]
+             (nth [(map #(* .25 %) [-10 -20  83 40])
+                   (map #(* .5 %) [-10 -20  83 40])
+                   [0 -180  200 200]
+                   [0 -50  100 100]
+                   [0 -25  50 50]
+                   [-100 -200  800 200]
+                   [40 120  80 80]
+                   [0 40  100 100]
+                   [75 -175  150 150]
+                   [-20 -20  100 100]
+                   [-400 -200  800 200]] z))
+        viewbox (vb 0)
+        viewbox2 (vb 0)
+        [viewbox3 set-viewbox3] (react/useState (vb 0))
+        m 30
+        d 9.4
+        scale2 [[.5 .5] [-0.5 .5]]]
+    [:div {:style (merge
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
                             (take 20 (repeat [8 :vh]))])
@@ -16275,6 +16274,7 @@ on time?"]
         (fn [n [d r c f1 f2]]
           [:div {:ref (if (= n slider) animate-ref nil)
                  :on-mouse-enter (fn [e]
+                                   (set-viewbox3 (vb n))
                                    (set-slider n))
                  :style (m7/css
                          [[(+ 0 (* 3 r)) 3 (+ 12 (* 3 c)) 3  f1 f2  1.5 :rem :column]
@@ -16304,1224 +16304,6 @@ on time?"]
             2 2 :center :flex-start]
            [f2 2 2 :flex-end  :center]]))
 
-
-
-
-
-
-
-
-
-
-
-       [:div {:style
-                (m7/css
-               [[2 8  3 18
-                 :center :flex-start  5.3 :rem :column]
-                [1.5 70 80  .3] []
-                {:gap ".1rem"
-                 :color (hsl [0 30 30 1])
-                 :z-index 10}])}
-        [m7/x `[= [[:p x m] [:p x n]]
-                [:p x [- m n]]]
-         ]
-
-        [m7/x `[= [:m [:p x m] [:p x n]]
-                [:p x [+ m n]]]]
-
-
-
-        [m7/x `[= [1 [:p x n]]
-                [:p x [- n]]]]
-
-
-
-
-        ]
-
-       #_[:div {:style
-              (m7/css
-               [[2 8  3 18
-                 :center :flex-start  2.2 :rem :column]
-                [1.5 70 80  .3] []
-                {:gap ".1rem"
-                 :color (hsl [0 30 30 1])
-                 :z-index 10}])}
-
-        #_"lie lose make mean meet pay put run say sell send set sit speak spend stand take teach tell think understand wear win write "
-
-
-
-
-        #_[:div "symbol"]
-        #_[:div "exponent"]
-        #_[:div "coefficent"]
-
-        #_[:div "
-Meaning: Distract; to disturb the concentration of
-Example: Please be quiet. I’m trying to concentrate and you’re putting me off.
-Put off
-
-Meaning: Cause to dislike; to discourage (from doing)
-Example: Almost drowning put him off swimming."]
-        #_[m7/x `[= [+ [:m 2 x] 1] y]]
-
-        #_[m7/x
-           (m7/eq2 `[= [+ [+ [:m 8 [:p x 2]] x] 6
-                        [:m 5 y] [:m 6 x y] [:m 9 [:p x 2] y]
-                        [:m 2 y] [:m 3 x y] [:m 2 [:p x 2] y]
-
-                        ] 0])
-           ]
-
-
-        (comment
-
-          )
-
-        #_[:div "
-A stake-out requires being inconspicuous, but not so for red-winged blackbirds.
-Showing off and making noise is the main objective of their stake-out.
-Male red-winged blackbirds have already staked-out their territories in wetlands and around ponds and lakes.
-Their red-and-yellow shoulder patches add glints of color to the dull landscape.
-And male red-wings don't hesitate to show their colors
-When other birds invade the red-wing's territory, he spreads his tail, droops his wings, and lets out the gurgling Song.
-In February and March, male red-wings come north from their southern wintering grounds
-and find good spots for nesting and feeding.
-They are probably our most numerous songbird.
-"]
-
-
-
-        #_[:img {:style {:width "30%"
-                       }
-               :src "https://www.thespruce.com/thmb/l0_mNoIWGQuwtumjslpdZRgk9fg=/941x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/red-winged-blackbird-identification-385990-hero-bca4cabf8e9743e8b2459ce6421dc642.jpg"}]
-
-        (comment
-          [m7/x `[= y [+ [- [:p x 2] [:m 3 x ]] 1]]]
-          [m7/x `[= y [-  [:m 2 x] 5]]]
-          [m7/x `[= [-  [:m 2 x ] 5] [+ [- [:p x 2] [:m 2 x ] [:m 2 x ] x]  1]]]
-          [m7/x `[= 0 [+ [- [:p x 2] [:m 5 x] ]  6]]]
-
-          [m7/x `[= 0 [:m [:b [- x 2]] [:b [- x 3]]]]]
-
-
-
-          [m7/x `[= 0 [- x 3]]]
-          [m7/x `[= 3 x]]
-          [m7/x `[= y [-  [* 2 3 ] 5]]]
-          [m7/x `[= y [-  [* 2 3 ] 5]]]
-          [m7/x `[= y 1]]
-
-          [:div ]
-
-          [m7/x `[= 0 [- x 2]]]
-          [m7/x `[= 2 x]]
-          [m7/x `[= y -1]])
-        #_[m7/x `[= [-   5] [+ [:p x 2]  x [- 5] 6 ]]]
-
-
-
-
-        #_[m7/x
-         (m7/eq2
-          `[= x
-            ~(let [x 'y
-                   p (fn [c d] `[:m ~c [:p ~x ~d]] )
-                   np (fn [c _] `[:m ~c ~x] )
-                   np1 (fn [c _] x)
-                   c (fn [c _] c)]
-
-
-               (into ['+]
-                     (map (fn [c d ff]
-                            (ff c d))
-                          [ [1 2] [3 2]]
-                          [ 1 0]
-                          [ np c])))])]
-
-
-
-        #_[m7/x
-
-         (w/postwalk
-          (fn [y]
-            (if (= y 'y)
-              (let [[_ _ r]
-                    (m7/eq2
-                     `[= x
-                       ~(let [x 'y
-                              p (fn [c d] `[:m ~c [:p ~x ~d]] )
-                              np (fn [c _] `[:m ~c ~x] )
-                              np1 (fn [c _] x)
-                              c (fn [c _] c)]
-
-
-                          (into ['+]
-                                (map (fn [c d ff]
-                                       (ff c d))
-                                     [ 2 3]
-                                     [ 1 0]
-                                     [ np c])))])]
-                [:b r])
-              y))
-          (m7/eq2
-           `[=
-             27
-             ~(let [cp (fn [c d e] `[:p ~e ~d])
-                    p (fn [c d e] `[:m ~c [:p ~e ~d]] )
-                    np (fn [c _ e] `[:m ~c ~e] )
-                    np1 (fn [c _ e] e)
-                    c (fn [c _ e] c)]
-
-
-                (into ['+]
-                      (map (fn [c d ff e]
-                             (ff c d e))
-                           [ [1 2] 3]
-                           [ 2 2]
-                           [cp p]
-                           ['x 'y])))]))
-
-
-
-
-
-
-
-
-           ]
-        (comment
-          (m7/x
-           (m7/eq2
-            `[=
-              ~(let [cp (fn [c d e] `[:p ~e ~d])
-                     p (fn [c d e] `[:m ~c [:p ~e ~d]] )
-                     np (fn [c _ e] `[:m ~c ~e] )
-                     np1 (fn [c _ e] e)
-                     c (fn [c _ e] c)]
-
-
-                 (into ['+]
-                       (map (fn [c d ff e]
-                              (ff c d e))
-                            [2 3]
-                            [1 1]
-                            [np c]
-                            ['y 'y])))
-              x
-              ]))
-
-
-          (m7/x `[= [+ [:p [:b x] 2]
-                     [:m 2 [:p y 2]]] 27])
-
-
-
-
-          (m7/x `[= [+ [:p [:b ~(let [cp (fn [c d e] `[:p ~e ~d])
-                                      p (fn [c d e] `[:m ~c [:p ~e ~d]] )
-                                      np (fn [c _ e] `[:m ~c ~e] )
-                                      np1 (fn [c _ e] e)
-                                      c (fn [c _ e] c)]
-
-
-                                  (into ['+]
-                                        (map (fn [c d ff e]
-                                               (ff c d e))
-                                             [2 3]
-                                             [1 1]
-                                             [np c]
-                                             ['y 'y])))] 2]
-                     [:m 2 [:p y 2]]] 27])
-
-
-          (m7/x `[= [+   ~(let [cp (fn [c d e] `[:p ~e ~d])
-                                p (fn [c d e] `[:m ~c [:p ~e ~d]] )
-                                np (fn [c _ e] `[:m ~c ~e] )
-                                np1 (fn [c _ e] e)
-                                c (fn [c _ e] c)]
-
-
-                            (into ['+]
-                                  (map (fn [c d ff e]
-                                         (ff c d e))
-                                       [(* 2 2) (* 2 3) 1]
-                                       [2 1 2]
-                                       [p np cp]
-                                       ['y 'y 3])))
-                     [:m 2 [:p y 2]]] 27])
-
-
-          (m7/x `[= ~(let [cp (fn [c d e] `[:p ~e ~d])
-                           p (fn [c d e] `[:m ~c [:p ~e ~d]] )
-                           np (fn [c _ e] `[:m ~c ~e] )
-                           np1 (fn [c _ e] e)
-                           c (fn [c _ e] c)]
-                       (conj
-                        (into ['+]
-                              (map (fn [c d ff e]
-                                     (ff c d e))
-                                   [6 (* 2 3) 1]
-                                   [2 1 2]
-                                   [p np cp]
-                                   ['y 'y 3]))
-                        `[- [* 3 [:p 3 2]]])
-                       ) 0]))
-
-
-        #_(m7/x `[= [+ [:m 6 [:p y 2]] [:m 6 y] [:m [:p 3 2] [:b [- 1 3]]]] 0])
-
-
-        #_(m7/x `[= [+ [:m 6 [:p y 2]] [:m 6 y] [* [- 2] [:p 3 2] ]] 0])
-
-
-        #_(m7/x `[= [+ [:m 1 [:p y 2]] [:m 1 y] [- 3]] 0])
-
-        [m7/x `[= [-  [:m 8 [:p x 2]]
-                   [:m 9 x ] 14] 0]]
-
-
-
-
-        #_[m7/x (m7/eq2 (w/postwalk
-                       (fun ([[:m c [:p [:b [+ a b]] 2]]]
-                             ['+ [:m c [:p a 2]] ['* 2 c a b] ['* c  [:p b 2]]])
-                            ([y] y))
-                       '[= 27 [+ [:p x 2] [:m 3 [:p [:b [+ [:m 2 y] 3]] 2]]]]))]
-
-
-        #_[m7/x
-         (m7/eq2 (w/postwalk (fun ([[:m a [:b c]]] c)
-                                  ([y] y))
-                             (m7/eq2 (w/postwalk
-                                      (fun ([[:p [:b [+ a b]] 2]]
-                                            [:b ['+ [:p a 2] ['* 2 a b] [:p b 2]]])
-                                           ([y] y))
-                                      '[= 27 [+ [:p x 2] [:m 3 [:p [:b [+ [:m 2 y] 3]] 2]]]]))))]
-        (comment
-          )
-        (comment
-          [m7/x
-
-           (m7/eq2 `[= [- [+ [:p x 2] [:m 2 x] ] 3] y])]
-
-
-
-          [m7/x
-           `[= [+ [:m 2 x]  1 ] y]]
-
-
-
-
-          [m7/x
-
-           (m7/eq2 `[= [:p x 2]  4])]
-
-
-          (comment
-            [m7/x
-             (m7/eq2 `[= [- 3 [:p x 2]]  [+ x 1]])]
-
-
-
-            [m7/x
-             (m7/eq2 `[= [+ [:p x 2] x [- 2]] 0])]
-
-
-            [m7/x
-             (m7/eq2 `[= [+ [:p x 2] x [- 2]] 0])]
-
-
-
-            [m7/x
-             (m7/eq2 `[= [+ [:p x 2] [:m x [:b [- 2 1]]] [* 2 [- 1]]] 0])]
-
-            [m7/x
-             (m7/eq2 `[= [+ [:p x 2] [- [:m 2 x] x] [* 2 [- 1]]] 0])]
-
-
-            [m7/x
-             (m7/eq2 `[= [- [:m x [:b [+ x 2]]] [:m 1 [:b [+ x 2]]]] 0])]
-
-
-            [m7/x '[= [:m [:b [+ x 2]]  [:b [- x 1]]] 0] ]
-
-
-
-
-            [m7/m  '[= [+ [- x 1 ] 1] 1]]
-            [:div "or"]
-
-            [m7/m  '[= [+ x 2] 0]]))
-
-
-        #_[m7/x
-         (m7/eq2 `[= [+ x 1] y])]
-
-
-        (comment
-
-
-          [:div {:style {:background-color (hsl [3 20 20 1])
-                         :width "100%"
-                         :height "3px"}
-                 }]
-
-          [m7/x
-           (m7/eq2 `[= [- 3 [:p x 2]] [+ x 1]])]
-
-
-          [m7/x
-           (m7/eq2 `[=  [+ [- [:p x 2]] [- x ] 2 ] 0])]
-
-
-          [m7/x
-           (m7/eq2 `[=  [+ [- [:p x 2]] [- x [:m 2 x]] 2 ] 0])]
-
-
-          [m7/x
-           (m7/eq2 `[- [:m [- x] [:b [- x 1]]]  [:m 2 [:b [- x 1]]]])]
-
-
-
-          [m7/x
-           (m7/eq2 `[= [:m  [:b [- x 1]] ] 0])])
-
-
-
-        #_[m7/x '[+ x 2]]
-
-
-
-        #_[m7/x
-         (m7/eq2 `[= [- 2 [:p x 2] ] x])]
-
-
-
-          #_(w/postwalk (fn [x] x) '[:apply
-                                 [= [+ x y] 1]
-                                 [- x]])
-
-        #_(m7/x
-         (m7/eq2
-          (map
-           (fun ([(n :guard number?)] (conj `[+ [- x]] n))
-                ([(m :guard vector?)] (conj m `[- x]))
-                ([n] n))
-           )))
-
-
-        #_(comment
-          [m7/x `[= [- [:m 2 [:p x 2]]
-                     x [* 7 3]] 0]]
-
-
-
-          [m7/x `[= [+ [:m 2 [:p x 2]]
-                     [:m x [:b [- [* 2 3] 7]]] [* [- 7] 3]] 0]]
-
-
-
-          [m7/x `[= [+ [:m 2 [:p x 2]]
-                     [- [:m [* 2 3] x] [:m 7 x]] [* [- 7] 3]] 0]]
-
-
-
-          [m7/x `[= [+ [:m [:m 2 x] [:b [+ x 3]]]
-                     [:m [- 7] [:b [+ x 3]]]] 0]]
-
-
-          [m7/x `[= [:m [:b [+ x 3]] [:b [- [:m 2 x] 7]]] 0]]
-
-
-
-          #_[m7/x `[= [+ [:m x [:b [- [:m 2 x]
-                                    7]]]
-                       [:m 3 [:b [- [:m 2 x]
-                                  7]]]] 0]])
-
-
-
-
-
-
-
-        #_[m7/m '[= y [- 1 x]]]
-
-
-        #_[m7/m '[= [+ [:m 2 [:p x 2]]
-                   [:m x y]
-                   [:p y 2]]
-                22]]
-        #_[m7/m '[= [+ [:m 2 [:p x 2]] [:m x [:b [- 1 x]]] [:p [:b [- 1 x]] 2]] 22]]
-
-
-        #_[m7/m '[= [+ [:m 2 [:p x 2]] [- x [:p x 2]]
-                   [:p [:b [- 1 x]] 2]] 22]]
-
-        #_[m7/m '[= [- [:m 2 [:p x 2]]  [:m x [:b [- 1 2]]] [- 21]] 0]]
-
-
-        #_[m7/m '[= [- [:m 2 [:p x 2]] x 21] 0]]
-
-
-
-
-
-
-
-        #_[:div "A car weight 1000Kg moving right at 9 m/s and it strikes a stationary 2000Kg of truck. When the hit the truck they stuck together and they started moving together. what would be the final velocity"]
-
-
-        #_[:div "let, velocity of the car and the trucks after collision is v"  ]
-
-
-        #_[m7/m '[= [+ [* [:m 9 [m s]] [:m 1000 Kg]] 0]
-                [:m [:b [:m [:b [+ 1000 2000]] Kg]] v]
-
-                ]]
-
-        #_[m7/m '[= v
-                [:m 3 [m s] ]
-
-
-                ]]
-
-
-        #_[:div "break"]
-
-
-        #_(reduce
-           (fn [acc e]
-             (if (some #(= e %)  ["broke"] )
-               (conj acc
-                     [:span " "
-                      [:span {:style {:background-color (hsl [1 70 70 1])
-                                      :color (hsl [1 20 40 1])
-                                      :font-weight 600}}
-                       (str  e)]])
-
-
-
-               (conj acc [:span (str " "  e)])))
-
-           [:div ]
-
-
-
-
-           (str/split "last year covid situation broke out." #"\s+"))
-
-
-
-
-        #_(reduce
-         (fn [acc e]
-           (if (some #(= e %)  ["lay"] )
-             (conj acc
-                   [:span " "
-                    [:span {:style {:background-color (hsl [1 70 70 1])
-                                    :color (hsl [1 20 40 1])
-                                    :font-weight 600}}
-                     (str  e)]])
-
-
-
-             (conj acc [:span (str " "  e)])))
-
-         [:div ]
-
-
-
-
-         (str/split "Last night I was so tired and I lay down into the bed." #"\s+")
-
-         )
-
-
-
-        #_(reduce
-         (fn [acc e]
-           (if (some #(= e %)  ["mede"] )
-             (conj acc
-                   [:span " "
-                    [:span {:style {:background-color (hsl [1 70 70 1])
-                                    :color (hsl [1 20 40 1])
-                                    :font-weight 600}}
-                     (str  e)]])
-
-
-
-             (conj acc [:span (str " "  e)])))
-
-         [:div ]
-
-
-
-
-         (str/split "Last month my mother made a pizza for us." #"\s+"))
-
-
-
-        #_(reduce
-         (fn [acc e]
-           (if (some #(= e %)  ["met"] )
-             (conj acc
-                   [:span " "
-                    [:span {:style {:background-color (hsl [1 70 70 1])
-                                    :color (hsl [1 20 40 1])
-                                    :font-weight 600}}
-                     (str  e)]])
-
-
-
-             (conj acc [:span (str " "  e)])))
-
-         [:div ]
-
-
-
-
-         (str/split "Last month I met my friends in the park." #"\s+"))
-
-
-
-
-        #_(reduce
-           (fn [acc e]
-           (if (some #(= e %)  ["was"] )
-             (conj acc
-                   [:span " "
-                    [:span {:style {:background-color (hsl [1 70 70 1])
-                                    :color (hsl [1 20 40 1])
-                                    :font-weight 600}}
-                     (str  e)]])
-
-
-
-             (conj acc [:span (str " "  e)])))
-
-         [:div ]
-
-
-
-
-         (str/split "Once up on a time there was a lady" #"\s+"))
-
-
-
-        #_(reduce
-         (fn [acc e]
-           (if (some #(= e %)  ["was"] )
-             (conj acc
-                   [:span " "
-                    [:span {:style {:background-color (hsl [1 70 70 1])
-                                    :color (hsl [1 20 40 1])
-                                    :font-weight 600}}
-                     (str  e)]])
-
-
-
-             (conj acc [:span (str " "  e)])))
-
-         [:div ]
-         (str/split "She was sick" #"\s+"))
-
-
-        #_(reduce
-         (fn [acc e]
-           (if (some #(= e %)  ["were"] )
-             (conj acc
-                   [:span " "
-                    [:span {:style {:background-color (hsl [1 70 70 1])
-                                    :color (hsl [1 20 40 1])
-                                    :font-weight 600}}
-                     (str  e)]])
-
-
-
-             (conj acc [:span (str " "  e)])))
-
-         [:div ]
-
-         (str/split "There were school teachers that were women" #"\s+"))
-
-
-        #_(reduce
-         (fn [acc e]
-           (if (some #(= e %)  ["was"] )
-             (conj acc
-                   [:span " "
-                    [:span {:style {:background-color (hsl [1 70 70 1])
-                                    :color (hsl [1 20 40 1])
-                                    :font-weight 600}}
-                     (str  e)]])
-
-
-
-             (conj acc [:span (str " "  e)])))
-
-         [:div ]
-
-         (str/split "My mother was angry" #"\s+"))
-
-
-        #_(reduce
-         (fn [acc e]
-           (if (some #(= e %)  ["was"] )
-             (conj acc
-                   [:span " "
-                    [:span {:style {:background-color (hsl [1 70 70 1])
-                                    :color (hsl [1 20 40 1])
-                                    :font-weight 600}}
-                     (str  e)]])
-
-
-
-             (conj acc [:span (str " "  e)])))
-
-         [:div ]
-
-         (str/split "My brother  was playing" #"\s+"))
-
-
-        #_(reduce
-         (fn [acc e]
-           (if (some #(= e %)  ["were"] )
-             (conj acc
-                   [:span " "
-                    [:span {:style {:background-color (hsl [1 70 70 1])
-                                    :color (hsl [1 20 40 1])
-                                    :font-weight 600}}
-                     (str  e)]])
-
-
-
-             (conj acc [:span (str " "  e)])))
-
-         [:div ]
-
-         (str/split "My friends were going to school" #"\s+"))
-
-
-        #_(reduce
-         (fn [acc e]
-           (if (some #(= e %)  ["were"] )
-             (conj acc
-                   [:span " "
-                    [:span {:style {:background-color (hsl [1 70 70 1])
-                                    :color (hsl [1 20 40 1])
-                                    :font-weight 600}}
-                     (str  e)]])
-
-
-
-             (conj acc [:span (str " "  e)])))
-
-         [:div ]
-
-         (str/split "They were happy" #"\s+"))
-
-
-        #_(reduce
-         (fn [acc e]
-           (if (some #(= e %)  ["was" "held"] )
-             (conj acc
-                   [:span " "
-                    [:span {:style {:background-color (hsl [1 70 70 1])
-                                    :color (hsl [1 20 40 1])
-                                    :font-weight 600}}
-                     (str  e)]])
-
-
-
-             (conj acc [:span (str " "  e)])))
-
-         [:div ]
-
-         (str/split "she was held responsible for careless driving" #"\s+"))
-
-
-        #_(reduce
-         (fn [acc e]
-           (if (some #(= e %)  ["was" "held"] )
-             (conj acc
-                   [:span " "
-                    [:span {:style {:background-color (hsl [1 70 70 1])
-                                    :color (hsl [1 20 40 1])
-                                    :font-weight 600}}
-                     (str  e)]])
-
-
-
-             (conj acc [:span (str " "  e)])))
-
-         [:div ]
-
-         (str/split "she held her baby with one hand" #"\s+"))
-
-
-        #_(reduce
-         (fn [acc e]
-           (if (some #(= e %)  ["was" "kept"] )
-             (conj acc
-                   [:span " "
-                    [:span {:style {:background-color (hsl [1 70 70 1])
-                                    :color (hsl [1 20 40 1])
-                                    :font-weight 600}}
-                     (str  e)]])
-
-
-
-             (conj acc [:span (str " "  e)])))
-
-         [:div ]
-
-         (str/split "she kept watching movies until it was midnight " #"\s+"))
-
-
-
-
-        #_(reduce
-         (fn [acc e]
-           (if (some #(= e %)  ["was" "led"] )
-             (conj acc
-                   [:span " "
-                    [:span {:style {:background-color (hsl [1 70 70 1])
-                                    :color (hsl [1 20 40 1])
-                                    :font-weight 600}}
-                     (str  e)]])
-
-
-
-             (conj acc [:span (str " "  e)])))
-
-         [:div ]
-
-         (str/split "In August of 2012, I led mjy first expedition on north pool." #"\s+"))
-
-
-
-
-
-
-
-
-
-
-
-
-
-        #_(reduce
-           (fn [acc e]
-             (if (some #(= e %)  ["broke"] )
-               (conj acc
-                     [:span " "
-                      [:span {:style {:background-color (hsl [1 70 70 1])
-                                      :color (hsl [1 20 40 1])
-                                      :font-weight 600}}
-                       (str  e)]])
-
-
-
-               (conj acc [:span (str " "  e)])))
-
-           [:div ]
-
-
-
-
-           (str/split "last year covid situation broke out." #"\s+"))
-
-
-        #_["thought" "brought" "could" "was" "began" "kept" "delevered"
-         "didn't," "deployed" "decided" "jumped"]
-        #_(reduce
-         (fn [acc e]
-           (if (some #(= e %) ["brought" "thought" "could" "was" "proved" "began" "delevered" "kept"
-                               "decided" "jumped" "deployed"])
-             (conj acc
-                   [:span " "
-                    [:span {:style {:background-color (hsl [1 70 70 1])
-                                    :color (hsl [1 20 40 1])
-                                    :font-weight 600}}
-                     (str  e)]])
-
-
-
-             (conj acc [:span (str " "  e)])))
-         [:div ]
-
-
-
-
-
-         #_(str/split "About a decade ago, the government thought that if it brought this system online, it could save taxpayer dollars and proved a better service, it was a great idea. So, the typical government process began . Six years and 1.2 billion dollars later, no working product was delevered . At this point they could have kept pouring money into the failing program. Sadly that what often happens, that's the status quo today. But they didn't, the dedicated people inside the agency decided to stand up and call for change. We deployed a small team of just six people. The team jumped in side-by-side to support the agency in transitioning this project into more modern business practices." #"\s+"))
-
-
-        #_(reduce
-         (fn [acc e]
-           (if (some #(= e %)  ["thought" "brought" "could" "was" "began" "kept" "delevered"
-                                "didn't," "deployed" "decided" "jumped"] )
-             (conj acc
-                   [:span " "
-                    [:span {:style {:background-color (hsl [1 70 70 1])
-                                    :color (hsl [1 20 40 1])
-                                    :font-weight 600}}
-                     (str  e)]])
-
-
-
-             (conj acc [:span (str " "  e)])))
-
-         [:div ]
-
-
-
-
-         (str/split "I felt very lucky because yesterday I nearly survived an
-                       accident" #"\s+"))
-
-        #_(reduce
-         (fn [acc e]
-           (if (some #(= e %)  ["began"] )
-             (conj acc
-                   [:span " "
-                    [:span {:style {:background-color (hsl [1 70 70 1])
-                                    :color (hsl [1 20 40 1])
-                                    :font-weight 600}}
-                     (str  e)]])
-
-
-
-             (conj acc [:span (str " "  e)])))
-
-         [:div ]
-         (str/split "Yesterday I began our journey to school at 10:30 am" #"\s+"))
-
-
-
-        #_(reduce
-         (fn [acc e]
-           (if (some #(= e %)  ["saw" ""] )
-             (conj acc
-                   [:span " "
-                    [:span {:style {:background-color (hsl [1 70 70 1])
-                                    :color (hsl [1 40 40 1])
-                                    :font-weight 600}}
-                     (str  e)]])
-
-
-
-             (conj acc [:span (str " "  e)])))
-
-         [:div ]
-         (str/split "I saw a beautiful bird on 31st December." #"\s+"))
-
-        #_[m7/mx `[+ 3 [- [/ [:s [+ [* [:b [- 14 10]]
-                                   [:b [- 20 15]]]
-                                4]]
-                         25] 4]
-                 ]]
-
-        #_[m7/mx `[+ 3 [- [/ [:s [+ [* 4 5] 4]] 25] 4]]]
-
-
-        #_[m7/mx `[+ 3 [- [/ [:s [+ 20 4]] 25] 4]]]
-
-
-        #_[m7/mx `[+ 3 [- 0.96 4]]]
-
-        #_[m7/mx `[= [- 3.96 ~(symbol (str "4.00"))] -0.04]]
-        #_[:div ""]
-        #_[m7/mx '[357 9900]]
-
-        #_[m7/mx '[- 3570000 35700]]
-        #_[m7/mx '[* 357 [:b [-  2]]]]
-
-
-        #_[m7/m 1176]
-
-        #_[m7/mx '[* 14 [:b [+ 10000 1000]]]]
-
-        #_[m7/mx '[+ 140000 14000]]
-
-        #_[m7/m 154000]
-        #_[m7/m '[* [:b [- 1000 1]] 12]]
-
-        #_[m7/m '[* [:b [- 1000 1]] 12]]
-
-
-        #_[m7/m '[= [- 12000 10 2] [- 11990 2]]]
-
-
-
-
-        #_[m7/m '[= [* 6 3] k]]
-
-
-
-        #_[m7/m '[= s  [[* 6 3] [- 7 2]]]]
-        #_[:div "I " [:input {:type :text }]
-         " my keys. could you please help me finding out the keys " ]
-        #_[:textarea {:rows 4
-                    :cols 50
-                    :on-change (fn [e]
-                              (set-text
-                               (-> e
-                                   .-target
-                                   .-value)))}]]
-
-
-        #_(let [d 'ε]
-           [:div {:style
-                  (m7/css
-                   [[2 10  4 15
-                     :center :center  4.0 :rem :column]
-                    [1.5 70 80  .5] []
-                    {:gap ".1rem"
-                     :color (hsl [0 30 60 1])
-                     :z-index 10}])}
-          #_[:div {:style {:font-size "1.1rem"}}
-           [:div time-str]]
-          #_[m7/mx `[= y [:m 10 t]]]
-          #_[m7/mx `[= ~(* 10 time-str) [* 10 ~(* 1 time-str)]]]
-
-
-          [m7/mx `[= y [+ [:p x 2] [:m 5 x]  ]]]
-          #_(= 'x )
-
-          #_(vec (clojure.walk/postwalk
-                (fn [x]
-                  (if (symbol? x)
-                    (let [s (symbol (name x))]
-                      (if (= s 'x)
-                        3
-                        s))
-
-                    x))
-                `[= y [+ [:p x 2] [:m 5 x]]]))
-
-
-
-          [m7/mx `[:a x [+ x ~d]]]
-
-
-          [m7/mx `[= [:k y [+ t 2]] [+ [:p [:b [+ t 2]] 2] [:m 5 [:b [+ t 2]]]  ]]]
-
-
-          [m7/mx `[= [:k y [+ t 2]] [+ [:p [:b [+ t 2]] 2]
-                                     [:m 5 [:b [+ t 2]]]  ]]]
-
-
-          #_[m7/mx `[:p [:b [+ a b]] 2]]
-
-          #_[m7/mx `[= y [+ [:p 7 2] [* 5 7]  ]]]
-
-
-
-          #_[m7/mx `[= y [* 10 5.5]]]
-
-
-
-
-          #_[m7/mx `[= 0.22 a]]
-          #_[:div {:style {:color (hsl [2 33 33 1])}}
-           [m7/mx `[= [:m s [:b [:k  t o]  ]]  y
-                    [:m 0.22 [:p [:k t o] 2]]]]]
-          #_[:div {:style {:font-size "1.5rem"}}
-           "let, time dt, where " [m7/mx `[= [:p dt 2]
-                                     0]]]
-
-          #_[:div {:style {:color (hsl [2 33 33 1])}}
-           [m7/mx `[= [:m s [:b [+ t dt]  ]]    [:m 0.22 [:p
-                                                          [:b [+ t dt]] 2]]]]]
-
-
-          #_[:div {:style {:color (hsl [2 33 33 1])}}
-           [m7/mx `[= [:m s [:b [+ t dt]  ]]
-                    [+ [:m 0.22 [:p
-                                 t 2]]
-                     [:m 0.22 [:p
-                               dt 2]]
-
-                     [* 0.22 [:m 2 t dt]]]]]]
-
-          #_[:div {:style {:color (hsl [2 33 33 1])}}
-           [m7/mx `[= [:m s [:b [+ [:k t o] dt]  ]]
-                    [+ [:m 0.22 [:p [:k t o] 2]]
-                     [* 0.22 [:m 2 t dt]]]]]]
-
-          #_[:div {:style {:color (hsl [2 33 33 1])}}
-           [m7/mx `[= [:m s [:b [+ [:k t o] dt]  ]]
-                    [+ [:m s [:b [:k t o]  ]]
-                     [:m ds dt]]]]]
-
-
-          #_[:div {:style {:color (hsl [2 33 33 1])}}
-           [m7/mx `[= ds
-                    [* 0.22 [:m 2 t dt]]]]]
-
-
-          #_[:div {:style {:color (hsl [2 33 33 1])}}
-           [m7/mx `[= ds
-                    [* 0.22 [:m 2 t dt]]]]]
-
-          #_[:div {:style {:color (hsl [2 33 33 1])}}
-           [m7/mx `[= v [ds dt]
-                    [* 0.22 [:m 2 t ]]]]]
-
-
-          #_(let [time-str sec2
-                tmp-tmp (js/parseFloat (fix (* 0.22 time-str time-str) 2))]
-            [m7/mx `[= ~tmp-tmp  [* 0.22 [:p
-                                          ~(* 1 time-str ) 2]]]])
-
-
-
-          #_[m7/m '[= [:p [:b [+ 10 5]] 2] [+ [:p 10 2] [:p 5 2] [* 2 10 5]]]]
-          #_[m7/m '[= [2 9]  a]]
-
-
-          #_[m7/m '[= [:m [* 10 15] m] [:m 15 s  v ]]]
-
-
-          #_[m7/m '[= 450 [:m 45 k ]]
-             ]
-          ;;
-          #_[m7/m '[- v u]]
-          #_[m7/m '[= v [s t]  [m s] [:m m [:p s -1]]]]
-
-
-
-
-
-          #_[m7/mx `[= [:k y 4] [:m [2 9] [:p 4 2]]]]
-          #_[m7/mx `[= [:k y [+ t 2]] [:m [2 9] [:p  [:b [+ t 2]] 2]]]]
-
-          #_[:div {:style {:font-size "2rem"}}
-           "let ε, where " [m7/mx `[= [:p ~d 2]
-                                    0]]]
-
-          #_[m7/mx `[= [:k y [+ t ~d]] [:m [2 9] [:p  [:b [+ t ~d]] 2]]]]
-
-          #_[m7/mx `[= [:k y [+ t ~d]] [:m [2 9] [:b [+ [:p t 2] [:m 2 t ~d ] [:p ~d  2]]]]]]
-
-          #_[m7/mx `[= [:k y [+ t ~d]] [+ [:m [2 9] [:p t 2]] [:m  [4 9] t ~d ] ]]]
-
-
-
-          #_[m7/m [1 1]]
-          #_[m7/m '[< [:p .00000000000000001 2] .00000000000000001 ]]
-
-          #_[m7/mx `[= [:k y [+ t ~d]] [:m v [:b [+ t ~d] ]]]]
-
-          #_[m7/mx `[= [:k y [+ t ~d]] [+ [:m v t] [:m v ~d]]]]
-
-          #_[m7/mx `[= [:k y [+ t ~d]]
-                   [+ [:k y t] [:m [:p y .] ~d]]]]
-
-          #_[m7/mx `[= [:k y [+ t ~d]]
-                   [+ [:k y t] [:m v ~d]]]]
-
-
-
-          #_[m7/mx `[= ~d
-                     [:sq 0]]]
-
-
-
-
-
-
-
-
-
-            ])
-
-
-
-
-       #_(map
-        (fn [n d]
-          [:div {:style (m7/css
-                         [[3 1 (+ 2 (* n 2)) 2  :center :center  1.5 :rem :column]
-                          [(* n .2) 70 (+ 10 (* 1 n))  .2] [] {:gap ".1rem"
-                                                               :z-index 4}])}
-
-           d])
-        (range 0 11)
-        (map (fn [i]
-               (js/Math.pow 2 i))
-             (range 0 11))
-
-        )
-
-       #_(map
-        (fn [n d]
-          [:div {:style (m7/css
-                         [[4 1 (+ 2 (* n 2)) 2  :center :center  1.5 :rem :column]
-                          [1 70 70  .9] [] {:gap ".1rem"
-                                                               :z-index 4}])}
-
-           d])
-        (range 0 11)
-        (map (fn [i]
-               [m7/mx `[:p 2 ~i]])
-             (range 0 11)))
-
-       #_[:div {:style (m7/css
-                      [[5 4 2 8 :center :center 1.8 :rem :column]
-                       [1 90 90 .01] []
-                       (into
-                        {:gap "1rem"
-                         :font-family "Roboto Flex"
-                         :color (hsl [0 60 60 1])
-                         :z-index 2}
-                        )
-                       ])
-              }
-
-        #_{:font-family "'Roboto Flex'"
-         :font-variation-settings
-         (fontf2
-          (update
-           var-vf
-           :wght
-           (fn [k] (+ k 100))))}
-        #_[:div {:style {}}  ""]
-
-        [m7/m '[= [:p AB 2]
-                [+ [:p BC 2]  [:p AC 2]]]]
-
-
-        [m7/m '[= [:p AB 2]
-                [+ [:p 14 2]  [:p 7 2]]]]
-        #_(js/Math.sqrt (+ 49 (* 16 16)))
-        [m7/m '[= AB
-                [:sq [+ [:p 16 2]  [:p 7 2]]]]]
-        ]
-
-
-       [:div {:style (m7/css
-                      [[8 5 1 18 :center :center 2.2 :rem ]
-                       [1 70 90 .1] [] {:gap "1rem"
-                                        :color (hsl [3 20 30 1])
-                                        :z-index 2}])}
-
-        #_[:span {:style {:background-color (hsl [1 70 70 .5])}}"9th October"]
-
-
-
-
-
-
-
-
-        ]
-
-
        [:div {:style (m7/css
                       [[2 10 2 23 :center :center 3 :rem]
                        [1 70 90 1] [] {:gap "1rem"
@@ -17529,72 +16311,8 @@ They are probably our most numerous songbird.
         (let []
           [:svg {:style {:height "100%"
                          :width "100%"}
-                 :viewBox (m7/space
-                           viewbox)}
-
+                 :viewBox (m7/space viewbox)}
            [flames]
-
-
-           [:linearGradient {:x1 .5
-                             :y1 1
-                             :x2 .5
-                             :y2 0
-                             :id (name :lgg1)
-                             :gradientTransform (m7/tranfrom [[:rotate 10]])}
-            [:stop  {:offset 0
-                     :stop-color (hsl [1 70 70 .1])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [.3 70 70 .7])}
-             [:animate {:attributeName :offset
-                        :from .2
-                        :to .5
-                        :dur (m7/not-space [3 "s"])
-                        :repeatCount :indefinite}]]
-            [:stop  {:offset .5
-                     :stop-color (hsl [.6 70 70 .4])}
-             [:animate {:attributeName :offset
-                        :from .3
-                        :to 1
-                        :dur (m7/not-space [3 "s"])
-                        :repeatCount :indefinite}]]
-            ]
-
-           [:pattern {:id (name :star)
-                      :viewBox (space [0 0 10 10])
-                      :width "10%"
-                      :height "10%"}
-            [:circle {:cx 5
-                      :cy 5
-                      :r 6
-                      :fill (m7/url (name :lg2))
-                      }]]
-
-           [:radialGradient {
-                             :id (name :lg1)
-                             :gradientTransform (m7/tranfrom [[:rotate 0]])}
-            [:stop  {:offset 0
-                     :stop-color (hsl [0 70 70 1])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [.2 70 70 .9])}]
-            [:stop  {:offset .77
-                     :stop-color (hsl [1 70 70 .8])}
-             [:animate {:attributeName :offset
-                        :id :f113
-                        :begin 0
-                        :from .88
-                        :to 1
-                        :dur (m7/not-space [120 "s"])
-                        :repeatCount :indefinite}]
-
-             [:animate {:attributeName :offset
-                        :begin :f123.end
-                        :from 1
-                        :to .88
-                        :dur (m7/not-space [120 "s"])
-                        :repeatCount :indefinite}]]
-            ]
-
-
            [:radialGradient {
                              :id (name :lg2)
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
@@ -17635,44 +16353,20 @@ They are probably our most numerous songbird.
                         :repeatCount :indefinite}]]
 
             ]
-           ;; :indefinite
-           [:marker {:id (name :mb2)
-                     :viewBox (m7/space [-5 -5 10 10])
-                     :refX 0
-                     :refY 0
-                     :orient :auto-start-reverse
-                     :markerWidth 5
-                     :markerHeight 5}
-            [:path {:d (m7/path [-3 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
-                    :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
-                    :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
 
            [:animate {:attributeName :viewBox
-                      :to (m7/space viewbox2)
+                      :to (m7/space viewbox3)
                       :dur "4s"
                       :fill :freeze}]
 
 
 
+           (if (= slider 2)
+             (grid-on 20 20))
 
 
 
-           #_(grid-on 20 20)
 
-
-           #_(map
-
-            [:path {:d (m7/path [0 0 :l 0 (ve (* 1 30 ))
-                                 (* 4 20) 0 0 (* 1 30 )
-                                 (* 4 -20) 0])
-                    :stroke-width 1
-                    :fill (hsl [2 70 70 1])}
-             ]
-
-
-            (rang 0 5))
 
 
 
@@ -18129,7 +16823,7 @@ They are probably our most numerous songbird.
                       :fill :white}  ]]])]
 
 
-       ])))
+       ]))
 
 
 
@@ -18139,6 +16833,24 @@ They are probably our most numerous songbird.
   (let [[text set-text] (react/useState "")
         [slider set-slider] (react/useState -1)
         animate-ref (react/useRef)
+        anm-style
+        (clj->js
+         [{
+           :background (hsl [.5 70 70 .1])
+           :transform (m7/tranfrom [[:rotate "10deg"]])
+           }
+          {:background (hsl [.9 70 70 .7])
+           :transform (m7/tranfrom [[:rotate "-10deg"]])
+
+           }
+
+          {:background (hsl [2 70 70 .9])
+           :transform (m7/tranfrom [[:scale .9]])
+           :offset (/ 9 14)}
+
+          {:background (hsl [3.5 70 70 .7])
+           :transform (m7/tranfrom [[:scale 1]])
+           }])
         _ (react/useEffect
            (fn []
              (if (and animate-ref
@@ -18146,23 +16858,7 @@ They are probably our most numerous songbird.
                (-> animate-ref
                    .-current
                    (.animate
-                    (clj->js
-                     [{
-                       :background (hsl [.5 70 70 .1])
-                       :transform (m7/tranfrom [[:rotate "10deg"]])
-                       }
-                      {:background (hsl [.9 70 70 .7])
-                       :transform (m7/tranfrom [[:rotate "-10deg"]])
-
-                       }
-
-                      {:background (hsl [2 70 70 .9])
-                       :transform (m7/tranfrom [[:scale .9]])
-                       :offset (/ 9 14)}
-
-                      {:background (hsl [3.5 70 70 .7])
-                       :transform (m7/tranfrom [[:scale 1]])
-                       }])
+                    anm-style
                     (clj->js
                      {:duration 2000
                       :iterations 1})
@@ -18206,172 +16902,17 @@ They are probably our most numerous songbird.
                             (take 20 (repeat [8 :vh]))])
                      {:background-color (hsl [1 70 70 .5])
                       :gap ".2rem"})}
-       (let [d 'ε]
-           [:div {:style
-                  (m7/css
-                   [[2 10  15 7
-                     :center :center  1.2 :rem :column]
-                    [1.5 70 80  .5] []
-                    {:gap ".1rem"
-                     :color (hsl [0 30 60 1])
-                     :z-index 10}])}
-            [:div {:style {:font-size "1.1rem"}}
-             #_[:div time-str]
 
-             ]
-            [m7/mx `[= y [:m 10 t]]]
-          #_[m7/mx `[= ~(* 10 time-str) [* 10 ~(* 1 time-str)]]]
-
-
-          [m7/mx `[= y [+ [:p x 2] [:m 5 x]  ]]]
-          #_(= 'x )
-
-
-
-
-
-          [m7/mx `[:a x [+ x ~d]]]
-
-
-          [m7/mx `[= [:k y [+ t 2]] [+ [:p [:b [+ t 2]] 2] [:m 5 [:b [+ t 2]]]  ]]]
-
-
-          [m7/mx `[= [:k y [+ t 2]] [+ [:p [:b [+ t 2]] 2]
-                                     [:m 5 [:b [+ t 2]]]  ]]]
-
-
-            [m7/mx `[:p [:b [+ a b]] 2]]
-
-            [m7/mx `[= y [+ [:p 7 2] [* 5 7]  ]]]
-
-
-
-            [m7/mx `[= y [* 10 5.5]]]
-
-
-
-
-            [m7/mx `[= 0.22 a]]
-          [:div {:style {:color (hsl [2 33 33 1])}}
-           [m7/mx `[= [:m s [:b [:k  t o]  ]]  y
-                    [:m 0.22 [:p [:k t o] 2]]]]]
-          [:div {:style {:font-size "1.5rem"}}
-           "let, time dt, where " [m7/mx `[= [:p dt 2]
-                                     0]]]
-
-            [:div {:style {:color (hsl [2 33 33 1])}}
-           [m7/mx `[= [:m s [:b [+ t dt]  ]]    [:m 0.22 [:p
-                                                          [:b [+ t dt]] 2]]]]]
-
-
-            [:div {:style {:color (hsl [2 33 33 1])}}
-           [m7/mx `[= [:m s [:b [+ t dt]  ]]
-                    [+ [:m 0.22 [:p
-                                 t 2]]
-                     [:m 0.22 [:p
-                               dt 2]]
-
-                     [* 0.22 [:m 2 t dt]]]]]]
-
-            [:div {:style {:color (hsl [2 33 33 1])}}
-           [m7/mx `[= [:m s [:b [+ [:k t o] dt]  ]]
-                    [+ [:m 0.22 [:p [:k t o] 2]]
-                     [* 0.22 [:m 2 t dt]]]]]]
-
-          [:div {:style {:color (hsl [2 33 33 1])}}
-           [m7/mx `[= [:m s [:b [+ [:k t o] dt]  ]]
-                    [+ [:m s [:b [:k t o]  ]]
-                     [:m ds dt]]]]]
-
-
-            [:div {:style {:color (hsl [2 33 33 1])}}
-           [m7/mx `[= ds
-                    [* 0.22 [:m 2 t dt]]]]]
-
-
-            [:div {:style {:color (hsl [2 33 33 1])}}
-           [m7/mx `[= ds
-                    [* 0.22 [:m 2 t dt]]]]]
-
-            [:div {:style {:color (hsl [2 33 33 1])}}
-           [m7/mx `[= v [ds dt]
-                    [* 0.22 [:m 2 t ]]]]]
-
-
-          #_(let [time-str sec2
-                tmp-tmp (js/parseFloat (fix (* 0.22 time-str time-str) 2))]
-            [m7/mx `[= ~tmp-tmp  [* 0.22 [:p
-                                          ~(* 1 time-str ) 2]]]])
-
-
-
-          [m7/m '[= [:p [:b [+ 10 5]] 2] [+ [:p 10 2] [:p 5 2] [* 2 10 5]]]]
-          [m7/m '[= [2 9]  a]]
-
-
-            [m7/m '[= [:m [* 10 15] m] [:m 15 s  v ]]]
-
-
-            [m7/m '[= 450 [:m 45 k ]]
-             ]
-          ;;
-          [m7/m '[- v u]]
-          [m7/m '[= v [s t]  [m s] [:m m [:p s -1]]]]
-
-
-
-
-
-          [m7/mx `[= [:k y 4] [:m [2 9] [:p 4 2]]]]
-          [m7/mx `[= [:k y [+ t 2]] [:m [2 9] [:p  [:b [+ t 2]] 2]]]]
-
-            [:div {:style {:font-size "2rem"}}
-           "let ε, where " [m7/mx `[= [:p ~d 2]
-                                    0]]]
-
-            [m7/mx `[= [:k y [+ t ~d]] [:m [2 9] [:p  [:b [+ t ~d]] 2]]]]
-
-            [m7/mx `[= [:k y [+ t ~d]] [:m [2 9] [:b [+ [:p t 2] [:m 2 t ~d ] [:p ~d  2]]]]]]
-
-            [m7/mx `[= [:k y [+ t ~d]] [+ [:m [2 9] [:p t 2]] [:m  [4 9] t ~d ] ]]]
-
-
-
-            [m7/m [1 1]]
-          [m7/m '[< [:p .00000000000000001 2] .00000000000000001 ]]
-
-            [m7/mx `[= [:k y [+ t ~d]] [:m v [:b [+ t ~d] ]]]]
-
-            [m7/mx `[= [:k y [+ t ~d]] [+ [:m v t] [:m v ~d]]]]
-
-            [m7/mx `[= [:k y [+ t ~d]]
-                   [+ [:k y t] [:m [:p y .] ~d]]]]
-
-            [m7/mx `[= [:k y [+ t ~d]]
-                   [+ [:k y t] [:m v ~d]]]]
-
-
-
-            [m7/mx `[= ~d
-                     [:sq 0]]]
-
-
-
-
-
-
-
-
-
-            ])
-
-
+       sol/drivative
 
 
        (map
         (fn [n d]
-          [:div {:style (m7/css
-                         [[3 1 (+ 2 (* n 2)) 2  :center :center  1.5 :rem :column]
+          [:div {:on-mouse-enter (fn [e]
+                                   (set-slider n))
+                 :ref (if (= n slider) animate-ref nil)
+                 :style (m7/css
+                         [[1 1 (+ 2 (* n 2)) 2  :center :center  1.5 :rem :column]
                           [(* n .2) 70 (+ 10 (* 1 n))  .2] [] {:gap ".1rem"
                                                                :z-index 4}])}
 
@@ -18386,7 +16927,7 @@ They are probably our most numerous songbird.
        (map
         (fn [n d]
           [:div {:style (m7/css
-                         [[4 1 (+ 2 (* n 2)) 2  :center :center  1.5 :rem :column]
+                         [[12 1 (+ 2 (* n 2)) 2  :center :center  1.5 :rem :column]
                           [1 70 70  .9] [] {:gap ".1rem"
                                                                :z-index 4}])}
 
