@@ -1,6 +1,6 @@
 ^{:auto-bundle :webpack
-  :open-url "http://103.108.147.146:[[server-port]]"
-  :connect-url "ws://103.108.147.146:[[server-port]]/figwheel-connect"
+;;  :open-url "http://103.108.147.146:[[server-port]]"
+;;  :connect-url "ws://103.108.147.146:[[server-port]]/figwheel-connect"
   :css-dirs ["resources/public/css"]}
 
 {:main math2.core}

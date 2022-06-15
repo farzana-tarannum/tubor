@@ -244,8 +244,10 @@
   [:div
    #_[py100/template3]
    #_[m100/app]
-   [m100/home-planets-banners2]
+   #_[m100/home-planets-banners3]
+   #_[m100/home-planets-banners2]
    #_[m100/home-planets-banners]
+   [m100/home-planets-banners4]
 
    ;; alkane
    #_[m100/home-planets]

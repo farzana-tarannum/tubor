@@ -782,7 +782,6 @@
      g
      (apply merge other))))
 
-()
 
 (comment
 
@@ -816,7 +815,7 @@
   (let [v ]
     )
   (css
-   [[1 2 3 4 :center :center 1 :rem]
+s   [[1 2 3 4 :center :center 1 :rem]
     [1 70 70 1]
     [2
      1 :rem  1 70 70 1
