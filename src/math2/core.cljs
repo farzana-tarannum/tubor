@@ -36,7 +36,7 @@
       []
       []]
 
-   [m100/chem-rate]
+   #_[m100/chem-rate]
    ;; airplane .5
    #_[m100/home-work3]
    #_[m100/home-work19]
@@ -51,14 +51,148 @@
    #_[m100/home-pressure2]
    #_[m100/home-pressure]
 
+   #_[m100/app]
+   #_[m100/sine-wave]
    #_[m100/airplane]
    #_[m100/map-asia]
    #_[m100/index2]
    #_[m100/sine-wave2]
+   #_[m100/sine-wave2]
+   #_[m100/chem-mole]
+   #_[m100/home-planets-banners]
+   #_[m100/eng-tense]
+   #_[m100/board2
+    (s/e3g)
+    (let [[f1 f2] [7 -2]
+          x 'x]
+      [[[m7/x `[:m 8 [:p ~x 2]]] 1 1 :center :center]
+       [[m7/x `[* ~f1 ~f2]] 2 2 :center :center]
+       [[m7/x `[:m 7 ~x]] 2 1 :center :center]
+       [[m7/x `[:m -16 ~x]] 1 2 :center :center]
+       [[m7/x `[:m 1 ~x]]
+        1 1 :flex-end :center]
+       [[m7/x `[:m 8 ~x]]
+        1 1 :center :flex-start]
+       [f1
+        2 2 :center :flex-start]
+       [f2 2 2 :flex-end  :center]])
+    [
+     [m7/x `[[:m 108
+              [:p y 2] ] 25]]]
+    ]
    #_[m100/board3
     (s/board4)
     []
-    []]
+      []]
+   #_[m100/map-asia]
+   #_[m100/airplane]
+   #_[m100/home-work22]
+   #_[m100/chem-rate]
+   ;; ;; airplane .5
+    #_[m100/home-work3]
+   #_[m100/home-work19]
+   ;; ;; pressure
+   #_[m100/pressure]
+
+   #_[m100/pressure2]
+
+    #_[m100/energy]
+   ;;; [m100/frection]
+    #_[m100/triangle]
+    #_[m100/home-pressure2]
+    #_[m100/home-pressure]
+
+      ;; spring force
+    #_[p11/template]
+   ;; ;; chemistry
+    #_[p11/template2]
+   ;; ;; frictions
+    #_[m100/template]
+   ;; ;; spring force
+   #_[m100/template2]
+   ;; ;; trigono
+    #_[m100/template2-1]
+   ;; ;; extra
+    #_[m100/template3]
+   ;; ;; taibles
+    #_[m100/template4]
+   ;; ;; physics video
+    #_[m100/template5]
+    #_[mtemp/template1]
+   ;; ;; robin hood
+    #_[m100/home-work]
+   ;; ;; momentum math
+    #_[m100/home-work2]
+   ;; ;; velocity
+    #_[m100/home-work3]
+   ;; ;; pyramid
+    #_[m100/home-work5]
+   ;; ;; garden math
+    #_[m100/home-work7]
+   ;; ;; quad algo
+    #_[m100/home-work7-1]
+   ;; ;; solving linear equation
+    #_[m100/linear-equation]
+
+   #_[m100/force-diagram]
+
+   #_[m100/banner-qd]
+
+   #_[m100/banner-factor-identities2]
+
+   ;; ;; pyramid
+   #_[m100/home-work10]
+   ;; ;; boxes
+   #_[m100/home-work11]
+   ;; ;; accelaration
+    #_[m100/home-work12]
+   ;; ;; v + u at
+     #_[m100/home-work13]
+   ;; ;; clock
+   #_    [m100/home-work14]
+   ;; ;; line to curves
+   #_[m100/home-work15]
+
+   ;; ;; temp vs time latent heat
+   #_[m100/home-work17]
+    #_[m100/home-work18]
+   ;; [m100/home-work19]
+   ;; ;; temp
+    #_[m100/home-work21]
+    #_[m100/banner1]
+   #_[m100/banner-brand]
+    #_[m100/map-asia]
+   #_[py100/template]
+   ;; [py100/template]
+   #_[m100/home-planets-banners]
+   ;; [m100/home-work19]
+   #_[py100/t2]
+   #_[m100/map-family]
+   #_[m100/map-family3]
+   #_[m100/map-family2]
+   #_[py100/template2]
+   #_[py100/template]
+   #_[m100/home-planets]
+   #_[m100/chem-rate]
+   #_[m100/chem-pop2]
+
+   #_[m100/home-planets]
+    #_[m100/home-work16]
+   ;; ;; distillation
+    #_[m100/chem-pop2]
+   #_[m100/home-work22]
+   ;; ;; hcl + haolh
+   #_[m100/home-work9]
+    #_[py100/template]
+    [py100/template2]
+    #_[py100/template3]
+
+   ;; ;; distillation2
+   #_[m100/home-work20]
+
+
+
+
    ])
 
 
@@ -247,7 +381,7 @@
    #_[m100/home-planets-banners3]
    #_[m100/home-planets-banners2]
    #_[m100/home-planets-banners]
-   [m100/home-planets-banners4]
+   #_[m100/home-planets-banners5]
 
    ;; alkane
    #_[m100/home-planets]
@@ -269,10 +403,28 @@
 
 
 
+
+
+(defn curveslasses []
+  [:div
+   [m100/pressure3]])
+
+
+
+
+
+
+
+
+
+
+
+
+
 #_(template3)
 (defn render-simple []
   (rdom/render
-   (chemistry)
+   (curveslasses)
    (js/document.getElementById "app")
    functional-compiler))
 (render-simple)

@@ -110,7 +110,7 @@
    :rm/age 38
    :rm/phone "880-1711961024"
    :rm/email ""
-   :rm/summery "I am a lead software engineer, I write software correct and performant with great documentation and testing. I help companies to transfrom big monoleth code to tiny peaces of microservices and leap them froward to cutting edge technologies without buzzing all sort of complexcities i.e keep things simple. I got an engineer first menatlity where I don't let my engineering skill get out of date with managerial loads."
+   :rm/summery "I am a fullstack senior software engineer and  DevOps engineer who has more than 10 years experience working on disruptive technological innovation on cloud computing telecommunication finance education sector. I have built my career with start ups to bigtech and from small caps to fortune 500 companies, government organization and universities."
    :rm/projects (into [12 14 13 16 17 22 8 23  25 26 27] [2 3 5 7 8 15] )
    :rm/jobs [9 10]
    :rm/projects.title "Projects and accomplishment"}
@@ -180,14 +180,7 @@ communicating in professional context both on presentation and at work."
    :rm/row 0
    :rm/col 0
    :rm/task "Tech Lead at Software Global Consultancy // SGC"
-   :rm/summery [:div
-                "I have been working as technical leader for the projects "
-                [:span {:style {:background-color (m7/hsl [.8 70 70 .8])}}
-                 "since 2013"]
-                ", acting as the owner of the technological vision, I have been facilitating teams both multinational
-   & medium size companies by automating their jobs, maintain cloud based infrastructure,
-   choosing right set of technologies for them as I always look forward to the big picture.
-   "]
+   :rm/summery "I have been working as lead software engineer since 2013. The company has been around for 15 years founded by a former renowned engineer from GrameenPhone. He was able to together put together industry veterans and those who are passionate and persistence on their work and focus with challenges on distributed system, big data analytics, blockchain technology, cloud computing, data science, AI machine learning, internet of things - IOT."
    :rm/referane ""}
 
 
@@ -196,14 +189,8 @@ communicating in professional context both on presentation and at work."
   {:db/id 13
    :rm/row 1
    :rm/col 0
-   :rm/task "System Engineer at Grameenphone. (2007-2009)"
-   :rm/summery [:div {:style {:font-size "1.5rem"}}
-                "I worked in Grameenphone as System Automation Expert in Operations System
-and Software department (OSS). Main goal is to develop and maintain mediation servers which
-is in a nut shell modern days "
-                [:span {:style {:background-color (m7/hsl [.8 70 70 .8])}} "Micro-servies"]
-                " with lot of bells and whistle. In order to telecommunication system work properly every single nodes has to communicate with other systems and often in multivendor system
- things are not compatible so intermediate system are needed to be developed. Back then we have saved ton money and man hours by developing and maintianing those systems."]
+   :rm/task "System Engineer at GrameenPhone. (2007-2009)"
+   :rm/summery "I worked in GrameenPhone as System Automation Expert in Operations System and Software department (OSS). Main goal is to develop and maintain mediation servers which is in a nut shell modern days MicroServies with lot of bells and whistle. In order to telecommunication system work properly every single nodes has to communicate with other systems and often in multi-vendor system things are not compatible so intermediate system are needed to be developed. Back then we have saved tons of money and man hours by developing and maintaining those systems."
    :rm/referane ""}
 
   {:db/id 14
@@ -241,12 +228,7 @@ is in a nut shell modern days "
    :rm/row 2
    :rm/col 0
    :rm/task "Lead Engineer - SAMSUNG R&D Institute Bangladesh (2011-2013)"
-   :rm/summery [:div {:style {:font-size "1.5rem"}}
-                "I used to lead mobile device driver team on Real time kernel.
-                 As Embedded system engineer my primary goat is to fix bug dirver relatied
-issues and help engineers to pin down the bugs they were dealing with and walk then
-thought the debuging and tracing equipment and technical know how for fixing the device driver related issues"
-                ]
+   :rm/summery "We have developed device drivers on on Real time kernel. As an embedded system engineer my primary goat is to fix bug driver related issues and help engineers to pin down the bugs - they were dealing with and walk then thought the debugging and tracing equipment and guide technical know how for fixing the device driver related issues."
    :rm/referane ""}
 
   {:db/id 17
@@ -1075,8 +1057,7 @@ The pipelined version also modeled at RTL level."]
                      3 [4 1]
                      26  [7 0]
                      15 [6 0]
-                     25 [7 1]} p [row1 col1])]
-          [
+                     25 [7 1]} p [row1 col1])]          [
            [:div {:key (gensym)
                   :spellcheck :true
                   :contenteditable :true
@@ -1282,21 +1263,23 @@ The pipelined version also modeled at RTL level."]
   (let [[name set-name] (react/useState "")
         ref (react/useRef)]
     [:div {:style
-           {:display :grid,
-            :height (m7/np [1000 :px])
-            :width (m7/np [700 :px])
-            :grid-template-columns
-            (m7/space
-             [(m7/np [1 :fr])
-              (m7/np [2 :fr])
-              (m7/np [1 :fr])])
-            :grid-template-rows
-            (m7/space (mapv
-                       (fn [n]
-                         (m7/np [n :fr]))
-                       (range 1 5)))
-            :background-color (hsl [3 20 98 1])
-            :gap ".5rem"}}
+           (into
+            (fv [[1 4] [1 1] [1 2] [2 1]])
+            {:display :grid,
+             :height (m7/np [1000 :px])
+             :width (m7/np [700 :px])
+             :grid-template-columns
+             (m7/space
+              [(m7/np [1 :fr])
+               (m7/np [2 :fr])
+               (m7/np [1 :fr])])
+             :grid-template-rows
+             (m7/space (mapv
+                        (fn [n]
+                          (m7/np [n :fr]))
+                        (range 1 5)))
+             :background-color (hsl [3 20 98 1])
+             :gap ".5rem"})}
 
        [:div {:key (gensym)
               :style {:align-items :center,
