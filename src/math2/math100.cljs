@@ -25599,19 +25599,20 @@ Example: I put the high crime rate down to the high unemployment."])
 
 
 
-              [:path#rad1 {:d (m7/path [0 0 :l
-                                        (* r 1)
-                                        (ve (* r (js/Math.sin (* angle 0))))
+              [:path#rad1 {:d (str (m7/path [0 0 :l
+                                             (* r 1)
+                                             (ve (* r (js/Math.sin (* angle 0))))
+                                             :a r r 0 false false (ve (- r (* r (js/Math.cos (* angle 4)))))  (ve (* r (js/Math.sin (* angle 4))))
+                                             ])
+                                   "z")
 
-                                        ])
+                           :fill (hsl [1 70 70 1])
+                           :stroke (hsl [1 30 30 1])
+                           :stroke-width 1}]
 
-                           :fill :none
-                           :stroke (hsl [.2 30 30 1])
-                           :stroke-width .5}]
-
-              [:path#rad1 {:d (m7/path [0 0 :l
-                                        (* r 1)
-                                        (ve (* r (js/Math.sin (* angle 1))))
+              #_[:path#rad2 {:d (m7/path [0 0 :l
+                                        (* r (js/Math.cos (* angle 3)))
+                                        (ve (* r (js/Math.sin (* angle 3))))
 
                                         ])
 
@@ -29161,30 +29162,334 @@ Example: I put the high crime rate down to the high unemployment."])
    (line3 -130 [(ve (- y 17)) 0] "l")]
 
 
-(defn triangle2 []
-  [:g {:transform (m7/tranfrom [[:translate [-140 -240]]])}
 
-   [:path {:d (m7/path [0 0 :l 150 0  -75 -200 -75 200 75 0 0 -75 45 0 -90 0 ])
-           :stroke-width 2
-           :stroke (hsl [1.5 70 70 1])
-           :fill (hsl [2.5 70 70 1])}]
+(defn triangle []
+  (let [[slider get-slider] (react/useState 0)
+        f (fn [n] (/ 1 n))
+        tt 'θ
+        dx [1 0  0 1 -1  0 0 -1 ]
+        sq (fn [n]
+                (comp
+                 (partial map (partial * n))))]
+    (let [zoom 4
+          ax-dx 80
+          ax-dy 40
+          vb (fn [z]
+               (nth [[100 -450  500 500]
+                     [0 -180  200 200]
+                     [0 -50  100 100]
+                     [0 -25  50 50]
+                     [-100 -200  800 200]
+                     [40 120  80 80]
+                     [0 40  100 100]
+                     [75 -175  150 150]
+                     [-20 -20  100 100]
+                     [-400 -200  800 200]] z))
+          viewbox (vb 0)
+          viewbox2 (vb 0)
+          ]
+      [:div {:style (merge
+                     (grid [100 :vh 100 :vw
+                            (take 15 (repeat [8 :vh]))
+                            (take 20 (repeat [8 :vh]))])
+                     {:background-color (hsl [1 70 70 1])
+                      :gap ".1rem"})}
 
-   [:text {:x 20
-           :y -20
-           :style {:font-size "2rem"}
-           } "ρ"]
+       #_[:div {:style (m7/css
+                        [[2 10 10 20 :center :center 2 :rem :column]
+
+                         [1 70 90 .1] [] {:gap "1rem"
+                                          :z-index 4}])}
+          [:div
+           "Lets, add point A,C"]
+          [:div
+           "Now, we got 2 triange's ABC and ADC"]
+
+          [:div
+           "angles on triange's ABC"]
+          [:div
+           "angles on triange's ADC"]
+          [m7/m '[= [+ BAC ABC ACB] 180]]
+          [m7/m '[= [+ DAC ADC DCB] 180]]
+
+          [:div {:style {:background-color (hsl [0 70 70 1])
+                         :height "1rem"
+                         :width "50%"}}
+           ""]
+
+          [m7/m '[= [+ A B D C] 360]]
 
 
-   [:text {:x 90
-           :y -20
-           :style {:font-size "2rem"}
-           } "V"]
+          ]
+       [:div {:style
+              (m7/css
+               [[4 3 10 7
+                 :center :center  4 :rem :column]
+                [3.5 70 (+ 50 (* 5 5))  .7] []
+                {:gap ".1rem"
+                 :z-index 10}])}
 
-   [:text {:x 75
-           :dx -10
-           :y -100
-           :style {:font-size "2rem"}
-           } "m"]
+        #_[:div ""]
+        #_[:div  {:style {:font-size "2rem"}} "g is an acceleration duo to gravitational pull" ]
+
+
+
+
+        #_[m7/m '[= g [:m 9.8 [:m m [:p s -2]]]]]
+
+
+        #_[m7/m '[= [:m ρ A h]
+                  m]]
+
+        #_[m7/m '[= F [[:m ∇ [:b [:m  m  v]] ]  t]]]
+
+
+        #_[m7/m '[= F ma [[:m ∇ m   v] t]
+                [[:m m  [:b [- v u]]] t]
+                ]]
+
+
+
+
+
+        #_[m7/m '[= P [W A] [ [:m ρ A h g] A] ]]
+
+        #_[m7/m '[=  P [F A] [N [:p m 2]] [:m N [:p m -2]] Pa]]
+
+
+
+        #_[m7/m '[= ρ [m V] ]]
+
+
+
+
+
+
+
+
+        #_[m7/m '[= [1 [:p x 3] ] [:p x -3] ]]
+
+
+
+        #_[m7/m '[= [:m [:k ρ w] V]  [:m ρ [:k V 1]]  ]]
+
+        ;; [m7/m '[= ρV [:m V [m V]] ]]
+
+
+        ;; [m7/m '[= m ρV ]]
+
+        #_[m7/m '[=  [:m [:k ρ w] V ] [:m  ρ [:k V 1] ] ]]
+
+
+        [m7/m '[=  [ V1 V] [[:k ρ w]  ρ ] ]]
+
+
+        [m7/m '[=
+                [ V1 V] [[:m [* 0.5 [:p 10 3]] kg [:p m 3]]
+                         [:m [:p 10 3] kg [:p m 3]]] .5 ]]
+
+
+
+
+        ;; [m7/m '[= P [W A] [[:m ρ A h g] A]  [:m ρ h g]  ]]
+
+
+        ]
+
+
+
+
+       [:div {:style (m7/css
+                      [[2 10 1 20 :center :center 3 :rem]
+
+                       [1 70 90 1] [] {:gap "1rem"}])}
+        (let []
+          [:svg {:style {:height "100%"
+                         :width "100%"}
+                 :viewBox (m7/space
+                           viewbox)}
+
+           (flames)
+           [:marker {:id (name :dot3)
+                     :viewBox (m7/space [-5 -5 10 10])
+                     :refX 0
+                     :refY 0
+                     :orient :auto-start-reverse
+                     :markerWidth 5
+                     :markerHeight 5}
+            [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
+                    :stroke (hsl [5 70 70 1])
+                    :stroke-width .1
+                    :transform (m7/tranfrom [[:rotate 0]])
+                    :fill (m7/hsl [.4 70 70 1])}]]
+           [:pattern {:id (name :star)
+                      :viewBox (space [0 0 10 10])
+                      :width "10%"
+                      :height "10%"}
+            [:circle {:cx 5
+                      :cy 5
+                      :r 4
+                      :fill (hsl [0 70 70 1])
+                      }]]
+
+           [:animate {:attributeName :viewBox
+                      :to (m7/space viewbox2)
+                      :dur "4s"
+                      :fill :freeze}]
+
+           [:g {:transform (m7/tranfrom [[:skewX 0]])}
+
+
+
+
+
+            [:path {:d (m7/path [0 0 :l 200 0 0 -150 -200 0 0 150])
+                    :stroke-dasharray "200 150 120 80"
+                    :stroke-dashoffset "400"
+                    :stroke-width 3
+                    :stroke (hsl [0 70 70 1])
+                    :fill (hsl [3.5 70 70 1])}]
+
+
+
+
+
+            [:g
+             [:path {:d (m7/path [120 -150 :l 50 0 0 -50 -50 0 0 50])
+                     :stroke-width 3
+
+                     :stroke (hsl [0.5 70 80 1])
+                     :fill (hsl [0.5 70 80 1])}
+              [:animateTransform
+               {:attributeName :transform
+                :begin (sec 0)
+                :dur (sec 1)
+                :type :translate
+                :from (m7/space [0 0])
+                :to (m7/space [0 20])
+                :fill :freeze
+                :id :ark1
+                }]
+              ]
+
+             [:path {:d (m7/path [150 -150 :l 0 -70 ])
+                     :stroke-width 3
+                     :marker-end (m7/url (name :dot3))
+
+                     :stroke (hsl [0.5 70 80 1])
+                     :fill (hsl [0.5 70 80 1])}
+              [:animateTransform
+               {:attributeName :transform
+                :begin (sec 0)
+                :dur (sec 1)
+                :type :translate
+                :from (m7/space [0 0])
+                :to (m7/space [0 20])
+                :fill :freeze
+                :id :rfff1
+                }]
+              ]
+
+
+             [:path {:d (m7/path [150 -150 :l 0 70 ])
+                     :stroke-width 3
+                     :marker-end (m7/url (name :dot3))
+
+                     :stroke (hsl [0.5 70 80 1])
+                     :fill (hsl [0.5 70 80 1])}
+              [:animateTransform
+               {:attributeName :transform
+                :begin (sec 0)
+                :dur (sec 1)
+                :type :translate
+                :from (m7/space [0 0])
+                :to (m7/space [0 20])
+                :fill :freeze
+                :id :rfff1
+                }]
+              ]
+
+             ]
+
+
+
+            [:path {:d (m7/path [0 0 :l 300 0 0 -50])
+                    :stroke-width 3
+                    :stroke (hsl [0 70 70 1])
+                    :fill :none
+                    }]
+
+
+            #_[:path {:d (m7/path [200 0 :l 100 0 0 -20  -100 0 0 20])
+                      :stroke-width 3
+                      :stroke (hsl [0 70 70 1])
+                      :fill (hsl [3.7 70 70 1])
+                      }
+               [:animateTransform
+                {:attributeName :transform
+                 :begin (sec 0)
+                 :dur (sec 1)
+                 :type :scale
+                 :from (m7/space  [1 .05])
+                 :to (m7/space  [1 1.8])
+                 :fill :freeze
+                 :id :rff1
+                 }]]
+
+
+            [:path {:d (m7/path [200 0 :l 50 0 0 -15  -50 0 0 15])
+                    :stroke-width 3
+                    :stroke (hsl [0 70 70 1])
+                    :fill (hsl [3.7 70 70 1])
+                    }
+             [:animateTransform
+              {:attributeName :transform
+               :begin (sec 0)
+               :dur (sec 1)
+               :type :scale
+               :from (m7/space  [1 .05])
+               :to (m7/space  [1 1.8])
+               :fill :freeze
+               :id :rff1
+               }]]
+
+            [:path {:d (m7/path [300 -15 :l 50 0])
+                    :marker-end (m7/url (name :dot2))
+                    :stroke-width 2
+                    :stroke (hsl [0.5 90 90 1])
+                    :fill :none}]
+
+
+            [:path {:d (m7/path [300 -35 :l 50 0])
+                    :marker-end (m7/url (name :dot2))
+                    :stroke-width 2
+                    :stroke (hsl [0.5 70 70 1])
+                    :fill :none}]
+
+            [:g {:transform (m7/tranfrom [[:translate [-140 -240]]])}
+
+             [:path {:d (m7/path [0 0 :l 150 0  -75 -200 -75 200 75 0 0 -75 45 0 -90 0 ])
+                     :stroke-width 2
+                     :stroke (hsl [1.5 70 70 1])
+                     :fill (hsl [2.5 70 70 1])}]
+
+             [:text {:x 20
+                     :y -20
+                     :style {:font-size "2rem"}
+                     } "ρ"]
+
+
+             [:text {:x 90
+                     :y -20
+                     :style {:font-size "2rem"}
+                     } "V"]
+
+             [:text {:x 75
+                     :dx -10
+                     :y -100
+                     :style {:font-size "2rem"
+                             }
+                     } "m"]
 
 
              #_[:foreignObject
@@ -29206,7 +29511,267 @@ Example: I put the high crime rate down to the high unemployment."])
                      :style {:font-size "2rem"}
                        } "ρ"]
 
-   ])
+             ]
+
+
+
+
+            #_[:path {:d (m7/path [200  -150 :l  -40 0 :a 40 40 0 false false    40  30])
+                      :stroke-width 2
+                      :stroke (hsl [0 70 70 1])
+                      :fill (hsl [0 70 70 1])}]
+
+
+            #_[:path {:d (m7/path [200 -150 :l -28 21 28 14])
+
+                    :stroke-width 3
+                    :stroke (hsl [0 70 70 1])
+                    :fill (hsl [2 70 70 1])}]
+
+
+            #_[:path {:d (m7/path [0 0 :l   40 0  0 -30 -40 0 0 30])
+
+                    :stroke-width 3
+                    :stroke (hsl [0 70 70 1])
+                    :fill :none}]
+
+
+            #_[:path {:d (m7/path [0 0 :l 40 0  0 -30 -40 30])
+
+                    :stroke-width 3
+                    :stroke (hsl [0 70 70 1])
+                    :fill (hsl [2 70 70 1])}]
+
+
+            [:path {:d (m7/path [0 0 :l 200 -150])
+
+                    :stroke-width 3
+                    :stroke (hsl [.5 70 70 1])
+                    :fill :none}]
+
+
+            ]
+
+
+
+
+           #_(grid-on 20 20)
+
+
+
+
+
+
+           ]
+          )]
+
+
+       ])))
+
+(defn triangle2 []
+  (let [[slider get-slider] (react/useState 0)
+        f (fn [n] (/ 1 n))
+        tt 'θ
+        dx [1 0  0 1 -1  0 0 -1 ]
+        sq (fn [n]
+                (comp
+                 (partial map (partial * n))))]
+    (let [zoom 4
+          ax-dx 80
+          ax-dy 40
+          vb (fn [z]
+               (nth [[100 -450  500 500]
+                     [0 -180  200 200]
+                     [0 -50  100 100]
+                     [0 -25  50 50]
+                     [-100 -200  800 200]
+                     [40 120  80 80]
+                     [0 40  100 100]
+                     [75 -175  150 150]
+                     [-20 -20  100 100]
+                     [-400 -200  800 200]] z))
+          viewbox (vb 0)
+          viewbox2 (vb 0)
+          ]
+      [:div {:style (merge
+                     (grid [100 :vh 100 :vw
+                            (take 15 (repeat [8 :vh]))
+                            (take 20 (repeat [8 :vh]))])
+                     {:background-color (hsl [1 70 70 1])
+                      :gap ".1rem"})}
+
+
+       [:div {:style
+              (m7/css
+               [[2 8 2 8
+                 :center :center  2.1 :rem :column]
+                [2.5 70 (+ 50 (* 5 5))  .7] []
+                {:gap ".1rem"
+                 :z-index 10}])}
+
+
+        [:div "14 btc is 309639.40$, how much btc you will get with 500$"]
+
+
+
+
+        [m7/x `[= b [:m u d ] ]]
+
+
+        [m7/x `[= u [:m [14 309639.40] [btc $]]]]
+
+
+        [m7/x `[= b [:m [14 309639.40] d ] ]]
+
+
+        [m7/x `[= b [* [14 309639.40] 500 ] ]]
+
+        [m7/x `[= b [7000 309639.40] ]]
+
+
+        [m7/x `[= b ~(/ 7000 309639.40) ]]
+
+
+
+
+
+
+        [:div {:style {:background-color (hsl [0 70 70 .31])}} ""]
+
+        ]
+
+       [:div {:style (m7/css
+                        [[2 10 10 20 :center :center 4.5 :rem :column]
+
+                         [1 70 90 .1] [] {:gap "1rem"
+                                          :z-index 4}])}
+
+
+
+        [m7/x `[= b [* u d] ]]
+
+
+
+
+
+
+        [:div {:style {:background-color (hsl [0 70 70 1])
+                         :height "1rem"
+                         :width "50%"}}
+         ""]
+
+
+
+        #_[m7/x `[= 14 [* u 309639.40]]]
+
+
+        #_[m7/x `[= b [* u 500]]]
+
+        [m7/x `[= [b 14]  [[* u 500] [* u 309639.40]]]]
+
+        #_[m7/x `[= [ [:m 14 b] 14]  [[* 14 500] 309639.40]]]
+
+        #_[m7/x `[= b  [[* 14 500] 309639.40]]]
+
+
+
+        #_[m7/x `[= 25 [* u g] ]]
+
+
+
+        #_[m7/x `[= [25 100] [[* u g] [* u 20]]] ]
+
+        #_[m7/x `[= [25 100] [g 20]] ]
+
+
+
+
+          ]
+
+
+
+
+
+       [:div {:style (m7/css
+                      [[2 10 1 20 :center :center 3 :rem]
+
+                       [1 70 90 1] [] {:gap "1rem"}])}
+        (let []
+          [:svg {:style {:height "100%"
+                         :width "100%"}
+                 :viewBox (m7/space
+                           viewbox)}
+
+           [:animate {:attributeName :viewBox
+                      :to (m7/space viewbox2)
+                      :dur "4s"
+                      :fill :freeze}]
+
+           [:g {:transform (m7/tranfrom [[:skewX 0]])}
+
+
+
+
+
+
+
+
+            #_[:g {:transform (m7/tranfrom [[:translate [100 -10]]
+                                          [:scale 2]])}
+
+             [:path {:d (m7/path [0 0 :l 150 0  -75 -200 -75 200 75 0 0 -75 45 0 -90 0 ])
+                     :stroke-width 2
+                     :stroke (hsl [1.5 70 70 1])
+                     :fill (hsl [2.5 70 70 1])}]
+
+             [:text {:x 20
+                     :y -20
+                     :style {:font-size "1rem"}
+                     } "u"]
+
+
+             #_[:text {:x 90
+                     :y -20
+                     :style {:font-size "1rem"}
+                     } "g"]
+
+             [:text {:x 50
+                     :dx 0
+                     :y -100
+                     :style {:font-size "1rem"}
+                     } "p"]
+
+
+
+
+             ]
+
+
+
+
+
+
+
+            ]
+
+
+
+
+
+
+
+
+
+
+
+           ]
+          )]
+
+
+       ])))
+
+
+
 
 
 
@@ -29353,15 +29918,26 @@ Example: I put the high crime rate down to the high unemployment."])
                  :z-index 10}])}
 
 
-        [m7/mx `[= [:m cos ~tt] [[+ w f2] F2]]]
 
-        [m7/mx `[= [:m f2 cos ~tt] [+ w f2]]]
+        #_[:div "Unit Price per chocolate/ˈtʃɒk(ə)lət/"]
 
 
-        [m7/mx `[= [:m 50 N cos 30] [+ w f2]]]
+        #_[m7/mx '[= unit [:m 20 [cent chocolate]]]]
 
-        [m7/mx `[= [:m
-                    43.30  N] [+ w f2]]]
+
+
+        [m7/mx `[= pirce [* unit  quantiy]]]
+
+
+        ;; [m7/mx `[= [:m cos ~tt] [[+ w f2] F2]]]
+
+        ;; [m7/mx `[= [:m f2 cos ~tt] [+ w f2]]]
+
+
+        ;; [m7/mx `[= [:m 50 N cos 30] [+ w f2]]]
+
+        ;; [m7/mx `[= [:m
+        ;;             43.30  N] [+ w f2]]]
 
         #_[m7/mx `[= [:m
                       ~(* 50
@@ -29562,17 +30138,17 @@ Example: I put the high crime rate down to the high unemployment."])
 
            [:g
             ;; water
-            (water [[:translate  [-60 -120]]
+            #_(water [[:translate  [-60 -120]]
                       [:scale [-1 1]]])
 
-            (water [[:translate  [60 -120]]
+            #_(water [[:translate  [60 -120]]
                     [:scale [1 1]]])
 
 
             (let [x -60
                   y 95]
               [:g
-               [:g  {:transform (m7/tranfrom [[:scale [1 1]]])}
+               #_[:g  {:transform (m7/tranfrom [[:scale [1 1]]])}
 
                 [:path {:d (m7/path `[~x ~y :l ~@(map #(* 120 %) dx)])
                         :stroke-dasharray (m7/space [(* 2 120) 120])
@@ -29591,8 +30167,8 @@ Example: I put the high crime rate down to the high unemployment."])
                  ]
 
 
-                ]
-               [:path {:d (m7/path `[70 ~y :l ~@(map #(* 50 %) dx)])
+                  ]
+               #_[:path {:d (m7/path `[70 ~y :l ~@(map #(* 50 %) dx)])
                        :stroke-dasharray (m7/space [100 50])
                        :stroke (hsl [1 70 70 1])
                        :stroke-width 2
@@ -29650,7 +30226,7 @@ Example: I put the high crime rate down to the high unemployment."])
                           :r 2
                           :fill (hsl [5 70 70 1])}]
 
-                (let [x -60
+                #_(let [x -60
                       y 0]
                   [:g  {:transform (m7/tranfrom [[:translate [0 (* 6 20)]]
                                                 [:scale [.05 1]]])}
@@ -29677,21 +30253,21 @@ Example: I put the high crime rate down to the high unemployment."])
                 #_[ship [[:translate [-60 10]]
                          [:scale [0.01 -0.01]]]]
                 ;; cube
-                [:path {:d (m7/path `[-25 50 :l ~@(map #(* 50 %) dx)])
-                          :stroke-dasharray (m7/space [100 50])
+                #_[:path {:d (m7/path `[-25 50 :l ~@(map #(* 50 %) dx)])
+                        :stroke-dasharray (m7/space [100 50])
                           :stroke (hsl [1 70 70 1])
                           :stroke-width 2
                           :fill (hsl [1 70 70 1])}]
 
-                (water [[:translate  [-60 0]]
+                #_(water [[:translate  [-60 0]]
                           [:scale [-1 1]]])
 
-                (water [[:translate  [60 0]]
+                #_(water [[:translate  [60 0]]
                           [:scale [1 1]]])
 
 
 
-                [:path {:d bdmap/helicopter1
+                #_[:path {:d bdmap/helicopter1
                         :fill (hsl [0.5 50 40 1])
                         :stroke :none
                         :transform (m7/tranfrom [
@@ -29703,13 +30279,13 @@ Example: I put the high crime rate down to the high unemployment."])
 
 
 
-                [:text {:dy -3}
+                #_[:text {:dy -3}
                  [:textPath {:href :#pasw2
                              :fill (hsl [4 70 70 1])
                              :startOffset "20%"
                              :font-size 10} "W"]]
 
-                [:path {:d (m7/path `[0 0 :l ~@f1])
+                #_[:path {:d (m7/path `[0 0 :l ~@f1])
                         :id :pasw2
                         :stroke-width 2
                         :marker-end (m7/url (name :dot3))
@@ -29731,7 +30307,7 @@ Example: I put the high crime rate down to the high unemployment."])
                  ]
 
 
-                [:path {:d (m7/path `[0 0 :l ~@(let [[x y] f1]
+                #_[:path {:d (m7/path `[0 0 :l ~@(let [[x y] f1]
                                                  [x (ve y)])])
                         :id :paswbar2
                         :stroke-width 2
@@ -29753,7 +30329,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
                  ]
 
-                [:path {:d (m7/path `[0 0 :l ~@(let [[x y] f1]
+                #_[:path {:d (m7/path `[0 0 :l ~@(let [[x y] f1]
                                                  [(* .2  x) (* .2 (ve y))])
                                       20 0])
                         :id :paswbarang2
@@ -29775,7 +30351,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
                  ]
 
-                [:g
+                #_[:g
                  [:text {:dy -2
                          :fill (hsl [5.1 70 70 0])}
                   [:textPath {
@@ -29842,9 +30418,9 @@ Example: I put the high crime rate down to the high unemployment."])
                  ]])
 
 
-             [ship [[:translate [-60 0]]
+             #_[ship [[:translate [-60 0]]
                     [:scale [0.01 -0.01]]]]
-             [:path {:d (m7/path `[-25 0 :l ~@(map #(* 50 %) dx)])
+             #_[:path {:d (m7/path `[-25 0 :l ~@(map #(* 50 %) dx)])
                      :stroke-dasharray (m7/space [100 50])
                      :stroke (hsl [1 70 70 1])
                      :stroke-width 2
@@ -29856,7 +30432,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
 
 
-             [:path {:d (m7/path [150 -150 :l 0 70 ])
+             #_[:path {:d (m7/path [150 -150 :l 0 70 ])
                      :stroke-width 3
                      :marker-end (m7/url (name :dot3))
 
@@ -29877,6 +30453,140 @@ Example: I put the high crime rate down to the high unemployment."])
             ]
            ]
           )]
+
+
+       ])))
+
+
+
+(defn pressure4 []
+  (let [[slider get-slider] (react/useState 0)
+        f (fn [n] (/ 1 n))
+        tt 'θ
+        dx [1 0  0 -1 -1  0 0 1 ]
+        sq (fn [n]
+                (comp
+                 (partial map (partial * n))))]
+    (let [zoom 4
+
+          ax-dx 80
+          ax-dy 40
+
+          vb (fn [z]
+               (nth [[100 -450  500 500]
+                     [0 -200  300 300]
+                     [0 -50  100 100]
+                     [0 -25  50 50]
+                     [-100 -200  800 200]
+                     [40 120  80 80]
+                     [0 40  100 100]
+                     [75 -175  150 150]
+                     [-20 -20  100 100]
+                     [-400 -200  800 200]
+                     [-200 -300  600 400]] z))
+          viewbox (vb 1)
+          viewbox2 (vb 1)
+          ]
+
+
+      [:div {:style (merge
+                     (grid [100 :vh 100 :vw
+                            (take 15 (repeat [8 :vh]))
+                            (take 20 (repeat [8 :vh]))])
+                     {:background-color (hsl [1 70 70 1])
+                      :gap ".1rem"})}
+
+       [:div {:style
+              (m7/css
+               [[2 8 14 8
+                 :center :center  2.5 :rem :column]
+                [3.5 70 (+ 50 (* 5 5))  .7] []
+                {:gap ".1rem"
+                 :z-index 10}])}
+
+
+
+        #_[:div "Unit Price per chocolate/ˈtʃɒk(ə)lət/"]
+
+
+        #_[m7/mx '[= unit [:m 20 [cent chocolate]]]]
+
+
+
+        [m7/mx `[= pirce [* unit  quantiy]]]
+
+        ]
+
+
+
+
+       [:div {:style (m7/css
+                      [[2 10 1 20 :center :center 3 :rem]
+
+                       [1 70 90 1] [] {:gap "1rem"}])}
+        (let []
+          [:svg {:style {:height "100%"
+                         :width "100%"}
+                 :viewBox (m7/space
+                           viewbox)}
+
+           (flames)
+           [:marker {:id (name :dot3)
+                     :viewBox (m7/space [-5 -5 10 10])
+                     :refX 0
+                     :refY 0
+                     :orient :auto-start-reverse
+                     :markerWidth 5
+                     :markerHeight 5}
+            [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
+                    :stroke (hsl [5 70 70 1])
+                    :stroke-width .1
+                    :transform (m7/tranfrom [[:scale [.4 .4]]
+                                             [:rotate 1]])
+                    :fill (m7/hsl [2 70 70 1])}]]
+           [:pattern {:id (name :star)
+                      :viewBox (space [0 0 10 10])
+                      :width "10%"
+                      :height "10%"}
+            [:circle {:cx 5
+                      :cy 5
+                      :r 4
+                      :fill (hsl [0 70 70 1])
+                      }]]
+
+           [:animate {:attributeName :viewBox
+                      :to (m7/space viewbox2)
+                      :dur "4s"
+                      :fill :freeze}]
+
+
+           [:g
+
+
+
+
+
+
+
+            [:animateTransform
+             {:attributeName :transform
+              :begin (sec 0)
+              :dur (sec 10)
+              :type :translate
+              :from (m7/space [0 -50])
+              :to (m7/space [400 -50])
+              :fill :freeze
+              :repeatCount :indefinite
+              }]
+
+            [:circle {:cx 0
+                      :cy (- (* 6 20) 10)
+                      :r 20
+                      :stroke (hsl [1 60 70 1])
+                      :fill (hsl [3 70 70 .6])}]
+
+
+            ]])]
 
 
        ])))
@@ -31228,9 +31938,9 @@ Example: I put the high crime rate down to the high unemployment."])
         f (fn [n] (/ 1 n))
         tt 'θ
         dx [1 0  0 -1 -1  0 0 1 ]
-        a 8
-        b 2
-        c 12
+        a 9
+        b 3
+        c 5
         sq (fn [n]
                 (comp
                  (partial map (partial * n))))]
@@ -31257,16 +31967,67 @@ Example: I put the high crime rate down to the high unemployment."])
        [:div {:style
               (m7/css
                [[2 8 2 8
-                 :center :center  2.5 :rem :column]
+                 :center :center  2.1 :rem :column]
                 [2.5 70 (+ 50 (* 5 5))  .7] []
                 {:gap ".1rem"
                  :z-index 10}])}
 
 
+        [:div "14 btc is 309639.40$, how much btc you will get with 500$"]
+
+
+
+
+        [m7/x `[= b [:m k d ] ]]
+
+
+        [m7/x `[= [14 309639.40] k]]
+
+
+        [m7/x `[= b [:m [14 309639.40] d ] ]]
+
+
+        [m7/x `[= b [* [14 309639.40] 500 ] ]]
+
+        [m7/x `[= b [7000 309639.40] ]]
+
+
+        [m7/x `[= b ~(/ 7000 309639.40) ]]
+
 
         #_[m7/m '[= [+ (* 2 4) (* 4 4) ]
                 [* 4 [:b [+ 2 4]]]
                 24]]
+
+        #_[m7/x `[= d [:m k a ] ]]
+
+        #_[m7/x `[= 10.5 [* k 5 ] ]]
+
+        #_[m7/x `[= [:m 2.1 [$ L]] k]]
+
+
+        #_[m7/x `[= d [:m 2.1 a ] ]]
+
+
+        #_[m7/x `[= [15 2.1] [[:m 2.1 a ] 2.1] 7.2]]
+
+        #_[m7/x `[= p [:m k l]]]
+
+        #_[m7/x `[= 3.5 [* k 5]]]
+
+        #_[m7/x `[= [3.5 5] [[* k 5] 5]]]
+
+        #_[m7/x `[= [3.5 5] k [:m 0.7 [$ L] ] ]]
+
+
+        #_[m7/x `[= p [:m 0.7 l]]]
+
+        #_[m7/x `[= p [* 0.7 13]]]
+
+
+        #_[m7/x `[= p [* 0.7 13]]]
+
+
 
 
 
@@ -31281,14 +32042,25 @@ Example: I put the high crime rate down to the high unemployment."])
         #_[m7/x `[= a ~a]]
         #_[m7/x `[= b ~b]]
 
-        [:div "law of distribution"]
+        #_[:div "law of distribution"]
 
-        [m7/x `[=
-                [+ [:m a b] [:m a c]]
-                [:m a [:b [+ b c]]]]]
+        #_[m7/x `[=
+
+                [* ~a [:b [+ ~b ~c ]]]
+                [+ [* ~a ~b] [* ~a ~c]]]]
 
 
+        #_[m7/x `[=
 
+                [:m a [:b [+ b c d]]]
+                [+ [:m a b] [:m a c]
+                 [:m a d]]]]
+
+
+        #_[m7/x `[= y [:m f [:b x]] [+ x 7]]]
+
+
+        #_[m7/x `[= y [:m g [:b x]] [:p x 2]]]
         ;; [m7/x `[=
         ;;         [+ [:m 5 x ] [:m 3 x]]
         ;;         [:m x [:b [+ 5 3 ]]]
@@ -31307,7 +32079,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
 
 
-        [m7/x `[=
+        #_[m7/x `[=
                 [+ [:m 7 [:p x 2] ] [:m 7 [:p x 2]]]
                 [:m [:p x 2] [:b [+ 7 7]]]
                 [:m 14 [:p x 2] ]]]
@@ -31378,410 +32150,7 @@ Example: I put the high crime rate down to the high unemployment."])
        ])))
 
 
-(defn triangle []
-  (let [[slider get-slider] (react/useState 0)
-        f (fn [n] (/ 1 n))
-        tt 'θ
-        dx [1 0  0 1 -1  0 0 -1 ]
-        sq (fn [n]
-                (comp
-                 (partial map (partial * n))))]
-    (let [zoom 4
-          ax-dx 80
-          ax-dy 40
-          vb (fn [z]
-               (nth [[100 -450  500 500]
-                     [0 -180  200 200]
-                     [0 -50  100 100]
-                     [0 -25  50 50]
-                     [-100 -200  800 200]
-                     [40 120  80 80]
-                     [0 40  100 100]
-                     [75 -175  150 150]
-                     [-20 -20  100 100]
-                     [-400 -200  800 200]] z))
-          viewbox (vb 0)
-          viewbox2 (vb 0)
-          ]
-      [:div {:style (merge
-                     (grid [100 :vh 100 :vw
-                            (take 15 (repeat [8 :vh]))
-                            (take 20 (repeat [8 :vh]))])
-                     {:background-color (hsl [1 70 70 1])
-                      :gap ".1rem"})}
 
-       #_[:div {:style (m7/css
-                        [[2 10 10 20 :center :center 2 :rem :column]
-
-                         [1 70 90 .1] [] {:gap "1rem"
-                                          :z-index 4}])}
-          [:div
-           "Lets, add point A,C"]
-          [:div
-           "Now, we got 2 triange's ABC and ADC"]
-
-          [:div
-           "angles on triange's ABC"]
-          [:div
-           "angles on triange's ADC"]
-          [m7/m '[= [+ BAC ABC ACB] 180]]
-          [m7/m '[= [+ DAC ADC DCB] 180]]
-
-          [:div {:style {:background-color (hsl [0 70 70 1])
-                         :height "1rem"
-                         :width "50%"}}
-           ""]
-
-          [m7/m '[= [+ A B D C] 360]]
-
-
-          ]
-       [:div {:style
-              (m7/css
-               [[4 3 10 7
-                 :center :center  4 :rem :column]
-                [3.5 70 (+ 50 (* 5 5))  .7] []
-                {:gap ".1rem"
-                 :z-index 10}])}
-
-        #_[:div ""]
-        #_[:div  {:style {:font-size "2rem"}} "g is an acceleration duo to gravitational pull" ]
-
-
-
-
-        #_[m7/m '[= g [:m 9.8 [:m m [:p s -2]]]]]
-
-
-        #_[m7/m '[= [:m ρ A h]
-                  m]]
-
-        #_[m7/m '[= F [[:m ∇ [:b [:m  m  v]] ]  t]]]
-
-
-        #_[m7/m '[= F ma [[:m ∇ m   v] t]
-                [[:m m  [:b [- v u]]] t]
-                ]]
-
-
-
-
-
-        #_[m7/m '[= P [W A] [ [:m ρ A h g] A] ]]
-
-        #_[m7/m '[=  P [F A] [N [:p m 2]] [:m N [:p m -2]] Pa]]
-
-
-
-        #_[m7/m '[= ρ [m V] ]]
-
-
-
-
-
-
-
-
-        #_[m7/m '[= [1 [:p x 3] ] [:p x -3] ]]
-
-
-
-        #_[m7/m '[= [:m [:k ρ w] V]  [:m ρ [:k V 1]]  ]]
-
-        ;; [m7/m '[= ρV [:m V [m V]] ]]
-
-
-        ;; [m7/m '[= m ρV ]]
-
-        #_[m7/m '[=  [:m [:k ρ w] V ] [:m  ρ [:k V 1] ] ]]
-
-
-        [m7/m '[=  [ V1 V] [[:k ρ w]  ρ ] ]]
-
-
-        [m7/m '[=
-                [ V1 V] [[:m [* 0.5 [:p 10 3]] kg [:p m 3]]
-                         [:m [:p 10 3] kg [:p m 3]]] .5 ]]
-
-
-
-
-        ;; [m7/m '[= P [W A] [[:m ρ A h g] A]  [:m ρ h g]  ]]
-
-
-        ]
-
-
-
-
-       [:div {:style (m7/css
-                      [[2 10 1 20 :center :center 3 :rem]
-
-                       [1 70 90 1] [] {:gap "1rem"}])}
-        (let []
-          [:svg {:style {:height "100%"
-                         :width "100%"}
-                 :viewBox (m7/space
-                           viewbox)}
-
-           (flames)
-           [:marker {:id (name :dot3)
-                     :viewBox (m7/space [-5 -5 10 10])
-                     :refX 0
-                     :refY 0
-                     :orient :auto-start-reverse
-                     :markerWidth 5
-                     :markerHeight 5}
-            [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
-                    :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
-                    :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
-           [:pattern {:id (name :star)
-                      :viewBox (space [0 0 10 10])
-                      :width "10%"
-                      :height "10%"}
-            [:circle {:cx 5
-                      :cy 5
-                      :r 4
-                      :fill (hsl [0 70 70 1])
-                      }]]
-
-           [:animate {:attributeName :viewBox
-                      :to (m7/space viewbox2)
-                      :dur "4s"
-                      :fill :freeze}]
-
-           [:g {:transform (m7/tranfrom [[:skewX 0]])}
-
-
-
-
-
-            [:path {:d (m7/path [0 0 :l 200 0 0 -150 -200 0 0 150])
-                    :stroke-dasharray "200 150 120 80"
-                    :stroke-dashoffset "400"
-                    :stroke-width 3
-                    :stroke (hsl [0 70 70 1])
-                    :fill (hsl [3.5 70 70 1])}]
-
-
-
-
-
-            [:g
-             [:path {:d (m7/path [120 -150 :l 50 0 0 -50 -50 0 0 50])
-                     :stroke-width 3
-
-                     :stroke (hsl [0.5 70 80 1])
-                     :fill (hsl [0.5 70 80 1])}
-              [:animateTransform
-               {:attributeName :transform
-                :begin (sec 0)
-                :dur (sec 1)
-                :type :translate
-                :from (m7/space [0 0])
-                :to (m7/space [0 20])
-                :fill :freeze
-                :id :ark1
-                }]
-              ]
-
-             [:path {:d (m7/path [150 -150 :l 0 -70 ])
-                     :stroke-width 3
-                     :marker-end (m7/url (name :dot3))
-
-                     :stroke (hsl [0.5 70 80 1])
-                     :fill (hsl [0.5 70 80 1])}
-              [:animateTransform
-               {:attributeName :transform
-                :begin (sec 0)
-                :dur (sec 1)
-                :type :translate
-                :from (m7/space [0 0])
-                :to (m7/space [0 20])
-                :fill :freeze
-                :id :rfff1
-                }]
-              ]
-
-
-             [:path {:d (m7/path [150 -150 :l 0 70 ])
-                     :stroke-width 3
-                     :marker-end (m7/url (name :dot3))
-
-                     :stroke (hsl [0.5 70 80 1])
-                     :fill (hsl [0.5 70 80 1])}
-              [:animateTransform
-               {:attributeName :transform
-                :begin (sec 0)
-                :dur (sec 1)
-                :type :translate
-                :from (m7/space [0 0])
-                :to (m7/space [0 20])
-                :fill :freeze
-                :id :rfff1
-                }]
-              ]
-
-             ]
-
-
-
-            [:path {:d (m7/path [0 0 :l 300 0 0 -50])
-                    :stroke-width 3
-                    :stroke (hsl [0 70 70 1])
-                    :fill :none
-                    }]
-
-
-            #_[:path {:d (m7/path [200 0 :l 100 0 0 -20  -100 0 0 20])
-                      :stroke-width 3
-                      :stroke (hsl [0 70 70 1])
-                      :fill (hsl [3.7 70 70 1])
-                      }
-               [:animateTransform
-                {:attributeName :transform
-                 :begin (sec 0)
-                 :dur (sec 1)
-                 :type :scale
-                 :from (m7/space  [1 .05])
-                 :to (m7/space  [1 1.8])
-                 :fill :freeze
-                 :id :rff1
-                 }]]
-
-
-            [:path {:d (m7/path [200 0 :l 50 0 0 -15  -50 0 0 15])
-                    :stroke-width 3
-                    :stroke (hsl [0 70 70 1])
-                    :fill (hsl [3.7 70 70 1])
-                    }
-             [:animateTransform
-              {:attributeName :transform
-               :begin (sec 0)
-               :dur (sec 1)
-               :type :scale
-               :from (m7/space  [1 .05])
-               :to (m7/space  [1 1.8])
-               :fill :freeze
-               :id :rff1
-               }]]
-
-            [:path {:d (m7/path [300 -15 :l 50 0])
-                    :marker-end (m7/url (name :dot2))
-                    :stroke-width 2
-                    :stroke (hsl [0.5 90 90 1])
-                    :fill :none}]
-
-
-            [:path {:d (m7/path [300 -35 :l 50 0])
-                    :marker-end (m7/url (name :dot2))
-                    :stroke-width 2
-                    :stroke (hsl [0.5 70 70 1])
-                    :fill :none}]
-
-            [:g {:transform (m7/tranfrom [[:translate [-140 -240]]])}
-
-             [:path {:d (m7/path [0 0 :l 150 0  -75 -200 -75 200 75 0 0 -75 45 0 -90 0 ])
-                     :stroke-width 2
-                     :stroke (hsl [1.5 70 70 1])
-                     :fill (hsl [2.5 70 70 1])}]
-
-             [:text {:x 20
-                     :y -20
-                     :style {:font-size "2rem"}
-                     } "ρ"]
-
-
-             [:text {:x 90
-                     :y -20
-                     :style {:font-size "2rem"}
-                     } "V"]
-
-             [:text {:x 75
-                     :dx -10
-                     :y -100
-                     :style {:font-size "2rem"
-                             }
-                     } "m"]
-
-
-             #_[:foreignObject
-              {:x 45
-               :y -120
-               :width 100
-               :height 100
-               :style {:font-size "1.5rem"}
-               } [m7/m '[:m ∇ [:m  m  v]]] ]
-
-
-             #_[:text {:x 10
-                     :y 0
-                     :style {:font-size "2rem"}
-                       } "ρ"]
-
-             #_[:text {:x 10
-                     :y 0
-                     :style {:font-size "2rem"}
-                       } "ρ"]
-
-             ]
-
-
-
-
-            #_[:path {:d (m7/path [200  -150 :l  -40 0 :a 40 40 0 false false    40  30])
-                      :stroke-width 2
-                      :stroke (hsl [0 70 70 1])
-                      :fill (hsl [0 70 70 1])}]
-
-
-            #_[:path {:d (m7/path [200 -150 :l -28 21 28 14])
-
-                    :stroke-width 3
-                    :stroke (hsl [0 70 70 1])
-                    :fill (hsl [2 70 70 1])}]
-
-
-            #_[:path {:d (m7/path [0 0 :l   40 0  0 -30 -40 0 0 30])
-
-                    :stroke-width 3
-                    :stroke (hsl [0 70 70 1])
-                    :fill :none}]
-
-
-            #_[:path {:d (m7/path [0 0 :l 40 0  0 -30 -40 30])
-
-                    :stroke-width 3
-                    :stroke (hsl [0 70 70 1])
-                    :fill (hsl [2 70 70 1])}]
-
-
-            [:path {:d (m7/path [0 0 :l 200 -150])
-
-                    :stroke-width 3
-                    :stroke (hsl [.5 70 70 1])
-                    :fill :none}]
-
-
-            ]
-
-
-
-
-           #_(grid-on 20 20)
-
-
-
-
-
-
-           ]
-          )]
-
-
-       ])))
 
 
 

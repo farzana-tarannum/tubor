@@ -43,11 +43,17 @@
    ;; pressure
    #_[m100/pressure]
 
+   #_[m100/pressure4]
+
    #_[m100/pressure2]
 
    #_[m100/energy]
    #_[m100/frection]
+
+   #_[m100/triangle2]
+
    #_[m100/triangle]
+
    #_[m100/home-pressure2]
    #_[m100/home-pressure]
 
@@ -61,7 +67,7 @@
    #_[m100/chem-mole]
    #_[m100/home-planets-banners]
    #_[m100/eng-tense]
-   #_[m100/board2
+   [m100/board2
     (s/e3g)
     (let [[f1 f2] [7 -2]
           x 'x]
@@ -184,7 +190,7 @@
    ;; ;; hcl + haolh
    #_[m100/home-work9]
     #_[py100/template]
-    [py100/template2]
+   #_[py100/template2]
     #_[py100/template3]
 
    ;; ;; distillation2
@@ -424,7 +430,7 @@
 #_(template3)
 (defn render-simple []
   (rdom/render
-   (curveslasses)
+   (math)
    (js/document.getElementById "app")
    functional-compiler))
 (render-simple)
