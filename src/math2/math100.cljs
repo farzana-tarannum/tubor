@@ -28775,9 +28775,7 @@ Example: I put the high crime rate down to the high unemployment."])
                  :color (hsl [0 30 60 1])
                  :z-index 10}])}
 
-        [:div time-str]
-
-        ]
+        [:div time-str]]
 
        (if true
          (let [d 'ε]
@@ -28919,15 +28917,6 @@ Example: I put the high crime rate down to the high unemployment."])
 
             #_[m7/mx `[= ~d
                        [:sq 0]]]
-
-
-
-
-
-
-
-
-
             ]))
 
 
@@ -31404,20 +31393,29 @@ Example: I put the high crime rate down to the high unemployment."])
        [:div {:style
                 (m7/css
                  [[2 10 10 10
-                   :center :center  2.8 :rem :column]
+                   :center :center  3.8 :rem :column]
                   [3.5 70 (+ 50 (* 5 5))  .7] []
                   {:gap ".1rem"
                    :z-index 10}])}
 
-        [:div {:style {:font-size "1.0rem"}} "kinetic energy is proportional to square of velocity and the mass"]
+
+        #_[m7/x `[= y [[* 2 4] [* 3 12]]]]
+
+        #_[m7/x `[= y [[* 2 1] [* 3 1 3]] [2 9]]]
 
 
-        [m7/m '[= KE [:m [1 2] m [:p  v 2]]]]
+
+        #_[m7/x `[= p [[* 1 8] [* 3 12]] [[* 1 4 2] [* 3 3 4]]]]
+
+        #_[:div {:style {:font-size "1.0rem"}} "kinetic energy is proportional to square of velocity and the mass"]
+
+
+        #_[m7/m '[= KE [:m [1 2] m [:p  v 2]]]]
         #_[:div {:style {:font-size "1.8rem"}} "if you lift a rock on a hill, work done would be "]
 
 ;;         [:div {:style {:font-size "1.2rem"}} "Height after 2s would be"]
 
-
+        [m7/x `[[* 1 2] [* 2 5]]]
 
 
 
@@ -31760,6 +31758,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
 
 
+           (fn [])
            [:g {:transform (m7/tranfrom [[:rotate -90]])}
             (
              (fn [n n1]
@@ -31774,6 +31773,57 @@ Example: I put the high crime rate down to the high unemployment."])
                                                            (cycle [2 1.5]))])}])
                      (range 0 n))])
              12 8)]
+
+
+
+           [:g {:transform (m7/tranfrom [[:rotate -90]])}
+            (
+             (fn [n n1]
+               [:g {:transform (m7/tranfrom [[:translate [0 0]]])}
+                (map (fn [i]
+                       [:path {:stroke-width 2
+                               :fill (hsl [(if (< i n1)  3.5 1) 70 70 .6])
+                               :stroke (hsl [7 70 70 1])
+                               :d (m7/path
+                                   `[~(* i 40) 30 :l ~@(map #(* 20 %1 %2)
+                                                            dx
+                                                            (cycle [2 1.5]))])}])
+                     (range 0 n))])
+             12 8)]
+
+
+           #_[:g {:transform (m7/tranfrom [[:rotate -90]])}
+            (
+             (fn [n n1]
+               [:g {:transform (m7/tranfrom [[:translate [0 0]]])}
+                (map (fn [i]
+                       [:path {:stroke-width 2
+                               :fill (hsl [(if (< i n1)  .5 6) 70 70 .6])
+                               :stroke (hsl [7 70 70 1])
+                               :d (m7/path
+                                   `[~(* i 40) 60 :l ~@(map #(* 20 %1 %2)
+                                                            dx
+                                                            (cycle [2 1.5]))])}])
+                     (range 0 n))])
+             12 8)]
+           (map
+            (fn [w]
+              [:g {:transform (m7/tranfrom [[:rotate -90]])}
+               (
+                (fn [n n1]
+                  [:g {:transform (m7/tranfrom [[:translate [0 0]]])}
+                   (map (fn [i]
+                          [:path {:stroke-width 2
+                                  :fill (hsl [(if (< i n1)  .5 6) 70 70 .6])
+                                  :stroke (hsl [7 70 70 1])
+                                  :d (m7/path
+                                      `[~(* i 40) ~(* w 30) :l ~@(map #(* 20 %1 %2)
+                                                               dx
+                                                               (cycle [2 1.5]))])}])
+                        (range 0 n))])
+                12 4)])
+            (range 2 8))
+
 
 
 
@@ -31903,7 +31953,10 @@ Example: I put the high crime rate down to the high unemployment."])
                                `[~(* i 40) 30 :l ~@(map #(* 20 %1 %2)
                                                         dx
                                                         (cycle [2 1.25]))])}])
-                 (range 0 4))]
+                 (range 0 2))]
+
+
+
 
 
 

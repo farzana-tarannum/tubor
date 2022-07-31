@@ -67,7 +67,7 @@
    #_[m100/chem-mole]
    #_[m100/home-planets-banners]
    #_[m100/eng-tense]
-   [m100/board2
+   #_[m100/board2
     (s/e3g)
     (let [[f1 f2] [7 -2]
           x 'x]
@@ -86,30 +86,30 @@
      [m7/x `[[:m 108
               [:p y 2] ] 25]]]
     ]
-   #_[m100/board3
+   [m100/board3
     (s/board4)
     []
-      []]
+   []]
    #_[m100/map-asia]
    #_[m100/airplane]
    #_[m100/home-work22]
    #_[m100/chem-rate]
    ;; ;; airplane .5
-    #_[m100/home-work3]
+   #_[m100/home-work3]
    #_[m100/home-work19]
    ;; ;; pressure
    #_[m100/pressure]
 
    #_[m100/pressure2]
 
-    #_[m100/energy]
+   #_[m100/energy]
    ;;; [m100/frection]
-    #_[m100/triangle]
+   #_[m100/triangle]
     #_[m100/home-pressure2]
     #_[m100/home-pressure]
 
       ;; spring force
-    #_[p11/template]
+   #_[p11/template]
    ;; ;; chemistry
     #_[p11/template2]
    ;; ;; frictions

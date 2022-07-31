@@ -35,23 +35,26 @@
                70 :% 1 0 80 0.3]
               {:z-index 20}])} v])
 
-
    [:div {:key (gensym)
-          :style
-          (css
-           [[1 12 2 12 :center :center 2 :rem :column]
-            [3 30 70 .5] []]
-           )}
-
+          :style (css
+                  [[1 6 5 12 :center :center 6 :rem]
+                   [.2 30 70 .2] []
+                   {:z-index 22
+                    :flex-direction :column}]
+                  )}
+    [m7/x `[= N [* u l]]]
+    [m7/x `[= u [N l] [1000 2] [2000 4]]]
 
     ]
 
-   [:div {:key (gensym)
-          :style (css
-                  [[1 6 5 12 :center :center 2 :rem]
-                   [.2 30 70 .2] []
-                   {:z-index 22}]
-                  )}
+
+
+   #_[:div {:key (gensym)
+            :style (css
+                    [[1 6 5 12 :center :center 2 :rem]
+                     [.2 30 70 .2] []
+                     {:z-index 22}]
+                    )}
 
     (let [bm 250
           f (fn [i] (/ 1 i))
@@ -159,7 +162,7 @@
                    :width  (size {:size 100 :scale :%})}}
 
      [:animate {:attributeName :viewBox
-                :to (space [-10 -70 40 40])
+                :to (space [-10 -70 80 80])
                 :dur "4s"
                 :fill :freeze}]
 
@@ -180,7 +183,7 @@
              [:text {:x x
                      :y 2
                      :style {:font-size ".1rem"}}
-              (* 50 x)]])
+              (/ x 10)]])
           (range 0 170 10))
 
      (map (fn [y]
@@ -194,7 +197,7 @@
              [:text {:x -1
                      :y (ve y)
                      :style {:font-size ".1rem"}}
-              (/ y 10)]])
+              (* y 50)]])
           (range 0 170 10))
 
      (map (comp
@@ -266,7 +269,7 @@
              }]
 
      [:path {:d (path (flatten
-                       [ [50 0 :l]
+                       [ [60 0 :l]
                         (take 10 (repeat [1 0 0 2 0 -2]))]))
              :stroke (hsl [3 70 70 1])
              :stroke-width .5

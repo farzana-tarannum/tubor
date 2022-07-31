@@ -1,5 +1,6 @@
 (ns math2.solve
   (:require
+   [math2.math7 :as m7]
    [clojure.spec.test.alpha :as stest]
    [clojure.test.check.generators :as gen2]
    [clojure.spec.gen.alpha :as gen]
@@ -161,6 +162,7 @@
                                   ((m mxml) l))  s))]
           `[~a ~b ~@c])
         ))))
+
 (def mk2
   (comp
    (fn [x] (map
@@ -170,6 +172,19 @@
                     (fn [b]
                       (update b 1 (fn [e] (if (> e 0) e
                                               (* e -1)))))) second)
+             mkeq1a)  x))
+   eq2))
+
+
+(defn mk3 [f]
+  (comp
+   (fn [x] (map
+            (comp
+             (juxt (comp
+                    mkeq2a
+                    (fn [b] (update b 1 (fn [e] (if (> e 0) e (* e -1))))))
+                   second)
+             f
              mkeq1a)  x))
    eq2))
 
@@ -311,7 +326,7 @@
 
 
 ;; (fn [exp] (map mkeqx exp))
-((comp
+#_((comp
   vec
   (fn [exp] (map mkeqx exp))
   (fn [[a b]]
@@ -357,8 +372,7 @@
                     [b 2]) c d])
              %)
        )
-      dd
-      ))))
+      dd))))
 
 
 (def simplifyn
@@ -488,8 +502,7 @@
   #_(cons '=
           (map
            (comp
-            vec
-            (fn [a]
+                        (fn [a]
               (cons '+ a))
             (fn [s] (map mkeq2 s)))
            (add-nth dd4 1)))
@@ -727,6 +740,37 @@
           (into  res (cons '- z))
           )
         ))))
+
+
+
+(def e3
+  (fn [e]
+    (let [ee (map first e)
+          sq (map second e)]
+      (loop [eqn (seq ee)
+             cnt (seq sq)
+             z []
+             flg []
+             res []
+
+             ]
+        (if cnt
+          (let [xee (first eqn)
+                x (first cnt)
+                y (if (next cnt) (first (next cnt)) 0)
+                t (if (or (< x 0) (< y 0))
+                    false true)
+                z (if (not t) (conj z xee) z)
+                ]
+            (recur (next eqn) (next cnt) (if (not t) z []) (conj flg t)
+                   (if t
+                     (conj (if (= (count z) 0)  res (conj res (vec (cons '- z))))  xee)
+                     res)))
+          (if (zero? (count z))
+            (cons '+ res)
+            (into  res (cons '- z))
+            )
+          )))))
 
 
 #_(def f+
@@ -1172,16 +1216,46 @@
 (comment
   ((:sym mxml) (mkeq1a 'x))
   ((comp
-    e+
-    e++
-    (juxt (fn [xx] (vec (map first xx))) (fn [xx] (vec (map second xx))))
+    e3
     mk2)
    `[[5 [2 1 3] [z x y]] [-2 [y x]] x 4]))
 
+
+
+
+
 (defn board4 []
-  (let [dd8 `[[x -5]
-              [[5 [2 1 3] [z x y]] [-2 [y x]] x 4]]]
-    [(
+  (let [dd7 `[[x -5 y]
+              [a [-2 [y x]]  x 4]]
+
+
+        dd10 `[[x -5 y]
+               [a [-2 [y x]]
+                x 4 ]]
+
+        dd9 `[[x -5 y]
+              [[5 [2 1 3] [z x y]] b x 4]]
+
+        dd9 `[[x -5 y]
+              [[5 [2 1 3] [z x y]] b x 4]]
+
+        dd5 `[[x -5 y]
+              [[5 [2 1 3] [z x y]]
+               [-2 [y x]] x 4]]
+        dd3 `[[[2 [y]] 5]
+              [[5 [1 1] [x y]] [-2 [y]] x 4]]
+        dd1 `[[[3 [z]] 2]
+              [[2 [1 1] [z y]] [-2 [y]] z 2]]
+        dd4 `[[w v 1]
+              [z y 2]]
+        dd8 `[[2 v 1]
+              [z y 2]]
+        line2 true
+        line3 true]
+
+    [
+
+     #_(
       (comp
        (fn [x] (cons :m x))
        (fn [nn]
@@ -1196,10 +1270,23 @@
                      (fn [n]
                        (map (comp
                              second
-                             mkeq1) n)))
-               eq2)
-              nn)))
-      dd8)
+                             mkeq1) n))) eq2) nn)))
+        `[[x -5]
+          [[5 [2 1 3] [z x y]] [-2 [y x]] x 4]])
+
+
+
+     #_((partial cons :m)
+        (map
+         (comp
+          (fn [a] [:b a])
+          e++
+          (juxt (partial map first )
+                (partial map second))
+          mk2)
+         `[[x 5]
+           [[5 [2 1 3] [z x y]] [-2 [y x]] x 4]]))
+
 
 
 
@@ -1211,16 +1298,69 @@
         (juxt (partial map first )
               (partial map second))
         mk2)
-       dd8))
+       dd5))
 
 
-     ((comp
+     ((partial cons :m)
+      (map
+       (comp
+        (fn [a] [:b a])
+        e++
+        (juxt (partial map first )
+              (partial map second))
+        mk2)
+       dd7))
+
+     #_((comp
        e++
        (juxt (fn [xx] (vec (map first xx))) (fn [xx] (vec (map second xx))))
        mk2)
       (second dd8))
 
-     (let [l (eq2 dd8)
+     ;;; good
+     #_(
+        (comp
+         vec
+         e++
+         (juxt (fn [xx] (vec (map first xx))) (fn [xx] (vec (map second xx))))
+         (fn [[x y]]
+           (map (fn [[e e1]]  [[:m e [:b y]] e1])  x))
+         vec
+         (juxt (comp vec mk2 first)
+               (comp
+                vec
+                e++
+                (juxt (fn [xx] (vec (map first xx))) (fn [xx] (vec (map second xx))))
+                mk2
+                second)))
+        `[[x 5]
+          [[5 [2 1 3] [z x y]] [-2 z] x 4]])
+
+     ;; good
+     (if line2
+       (
+        (comp
+         vec
+         e++
+         (juxt (fn [xx] (vec (map first xx))) (fn [xx] (vec (map second xx))))
+         (fn [[x y]]
+           (map (fn [[e e1]]  [[:m e [:b y]] e1])  x))
+         vec
+         (juxt (comp vec mk2 first)
+               (comp
+                vec
+                e++
+                (juxt (fn [xx] (vec (map first xx))) (fn [xx] (vec (map second xx))))
+                mk2
+                second)))
+        dd7
+        ))
+
+
+
+
+     ;;; bed
+     #_(let [l (eq2 dd8)
            f1 (comp
                e++
                (juxt (fn [xx] (vec (map first xx))) (fn [xx] (vec (map second xx))))
@@ -1232,8 +1372,8 @@
          (juxt (fn [xx] (vec (map first xx))) (fn [xx] (vec (map second xx)))))
         (map (fn [[x y]]
                [[:m x [:b b]] y])  a)))
-
-     ((comp second)
+     ;; not working
+     #_((comp second)
       (let [l (eq2 `[[x -5]
                      [[5 [2 1 3] [z x y]] [-2 [y x]] x 4]])
             f (comp mkeq1a)]
@@ -1255,7 +1395,8 @@
              )))
         ))
 
-     (
+     ;; not working
+     #_(
       (comp
        (fn [x] `[+
                  [:m ~(symbol (name 'x)) ~@x]
@@ -1282,8 +1423,8 @@
 
 
 
-
-     ((comp
+     ;; good
+     #_((comp
        #(cons '+ %)
        (fn [[ee sq]]
          (loop [eqn (seq ee)
@@ -1353,6 +1494,296 @@
         eq2)
        `[[x 5]
          [[5 [2 1 3] [z x y]] [-2 [y x]] x 4]]))
+
+
+     ;; good 2
+
+     (if line3
+       ((comp
+         #(cons '+ %)
+         (fn [[ee sq]]
+           (loop [eqn (seq ee)
+                  cnt (seq sq)
+                  z []
+                  flg []
+                  res []]
+             (if cnt
+               (let [xee (first eqn)
+                     x (first cnt)
+                     y (if (next cnt) (first (next cnt)) 0)
+                     t (if (or (< x 0) (< y 0))
+                         false true)
+                     z (if (not t) (conj z xee) z)
+                     ]
+                 (recur (next eqn) (next cnt) (if (not t) z []) (conj flg t)
+                        (if t
+                          (conj (if (= (count z) 0)  res (conj res (vec (cons '- z))))  xee)
+                          res)))
+               res)))
+         (juxt
+          #(vec (map first %))
+          #(vec (map second %)))
+         #(map
+           (comp
+            (juxt (comp
+                   mkeq2
+                   (fn [[a b c d]]
+                     [a (if (< b 0) (* b -1) b) c d]) ) second)
+            (fn [[a b]]
+              (let [[w x y z] a
+                    [w1 x1 y1 z1] b]
+                (into [ (if (not
+                             (or (= (* x x1) 1)
+                                 (= (* x x1) -1)))
+                          (cond (= w :np1) :np
+                                (= w :cp) :p
+                                :else w)
+                          w)
+                       (* x x1)
+
+                       ]
+                      (if (int? z1)
+                        [y z]
+                        [
+                         (vec (flatten [y y1]))
+                         (vec (flatten [z z1]))]
+                        )))
+              ))  %)
+         (fn [[a b]]
+           (for [x a
+                 y b]
+             (vec
+              (sort-by
+               (comp
+                {:p 10
+                 :cp 15
+                 :np 20
+                 :np1 30
+                 :c 60}
+                first)
+               [x y]))
+             )))
+        (map
+         (comp
+          (fn [n] (map mkeq1 n))
+          eq2)
+         dd7
+         )))
+
+
+     (if line3
+       ((comp
+
+         #(cons '+ %)
+         (fn [[ee sq]]
+           (loop [eqn (seq ee)
+                  cnt (seq sq)
+                  z []
+                  flg []
+                  res []]
+             (if cnt
+               (let [xee (first eqn)
+                     x (first cnt)
+                     y (if (next cnt) (first (next cnt)) 0)
+                     t (if (or (< x 0) (< y 0))
+                         false true)
+                     z (if (not t) (conj z xee) z)
+                     ]
+                 (recur (next eqn) (next cnt) (if (not t) z []) (conj flg t)
+                        (if t
+                          (conj (if (= (count z) 0)  res (conj res (vec (cons '- z))))  xee)
+                          res)))
+               res)))
+         (juxt
+          #(vec (map first %))
+          #(vec (map second %)))
+         #(map
+           (comp
+            (juxt (comp
+                   mkeq2
+                   (fn [[a b c d]]
+                     [a (if (< b 0) (* b -1) b) c d]) ) second)
+            (fn [[a b]]
+              (let [[w x y z] a
+                    [w1 x1 y1 z1] b]
+                (into [ (if (not
+                             (or (= (* x x1) 1)
+                                 (= (* x x1) -1)))
+                          (cond (= w :np1) :np
+                                (= w :cp) :p
+                                :else w)
+                          w)
+                       (* x x1)
+
+                       ]
+                      (if (int? z1)
+                        [y z]
+                        [
+                         (vec (flatten [y y1]))
+                         (vec (flatten [z z1]))]
+                        )))
+              ))  %)
+         (fn [[a b]]
+           (for [x a
+                 y b]
+             (vec
+              (sort-by
+               (comp
+                {:p 10
+                 :cp 15
+                 :np 20
+                 :np1 30
+                 :c 60}
+                first)
+               [x y]))
+             )))
+        (map
+         (comp
+          (fn [n] (map mkeq1 n))
+          eq2)
+         dd9
+         )))
+
+
+     (if line3
+       ((comp
+         #(cons '+ %)
+         (fn [[ee sq]]
+           (loop [eqn (seq ee)
+                  cnt (seq sq)
+                  z []
+                  flg []
+                  res []]
+             (if cnt
+               (let [xee (first eqn)
+                     x (first cnt)
+                     y (if (next cnt) (first (next cnt)) 0)
+                     t (if (or (< x 0) (< y 0))
+                         false true)
+                     z (if (not t) (conj z xee) z)
+                     ]
+                 (recur (next eqn) (next cnt) (if (not t) z []) (conj flg t)
+                        (if t
+                          (conj (if (= (count z) 0)  res (conj res (vec (cons '- z))))  xee)
+                          res)))
+               res)))
+         (juxt
+          #(vec (map first %))
+          #(vec (map second %)))
+         #(map
+           (comp
+            (juxt (comp
+                   mkeq2
+                   (fn [[a b c d]]
+                     [a (if (< b 0) (* b -1) b) c d]) ) second)
+            (fn [[a b]]
+              (let [[w x y z] a
+                    [w1 x1 y1 z1] b]
+                (into [ (if (not
+                             (or (= (* x x1) 1)
+                                 (= (* x x1) -1)))
+                          (cond (= w :np1) :np
+                                (= w :cp) :p
+                                :else w)
+                          w)
+                       (* x x1)
+
+                       ]
+                      (if (int? z1)
+                        [y z]
+                        [
+                         (vec (flatten [y y1]))
+                         (vec (flatten [z z1]))]
+                        )))
+              ))  %)
+         (fn [[a b]]
+           (for [x a
+                 y b]
+             (vec
+              (sort-by
+               (comp
+                {:p 10
+                 :cp 15
+                 :np 20
+                 :np1 30
+                 :c 60}
+                first)
+               [x y]))
+             )))
+        (map
+         (comp
+          (fn [n] (map mkeq1 n))
+          eq2)
+         dd10
+         )))
+
+
+
+
+
+     #_(map
+      (comp
+       (fn [n] (map mkeq2a n))
+       (fn [n] (map mkeq1a n))
+       eq2)
+      `[[x -5 y]
+        [a [-2 [y x]]
+         x 4 ]]
+      )
+
+
+     ((comp e3 mk2)
+      `[[5 [2 1 3] [z x y]] [-2 [y x]] x 4])
+
+
+     ((comp e3 (mk3 (fn [[a b c]]
+                      [a b (merge-with + c c)])))
+      `[[5 [2 1 3] [z x y]] [-2 [y x]] x 4])
+
+
+     #_((comp
+
+       (partial map (fn [[a b c]]
+                      [a b (merge-with + c c)]) )
+       (partial map mkeq1a)
+       eq2)
+      `[[5 [2 1 3] [z x y]] [-2 [y x]] x 4])
+
+
+
+
+
+     ;;; current
+     #_((comp
+
+
+         (fn [[a b]]
+           (for [x a
+                 y b]
+             (vec
+              (sort-by
+               (comp
+                {:p 10
+                 :cp 15
+                 :np 20
+                 :np1 30
+                 :c 60}
+                first)
+               [x y]))
+             )))
+      (map
+       (comp
+        (fn [n] (map mkeq1 n))
+        eq2)
+       `[[x -5 y]
+         [[5 [2 1 3] [z x y]] [-2 [y x]] x 4]]))
+
+
+
+
+
+
+
 
 
 
