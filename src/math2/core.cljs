@@ -86,7 +86,7 @@
      [m7/x `[[:m 108
               [:p y 2] ] 25]]]
     ]
-   #_[m100/board3
+   [m100/board3
     (s/board4)
     []
    []]
@@ -170,7 +170,7 @@
     #_[m100/map-asia]
    #_[py100/template]
    ;; [py100/template]
-   [m100/playgroud]
+   #_[m100/playgroud]
    #_[m100/home-planets-banners4]
    ;; [m100/home-work19]
    #_[py100/t2]

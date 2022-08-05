@@ -112,11 +112,17 @@
 
 (def mxml
   {:c second
-   :sym (comp ffirst  vec (fn [n] (nth n 2)))
+   :sym (comp ffirst
+              vec
+              (fn [n] (nth n 2)))
    :vec vec
    :m (fn [n] :m)
    :p (fn [n] :p)
    :syms (comp
+          (fn [vv]
+            (if (= (count vv) 1)
+              (first vv)
+              vv))
           (fn [vv] (map (fn [[u v]]
                           (if (= v 1) u [:p u v] )) vv))
           vec
@@ -1737,8 +1743,29 @@
 
 
      ((comp e3 (mk3 (fn [[a b c]]
-                      [a b (merge-with + c c)])))
+                      [(if (= :sym  a) :syms a) b
+                       (merge-with + c c)])))
       `[[5 [2 1 3] [z x y]] [-2 [y x]] x 4])
+
+
+     ((comp e3 (mk3 (fn [[a b c]]
+                      [(if (= :sym  a) :syms a) b
+                       (merge-with (fn [e d] [1 2]) c c)])))
+      `[[5 [2 1 3] [z x y]] [-2 [y x]] x 4])
+
+
+
+
+
+     ((mxml :syms)
+      ((fn [[a b c]]
+         [:syms b
+          (merge-with + c c)])
+       (nth ((comp
+              #(map mkeq1a %)
+              eq2)
+             `[[5 [2 1 3] [z x y]] [-2 [y x]] x 4])
+            2)))
 
 
      #_((comp

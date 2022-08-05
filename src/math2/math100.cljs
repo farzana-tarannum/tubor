@@ -17743,10 +17743,155 @@ on time?"]
                      {:background-color (hsl [1 70 70 .5])
                       :gap ".2rem"})}
 
+
+     #_(map-indexed
+      (fn [n [d r c f1 f2]]
+        [:div {:key (str "333abc_svg" n)
+               :style (m7/css
+                       [[(* 2 r) 1 (* 2 c) 2  f1 f2  1.5
+                         :rem :column]
+                        [30 70 70 .3] []
+                        (into
+                         {
+                          :font-family "Roboto Flex"
+                          :gap (m7/np [1 :rem])
+                          :color (hsl [1 30 30 1])
+                          :z-index 4
+                          :cursor :grab}
+                         {:z-index 19}
+                         )])
+               }
+         d])
+
+      (map
+       (fn [j i ]
+         [i 2 (+ j 1) :center :center])
+       (range 1 10)
+       (range 2 11)
+       ))
+
+
+     #_(map-indexed
+      (fn [n [d r c f1 f2]]
+        [:div {:key (str "333abc_svg" n)
+               :style (m7/css
+                       [[r 1 c 1  f1 f2  1.5
+                         :rem :column]
+                        [30 70 70 .3] []
+                        (into
+                         {
+                          :font-family "Roboto Flex"
+                          :gap (m7/np [1 :rem])
+                          :color (hsl [1 30 30 1])
+                          :z-index 4
+                          :cursor :grab}
+                         {:z-index 19}
+                         )])
+               }
+         d])
+
+      (map
+       (fn [j i ]
+         [i 3 (+ j 1) :center :center])
+       (range 1 100)
+       (range 2 21)
+       ))
+
+
+
+     ;; (= d 3) (= d 5) (= d 7) (= d 11) (= d 1)3
+
+     ;; (= (mod d 3) 0) (= (mod d 5) 0) (= (mod d 7) 0) (= (mod d 11) 0) (= (mod d 13) 0)
+
+
+     (for [r1 (range 0 10)
+             c1 (range 0 23)
+             :let [r (+ r1 2)
+                   c (+ c1 2)
+                   n (+ c1 (* 22 r1))
+                   d (+ 2 n)
+                   f1 :center
+                   f2 :center]]
+         (apply
+          (fn [n [d r c f1 f2]]
+            [:div {:key (str "333abc_svg" n)
+                   :style (m7/css
+                           [[r 1 c 1  f1 f2  1.5
+                             :rem :column]
+
+                            (if (or (= d 2) (= d 3) (= d 5) (= d 7) (= d 11) (= d 13))
+                              [0 70 70 .8]
+                              (if (or (= (mod d 2) 0)
+                                      (= (mod d 3) 0)
+                                      (= (mod d 5) 0)
+                                      (= (mod d 7) 0)
+                                      (= (mod d 11) 0)
+                                      (= (mod d 13) 0)
+                                      )
+                                [60 30 30 .3]
+                                [60 70 70 .3]
+                                ))
+
+
+
+
+
+
+
+
+
+                            []
+                            (into
+                             {
+                              :font-family "Roboto Flex"
+                              :gap (m7/np [1 :rem])
+                              :color (hsl [1 30 30 1])
+                              :z-index 4
+                              :cursor :grab}
+                             {:z-index 19}
+                             )])
+                   }
+             d])
+          [n [d r c f1 f2]]))
+
+
+
      [:div {:style (m7/css
-                    [[4 2 1 23 :center :center 3.5 :rem]
-                     [2 70 90 .1] [] {:gap "1rem"
-                                     :z-index 26}])}
+                    [[1 3 1 24 :center :center 2.2 :rem :column]
+                     [2 70 90 .2] [] {:gap "1rem"
+                                      :z-index 26}])}
+
+      #_(let [n (* 11 41)
+            ]
+        (map
+         (fn [d]
+           [m7/x `[= ~n (+ (* ~d ~(int (/ n d)))
+                           ~(- n (* d (int (/ n d)))))]])
+         [7 11]))
+      #_[:div "to find out 222 is a prime number, we need to it divide up to "
+       [m7/x `[= [:sq 25777] ~(js/Math.sqrt 25777)]]]
+
+      #_[m7/x `[= [:sq 16] [:sq (* 4 4)] 4]]
+
+
+      #_[m7/x `[= [57 3] [[- 60 3] 3] [- [60 3] [3 3]]  [- 20 1] 19]]
+
+      #_[m7/x `[= [:sq 17] ~(js/Math.sqrt 17)]]
+
+
+      #_[m7/x `[= [* 4.1231 4.1231] ~(* 4.1232 4.1231)]]
+
+      #_[m7/x `[= [:p 4.1231 2] ~(* 4.1232 4.1231)]]
+
+
+      #_[m7/x `[= [:sq [:p 4.1231 2]] [:sq ~(* 4.1232 4.1231)]]]
+
+
+      #_[m7/x `[= 4.1231  [:sq ~(* 4.1232 4.1231)]]]
+
+
+
+
 
       ]
      [:div
@@ -17757,6 +17902,8 @@ on time?"]
                [[1 1 1 23 :center :center 2.5 :rem]
                 [2 70 90 1] [] {:gap "1rem"
                                 :z-index 1}])}
+
+
 
 
 
@@ -17774,7 +17921,7 @@ on time?"]
                                   :z-index 1}])}
         "Answer: Enlargement of scale factor 2 at the point 40,15" ])
 
-       (map-indexed
+     #_(map-indexed
         (fn [n [d r c f1 f2]]
           [:div {:key (str "abc_svg" n)
                  :ref (if (= n slider) animate-ref nil)
