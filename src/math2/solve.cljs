@@ -184,14 +184,16 @@
 
 (defn mk3 [f]
   (comp
-   (fn [x] (map
-            (comp
-             (juxt (comp
-                    mkeq2a
-                    (fn [b] (update b 1 (fn [e] (if (> e 0) e (* e -1))))))
-                   second)
-             f
-             mkeq1a)  x))
+   (fn [x]
+     (map
+      (comp
+       (juxt (comp
+              mkeq2a
+              (fn [b]
+                (update b 1 (fn [e] (if (> e 0) e (* e -1))))))
+             second)
+       f
+       mkeq1a)  x))
    eq2))
 
 
@@ -1766,6 +1768,58 @@
               eq2)
              `[[5 [2 1 3] [z x y]] [-2 [y x]] x 4])
             2)))
+
+
+     (let [[s co exp] (nth ((comp
+                             #(map mkeq1a %)
+                             eq2)
+                            `[[5 [2 1 3] [z x y]] [-2 [y x]] x 4])
+                           1)
+           f (fn [[a b c]]
+               [s  (* b co)
+                (merge-with (fn [e d] (+ e d)) c exp)])
+           ]
+       ((comp e3 (mk3 f))
+        `[[5 [2 1 3] [z x y]] [-2 [y x]] x 4]))
+
+     ((comp e3 (mk3 identity))
+      `[[5 [2 1 3] [z x y]] [-2 [y x]] x 4])
+
+
+     ((comp e3 (mk3 identity))
+      `[[5 [2 1 3] [z x y]] [-2 [y x]] x 4])
+
+     ;; mkeq2a
+     ((comp
+       (partial cons '+))
+      (map
+       mkeq1a
+       (eq2 `[[-5 [2 1 3] [z x y]] [-2 [y x]] x 4])))
+
+
+     (let [l1 (map
+               (comp
+                (juxt (comp mkeq2a) second)
+                mkeq1a)
+               (eq2 `[[-5 [2 1 3] [z x y]] [-2 [y x]] x 4]))
+           ]
+       l1)
+
+
+
+
+
+
+
+
+
+     #_(map
+
+      (comp e3 (mk3 (fn [[a b c]]
+                      [(if (= :sym  a) :syms a) b
+                       (merge-with (fn [e d] [1 2]) c c)])))
+      `[[5 [2 1 3] [z x y]] [-2 [y x]] x 4])
+
 
 
      #_((comp
