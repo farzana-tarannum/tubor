@@ -48,7 +48,7 @@
    #_[m100/pressure2]
 
    #_[m100/energy]
-   [m100/frection]
+   #_[m100/frection]
 
    #_[m100/triangle2]
 
@@ -86,8 +86,8 @@
      [m7/x `[[:m 108
               [:p y 2] ] 25]]]
     ]
-   #_[m100/board3
-    (s/board4)
+   [m100/board3
+    (s/board5)
     []
    []]
    #_[m100/map-asia]

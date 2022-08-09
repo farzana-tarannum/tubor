@@ -160,13 +160,15 @@
 
 (def mkeq2a
   (fn [l]
-    (let [s (first l)]
+    (let [[s _ e] l]
       (cond
         (= (type :a) (type s)) ((s mxml) l)
         :else
         (let [[a b c] (vec (map (fn [m]
                                   ((m mxml) l))  s))]
-          `[~a ~b ~@c])
+          (if (= (count e) 1)
+            `[~a ~b ~c]
+            `[~a ~b ~@c]))
         ))))
 
 (def mk2
@@ -1229,7 +1231,152 @@
    `[[5 [2 1 3] [z x y]] [-2 [y x]] x 4]))
 
 
+(def symeq
+  (fn [e]
+    (let [l1 (map
+              (comp mkeq1a)
+              (eq2 e))
+          l11 (map-indexed (fn [i [x y z]]
+                             (let [pos (fn [s] (if (> s 0) s (* -1 s)))
+                                            f (fn [x] (if (< x 0) '- '+ ))]
+                               [y (f y) x (if (= i 0) y (pos y)) z]))
+                                    l1)
+                   [[[saa sab & sarest] [sba sbb & sbrest]]
+                    & lrest2] (reverse (partition 2 1 l11))
+                   l3 (reduce (fn [acc [[saa sab & sarest] [sba sbb & sbrest]]]
+                                [sbb  (mkeq2a sarest) acc])
+                              [sbb (mkeq2a sarest) (mkeq2a sbrest)]
+                              lrest2)
+                   ]
 
+               l3)))
+
+(defn board5 []
+  (let []
+    [
+
+     #_(symeq
+        `[[2 [2 ] [x]] [-2 [y x]] [-2 x] 4])
+
+
+     `[= [* 8 8] [:p 8 2]]
+
+     `[= [* 8 8 8] [:p 8 3] ~(* 64 8)]
+
+     (let [z '[:m 5 z]]
+       `[= [* ~z ~z ~z]
+         [:p [:b ~z] 3]
+         [:m 125 [:p z 3]]] )
+
+
+     (let [a 'a]
+       `[= [:m ~a
+            [:b ~(symeq `[[2 x] [3 y]])]]
+         ~(symeq `[[2 [[:b ~a] x]]
+                   [3 [[:b ~a] y]]])])
+
+
+
+     `[= a ~(symeq `[[2 x] [3 y]])]
+
+     (let [a (symeq `[[2 x] [3 y]])]
+       `[= [:m [:b ~a]
+            [:b ~(symeq `[[2 x] [3 y]])]]
+         ~(symeq `[[2  [x [:b ~a]]]
+                   [3 [y [:b ~a] ]]])])
+
+     #_(let [a (symeq `[[2 x] [3 y]])]
+       `[= [:m [:b ~a] [:b ~(symeq `[[2 x] [3 y]])]]
+         [+ [:m 2 x [:b ~a]]
+          [:m 3 y [:b ~a]]]])
+
+
+     #_`[= [* z z z] [:p z 3]]
+
+
+     #_(let [a (symeq `[[2 x] [3 y]])]
+       `[+ [:m 2 x [:b ~a]]
+         [:m 3 y [:b ~a]]])
+
+
+     #_(symeq `[[4 [2] [x]] [6 [x y]]
+              [6 [x y]]
+              [9 [2] [y]]])
+
+     #_(let [a (symeq `[[2 x] [3 y]])]
+       `[= [:m [:b ~a] [:b ~a]]
+         [+ [:p [:b [:m 2 x]] 2]
+
+          [* 2 [:m 6 x y]]
+          [:p [:b [:m 3 y]] 2]]])
+
+     #_(let [a (symeq `[[2 x] [3 y]])]
+       `[= [:p [:b ~a] 2]
+         [+ [:p [:b [:m 2 x]] 2]
+
+          [* 2 [:m 6 x y]]
+          [:p [:b [:m 3 y]] 2]]])
+
+     #_(let [x `a
+           y 'q
+           c 5
+           d 3
+           a (symeq `[[~c ~x] [3 ~y]])]
+       `[= [:p [:b ~a] 2]
+         [+ [:p [:b [:m ~c ~x]] 2]
+
+          [* 2 [:m ~c ~x ~d ~y]]
+          [:p [:b [:m ~d ~y]] 2]]
+         ~(symeq `[[~(* c c) [2] [~x]]
+                   [~(* c d 2) [~x ~y]]
+                   [~(* d d) [2] [~y]]])])
+
+     #_(let [x 'p
+           y 'q
+           c 5
+           d 3
+           a (symeq `[[~c ~x] [3 ~y]])]
+       `[= [:p [:b ~a] 2]
+         [+ [:p [:b [:m ~c ~x]] 2]
+
+          [* 2 [:m ~c ~x ~d ~y]]
+          [:p [:b [:m ~d ~y]] 2]]
+         ~(symeq `[[~(* c c) [2] [~x]]
+                   [~(* c d 2) [~x ~y]]
+                   [~(* d d) [2] [~y]]])])
+
+
+
+
+     #_['= (symeq `[[p x] [-1 [q y]]]) 4]
+
+     #_['= (symeq `[[3 [p x]] [2 [q y]]]) 22]
+
+
+     #_['= (symeq `[[3 x] [2 q]]) 4]
+     #_['= [:m 3 [:b (symeq `[[3 x] [2 q]])]] `[* 3 4]]
+     #_['= (symeq `[[9 x]  [6 q]]) 12]
+
+     #_`[= [:m 9 p]
+       [- 12 [:m 6 q]]]
+     #_['= (symeq `[[9 p] [-4 q]]) 22]
+
+     #_['= (symeq `[ 12 [-6 q ]
+                  [-4 q]]) 22]
+
+     #_((fn [l]
+          (let [[s _ e] l]
+            (let [[a b c] (vec (map (fn [m]
+                                      ((m mxml) l))  s))]
+              (if (= (count e) 1)
+                `[~a ~b ~c]
+                `[~a ~b ~@c]))))
+        (mkeq1a (eq2 `[5 [2] [x]])))
+
+     #_`[+ [:m x [:b [+ x 2]] ] [:m 2 [:b [+ x 2]] ] ]
+     ])
+
+  )
 
 
 (defn board4 []
@@ -1789,6 +1936,8 @@
      ((comp e3 (mk3 identity))
       `[[5 [2 1 3] [z x y]] [-2 [y x]] x 4])
 
+
+
      ;; mkeq2a
      ((comp
        (partial cons '+))
@@ -1797,13 +1946,50 @@
        (eq2 `[[-5 [2 1 3] [z x y]] [-2 [y x]] x 4])))
 
 
+     ;; (juxt (comp mkeq2a) second)
      (let [l1 (map
                (comp
-                (juxt (comp mkeq2a) second)
+                second
                 mkeq1a)
                (eq2 `[[-5 [2 1 3] [z x y]] [-2 [y x]] x 4]))
-           ]
-       l1)
+
+           l2 (reverse (partition 2 1 (vec l1)))
+           l3 (reduce (fn [acc [x y]]
+                        (let [pos (fn [s] (if (> s 0) s (* -1 s)))
+                              f (fn [x] (if (< x 0) '- '+ ))]
+                          (if (= acc [])
+                            [(f y) x (pos y)]
+                            [(f y) (pos x) acc])) ) [] l2)]
+
+       l3)
+
+     (comment
+       (if (= acc [])
+         [s x y]
+         [s (pos x) acc])       )
+     ((fn [e]
+        (let [l1 (map
+                  (comp mkeq1a)
+                  (eq2 e))
+              l11 (map-indexed (fn [i [x y z]]
+                                 (let [pos (fn [s] (if (> s 0) s (* -1 s)))
+                                       f (fn [x] (if (< x 0) '- '+ ))]
+                                   [y (f y) x (if (= i 0) y (pos y)) z]))
+                               l1)
+              [[[saa sab & sarest] [sba sbb & sbrest]]
+               & lrest2] (reverse (partition 2 1 l11))
+              l3 (reduce (fn [acc [[saa sab & sarest] [sba sbb & sbrest]]]
+                           [sbb  (mkeq2a sarest) acc])
+                         [sbb (mkeq2a sarest) (mkeq2a sbrest)]
+                         lrest2)
+              ]
+
+          l3))
+      `[[-5 [2 1 3] [z x y]] [-2 [y x]] x 4])
+
+     `[=
+       [[+ 36 [:m 9 y] ] [:m 5 y] ]  [+ [[+ 12 [:m 3 y]]
+                                         [+ 12 [:m 3 y]]] [[:m 10  y] [+ 12 [:m 3 y] ]]]]
 
 
 
