@@ -138,7 +138,7 @@
     [:sym 1 {e 1}])
    ([[c2 1 e]]
     [[:m :c :sym] c2 {e 1}])
-   ([[1 d e]]
+   ([[1 (d :guard number?) e]]
     [[:p :sym :deg] 1 {e d}])
    ([[c2 [d & d1] [e & e1]]]
     [[:m :c :syms] c2
@@ -167,8 +167,8 @@
         (let [[a b c] (vec (map (fn [m]
                                   ((m mxml) l))  s))]
           (if (= (count e) 1)
-            `[~a ~b ~c]
-            `[~a ~b ~@c]))
+            (if (= b 1) `[~a  ~c] `[~a ~b ~c])
+            (if (= b 1) `[~a  ~@c] `[~a ~b ~@c])))
         ))))
 
 (def mk2
@@ -1238,18 +1238,37 @@
               (eq2 e))
           l11 (map-indexed (fn [i [x y z]]
                              (let [pos (fn [s] (if (> s 0) s (* -1 s)))
-                                            f (fn [x] (if (< x 0) '- '+ ))]
+                                   f (fn [x] (if (< x 0) '- '+ ))]
                                [y (f y) x (if (= i 0) y (pos y)) z]))
-                                    l1)
-                   [[[saa sab & sarest] [sba sbb & sbrest]]
-                    & lrest2] (reverse (partition 2 1 l11))
-                   l3 (reduce (fn [acc [[saa sab & sarest] [sba sbb & sbrest]]]
-                                [sbb  (mkeq2a sarest) acc])
-                              [sbb (mkeq2a sarest) (mkeq2a sbrest)]
-                              lrest2)
-                   ]
+                           l1)
+          [[[saa sab & sarest] [sba sbb & sbrest]]
+           & lrest2] (reverse (partition 2 1 l11))
+          l3 (reduce (fn [acc [[saa sab & sarest] [sba sbb & sbrest]]]
+                       [sbb  (mkeq2a sarest) acc])
+                     [sbb (mkeq2a sarest) (mkeq2a sbrest)]
+                     lrest2)
+          ]
 
-               l3)))
+      l3)))
+
+
+(def symeq2
+  (fn [l1]
+    (let [
+          l11 (map-indexed (fn [i [x y z]]
+                             (let [pos (fn [s] (if (> s 0) s (* -1 s)))
+                                   f (fn [x] (if (< x 0) '- '+ ))]
+                               [y (f y) x (if (= i 0) y (pos y)) z]))
+                           l1)
+          [[[saa sab & sarest] [sba sbb & sbrest]]
+           & lrest2] (reverse (partition 2 1 l11))
+          l3 (reduce (fn [acc [[saa sab & sarest] [sba sbb & sbrest]]]
+                       [sbb  (mkeq2a sarest) acc])
+                     [sbb (mkeq2a sarest) (mkeq2a sbrest)]
+                     lrest2)
+          ]
+
+      l3)))
 
 (defn board5 []
   (let []
@@ -1261,15 +1280,21 @@
 
      `[= [* 8 8] [:p 8 2]]
 
-     `[= [* 8 8 8] [:p 8 3] ~(* 64 8)]
+     `[= [* -8 -8] 64 [:p 8 2] 64]
 
-     (let [z '[:m 5 z]]
+
+
+     `[= [* -8 -8 -8] [- [:p 8 3]]]
+
+
+
+     #_(let [z '[:m 5 z]]
        `[= [* ~z ~z ~z]
          [:p [:b ~z] 3]
-         [:m 125 [:p z 3]]] )
+         [:m 125 [:p z 3]]])
 
 
-     (let [a 'a]
+     #_(let [a 'a]
        `[= [:m ~a
             [:b ~(symeq `[[2 x] [3 y]])]]
          ~(symeq `[[2 [[:b ~a] x]]
@@ -1277,18 +1302,39 @@
 
 
 
-     `[= a ~(symeq `[[2 x] [3 y]])]
+     #_`[= a ~(symeq `[[2 x] [3 y]])]
 
-     (let [a (symeq `[[2 x] [3 y]])]
+     #_(let [a (symeq `[[2 x] [3 y]])]
        `[= [:m [:b ~a]
             [:b ~(symeq `[[2 x] [3 y]])]]
          ~(symeq `[[2  [x [:b ~a]]]
                    [3 [y [:b ~a] ]]])])
 
+
      #_(let [a (symeq `[[2 x] [3 y]])]
-       `[= [:m [:b ~a] [:b ~(symeq `[[2 x] [3 y]])]]
-         [+ [:m 2 x [:b ~a]]
-          [:m 3 y [:b ~a]]]])
+         `[= [:m [:b ~a]
+            [:b ~(symeq `[[2 x] [3 y]])]]
+         ~(symeq `[[2  [x [:b ~a]]]
+                   [3 [y [:b ~a] ]]])])
+
+     #_(mkeq2a (mkeq1a [1 ['x 'y 'z]]))
+
+     #_(symeq `[[1 [x y z]] 3])
+     #_(symeq `[[1 [y z]] 3])
+     #_(mkeq2a (mkeq1a [1 ['x 'y 'z 'k]]))
+
+     #_(mkeq2a (mkeq1a [1 ['x 'y 'z 'k] [2 3 4 5] ]))
+     #_(symeq `[[5 [2 1 3] [z x y]] [-2 [y x]] x 4])
+
+
+     #_(mkeq2a (mkeq1a (eq2 `[1 [ 1 3] [x y]])))
+
+
+
+
+
+     #_`[= [* -8 -8] 64 [:p 8 2]]
+
 
 
      #_`[= [* z z z] [:p z 3]]
@@ -1317,19 +1363,407 @@
           [* 2 [:m 6 x y]]
           [:p [:b [:m 3 y]] 2]]])
 
-     #_(let [x `a
-           y 'q
-           c 5
-           d 3
-           a (symeq `[[~c ~x] [3 ~y]])]
-       `[= [:p [:b ~a] 2]
-         [+ [:p [:b [:m ~c ~x]] 2]
 
-          [* 2 [:m ~c ~x ~d ~y]]
-          [:p [:b [:m ~d ~y]] 2]]
-         ~(symeq `[[~(* c c) [2] [~x]]
-                   [~(* c d 2) [~x ~y]]
-                   [~(* d d) [2] [~y]]])])
+
+     #_(let [x 'x
+           y 'z
+           c 5
+           d 7
+           a (symeq `[[~c ~x] [~d ~y]])
+           answer true]
+       `[= [:p [:b ~a] 2]
+         ~(if answer
+
+            `[+ [:p [:b [:m ~c ~x]] 2]
+
+             [* 2 [:m ~c ~x ~d ~y]]
+             [:p [:b [:m ~d ~y]] 2]
+
+              ]
+            '_)
+         ~(if answer
+            (symeq `[[~(* c c) [2] [~x]]
+                    [~(* c d 2) [~x ~y]]
+                     [~(* d d) [2] [~y]]])
+            '_)])
+
+
+
+     #_(let [a (eq `[[2 x] [3 y]])
+           m (mkeq1a [2 'x])
+           f (fn [[a1 b1 c1]]
+               (fn [[a b c]]
+                 [(if (= :sym  a) :syms a) b
+                  (merge-with (fn [e d] (+ e d)) c c1)]))
+             f2 (f m)
+             ]
+
+         `[= [:m [:b ~a]
+              [:b ~(symeq `[[2 x] [3 y]])]]
+           ~(symeq2
+             (map
+
+              (comp
+               f2
+               mkeq1a)
+              (eq2 `[[2 x] [3 y]])))
+           ])
+
+     #_(let [f ((fn [[a1 b1 c1]]
+                (fn [[a b c]]
+                  [a (* b1 b)
+                   (merge-with (fn [e d] (+ e d)) c c1)]))
+              (mkeq1a [2 'x]))]
+       (symeq2
+        (map
+         (comp
+
+          f
+          mkeq1a)
+         (eq2 `[[2 [1] [x]] [-3 [1] [y]]])))
+       )
+
+
+
+
+     (let [f2 (fn [[a1 b1 c1]]
+                (fn [[a b c]]
+                  [a (* b1 b)
+                   (merge-with (fn [e d] (+ e d)) c c1)]))
+           f (f2
+              (mkeq1a [2 [1] ['x]]))
+           f3 (f2
+               (mkeq1a [3 [1] ['x]]))]
+       (symeq2
+        (map
+         (comp
+
+          f3
+          mkeq1a)
+         (eq2 `[[2 [1] [x]] [-3 [1] [y]]]))))
+
+     (let [f2 (fn [[a1 b1 c1]]
+                (fn [[a b c]]
+                  [a (* b1 b)
+                   (merge-with (fn [e d] (+ e d)) c c1)]))
+           f (f2
+              (mkeq1a [2 [1] ['x]]))
+           f3 (f2
+               (mkeq1a [3 [1] ['x]]))
+           ek (symeq (eq2 `[[2 [1] [x]] [-3 [1] [y]]]))]
+       `[= [:m 3 x  [:b ~ek]]
+         ~(symeq2
+           (map
+            (comp
+
+             f3
+             mkeq1a)
+            (eq2 `[[2 [1] [x]] [-3 [1] [y]]])))])
+
+
+
+     (let [f2 (fn [[a1 b1 c1]]
+                (fn [[a b c]]
+                  [a (* b1 b)
+                   (merge-with (fn [e d] (+ e d)) c c1)]))
+           f (f2
+              (mkeq1a [2 [1] ['x]]))
+           f3 (f2
+               (mkeq1a [9 [1] ['s]]))
+           k (eq2 `[[3 [1] [z]] [-3 [1] [s]]])
+           ek (symeq k)]
+       `[= [:m 9 s  [:b ~ek]]
+         ~(symeq2
+           (map
+            (comp
+
+             f3
+             mkeq1a)
+            (eq2 k)))])
+
+
+     (let [f2 (fn [[a1 b1 c1]]
+                (fn [[a b c]]
+                  [a (* b1 b)
+                   (merge-with (fn [e d] (+ e d)) c c1)]))
+           f (f2
+              (mkeq1a [2 [1] ['x]]))
+           f3 (f2
+               (mkeq1a [-9 [1] ['s]]))
+           k (eq2 `[[3 [1] [z]] [-3 [1] [s]]])
+           ek (symeq k)]
+       `[= [:m [- 9] s  [:b ~ek]]
+         ~(symeq2
+           (map
+            (comp
+
+             f3
+             mkeq1a)
+            (eq2 k)))])
+
+
+     (let [f2 (fn [[a1 b1 c1]]
+                (fn [[a b c]]
+                  [a (* b1 b)
+                   (merge-with (fn [e d] (+ e d)) c c1)]))
+           f (f2
+              (mkeq1a [2 [1] ['x]]))
+           a [-5  [1] ['s]]
+           amk (mkeq1a a)
+           amkmk (mkeq2a amk)
+           f3 (f2
+               amk)
+           k (eq2 `[[4 [1] [z]] [-2 [1] [s]]])
+           ek (symeq k)]
+       `[= [:m ~amkmk  [:b ~ek]]
+         ~(symeq2
+           (map
+            (comp
+
+             f3
+             mkeq1a)
+            (eq2 k)))])
+
+     (let [f2 (fn [[a1 b1 c1]]
+                (fn [[a b c]]
+                  [a (* b1 b)
+                   (merge-with (fn [e d] (+ e d)) c c1)]))
+           f (f2
+              (mkeq1a [2 [1] ['x]]))
+           a [3  [1] ['s]]
+           amk (mkeq1a a)
+           amkmk (mkeq2a amk)
+           f3 (f2
+               amk)
+           k (eq2 `[[-4 [1] [x]] [3 [1] [y]]])
+           ek (symeq k)]
+       `[= [:m ~amkmk  [:b ~ek]]
+         ~(symeq2
+           (map
+            (comp
+
+             f3
+             mkeq1a)
+            (eq2 k)))])
+
+
+     (let [f2 (fn [[a1 b1 c1]]
+                (fn [[a b c]]
+                  [a (* b1 b)
+                   (merge-with (fn [e d] (+ e d)) c c1)]))
+           f (f2
+              (mkeq1a [2 [1] ['x]]))
+           a [3  [1] ['x]]
+           amk (mkeq1a a)
+           amkmk (mkeq2a amk)
+           f3 (f2
+               amk)
+           k (eq2 `[[7 [1] [x]] [-5 [1] [y]]])
+           ek (symeq k)]
+       `[= [:m ~amkmk  [:b ~ek] ]
+         ~(symeq2
+           (map
+            (comp
+             f3
+             mkeq1a)
+            (eq2 k)))
+         ])
+
+     (let [f2 (fn [[a1 b1 c1]]
+                (fn [[a b c]]
+                  [a (* b1 b)
+                   (merge-with (fn [e d] (+ e d)) c c1)]))
+           f (f2
+              (mkeq1a [2 [1] ['x]]))
+           a [6  [1] ['x]]
+           amk (mkeq1a a)
+           amkmk (mkeq2a amk)
+           f3 (f2
+               amk)
+           k (eq2 `[[7 [1] [x]] [-5 [1] [y]]])
+           ek (symeq k)]
+       `[=
+         ~(symeq2
+           (map
+            (comp
+             f3
+             mkeq1a)
+            (eq2 k)))
+         [:m ~amkmk  [:b ~ek] ]
+         ])
+
+
+     (let [f2 (fn [[a1 b1 c1]]
+                (fn [[a b c]]
+                  [a (* b1 b)
+                   (merge-with (fn [e d] (+ e d)) c c1)]))
+           f (f2
+              (mkeq1a [2 [1] ['x]]))
+           k (eq2 `[[7 [1] [x]] [-5 [1] [y]]])
+
+           ek (symeq k)
+           a (first k)
+           amk (mkeq1a a)
+           f3 (f2 amk)
+           amkmk (mkeq2a amk)
+           b (second k)
+           bmk (mkeq1a b)
+           fb3 (f2 bmk)
+           bmkmk (mkeq2a bmk)
+           ]
+       `[=
+         [+ [:m ~amkmk  [:b ~ek]]
+          [:m ~bmkmk  [:b ~ek]]]
+         [+ ~(symeq2
+              (map
+               (comp
+                f3
+                mkeq1a)
+               (eq2 k)))
+          ~(symeq2
+            (map
+             (comp
+              fb3
+              mkeq1a)
+             (eq2 k)))]
+
+         ])
+
+     (let [f2 (fn [[a1 b1 c1]]
+                (fn [[a b c]]
+                  [a (* b1 b)
+                   (merge-with (fn [e d] (+ e d)) c c1)]))
+           f (f2
+              (mkeq1a [2 [1] ['x]]))
+           k (eq2 `[[7 [1] [x]] [-5 [1] [y]]])
+
+           ek (symeq k)
+           a (first k)
+           amk (mkeq1a a)
+           f3 (f2 amk)
+           amkmk (mkeq2a amk)
+           b (second k)
+           bmk (mkeq1a b)
+           fb3 (f2 bmk)
+           bmkmk (mkeq2a bmk)
+           ]
+       `[=
+         [:m [:b ~ek]  [:b ~ek]]
+         [+ ~(symeq2
+              (map
+               (comp
+                f3
+                mkeq1a)
+               (eq2 k)))
+          ~(symeq2
+            (map
+             (comp
+              fb3
+              mkeq1a)
+             (eq2 k)))]
+
+         ])
+
+
+     (let [f2 (fn [[a1 b1 c1]]
+                (fn [[a b c]]
+                  [a (* b1 b)
+                   (merge-with (fn [e d] (+ e d)) c c1)]))
+           k (eq2 `[[7 [1] [x]] [-5 [1] [y]]])
+
+           [f3 fb3] (map
+                     (comp
+                      f2
+                      mkeq1a) k)
+
+           ]
+       (symeq2
+        (mapcat (fn [f]
+                  (map
+                   (comp
+                    f
+                    mkeq1a)
+                   k))
+                [f3 fb3])))
+
+
+
+
+
+
+     #_(let [f2 (fn [[a1 b1 c1]]
+                (fn [[a b c]]
+                  [a (* b1 b)
+                   (merge-with (fn [e d] (+ e d)) c c1)]))
+           k (eq2 `[[7 [1] [x]] [-5 [1] [y]]])
+           ek (symeq k)
+           ff3 (map (fn [a]
+                  (let [amk (mkeq1a a)
+                        f3 (f2 amk)]
+                    (mkeq2a amk)))  k)
+           ]
+       (symeq2
+        (map
+         (comp
+          (first ff3)
+          mkeq1a)
+         (eq2 k)))
+
+       )
+
+     #_(let [f2 (fn [[a1 b1 c1]]
+                (fn [[a b c]]
+                  [a (* b1 b)
+                   (merge-with (fn [e d] (+ e d)) c c1)]))
+           f (f2
+              (mkeq1a [2 [1] ['x]]))
+           k (eq2 `[[7 [1] [x]] [-5 [1] [y]]])
+
+           ek (symeq k)
+           a (first k)
+           amk (mkeq1a a)
+           f3 (f2 amk)
+           amkmk (mkeq2a amk)
+           b (second k)
+           bmk (mkeq1a b)
+           fb3 (f2 bmk)
+           bmkmk (mkeq2a bmk)
+           ]
+       `[=
+         [:m [:b ~ek]  [:b ~ek]]
+         [+
+          (map
+
+
+           (symeq2
+             (map
+              (comp
+               f3
+               mkeq1a)
+              (eq2 k))))
+          1]
+
+         ])
+
+
+
+
+
+
+
+
+
+
+     #_(let [f2 (fn [[a1 b1 c1]]
+                (fn [[a b c]]
+                  [a (* b1 b)
+                   (merge-with (fn [e d] (+ e d)) c c1)]))]
+       (for [l1 (eq2 `[[2 [1] [x]] [-3 [1] [y]]])
+             l2 (eq2 `[[2 [1] [x]] [-3 [1] [y]]])]
+         ))
+
+
+
 
      #_(let [x 'p
            y 'q
@@ -2001,9 +2435,9 @@
 
      #_(map
 
-      (comp e3 (mk3 (fn [[a b c]]
-                      [(if (= :sym  a) :syms a) b
-                       (merge-with (fn [e d] [1 2]) c c)])))
+        (comp e3 (mk3 (fn [[a b c]]
+                        [(if (= :sym  a) :syms a) b
+                         (merge-with (fn [e d] [1 2]) c c)])))
       `[[5 [2 1 3] [z x y]] [-2 [y x]] x 4])
 
 
