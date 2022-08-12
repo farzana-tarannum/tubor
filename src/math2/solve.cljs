@@ -1270,6 +1270,11 @@
 
       l3)))
 
+
+
+
+
+
 (defn board5 []
   (let []
     [
@@ -1665,18 +1670,25 @@
          ])
 
 
+
+     (let [k (eq2 `[[7 [1] [x]] [-5 [1] [y]] [2 [2] [y]]])
+           k2 (eq2 `[[-1 [2] [x]]  [2 [2] [y]]])
+           ]
+       [:m [:b (symeq k)]  [:b (symeq k2)]])
+
+
+
      (let [f2 (fn [[a1 b1 c1]]
                 (fn [[a b c]]
                   [a (* b1 b)
                    (merge-with (fn [e d] (+ e d)) c c1)]))
-           k (eq2 `[[7 [1] [x]] [-5 [1] [y]]])
-
-           [f3 fb3] (map
-                     (comp
-                      f2
-                      mkeq1a) k)
-
-           ]
+           k (eq2 `[[7 [1] [x]] [-5 [1] [y]] [2 [2] [y]]])
+           k3 [:b (symeq (eq2 `[[-1 [2] [x]]  [2 [2] [y]]]))]
+           k2 (eq2 `[[1 [1] [~k3]]])
+           kf2 (map
+                (comp
+                 f2
+                 mkeq1a) k2)]
        (symeq2
         (mapcat (fn [f]
                   (map
@@ -1684,11 +1696,98 @@
                     f
                     mkeq1a)
                    k))
-                [f3 fb3])))
+                kf2)))
+
+
+     (let [f2 (fn [[a1 b1 c1]]
+                (fn [[a b c]]
+                  [a (* b1 b)
+                   (merge-with (fn [e d] (+ e d)) c c1)]))
+           k (eq2 `[[7 [1] [x]] [-5 [1] [y]] [2 [2] [y]]])
+           k2 (eq2 `[[-1 [2] [x]]  [2 [2] [y]]])
+           kf2 (map
+                (comp
+                 f2
+                 mkeq1a) k2)]
+       (symeq2
+        (mapcat (fn [f]
+                  (map
+                   (comp
+                    f
+                    mkeq1a)
+                   k))
+                kf2)))
 
 
 
 
+     (let [f2 (fn [[a1 b1 c1]]
+                (fn [[a b c]]
+                  [a (* b1 b)
+                   (merge-with (fn [e d] (+ e d)) c c1)]))
+           k (eq2  (eq2 `[[-1 [2] [x]]  [2 [2] [y]]]))
+
+           k3 [:b (symeq `[[7 [1] [x]] [-5 [1] [y]] [2 [2] [y]]])]
+           k2 (eq2 `[[1 [1] [~k3]]])
+           kf2 (map
+                (comp
+                 f2
+                 mkeq1a) k2)]
+       (symeq2
+        (mapcat (fn [f]
+                  (map
+                   (comp
+                    f
+                    mkeq1a)
+                   k))
+                kf2)))
+
+
+
+
+     #_(let [k  (map-indexed
+               (fn [i j]
+                 [i j])
+               (eq2 `[[7 [1] [x]] [-5 [1] [y]] [2 [2] [y]]]))
+           ff (comp
+               (juxt (comp
+                      mkeq2a
+                      mkeq1a
+                      (fn [[x [y u v]]] [(if (> y 0) y (* -1 y) ) u v]))
+                     (comp
+                      (fn [[x y]] (if (> y 0)
+                                    [x y true]
+                                    [x y false]))
+                      (fn [[x [y _ _]]] [x y]))))
+           ]
+       (
+        (comp
+         (fn [[x y]]
+           (interleave x y))
+         (juxt
+          (comp
+           (fn [rr] (conj rr true))
+           vec
+           drop-last
+           (partial map (fn [[ _ _ y]] y))
+           (partial map second))
+          (partial map first)))
+        (map ff k)))
+
+
+     #_(let [k (eq2 `[[7 [1] [x]] [-5 [1] [y]] [2 [2] [y]]])
+           k2 (eq2 `[[-1 [2] [x]]  [2 [2] [y]]])
+           ]
+       (map
+        (fn [q]
+          [:m
+           ((comp mkeq2a mkeq1a) q)  [:b (symeq k2)]])
+        k))
+
+     #_(let [pos (fn [s] (if (> s 0) s (* -1 s)))
+           f (fn [x] (if (< x 0) '- '+ ))]
+       [y (f y) x (if (= i 0) y (pos y)) z])
+     #_(map-indexed (fn [i [x y z]]) l1)
 
 
      #_(let [f2 (fn [[a1 b1 c1]]
