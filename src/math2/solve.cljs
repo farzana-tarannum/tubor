@@ -1271,6 +1271,91 @@
       l3)))
 
 
+(def lawd
+  (fn [eqk1 eqk2]
+    (let [f2 (fn [[a1 b1 c1]]
+               (fn [[a b c]]
+                 [a (* b1 b)
+                  (merge-with (fn [e d] (+ e d)) c c1)]))
+          k (eq2 eqk1)
+          k2 (eq2 eqk2)
+          kf2 (map
+               (comp
+                f2
+                mkeq1a) k2)]
+      (symeq2
+       (mapcat (fn [f]
+                 (map
+                  (comp
+                   f
+                   mkeq1a)
+                  k))
+               kf2)))))
+(def lawd2
+  (fn [eqk1 eqk2]
+    (let [f2 (fn [[a1 b1 c1]]
+               (fn [[a b c]]
+                 [a (* b1 b)
+                  (merge-with (fn [e d] (+ e d)) c c1)]))
+          k (eq2 eqk1)
+
+          k3 [:b (symeq eqk2)]
+          k2 (eq2 `[[1 [1] [~k3]]])
+          kf2 (map
+               (comp
+                f2
+                mkeq1a) k2)]
+      (symeq2
+       (mapcat (fn [f]
+                 (map
+                  (comp f mkeq1a) k))
+               kf2)))))
+
+
+(defn board6 []
+  [
+
+   #_(let [b (symeq `[[5 x] [3 y]])
+         c (symeq `[[5 x] [3 y]])]
+     `[:m [:b ~b] [:b ~c]])
+
+   #_(let [b (symeq `[[5 x] [3 y]])
+         c (symeq `[[5 x] [3 y]])]
+     `[:m [:b ~b] [:b ~c]])
+
+   #_(let [b (symeq `[[8 x] [2 y]])
+         c (symeq `[[8 x] [2 y]])]
+     `[:m [:b ~b] [:b ~c]])
+
+   #_(lawd2 `[[5 [1] [x]] [3 [1] [y]]]
+          `[[5 [1] [x]] [3 [1] [y]]])
+   #_(lawd `[[5 [1] [x]] [3 [1] [y]]]
+         `[[5 [1] [x]] [3 [1] [y]]])
+
+
+   #_(let [b (symeq `[[5 x] [-3 y]])
+         c (symeq `[[5 x] [-3 y]])]
+     `[:m [:b ~b] [:b ~c]])
+
+   #_(lawd2 `[[5 [1] [x]] [-3 [1] [y]]]
+          `[[5 [1] [x]] [-3 [1] [y]]])
+   #_(lawd `[[5 [1] [x]] [-3 [1] [y]]]
+         `[[5 [1] [x]] [-3 [1] [y]]])
+
+   #_(let [b (symeq `[[5 x] [3 y]])
+         c (symeq `[[5 x] [-3 y]])]
+     `[:m [:b ~b] [:b ~c]])
+   #_(lawd2 `[[5 [1] [x]] [3 [1] [y]]]
+          `[[5 [1] [x]] [-3 [1] [y]]])
+
+   #_(lawd `[[5 [1] [x]] [3 [1] [y]]]
+         `[[5 [1] [x]] [-3 [1] [y]]])
+
+   #_(lawd `[[5 [1] [x]] [3 [1] [y]]] `[[5 [1] [x]] [-3 [1] [y]]])
+
+
+
+   ])
 
 
 
@@ -1736,10 +1821,7 @@
        (symeq2
         (mapcat (fn [f]
                   (map
-                   (comp
-                    f
-                    mkeq1a)
-                   k))
+                   (comp f mkeq1a) k))
                 kf2)))
 
 

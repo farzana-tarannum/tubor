@@ -68,7 +68,7 @@
    #_[m100/home-planets-banners]
    #_[m100/eng-tense]
    #_[m100/board2
-    (s/e3g)
+    (s/board5)
     (let [[f1 f2] [7 -2]
           x 'x]
       [[[m7/x `[:m 8 [:p ~x 2]]] 1 1 :center :center]
@@ -87,7 +87,7 @@
               [:p y 2] ] 25]]]
     ]
    [m100/board3
-    (s/board5)
+    (s/board6)
     []
    []]
    #_[m100/map-asia]
