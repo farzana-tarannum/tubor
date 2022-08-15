@@ -130,6 +130,20 @@
           (fn [n] (nth n 2)))
    })
 
+(comment
+  (defn squish [pp]
+    (reduce
+     (fn [acc [a s e]]
+       ([[[b s1 e1] & acc] [a s e]]
+        (if (= e1 e)
+          `[ [~b ~(+ s s1) ~e1] ~@acc]
+          `[[~a ~s ~e] [~b ~s1 ~e1] ~@acc])))
+     [] pp))
+
+  )
+
+
+
 (def mxml
   {:c second
    :sym (comp ffirst
@@ -143,11 +157,13 @@
             (if (= (count vv) 1)
               (first vv)
               vv))
-          (fn [vv] (map (fn [[u v]]
-                          (if (= v 1) u [:p u v]))
-                        (if (some vector? (map first vv))
-                         vv  (sort-by first vv) )
-                        ))
+          (fn [vv]
+            (map (fn [[u v]]
+                   (if (= v 1) u [:p u v]))
+                 (if (some vector? (map first vv))
+                   vv
+                   (sort-by first vv))
+                 ))
           vec
           (fn [n] (nth n 2)))
    })
@@ -155,7 +171,7 @@
 
 (comment
 
-
+  (= [] [])
 
   (contains? [v ])
 
@@ -1408,8 +1424,43 @@
    (lawd `[[1 [1] [x]] [1 [1] [y]]] `[[1 [1] [x]] [-2 [1] [y]]])
 
 
-   (lawd
+
+
+   ((fn [eqk1 eqk2]
+      (let [f2 (fn [[a1 b1 c1]]
+                 (fn [[a b c]]
+                   [a (* b1 b)
+                    (merge-with (fn [e d] (+ e d)) c c1)]))
+            k (eq2 eqk1)
+            k2 (eq2 eqk2)
+            kf2 (map
+                 (comp
+                  f2
+                  mkeq1a) k2)]
+
+        (symeq2
+         (filter (fn [[_ c _]]
+                   (if (= c 0) false true))
+
+          (reverse
+           (reduce
+            (fn [[[x1 y1 z1] & rest  :as acc] [x y z]]
+              (if (= z1 z)
+                (vec (cons [x (+ y y1) z] rest))
+                (vec (cons [x y z] acc ))))
+            []
+            (mapcat (fn [f]
+                      (map
+                       (comp
+                        f
+                        mkeq1a)
+                       k))
+                    kf2)))))
+        ))
     `[[1 [1] [x]] [1 [1] [y]]] `[[1 [1] [x]] [-1 [1] [y]]])
+   (lawd     `[[1 [1] [x]] [1 [1] [y]]] `[[1 [1] [x]] [-1 [1] [y]]] )
+
+
 
    ])
 
