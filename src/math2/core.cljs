@@ -58,7 +58,7 @@
    #_[m100/home-pressure]
 
    #_[m100/app]
-   [m100/sine-wave]
+   #_[m100/sine-wave]
    #_[m100/airplane]
    #_[m100/map-asia]
    #_[m100/index2]
@@ -86,7 +86,7 @@
      [m7/x `[[:m 108
               [:p y 2] ] 25]]]
     ]
-   #_[m100/board3
+   [m100/board3
     (s/board6)
     []
    []]

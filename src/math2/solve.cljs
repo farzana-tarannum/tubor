@@ -32,6 +32,7 @@
                      ]))
 
 
+
 (defn eq2 [eq]
   (vec (postwalk
         (fn [x]
@@ -110,7 +111,7 @@
    ([pass]
     pass)))
 
-(def mxml
+#_(def mxml
   {:c second
    :sym (comp ffirst
               vec
@@ -128,6 +129,42 @@
           vec
           (fn [n] (nth n 2)))
    })
+
+(def mxml
+  {:c second
+   :sym (comp ffirst
+              vec
+              (fn [n] (nth n 2)))
+   :vec vec
+   :m (fn [n] :m)
+   :p (fn [n] :p)
+   :syms (comp
+          (fn [vv]
+            (if (= (count vv) 1)
+              (first vv)
+              vv))
+          (fn [vv] (map (fn [[u v]]
+                          (if (= v 1) u [:p u v]))
+                        (if (some vector? (map first vv))
+                         vv  (sort-by first vv) )
+                        ))
+          vec
+          (fn [n] (nth n 2)))
+   })
+
+
+(comment
+
+
+
+  (contains? [v ])
+
+  (sort-by (comp
+            (fn [a] (vector? a) 0 a)
+            first) {'z 3
+                  'x 2
+                  'y 2
+                  [:x 3] 3}))
 
 
 (def mkeq1a
@@ -1357,11 +1394,12 @@
    #_(lawd `[[5 [1] [x]] [-3 [1] [y]]]
          `[[5 [1] [x]] [-3 [1] [y]]])
 
-   (let [b (symeq `[[5 x] [3 y]])
+   #_(let [b (symeq `[[5 x] [3 y]])
          c (symeq `[[5 x] [-3 y]])]
-     `[:m [:b ~b] [:b ~c]])
+       `[:m [:b ~b] [:b ~c]])
    (lawd2
     `[[5 [1] [x]] [-3 [1] [y]]] `[[5 [1] [x]] [3 [1] [y]]])
+
 
    (lawd `[[5 [1] [x]] [3 [1] [y]]] `[[5 [1] [x]] [-3 [1] [y]]])
 

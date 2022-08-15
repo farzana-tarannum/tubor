@@ -26353,7 +26353,7 @@ Example: I put the high crime rate down to the high unemployment."])
           ax-dy 40
           vb (fn [z]
                (nth [(map  #(* % 8) [15 -20  40 45])
-                     (map  #(* % 8) [-50 -25  100 50])
+                     (map  #(* % 24) [0 -25  100 50])
 
                      (map  #(* % 8) [-25 -30  100 52])
                      (map  #(* % 5) [20 -25  100 50])
@@ -26375,7 +26375,7 @@ Example: I put the high crime rate down to the high unemployment."])
                      [-400 -200  800 200]
                      ] z))
           viewbox (vb 2)
-          viewbox2 (vb 2)]
+          viewbox2 (vb 1)]
       [:div {:style (merge
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
@@ -26384,7 +26384,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
 
        [:div {:style (m7/css
-                      [[2 5 3 10 :center :center 2.1 :rem :column]
+                      [[2 8 3 10 :center :center 2.1 :rem :column]
                        [1 70 90 .1] []
                        {:gap "1rem"
 
@@ -26392,10 +26392,49 @@ Example: I put the high crime rate down to the high unemployment."])
                         :z-index 2}])}
 
 
-        [m7/x `[= [:m cos [:p 135 *]] [:m cos [:p [:b [+ 90 45]] *]] [- [:m cos [:p 45 *]]] [- [[:sq 2] 2]] ]]
+        #_[m7/x `[= [:m cos [:p 135 *]] [:m cos [:p [:b [+ 90 45]] *]] [- [:m cos [:p 45 *]]] [- [[:sq 2] 2]] ]]
 
-        [m7/x `[= [:m sing [:p 135 *]] [:m sing [:p [:b [+ 90 45]] *]] [:m sin [:p 45 *]] [[:sq 2] 2] ]]
+        #_[m7/x `[= [:m sing [:p 135 *]] [:m sing [:p [:b [+ 90 45]] *]] [:m sin [:p 45 *]] [[:sq 2] 2] ]]
 
+        #_[m7/x `[= AD [:m AB sin [:p 20 *]]]]
+
+        #_[m7/x `[= [:m cos [:p 50 *]] [[- [+ [:p 8 2] [:p 10 2]] [:p PR 2]] [* 2 8 10]]]]
+
+
+        [m7/x `[= [PS [:m sin [:p 15 *]]] [8 [:m sin [:p 36.585 *]] ]
+                ]]
+
+
+
+        [m7/x `[= [RS [:m sin [:p 15 *]]] [10.282 [:m sin [:p 36.585 *]] ]
+                ]]
+
+
+        [m7/x `[= [:m Area PQS] [:m [1 2] (* [:b [+ 10 RS]] 8 [:m sin [:p 50 *]] ) ]
+                ]]
+
+
+        #_[m7/x `[= [:m cos x] [11
+                              16]]]
+
+
+        #_[m7/x `[= x  [:m [:p cos -1] [11
+                                      16]]]]
+
+        #_[m7/x `[= x [:p 46.567 *]]]
+
+
+        #_[m7/x `[= [:m  cos x] [[- [+ [:p 10 2] [:p 15 2]] [:p y 2]] [* 2 10 15]]]]
+
+
+
+        #_[m7/x `[= [:m  cos x] [[- [+ [:p 10 2] [:p 15 2]] [:p y 2]] [* 2 10 15]]]]
+
+
+        #_[m7/x `[= [:p y 2]  [- ~(+ 100 (* 15 15)) [* [* 55 15] 4] ]]]
+
+
+        #_[m7/x `[= [BD [:m cos [:p 20 *]]] AB]]
         #_[m7/x `[= hyp r 1 ]]
         #_[m7/x `[=  [+ [:p x 2] [:p x 2]]  [:p 1 2]]]
 
@@ -26570,6 +26609,22 @@ Example: I put the high crime rate down to the high unemployment."])
                            :fill (hsl [2 70 70 1])
                            :stroke (hsl [2 30 30 1])
                            :stroke-width 1}]
+
+
+              [:path#rad51 {:d (str (m7/path [0 0 :l
+                                            (* 2 r (js/Math.cos (* angle 8))) 0
+                                             0 (ve (* r 2 (js/Math.sin (* angle 8))))
+
+
+                                             ])
+                                   "z")
+
+                           :fill (hsl [5 70 70 .3])
+                           :stroke (hsl [5 30 30 .3])
+                           :stroke-width 1}]
+
+
+
 
               [:path#rad6 {:d (str (m7/path [0 0 :l
                                              (* r (js/Math.cos (* angle 24))) 0
