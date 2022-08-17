@@ -7,6 +7,7 @@
    [clojure.walk :as w]
    [defun.core :refer [defun fun]]
    [math2.solution :as sol]
+   [math2.solve :as sl]
    [math2.math7 :as m7 :refer
     [grid hsl css space size path ve sec]]))
 
@@ -403,16 +404,16 @@
                  [[4 6 3 7 :center :center  2 :rem :column] [3.5 70 (+ 50 (* 5 5))  .7] []
                   {:gap     ".1rem"
                    :z-index 10}])}
-          [m7/m ['= 'y ['- [:p [:b ['- 'x 'm]] 2] [:p 'd 2]]]]
+          #_[m7/m ['= 'y ['- [:p [:b ['- 'x 'm]] 2] [:p 'd 2]]]]
 
-          [m7/m ['= ['- [:p [:b ['- 'x m]] 2] [:p d 2]] 0 ]]
-          [:div  {:ref font-ref
+          #_[m7/m ['= ['- [:p [:b ['- 'x m]] 2] [:p d 2]] 0 ]]
+          #_[:div  {:ref font-ref
                   :style {:font-size "2rem"
                           }}
-           [m7/m ['= [:m [:b ['- 'x m d]]  [:b ['+ ['- 'x m] d]]] 0 ]]]
+             [m7/m ['= [:m [:b ['- 'x m d]]  [:b ['+ ['- 'x m] d]]] 0 ]]]
 
-          [m7/m ['= ['+ ['- 'x m] d] 0]]
-          [m7/m ['= ['- 'x m d] 0]]
+          #_[m7/m ['= ['+ ['- 'x m] d] 0]]
+          #_[m7/m ['= ['- 'x m d] 0]]
           ]
 
          [:div {:on-click (fn [_]
@@ -427,8 +428,30 @@
           main-eq]
          )
        (if slider
-         [:div {:ref animate-ref2
-                :style
+         (let [a (m7/eq2 `[[1 [1] [x]] [-1 [1] [m]]])
+               d (m7/eq2 `[-1 [2] [d]])
+               a2 [[1 [2] [[:b (sl/symeq a)]]]
+                   d]
+               d1 (sl/mkeq1a d)
+               d2 (sl/mkeq2a d1)
+               bb 3
+               cc 2
+               ee (m7/eq2 [[1 [2] ['x]]
+                           [1 [1 1] [bb 'x]]
+                           [1 [1] [cc]]])
+               eee (m7/eq2 [[1 [2] ['x]]
+                            [bb [1] ['x]]
+                            1])
+
+
+               ee1 (m7/eq2 `[[1 [ 2] [ x]]
+                             [1 [1 1] [[b a] x]]
+                             [1 [1] [[c a]]]])
+               ek1 (conj (vec (sl/lawdr2 a a)) d1)
+               ek2 (rest (rest ek1))
+               ]
+           [:div {:ref animate-ref2
+                  :style
                   (m7/css
                    [[4 7 14 12
                      :flex-start :flex-start  2 :rem :column]
@@ -437,6 +460,11 @@
                     {:padding-left "100px"
                      :gap ".1rem"
                      :z-index 10}])}
+            #_(m7/x (sl/e= (sl/symeq a2)))
+            #_(m7/x (sl/e= (sl/symeq2 ek1)))
+            #_(m7/x (sl/e= (sl/symeq eee)))
+            #_(m7/x ['= cc  (sl/symeq2 ek2)])
+            #_(m7/x `[= ~bb [- [:m 2 m]]])
 
 
 
@@ -445,7 +473,7 @@
 
 
 
-            ]
+            ])
            [:div ""])
 
 

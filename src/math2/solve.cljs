@@ -3018,21 +3018,29 @@
         ]
     (mkeq2a (mkeq1a (second ee1)))
     )
-  [a (m7/eq2 `[[1 [1] [x]] [-1 [1] [m]]])
-   d (m7/eq2 `[-1 [2] [d]])
-   a2 [[1 [2] [[:b (sl/symeq a)]]]
-       d]
-   d1 (sl/mkeq1a d)
-   d2 (sl/mkeq2a d1)
-   ee (m7/eq2 `[[1 [1 2] [a x]]
-                [1 [1 1] [b x]]
-                [1 [1] [c]]])
+  (let [a (m7/eq2 `[[1 [1] [x]] [-1 [1] [m]]])
+        d (m7/eq2 `[-1 [2] [d]])
+        a2 [[1 [2] [[:b (symeq a)]]]
+            d]
+        d1 (mkeq1a d)
+        d2 (mkeq2a d1)
+        bb 3
+        cc 2
+        ee (m7/eq2 [[1 [2] ['x]]
+                    [1 [1 1] [bb 'x]]
+                    [1 [1] [cc]]])
 
 
-   ee1 (m7/eq2 `[[1 [ 2] [ x]]
-                 [1 [1 1] [[b a] x]]
-                 [1 [1] [[c a]]]])
-   ek1 (conj (vec (sl/lawdr2 a a)) d1)
-   ]
+        ee1 (m7/eq2 `[[1 [ 2] [ x]]
+                      [1 [1 1] [[b a] x]]
+                      [1 [1] [[c a]]]])
+        ek1 (conj (vec (lawdr2 a a)) d1)
+        ek2 (rest (rest ek1))
+        ]
+    (map (comp
+
+          mkeq1a) ee)
+    )
+
 
   )
