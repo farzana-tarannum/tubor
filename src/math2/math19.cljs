@@ -229,17 +229,18 @@
         [btn set-btn] (react/useState 100)
         [xx set-xx] (react/useState 2)
         [yy set-yy] (react/useState 3)
-]
+        [zm set-zm] (react/useState [])
+        [q2 set-q2] (react/useState [2 1 2])
+        ]
     (let [fix true
           scales [1 -1]
-          [a m d :as amd]         [2 1 2]
+          [a m d :as amd]  q2
           d2 (/ (* d d) a)
           vbr [[(ve (- (* 3 3 20 .5) (* m 20))) (ve (- (* 3 20) (* 20 d2))) (* 3 3 20) (* 3 20) ]
                [(ve (* 3 12 20 .5)) (ve (- (* 12 20) (* 20 d2))) (* 3 12 20) (* 12 20) ]]
           gd [1 1 0 0 false .1 (if point 1  4)]
           r (if point .2 (nth `[~@(take 5 (repeat 2)) ~@(take 15 (repeat 1)) ] a))
-          viewbox2 (if point (first vbr)
-                      (second vbr))
+          viewbox2 (if point (first vbr) (second vbr))
           viewbox (if point (second vbr) (first vbr))
 
           rn (apply range (map #(* % a) [-6 6 1]))
@@ -304,7 +305,9 @@
 
            d])
         (range 0 20)
-        [[:div  "\u2295"]
+        [[:div {:on-click (fn [e] e)}
+
+          "\u2295"]
          [:div  "\u2296"]
          [:div {:on-click (fn [_]
                             (set-xx (- xx 1)))} "⬅"]
@@ -333,10 +336,11 @@
                             (set-yy (+ yy 1)))} "⇨"]
 
          [:div {:on-click (fn [_]
-                            (set-yy (- yy 1)))} "⬅"]
-         [:div yy]
+                            (set-q2 (update q2 0 dec)))} "⬅"]
+         [:div (get q2 0)]
          [:div {:on-click (fn [_]
-                            (set-yy (+ yy 1)))} "⇨"]
+                            (set-q2 (update q2 0 inc)))}
+          "⇨"]
 
 
 
