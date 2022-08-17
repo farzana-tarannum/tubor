@@ -6,6 +6,7 @@
             [math2.math7 :as math7]
             [math2.physics11 :as p11]
             [math2.math100 :as m100]
+            [math2.math19 :as m19]
             [math2.math :as mtemp]
             [math2.bdmap :as bdmap]
             [math2.solve :as s]
@@ -32,14 +33,14 @@
 (defn math []
   [:div
    #_[m100/board2
-      []
-      []
-      []]
+    []
+    []
+    []]
 
    #_[m100/chem-rate]
    ;; airplane .5
    #_[m100/home-work3]
-   #_[m100/home-work19]
+   [m19/home-work19]
    ;; pressure
    #_[m100/pressure]
 
@@ -86,9 +87,10 @@
      [m7/x `[[:m 108
               [:p y 2] ] 25]]]
     ]
-   [m100/board3
+   #_[m100/board3
     (s/board6)
     []
+
    []]
    #_[m100/map-asia]
    #_[m100/airplane]
@@ -171,7 +173,7 @@
    #_[py100/template]
    ;; [py100/template]
    #_[m100/playgroud]
-   #_[m100/home-planets-banners4]
+   [m100/home-planets-banners4]
    ;; [m100/home-work19]
    #_[py100/t2]
    #_[m100/map-family]
