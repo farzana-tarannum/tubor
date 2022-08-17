@@ -1397,6 +1397,39 @@
                                   kf2)))))
                )))
 
+(def lawdr2
+  (fn [eqk1 eqk2]
+             (let [f2 (fn [[a1 b1 c1]]
+                        (fn [[a b c]]
+                          [a (* b1 b)
+                           (merge-with (fn [e d] (+ e d)) c c1)]))
+                   k (eq2 eqk1)
+                   k2 (eq2 eqk2)
+                   kf2 (map
+                        (comp
+                         f2
+                         mkeq1a) k2)]
+               (filter (fn [[_ c _]]
+                         (if (= c 0) false true))
+
+                       (reverse
+                        (reduce
+                         (fn [[[x1 y1 z1] & rest  :as acc] [x y z]]
+                           (if (= z1 z)
+                             (vec (cons [x (+ y y1) z] rest))
+                             (vec (cons [x y z] acc ))))
+                         []
+                         (mapcat (fn [f]
+                                   (map
+                                    (comp
+                                     f
+                                     mkeq1a)
+                                    k))
+                                 kf2))))
+               )))
+
+
+
 
 (defn board6 []
   [
@@ -1436,8 +1469,8 @@
 
 
    (let [b (symeq `[[5 x] [2 y]])
-           c (symeq `[[1 x] [-3 y]])]
-       `[:m [:b ~c] [:b ~b]])
+         c (symeq `[[1 x] [-3 y]])]
+     `[:m [:b ~c] [:b ~b]])
 
    (lawd2  `[[1 [1] [x]] [-3 [1] [y]]] `[[5 [1] [x]] [2 [1] [y]]])
 
@@ -2970,3 +3003,36 @@
          dd2))
 
      ]))
+
+
+(comment
+  (let [a (m7/eq2 `[[1 [1] [x]] [-1 [1] [m]]])
+               d (m7/eq2 `[-1 [2] [d]])
+               a2 [[1 [2] [(symeq a)]]
+                   d]
+               d1 (mkeq1a d)
+        d2 (mkeq2a d1)
+        ee1 (m7/eq2 `[[1 [ 2] [ x]]
+                      [1 [1 1] [[b a] x]]
+                      [1 [1] [[c a]]]])
+        ]
+    (mkeq2a (mkeq1a (second ee1)))
+    )
+  [a (m7/eq2 `[[1 [1] [x]] [-1 [1] [m]]])
+   d (m7/eq2 `[-1 [2] [d]])
+   a2 [[1 [2] [[:b (sl/symeq a)]]]
+       d]
+   d1 (sl/mkeq1a d)
+   d2 (sl/mkeq2a d1)
+   ee (m7/eq2 `[[1 [1 2] [a x]]
+                [1 [1 1] [b x]]
+                [1 [1] [c]]])
+
+
+   ee1 (m7/eq2 `[[1 [ 2] [ x]]
+                 [1 [1 1] [[b a] x]]
+                 [1 [1] [[c a]]]])
+   ek1 (conj (vec (sl/lawdr2 a a)) d1)
+   ]
+
+  )

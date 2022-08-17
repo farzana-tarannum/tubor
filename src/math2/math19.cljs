@@ -230,7 +230,7 @@
         [xx set-xx] (react/useState 2)
         [yy set-yy] (react/useState 3)
         [zm set-zm] (react/useState [])
-        [q2 set-q2] (react/useState [2 1 2])
+        [q2 set-q2] (react/useState [1 0 0])
         ]
     (let [fix true
           scales [1 -1]
@@ -324,23 +324,31 @@
          [:div "\u25EF"]
          [:div "1"]
          [:div "2"]
+
+
          [:div {:on-click (fn [_]
-                            (set-xx (- xx 1)))} "⬅"]
-         [:div xx]
+                            (set-q2 (update q2 2 dec)))} "⬅"]
+         [:div (get q2 2)]
          [:div {:on-click (fn [_]
-                            (set-xx (+ xx 1)))} "⇨"]
+                            (set-q2 (update q2 2 inc)))} "⇨"]
+
+
+
+
          [:div {:on-click (fn [_]
-                            (set-yy (- yy 1)))} "⬅"]
-         [:div yy]
+                            (set-q2 (update q2 1 dec)))} "⬅"]
+         [:div (get q2 1)]
          [:div {:on-click (fn [_]
-                            (set-yy (+ yy 1)))} "⇨"]
+                            (set-q2 (update q2 1 inc)))} "⇨"]
+
+
+
 
          [:div {:on-click (fn [_]
                             (set-q2 (update q2 0 dec)))} "⬅"]
          [:div (get q2 0)]
          [:div {:on-click (fn [_]
-                            (set-q2 (update q2 0 inc)))}
-          "⇨"]
+                            (set-q2 (update q2 0 inc)))} "⇨"]
 
 
 
@@ -429,43 +437,10 @@
                     {:padding-left "100px"
                      :gap ".1rem"
                      :z-index 10}])}
-          [m7/m ['= 'y ['- [:p [:b ['- 'x 'm]] 2] [:p 'd 2]]]]
-
-          [m7/m ['= ['- [:p [:b ['- 'x m]] 2] [:p d 2]] 0 ]]
-
-          [m7/m ['= ['- ['+ [:p 'x 2] ['- [:m 2 'm 'x]] [:p 'm 2]] [:p 'd 2]]  0]]
 
 
-          [m7/m ['= ['+ [:p 'x 2] [:m (* 2 m) 'x] (- (* m m) (* d d)) ]  0]]
-
-          [m7/m ['= ['- ['- [:p 'x 2] [:m 5 'x] ] 15] 0]]
-
-          [m7/m ['=  ['- [:m 2 'm ]] ['- 5]] ]
-
-          [m7/m ['=  [:m 2 'm ] 5] ]
-
-          [m7/m ['=  'm [5 2]] ]
-
-          [m7/m '[= -15 [- [:p m 2] [:p d 2]]]]
-
-          [m7/m '[= [:p d 2] [+ [:p [:b [5 2]] 2] 15]]]
-
-          [m7/m '[= [:p d 2] [+ [25 4] [60 4]]]]
-
-            #_[m7/m ['= ['- [:m 2 'm ]] ['- 16]] ]
-            #_[m7/m ['= 'm 8]]
-            ;; [m7/m ['= 'm 5] ]
-          #_[m7/m '[= [+ 64
-                       17]  [:p d 2]]]
-
-            #_[m7/m '[= 81
-                    [:p d 2]]]
 
 
-          #_[m7/m '[= d 9]]
-
-            ;; [m7/m ['= [:p 7 2]
-            ;;        [:p 'd 2]] ]
 
 
 
