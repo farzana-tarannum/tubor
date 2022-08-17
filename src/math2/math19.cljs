@@ -231,7 +231,7 @@
         [xx set-xx] (react/useState 2)
         [yy set-yy] (react/useState 3)
         [zm set-zm] (react/useState [])
-        [q2 set-q2] (react/useState [1 0 0])
+        [q2 set-q2] (react/useState [1 1 2])
         ]
     (let [fix true
           scales [1 -1]
@@ -404,16 +404,21 @@
                  [[4 6 3 7 :center :center  2 :rem :column] [3.5 70 (+ 50 (* 5 5))  .7] []
                   {:gap     ".1rem"
                    :z-index 10}])}
-          #_[m7/m ['= 'y ['- [:p [:b ['- 'x 'm]] 2] [:p 'd 2]]]]
+          [m7/m ['= 'y [:m 'a [:b ['- [:p [:b ['- 'x 'm]] 2] [:p 'd 2]]]]]]
 
-          #_[m7/m ['= ['- [:p [:b ['- 'x m]] 2] [:p d 2]] 0 ]]
-          #_[:div  {:ref font-ref
+          [m7/m ['= [:m 8 [:b ['- [:p [:b ['- 'x m]] 2] [:p d 2]]]] 0 ]]
+
+          [m7/m ['= [[:m 8 [:b ['- [:p [:b ['- 'x m]] 2] [:p d 2]]]] 8] [0 8] ]]
+
+          [m7/m ['= ['- [:p [:b ['- 'x m]] 2] [:p d 2]] 0 ]]
+
+          [:div  {:ref font-ref
                   :style {:font-size "2rem"
                           }}
              [m7/m ['= [:m [:b ['- 'x m d]]  [:b ['+ ['- 'x m] d]]] 0 ]]]
 
-          #_[m7/m ['= ['+ ['- 'x m] d] 0]]
-          #_[m7/m ['= ['- 'x m d] 0]]
+          [m7/m ['= ['+ ['- 'x m] d] 0]]
+          [m7/m ['= ['- 'x m d] 0]]
           ]
 
          [:div {:on-click (fn [_]
@@ -434,8 +439,8 @@
                    d]
                d1 (sl/mkeq1a d)
                d2 (sl/mkeq2a d1)
-               bb 3
-               cc 2
+               bb 'b
+               cc 'c
                ee (m7/eq2 [[1 [2] ['x]]
                            [1 [1 1] [bb 'x]]
                            [1 [1] [cc]]])
@@ -460,11 +465,11 @@
                     {:padding-left "100px"
                      :gap ".1rem"
                      :z-index 10}])}
-            #_(m7/x (sl/e= (sl/symeq a2)))
-            #_(m7/x (sl/e= (sl/symeq2 ek1)))
-            #_(m7/x (sl/e= (sl/symeq eee)))
-            #_(m7/x ['= cc  (sl/symeq2 ek2)])
-            #_(m7/x `[= ~bb [- [:m 2 m]]])
+            (m7/x (sl/e=  [:m 'a [:b (sl/symeq a2)]]) )
+            (m7/x (sl/e= [:m 'a [:b (sl/symeq2 ek1)]]))
+            (m7/x (sl/e= [:m 'a [:b (sl/symeq ee1)]]))
+            (m7/x ['= [cc 'a]  (sl/symeq2 ek2)])
+            (m7/x `[= [~bb a] [- [:m 2 m]]])
 
 
 
@@ -558,8 +563,9 @@
                 [:g
 
 
-                 (if curve
-                   [:path {:d
+
+
+                 [:path {:d
                          (str (path [ 0 0 :c
                                      (* 20 3.5) (ve (* 2 2 2))
                                      (* 20 5.5) (ve (* 2 5 5))
@@ -583,8 +589,7 @@
                          :stroke-width .1
                          :fill (m7/url (name :lgg1))
                          }
-                    ])
-
+                    ]
 
 
 
