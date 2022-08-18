@@ -33066,7 +33066,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
        [:div {:style
               (m7/css
-               [[2 10 2 18
+               [[2 10 2 8
                  :center :center  2.0 :rem :column]
                 [2.5 70 (+ 50 (* 5 5))  .7] []
                 {:gap ".1rem"
@@ -33079,26 +33079,26 @@ Example: I put the high crime rate down to the high unemployment."])
 
 
 
-        [m7/x `[= x
+        #_[m7/x `[= x
                 [[+ 12 [:m 3 y] ] 5]]]
 
 
 
 
 
-        [:div {:style {:background-color (hsl [3 30 30 1])
+        #_[:div {:style {:background-color (hsl [3 30 30 1])
                        :width "100%"
                        :height "6px"}
                }]
 
-        [m7/x `[=
+        #_[m7/x `[=
                 [[+ 36 [:m 9 y] ] [:m 5 y] ]  [+ [[+ 12 [:m 3 y]]
                                                   [+ 12 [:m 3 y]]] [[:m 10  y] [+ 12 [:m 3 y] ]]]]]
 
 
-        [m7/x `[= [+ [:p y 2] [:m 2 y [78  [- 38]]] [:p [:b [78 -38]] 2]] [:p [:b [+ y [78 -38]]] 2]]]
+        #_[m7/x `[= [+ [:p y 2] [:m 2 y [78  [- 38]]] [:p [:b [78 -38]] 2]] [:p [:b [+ y [78 -38]]] 2]]]
 
-        [m7/x `[=
+        #_[m7/x `[=
                 [+ [:p y 2]
                  [[:m [* 2  ~(/ (- (* 2 108) 60) 2)] y] [- 38]]
 
@@ -33110,30 +33110,30 @@ Example: I put the high crime rate down to the high unemployment."])
                  ]
                 0]]
 
-        [m7/x `[=
+        #_[m7/x `[=
                 [- [:p [:b [+ y [78 -38]]] 2]
                  [[:p 150 2]
                   (:p 38 2)]]
                 0]]
 
 
-        [m7/x `[= [- [:p [:b [+ y [78 -38]]] 2] [[:p 150 2]
+        #_[m7/x `[= [- [:p [:b [+ y [78 -38]]] 2] [[:p 150 2]
                                                  (:p 38 2)]]
                 [:m [:b [+ [+ y [78 -38]] [150 38]]] [:b [- [+ y [78 -38]] [150 38]]]]
                 0]]
 
-        [m7/x `[=
+        #_[m7/x `[=
                 [:m [:b [+ [+ y [78 -38]] [150 38]]] [:b [- [+ y [78 -38]] [150 38]]]]
                 0]]
 
-        [m7/x `[=
+        #_[m7/x `[=
                 [+ [+ y [78 -38]] [150 38]]
 
 
                 0]]
-        [:div "or"]
+        #_[:div "or"]
 
-        [m7/x `[= [- [+ y [78 -38]] [150 38]]  0]]
+        #_[m7/x `[= [- [+ y [78 -38]] [150 38]]  0]]
 
 
 
@@ -33373,7 +33373,7 @@ Example: I put the high crime rate down to the high unemployment."])
            (grid-on 1 1 ax-dy ax-dy)
 
 
-           #_(for [j (range 0 a)
+           (for [j (range 0 a)
                  i (range 0 (+  b c))]
              [:path {:stroke-width 1
                      :fill (hsl [(if (< i b) 1 2) 70 70 .8])

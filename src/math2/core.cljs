@@ -7,6 +7,7 @@
             [math2.physics11 :as p11]
             [math2.math100 :as m100]
             [math2.math19 :as m19]
+            [math2.fraction :as frac]
             [math2.math :as mtemp]
             [math2.bdmap :as bdmap]
             [math2.solve :as s]
@@ -33,14 +34,14 @@
 (defn math []
   [:div
    #_[m100/board2
-    []
-    []
-    []]
+      []
+      []
+      []]
 
    #_[m100/chem-rate]
    ;; airplane .5
    #_[m100/home-work3]
-   [m19/home-work19]
+   #_[m19/home-work19]
    ;; pressure
    #_[m100/pressure]
 
@@ -49,7 +50,7 @@
    #_[m100/pressure2]
 
    #_[m100/energy]
-   #_[m100/frection]
+   [frac/frection]
 
    #_[m100/triangle2]
 
