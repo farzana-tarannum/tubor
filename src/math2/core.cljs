@@ -9,6 +9,7 @@
             [math2.math19 :as m19]
             [math2.fraction :as frac]
             [math2.math :as mtemp]
+            [math2.trig :as trig]
             [math2.bdmap :as bdmap]
             [math2.solve :as s]
             [clojure.walk :as w]
@@ -31,6 +32,9 @@
 (def functional-compiler (r/create-compiler {:function-components true}))
 
 
+
+
+
 (defn math []
   [:div
    #_[m100/board2
@@ -50,7 +54,7 @@
    #_[m100/pressure2]
 
    #_[m100/energy]
-   [frac/frection]
+   #_[frac/frection]
 
    #_[m100/triangle2]
 
@@ -66,7 +70,7 @@
    #_[m100/index2]
    #_[m100/sine-wave2]
    #_[m100/sine-wave2]
-   #_[m100/chem-mole]
+   [trig/ladder]
    #_[m100/home-planets-banners]
    #_[m100/eng-tense]
    #_[m100/board2
@@ -414,11 +418,12 @@
 
 
 
-
 (defn curveslasses []
   [:div
-   [m100/pressure3]])
-
+   [m19/home-work19]
+   #_[trig/ladder]
+   #_[frac/frection]
+   ])
 
 
 
@@ -434,7 +439,7 @@
 #_(template3)
 (defn render-simple []
   (rdom/render
-   (math)
+   (curveslasses)
    (js/document.getElementById "app")
    functional-compiler))
 (render-simple)

@@ -70,7 +70,7 @@
           [:text {:x (* 20 x)
                   :fill (hsl [0 40 20 1])
                   :y 4.5
-                  :font-size 3}
+                  :font-size 5}
            (if frac
              (.toFixed (* x X) 1)
              (* x X))
@@ -93,7 +93,7 @@
                   :dy -1
                   :fill (hsl [0 40 20 1])
                   :y (ve (* 20 y))
-                  :font-size 3}
+                  :font-size 5}
            (if frac
              (.toFixed (* y Y) 1)
              (* y Y))
@@ -116,11 +116,85 @@
 
       ])))
 
+(comment
+
+  (let [a (m7/eq2 `[[1 [1] [x]] [-1 [1] [m]]])
+        b (m7/eq2 `[[1 [1] [x]] [-1 [1] [y]]])
+        c (m7/eq2 `[[1 [1 1] [a x]] [1 [1 1] [a y]]])
+
+        d (m7/eq2 `[-1 [2] [d]])
+        a2 [[1 [2] [[:b (sl/symeq a)]]] d]
+        d1 (sl/mkeq1a d)
+        d2 (sl/mkeq2a d1)
+        bb 'b
+        cc 'c
+        ee (m7/eq2 [[1 [2] ['x]]
+                    [1 [1 1] [bb 'x]]
+                    [1 [1] [cc]]])
+        eee (m7/eq2 [[1 [2] ['x]]
+                     [bb [1] ['x]]
+                     1])
+
+
+        ee1 (m7/eq2 `[[1 [ 2] [ x]]
+                      [1 [1 1] [[b a] x]]
+                      [1 [1] [[c a]]]])
+        ek1 (conj (vec (sl/lawdr2 a a)) d1)
+        ek2 (rest (rest ek1))
+        ]
+    [(m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq b)]]
+            (sl/lawd2 b b)])
+
+     (m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq b)]]
+            (sl/lawd b b)])
+
+     (m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq b)]]
+            (sl/lawdr b b)])
+
+     (m7/x ['= [:p [:b (sl/symeq b)] 2]
+            (sl/lawdr b b)])
+
+
+
+
+     #_(m7/x (sl/e=  [:m 'a [:b (sl/symeq a2)]]) )
+     #_(m7/x (sl/e= [:m 'a [:b (sl/symeq2 ek1)]]))
+     #_(m7/x (sl/e= [:m 'a [:b (sl/symeq ee1)]]))
+     #_(m7/x ['= [cc 'a]  (sl/symeq2 ek2)])
+     #_(m7/x `[= [~bb a] [- [:m 2 m]]])
+
+
+     ])
+
+
+  (let [ b (m7/eq2 `[[1 [1] [x]] [-1 [1] [1]]])]
+    (m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq b)]]
+           ((fn [eqk1 eqk2]
+              (let [f2 (fn [[a1 b1 c1]]
+                         (fn [[a b c]]
+                           [a (* b1 b)
+                            (merge-with (fn [e d] (+ e d)) c c1)]))
+                    k (eq2 eqk1)
+                    k2 (eq2 eqk2)
+                    kf2 (map
+                         (comp
+                          f2
+                          mkeq1a) k2)]
+                (symeq2
+                 (mapcat (fn [f]
+                           (map
+                            (comp
+                             f
+                             mkeq1a)
+                            k))
+                         kf2)))) b b)])))
+
 
 (defn frection []
   (let [[slider get-slider] (react/useState 0)
         f (fn [n] (/ 1 n))
         tt 'θ
+        dd '☐
         dx [1 0  0 -1 -1  0 0 1 ]
         a 3
         b 3
@@ -134,7 +208,7 @@
           ax-dy 40
 
           vb (fn [z]
-               (nth [[100 -450  500 500]
+               (nth [[-80 -240  250 250]
                      [-40 -100  200 200]] z))
           viewbox (vb 1)
           viewbox2 (vb 0)
@@ -149,9 +223,9 @@
                       :gap ".1rem"})}
 
 
-       (let [a (m7/eq2 `[[1 [1] [x]] [-1 [1] [m]]])
-             b (m7/eq2 `[[1 [1] [x]] [1 [1] [y]]])
-             c (m7/eq2 `[[1 [1 1] [a x]] [1 [1 1] [a y]]])
+       (let [a (m7/eq2 `[[1 [3] [x]] [1 [1] [y]]])
+             b (m7/eq2 `[[2 [1 2] [x y]] [-3 [2] [y]]])
+             c (m7/eq2 `[[1 [1 1] [~dd  x]] [-2 [1 1] [ c ~dd]]])
 
                d (m7/eq2 `[-1 [2] [d]])
                a2 [[1 [2] [[:b (sl/symeq a)]]]
@@ -182,19 +256,26 @@
                   {:padding-left "25px"
                    :gap ".1rem"
                    :z-index 10}])}
-          #_(m7/x ['= [:m 'a [:b (sl/symeq b)]]
+          (m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq a)]]
+                 tt])
+          #_(m7/x ['= [:m  [:b (sl/symeq b)] dd ]
                    (sl/symeq c)])
+          (m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq a)]]
+                 (sl/lawd2 b a)])
+          (m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq a)]]
+                 (sl/lawd a b )])
 
-          (m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq b)]]
-                 (sl/lawd2 b b)])
+          #_(m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq a)]]
+                 (sl/lawdr a b )])
 
-          (m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq b)]]
+
+          #_(m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq b)]]
                  (sl/lawd b b)])
 
-          (m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq b)]]
+          #_(m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq b)]]
                  (sl/lawdr b b)])
 
-          (m7/x ['= [:p [:b (sl/symeq b)] 2]
+          #_(m7/x ['= [:p [:b (sl/symeq b)] 2]
                  (sl/lawdr b b)])
 
 
@@ -247,25 +328,26 @@
                          `[~(* i 20) ~(+ -80 (* 20 j )) :l ~@(map #(* 20 %1 %2)
                                                                   dx
                                                                   (cycle [1 1]))])}])
-
-           (for [i (range 0 (+ b c))
-                 j (range 0 (+ b c))
-                 :let [xx [(< i b ) (< j b)]
-                       yy [(>= i b) (>= j b)]
-                       yx [(< i b) (>= j b)]
-                       xy [(>= i b) (< j b)]
-                       qd (map (fn [[a b] y] [a b y]) [xx xy yx yy] [1 2 3 4])
-                       [_ _ color] (first (filter (fn [[x y _]] (and x y)) qd))
-                       ]
-                 ]
-             [:path {:stroke-width 1
-                     :fill (hsl [color 70 70 .8])
-                     :stroke (hsl [1 70 50 .8])
-                     :d (m7/path
-                         `[~(* i 20) ~(ve (* 20 j )) :l ~@(map #(* 20 %1 %2)
-                                                                  dx
-                                                                  (cycle [1 1]))])}]
-             )
+           [:g {:transform (m7/tranfrom [[:scale [1 -1]]
+                                         [:translate [0 160]]])}
+            (for [i (range 0 (+ b c))
+                  j (range 0 (+ b c))
+                  :let [xx [(< i b ) (< j b)]
+                        yy [(>= i b) (>= j b)]
+                        yx [(< i b) (>= j b)]
+                        xy [(>= i b) (< j b)]
+                        qd (map (fn [[a b] y] [a b y]) [xx xy yx yy] [1 2 3 4])
+                        [_ _ color] (first (filter (fn [[x y _]] (and x y)) qd))
+                        ]
+                  ]
+              [:path {:stroke-width 1
+                      :fill (hsl [color 70 70 .8])
+                      :stroke (hsl [1 70 50 .8])
+                      :d (m7/path
+                          `[~(* i 20) ~(ve (* 20 j )) :l ~@(map #(* 20 %1 %2)
+                                                                dx
+                                                                (cycle [1 1]))])}]
+              )]
 
            #_(for [j (range 0 a)
                    i (range 0 (+  b c))]
