@@ -231,7 +231,12 @@
         [xx set-xx] (react/useState 2)
         [yy set-yy] (react/useState 3)
         [zm set-zm] (react/useState [])
-        [q2 set-q2] (react/useState [1 1 2])
+        [q2 set-q2] (react/useState [6 1 1])
+        [center set-center] (react/useState true)
+        [zoom-in set-zoom-in] (react/useState false)
+        [zoom-out set-zoom-out] (react/useState false)
+
+
         ]
     (let [fix true
           scales [1 -1]
@@ -241,7 +246,12 @@
                [(ve (* 3 12 20 .5)) (ve (- (* 12 20) (* 20 d2))) (* 3 12 20) (* 12 20) ]]
           gd [1 1 0 0 false .1 (if point 1  4)]
           r (if point .2 (nth `[~@(take 5 (repeat 2)) ~@(take 15 (repeat 1)) ] a))
-          viewbox2 (if point (first vbr) (second vbr))
+          viewbox2 (if center
+                     (let [[x y w h] (if point (first vbr) (second vbr))]
+                       [(ve (/ w 2)) (ve (/ h 2)) w h])
+
+
+                     (if point (first vbr) (second vbr)))
           viewbox (if point (second vbr) (first vbr))
 
           rn (apply range (map #(* % a) [-6 6 1]))
@@ -262,18 +272,25 @@
                                  [[- [:p [:b [-  x ~m]] 2]
                                    [:p ~d 2]] ~a]]]))
                    amd)
-
           down false
           mid true
           curve false
+          shape false
           [mx my :as mark] [0 0]
-
+          eqsprev (fn [x]
+                    (if fix
+                      (.toFixed (* (/ 1 a) (- (* (- x m) (- x m)) (* d d))) 1)
+                      (* 1 (- (* (- x m) (- x m)) (* d d)))))
           eqs (fn [x]
                 (if fix
                   (.toFixed (* (/ 1 a) (- (* (- x m) (- x m)) (* d d))) 1)
                   (* 1 (- (* (- x m) (- x m)) (* d d)))))
-          eqs2 (fn [x]
+
+          eqsprev2 (fn [x]
                  (ve (* (/ 20 a) (- (* (- x m) (- x m)) (* d d)))))
+
+          eqs2 (fn [x]
+                 (ve (* (/ 20 a) (- (* (- x m) (- x m) (- x m)) (* d d)))))
 
           ]
       [:div {
@@ -287,29 +304,46 @@
 
        (map
         (fn [n d]
-          [:button {:on-mouse-enter (fn [e] (set-btn n))
+          [:div {:on-mouse-enter (fn [e] (set-btn n))
                     :on-mouse-leave (fn [e] (set-btn 100))
                     :style (m7/css
-                            [[12 1 (+ 2 (* n 1)) 1  :center :center  2 :rem :column]
-                             [(if (= btn n) .3 .5) 70 57  .8] []
+                            [[12 1 (+ 1 (* n 1)) 1  :center :center  2 :rem :column]
+                             [(if (= btn n) 1 .5) 70 70  .8] []
                              {:font-size (m7/np
-                                          [(if (= btn n) 3 2.1 ) :rem])
+                                          [(if (= btn n) 2 1.8 ) :rem])
                               :font-family "Roboto Flex"
                               :gap (m7/np [1 :rem])
+                              :border-radius "50%"
                               :color (hsl
                                       (if (= btn n)
-                                        [1 70 60 .8]
-                                        [1 30 60 .5]))
+                                        [1 30 30 1]
+                                        [1 70 60 .7]))
                               :z-index 4
                               :cursor :grab}
                              ])}
 
            d])
-        (range 0 20)
-        [[:div {:on-click (fn [e] e)}
+        (range 0 40)
 
-          "\u2295"]
-         [:div  "\u2296"]
+        [
+         [:div {:on-click (fn [e] (set-zoom-in (not zoom-in)))}
+          (if zoom-in "+" "-")]
+
+         [:div
+          (.toFixed (first viewbox2 ) 1) ]
+         [:div {:on-click (fn [e] (set-zoom-out (not zoom-out)))}
+          (if zoom-out "+" "-")]
+
+         [:div (.toFixed (second viewbox2 )  1)]
+
+         [:div {:on-click (fn [e] (set-zoom-out (not zoom-out)))}
+          (if zoom-out "+" "-")]
+         [:div
+          (.toFixed (nth viewbox2 2) 1)]
+         [:div {:on-click (fn [e] (set-zoom-out (not zoom-out)))}
+          (if zoom-out "+" "-")]
+         [:div (.toFixed
+                (nth viewbox2 3) 1)]
          [:div {:on-click (fn [_]
                             (set-xx (- xx 1)))} "⬅"]
          [:div xx]
@@ -322,9 +356,8 @@
                             (set-yy (+ yy 1)))} "⇨"]
 
 
-         [:div "\u25EF"]
-         [:div "1"]
-         [:div "2"]
+         [:div  {:on-click (fn [] (set-center (not center)))} (.toFixed (second viewbox2) 1)]
+
 
 
          [:div {:on-click (fn [_]
@@ -340,14 +373,14 @@
                             (set-q2 (update q2 1 dec)))} "⬅"]
          [:div (get q2 1)]
          [:div {:on-click (fn [_]
-                            (set-q2 (update q2 1 inc)))} "⇨"]
+                            (set-q2 (update q2 1 inc)))} "\u279C"]
 
 
 
 
          [:div {:on-click (fn [_]
                             (set-q2 (update q2 0 dec)))} "⬅"]
-         [:div (get q2 0)]
+         [:div "⇨" (get q2 0)]
          [:div {:on-click (fn [_]
                             (set-q2 (update q2 0 inc)))} "⇨"]
 
@@ -361,7 +394,7 @@
         (fn [n d]
           [:div {:style (m7/css
                          [[1 1 (+ 2 (* n 1)) 1  :center :center  2 :rem :column]
-                          [(* n .2) 70 (+ 50 (* 1 n))  .4] [] {:gap ".1rem"
+                          [(+ (/ n 10) .8) 70 (+ 50 (* 1 n))  .4] [] {:gap ".1rem"
                                                                :z-index 4}])}
 
            d])
@@ -373,7 +406,8 @@
         (fn [n d]
           [:div {:style (m7/css
                          [[2 1 (+ 2 (* n 1)) 1  :center :center  2 :rem :column]
-                          [(* n .2) 70 (+ 50 (* 1 n))  .4] [] {:gap ".1rem"
+                          [(+ (/ n 10) .8) 70 (+ 50 (* 1 n))  .4]
+                          [] {:gap ".1rem"
                                                                :z-index 4}])}
 
            d])
@@ -564,32 +598,32 @@
 
 
 
+                 (if shape
+                   [:path {:d
+                           (str (path [ 0 0 :c
+                                       (* 20 3.5) (ve (* 2 2 2))
+                                       (* 20 5.5) (ve (* 2 5 5))
+                                       (* 20 7) (ve (* 2 7 7))
+                                       :c
+                                       (* 20 2) (ve (- (* 2 9 9) (* 2 7 7)))
+                                       (* 20 4) (ve (- (* 2 11 11 ) (* 2 7 7)))
+                                       (* 20 6) (ve (- (* 2 13 13) (* 2 7 7)))
+                                       :l (ve (* 20 13))  0
+                                       ])
+                                "z")
 
-                 [:path {:d
-                         (str (path [ 0 0 :c
-                                     (* 20 3.5) (ve (* 2 2 2))
-                                     (* 20 5.5) (ve (* 2 5 5))
-                                     (* 20 7) (ve (* 2 7 7))
-                                     :c
-                                     (* 20 2) (ve (- (* 2 9 9) (* 2 7 7)))
-                                     (* 20 4) (ve (- (* 2 11 11 ) (* 2 7 7)))
-                                     (* 20 6) (ve (- (* 2 13 13) (* 2 7 7)))
-                                     :l (ve (* 20 13))  0
-                                     ])
-                              "z")
-
-                         :transform
-                         (m7/tranfrom
-                          [
-                           [:translate [(* m 20)
-                                        (* 2 d d)]]
-                           [:scale [x 1]]
-                           ])
-                         :stroke (hsl [0 70 70 1])
-                         :stroke-width .1
-                         :fill (m7/url (name :lgg1))
-                         }
-                    ]
+                           :transform
+                           (m7/tranfrom
+                            [
+                             [:translate [(* m 20)
+                                          (* 2 d d)]]
+                             [:scale [x 1]]
+                             ])
+                           :stroke (hsl [0 70 70 1])
+                           :stroke-width .1
+                           :fill (m7/url (name :lgg1))
+                           }
+                    ])
 
 
 

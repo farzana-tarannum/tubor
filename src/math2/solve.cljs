@@ -169,6 +169,9 @@
    })
 
 
+
+
+
 (comment
 
   (= [] [])
@@ -223,6 +226,27 @@
             (if (= b 1) c [a b c])
             (if (= b 1) `[~a  ~@c] `[~a ~b ~@c])))
         ))))
+
+(reduce (fn [acc [x y]]
+          (conj acc [x y])) []
+        {:x 2})
+
+(def mkeq3a
+  (fn [[_ co exps]]
+    (let [[a & r :as l]
+          (reduce (fun
+                   ([acc [1 1]] acc)
+                   ([acc [0 y]] acc)
+                   ([acc [1 y]] (into acc y))
+                   ([acc [x 0]] acc)
+                   ([acc [x 1]] acc)
+                   ([acc [x (y :guard number?)]] (into acc [:p y x]))
+                   ([acc [x y]] (into acc [:p x y]))) [] exps)]
+      ((fun ([a [] 1] a)
+            ([a [] co] [:m co a])
+            ([a r 1]  (into [:m a] r))
+            ([a r co] (into [:m co a] r)))
+       a r co))))
 
 (def mk2
   (comp

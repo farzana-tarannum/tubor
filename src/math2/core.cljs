@@ -420,8 +420,8 @@
 
 (defn curveslasses []
   [:div
-   [m19/home-work19]
-   #_[trig/ladder]
+   #_[m19/home-work19]
+   [trig/ladder]
    #_[frac/frection]
    ])
 

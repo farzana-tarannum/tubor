@@ -208,11 +208,11 @@
         sec2 timer
         angle {:font-size 12 :dy -5 :dx 30}
         turns (mapcat (fn [y]
-                     (map
-                      (fn [x]
-                        (+ (/ js/Math.PI x ) (* y  (/ js/Math.PI 2))))
-                      [6 4 3 2]))
-                   [0 1 2 3])
+                        (map
+                         (fn [x]
+                           (+ (/ js/Math.PI x ) (* y  (/ js/Math.PI 2))))
+                         [6 4 3 2]))
+                      [0 1 2 3])
         tn (nth turns sec2)
         tn2 (nth turns 4)
         r 18
@@ -285,10 +285,18 @@
                          :color (hsl [3 50 30 1])
                          :z-index 2}])}
 
+
          ]
 
+
+
         #_[:div (str " Angle " )]
-        [:div (str " arc " tn)]]
+        [m7/x `[= ~tt [:s ~(nth (mapcat (fn [y]
+                                          (map
+                                           (fn [x]
+                                             [[:m y pi] x])
+                                           [6 4 3 2]))
+                                        [0 1 2 3]) timer) ]]]]
 
 
 
