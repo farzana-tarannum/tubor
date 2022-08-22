@@ -421,7 +421,8 @@
 (defn curveslasses []
   [:div
    #_[m19/home-work19]
-   [trig/ladder]
+   #_[trig/ladder]
+   [m100/home-planets-banners4]
    #_[frac/frection]
    ])
 

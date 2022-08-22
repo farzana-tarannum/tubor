@@ -3101,15 +3101,16 @@
                      ]
 
                    (map (fn [[[a _] [x y]]] [y a x])         (reverse (partition 2 1 l2)))))]
-         ((fn [[s b e :as l]]
-            (let [[a b c] [:m b e]]
-              (if (= (count e) 1)
-                (if (= b 1) c [a b c])
-                (if (= b 1) `[~a  ~@c] `[~a ~b ~@c])) ))
-          (nth kf3 1))
-         )) b b))
 
+         (f kf3))) b b))
 
+  (comment
+    ((fn [[s b e :as l]]
+       (let [[a b c] [:m b e]]
+         (if (= (count e) 1)
+           (if (= b 1) c [a b c])
+           (if (= b 1) `[~a  ~@c] `[~a ~b ~@c])) ))
+     (mkeq3a (nth kf3 1))))
   (comment
     (reduce
      (fn [e [s n _]]

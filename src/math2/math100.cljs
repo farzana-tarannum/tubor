@@ -16990,13 +16990,18 @@ on time?"]
                      (> count 0))
               text-ref nil)
        :style (m7/css
-               [[1 1 1 23 :center :center 2.5 :rem]
-                [2 70 90 1] [] {:gap "1rem"
-                                :z-index 1}])}
-      (if (> count 0)
+               [[3 2 1 23 :center :center 2.5 :rem :column]
+                [2 70 90 .5] [] {:gap "1rem"
+                                :z-index 5}])}
+
+
+
+      [m7/x `[= gradient [rise run] [[:m r sin ~tt] [:m r cos ~tt]] [[- z y] [- w x]]]]
+      [m7/x ['= [14 32] [7 16]]]
+      #_(if (> count 0)
         "Describe fully single transformation that maps triangle P to R")]
 
-     (if (= slider 5)
+     #_(if (= slider 5)
        [:div
         {:ref text-ref
          :style (m7/css
@@ -17037,15 +17042,16 @@ on time?"]
            d])
         [["Q.3" 1 1 :center :center]
          [[:div {:style {:width :100%
+                         :font-size "1rem"
                          :display :flex
                          :justify-content :space-around}}
            [:div {:on-click (fn [_]
-                              (set-xx (- xx 1)))} "⬅"] [:div xx]
+                              (set-xx (- xx 1)))} "⬅"] [:div [m7/x  `[= y ~xx]]]
            [:div {:on-click (fn [_]
                               (set-xx (+ xx 1)))} "⇨"]
            [:div {:on-click (fn [_]
                               (set-yy (- yy 1)))} "⬅"]
-           [:div yy]
+           [:div [:div [m7/x  `[= x ~yy]]]]
            [:div {:on-click (fn [_]
                               (set-yy (+ yy 1)))} "⇨"]] 1 2 :center :center]
          ["Graph"

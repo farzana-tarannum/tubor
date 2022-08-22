@@ -132,7 +132,7 @@
           [exp (str elem)])))
      )
    [:mrow
-        (let [[exp elem] first-elem]
+    (let [[exp elem] first-elem]
           (if (= exp :expr) (expr first-elem) first-elem))]
    elem))
 

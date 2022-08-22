@@ -208,7 +208,7 @@
           ax-dy 40
 
           vb (fn [z]
-               (nth [[-80 -240  250 250]
+               (nth [[-80 -100  250 250]
                      [-40 -100  200 200]] z))
           viewbox (vb 1)
           viewbox2 (vb 0)
@@ -223,8 +223,12 @@
                       :gap ".1rem"})}
 
 
-       (let [a (m7/eq2 `[[1 [3] [x]] [1 [1] [y]]])
-             b (m7/eq2 `[[2 [1 2] [x y]] [-3 [2] [y]]])
+       #_(let [a (m7/eq2 `[[1 [1 1] [x z]] [1 [1 1] [y z]]])
+             b (m7/eq2 `[[1 [1 1] [x z]] [-1 [1 1] [y z]]])
+
+             bbox (let [[[c1 x2 x3] [c2 y2 y3]] b]
+                    [[c1 (conj x2 1) (conj x3 dd)] [c2 (conj y2 1) (conj y3 dd)]])
+
              c (m7/eq2 `[[1 [1 1] [~dd  x]] [-2 [1 1] [ c ~dd]]])
 
                d (m7/eq2 `[-1 [2] [d]])
@@ -256,17 +260,21 @@
                   {:padding-left "25px"
                    :gap ".1rem"
                    :z-index 10}])}
-          (m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq a)]]
-                 tt])
-          #_(m7/x ['= [:m  [:b (sl/symeq b)] dd ]
-                   (sl/symeq c)])
-          (m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq a)]]
-                 (sl/lawd2 b a)])
-          (m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq a)]]
-                 (sl/lawd a b )])
-
           #_(m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq a)]]
-                 (sl/lawdr a b )])
+                   tt])
+          (m7/x [:m
+                 [:b (sl/symeq b)]
+                 [:b (sl/symeq a)]])
+          #_(m7/x [:m [:b (sl/symeq b)] dd ])
+
+          #_(m7/x (sl/symeq bbox))
+
+
+          #_(m7/x (sl/lawd2 b a ))
+          #_(m7/x (sl/lawd a b ))
+          #_(m7/x (sl/lawdr a b ))
+          #_(m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq a)]]
+                   ])
 
 
           #_(m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq b)]]
@@ -281,11 +289,11 @@
 
 
 
-            #_(m7/x (sl/e=  [:m 'a [:b (sl/symeq a2)]]) )
-            #_(m7/x (sl/e= [:m 'a [:b (sl/symeq2 ek1)]]))
-            #_(m7/x (sl/e= [:m 'a [:b (sl/symeq ee1)]]))
-            #_(m7/x ['= [cc 'a]  (sl/symeq2 ek2)])
-            #_(m7/x `[= [~bb a] [- [:m 2 m]]])
+          #_(m7/x (sl/e=  [:m 'a [:b (sl/symeq a2)]]) )
+          #_(m7/x (sl/e= [:m 'a [:b (sl/symeq2 ek1)]]))
+          #_(m7/x (sl/e= [:m 'a [:b (sl/symeq ee1)]]))
+          #_(m7/x ['= [cc 'a]  (sl/symeq2 ek2)])
+          #_(m7/x `[= [~bb a] [- [:m 2 m]]])
 
 
 
@@ -328,10 +336,10 @@
                          `[~(* i 20) ~(+ -80 (* 20 j )) :l ~@(map #(* 20 %1 %2)
                                                                   dx
                                                                   (cycle [1 1]))])}])
-           [:g {:transform (m7/tranfrom [[:scale [1 -1]]
-                                         [:translate [0 160]]])}
-            (for [i (range 0 (+ b c))
-                  j (range 0 (+ b c))
+           [:g {:transform (m7/tranfrom [[:scale [1 1]]
+                                         [:translate [0 80]]])}
+            (for [i (range -3 (+ b c))
+                  j (range -3 (+ b c))
                   :let [xx [(< i b ) (< j b)]
                         yy [(>= i b) (>= j b)]
                         yx [(< i b) (>= j b)]
