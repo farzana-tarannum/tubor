@@ -170,6 +170,19 @@
 
 
 
+(def ordering
+  (fn [l1]
+    (let [l11 (map-indexed (fn [i [x y z]]
+                             (let [pos (fn [s] (if (> s 0) s (* -1 s)))
+                                   f (fn [x] (if (< x 0) '- '+ ))]
+                               [y (f y) x (if (= i 0) y (pos y)) z]))
+                           l1)
+          l2 (map-indexed
+              (fn [i [_ y & _]] [i y]) l11)]
+
+      (map (fn [[[a _] [x y]]] [y a x])
+           (reverse (partition 2 1 l2))))))
+
 
 
 (comment
@@ -3089,20 +3102,9 @@
                       f
                       mkeq1a) k))
                   kf2)
-             f (fn [l1]
-                 (let [
-                       l11 (map-indexed (fn [i [x y z]]
-                                          (let [pos (fn [s] (if (> s 0) s (* -1 s)))
-                                              f (fn [x] (if (< x 0) '- '+ ))]
-                                          [y (f y) x (if (= i 0) y (pos y)) z]))
-                                      l1)
-                     l2 (map-indexed
-                         (fn [i [_ y & _]] [i y]) l11)
-                     ]
+             ]
 
-                   (map (fn [[[a _] [x y]]] [y a x])         (reverse (partition 2 1 l2)))))]
-
-         (f kf3))) b b))
+         (ordering kf3))) b b))
 
   (comment
     ((fn [[s b e :as l]]

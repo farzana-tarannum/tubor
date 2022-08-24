@@ -9,55 +9,293 @@
 
 
 
+(s/def ::op-plus '#{+})
+
+
+(s/def ::op-arrow #{:a})
+
+
+(s/def ::op-equal '#{=})
+
+(s/def ::op-mul '#{*})
+(s/def ::op-mul2 #{:m})
+(s/def ::op-dev '#{/})
+(s/def ::op-b #{:b :c :s})
+
+(s/def ::op-minus '#{-})
+(s/def ::op-sqroot #{:sq})
+(s/def ::op-pow #{:p})
+(s/def ::op-sub  #{:s})
+
+(s/def ::betas (s/or
+               :α #{:alpha}
+               :β #{:beta}))
+
+
+(s/def ::ops (s/or
+              :→ ::op-arrow
+              :+ ::op-plus
+              :> '#{>}
+              :< '#{<}
+              :<= '#{<=}
+              :>= '#{>=}
+              :!= '#{!=}
+              :- ::op-minus
+              :× ::op-mul
+              := ::op-equal
+              :op-mul2 ::op-mul2
+              :÷ ::op-dev))
 
 
 
-(comment
-  (let [ b (m7/eq2 `[[1 [1] [x]] [-1 [1] [1]]])]
-    ((fn [eqk1 eqk2]
-       (let [f2 (fn [[a1 b1 c1]]
-                  (fn [[a b c]]
-                    [a (* b1 b)
-                     (merge-with (fn [e d] (+ e d)) c c1)]))
-             k (eq2 eqk1)
-             k2 (eq2 eqk2)
-             kf2 (map
-                  (comp
-                   f2
-                   mkeq1a) k2)
-             kf3 (mapcat
-                  (fn [f]
-                    (map
-                     (comp
-                      f
-                      mkeq1a) k))
-                  kf2)
-             f (fn [l1]
-                 (let [
-                       l11 (map-indexed (fn [i [x y z]]
-                                          (let [pos (fn [s] (if (> s 0) s (* -1 s)))
-                                              f (fn [x] (if (< x 0) '- '+ ))]
-                                          [y (f y) x (if (= i 0) y (pos y)) z]))
-                                      l1)
-                     l2 (map-indexed
-                         (fn [i [_ y & _]] [i y]) l11)
+(s/def ::element
+  (s/or
+   :mn number?
+   :betas ::betas
+   :mi symbol?
+   :expr ::expr))
+
+(s/def ::element2
+  (s/or
+   :mn number?
+   :mi symbol?
+   :expr ::expr2))
+
+(s/def ::p-exp
+  (s/cat
+   :mo ::ops
+   :first-elem ::element
+   :elem (s/+ ::element)))
+
+
+
+(s/def ::m-exp
+  (s/cat
+   :mo (s/or :- ::op-minus
+             :sq ::op-sqroot)
+   :elem ::element))
+
+
+(s/def ::b-exp
+  (s/cat
+   :mo ::op-b
+   :elem ::element))
+
+(s/def ::f-exp
+  (s/cat
+   :elem-left ::element
+   :elem-right ::element))
+
+(s/def ::e-exp
+  (s/cat
+   :mo (s/or
+             :p ::op-pow
+             :k #{:k}
+             :s ::op-sub)
+   :elem-left ::element
+   :elem-right ::element))
+
+
+(s/def ::expr
+  (s/or
+   :p-exp ::p-exp
+   :b-exp ::b-exp
+   :m-exp ::m-exp
+   :e-exp ::e-exp
+   :f-exp ::f-exp))
+
+(s/def ::expr2
+  (s/alt
+   :p-exp ::p-exp
+   :m-exp ::m-exp
+   :f-exp ::f-exp))
+
+
+
+(declare expr)
+
+
+
+(defn p-exp [{:keys [mo first-elem elem ]}]
+  (reduce
+   (fn [acc e]
+     (let [[exp elem] e]
+       (conj
+        (if (= (first mo)
+               :op-mul2 )
+          acc
+          (conj acc [:mo (name (first mo))]))
+        (if (= exp :expr)
+          (expr e)
+          [exp (str elem)])))
+     )
+   [:mrow
+    (let [[exp elem] first-elem]
+          (if (= exp :expr) (expr first-elem) first-elem))]
+   elem))
+
+(defn m-exp [{:keys [mo elem]}]
+  (let [[op-a op] mo]
+    (cond
+      (= op-a :-)
+      [:mrow
+       [:mo "-"]
+       (let [[exp e] elem]
+         (if (= exp :expr)
+           (expr elem)
+           elem))]
+      (= op-a :sq)
+      [:msqrt (let [[exp e] elem]
+                (if (= exp :expr)
+                  (expr elem)
+                  elem))])))
+
+(defn e-exp [{:keys [mo elem-left elem-right]}]
+  ((fun ([[:p _]]
+         [:msup
+          (if (= (first elem-left) :expr)
+            (expr elem-left)
+            elem-left)
+          (if (= (first elem-right) :expr)
+            (expr elem-right)
+            elem-right)
+          ])
+        ([[:k _]]
+         [:msub
+          (if (= (first elem-left) :expr)
+            (expr elem-left)
+            elem-left)
+          (if (= (first elem-right) :expr)
+            (expr elem-right)
+            elem-right)
+          ])
+        ([[:s _]]
+         [:mroot
+          (if (= (first elem-left) :expr)
+            (expr elem-left)
+            elem-left)
+          (if (= (first elem-right) :expr)
+            (expr elem-right)
+            elem-right)
+          ])
+        ([[:= _]]
+         [:mrow
+          (if (= (first elem-left) :expr)
+            (expr elem-left)
+            elem-left)
+
+          [:mo "="]
+          (if (= (first elem-right) :expr)
+            (expr elem-right)
+            elem-right)])) mo))
+
+
+
+
+(defn b-exp [{:keys [mo elem]}]
+  (if (= mo :b)
+    [:mrow [:mo "("]
+     (expr elem)
+     [:mo ")"]]
+    [:mrow [:mo "["]
+     (expr elem)
+     [:mo "]"]]))
+
+
+
+(defn f-exp [e]
+  (let [ {:keys [elem-left elem-right]} e]
+    [:mrow
+     [:mfrac
+      (if (= (first elem-left) :expr)
+        (expr elem-left) elem-left )
+      (if (= (first elem-right) :expr)
+        (expr elem-right) elem-right )
+      ]]))
+
+
+(defn expr [e]
+  (if (= (first e) :expr)
+      (let [expr-f (juxt
+                    first
+                    (comp  first second)
+                    (comp  second second))
+            [_ t-expr expr-1] (expr-f e)]
+        (( {:p-exp p-exp
+            :m-exp m-exp
+            :b-exp b-exp
+            :f-exp f-exp
+            :e-exp e-exp} t-expr)
+         expr-1))
+      e))
+
+
+(defn mx [eq]
+  [:math
+   (expr
+    (s/conform ::element
+               (vec (clojure.walk/postwalk
+                     (fn [x]
+                       (if (symbol? x)
+                         (symbol (name x))
+                         x))
+                     eq))))])
+
+(defn x [eq]
+  [:math
+   (expr
+    (s/conform ::element
+               (let [r (vec (clojure.walk/postwalk
+                             (fn [x]
+                               (if (symbol? x)
+                                 (symbol (name x))
+                                 x))
+                             eq))]
+                 (if (s/valid? ::element r)
+                   r
+                   0)
+                 )))])
+(defn eq2 [eq]
+  (vec (clojure.walk/postwalk
+        (fn [x]
+          (if (symbol? x)
+            (symbol (name x))
+            x))
+        eq)))
+
+
+(defn sx2 [eq x2 tt]
+  [:math
+   (expr
+    (s/conform ::element
+               (let [r (vec (clojure.walk/postwalk
+                             (fn [x]
+                               (if (symbol? x)
+                                 (let [x1 (symbol (name x))]
+                                   (if (= x1 x2)
+                                     tt
+                                     x1))
+                                 x))
+                             eq))
                      ]
+                 (if (s/valid? ::element r)
+                   r
+                   0)
+                 )))])
 
-                   (map (fn [[[a _] [x y]]] [y a x])         (reverse (partition 2 1 l2)))))]
 
-         (f kf3))) b b))
-
-  (comment
-    ((fn [[s b e :as l]]
-       (let [[a b c] [:m b e]]
-         (if (= (count e) 1)
-           (if (= b 1) c [a b c])
-           (if (= b 1) `[~a  ~@c] `[~a ~b ~@c])) ))
-     (mkeq3a (nth kf3 1))))
-  (comment
-    (reduce
-     (fn [e [s n _]]
-       [s (mkeq2a (nth kf3 n)) e])
-     (first (f kf3))
-     (rest (f kf3))))
-  )
+(defn sx [eq x2 tt]
+  [:math
+   (expr
+    (s/conform ::element
+               (let [r (vec (clojure.walk/postwalk
+                             (fn [x]
+                               (if (= x x2)
+                                 tt
+                                 x))
+                             eq))
+                     ]
+                 (if (s/valid? ::element r)
+                   r
+                   0)
+                 )))])

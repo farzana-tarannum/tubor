@@ -452,7 +452,7 @@
 (comment
   (s/cat
    )
-  (gen2/sample (gen2/choose 5  12)))
+  )
 
 (defn conjj [i]
   (fn [arr]
