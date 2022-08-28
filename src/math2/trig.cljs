@@ -205,7 +205,7 @@
 
 (defn ladder []
   (let [[timer update-time] (react/useState 0)
-        sec2 timer
+        sec2 5
         angle {:font-size 12 :dy -5 :dx 30}
         turns (mapcat (fn [y]
                         (map
@@ -291,7 +291,7 @@
 
 
         #_[:div (str " Angle " )]
-        [m7/x `[= ~tt [:s ~(nth (mapcat (fn [y]
+        #_[m7/x `[= ~tt [:s ~(nth (mapcat (fn [y]
                                           (map
                                            (fn [x]
                                              [[:m y pi] x])
@@ -315,21 +315,37 @@
 
        [:div {:style (m7/css
                       [[2 10 14 9 :center :center
-                        1.4 :rem :column]
+                        2.1 :rem :column]
                        [1 70 90 .1] []
                        {:gap "1rem"
                         :color (hsl [3 50 30 1])
                         :z-index 3}])}
-        #_[m7/mx `[= AC r 3]]
-        #_[m7/mx `[= AB BC x]]
+        [m7/mx `[= AC r]]
+
+        [m7/mx `[= AB BC x]]
         [:div "In pythagorium theorum in ABC"]
-        [m7/x `[= [:p 1 2]  [+ [:p [:b [1 2]] 2]  [:p x 2]]]]
+        [m7/x `[= [:p r 2]  [+ [:p x 2]  [:p x 2]]]]
+        [m7/x `[= [:p r 2]  [:m 2 [:p x 2] ]]]
 
-        [m7/x `[= 1  [+ [1 4]  [:p x 2]]]]
+        [m7/x `[=  r 1]]
+        [m7/x `[= [:p 1 2]  [:m 2 [:p x 2] ]]]
 
-        [m7/x `[= [3 4] [:p x 2]]]
 
-        [m7/x `[= [[:sq 3] 2] x]]
+        [m7/x `[= [1 2]  [ [:m 2 [:p x 2]] 2]]]
+
+
+        [m7/x `[= [1 2]  [:p x 2]]]
+
+
+
+
+        #_[m7/x `[= [:p 1 2]  [+ [:p [:b [1 2]] 2]  [:p x 2]]]]
+
+        #_[m7/x `[= 1  [+ [1 4]  [:p x 2]]]]
+
+        #_[m7/x `[= [3 4] [:p x 2]]]
+
+        #_[m7/x `[= [[:sq 3] 2] x]]
         #_[m7/x `[= [:p 3 2]  [:m 2 [:p x 2]]]]
         #_[m7/x `[= [ [:p 3 2] 2]  [:p x 2]]]
 

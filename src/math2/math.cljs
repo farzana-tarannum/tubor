@@ -3413,31 +3413,7 @@
       ]
 
      (comment solve )
-     (comment(let [x2 [:m ['* dx dy] [:p v 2]]
-                   a m1
-                   b n1
-                   ab+ [:b ['+ ['- ['* dx  a]] ['* dy b]]]
-                   abx+ [:m ab+ v]
-                   ab ['* ['- a] b]
-                   r1 ['+ x2 abx+ ab]
-                   r2 ['+ x2 [:m  (- m1 n1) v] ab]
-                   s1 [:b ['+ v m1]]
-                   s2 [:b ['+ v n1]]
-                   sol [:m s1 s2]
-                   ]
-               (map-indexed
-                (fn [i eq]
-                  [:div  (g [[(inc i) 1] [8 7] [10 1]]
-                            {:d (grad2 (inc i))
-                             :size [1.7 :rem]
-                             :flex :center})
-                   [mm eq]
 
-                   ])
-                [['= r2 0] ['= r1 0]  x2 abx+ ab
-                 ['= sol 0]
-                 ['= s1 0]
-                 ['= v (* m1 -1)]])))
 
 
 

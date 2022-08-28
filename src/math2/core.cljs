@@ -382,8 +382,8 @@
    #_[m100/map-family3]
    #_[m100/map-family2]
    #_[py100/template2]
-   #_[py100/template3]
-   [py100/template4]
+   [py100/template3]
+   #_[py100/template4]
    ])
 
 
@@ -423,7 +423,8 @@
    #_[m19/home-work19]
    #_[trig/ladder]
    [m100/home-planets-banners4]
-   #_[frac/frection]])
+   #_[frac/frection]
+   ])
 
 
 

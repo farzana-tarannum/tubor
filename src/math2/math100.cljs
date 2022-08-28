@@ -16871,14 +16871,14 @@ on time?"]
                    [-20 -20  100 100]
                    [-400 -200  800 200]] z))
         [viewbox4 set-viewbox4] (react/useState (vb 0))
-        [viewbox3 set-viewbox3] (react/useState (vb 1))
+        [viewbox3 set-viewbox3] (react/useState (vb 0))
         [clear set-clear] (react/useState false)
         m 30
         d 9.4
         scale2 [[.5 .5] [-0.5 .5]]
         [text set-text] (react/useState "hello")
-        [slider set-slider] (react/useState 0)
-        [count set-count] (react/useState 0)
+        [slider set-slider] (react/useState 1)
+        [count set-count] (react/useState 1)
         [xx set-xx] (react/useState 2)
         [yy set-yy] (react/useState 3)
 
@@ -16990,14 +16990,41 @@ on time?"]
                      (> count 0))
               text-ref nil)
        :style (m7/css
-               [[3 2 1 23 :center :center 2.5 :rem :column]
+               [[3 6 12 23 :center :center 1.5 :rem :column]
                 [2 70 90 .5] [] {:gap "1rem"
                                 :z-index 5}])}
 
 
+      #_[m7/x  `[= [[- ya yb] [- xa xb]] [[- -5 1] [- 0 [- 2]]] [-6 2]]]
+      #_[m7/x `[= [:p AB 2] [+ [:p [:b -6] 2]  [:p 2 2]] 40]]
 
-      [m7/x `[= gradient [rise run] [[:m r sin ~tt] [:m r cos ~tt]] [[- z y] [- w x]]]]
-      [m7/x ['= [14 32] [7 16]]]
+      #_[m7/x  `[= [[- ya ya] [- xa xc]] [[- -5 5] [- 0 [- 10]]] [-10 -10]]]
+
+      #_[m7/x `[= [:p AC 2] [+ [:p [:b -10] 2]  [:p 10 2]] 200]]
+
+      #_[m7/x  `[= [[-  yb yc] [-  xb xc]] [[-  1 5] [- [- 2] 10]] [-4 -12]]]
+
+      [m7/x `[= m gradient [rise run] [[:m r sin ~tt] [:m r cos ~tt]]
+              [[- y y1] [- x x1]]]]
+
+      [m7/x `[= length  [:sq [+ [:p rise 2] [:p run 2]]   ]]]
+
+      [m7/x `[= m [[- y y1] [- x x1]]]]
+
+
+
+      [m7/x `[= [- [1 2]]  [[- 4 3] [- 1.5 1] ]   [[- 4.5 3] [- [- 2] 1]] [[- y 3] [- x 1]]]]
+
+
+      [m7/x `[= [- [1 2]] [[- y 3] [- x 1]] ]]
+
+      [m7/x `[= [- [1 2]] [[- y 1.5] [- x 4]] ]]
+
+
+      [m7/x `[= [:m [- [1 2]] [:b [- x 1]]] [- y 3]]]
+
+
+      #_[m7/x ['= [14 32] [7 16]]]
       #_(if (> count 0)
         "Describe fully single transformation that maps triangle P to R")]
 
@@ -17190,7 +17217,7 @@ on time?"]
 
 
            (if (or (= slider 2) (= slider 1) (= slider 3))
-             (grid-on 10 10 (* xx 20) (* yy 20) false))
+             (grid-on 1 1 (* xx 20) (* yy 20) false))
 
 
            [:g
@@ -17211,7 +17238,28 @@ on time?"]
                           :fill (hsl [4.1 70 70 1])}
              ]
 
+
+
+
+
+
             [:path#tri3 {:d (m7/path [x2 y2 :l (* 16 2 2) (ve (* 2 7 2))
+                                      0 (ve (ve (* 2 7 2))) (ve (* 16 2 2)) 0])
+                         :stroke (hsl [.5 70 70 1])
+                         :stroke-width .5
+                         :fill (hsl [1 70 70 1])}
+             ]
+
+
+
+            [:path#tri3 {:d (m7/path [x2 y2 :l (* 16 2 2) (ve (* 2 7 2))
+                                      0 (ve (ve (* 2 7 2))) (ve (* 16 2 2)) 0])
+                         :stroke (hsl [.5 70 70 1])
+                         :stroke-width .5
+                         :fill (hsl [1 70 70 1])}
+             ]
+
+            [:path#tri31 {:d (m7/path [x2 y2 :l (* 16 2 2) (ve (* 2 7 2))
                                       0 (ve (ve (* 2 7 2))) (ve (* 16 2 2)) 0])
                          :stroke (hsl [.5 70 70 1])
                          :stroke-width .5
@@ -17324,9 +17372,18 @@ on time?"]
               "P"]
 
              [:textPath {:href :#tri3
-                         :startOffset :25%
+                         :startOffset :3%
                          :font-size 3}
-              "R"]
+              "A"]
+             [:textPath {:href :#tri31
+                         :startOffset :90%
+                         :font-size 3}
+              "B"]
+
+             [:textPath {:href :#tri3
+                         :startOffset :100%
+                         :font-size 3}
+              "B"]
 
              #_[:textPath {:href :#tri2
                            :startOffset (+ 13 (* 2 17))

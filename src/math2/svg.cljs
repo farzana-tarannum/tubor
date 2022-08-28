@@ -98,3 +98,83 @@
            (map wrap ["wdth" "wght" "CNTR"  "opsz" "PWGT"
                       "PWDT" "GRAD" "XOPQ" "XTRA" "YOPQ"])
            fnts))}))
+
+
+
+(defn flames
+  ([id red yellow]
+   [:filter
+    {:id (name id)
+     :height (np [300 :%])
+     :width (np [120 :%])
+     :y (np [-100 :%])
+     :x (np [0 :%])
+     }
+    [:feTurbulence
+     {:stitchTiles :stitch
+      :result "noise"
+      :numOctaves 1
+      :baseFrequency 1
+      :type :fractalNoise}]
+    [:feOffset
+     {:result "off1", :dy "0"}
+     [:animate
+      {:repeatCount "indefinite",
+       :dur "6s",
+       :to "-300",
+       :from "0",
+       :attributeName "dy",
+       :attributeType :XML}]]
+    [:feOffset
+     {:result "off2", :dy "60", :in "noise"}
+     [:animate
+      {:repeatCount "indefinite",
+       :dur "6s",
+       :to "0",
+       :from "300",
+       :attributeName "dy",
+       :attributeType "XML"}]
+     ]
+    [:feMerge
+     {:result "scrolling-noise"}
+     [:feMergeNode {:in "off1"}]
+     [:feMergeNode {:in "off2"}]]
+    [:feComponentTransfer
+     {:result "brighter-noise"}
+     [:feFuncA {:exponent "0.5", :amplitude "1", :type "gamma"}]]
+    [:feComposite
+     {:result "gradient-noise",
+      :operator "in",
+      :in2 "brighter-noise",
+      :in "SourceGraphic"}]
+    [:feComponentTransfer
+     {:result "threshhold"}
+     [:feFuncR {:tableValues "0 .2", :type "discrete"}]
+     [:feFuncG {:tableValues "0 .2", :type "discrete"}]
+     [:feFuncB {:tableValues "0 .2", :type "discrete"}]
+     [:feFuncA {:tableValues "0 .2", :type "discrete"}]]
+    [:feFlood {:result "yellow", :flood-color yellow}]
+    [:feComposite
+     {:result "yellow-threshhold",
+      :operator "in",
+      :in "yellow",
+      :in2 "threshhold"}]
+    [:feFlood {:result "red", :flood-color red}]
+    [:feComponentTransfer
+     {:result "exponent-gradient", :in "SourceGraphic"}
+     [:feFuncA {:exponent "5", :type "gamma"}]]
+    [:feComposite
+     {:result "red-gradient",
+      :operator "in",
+      :in2 "exponent-gradient",
+      :in "red"}]
+    [:feComposite
+     {:result "red-gradient-threshhold",
+      :operator "in",
+      :in "red-gradient",
+      :in2 "threshhold"}]
+    [:feMerge
+     [:feMergeNode {:in "yellow-threshhold"}]
+     [:feMergeNode {:in "red-gradient-threshhold"}]]])
+  ([]
+   (flames :flames "#f33" "#ff9" )))

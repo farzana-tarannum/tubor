@@ -196,9 +196,10 @@
         tt 'θ
         dd '☐
         dx [1 0  0 -1 -1  0 0 1 ]
-        a 3
-        b 3
-        c 5
+
+        b 2
+        c 1
+        tt 'θ
         sq (fn [n]
                 (comp
                  (partial map (partial * n))))]
@@ -223,16 +224,17 @@
                       :gap ".1rem"})}
 
 
-       #_(let [a (m7/eq2 `[[1 [1 1] [x z]] [1 [1 1] [y z]]])
-             b (m7/eq2 `[[1 [1 1] [x z]] [-1 [1 1] [y z]]])
+       (let [a (m7/eq2 `[[2 [1]  [w]] [1 [1]  [y]]])
+             b (m7/eq2 `[[2 [1]  [w]] [1 [1] [y]]])
 
              bbox (let [[[c1 x2 x3] [c2 y2 y3]] b]
-                    [[c1 (conj x2 1) (conj x3 dd)] [c2 (conj y2 1) (conj y3 dd)]])
+                    [[c1 (conj x2 1) (conj x3 dd)]
+                     [c2 (conj y2 1) (conj y3 dd)]])
 
              c (m7/eq2 `[[1 [1 1] [~dd  x]] [-2 [1 1] [ c ~dd]]])
 
-               d (m7/eq2 `[-1 [2] [d]])
-               a2 [[1 [2] [[:b (sl/symeq a)]]]
+             d (m7/eq2 `[-1 [2] [d]])
+             a2 [[1 [2] [[:b (sl/symeq a)]]]
                    d]
                d1 (sl/mkeq1a d)
                d2 (sl/mkeq2a d1)
@@ -260,21 +262,68 @@
                   {:padding-left "25px"
                    :gap ".1rem"
                    :z-index 10}])}
+
+
+          #_[m7/x `[=  gradient  [[:m r sin ~tt] [:m r cos ~tt]]
+                  [[- 0 k] [- k 0]]
+                  [[- k] k]
+                  -1]]
+
+          #_[m7/x `[=  k [:m r sin 135] ]]
+
+          #_[m7/x `[=  k [:m 10 sin 135] ]]
+
+
+          #_[m7/x `[=  gradient  [[:m r [[:sq 2] 2]] [:m r [- [[:sq 2] 2]]]]
+                  [[- 0 k] [- k 0]]
+                  [[- k] k]
+                  -1]]
+          #_[m7/x `[=  factorial [:m  f [:b x]]  [:m x f [:b [- x 1]]]]]
+
+          #_[m7/x `[=  factorial [:m  f [:b 0]] 1]]
+
+
+          #_[m7/x `[=   [:m  f [:b 5]]  [:m 5 f [:b [- 5 1]]]]]
+
+          #_[m7/x `[=   [:m  f [:b 5]]  [* 5 [:m f [:b 4]]]]]
+
+          #_[m7/x `[=   [:m  f [:b 5]]  [* 5 4 [:m f [:b 3]]]]]
+          #_[m7/x `[=   [:m  f [:b 5]]  [* 5 4 3 [:m f [:b 2]]]]]
+
+          #_[m7/x `[=   [:m  f [:b 5]]  [* 5 4 3 2 [:m f [:b 1]]]]]
+
+          #_[m7/x `[=   [:m  f [:b 5]]  [* 5 4 3 2 1 [:m f [:b 0]]]]]
+
+
           #_(m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq a)]]
                    tt])
-          (m7/x [:m
-                 [:b (sl/symeq b)]
-                 [:b (sl/symeq a)]])
-          #_(m7/x [:m [:b (sl/symeq b)] dd ])
+
+
+
+
+
+
+
+
+
+
+
+
+          (m7/x (sl/lawdr a b ))
+
+          #_(m7/x (sl/lawd a b ))
+          #_(m7/x (sl/lawd2 b a ))
 
           #_(m7/x (sl/symeq bbox))
+          #_(m7/x [:m [:b (sl/symeq b)] dd ])
+          #_(m7/x [:m
+                 [:b (sl/symeq b)]
+                 [:b (sl/symeq a)]])
 
+          #_(m7/x [:p
+                   [:b (sl/symeq b)]
+                 2])
 
-          #_(m7/x (sl/lawd2 b a ))
-          #_(m7/x (sl/lawd a b ))
-          #_(m7/x (sl/lawdr a b ))
-          #_(m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq a)]]
-                   ])
 
 
           #_(m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq b)]]
@@ -336,10 +385,10 @@
                          `[~(* i 20) ~(+ -80 (* 20 j )) :l ~@(map #(* 20 %1 %2)
                                                                   dx
                                                                   (cycle [1 1]))])}])
-           [:g {:transform (m7/tranfrom [[:scale [1 1]]
+           [:g {:transform (m7/tranfrom [[:scale [1 -1]]
                                          [:translate [0 80]]])}
-            (for [i (range -3 (+ b c))
-                  j (range -3 (+ b c))
+            (for [i (range 0 (+ b c))
+                  j (range 0 (+ b c))
                   :let [xx [(< i b ) (< j b)]
                         yy [(>= i b) (>= j b)]
                         yx [(< i b) (>= j b)]
