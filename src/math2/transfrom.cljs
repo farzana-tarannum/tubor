@@ -253,9 +253,9 @@
                      (> count 0))
               text-ref nil)
        :style (m7/css
-               [[3 9 1 12  :center :center 1.5 :rem :column]
-                [2 70 90 .5] [] {:gap "1rem"
-                                :z-index 5}])}
+               [[3 9 8 12  :center :center 1.5 :rem :column]
+                [2 70 90 .4] [] {:gap "1rem"
+                                 :z-index 2}])}
 
 
       #_[m7/x  `[= [[- ya yb] [- xa xb]] [[- -5 1] [- 0 [- 2]]] [-6 2]]]
@@ -271,7 +271,7 @@
               [[- y y1] [- x x1]]]]
 
 
-      [:div "c(x,y) for AC"]
+      [:div "C(x,y) for AC"]
 
       [m7/x `[= m [[- 6 y ] [- [- 2] x ]]]]
 
@@ -284,7 +284,7 @@
 
 
 
-      [:div "c(x,y) for BC"]
+      [:div "C(x,y) for BC"]
 
       #_[m7/x `[= [:m m [:b [- x x1]]] [- y y1] ]]
 

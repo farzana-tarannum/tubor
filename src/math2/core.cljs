@@ -416,15 +416,12 @@
 
    ] )
 
-
-
-
 (defn curveslasses []
   [:div
    #_[m19/home-work19]
    #_[trig/ladder]
-   #_[trans/coordinates]
-   [frac/frection]
+   [trans/coordinates]
+   #_[frac/frection]
    ])
 
 
