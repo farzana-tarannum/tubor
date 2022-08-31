@@ -13,6 +13,7 @@
             [math2.bdmap :as bdmap]
             [math2.solve :as s]
             [clojure.walk :as w]
+            [math2.transfrom :as trans]
             [defun.core :refer [defun fun]]
             [math2.math7 :as m7 :refer
              [grid hsl css space size path ve sec]]
@@ -422,8 +423,8 @@
   [:div
    #_[m19/home-work19]
    #_[trig/ladder]
-   [m100/home-planets-banners4]
-   #_[frac/frection]
+   #_[trans/coordinates]
+   [frac/frection]
    ])
 
 

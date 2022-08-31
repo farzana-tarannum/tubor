@@ -197,8 +197,8 @@
         dd '☐
         dx [1 0  0 -1 -1  0 0 1 ]
 
-        b 2
-        c 1
+        b 5
+        c 2
         tt 'θ
         sq (fn [n]
                 (comp
@@ -224,8 +224,9 @@
                       :gap ".1rem"})}
 
 
-       (let [a (m7/eq2 `[[2 [1]  [w]] [1 [1]  [y]]])
-             b (m7/eq2 `[[2 [1]  [w]] [1 [1] [y]]])
+       (let [
+             a (m7/eq2 `[[~b [1]  [w]] [~c [1]  [y]]])
+             b (m7/eq2 `[[~b [1]  [w]] [~c [1] [y]]])
 
              bbox (let [[[c1 x2 x3] [c2 y2 y3]] b]
                     [[c1 (conj x2 1) (conj x3 dd)]
@@ -234,26 +235,24 @@
              c (m7/eq2 `[[1 [1 1] [~dd  x]] [-2 [1 1] [ c ~dd]]])
 
              d (m7/eq2 `[-1 [2] [d]])
-             a2 [[1 [2] [[:b (sl/symeq a)]]]
-                   d]
-               d1 (sl/mkeq1a d)
-               d2 (sl/mkeq2a d1)
-               bb 'b
-               cc 'c
-               ee (m7/eq2 [[1 [2] ['x]]
-                           [1 [1 1] [bb 'x]]
-                           [1 [1] [cc]]])
-               eee (m7/eq2 [[1 [2] ['x]]
-                            [bb [1] ['x]]
-                            1])
+             a2 [[1 [2] [[:b (sl/symeq a)]]] d]
+             d1 (sl/mkeq1a d)
+             d2 (sl/mkeq2a d1)
+             bb 'b
+             cc 'c
+             ee (m7/eq2 [[1 [2] ['x]]
+                         [1 [1 1] [bb 'x]]
+                         [1 [1] [cc]]])
+             eee (m7/eq2 [[1 [2] ['x]]
+                          [bb [1] ['x]]
+                          1])
 
 
-               ee1 (m7/eq2 `[[1 [ 2] [ x]]
-                             [1 [1 1] [[b a] x]]
-                             [1 [1] [[c a]]]])
-               ek1 (conj (vec (sl/lawdr2 a a)) d1)
-               ek2 (rest (rest ek1))
-               ]
+             ee1 (m7/eq2 `[[1 [ 2] [ x]]
+                           [1 [1 1] [[b a] x]]
+                           [1 [1] [[c a]]]])
+             ek1 (conj (vec (sl/lawdr2 a a)) d1)
+             ek2 (rest (rest ek1))]
          [:div {:style
                 (m7/css
                  [[1 7 2 8 :center :flex-start 2 :rem :column]
@@ -264,66 +263,21 @@
                    :z-index 10}])}
 
 
-          #_[m7/x `[=  gradient  [[:m r sin ~tt] [:m r cos ~tt]]
-                  [[- 0 k] [- k 0]]
-                  [[- k] k]
-                  -1]]
+          #_(m7/x [:p
+                 [:b (sl/symeq b)] 2])
 
-          #_[m7/x `[=  k [:m r sin 135] ]]
-
-          #_[m7/x `[=  k [:m 10 sin 135] ]]
-
-
-          #_[m7/x `[=  gradient  [[:m r [[:sq 2] 2]] [:m r [- [[:sq 2] 2]]]]
-                  [[- 0 k] [- k 0]]
-                  [[- k] k]
-                  -1]]
-          #_[m7/x `[=  factorial [:m  f [:b x]]  [:m x f [:b [- x 1]]]]]
-
-          #_[m7/x `[=  factorial [:m  f [:b 0]] 1]]
-
-
-          #_[m7/x `[=   [:m  f [:b 5]]  [:m 5 f [:b [- 5 1]]]]]
-
-          #_[m7/x `[=   [:m  f [:b 5]]  [* 5 [:m f [:b 4]]]]]
-
-          #_[m7/x `[=   [:m  f [:b 5]]  [* 5 4 [:m f [:b 3]]]]]
-          #_[m7/x `[=   [:m  f [:b 5]]  [* 5 4 3 [:m f [:b 2]]]]]
-
-          #_[m7/x `[=   [:m  f [:b 5]]  [* 5 4 3 2 [:m f [:b 1]]]]]
-
-          #_[m7/x `[=   [:m  f [:b 5]]  [* 5 4 3 2 1 [:m f [:b 0]]]]]
-
-
-          #_(m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq a)]]
-                   tt])
-
-
-
-
-
-
-
-
-
-
-
-
-          (m7/x (sl/lawdr a b ))
-
-          #_(m7/x (sl/lawd a b ))
-          #_(m7/x (sl/lawd2 b a ))
-
-          #_(m7/x (sl/symeq bbox))
-          #_(m7/x [:m [:b (sl/symeq b)] dd ])
           #_(m7/x [:m
                  [:b (sl/symeq b)]
                  [:b (sl/symeq a)]])
 
-          #_(m7/x [:p
-                   [:b (sl/symeq b)]
-                 2])
+          #_(m7/x [:m [:b (sl/symeq b)] dd ])
 
+          #_(m7/x (sl/symeq bbox))
+
+          #_(m7/x (sl/lawd2 b a ))
+          #_(m7/x (sl/lawd a b ))
+
+          (m7/x (sl/lawdr a b ))
 
 
           #_(m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq b)]]
