@@ -54,8 +54,7 @@
 (defn frac? [s]
   (and (< s 1.001) (> s -0.001)))
 
-(s/def :css/persent
-  (s/and number? persent?))
+(s/def :css/persent number?)
 
 (s/def :css/hsl
   (s/cat
@@ -208,33 +207,72 @@
      (apply merge other))))
 
 
-(hsl [2 70 90 .4])
+(defn css2 [[sp color gradient & other]]
+  (let [sz (juxt :size :scale)
+        cell (comp
+              (fn [n] (update n :font-size sz))
+              (partial into {:display :flex})
+              (juxt
+               (comp
+                (partial vector :grid-row)
+                #_span
+                (juxt :row :span)
+                :grid-row)
+               (comp
+                (partial vector :grid-column)
+                #_span
+                (juxt :row :span)
+                :grid-column)
+               :flex)
+              (fn [sp] (s/conform :css/span sp)))
+        hslt2 (comp
+               (fn [a]
+                 [:hsla (vec a)])
+               (juxt
+                (comp
+                 (fn [n] [n :rad])
+                 :hue)
+                (comp
+                 (fn [n] [n :%])
+                 :saturation)
+                (comp
+                 (fn [n] [n :%])
+                 :lighness) :opacity)
+               (partial s/conform :css/hsl))
+        hslt (comp
+              vec
+              (partial cons :hlsa )
+              (juxt
+               (comp
+                (fn [n] [n :rad])
+                :hue)
+               (comp
+                (fn [n] [n :%])
+                :saturation)
+               (comp
+                (fn [n] [n :%])
+                :lighness) :opacity)
+              (partial s/conform :css/hsl))
 
-(merge
- (
-  (comp
-   (fn [n] (update n :font-size identity))
-   (partial into {:display :flex})
-   (juxt
-    (comp
-     (partial vector :grid-row)
-     #_span
-     (juxt :row :span)
-     :grid-row)
-    (comp
-     (partial vector :grid-column)
-     #_span
-     (juxt :row :span)
-     :grid-column)
-    :flex)
-   (fn [sp] (s/conform :css/span sp)))
-  [4 4 1 12  :center :center 1.5 :rem :column])
- {:gap 1
-  :z-index 2})
+        g (if (> (count gradient) 0)
+            {:background-image
+             (linear-gradient
+              (s/conform :css/linear-gradient gradient))}
+            {})
+        color (if (> (count color) 0)
+                {:background-color (hslt2 color)}
+                {})
+        ]
+    (merge
+     (cell sp)
+     color
+     g
+     (apply merge other))))
 
 
 
-(css
- [[4 4 1 12  :center :center 1.5 :rem :column]
-  [2 70 90 .4] [] {:gap "1rem"
-                   :z-index 2}])
+
+
+
+(
+ [2 70 90 .4])
