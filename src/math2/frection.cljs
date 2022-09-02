@@ -197,12 +197,12 @@
         dd '☐
         dx [1 0  0 -1 -1  0 0 1 ]
 
-        b 5
-        c 2
+        b 2
+        c 1
         tt 'θ
         sq (fn [n]
-                (comp
-                 (partial map (partial * n))))]
+             (comp
+              (partial map (partial * n))))]
     (let [zoom 4
 
           ax-dx 80
@@ -225,8 +225,8 @@
 
 
        (let [
-             a (m7/eq2 `[[~b [1]  [w]] [~c [1]  [y]]])
-             b (m7/eq2 `[[~b [1]  [w]] [~c [1] [y]]])
+             a (m7/eq2 `[[~b [1]  [z]] [~c [1]  [x]]])
+             b (m7/eq2 `[[3 [1]  [y]] [~c [1] [x]]])
 
              bbox (let [[[c1 x2 x3] [c2 y2 y3]] b]
                     [[c1 (conj x2 1) (conj x3 dd)]
@@ -264,30 +264,36 @@
 
 
           #_(m7/x [:p
-                 [:b (sl/symeq b)] 2])
+                   [:b (sl/symeq b)] 2])
 
-          #_(m7/x [:m
+
+
+
+
+
+
+          (m7/x (sl/lawd2 b a ))
+
+          (m7/x (sl/symeq bbox))
+
+          (m7/x [:m [:b (sl/symeq b)] dd ])
+          (m7/x [:m
                  [:b (sl/symeq b)]
                  [:b (sl/symeq a)]])
 
-          #_(m7/x [:m [:b (sl/symeq b)] dd ])
-
-          #_(m7/x (sl/symeq bbox))
-
-          #_(m7/x (sl/lawd2 b a ))
           #_(m7/x (sl/lawd a b ))
 
-          (m7/x (sl/lawdr a b ))
+          #_(m7/x (sl/lawdr a b ))
 
 
           #_(m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq b)]]
-                 (sl/lawd b b)])
+                   (sl/lawd b b)])
 
           #_(m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq b)]]
-                 (sl/lawdr b b)])
+                   (sl/lawdr b b)])
 
           #_(m7/x ['= [:p [:b (sl/symeq b)] 2]
-                 (sl/lawdr b b)])
+                   (sl/lawdr b b)])
 
 
 
@@ -305,7 +311,7 @@
 
 
 
-            ])
+          ])
 
 
 
@@ -331,14 +337,14 @@
 
 
            #_(for [j (range 0 a)
-                 i (range 0 (+  b c))]
-             [:path {:stroke-width 1
-                     :fill (hsl [(if (< i b) 1 2) 70 70 .8])
-                     :stroke (hsl [1 70 50 .8])
-                     :d (m7/path
-                         `[~(* i 20) ~(+ -80 (* 20 j )) :l ~@(map #(* 20 %1 %2)
-                                                                  dx
-                                                                  (cycle [1 1]))])}])
+                   i (range 0 (+  b c))]
+               [:path {:stroke-width 1
+                       :fill (hsl [(if (< i b) 1 2) 70 70 .8])
+                       :stroke (hsl [1 70 50 .8])
+                       :d (m7/path
+                           `[~(* i 20) ~(+ -80 (* 20 j )) :l ~@(map #(* 20 %1 %2)
+                                                                    dx
+                                                                    (cycle [1 1]))])}])
            [:g {:transform (m7/tranfrom [[:scale [1 -1]]
                                          [:translate [0 80]]])}
             (for [i (range 0 (+ b c))
@@ -375,30 +381,30 @@
 
 
            #_(for [j (range 3 8)
-                 i (range 0 (+  b c))]
-             [:path {:stroke-width 1
-                     :fill (hsl [(if (< i b) 3 4) 70 70 .8])
-                     :stroke (hsl [3 70 50 .8])
-                     :d (m7/path
-                         `[~(* i 20) ~(+ -80 (* 20 j )) :l
-                           ~@(map #(* 20 %1 %2)
-                                  dx
-                                  (cycle [1 1]))])}])
+                   i (range 0 (+  b c))]
+               [:path {:stroke-width 1
+                       :fill (hsl [(if (< i b) 3 4) 70 70 .8])
+                       :stroke (hsl [3 70 50 .8])
+                       :d (m7/path
+                           `[~(* i 20) ~(+ -80 (* 20 j )) :l
+                             ~@(map #(* 20 %1 %2)
+                                    dx
+                                    (cycle [1 1]))])}])
 
 
            #_[:g
-            (map
-             (fn [j]
-               (map (fn [i]
-                      [:path {:stroke-width 2
-                              :fill (hsl [(if (< i 2) 1 2) 70 70 1])
-                              :stroke (hsl [7 70 70 1])
-                              :d (m7/path
-                                  `[~(* i 40) ~(* 20 j ) :l ~@(map #(* 20 %1 %2)
-                                                                   dx
-                                                                   (cycle [2 1]))])}])
-                    (range 0 5)))
-             (range 0 2))]
+              (map
+               (fn [j]
+                 (map (fn [i]
+                        [:path {:stroke-width 2
+                                :fill (hsl [(if (< i 2) 1 2) 70 70 1])
+                                :stroke (hsl [7 70 70 1])
+                                :d (m7/path
+                                    `[~(* i 40) ~(* 20 j ) :l ~@(map #(* 20 %1 %2)
+                                                                     dx
+                                                                     (cycle [2 1]))])}])
+                      (range 0 5)))
+               (range 0 2))]
 
 
            ]

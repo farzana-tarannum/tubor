@@ -7,68 +7,108 @@
    [clojure.spec.alpha :as s]
    [defun.core :refer [defun fun]]))
 
+(defn conjj [i]
+  (fn [arr]
+    (conj arr i)))
 
-(defn persent? [s]
-  (and (< s 100.001) (> s -0.001)))
+(def ve (fn [x] (* x -1)))
+(def m-add (fn [m] (str "M " m)))
+
+(def f-add (fn [m]
+             (fn [st]
+               (str (name m) st))))
+
+(def l-add (fn [m]
+             (fn [st]
+               (str st (name m) ))))
+
+(def sec (l-add :s))
+(def rel #{:l :c :a :q})
+(def abs #{:L :C :A :Q})
+(def space (fn [p] (str/join " " p)))
+
+(def sami-colon (fn [p] (str/join " ; " p)))
+(def coma (fn [p] (str/join " , " p)))
+(def not-space (fn [p] (str/join "" p)))
+
+
+(def np (fn [p]
+          (not-space
+           (map
+            (fn [aa]
+              (if (keyword? aa) (name aa) aa))
+            p))))
+
+(defn wrap [a]
+  (str "(" a  ")"))
+(defn wrap' [a]
+  (str "'" a  "'"))
+
+(defn wrap-sami-colon [a]
+  (str "\"" a "\""))
+
+(defn url [i]
+  (str "url" "(#" i  ")" ))
+
 
 (defn frac? [s]
   (and (< s 1.001) (> s -0.001)))
 
-(s/def :math7/persent
+(s/def :css/persent
   (s/and number? persent?))
 
-(s/def :math7/hsl
+(s/def :css/hsl
   (s/cat
    :hue number?
-   :saturation :math7/persent
-   :lighness :math7/persent
-   :opacity (s/and number? frac?)))
+   :saturation number?
+   :lighness number?
+   :opacity number?))
 
 
 (comment
-  (s/valid? :math7/hsl [1 0 100 1]))
+  (s/valid? :css/hsl [1 0 100 1]))
 
-(s/def :math7/size
+(s/def :css/size
   (s/cat
    :size number?
    :scale #{:rem :px :vh :vw :% :fr}))
 
-(s/def :math7/linear-gradient
+(s/def :css/linear-gradient
   (s/cat
    :angle number?
    :colors
    (s/+ (s/cat
-         :size :math7/size
-         :color :math7/hsl))))
+         :size :css/size
+         :color :css/hsl))))
 
 
-(s/def :math7/flex
+(s/def :css/flex
   (s/cat
    :justify-content #{:center :space-between :space-around :flex-start :flex-end}
    :align-items #{:center :space-between :space-around :flex-start :flex-end}
-   :font-size :math7/size
+   :font-size :css/size
    :flex-direction (s/? #{:row :column})))
 
-(comment (s/conform :math7/flex [:center :center 1 :rem]))
+(comment (s/conform :css/flex [:center :center 1 :rem]))
 
 
 
-(s/def :math7/span
+(s/def :css/span
   (s/cat
    :grid-row (s/cat :row int? :span int?)
    :grid-column (s/cat :row int? :span int?)
-   :flex :math7/flex
+   :flex :css/flex
    ))
 
 (comment
-  (s/conform :math7/span [1 2 3 4 :center :center 1 :rem :row]))
+  (s/conform :css/span [1 2 3 4 :center :center 1 :rem :row]))
 
 (comment
-  (s/def :math7/cell
+  (s/def :css/cell
     (s/cat
-     :span (s/spec :math7/span)
-     :color (s/spec :math7/hsl)
-     :linear-gradient (s/? (s/spec :math7/linear-gradient)))))
+     :span (s/spec :css/span)
+     :color (s/spec :css/hsl)
+     :linear-gradient (s/? (s/spec :css/linear-gradient)))))
 
 
 (def hsla
@@ -89,7 +129,7 @@
 
 (defn hsl [a]
   ((comp hsla
-         (partial s/conform :math7/hsl)) a))
+         (partial s/conform :css/hsl)) a))
 
 (def size
   (comp
@@ -154,16 +194,47 @@
         g (if (> (count gradient) 0)
             {:background-image
              (linear-gradient
-              (s/conform :math7/linear-gradient gradient))}
+              (s/conform :css/linear-gradient gradient))}
             {})
         color (if (> (count color) 0)
                 {:background-color (hsl color)}
                 {})
         ]
-    (comment (merge (cell span) g color (partial )))
     (merge
      (cell
-      (s/conform :math7/span sp))
+      (s/conform :css/span sp))
      color
      g
      (apply merge other))))
+
+
+(hsl [2 70 90 .4])
+
+(merge
+ (
+  (comp
+   (fn [n] (update n :font-size identity))
+   (partial into {:display :flex})
+   (juxt
+    (comp
+     (partial vector :grid-row)
+     #_span
+     (juxt :row :span)
+     :grid-row)
+    (comp
+     (partial vector :grid-column)
+     #_span
+     (juxt :row :span)
+     :grid-column)
+    :flex)
+   (fn [sp] (s/conform :css/span sp)))
+  [4 4 1 12  :center :center 1.5 :rem :column])
+ {:gap 1
+  :z-index 2})
+
+
+
+(css
+ [[4 4 1 12  :center :center 1.5 :rem :column]
+  [2 70 90 .4] [] {:gap "1rem"
+                   :z-index 2}])

@@ -722,6 +722,18 @@
 
 
 
+              [:circle {:cx (* 20 m)
+                        :cy (/ (* 20 d d) a)
+                        :fill (hsl [5 60 60 .5] )
+                        :r 2}
+               [:animate {:attributeName :r
+                          :from 0
+                          :to 2
+                          :dur (m7/not-space [3 "s"])
+                          :repeatCount :indefinite}]
+               ]
+
+
 
 
 
