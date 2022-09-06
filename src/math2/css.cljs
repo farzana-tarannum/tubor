@@ -272,7 +272,30 @@
 
 
 
+(defn transform [t]
+  ((partial str/join " ")
+   (map
+    (comp
+     (partial str/join "")
+     (juxt
+      (comp
+       name
+       first)
+      (comp
+       (fn [n]
+         (str "(" n ")"))
+       (fn [n]
+         (if (vector? n)
+           (str/join "," n)
+           (str n)))
+       second))) t)))
 
-
-(
- [2 70 90 .4])
+#_(transform [[:scale 3]
+              [:transform [2 3]]])
+#_(transform
+   (rest
+    (:background-color
+     (css2
+      [[4 4 1 12  :center :center 1.5 :rem :column]
+       [2 70 90 .4] [] {:gap [1 :rem]
+                        :z-index 2}]))))
