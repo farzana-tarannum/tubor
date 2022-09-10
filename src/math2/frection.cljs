@@ -429,6 +429,31 @@
                      {:background-color (hsl [1 70 70 1])
                       :gap ".1rem"})}
 
+   [:div {:style
+                (m7/css
+                 [[1 7 10 8 :center :flex-start 4 :rem :column]
+                  [2 70 (+ 50 (* 5 5))  .7]
+                  []
+                  {:padding-left "25px"
+                   :gap ".1rem"
+                   :z-index 10}])}
+
+
+
+    [m7/x `[= [- [:m 2 x] [:m 3 y] 1 ] 0]]
+
+    #_[m7/x `[= 0 [- [+ [:p a 2]  [:m a [:b [- 6 3]]]] [* 6 3]]]]
+
+    #_[m7/x `[= 0 [- [+ [:p a 2]  [:m 6 a ] [:m [- 3] a]]
+                 [* 6 3]]]]
+
+    #_[m7/x `[= 0 [:m [:b [+ a 6 ]] [:b [- a 3 ]]]]]
+
+
+
+
+    ]
+
 
    [:div {:style
                 (m7/css
