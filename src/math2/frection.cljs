@@ -196,10 +196,11 @@
         tt 'θ
         dd '☐
         dx [1 0  0 -1 -1  0 0 1]
-        b 2
-        c 5
-        d 3
-        e 2
+        abc (fn [a] (js/Math.abs a))
+        b 5
+        c 3
+        d 2
+        e 4
         tt 'θ
         sq (fn [n]
              (comp
@@ -273,27 +274,30 @@
 
 
 
-          (m7/x [:m
+          #_(m7/x [:m
                    [:b (sl/symeq a)]
                  [:b (sl/symeq b)]])
 
           #_(m7/x (sl/symeq bbox))
-          #_(m7/x [:m [:b (sl/symeq b)] dd ])
-
-          (m7/x (sl/lawd2 a b ))
 
 
 
 
 
-          (m7/x (sl/lawd  b a))
+
+
+
+
 
           (m7/x (sl/lawdr b a))
 
+          #_(m7/x (sl/lawd  b a))
+
+          #_(m7/x (sl/lawd2 a b ))
+          #_(m7/x [:m [:b (sl/symeq b)] dd ])
 
 
-          #_(m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq b)]]
-                   (sl/lawd b b)])
+          #_(m7/x [:m [:b (sl/symeq b)] [:b (sl/symeq a)]])
 
           #_(m7/x ['= [:m [:b (sl/symeq b)] [:b (sl/symeq b)]]
                    (sl/lawdr b b)])
@@ -353,24 +357,28 @@
                                                                     (cycle [1 1]))])}])
            [:g {:transform (m7/tranfrom [[:scale [1 -1]]
                                          [:translate [0 80]]])}
-            (for [i (range 0 (+ b c))
-                  j (range 0 (+ d e))
-                  :let [xx [(< i b ) (< j d)]
-                        yy [(>= i b) (>= j d)]
-                        yx [(< i b) (>= j d)]
-                        xy [(>= i b) (< j d)]
-                        qd (map (fn [[a b] y] [a b y]) [xx xy yx yy] [1 2 3 4])
-                        [_ _ color] (first (filter (fn [[x y _]] (and x y)) qd))
-                        ]
-                  ]
-              [:path {:stroke-width 1
-                      :fill (hsl [color 70 70 .8])
-                      :stroke (hsl [1 70 50 .8])
-                      :d (m7/path
-                          `[~(* i 20) ~(ve (* 20 j )) :l ~@(map #(* 20 %1 %2)
-                                                                dx
-                                                                (cycle [1 1]))])}]
-              )]
+            (let [e (abc e)
+                  b (abc b)
+                  c (abc c)
+                  d (abc d)]
+                (for [i (range 0 (+ b c))
+                      j (range 0 (+ d e))
+                      :let [xx [(< i b ) (< j d)]
+                            yy [(>= i b) (>= j d)]
+                            yx [(< i b) (>= j d)]
+                            xy [(>= i b) (< j d)]
+                            qd (map (fn [[a b] y] [a b y]) [xx xy yx yy] [1 2 3 4])
+                            [_ _ color] (first (filter (fn [[x y _]] (and x y)) qd))
+                            ]
+                      ]
+                  [:path {:stroke-width 1
+                          :fill (hsl [color 70 70 .8])
+                          :stroke (hsl [1 70 50 .8])
+                          :d (m7/path
+                              `[~(* i 20) ~(ve (* 20 j )) :l ~@(map #(* 20 %1 %2)
+                                                                    dx
+                                                                    (cycle [1 1]))])}]
+                  ))]
 
            #_(for [j (range 0 a)
                    i (range 0 (+  b c))]

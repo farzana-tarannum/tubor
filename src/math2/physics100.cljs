@@ -87,7 +87,11 @@
    :rm/code {:db/unique :db.unique/identity}
    })
 
+
+
+
 (def conn   (d/create-conn schema))
+
 (d/transact!
  conn
  [
@@ -1057,7 +1061,8 @@ The pipelined version also modeled at RTL level."]
                      3 [4 1]
                      26  [7 0]
                      15 [6 0]
-                     25 [7 1]} p [row1 col1])]          [
+                     25 [7 1]} p [row1 col1])]
+          [
            [:div {:key (gensym)
                   :spellcheck :true
                   :contenteditable :true

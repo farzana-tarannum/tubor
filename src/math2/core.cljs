@@ -420,9 +420,9 @@
   [:div
    #_[m19/home-work19]
    #_[trig/ladder]
-   #_[trans/coordinates2]
-   [trans/coordinates3]
-   #_[frac/frection]
+   #_[trans/coordinates3]
+   #_[py100/template2]
+   [frac/frection]
    #_[frac/frection2]
    ])
 
