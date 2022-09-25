@@ -10,8 +10,10 @@
             [math2.fraction :as frac]
             [math2.math :as mtemp]
             [math2.trig :as trig]
+            [math2.stat :as stat]
             [math2.bdmap :as bdmap]
             [math2.solve :as s]
+            [math2.teacher :as teacher]
             [clojure.walk :as w]
             [math2.transfrom :as trans]
             [defun.core :refer [defun fun]]
@@ -419,11 +421,16 @@
 (defn curveslasses []
   [:div
    #_[m19/home-work19]
+   #_[trig/trig2]
    #_[trig/ladder]
+   #_[trig/circle]
    #_[trans/coordinates3]
+   [trans/cd5]
+   #_[stat/stat3]
+   #_[teacher/resume]
    #_[py100/template2]
+   #_[frac/stat]
    [frac/frection]
-   #_[frac/frection2]
    ])
 
 

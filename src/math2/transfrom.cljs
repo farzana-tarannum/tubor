@@ -1888,37 +1888,64 @@
                          (set-yy (+ yy 1)))} "⇨"]
       ]
 
+
+
+
+
+
+
      (let [
            a (m7/eq2 `[[1 [1]  [x2]] [-1 [1]  [x1]]])
            b (m7/eq2 `[[1 [1]  [y1]] [1 [1] [y2]]])]
        [:div
         {:style (m7/css
-                 [[4 4 1 12  :center :center 3.5 :rem :column]
+                 [[4 4 1 12  :center :center 1.5 :rem :column]
                   [2 70 90 .4] [] {:gap "1rem"
                                    :z-index 2}])}
 
 
+        [m7/x `[= [* [1 2] [* BC h]] [* [1 2] BC [:m AB sin B]]]]
 
-        #_[:div "A(-2,-4) , B(1,-7)"]
+        [m7/x `[= [* [1 2] BC h] [* [1 2] BC [:m AC sin C]]]]
 
-        #_[m7/x `[= [[+ [- 7] 4]
-                   [- 1 [- 2]]]
-                [[- 3] 3] [- 1]]
-
-         ]
+        [m7/x `[= [* [1 2] AC [:k h ac]] [* [1 2] AB [:m AC sin A]]]]
 
 
-        #_[m7/x `[= [:m 2 y] [+ [- x] 19
-                     ]]]
+        [:div "sine rule"]
+        [m7/x `[= [AC
+                   [:m sin B]]
+                [AB
+                 [:m sin C]]]]
 
+        [m7/x `[=
+                [* [1 2] BC [:m AC sin C]]
+                [* [1 2] AB [:m AC sin A]]]]
 
+        [m7/x `[=
+                [*  BC [:m  sin C]]
+                [*  AB [:m  sin A]]]]
 
+        [m7/x `[=
+                [[*  BC [:m  sin C]]
 
+                 [* [:m  sin A] [:m  sin C]]]
+                [[*  AB [:m  sin A]]
+                 [* [:m  sin A] [:m  sin C]]]]]
 
+        [m7/x `[=
+                [BC
+                 [:m  sin A]
+                 ]
+                [AB
+                 [:m  sin C]]]]
 
-
-
-
+        [m7/x `[=
+                [BC
+                 [:m  sin A]
+                 ]
+                [AB
+                 [:m  sin C]]
+                [AC [:m sin B]]]]
 
 
 
@@ -1945,10 +1972,320 @@
                            (+ x2 (* run 2)) (+ y2 (* rise 2))]
 
             m (/ (- y2 y1) (- x2 x1))
+            ma (/ 2 7)
+            mb (/ -7 2)
+
+            mc (/ (- 5 7)
+                  (- 9 2))
+
+
             m1 (/ (- y4 y3) (- x4 x3))
             leq (fn [[m x1 y1]]
                   (fn [x]
                     (+ (* m (- x x1)) y1)))
+
+            maeq (leq [ma (* 2 20) (* 20 3)])
+
+            mbeq (leq [mb (* 2 20) (* 20 7)])
+
+
+            mceq (leq [mc (* 2 20) (* 20 7)])
+
+
+            x11 (* -10 20)
+            y11 ((leq [m x1 y1]) x11)
+            x22 (* 10 20)
+            y22 ((leq [m x1 y1]) (* 10 20))
+            y33 ((leq [m1 x3 y3]) (* 5 20))
+            y44 ((leq [m1 x3 y3]) (* -5 20))]
+        [:svg {
+                 :style {:height :100%
+                         :width :100%}
+                 :on-click (fn [e]
+                             (p
+                              (-> e .-target)
+                              (-> e  .-clientX)
+                              (-> e  .-clientY) ))
+                 :viewBox (m7/space viewbox4)}
+         [svg/flames]
+         [grad]
+         [:animate {:attributeName :viewBox
+                    :to (m7/space viewbox3)
+                    :dur "4s"
+                    :fill :freeze}]
+
+
+
+
+         #_(grid-on 1 1 (* xx 20) (* yy 20) false)
+
+
+         [green]
+
+
+         [:marker {:id (name :mb2)
+                   :viewBox (m7/space [-5 -5 10 10])
+                   :refX 0
+                   :refY 0
+                   :orient :auto-start-reverse
+                   :markerWidth 5
+                   :markerHeight 5}
+          [:path {:d (m7/path [-3 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
+                  :stroke (hsl [5 70 70 1])
+                  :stroke-width .1
+                  :transform (m7/tranfrom [[:rotate 0]])
+                  :fill (m7/hsl [.4 70 70 1])}]]
+
+         [:g
+
+
+
+
+
+            [:g
+
+             #_[:path#bma1 {:d (m7/path [-200 (ve (maeq -200)) :L 1200 (ve (maeq 1200))])
+                          :stroke-width 1
+                          :marker-end (m7/url (name :mb2))
+                          :marker-start (m7/url (name :mb2))
+                          :stroke (hsl [2 30 30 1])
+                          :fill :none}]
+
+
+             [:path#bmb1 {:d (m7/path
+                              [(* 2 20) (ve
+                                         (mbeq (* 2 20))) :L 65 (ve (mbeq 65))])
+                          :stroke-width 1
+                          :marker-end (m7/url (name :mb2))
+                          :marker-start (m7/url (name :mb2))
+                          :stroke (hsl [2 30 30 1])
+                          :fill :none}]
+
+
+             #_[:path#bmc1 {:d
+                          (m7/path
+                           [-200 (ve
+                                  (mceq -200)) :L
+                            1200
+                            (ve (mceq 1200))])
+                          :stroke-width 1
+                          :marker-end (m7/url (name :mb2))
+                          :marker-start (m7/url (name :mb2))
+                          :stroke (hsl [2 30 30 1])
+                          :fill :none}]
+
+             [:path {:d (m7/path [(* 2 20) (ve (* 7 20)) :L
+                                  (* 20 2) (ve (* 20 3))
+
+                                  (* 9 20) (ve (* 20 5))
+                                  (* 2 20) (ve (* 7 20))
+                                  ])
+                     :stroke-width 1
+                     :stroke (hsl [2 30 30 1])
+                     :fill (hsl [1 70 70 .4])}]
+
+
+             #_[:path#b1 {:d (m7/path [x11 y11 :L x22 y22])
+                          :stroke-width 1
+                          :marker-end (m7/url (name :mb2))
+                          :marker-start (m7/url (name :mb2))
+                          :stroke (hsl [2 30 30 1])
+                          :fill :none}]
+
+
+             [:circle {:r 2
+                       :cy (ve (* 20 3))
+                       :cx (* 20 2)
+                       :fill (hsl [0.5 80 60 1])}]
+
+             [:text {:r 2
+                     :y (ve (* 20 3))
+                     :x (* 20 2)
+                     :font-size 10}
+              "C"]
+
+             [:circle {:r 2
+                       :cy (ve (* 20 5))
+                       :cx (* 20 9)
+                       :fill (hsl [0.5 80 60 1])}]
+
+             [:text {:r 2
+                     :y (ve (* 20 5))
+                     :x (* 9 20)
+                     :font-size 10}
+              "B"]
+
+
+             [:circle {:r 2
+                       :cy (ve (* 20 7))
+                       :cx (* 20 2)
+                       :fill (hsl [0.5 80 60 1])}]
+
+             [:text {:r 2
+                     :y (ve (* 20 7))
+                     :x (* 20 2)
+                     :font-size 10}
+              "A"]
+
+
+
+
+             ]
+
+
+
+
+
+            [:text {:style {:font-size 10}}
+
+
+             [:textPath {:href :#bmb1
+                         :startOffset "40%"
+                         }
+              "h"]
+
+
+
+             [:textPath {:href :#b3
+                         :startOffset "40%"}
+              (str (first c) " " (last c))
+
+
+
+              ]]
+
+            ]
+
+
+         ])
+      ]]))
+
+
+
+
+
+(defn stat3 []
+  (let [f (fn [n] (/ 1 n))
+        tt 'θ
+        dx [1 0  0 1 -1  0 0 -1 ]
+        sq (fn [n]
+             (comp
+              (partial map (partial * n))))
+        ax-dx 80
+        ax-dy 40
+        vb (fn [z]
+             (nth [(map #(* 5 %) [-10 -70  83 80])
+                   [0 -250  300 300]
+                   [-100 -150  300 300]
+                   [0 -80  80 100]
+                   [0 -25  50 50]
+                   [-100 -200  890 200]
+                   [40 120  80 80]
+                   [0 40  100 100]
+                   [75 -175  150 150]
+                   [-20 -20  100 100]
+                   [-400 -200  800 200]] z))
+        viewbox4 (vb 0)
+        viewbox3 (vb 1)
+        m 30
+        d 9.4
+        scale2 [[.5 .5] [-0.5 .5]]
+        [xx set-xx] (react/useState 2)
+        [yy set-yy] (react/useState 3)
+
+        [c ck] (react/useState [0 0])
+        p (fn [svg x y]
+            (let [p (js/DOMPoint. x y)
+                  t (-> svg
+                        (.getScreenCTM)
+                        (.inverse))
+                  xy (-> p
+                         (.matrixTransform t))]
+              (ck [(fix (/ (-> xy .-x) 2) 1)
+                   (fix (* -1 (/ (-> xy .-y) 2)) 1) ])))]
+    [:div {:style (merge
+                     (grid [100 :vh 100 :vw
+                            (take 24 (repeat [8 :vh]))
+                            (take 20 (repeat [8 :vh]))])
+                     {:background-color (hsl [1 70 70 .5])
+                      :gap ".2rem"})}
+     [:div
+      {:style (m7/css
+               [[3 1 8 11  :center :center 2.2 :rem ]
+                [2 70 90 .4] [] {:gap "1rem"
+                                 :z-index 2}])}
+
+      [:div {:on-click (fn [_]
+                         (set-xx (- xx 1)))} "⬅"]
+      [:div [m7/x  `[= y ~xx]]]
+      [:div {:on-click (fn [_]
+                         (set-xx (+ xx 1)))} "⇨"]
+      [:div {:on-click (fn [_]
+                         (set-yy (- yy 1)))} "⬅"]
+      [:div [:div [m7/x  `[= x ~yy]]]]
+      [:div {:on-click (fn [_]
+                         (set-yy (+ yy 1)))} "⇨"]
+      ]
+
+
+
+
+
+
+
+
+     [:div
+      {:style (m7/css
+               [[4 4 1 12  :center :center 2.5 :rem :column]
+                [2 70 90 .4] [] {:gap "1rem"
+                                 :z-index 2}])}
+
+
+
+
+
+
+      ]
+
+
+
+
+
+
+
+     [:div {:style (m7/css
+                    [[2 10 2 23 :center :center 3 :rem]
+                     [1 70 90 1] [] {:gap "1rem"
+                                     :z-index 1}])}
+
+      (let [[x1 y1 x2 y2] [(* 3 20) (ve (*  4 20 ))
+                           (* 20 -1) (ve (* 8 20 ))]
+
+            [rise run] [(ve (* 2 7 )) (* 16 2)]
+            [x3 y3 x4 y4] [(+ x1 run) (+ y1 rise)
+                           (+ x2 (* run 2)) (+ y2 (* rise 2))]
+
+            m (/ (- y2 y1) (- x2 x1))
+            ma (/ 2 7)
+            mb (/ -7 2)
+
+            mc (/ (- 5 7)
+                  (- 9 2))
+
+
+            m1 (/ (- y4 y3) (- x4 x3))
+            leq (fn [[m x1 y1]]
+                  (fn [x]
+                    (+ (* m (- x x1)) y1)))
+
+            maeq (leq [ma (* 2 20) (* 20 3)])
+
+            mbeq (leq [mb (* 2 20) (* 20 7)])
+
+
+            mceq (leq [mc (* 2 20) (* 20 7)])
+
+
             x11 (* -10 20)
             y11 ((leq [m x1 y1]) x11)
             x22 (* 10 20)
@@ -1993,75 +2330,710 @@
                   :transform (m7/tranfrom [[:rotate 0]])
                   :fill (m7/hsl [.4 70 70 1])}]]
 
-           [:g
+         [:g
+
+
 
 
 
             [:g
-             [:path#b1 {:d (m7/path [x11 y11 :L x22 y22])
+
+             [:path#bma1 {:d (m7/path [-200 (ve (maeq -200)) :L 1200 (ve (maeq 1200))])
                           :stroke-width 1
                           :marker-end (m7/url (name :mb2))
                           :marker-start (m7/url (name :mb2))
-                        :stroke (hsl [2 30 30 1])
-                        :fill :none}]
+                          :stroke (hsl [2 30 30 1])
+                          :fill :none}]
 
 
              [:circle {:r 2
-                       :cy (ve (* 20 7))
-                       :cx 0
+                       :cy (ve (* 20 3))
+                       :cx (* 20 2)
                        :fill (hsl [0.5 80 60 1])}]
 
              [:text {:r 2
-                     :y (ve (* 20 7))
-                     :x 0
+                     :y (ve (* 20 3))
+                     :x (* 20 2)
                      :font-size 10}
-              "A"]
+              "P(2,3)"]
 
-
-
-             #_[:path#b2 {:d (m7/path [(* -5 20) y44
-                                       :L
-                                       (* 5 20) y33])
-                          :stroke (hsl [1 20 20 1])
-                          :stroke-width .5
-
-                          :marker-end (m7/url (name :mb2))
-                          :marker-start (m7/url (name :mb2))
-
-                          :fill (hsl [1 70 70 1])}]
-               #_[:path#b3 {:d (m7/path [(* 1 20) 0 :l (* 16 2) 0])
-                          :stroke (hsl [1 20 20 1])
-                          :stroke-width .5
-
-                          :marker-end (m7/url (name :mb2))
-                          :marker-start (m7/url (name :mb2))
-
-                          :fill (hsl [1 70 70 1])}]]
+             ]
 
 
 
 
 
-            [:text {:style {:font-size 5}}
 
-
-             [:textPath {:href :#b1
-                         :startOffset "40%"
-                         }
-              ""]
-
-
-
-             [:textPath {:href :#b3
-                         :startOffset "40%"}
-              (str (first c) " " (last c))
-
-
-
-              ]]
 
             ]
 
 
          ])
       ]]))
+
+
+
+
+
+
+
+
+(defn cd4 []
+  (let [f (fn [n] (/ 1 n))
+        tt 'θ
+        dx [1 0  0 1 -1  0 0 -1 ]
+        sq (fn [n]
+             (comp
+              (partial map (partial * n))))
+        ax-dx 80
+        ax-dy 40
+        vb (fn [z]
+             (nth [(map #(* 5 %) [-10 -70  83 80])
+                   [0 -250  300 300]
+                   [-100 -150  300 300]
+                   [0 -80  80 100]
+                   [0 -25  50 50]
+                   [-100 -200  890 200]
+                   [40 120  80 80]
+                   [0 40  100 100]
+                   [75 -175  150 150]
+                   [-20 -20  100 100]
+                   [-400 -200  800 200]] z))
+        viewbox4 (vb 0)
+        viewbox3 (vb 1)
+        m 30
+        d 9.4
+        scale2 [[.5 .5] [-0.5 .5]]
+        [xx set-xx] (react/useState 2)
+        [yy set-yy] (react/useState 3)
+
+        [c ck] (react/useState [0 0])
+        p (fn [svg x y]
+            (let [p (js/DOMPoint. x y)
+                  t (-> svg
+                        (.getScreenCTM)
+                        (.inverse))
+                  xy (-> p
+                         (.matrixTransform t))]
+              (ck [(fix (/ (-> xy .-x) 2) 1)
+                   (fix (* -1 (/ (-> xy .-y) 2)) 1) ])))]
+    [:div {:style (merge
+                     (grid [100 :vh 100 :vw
+                            (take 24 (repeat [8 :vh]))
+                            (take 20 (repeat [8 :vh]))])
+                     {:background-color (hsl [1 70 70 .5])
+                      :gap ".2rem"})}
+     [:div
+      {:style (m7/css
+               [[3 1 8 11  :center :center 2.2 :rem ]
+                [2 70 90 .4] [] {:gap "1rem"
+                                 :z-index 2}])}
+
+      [:div {:on-click (fn [_]
+                         (set-xx (- xx 1)))} "⬅"]
+      [:div [m7/x  `[= y ~xx]]]
+      [:div {:on-click (fn [_]
+                         (set-xx (+ xx 1)))} "⇨"]
+      [:div {:on-click (fn [_]
+                         (set-yy (- yy 1)))} "⬅"]
+      [:div [:div [m7/x  `[= x ~yy]]]]
+      [:div {:on-click (fn [_]
+                         (set-yy (+ yy 1)))} "⇨"]
+      ]
+
+
+
+     [:div {:style (m7/css
+                    [[4 4 1 12  :center :center 1.5 :rem :column]
+                     [2 70 90 .4] [] {:gap "1rem"
+                                      :z-index 2}])}
+
+      [m7/x `[= [+ [:m 2 x] [:m 3 y]] 7]]
+
+      [m7/x `[= [+ [:m -2 x]  7]  [:m 3 y]]]
+
+      [m7/x `[= [+ [:m [-2 3] x]  [7 3]] y]]
+
+
+
+
+      [:div {:style {:height "4px"
+                     :width "100%"
+                     :background-color (hsl [1 30 30 1])}
+             }]
+
+      [m7/x `[= [- [:m 7 x] y] 13]]
+
+      [m7/x `[= [- [:m 7 x] 13] y]]
+
+
+      #_[m7/x `[= [+ [:m 23 x] 0] 46]]
+
+
+      #_[m7/x `[= [+ [:m 2 x] [:m 3 y]] 7]]
+      #_[m7/x `[= [+ [* 2 2] [:m 3 y]] 7]]
+      #_[m7/x `[= y [- [:m 7 x] 13]]]
+
+      #_[:div "(x,y)=(2,1)"]
+
+
+
+      #_[m7/x `[= [+ [:m 2 x] [:m 3 [:b [- [:m 7 x] 13]]]] 7]]
+      #_[m7/x `[= y [:p 10  x]] ]
+
+
+      #_[m7/x `[= [:m f [:b 0]]
+              0]
+       ]
+
+      #_[m7/x `[= [:m f [:b 0]] 1]]
+      #_[m7/x `[= [:m f [:b x]]
+              [:m x [:m f [:b [- x 1]]] ]]
+       ]
+
+      ]
+
+
+
+
+
+     #_(let [
+           a (m7/eq2 `[[1 [1]  [x2]] [-1 [1]  [x1]]])
+           b (m7/eq2 `[[1 [1]  [y1]] [1 [1] [y2]]])]
+         [:div
+          {:style (m7/css
+                   [[4 4 1 12  :center :center 1.5 :rem :column]
+                    [2 70 90 .4] [] {:gap "1rem"
+                                     :z-index 2}])}
+
+
+
+          [m7/x `[= AD [* AC [:m sin [:p 30 *]]]]]
+
+          [m7/x `[=  [:m AB cos [:p 30 *]]  [* AC [1 2]]]]
+
+          [m7/x `[=  [* 20 [[:sq 3] 2]]  [* AC [1 2]]]]
+
+          [m7/x `[= [:m  20 [:sq 3] ]
+                  AC]]
+
+          [m7/x `[= DC [:m AC cos [:p 30 *]]]]
+
+          [m7/x `[= DC [:m AC  [[:sq 3] 2]]]]
+
+          [m7/x `[=  DC [* [:m  20 [:sq 3] ]  [[:sq 3] 2]]]]
+
+
+          [m7/x `[= BC [+ BD DC] [+ [[* 20 3] 2] 10]]]
+
+          [m7/x `[= BC 40]]
+
+          [m7/x `[* 20 10 [:sq 3]]]
+
+          [m7/x `[* 300 [:sq 3]]]
+
+
+
+
+
+
+
+          #_[m7/x `[= [* [1 2] [* BC h]] [* [1 2] BC [:m AB sin B]]]]
+
+
+
+          #_[m7/x `[=
+                    [BC
+                     [:m  sin A]
+                     ]
+                    [AB
+                     [:m  sin C]]
+                    [AC [:m sin B]]]]
+
+
+
+
+
+          ])
+
+
+
+
+
+
+
+     [:div {:style (m7/css
+                    [[2 10 2 23 :center :center 3 :rem]
+                     [1 70 90 1] [] {:gap "1rem"
+                                     :z-index 1}])}
+
+      (let [[x1 y1 x2 y2] [(* 3 20) (ve (*  4 20 ))
+                           (* 20 -1) (ve (* 8 20 ))]
+
+            [rise run] [(ve (* 2 7 )) (* 16 2)]
+            [x3 y3 x4 y4] [(+ x1 run) (+ y1 rise)
+                           (+ x2 (* run 2)) (+ y2 (* rise 2))]
+
+            m (/ (- y2 y1) (- x2 x1))
+            ma (/ -2 3)
+            mb 7
+
+            mc (/ (- 5 7)
+                  (- 9 2))
+
+
+            m1 (/ (- y4 y3) (- x4 x3))
+            leq (fn [[m x1 y1]]
+                  (fn [x]
+                    (+ (* m (- x x1)) y1)))
+
+            maeq (leq [ma (* 2 0) (* 20 (/ 7 3))])
+
+            mbeq (leq [mb (* 20 (/ 13 7)) 0])
+
+
+            mceq (leq [mc (* 2 20) (* 20 7)])
+
+
+            x11 (* -10 20)
+            y11 ((leq [m x1 y1]) x11)
+            x22 (* 10 20)
+            y22 ((leq [m x1 y1]) (* 10 20))
+            y33 ((leq [m1 x3 y3]) (* 5 20))
+            y44 ((leq [m1 x3 y3]) (* -5 20))]
+        [:svg {
+                 :style {:height :100%
+                         :width :100%}
+                 :on-click (fn [e]
+                             (p
+                              (-> e .-target)
+                              (-> e  .-clientX)
+                              (-> e  .-clientY) ))
+                 :viewBox (m7/space viewbox4)}
+         [svg/flames]
+         [grad]
+         [:animate {:attributeName :viewBox
+                    :to (m7/space viewbox3)
+                    :dur "4s"
+                    :fill :freeze}]
+
+
+
+
+         (grid-on 1 1 (* xx 20) (* yy 20) false)
+
+
+         [green]
+
+
+         [:marker {:id (name :mb2)
+                   :viewBox (m7/space [-5 -5 10 10])
+                   :refX 0
+                   :refY 0
+                   :orient :auto-start-reverse
+                   :markerWidth 5
+                   :markerHeight 5}
+          [:path {:d (m7/path [-3 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
+                  :stroke (hsl [5 70 70 1])
+                  :stroke-width .1
+                  :transform (m7/tranfrom [[:rotate 0]])
+                  :fill (m7/hsl [.4 70 70 1])}]]
+
+         [:g
+          #_[:g
+           (let [a (* 5 20)
+                 b (* 2 20)]
+             [:g
+              [:path {:d (m7/path [0 0 :l -50 0 50 0  a 0 0 (ve b) (ve a) 0 0 b
+
+                                   0 (ve (* 3 b))
+
+                                   a (* 3 b)
+
+                                   ])
+                      :transform (m7/tranfrom [[:skewX 0]])
+                      :stroke-width 1
+                      :marker-end (m7/url (name :mb2))
+                      :marker-start (m7/url (name :mb2))
+                      :stroke (hsl [2 30 30 1])
+                      :fill :none}]
+
+
+              [:circle {:r 2
+                        :cy (ve (* 3 b))
+                        :cx (js/Math.cos (+ (/ js/Math.PI 2)
+                                            (/ js/Math.PI 6)))
+                        :fill (hsl [0.5 80 60 1])}]
+              ])]
+
+
+
+
+
+
+
+
+          [:g
+
+           [:path#bma1 {:d (m7/path [-200 (ve (maeq -200)) :L 1200 (ve (maeq 1200))])
+                        :stroke-width 1
+                        :marker-end (m7/url (name :mb2))
+                        :marker-start (m7/url (name :mb2))
+                        :stroke (hsl [2 30 30 1])
+                        :fill :none}]
+
+           [:path#bma2 {:d (m7/path [-200 (ve (mbeq -200)) :L 1200 (ve (mbeq 1200))])
+                        :stroke-width 1
+                        :marker-end (m7/url (name :mb2))
+                        :marker-start (m7/url (name :mb2))
+                        :stroke (hsl [2 30 30 1])
+                        :fill :none}]
+
+
+           #_[:path#bmc1 {:d
+                          (m7/path
+                           [-200 (ve
+                                  (mceq -200)) :L
+                            1200
+                            (ve (mceq 1200))])
+                          :stroke-width 1
+                          :marker-end (m7/url (name :mb2))
+                          :marker-start (m7/url (name :mb2))
+                          :stroke (hsl [2 30 30 1])
+                          :fill :none}]
+
+             #_[:path {:d (m7/path [(* 2 20) (ve (* 7 20)) :L
+                                    (* 20 2) (ve (* 20 3))
+
+                                    (* 9 20) (ve (* 20 5))
+                                    (* 2 20) (ve (* 7 20))
+                                    ])
+                       :stroke-width 1
+                       :stroke (hsl [2 30 30 1])
+                       :fill (hsl [1 70 70 .4])}]
+
+
+             #_[:path {:d (m7/path [(* 2 20) (ve (* 7 20)) :L
+                                  (* 20 2) (ve (* 20 3))
+
+                                  (* 9 20) (ve (* 20 5))
+                                  (* 2 20) (ve (* 7 20))
+                                  ])
+                     :stroke-width 1
+                     :stroke (hsl [2 30 30 1])
+                     :fill (hsl [1 70 70 .4])}]
+
+
+
+             #_[:path#b1 {:d (m7/path [x11 y11 :L x22 y22])
+                          :stroke-width 1
+                          :marker-end (m7/url (name :mb2))
+                          :marker-start (m7/url (name :mb2))
+                          :stroke (hsl [2 30 30 1])
+                          :fill :none}]
+
+
+           #_[:circle {:r 2
+                       :cy (ve (* 20 3))
+                       :cx (* 20 2)
+                       :fill (hsl [0.5 80 60 1])}]
+
+             #_[:text {:r 2
+                     :y (ve (* 20 3))
+                     :x (* 20 2)
+                     :font-size 10}
+              "C"]
+
+             #_[:circle {:r 2
+                       :cy (ve (* 20 5))
+                       :cx (* 20 9)
+                       :fill (hsl [0.5 80 60 1])}]
+
+             #_[:text {:r 2
+                     :y (ve (* 20 5))
+                     :x (* 9 20)
+                     :font-size 10}
+              "B"]
+
+
+             #_[:circle {:r 2
+                       :cy (ve (* 20 7))
+                       :cx (* 20 2)
+                       :fill (hsl [0.5 80 60 1])}]
+
+             #_[:text {:r 2
+                     :y (ve (* 20 7))
+                     :x (* 20 2)
+                     :font-size 10}
+              "A"]
+           ]
+
+          #_[:text {:style {:font-size 10}}
+
+
+             [:textPath {:href :#bmb1
+                         :startOffset "40%"
+                         }
+              "h"]
+
+
+
+               [:textPath {:href :#b3
+                         :startOffset "40%"}
+              (str (first c) " " (last c))
+
+
+
+                ]]
+
+            ]
+
+
+         ])
+      ]]))
+
+
+
+
+(defn cd5 []
+  (let [f (fn [n] (/ 1 n))
+        tt 'θ
+        dx [1 0  0 1 -1  0 0 -1 ]
+        sq (fn [n]
+             (comp
+              (partial map (partial * n))))
+        ax-dx 80
+        ax-dy 40
+        vb (fn [z]
+             (nth [(map #(* 5 %) [-10 -70  83 80])
+                   [0 -250  300 300]
+                   [-100 -150  300 300]
+                   [0 -80  80 100]
+                   [0 -25  50 50]
+                   [-100 -200  890 200]
+                   [40 120  80 80]
+                   [0 40  100 100]
+                   [75 -175  150 150]
+                   [-20 -20  100 100]
+                   [-400 -200  800 200]] z))
+        viewbox4 (vb 0)
+        viewbox3 (vb 1)
+        m 30
+        d 9.4
+        scale2 [[.5 .5] [-0.5 .5]]
+        [xx set-xx] (react/useState 2)
+        [yy set-yy] (react/useState 3)
+
+        [c ck] (react/useState [0 0])
+        p (fn [svg x y]
+            (let [p (js/DOMPoint. x y)
+                  t (-> svg
+                        (.getScreenCTM)
+                        (.inverse))
+                  xy (-> p
+                         (.matrixTransform t))]
+              (ck [(fix (/ (-> xy .-x) 2) 1)
+                   (fix (* -1 (/ (-> xy .-y) 2)) 1) ])))]
+    [:div {:style (merge
+                     (grid [100 :vh 100 :vw
+                            (take 24 (repeat [8 :vh]))
+                            (take 20 (repeat [8 :vh]))])
+                     {:background-color (hsl [1 70 70 .5])
+                      :gap ".2rem"})}
+     [:div
+      {:style (m7/css
+               [[3 1 8 11  :center :center 2.2 :rem ]
+                [2 70 90 .4] [] {:gap "1rem"
+                                 :z-index 2}])}
+
+      [:div {:on-click (fn [_]
+                         (set-xx (- xx 1)))} "⬅"]
+      [:div [m7/x  `[= y ~xx]]]
+      [:div {:on-click (fn [_]
+                         (set-xx (+ xx 1)))} "⇨"]
+      [:div {:on-click (fn [_]
+                         (set-yy (- yy 1)))} "⬅"]
+      [:div [:div [m7/x  `[= x ~yy]]]]
+      [:div {:on-click (fn [_]
+                         (set-yy (+ yy 1)))} "⇨"]
+      ]
+
+
+
+     [:div {:style (m7/css
+                    [[4 4 1 12  :center :center 1.5 :rem :column]
+                     [2 70 90 .4] [] {:gap "1rem"
+                                      :z-index 2}])}
+
+      [m7/x `[= [+  [:m 2 x ] y] 5]]
+
+
+      #_[m7/x `[= [+  [:m 2 x y] [:p y 2]] [:m 5 y]]]
+
+      [m7/x `[= y [+ [- [:m 2 x]]  5] ] ]
+
+
+      [m7/x `[= [:p y 2] [:p [:b [- 5 [:m 2 x]  ]] 2] ] ]
+
+
+      [m7/x `[= [:p y 2] [+ [- 25 [:m 20 x]] [:m 4 [:p  x 2]]]] ]
+
+
+      #_[m7/x `[= [+ [- [:m 2 x]]  [* [- 2] [5 [- 2]]]]  y ] ]
+
+
+      #_[m7/x `[= [:m [- 2] [:b [-  x  [5 2]]]]  y ] ]
+
+
+
+
+      [:div {:style {:height "2px"
+                       :width "80%"
+                       :background-color (hsl [1 30 30 1])}
+             }]
+
+
+      [m7/x `[= [+ [:p x 2] [:p y 2]] 5 ]]
+
+      [m7/x `[= [+ [:p x 2] [+ [- 25 [:m 20 x]] [:m 4 [:p  x 2]]]] 5 ]]
+
+      [m7/x `[= [+ [- [* 5 4] [:m [* 5 4] x]] [:m 5 [:p  x 2]]] 0 ]]
+
+      [m7/x `[= [+ [- [:p 2 2] [:m  [* 2 2] x]] [:p  x 2]] 0 ]]
+
+      [m7/x `[=  [:p [:b [- 2  x]] 2]
+              0 ]]
+
+      [m7/x `[=  [:sq [:p [:b [- 2  x]] 2]]
+              [:sq 0] ]]
+
+      [m7/x `[= [- x 2] 0 ]]
+
+
+
+      #_[m7/x `[= [+ [:p x 2] [:p y 2]] [+  [:m 2 x ] y] ]]
+
+      #_[m7/x `[= [+ [:p x 2] [:p y 2]] [:p [:b [:sq 5]] 2] ]]
+
+
+
+
+
+
+      ]
+
+
+
+
+
+
+     [:div {:style (m7/css
+                    [[2 10 2 23 :center :center 3 :rem]
+                     [1 70 90 1] [] {:gap "1rem"
+                                     :z-index 1}])}
+
+      (let [ ma -2
+            mb 7
+            leq (fn [[m x1 y1]]
+                  (fn [x]
+                    (+ (* m (- x x1)) y1)))
+
+            maeq (leq [ma (* 20 (/ 5 2))  (* 20 0)])
+
+            mbeq (leq [mb (* 20 (/ 13 7)) 0])
+
+
+            ]
+        [:svg {:style {:height :100%
+                       :width :100%}
+               :on-click (fn [e]
+                           (p
+                            (-> e .-target)
+                            (-> e  .-clientX)
+                            (-> e  .-clientY)))
+               :viewBox (m7/space viewbox4)}
+         [svg/flames]
+         [grad]
+         [:animate {:attributeName :viewBox
+                    :to (m7/space viewbox3)
+                    :dur "4s"
+                    :fill :freeze}]
+
+
+
+
+         (grid-on 1 1 (* xx 20) (* yy 20) false)
+
+
+         [green]
+
+
+         [:marker {:id (name :mb2)
+                   :viewBox (m7/space [-5 -5 10 10])
+                   :refX 0
+                   :refY 0
+                   :orient :auto-start-reverse
+                   :markerWidth 5
+                   :markerHeight 5}
+          [:path {:d (m7/path [-3 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
+                  :stroke (hsl [5 70 70 1])
+                  :stroke-width .1
+                  :transform (m7/tranfrom [[:rotate 0]])
+                  :fill (m7/hsl [.4 70 70 1])}]]
+
+         [:g
+          [:g
+
+           [:path#bma1 {:d (m7/path [-200 (ve (maeq -200)) :L 1200 (ve (maeq 1200))])
+                        :stroke-width .3
+                        :marker-end (m7/url (name :mb2))
+                        :marker-start (m7/url (name :mb2))
+                        :stroke (hsl [2 30 30 1])
+                        :fill :none}]
+
+           #_[:path#bma2 {:d (m7/path [-200 (ve (mbeq -200)) :L 1200 (ve (mbeq 1200))])
+                        :stroke-width 1
+                        :marker-end (m7/url (name :mb2))
+                        :marker-start (m7/url (name :mb2))
+                        :stroke (hsl [2 30 30 1])
+                        :fill :none}]
+
+
+
+
+           [:circle {:r (* 20 (js/Math.sqrt 5))
+                     :cy 0
+                     :cx 0
+                     :stroke-width .3
+                     :fill :none
+                     :stroke (hsl [0.5 80 60 1])}]
+
+             #_[:text {:r 2
+                     :y (ve (* 20 5))
+                     :x (* 9 20)
+                     :font-size 10}
+              "B"]
+
+
+
+
+
+
+
+             ]
+
+
+
+
+
+          #_[:text {:style {:font-size 10}}
+
+
+             [:textPath {:href :#bmb1
+                         :startOffset "40%"
+                         }
+              "h"]
+
+
+
+             ]]])]]))

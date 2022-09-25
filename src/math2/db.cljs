@@ -10,11 +10,13 @@
    :rm/code {:db/unique :db.unique/identity}
    })
 
-(def conn   (d/create-conn schema))
 
-(d/transact!
- conn
- [
+(def summery
+  "I have been teaching A level computer science, mathematics, physics, IT online since 2019. My lectures are very well prepared by leveraging my hands on programming skill on computer graphics, animation, user interaction and web technologies. It is really helpful for those who want to study at top Universities around the world as well as top Engineering Universities in Bangladesh. My teaching techniques with visual interaction helps students get better at receiving intuition of science & technologies even who those who have short attention span."
+  )
+
+(def data
+  [
   {:db/id 43
    :rm/code :couch
    :rm/occupation "Computer Engineer"
@@ -22,7 +24,7 @@
    :rm/age 38
    :rm/phone "880-1711961024"
    :rm/email ""
-   :rm/summery "I teach computer science, mathematics, physics  by leveraging my hands on programming skill on computer graphics, animation, user interaction and web technologies. By teaching with better visual interaction helps students get better at receaving intuation of science & technologies."
+   :rm/summery summery
     :rm/projects (into [2 3 5 7 8]
                       [12 14 13 16 17 22 8 23 ])
     :rm/jobs [9 10]

@@ -91,6 +91,25 @@
                            )}
       ]]))
 
+(defn file-input-background4 []
+  (let [[img update-image] (react/useState "")]
+    [:div {:style {:width "80vw"
+                   :height "80vh"
+                   :grid-row "1 / 2"
+                   :grid-column "1 / 3"
+                   :background-size :cover
+                   :background-position :center
+                   :background-color :black
+                   :background-image (str "url(" img   ")")}}
+
+     (if (= (count img) 0)
+       [:input {:type :file
+                :multiple true
+                :on-change (fn [e]
+                             (upload-size (.-files e.target) update-image)
+                             )}
+        ])]))
+
 (defn file-input-background2 []
   (let [[img update-image] (react/useState "")]
     [:div

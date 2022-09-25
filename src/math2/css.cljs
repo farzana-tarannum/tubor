@@ -299,3 +299,40 @@
       [[4 4 1 12  :center :center 1.5 :rem :column]
        [2 70 90 .4] [] {:gap [1 :rem]
                         :z-index 2}]))))
+
+
+(s/def :math7/grid
+  (s/cat
+   :height  :math7/size
+   :width :math7/size
+   :grid-template-columns (s/spec
+                           (s/+
+                            (s/spec :math7/size)))
+   :grid-template-rows (s/spec
+                        (s/+
+                         (s/spec :math7/size)))
+   ))
+
+
+(def grid
+  (comp
+   (partial into {:display :grid})
+   (juxt (comp
+          (partial vector :height)
+          size
+          :height)
+         (comp
+          (partial vector :width)
+          size
+          :width)
+         (comp
+          (partial vector :grid-template-columns)
+          space
+          (partial map size)
+          :grid-template-columns)
+         (comp
+          (partial vector :grid-template-rows)
+          space
+          (partial map size)
+          :grid-template-rows))
+   (partial s/conform :math7/grid)))

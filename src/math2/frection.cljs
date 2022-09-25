@@ -227,8 +227,8 @@
 
 
        (let [
-             a (m7/eq2 `[[~b [1]  [t]] [~c [1]  [x]]])
-             b (m7/eq2 `[[~d [1]  [t]] [~e [1]  [x]]])
+             a (m7/eq2 `[[5 [1]  [t]] [-2 [1]  [x]]])
+             b (m7/eq2 `[[5 [1]  [t]] [-2 [1]  [x]]])
 
 
 
@@ -267,14 +267,14 @@
                    :z-index 10}])}
 
 
-          #_(m7/x [:p
+          (m7/x [:p
                    [:b (sl/symeq b)] 2])
 
 
 
 
 
-          #_(m7/x [:m
+          (m7/x [:m
                    [:b (sl/symeq a)]
                  [:b (sl/symeq b)]])
 
@@ -283,11 +283,11 @@
 
 
 
+          (m7/x (sl/lawd2 a b ))
 
 
 
-
-
+          (m7/x (sl/lawd  b a))
 
           (m7/x (sl/lawdr b a))
 
@@ -361,7 +361,7 @@
                   b (abc b)
                   c (abc c)
                   d (abc d)]
-                (for [i (range 0 (+ b c))
+              (for [i (range 0 (+ b c))
                       j (range 0 (+ d e))
                       :let [xx [(< i b ) (< j d)]
                             yy [(>= i b) (>= j d)]
@@ -419,6 +419,115 @@
                                                                      (cycle [2 1]))])}])
                       (range 0 5)))
                (range 0 2))]
+
+
+           ]
+          )]
+
+
+       ])))
+
+
+
+(defn stat []
+  (let [abc (fn [a] (js/Math.abs a))
+        u "👤"
+        b 5
+        c 3
+        d 2
+        e 4
+        dx [1 0  0 -1 -1  0 0 1]]
+    (let [zoom 4
+
+          ax-dx 80
+          ax-dy 40
+
+          vb (fn [z]
+               (nth [[-80 -200  250 250]
+                     [-40 -200  200 200]] z))
+          viewbox (vb 1)
+          viewbox2 (vb 0)
+          ]
+
+      [:div {:style (merge
+                     (grid [100 :vh 100 :vw
+                            (take 15 (repeat [8 :vh]))
+                            (take 20 (repeat [8 :vh]))])
+                     {:background-color (hsl [1 70 70 1])
+                      :gap ".1rem"})}
+
+
+       (let []
+         [:div {:style
+                (m7/css
+                 [[1 7 2 8 :center :flex-start 2 :rem :column]
+                  [1 70 (+ 50 (* 5 5))  .7]
+                  []
+                  {:padding-left "25px"
+                   :gap ".1rem"
+                   :z-index 10}])}
+
+          ])
+
+
+
+
+
+       [:div {:style (m7/css
+                      [[2 10 1 20 :center :center 3 :rem]
+
+                       [1 70 90 1] [] {:gap "1rem"}])}
+        (let []
+          [:svg {:style {:height "100%"
+                         :width "100%"}
+                 :viewBox (m7/space
+                           viewbox)}
+
+           [:animate {:attributeName :viewBox
+                      :to (m7/space viewbox2)
+                      :dur "4s"
+                      :fill :freeze}]
+
+
+           (grid-on 1 1 ax-dy ax-dy)
+
+
+           [:g {}
+            (let [e (abc e)
+                  b (abc b)
+                  c (abc c)
+                  d (abc d)]
+              (for [i (range 0 (+ b c))
+                    j (range 0 (+ d e))
+                    :let [xx [(< i b ) (< j d)]
+                          yy [(>= i b) (>= j d)]
+                          yx [(< i b) (>= j d)]
+                          xy [(>= i b) (< j d)]
+                          qd (map (fn [[a b] y] [a b y]) [xx xy yx yy] [1 2 3 4])
+                          [_ _ color] (first
+                                       (filter (fn [[x y _]]
+                                                 (and x y)) qd))
+                          ]
+                    ]
+                [:g
+
+                 [:path {:stroke-width 1
+                         :fill (hsl [color 70 70 .8])
+                         :stroke (hsl [color 70 50 .8])
+                         :d (m7/path
+                             `[~(* i 20) ~(ve (* 20 j )) :l ~@(map #(* 20 %1 %2)
+                                                                   dx
+                                                                   (cycle [1 1]))])}]
+                 [:text {:font-size 5
+                         :fill (hsl [(+ -1 color) 50 30 1])
+                         :x (* i 20)
+                         :y (ve (* j 20))
+                         :dy -5
+                         :dx 5}
+                  color]]
+                  ))]
+
+
 
 
            ]

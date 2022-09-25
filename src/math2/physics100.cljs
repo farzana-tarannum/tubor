@@ -80,10 +80,12 @@
 
 
 (def schema
-  {:rm/projects {:db/cardinality :db.cardinality/many
-                 :db/valueType   :db.type/ref}
-   :rm/jobs   {:db/cardinality :db.cardinality/many
-               :db/valueType   :db.type/ref}
+  {:rm/projects
+   {:db/cardinality :db.cardinality/many
+    :db/valueType   :db.type/ref}
+   :rm/jobs
+   {:db/cardinality :db.cardinality/many
+    :db/valueType   :db.type/ref}
    :rm/code {:db/unique :db.unique/identity}
    })
 
