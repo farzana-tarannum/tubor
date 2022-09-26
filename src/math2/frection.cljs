@@ -227,36 +227,16 @@
 
 
        (let [
-             a (m7/eq2 `[[5 [1]  [t]] [-2 [1]  [x]]])
-             b (m7/eq2 `[[5 [1]  [t]] [-2 [1]  [x]]])
-
-
-
-             bbox (let [[[c1 x2 x3] [c2 y2 y3]] b]
-                    [[c1 (conj x2 1) (conj x3 dd)]
-                     [c2 (conj y2 1) (conj y3 dd)]])
-
-             c (m7/eq2 `[[1 [1 1] [~dd  x]] [-2 [1 1] [ c ~dd]]])
-
-             d (m7/eq2 `[-1 [2] [d]])
-             a2 [[1 [2] [[:b (sl/symeq a)]]] d]
-             d1 (sl/mkeq1a d)
-             d2 (sl/mkeq2a d1)
-             bb 'b
-             cc 'c
-             ee (m7/eq2 [[1 [2] ['x]]
-                         [1 [1 1] [bb 'x]]
-                         [1 [1] [cc]]])
-             eee (m7/eq2 [[1 [2] ['x]]
-                          [bb [1] ['x]]
-                          1])
-
-
-             ee1 (m7/eq2 `[[1 [ 2] [ x]]
-                           [1 [1 1] [[b a] x]]
-                           [1 [1] [[c a]]]])
-             ek1 (conj (vec (sl/lawdr2 a a)) d1)
-             ek2 (rest (rest ek1))]
+             a (m7/eq2 `[[2 [1]  [x]] [-1 [1]  [y]]])
+             b (m7/eq2 `[[1 [1]  [x]] [1 [1]  [y]]])
+             b1 (m7/eq2 `[[1 [1]  [x]] [-1 [1]  [y]]])
+             flag false
+             surd (fn [e]
+                    (m7/x
+                     (if flag
+                       (m7/sx3
+                        (m7/sx3 e 'x [:sq 2]) 'y [:sq 3]) e)))
+             ]
          [:div {:style
                 (m7/css
                  [[1 7 2 8 :center :flex-start 2 :rem :column]
@@ -267,33 +247,84 @@
                    :z-index 10}])}
 
 
-          (m7/x [:p
+          #_[m7/x `[[+ [:sq 3] [:sq 2]]
+                  [- [:sq 3]
+                   [:sq 2]]]]
+          (surd [(sl/symeq a)
+                 (sl/symeq b)])
+
+
+          (surd [[:m [:b (sl/symeq a)] [:b (sl/symeq b1)]]
+                 [:m [:b (sl/symeq b)]  [:b (sl/symeq b1)]]])
+
+          (surd [(sl/lawd2 a b1)
+                 (sl/lawdr b b1)])
+
+          (surd [(sl/lawd a b1)
+                 (sl/lawdr b b1)])
+
+          (surd [(sl/lawdr a b1)
+                 (sl/lawdr b b1)])
+
+
+
+
+
+          #_(surd `[[:p [:b [- x y]] 2]
+                  [- [:p x 2] [:p y 2]]])
+
+
+          #_(surd [(sl/lawdr a a)
+                 `[- [:p x 2] [:p y 2]]])
+
+
+
+
+
+
+
+
+
+
+
+
+
+          #_(m7/x [:p
                    [:b (sl/symeq b)] 2])
 
 
 
 
 
-          (m7/x [:m
-                   [:b (sl/symeq a)]
-                 [:b (sl/symeq b)]])
+
 
           #_(m7/x (sl/symeq bbox))
 
 
 
 
-          (m7/x (sl/lawd2 a b ))
+          #_(m7/x (sl/lawd2 a b ))
+
+
+          #_(m7/sx2 [:m
+                   [:b (sl/symeq b)]
+                   [:b (sl/symeq a)]
+                   ]
+                  'x [:sq 2])
 
 
 
-          (m7/x (sl/lawd  b a))
 
-          (m7/x (sl/lawdr b a))
+          #_(m7/sx2 (sl/lawdr b a)
+                  'x [:sq 2])
+
+          #_(m7/x (sl/lawd  b a))
 
           #_(m7/x (sl/lawd  b a))
 
           #_(m7/x (sl/lawd2 a b ))
+
+
           #_(m7/x [:m [:b (sl/symeq b)] dd ])
 
 
@@ -466,6 +497,10 @@
                   {:padding-left "25px"
                    :gap ".1rem"
                    :z-index 10}])}
+
+
+
+
 
           ])
 

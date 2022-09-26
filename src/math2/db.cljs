@@ -122,32 +122,14 @@ communicating in professional context both on presentation and at work."
   {:db/id 14
    :rm/row 0
    :rm/col 0
-   :rm/task [:div
-             [:div "ASHRAF AHMED"]
-             [:div {:style {:font-size "1.5rem"
-                            }}
-              "+8801712192643"]
-             ]
-   :rm/summery [:div {:style {:display :flex
-                              :flex-direction :column
-                              :justify-content :center}}
-                [:img {:src "m.jpg"
-                       :style {:height "60%"
-                               :width "60%"}}]
-                [:div {:style {:font-size "1rem"}}
-                 [:div "H# 192, R# 2, Avenue# 3, Mirpur DOHS, Dhaka - 1216"]
-                 [:div "jaharapi@protonmail.com"]
-                 ]]
-   }
+   :rm/task "ASHRAF AHMED \\8801711961024 H# 192, R# 2, Avenue# 3, Mirpur DOHS, Dhaka - 1216 "
+   :rm/summery "jaharapi@protonmail.com"}
 
   {:db/id 15
    :rm/row 1
    :rm/col 1
-   :rm/task [:div {:style {:font-size "1.5rem"}}
-
-             "Assistant Director - Bangladesh Telecommunication Regulatory Commision - BTRC (2009-2011)"]
-   :rm/summery [:div {:style {:font-size "1.5rem"}}
-                "I was an active member of National Telecommunication committee, I used to inspect Telecommunication and IT infrastructure, primary goal is to find out potential reverse or Tax leak from those infrastructure. As only person that had proper communication background my job was very extensive, some time it was extended 24/7."]
+   :rm/task "Assistant Director - Bangladesh Telecommunication Regulatory Commision - BTRC (2009-2011)"
+   :rm/summery "I was an active member of National Telecommunication committee, I used to inspect Telecommunication and IT infrastructure, primary goal is to find out potential reverse or Tax leak from those infrastructure. As only person that had proper communication background my job was very extensive, some time it was extended 24/7."
    }
 
   {:db/id 16
@@ -161,9 +143,7 @@ communicating in professional context both on presentation and at work."
    :rm/row 2
    :rm/col 1
    :rm/task "Software Engineer - GENUITY Systems Limited (2006-2007)"
-   :rm/summery [:div {:style {:font-size "1.5rem"}}
-                "I have started my carrer as communcation server developer i.e video conference server that is concurrent, distribued that can handle millions of request per second."
-                ]
+   :rm/summery "I have started my carrer as communcation server developer i.e video conference server that is concurrent, distribued that can handle millions of request per second."
    :rm/referane ""}
   {:db/id 22
    :rm/row 3
@@ -181,54 +161,27 @@ communicating in professional context both on presentation and at work."
 where I scored CGPA of 3.69 out of 4. I was a programming contestant which help me solving problems in constraint environment with limited resources."
    :rm/referane ""}
 
-  {:db/id 24
-   :rm/row 7
-   :rm/col 1
-   :rm/task ""
-   :rm/summery ""
-   :rm/referane ""}
-
-  {:db/id 25
+   {:db/id 25
    :rm/row 6
    :rm/col 0
-   :rm/task [:div
-             [:div "Personal Summery"]
-             ]
-   :rm/summery [:div
-                [:div "I raised and born on noble family. My late father was an veteran we traveled a lot accross the
-country. I collage was -"]
-                [:div
-                 [:div "Secondary and Higher Secondary from Rajshahi Cadet College."]
-                 [:div "1998-2000"]]
-
-                ]
-   :rm/referane ""}
+    :rm/task "Personal Summery"
+    :rm/summery "I raised and born on noble family. My late father was an veteran we traveled a lot accross the
+country. I collage was -
+Secondary and Higher Secondary from Rajshahi Cadet College. 1998-2000"
+    :rm/referane ""}
 
   {:db/id 26
    :rm/row 5
    :rm/col 1
-   :rm/task [:div
-             [:div "Reference"]
-             [:div ""]]
-   :rm/summery [:div [:div
-                      "Salman Maruf Ifee"]
-                [:div "8801711081123"]
-                [:div "Ericsson"]
-                [:div "Sharif Ahmed"]
-                [:div "+1 573-479-0167"]
-                [:div "Microsoft"]]
+   :rm/task "Reference"
+   :rm/summery "Salman Maruf Ifee 8801711081123 Ericsson Sharif Ahmed +1 573-479-0167 Microsoft"
    :rm/referane ""}
 
   {:db/id 27
    :rm/row 6
    :rm/col 1
-   :rm/task [:div {:style {:font-size "1.5rem"}}
-             "Verilog HDL Modeling Systhesis and FPGA-based Place and Route of a 32-Bit Multicycle and Pipelined RISC Processor"]
-   :rm/summery [:div {:style {:font-size "1.5rem"}}
-                "This design project modeled and verified a multi-cycle and 5-stage pipelined version of 32-bit RISC processor - MIPS - with "
-                [:span
-                 "Verilog Hardware Description Language (HDL)."]
-                "A multi-cycle version was modeled and Register Transfer (RT) level with distinct partition between the control unit (FSM) and the datapath unit. The FSM, in this version, was modeled in explicit style maintaining the partition between combinational and sequential logic. This versoin was synthezied and the place-and-route and implemented on a Xilinx Spartan-2 (XC2S50PQ208) FPGA.
-The pipelined version also modeled at RTL level."]
+   :rm/task "Verilog HDL Modeling Systhesis and FPGA-based Place and Route of a 32-Bit Multicycle and Pipelined RISC Processor"
+   :rm/summery "This design project modeled and verified a multi-cycle and 5-stage pipelined version of 32-bit RISC processor - MIPS - with Verilog Hardware Description Language (HDL)."
+
    :rm/referane ""}
   ])

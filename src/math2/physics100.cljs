@@ -1200,8 +1200,8 @@ The pipelined version also modeled at RTL level."]
         ]
 
 
-       (map identity
-            (reduce
+     (map identity
+          (reduce
              (fn [acc [task sum row col nm]]
                (conj
                 (conj acc

@@ -285,6 +285,23 @@
                    0)
                  )))])
 
+(defn sx3 [eq x2 tt]
+  (let [r (vec (clojure.walk/postwalk
+                (fn [x]
+                  (if (symbol? x)
+                    (let [x1 (symbol (name x))]
+                      (if (= x1 x2)
+                        tt
+                        x1))
+                    x))
+                eq))
+        ]
+    (if (s/valid? ::element r)
+      r
+      0)))
+
+
+
 
 (defn sx [eq x2 tt]
   [:math

@@ -422,15 +422,18 @@
   [:div
    #_[m19/home-work19]
    #_[trig/trig2]
+   #_[trig/freq]
    #_[trig/ladder]
+   [trig/freq3]
+
    #_[trig/circle]
    #_[trans/coordinates3]
-   [trans/cd5]
+   #_[trans/cd5]
    #_[stat/stat3]
    #_[teacher/resume]
    #_[py100/template2]
    #_[frac/stat]
-   [frac/frection]
+   #_[frac/frection]
    ])
 
 
