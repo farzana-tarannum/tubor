@@ -359,9 +359,11 @@
    [py100/template]
    [py100/template2]
    [py100/template3]
-
    ;; distillation2
-   [m100/home-work20]])
+   [m100/home-work20]
+
+
+   ])
 
 
 (defn template3 []
@@ -401,33 +403,36 @@
    #_[m100/home-planets-banners5]
 
    ;; alkane
-   #_[m100/home-planets]
-   #_[m100/chem-rate]
+   [m100/home-planets]
+   [m100/chem-rate]
    #_[m100/chem-pop2]
 
 
    #_[m100/home-planets]
-   #_[m100/home-work16]
+   [m100/home-work16]
    ;; distillation
    #_[m100/chem-pop2]
    #_[m100/home-work22]
    ;; hcl + haolh
    #_[m100/home-work9]
    ;; distillation2
-   #_[m100/home-work20]
+   [m100/home-work20]
 
    ] )
 
 (defn curveslasses []
   [:div
-   #_[m19/home-work19]
-   #_[trig/trig2]
+
+   [m19/home-work19]
+   [trig/trig2]
    #_[trig/freq]
    #_[trig/ladder]
-   [trig/freq3]
-
+   #_[trig/freq3]
    #_[trig/circle]
    #_[trans/coordinates3]
+
+   #_[trans/coordinatesbz]
+
    #_[trans/cd5]
    #_[stat/stat3]
    #_[teacher/resume]

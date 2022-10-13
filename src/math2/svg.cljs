@@ -178,3 +178,48 @@
      [:feMergeNode {:in "red-gradient-threshhold"}]]])
   ([]
    (flames :flames "#f33" "#ff9" )))
+
+
+(def path
+  (comp
+   m-add
+   space
+   (partial mapcat identity)
+   (juxt (comp
+          (juxt :x :y)
+          :m)
+         (comp
+          (partial
+           mapcat
+           (fun
+            ([[:line {:l :l :points p}]]
+             (cons (name :l)  (mapcat (juxt :x :y)   p)))
+            ([[:line {:l :L :points p}]]
+             (cons (name :L) (mapcat (juxt :x :y) p)))
+            ([[:curve-c {:c :c
+                         :control-point1 control-point1
+                         :control-point2 control-point2
+                         :end-point end-point}]]
+             (cons (name :c)
+                   (mapcat (juxt :x :y)  [control-point1 control-point2 end-point])))
+            ([[:curve-c {:c :C
+                         :control-point1 control-point1
+                         :control-point2 control-point2
+                         :end-point end-point}]]
+             (cons (name :C)
+                   (mapcat (juxt :x :y)  [control-point1 control-point2 end-point])))
+
+            ([[:curve-q
+               {:q :q :control-point control-point :end-point end-point}]]
+             (cons (name :q) (mapcat (juxt :x :y)
+                                     [control-point end-point])))
+            ([[:curve-q
+               {:q :Q :control-point control-point :end-point end-point}]]
+             (cons (name :Q) (mapcat (juxt :x :y)
+                                     [control-point end-point])))
+            ([[:arc {:a :a :r1 r1 :r2 r2 :angle angle :f1 f1 :f2 f2 :end end}]]
+             [(name :a)  r1 r2  angle (if f1 1 0) (if f2 1 0) (:x end) (:y end)])
+            ([[:arc {:A :a :r1 r1 :r2 r2 :angle angle :f1 f1 :f2 f2 :end end}]]
+             [(name :A)  r1 r2  angle (if f1 1 0) (if f2 1 0) (:x end) (:y end)])))
+          :d))
+   (partial s/conform :math7/path)))

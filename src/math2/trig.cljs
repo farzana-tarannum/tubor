@@ -3570,7 +3570,7 @@
 
                            :fill (hsl [1 70 70 1])
                            :stroke (hsl [1 30 30 1])
-                           :stroke-width 1}]
+                           :stroke-width 2}]
 
 
               #_[:path#rad2 {:d (str (m7/path [0 0 :l
@@ -3700,7 +3700,7 @@
 
                            :fill :none
                            :stroke (hsl [.2 30 30 .5])
-                           :stroke-width .5}]
+                           :stroke-width 10}]
 
 
 
