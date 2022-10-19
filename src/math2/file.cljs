@@ -93,10 +93,8 @@
 
 (defn file-input-background4 []
   (let [[img update-image] (react/useState "")]
-    [:div {:style {:width "80vw"
-                   :height "80vh"
-                   :grid-row "1 / 2"
-                   :grid-column "1 / 3"
+    [:div {:style {:width "100%"
+                   :height "100%"
                    :background-size :cover
                    :background-position :center
                    :background-color :black

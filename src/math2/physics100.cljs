@@ -787,7 +787,7 @@ The pipelined version also modeled at RTL level."]
                       [[2 8 5 20 :center :center 2.3 :rem]
                        [1 70 90 .2] [] {:gap "1rem"
                                         :padding "2rem"}
-                       (fv [[1 4] [1 1] [1 2] [2 1]])])}
+                       ])}
 
         (ffirst
          (d/q '[:find  ?s
@@ -1233,7 +1233,7 @@ The pipelined version also modeled at RTL level."]
                     [?p :rm/row ?r]
                     [?p :rm/col ?c]
                     ] @conn)))
-       #_ (let [row 2 col 1
+        #_(let [row 2 col 1
                 sum (mapcat identity
                             (d/q '[:find  ?job ?c ?dr
                                    :where

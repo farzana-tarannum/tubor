@@ -423,8 +423,8 @@
 (defn curveslasses []
   [:div
 
-   [m19/home-work19]
-   [trig/trig2]
+   #_[m19/home-work190 [1 0 0]]
+   #_[trig/trig2]
    #_[trig/freq]
    #_[trig/ladder]
    #_[trig/freq3]
@@ -435,8 +435,8 @@
 
    #_[trans/cd5]
    #_[stat/stat3]
-   #_[teacher/resume]
-   #_[py100/template2]
+   [teacher/resume]
+   #_[py100/template4]
    #_[frac/stat]
    #_[frac/frection]
    ])

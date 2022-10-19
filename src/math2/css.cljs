@@ -206,6 +206,11 @@
      g
      (apply merge other))))
 
+(css
+ [[3 10 3 11  :center :center 2.2 :rem ]
+  [1 70 90 .4] [] {:gap "1rem"
+                   :z-index 2}])
+
 
 (defn css2 [[sp color gradient & other]]
   (let [sz (juxt :size :scale)

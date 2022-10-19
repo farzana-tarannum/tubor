@@ -10,6 +10,8 @@
    :rm/code {:db/unique :db.unique/identity}
    })
 
+(def summery2 "As a DevOps my primary gool is to ensure developer productivity and ensure system reliability. I achieve this gools by leveraging  in depth knowledge in past as a network programming in c on linux systems and miro achitecture (ISA) from there I had grudually migrated to jvm finally back to the system as DevOps with Rust, go which have memory safety guarantees. I am strong beliver of multi database, programming pardime as each developer community have their strength as well as weekness, so I laverage modern toolings on service meshes  based on microservies and stream-processing, RESTful API routing to reduce fiction and boiler plates hence increase productivity and reliability")
+
 
 (def summery
   "I have been teaching A level computer science, mathematics, physics, IT online since 2019. My lectures are very well prepared by leveraging my hands on programming skill on computer graphics, animation, user interaction and web technologies. It is really helpful for those who want to study at top Universities around the world as well as top Engineering Universities in Bangladesh. My teaching techniques with visual interaction helps students get better at receiving intuition of science & technologies even who those who have short attention span."
@@ -17,16 +19,30 @@
 
 (def data
   [
-  {:db/id 43
-   :rm/code :couch
-   :rm/occupation "Computer Engineer"
-   :rm/name ""
-   :rm/age 38
-   :rm/phone "880-1711961024"
-   :rm/email ""
-   :rm/summery summery
+   {:db/id 43
+    :rm/code :couch
+    :rm/occupation "Computer Engineer"
+    :rm/name ""
+    :rm/age 38
+    :rm/phone "880-1711961024"
+    :rm/email ""
+    :rm/summery summery
     :rm/projects (into [2 3 5 7 8]
-                      [12 14 13 16 17 22 8 23 ])
+                       [12 14 13 16 17 22 8 23 ])
+    :rm/jobs [9 10]
+    :rm/projects.title "Projects and accomplishment"}
+
+   {:db/id 111
+    :rm/code :devops
+    :rm/occupation "Computer Engineer"
+    :rm/name ""
+    :rm/age 38
+    :rm/phone "880-1711961024"
+    :rm/email ""
+    :rm/summery "I am a DevOps engineer, I have more than 15 years experience working on cloud computing architechtures on linux platforms.
+I have built my career with start ups to bigtech by developing infrastructure toolings, troubleshooting, system intregration."
+    :rm/projects (into []
+                       [12 113 16 17 22 23 ])
     :rm/jobs [9 10]
     :rm/projects.title "Projects and accomplishment"}
   {:db/id 1
@@ -70,7 +86,7 @@
 
 
   {:db/id 8
-   :rm/row 3
+   :rm/row 20
    :rm/col 1
    :rm/task "English communication skill on professional context"
    :rm/summery "I have worked with people over the globe, over time I have gotten better at
@@ -99,25 +115,24 @@ communicating in professional context both on presentation and at work."
                 System & database Administration. Thought my carrier I have nailed
                 every kind of task an IT professional asked for. I am spetialized on
                 SAP based DevOps, continuous integration systems"
-   :rm/projects [12 14 13 16 17 22 8 23 24 25 26 27]
+   :rm/projects [12 14 13 16 117 22 8 23 24 25 26 27]
    :rm/jobs [9 10]
    :rm/projects.title "Projects and accomplishment"}
-  {:db/id 12
-   :rm/row 0
-   :rm/col 0
-   :rm/task "Tech Lead at Software Global Consultancy // SGC"
-   :rm/summery "I have been working as lead software engineer since 2013. The company has been around for 15 years founded by a former renowned engineer from GrameenPhone. He was able to together put together industry veterans and those who are passionate and persistence on their work and focus with challenges on distributed system, big data analytics, blockchain technology, cloud computing, data science, AI machine learning, internet of things - IOT."
-   :rm/referane ""}
+
+   {:db/id 13
+    :rm/row 1
+    :rm/col 0
+    :rm/task "System Engineer at GrameenPhone. (2007-2009)"
+    :rm/summery "I worked in GrameenPhone as System Automation Expert in Operations System and Software department (OSS). Main goal is to develop and maintain mediation servers which is in a nut shell modern days MicroServies with lot of bells and whistle. In order to telecommunication system work properly every single nodes has to communicate with other systems and often in multi-vendor system things are not compatible so intermediate system are needed to be developed. Back then we have saved tons of money and man hours by developing and maintaining those systems."
+    :rm/referane ""}
 
 
-
-
-  {:db/id 13
-   :rm/row 1
-   :rm/col 0
-   :rm/task "System Engineer at GrameenPhone. (2007-2009)"
-   :rm/summery "I worked in GrameenPhone as System Automation Expert in Operations System and Software department (OSS). Main goal is to develop and maintain mediation servers which is in a nut shell modern days MicroServies with lot of bells and whistle. In order to telecommunication system work properly every single nodes has to communicate with other systems and often in multi-vendor system things are not compatible so intermediate system are needed to be developed. Back then we have saved tons of money and man hours by developing and maintaining those systems."
-   :rm/referane ""}
+   {:db/id 113
+    :rm/row 1
+    :rm/col 0
+    :rm/task "System Engineer at GrameenPhone. (2007-2009)"
+    :rm/summery "Main goal is to develop and maintain mediation servers which is in a nut shell modern days MicroServies with less of bells and whistle. In order to telecommunication system work properly every single nodes has to communicate with other systems and often in multi-vendor system things are not compatible."
+    :rm/referane ""}
 
   {:db/id 14
    :rm/row 0
@@ -136,20 +151,27 @@ communicating in professional context both on presentation and at work."
    :rm/row 2
    :rm/col 0
    :rm/task "Lead Engineer - SAMSUNG R&D Institute Bangladesh (2011-2013)"
-   :rm/summery "We have developed device drivers on on Real time kernel. As an embedded system engineer my primary goat is to fix bug driver related issues and help engineers to pin down the bugs - they were dealing with and walk then thought the debugging and tracing equipment and guide technical know how for fixing the device driver related issues."
+   :rm/summery "I have worked on device drivers on linux kernel, there I have mastered on taking systrace, JTAG. analyzie core dump using GDB toolings on embaded linux, linux boot sequence on UBOOT, handle UART and gpio, memory maped network drivers. I have go 2+1 months training low level device driver programming in c both from SAMSANG SNMC, India and Bangladesh. I also receaved leadership training "
    :rm/referane ""}
 
-  {:db/id 17
-   :rm/row 2
-   :rm/col 1
-   :rm/task "Software Engineer - GENUITY Systems Limited (2006-2007)"
-   :rm/summery "I have started my carrer as communcation server developer i.e video conference server that is concurrent, distribued that can handle millions of request per second."
-   :rm/referane ""}
+   {:db/id 17
+    :rm/row 2
+    :rm/col 1
+    :rm/task "Software Engineer - GENUITY Systems Limited (2006-2007)"
+    :rm/summery "I was a Linux Network programmer in c, I used to develop select and epoll based network SBC worked with syscalls, lexical parsers, gather indepth knowledge about real time protocols voice and video packets and UDB based session controlers and implemented high avabalibility on failover using ICMP and arp. Master Postgre sql query optimitaion and hardisk raid for data redandency, mastering remote with ssh and emacs and shell scripting, yum and apt-get for avoyding dependency hell. Wored with highly concorrent softswith routing with load blancing and priodity queues, medeia gateways on CentOS and ubuntu. "
+    :rm/referane ""}
+
+   {:db/id 117
+    :rm/row 2
+    :rm/col 1
+    :rm/task "Software Engineer - GENUITY Systems Limited (2006-2007)"
+    :rm/summery "As a devOps on video conferencing systems and I have worked with hith availibilty on liunx, shell scripting, packet tracing with wireshark, routing UDP packets over all type network environments."
+    :rm/referane ""}
   {:db/id 22
    :rm/row 3
    :rm/col 0
    :rm/task "Video conferencing solution with Virtual notebooks"
-   :rm/summery "Collaboration between professionals i.e engineers, managers is hard using web Camera and limited zoom experience. Using my solution virtual notebooks in video conferencing make collaborate between themself more productive. Moreover I made it visually more appealing by making use of digital typography and making use of computer animation and develop ways where computer can assist prefessional with their work."
+   :rm/summery "Worked with KVM Libvert virtualiztoin on Archlinux, gstreamer video audio routing from souce to sink."
    :rm/referane ""}
   {:db/id 23
    :rm/row 4
@@ -157,8 +179,8 @@ communicating in professional context both on presentation and at work."
    :rm/task [:div
              [:div "BSC in Computer Engineering"]
              [:div "2001-2005"]]
-   :rm/summery "I did lot of project works, research, programming contest besides formal Education
-where I scored CGPA of 3.69 out of 4. I was a programming contestant which help me solving problems in constraint environment with limited resources."
+   :rm/summery "I have graduted from AIUB CGPA of 3.69 out of 4.p
+"
    :rm/referane ""}
 
    {:db/id 25
