@@ -18,6 +18,7 @@
 
 
 (s/def ::op-equal '#{=})
+(s/def ::op-coma '#{++})
 
 (s/def ::op-mul '#{*})
 (s/def ::op-mul2 #{:m})
@@ -34,6 +35,7 @@
                :β #{:beta}))
 
 
+
 (s/def ::ops (s/or
               :→ ::op-arrow
               :+ ::op-plus
@@ -42,9 +44,15 @@
               :<= '#{<=}
               :>= '#{>=}
               :!= '#{!=}
+              :→ '#{=>}
               :- ::op-minus
               :× ::op-mul
+              :∪ '#{s+}
+              :∩ '#{s-}
               := ::op-equal
+              :. ::op-coma
+              :∈ '#{el}
+              :⊂ '#{sub}
               :op-mul2 ::op-mul2
               :÷ ::op-dev))
 
@@ -123,9 +131,9 @@
    (fn [acc e]
      (let [[exp elem] e]
        (conj
-        (if (= (first mo)
-               :op-mul2 )
-          acc
+        (condp = (first mo)
+          :op-mul2 acc
+          :. (conj acc [:mo ","])
           (conj acc [:mo (name (first mo))]))
         (if (= exp :expr)
           (expr e)
@@ -194,14 +202,34 @@
 
 
 
-(defn b-exp [{:keys [mo elem]}]
+#_(defn b-exp [{:keys [mo elem]}]
   (if (= mo :b)
     [:mrow [:mo "("]
      (expr elem)
      [:mo ")"]]
-    [:mrow [:mo "["]
+    [:mrow [:mo "{"]
      (expr elem)
-     [:mo "]"]]))
+     [:mo "}"]]))
+
+
+(def b-exp
+  (fn [{:keys [mo elem]}]
+    (condp = mo
+      :b [:mrow [:mo "("]
+          (expr elem)
+          [:mo ")"]]
+      :c [:mrow [:mo "{"]
+          (expr elem)
+          [:mo "}"]]
+      :s [:mrow [:mo "["]
+          (expr elem)
+          [:mo "]"]]
+      :cc [:mrow [:mo "{"]
+          (expr elem)
+          [:mo "}"]]
+      (expr elem)
+      )))
+
 
 
 

@@ -66,24 +66,49 @@ I have built my career with start ups to bigtech by developing infrastructure to
    {:db/id 20
     :rm/row 0
     :rm/col 0
-    :rm/task "Web Vector graphics (SVG) based data virtualiztoin and animation platform for cambridge education (CIE)"
-    :rm/summery "Collaboration between teachers and students is hard using web Camera and limited zoom experience. Data scientist uses virtual notebooks to collaborate between themself. I have developed similar experience that would rather focus on student productivity. So that people can collaborate online. Moreover I made it visually more appealing by making use of digital typography with reactjs and clojurescript and jvm based clojure backed and expert systems clara rule, kafka event streaming, docker k3s department and graph database with datalog query engine and phyton OpenCV, differential programming, lenearing programming, lenearing and non lenear transformation, paring with darivatives"
+    :rm/task "Serverless end to end video conferencing and live Streaming v1 (2006-2012)"
+    :rm/summery "I having been making end to end low latency network connectivity solutions since 2006 using network UDP whole punching technologies which is becomming standard in 2021/2022 not only for voice and video (SRT) but also in http3 (QUIC). Streaming Vedeo providers like Google, zoom, facebook, twitch  uses of TCP-based protocls like RTMP, make unlaw full interceptions, make pessing encoding, transcoding, processing on the server side -  debending on network condition and data colocations their latency ended up 1000 times slower than my solution. In 2006 I have introdue network compressing using client and server side programs in event based c networking programming in linux, make it fault tolarent using arp spoofing then update this solution where servers help endpoints steaming through least latency route in 2008 and in 2011 added multiplxing to in crease network throughput 2013."
+    :rm/referane ""}
+
+   {:db/id 25
+    :rm/row 0
+    :rm/col 0
+    :rm/task "Serverless end to end video conferencing and live Streaming with Edge processing v2 (from 2013)"
+    :rm/summery "2015 I managed to ttansfer network discovery soluton and in first with CPS(comminication sqeuntional processing) in clojure and using actor modle in scala to make it scalabe and configuration managed side mongodb nodejs with reactjs fontend with webrtc. In 2006 I have introdue network compressing using client and server side programs in event based c networking programming in linux, make it fault tolarent using arp spoofing then update this solution where servers help endpoints steaming through least latency route in 2008 and in 2011 added multiplxing to in crease network throughput 2013 - 2015 I managed to ttansfer network discovery soluton and in first with CPS(comminication sqeuntional processing) in clojure and using actor modle in scala to make it scalabe and configuration managed side mongodb nodejs with reactjs fontend with webrtc.
+    "
+    :rm/referane ""}
+
+
+   {:db/id 35
+    :rm/row 0
+    :rm/col 0
+    :rm/task "Near real time Edge processing"
+    :rm/summery ""
+    :rm/referane ""}
+
+   {:db/id 35
+    :rm/row 0
+    :rm/col 0
+    :rm/task "Web based audio & vedio conferencing"
+    :rm/summery ""
+    :rm/referane ""}
+
+   {:db/id 45
+    :rm/row 0
+    :rm/col 0
+    :rm/task "Actor model and CPS adoption for scalavility"
+    :rm/summery ""
     :rm/referane ""}
 
 
   {:db/id 3
    :rm/row 2
    :rm/col 1
-   :rm/task "Modeling Math and Physics problem with computer aided vector graphics"
-   :rm/summery "Simulating Math and Physics and computer science problems using animation vector graphics helps uploading the information on students brain and keep it stay inside long time memory."
+   :rm/task "Realtime collaboration platform for data scientist"
+   :rm/summery ""
    :rm/referane ""}
 
-  {:db/id 5
-   :rm/row 1
-   :rm/col 0
-   :rm/task "Hands on knowledge on Computer chips, electronics"
-   :rm/summery "I have gathered knowledge about computer chips and electronics and networking thought my carrier for Industry leaders like SAMSUNG, GrameenPhone. Over the year I have developed better understanding about what is going on under the hood which leads me to resonate those hands on knowledge to the students better."
-   :rm/referane ""}
+
 
 
   {:db/id 7
@@ -94,13 +119,7 @@ I have built my career with start ups to bigtech by developing infrastructure to
    :rm/referane ""}
 
 
-  {:db/id 8
-   :rm/row 20
-   :rm/col 1
-   :rm/task "English communication skill on professional context"
-   :rm/summery "I have worked with people over the globe, over time I have gotten better at
-communicating in professional context both on presentation and at work."
-   :rm/referane ""}
+
 
   {:db/id 9
    :rm/row 2
@@ -108,6 +127,7 @@ communicating in professional context both on presentation and at work."
    :rm/job "System Engineer at Operations System and Software"
    :rm/company "Grameenphone"
    :rm/duration "2009-2013"}
+
   {:db/id 10
    :rm/row 3
    :rm/job "Lead Engineer at Mobile Development"
@@ -160,7 +180,8 @@ communicating in professional context both on presentation and at work."
    :rm/row 1
    :rm/col 1
    :rm/task "Assistant Director - Bangladesh Telecommunication Regulatory Commision - BTRC (2009-2011)"
-   :rm/summery "I was an active member of National Telecommunication committee, I used to inspect Telecommunication and IT infrastructure, primary goal is to find out potential reverse or Tax leak from those infrastructure. As only person that had proper communication background my job was very extensive, some time it was extended 24/7."
+   :rm/summery "tasted by at least millions time using wireshark packct tracing and lua scripting when I was Lawful Interseptor Bangladesh Telecommunication Regulatory Commisions.
+I was an active member of National Telecommunication committee, I used to inspect Telecommunication and IT infrastructure, primary goal is to find out potential reverse or Tax leak from those infrastructure. As only person that had proper communication background my job was very extensive, some time it was extended 24/7."
    }
 
   {:db/id 16
@@ -187,21 +208,7 @@ communicating in professional context both on presentation and at work."
    {:db/id 127
     :rm/row 2
     :rm/col 1
-    :rm/task "Eyeball Networks Aug 2008 - May 20101 year 10 months"
-    :rm/summery "Eyeball's Nat-Traversal solution development.
-Implementation of latest SIP, XMPP, STUN, TURN and ICE drafts/rfc's.
-Lead developer of eyeballs AFE / AFS 8.0
-
-
-
-- Cloud based development
-- Big Data, Machine Learning
-- Scalable realtime services and communication software development
-- TCP/IP, UDP, RTP, SIP, XMPP, STUN, TURN, ICE
-- High performance SDK development experience
-- Audio/speech codec implementation
-- Audio-video messenger development
-"
+    :rm/task "Learn how to implement Intel Integated Performance primitives (IPP) api Audio/speech codec, udp hole punching technologies named (STRN, TURN, ICE), implemented web based audio, video streaming. Configured dns extentions DNS srv. Impement protocols from RFC draft."
     :rm/referane ""}
 
 
@@ -209,11 +216,7 @@ Lead developer of eyeballs AFE / AFS 8.0
     :rm/row 2
     :rm/col 1
     :rm/task "Fractals Labs"
-    :rm/summery "- Video messenger and soft-switch development
-- Audio-video codec (G729AB, AMR-NB, H263, H264) implementation and optimization
-- Silence detection
-- Serial I/O programming
-"
+    :rm/summery "Successful server based deployment of Audio-video codec (G729AB, AMR-NB, H263, H264) transcoding on debian based systems. Addoption of Phyton and shell script replacement. commercialization of UART, gpio, smart card solutions on raspberry pi. Restful api development with Reactjs worked with phyton flux, websocket, gevent, sqlalkalemi. Learned how to run a startups without any investment and when to quet when bigtech with unlimited capital steps in."
     :rm/referane ""}
 
 

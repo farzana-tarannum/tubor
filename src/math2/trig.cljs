@@ -736,6 +736,160 @@
 
 
 
+(defn ladder2 []
+  (let [[timer update-time] (react/useState 0)
+        sec2 5
+        angle {:font-size 12 :dy -5 :dx 30}
+        turns (mapcat (fn [y]
+                        (map
+                         (fn [x]
+                           (+ (/ js/Math.PI x ) (* y  (/ js/Math.PI 2))))
+                         [6 4 3 2]))
+                      [0 1 2 3])
+        tn (nth turns sec2)
+        tn2 (nth turns 4)
+        r 18
+        adj (fix (* r  (js/Math.cos tn))  2)
+        op (fix (* r  (js/Math.sin tn))  2)
+        opp1 (fix (* r  (js/Math.tan tn))  2)
+
+        adj2 (fix (* r  (js/Math.cos tn))  2)
+        op2 (fix (* r  (js/Math.sin tn))  2)
+        opp12 (fix (* r  (js/Math.tan tn))  2)
+
+        _ (react/useEffect
+           (fn []
+             (let [i (js/setInterval
+                      (fn [x] (update-time (mod (inc timer) 16))) 5000)]
+               (fn []
+                 (js/clearInterval i)))))
+
+        [slider get-slider] (react/useState 0)
+        pi 'π
+        dd '☐
+        deg '°
+        f (fn [n] (/ 1 n))
+        tt 'θ
+        dx [1 0  0 1 -1  0 0 -1]
+
+        sq (fn [n]
+                (comp
+                 (partial map (partial * n))))]
+    (let [zoom 4
+          ax-dx 80
+          ax-dy 40
+          vb (fn [z]
+               (nth [[100 -320  400 450]
+                     [0 -180  200 200]
+                     [0 -50  100 100]
+                     [0 -25  50 50]
+                     [-100 -200  800 200]
+                     [40 120  80 80]
+                     [0 40  100 100]
+                     [75 -175  150 150]
+                     [-20 -20  100 100]
+                     [-200 -600  1200 1000]
+                     ] z))
+          viewbox (vb 0)
+          viewbox2 (vb 9)
+          ]
+      [:div {:style (merge
+                     (grid [100 :vh 100 :vw
+                            (take 24 (repeat [8 :vh]))
+                            (take 20 (repeat [8 :vh]))])
+                     {:background-color (hsl [1 70 70 .1])
+
+                      :gap ".1rem"})}
+
+
+       [:div {:style (m7/css
+                      [[2 6 2 9 :center :center
+                        1.8 :rem :column]
+                       [1 70 90 .1] []
+                       {:gap "1rem"
+                        :color (hsl [3 50 30 1])
+                        :z-index 2}])}
+
+        ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+       [:div {:style (m7/css
+                      [[2 10 3 23 :center :center 3 :rem]
+                       [1 70 90 1] []
+                       {:gap "1rem"
+                        :z-index 1}])}
+        (let []
+          [:svg {:style {:height "100%"
+                         :width "100%"}
+                 :viewBox (m7/space
+                           viewbox)}
+
+
+           [:animate {:attributeName :viewBox
+                      :to (m7/space viewbox2)
+                      :dur "4s"
+                      :fill :freeze}]
+           [flames]
+           #_(grid-on 1 1)
+
+
+
+
+           (let [rad tn
+                 r (* r 20)]
+             [:g
+
+
+
+
+
+
+
+              [:circle#cline1 {:r r
+                        :cx 0
+                        :cy 0
+                        :stroke  (hsl [1 70 70 1])
+                        :stroke-width 2
+                        :fill :none}]
+
+
+
+
+
+              [:g#arcs
+               (map-indexed
+                (fn [i se]
+                  [:g
+                   [:circle {:r 4
+                             :cx (* r (js/Math.cos se))
+                             :cy (ve (* r (js/Math.sin se)))
+                             :fill (hsl [3 70 70 1])}]
+                   [:text {:font-size 10
+                           :x (* r (js/Math.cos se))
+                           :y (ve (* r (js/Math.sin se)))
+                           :fill (hsl [3 45 5 1])}   i]])
+                turns)]
+
+
+
+
+
+
+              ])])]])))
+
+
+
 
 
 
@@ -4349,6 +4503,341 @@
 
 
 (defn circle []
+  (let [[timer update-time] (react/useState 0)
+        sec2 0
+        sin (fn [t]
+              (fix (js/Math.sin (/ (* t js/Math.PI) 180)) 5))
+
+        asin (fn [t]
+               (fix (js/Math.asin t) 5))
+
+        cos (fn [t]
+              (fix (js/Math.cos (/ (* t js/Math.PI) 180)) 5))
+
+        angle {:font-size 12 :dy -5 :dx 30}
+        turns (mapcat (fn [y]
+                        (map
+                         (fn [x]
+                           (+ (/ js/Math.PI x )
+                              (* y  (/ js/Math.PI 2))))
+                         [6 4 3 2]))
+                      [0 1 2 3])
+        tn (nth turns sec2)
+        tn2 (nth turns 4)
+        r 18
+        adj (fix (* r  (js/Math.cos tn))  2)
+        op (fix (* r  (js/Math.sin tn))  2)
+        opp1 (fix (* r  (js/Math.tan tn))  2)
+
+        adj2 (fix (* r  (js/Math.cos tn))  2)
+        op2 (fix (* r  (js/Math.sin tn))  2)
+        opp12 (fix (* r  (js/Math.tan tn))  2)
+
+        _ (react/useEffect
+           (fn []
+             (let [i (js/setInterval
+                      (fn [x] (update-time
+                               (mod (inc timer) 16))) 5000)]
+               (fn []
+                 (js/clearInterval i)))))
+
+        [slider get-slider] (react/useState 0)
+        pi 'π
+        dd '☐
+        deg '°
+        nl '∅
+        f (fn [n] (/ 1 n))
+        tt 'θ
+        dx [1 0  0 1 -1  0 0 -1]
+
+        sq (fn [n]
+                (comp
+                 (partial map (partial * n))))]
+    (let [zoom 4
+          ax-dx 80
+          ax-dy 40
+          vb (fn [z]
+               (nth [[100 -320  400 450]
+                     [-200 -500  1200 800]
+                     [-2000 -5000  12000 8000]
+                     [0 -180  200 200]
+                     [0 -50  100 100]
+                     [0 -25  50 50]
+                     [-100 -200  800 200]
+                     [40 120  80 80]
+                     [0 40  100 100]
+                     [75 -175  150 150]
+                     [-20 -20  100 100]
+                     [-200 -500  1200 800]
+                     ] z))
+          viewbox (vb 2)
+          viewbox2 (vb 2)
+          ]
+      [:div {:style (merge
+                     (grid [100 :vh 100 :vw
+                            (take 24 (repeat [8 :vh]))
+                            (take 20 (repeat [8 :vh]))])
+                     {:background-color (hsl [1 70 70 .1])
+                      :gap ".1rem"})}
+
+
+       [:div {:style (m7/css
+                      [[3 3 1 8 :center :center
+                        1.8 :rem :column]
+                       [1 70 90 .1] []
+                       {:gap "1rem"
+                        :color (hsl [3 50 30 1])
+                        :z-index 2}])}
+
+        #_[m7/x `[s- C [:b [s+ A B]]]]
+
+
+        #_[m7/x `[el a b ]]
+
+        #_[m7/x `[sub a b ]]
+
+        #_[m7/x `[++ 1 2 3]]
+
+        ;; [m7/x `[= A [:c [++ 2 3 5 7] ] ]]
+
+        ;; [m7/x `[= C  [:c [++ 1 4] ] ]]
+
+        ;; [m7/x `[= [s- C A]
+        ;;         [:c 0]]]
+
+
+
+        ;; [m7/x `[sub [:c [++ 9 3 5]] B ]]
+
+        ;; [:div "{2x: x is an  integers,  2 <= 2x <= 20}"]
+
+
+
+
+
+        ;; [m7/x '[= M [:c [++ 1 2 4 6 8]]]]
+
+
+
+
+
+        [m7/x '[= M [:c [++ 1 2 4 6 8]]]]
+
+        #_[m7/x '[= N [:c [++   6 7 8 9]]]]
+
+        [m7/x `[= [s+ M N] [:c [++ 1 2 4 6 8 7 9]]]]
+        [m7/x `[= [:p  M ~deg] [:c [++ 7 9]]]]
+
+        [m7/x `[= [s- [:p M ~deg] N] [s- [:c [++ 7 9]]
+                                      [:c [++ 6 7 8 9]]]]]
+
+
+        [m7/x `[= [s- [:p N ~deg] N] ~nl]]
+
+
+
+
+        ]
+
+
+
+
+       [:div {:style (m7/css
+                      [[8 1 8 1 :center :center
+                        1.8 :rem :column]
+                       [1 70 90 .1] []
+                       {:gap "1rem"
+                        :color (hsl [3 50 30 1])
+                        :z-index 2}])}
+
+
+        "1"
+
+        ]
+
+       [:div {:style (m7/css
+                      [[7 1 11 1 :center :center
+                        1.8 :rem :column]
+                       [1 70 90 .1] []
+                       {:gap "1rem"
+                        :color (hsl [3 50 30 1])
+                        :z-index 2}])}
+
+
+        "3"
+
+        ]
+
+
+
+
+
+       [:div {:style (m7/css
+                      [[2 10 3 23 :center :center 3 :rem]
+                       [1 70 90 1] []
+                       {:gap "1rem"
+                        :z-index 1}])}
+        (let []
+          [:svg {:style {:height "100%"
+                         :width "100%"}
+                 :viewBox (m7/space
+                           viewbox)}
+
+
+           [:animate {:attributeName :viewBox
+                      :to (m7/space viewbox2)
+                      :dur "4s"
+                      :fill :freeze}]
+
+           #_(grid-on 1 1)
+
+
+
+
+           (let [rad tn
+                 r (* r 20)]
+             [:g
+
+
+
+
+              [:circle {:r (* 4 r)
+                        :cx 0
+                        :cy 0
+                        :fill (hsl [.6 75 70 .8])}]
+
+
+
+              [:circle {:r 580
+                        :cx 0
+                        :cy 0
+                        :stroke  (hsl [2.7 70 70 1])
+                        :stroke-width .3
+                        :fill :none}]
+
+
+              [:circle {:r (* 10 r)
+                        :cx (* r 10 (js/Math.cos tn))
+                        :cy (ve (* r 10 (js/Math.sin tn)))
+                        :fill (hsl [1 70 70 .9])}]
+
+
+
+
+              [:circle {:r (* 10 r)
+                        :cx 0
+                        :cy 0
+                        :fill (hsl [2.6 65 70 .6])}]
+
+
+              #_[:circle {:r (* 2 r)
+                          :cx 0
+                        :cy 0
+                        :fill (hsl [1.6 95 70 .6])}]
+
+              #_[:circle {:r (* 3 r)
+                        :cx 0
+                        :cy 0
+                        :fill (hsl [1.6 95 70 .7])}]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              [:g
+
+
+               [:path#angle {:d
+                             (m7/path
+                              [0 0 :l r 0 :a r r 0 false false
+                               (ve (- r (* 20 adj)))
+                               (ve (* 20 op))])
+                             :stroke (hsl [3 70 70 1])
+                             :transform (m7/tranfrom [[:scale [0.4 0.4]]])
+                             :stroke-width 3
+                             :fill (hsl [3 70 70 .5])}]
+
+
+               [:path#sin {:d (m7/path [0 0 :l (* 20 adj) 0
+                                        0 (ve (* 20 op))])
+                           :id :tri22
+                           :stroke (hsl [1 70 70 1])
+                           :stroke-width 1
+                           :fill (hsl [1.5 70 70 .5])}]
+
+
+               [:path#sin {:d (m7/path [0 0 :l (* 200 adj) 0
+                                        0 (ve (* 200 op))])
+                           :id :tri22
+                           :stroke (hsl [1 70 70 1])
+                           :stroke-width 1
+                           :fill (hsl [1.5 70 70 .5])}]]
+
+
+
+
+              [:text {:x 500
+                      :font-size 200
+                      :dy (:dy angle)
+                      :dx (:dx angle)
+                      :y -100}
+
+               2]
+
+
+              [:text {:x -2000
+                      :font-size 200
+                      :dy (:dy angle)
+                      :dx (:dx angle)
+                      :y -100}
+
+               4]
+
+
+              [:text {:x 4000
+                      :font-size 200
+                      :dy (:dy angle)
+                      :dx (:dx angle)
+                      :y -100}
+
+               5]
+
+
+
+
+              #_[:text {:x 0
+                        :style {:font-size (:font-size angle)}
+                        :dy (:dy angle)
+                        :dx (:dx angle)
+                        :y 0}
+                 (name tt)
+                 (fix (* (/ 180 js/Math.PI) (js/Math.asin .92)
+                         ) 2)
+                 (fix (/ 180 (nth turns sec2)) 1)
+                 [:tspan {:dy -6}
+                  (name deg)]
+                 ]
+
+
+              ])])]])))
+
+
+(defn circle1 []
   (let [[timer update-time] (react/useState 0)
         sec2 0
         sin (fn [t]
