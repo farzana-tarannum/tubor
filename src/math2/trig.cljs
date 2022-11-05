@@ -4581,7 +4581,7 @@
                       :gap ".1rem"})}
 
 
-       [:div {:style (m7/css
+       #_[:div {:style (m7/css
                       [[3 3 1 8 :center :center
                         1.8 :rem :column]
                        [1 70 90 .1] []
@@ -4651,22 +4651,11 @@
                         :z-index 2}])}
 
 
-        "1"
+
 
         ]
 
-       [:div {:style (m7/css
-                      [[7 1 11 1 :center :center
-                        1.8 :rem :column]
-                       [1 70 90 .1] []
-                       {:gap "1rem"
-                        :color (hsl [3 50 30 1])
-                        :z-index 2}])}
 
-
-        "3"
-
-        ]
 
 
 
@@ -4677,11 +4666,21 @@
                        [1 70 90 1] []
                        {:gap "1rem"
                         :z-index 1}])}
-        (let []
+        (let [rad tn
+              r (* r 20)
+              c1 (gensym)
+              c2 (gensym)
+              c3 (gensym)
+              c4 (gensym)
+              c5 (gensym)
+              filter1 (gensym)]
           [:svg {:style {:height "100%"
                          :width "100%"}
                  :viewBox (m7/space
+
                            viewbox)}
+
+
 
 
            [:animate {:attributeName :viewBox
@@ -4691,49 +4690,148 @@
 
            #_(grid-on 1 1)
 
+           [:filter {:id filter1
+                     :filterUnits :userSpaceOnUse}
+            [:feMorphology {:operator :dilate
+                            :radius 50
+                            :in :SourceGraphic
+                            :result :thickness}]
+            [:feComposite {:operator :out
+                           :in :thickness
+                           :in2 :SourceGraphic}]]
+
+
+           [:filter {:id c3}
+            [:feGaussianBlur {:in  :SourceGraphic
+                              :stdDeviation 20
+                              :result :blur}
+             ]
+            [:feColorMatrix {:in :blur
+                             :type :matrix
+                             :values (m7/space [1 0 0 0 0
+                                                0 1 0 0 0
+                                                0 0 1 0 0
+                                                0 0 0 39 -7])
+                             :result :goo} ]
+            [:feComposite {:id :SourceGraphic
+                           :in2 :goo
+                           :operator :atop}
+             ]]
+
+           [:filter {:id c4}
+            [:feOffset {:in  :SourceGraphic
+                        :dx -100
+                        :dy -100}]
+            [:feGaussianBlur {
+                              :stdDeviation 60
+                              :result :dropshadow}]
+            [:feColorMatrix {:in :dropshadow
+                             :type :matrix
+                             :values (m7/space [1 0 0 0 0
+                                                0 1 0 0 0
+                                                0 0 1 0 0
+                                                0 0 0 .8 0])
+                             :result :fshadow} ]
+            [:feMerge
+             [:feMergeNode {:in :fshadow}]
+             [:feMergeNode {:in :SourceGraphic}]]
+            #_[:feComposite {:id :SourceGraphic
+                             :in2 :goo
+                             :operator :atop}
+               ]
+            ]
+
+           [:clipPath {:id c1}
+            [:circle {:r (* 10 r)
+                      :clip-path (m7/urll (str "#" c1))
+                      :cx 0
+                      :cy 0
+                      :fill (hsl [2.6 65 70 .6])}]]
 
 
 
-           (let [rad tn
-                 r (* r 20)]
-             [:g
+           #_[:circle {:r 580
+
+                       :cx 0
+                       :cy 0
+                       :stroke  (hsl [2.7 70 70 1])
+                       :stroke-width .3
+                       :fill :none}]
 
 
 
+           [:clipPath {:id c2}
+            [:circle {:clip-path (m7/url c1)
+                      :r (* 10 r)
+                      :cx (* r 10 (js/Math.cos tn))
+                      :cy (ve (* r 10 (js/Math.sin tn)))
+                      :fill (hsl [1 70 70 .9])}]]
 
-              [:circle {:r (* 4 r)
-                        :cx 0
+           [:clipPath {:id c5}
+            [:circle {
+                      :clip-path (m7/url c2)
+                      :r (* 10 r)
+                      :cx (* r 10 (js/Math.cos tn))
+                      :cy (ve (* r 10 (js/Math.sin tn)))
+                      :fill (hsl [1.6 95 70 .6])}]]
+
+
+           [:g {:filter (m7/url c4)}
+
+
+            [:circle {:r (* 6 r)
+                      :clip-path (m7/urll (str "#" c1))
+                      :cx 0
+                      :cy 0
+                      :fill (hsl [2.6 65 70 .4])}]
+
+
+
+            [:circle {
+                      :r (* 6 r)
+                      :cx (* r 10 (js/Math.cos tn))
+                      :cy (ve (* r 10 (js/Math.sin tn)))
+                      :fill (hsl [1 70 70 .3])}]
+
+              #_[:clipPath {:id c1}
+               [:circle {:r (* 4 r)
+
+                         :cx -2500
+                         :cy 0
+                         :fill (hsl [.6 75 70 .8])}]]
+
+
+
+              #_[:circle {:r (* 4 r)
+
+                        :cx -2500
                         :cy 0
                         :fill (hsl [.6 75 70 .8])}]
 
 
 
-              [:circle {:r 580
-                        :cx 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            [:circle {:r (* 20 r)
+                      :filter (m7/url filter1)
+                      :clip-path (m7/url c5)
+                        :cx -400
                         :cy 0
-                        :stroke  (hsl [2.7 70 70 1])
-                        :stroke-width .3
-                        :fill :none}]
-
-
-              [:circle {:r (* 10 r)
-                        :cx (* r 10 (js/Math.cos tn))
-                        :cy (ve (* r 10 (js/Math.sin tn)))
-                        :fill (hsl [1 70 70 .9])}]
-
-
-
-
-              [:circle {:r (* 10 r)
-                        :cx 0
-                        :cy 0
-                        :fill (hsl [2.6 65 70 .6])}]
-
-
-              #_[:circle {:r (* 2 r)
-                          :cx 0
-                        :cy 0
-                        :fill (hsl [1.6 95 70 .6])}]
+                        :fill (hsl [1.6 95 70 .6])
+                        }]
 
               #_[:circle {:r (* 3 r)
                         :cx 0
@@ -4759,7 +4857,7 @@
 
 
 
-              [:g
+              #_[:g
 
 
                [:path#angle {:d
@@ -4791,16 +4889,17 @@
 
 
 
-              [:text {:x 500
-                      :font-size 200
-                      :dy (:dy angle)
-                      :dx (:dx angle)
-                      :y -100}
+            [:text {:x 500
+                    :filter (m7/url filter1)
+                    :font-size 1000
+                    :dy (:dy angle)
+                    :dx (:dx angle)
+                    :y -100}
 
-               2]
+               "Hello world"]
 
 
-              [:text {:x -2000
+            #_[:text {:x -2000
                       :font-size 200
                       :dy (:dy angle)
                       :dx (:dx angle)
@@ -4809,7 +4908,7 @@
                4]
 
 
-              [:text {:x 4000
+            #_[:text {:x 4000
                       :font-size 200
                       :dy (:dy angle)
                       :dx (:dx angle)
@@ -4834,7 +4933,8 @@
                  ]
 
 
-              ])])]])))
+            ]
+           ])]])))
 
 
 (defn circle1 []

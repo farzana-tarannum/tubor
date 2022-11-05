@@ -428,14 +428,14 @@
    #_[trig/freq]
    #_[trig/ladder2]
    #_[trig/freq3]
-   [trig/circle]
+   #_[trig/circle]
    #_[trans/coordinates3]
 
    #_[trans/coordinatesbz]
 
    #_[trans/cd5]
    #_[stat/stat3]
-   #_[teacher/resume]
+   [teacher/resume]
    #_[py100/template4]
    #_[frac/stat]
    #_[frac/frection]

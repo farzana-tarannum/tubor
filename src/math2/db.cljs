@@ -10,7 +10,10 @@
    :rm/code {:db/unique :db.unique/identity}
    })
 
-(def summery2 "As a DevOps my primary gool is to ensure developer productivity and ensure system reliability. I achieve this gools by leveraging  in depth knowledge in past as a network programming in c on linux systems and miro achitecture (ISA) from there I had grudually migrated to jvm finally back to the system as DevOps with Rust, go which have memory safety guarantees. I am strong beliver of multi database, programming pardime as each developer community have their strength as well as weekness, so I laverage modern toolings on service meshes  based on microservies and stream-processing, RESTful API routing to reduce fiction and boiler plates hence increase productivity and reliability")
+
+
+
+(def summery2 "As a DevOps, my primary goal is to ensure developer productivity and ensure system reliability. I achieved these goals by leveraging in depth knowledge in the past as a network system programming on C and Linux systems and micro architectures (ISA) from there I had gradually migrated to jvm with Clojure, Scala finally back to the system as DevOps with Elixir, Rust, GO-lang which ensure memory safety guarantees and faster development cycle. I am a strong believer of multi-database, programming paradigm as each developer community have their strengths as well as weakness, so I leverage modern tooling like service meshes on microservices and stream-processing, RESTful API routing to reduce fiction and boiler plates hence increase productivity and reliability.")
 
 
 (def summery
@@ -39,8 +42,10 @@
     :rm/age 38
     :rm/phone "880-1711961024"
     :rm/email ""
-    :rm/summery "I am a DevOps engineer, I have more than 15 years experience working on cloud computing architechtures on linux platforms.
-I have built my career with start ups to bigtech by developing infrastructure toolings, troubleshooting, system intregration."
+
+
+
+    :rm/summery "I am a DevOps engineer. I have more than 15 years experience working on cloud computing architectures on Linux platforms. I have built my career with start-ups to Bigtechs by developing infrastructure toolings, troubleshooting, system integration."
     :rm/projects (into [27 25]
                        [12 13 20 16 17 22 23 7 17 127 15])
     :rm/jobs [9 10]
@@ -176,13 +181,24 @@ I have built my career with start ups to bigtech by developing infrastructure to
    :rm/task "ASHRAF AHMED \\8801711961024 H# 192, R# 2, Avenue# 3, Mirpur DOHS, Dhaka - 1216 "
    :rm/summery "jaharapi@protonmail.com"}
 
-  {:db/id 15
-   :rm/row 1
-   :rm/col 1
-   :rm/task "Assistant Director - Bangladesh Telecommunication Regulatory Commision - BTRC (2009-2011)"
-   :rm/summery "tasted by at least millions time using wireshark packct tracing and lua scripting when I was Lawful Interseptor Bangladesh Telecommunication Regulatory Commisions.
+   {:db/id 15
+    :rm/row 8
+    :rm/col 1
+    :rm/task "Assistant Director - Bangladesh Telecommunication Regulatory Commision - BTRC (2009-2011)"
+    :rm/summery "tasted by at least millions time using wireshark packct tracing and lua scripting when I was Lawful Interseptor Bangladesh Telecommunication Regulatory Commisions.
 I was an active member of National Telecommunication committee, I used to inspect Telecommunication and IT infrastructure, primary goal is to find out potential reverse or Tax leak from those infrastructure. As only person that had proper communication background my job was very extensive, some time it was extended 24/7."
-   }
+    }
+
+   {:db/id 15
+    :rm/row 1
+    :rm/col 1
+    :rm/task "Deep packet Inspections (DPI)"
+    :rm/summery "
+Packet Inspection and Auditing for malatious mel activities and Lawful Interception
+ in Linux Kernel Space using eBPF technologies and systrace using GO-lang and PostGreSQL. "
+    }
+
+
 
   {:db/id 16
    :rm/row 2
@@ -233,15 +249,7 @@ I was an active member of National Telecommunication committee, I used to inspec
    :rm/task "Video conferencing solution with Virtual notebooks"
    :rm/summery "Worked with KVM Libvert virtualiztoin on Archlinux, gstreamer video audio routing from souce to sink."
    :rm/referane ""}
-   {:db/id 23
-   :rm/row 4
-   :rm/col 0
-   :rm/task [:div
-             [:div "BSC in Computer Engineering"]
-             [:div "2001-2005"]]
-   :rm/summery "I have graduted from AIUB CGPA of 3.69 out of 4.p
-"
-   :rm/referane ""}
+
 
    {:db/id 25
    :rm/row 6

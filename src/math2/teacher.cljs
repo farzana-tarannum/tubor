@@ -57,7 +57,7 @@
 
             }
 
-      [:div "Ashrar Ahmed"]
+      [:div "Ashik Ahmed"]
       [:div {:style {:font-size "1.1rem"}} "H# 192, R# 2, Mirpur DOHS, DHAKA, BANGLADESH"]
       [:div {:style {:font-size "1.3rem"}}
        "+8801711961024, jaharapi@protonmail.com"]]
@@ -74,12 +74,13 @@
       [file/file-input-background4]]
 
 
-     [:div {:key (gensym)
+     [:div {:contenteditable :true
+            :key (gensym)
             :style (css
                     [[4 4 1 15  :center :center 2.3 :rem :column]
                      [1 70 90 .4] [] {
                                       :padding "20px"
-
+                                      :contenteditable :true
                                       :gap "1rem"
                                       :z-index 2}
                      ])
@@ -92,14 +93,18 @@
               [?e :rm/summery ?s]] @conn))
       ]
 
-     [:div {:key (gensym)            :style (css
+     [:div {:contenteditable :true
+            :key (gensym)            :style (css
                                              [[8 5 1 15  :center :center 1.6 :rem :column]
-                     [1 70 90 .4] [] {
-                                      :padding "20px"
-                                      :font-family "Amazonia Var"
-                                      :gap "1rem"
-                                      :z-index 2}
-                     ])
+                                              [1 70 90 .4] []
+                                              {
+
+
+                                               :padding "20px"
+                                               :font-family "Amazonia Var"
+                                               :gap "1rem"
+                                               :z-index 2}
+                                              ])
 
             }
       db/summery2

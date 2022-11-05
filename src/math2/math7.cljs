@@ -541,6 +541,9 @@
 (defn url [i]
   (str "url" "(#" i  ")" ))
 
+(defn urll [i]
+  (str "url" "(" i  ")" ))
+
 (defn fs [fnts]
   (let [wrap (fn [a]
                (str "'" a  "'"))]
