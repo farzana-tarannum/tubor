@@ -16,6 +16,9 @@
 (def summery2 "As a DevOps, my primary goal is to ensure developer productivity and ensure system reliability. I achieved these goals by leveraging in depth knowledge in the past as a network system programming on C and Linux systems and micro architectures (ISA) from there I had gradually migrated to jvm with Clojure, Scala finally back to the system as DevOps with Elixir, Rust, GO-lang which ensure memory safety guarantees and faster development cycle. I am a strong believer of multi-database, programming paradigm as each developer community have their strengths as well as weakness, so I leverage modern tooling like service meshes on microservices and stream-processing, RESTful API routing to reduce fiction and boiler plates hence increase productivity and reliability.")
 
 
+(def summery3 "As a DevOps, fullstack developer to ensure developer productivity and ensure system reliability in the mean time still maintain faster development cycle, I have been using groovy on jvm and react as fontend scince 2014 and linux system intergration and postgresql science 2006. So I leverage modern tooling such as docker, kubernetes, RESTful API to reduce fiction and boiler plates hence increase productivity and reliability.")
+
+
 (def summery
   "I have been teaching A level computer science, mathematics, physics, IT online since 2019. My lectures are very well prepared by leveraging my hands on programming skill on computer graphics, animation, user interaction and web technologies. It is really helpful for those who want to study at top Universities around the world as well as top Engineering Universities in Bangladesh. My teaching techniques with visual interaction helps students get better at receiving intuition of science & technologies even who those who have short attention span."
   )

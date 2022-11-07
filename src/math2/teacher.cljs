@@ -95,7 +95,7 @@
 
      [:div {:contenteditable :true
             :key (gensym)            :style (css
-                                             [[8 5 1 15  :center :center 1.6 :rem :column]
+                                             [[8 3 1 15  :center :center 1.6 :rem :column]
                                               [1 70 90 .4] []
                                               {
 
@@ -107,7 +107,7 @@
                                               ])
 
             }
-      db/summery2
+      db/summery3
       ]
 
 

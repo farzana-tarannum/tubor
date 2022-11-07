@@ -748,7 +748,7 @@
                       [0 1 2 3])
         tn (nth turns sec2)
         tn2 (nth turns 4)
-        r 18
+        r 4
         adj (fix (* r  (js/Math.cos tn))  2)
         op (fix (* r  (js/Math.sin tn))  2)
         opp1 (fix (* r  (js/Math.tan tn))  2)
@@ -780,7 +780,7 @@
           ax-dy 40
           vb (fn [z]
                (nth [[100 -320  400 450]
-                     [0 -180  200 200]
+                     [0 -100  200 300]
                      [0 -50  100 100]
                      [0 -25  50 50]
                      [-100 -200  800 200]
@@ -791,7 +791,7 @@
                      [-200 -600  1200 1000]
                      ] z))
           viewbox (vb 0)
-          viewbox2 (vb 9)
+          viewbox2 (vb 1)
           ]
       [:div {:style (merge
                      (grid [100 :vh 100 :vw
@@ -802,7 +802,7 @@
                       :gap ".1rem"})}
 
 
-       [:div {:style (m7/css
+       #_[:div {:style (m7/css
                       [[2 6 2 9 :center :center
                         1.8 :rem :column]
                        [1 70 90 .1] []
@@ -847,6 +847,14 @@
 
 
            (let [rad tn
+                 a (gensym)
+                 b (gensym)
+                 c (gensym)
+                 ab (gensym)
+                 bc (gensym)
+                 ca (gensym)
+                 abc (gensym)
+                 f1 (gensym)
                  r (* r 20)]
              [:g
 
@@ -856,8 +864,26 @@
 
 
 
-              [:circle#cline1 {:r r
+              [:circle {:r r
                         :cx 0
+                        :cy 0
+                        :stroke  (hsl [1 50 50 1])
+                        :stroke-width 2
+                        :fill :none}]
+
+              [:clipPath {:id a}
+               [:circle {:r r
+                         :cx 0
+                         :cy 0
+                         :stroke  (hsl [1 70 70 1])
+                         :stroke-width 2
+                         }]]
+
+
+
+
+              [:circle {:r r
+                        :cx (* 20 6)
                         :cy 0
                         :stroke  (hsl [1 70 70 1])
                         :stroke-width 2
@@ -867,15 +893,67 @@
 
 
 
-              [:g#arcs
+
+
+
+              [:circle {:r r
+                        :cx (* 20 3)
+                        :cy (* 20 5)
+                        :stroke  (hsl [1 70 70 1])
+                        :stroke-width 2
+                        :fill :none}]
+              [:filter {:id f1}
+               [:feOffset {:in :SourceGraphic
+                           :dx (* 20 6)
+                           :dy 0}]
+               [:feComposite {:in2 :SourceGraphic
+                              :operator :light}]]
+
+              [:circle {:r r
+                        :cx 0
+                        :cy 0
+                        :stroke  (hsl [1 50 50 1])
+                        :stroke-width 2
+                        :fill (hsl [0 70 70 1])
+                        :filter (m7/url f1)
+                        }]
+
+              [:circle {:r r
+                        :id ab
+                        :clip-path (m7/url a)
+                        :cx (* 20 6)
+                        :cy 0
+                        :stroke  (hsl [1 70 70 1])
+                        :stroke-width 2
+
+                        :fill (m7/hsl [2 70 70 .5])}]
+
+
+
+
+
+
+
+
+
+
+              #_[:circle {:r r
+                        :clip-path (m7/url abc)
+                        :cx (* 20 3)
+                        :cy (* 20 5)
+                        :stroke  (hsl [1 70 70 1])
+                        :stroke-width 2
+                        :fill (m7/hsl [2.9 70 70 1])}]
+
+              #_[:g#arcs
                (map-indexed
                 (fn [i se]
                   [:g
-                   [:circle {:r 4
+                   [:circle {:r 1
                              :cx (* r (js/Math.cos se))
                              :cy (ve (* r (js/Math.sin se)))
                              :fill (hsl [3 70 70 1])}]
-                   [:text {:font-size 10
+                   [:text {:font-size 3
                            :x (* r (js/Math.cos se))
                            :y (ve (* r (js/Math.sin se)))
                            :fill (hsl [3 45 5 1])}   i]])
@@ -4673,6 +4751,10 @@
               c3 (gensym)
               c4 (gensym)
               c5 (gensym)
+              c6 (gensym)
+              ca (gensym)
+              cb (gensym)
+              cc (gensym)
               filter1 (gensym)]
           [:svg {:style {:height "100%"
                          :width "100%"}
@@ -4761,48 +4843,86 @@
 
 
            [:clipPath {:id c2}
-            [:circle {:clip-path (m7/url c1)
-                      :r (* 10 r)
-                      :cx (* r 10 (js/Math.cos tn))
-                      :cy (ve (* r 10 (js/Math.sin tn)))
-                      :fill (hsl [1 70 70 .9])}]]
-
-           [:clipPath {:id c5}
-            [:circle {
-                      :clip-path (m7/url c2)
-                      :r (* 10 r)
-                      :cx (* r 10 (js/Math.cos tn))
-                      :cy (ve (* r 10 (js/Math.sin tn)))
-                      :fill (hsl [1.6 95 70 .6])}]]
-
-
-           [:g {:filter (m7/url c4)}
-
-
-            [:circle {:r (* 6 r)
-                      :clip-path (m7/urll (str "#" c1))
-                      :cx 0
-                      :cy 0
-                      :fill (hsl [2.6 65 70 .4])}]
-
-
-
             [:circle {
                       :r (* 6 r)
                       :cx (* r 10 (js/Math.cos tn))
                       :cy (ve (* r 10 (js/Math.sin tn)))
                       :fill (hsl [1 70 70 .3])}]
 
-              #_[:clipPath {:id c1}
-               [:circle {:r (* 4 r)
-
-                         :cx -2500
-                         :cy 0
-                         :fill (hsl [.6 75 70 .8])}]]
+            ]
 
 
 
-              #_[:circle {:r (* 4 r)
+
+           [:clipPath {:id c5}
+            [:circle {:r (* 6 r)
+                      :clip-path (m7/urll (str "#" c2))
+                      :cx 0
+                      :cy -200
+                      :fill (hsl [2.6 65 70 .4])}]
+
+            ]
+
+
+           [:g {:filter (m7/url c4)}
+
+
+            (comment :clip-path (m7/urll (str "#" c2))
+                     :clip-path (m7/urll (str "#" c2))
+                     :clip-path (m7/urll (str "#" c2)))
+
+            ;; a
+
+
+            [:circle {:r (* 6 r)
+                      :cx 0
+                      :cy -200
+                      :fill (hsl [2.6 65 70 .4])}]
+
+
+            ;; c
+            [:circle {
+                      :r (* 6 r)
+                      :cx (+ 2000 (* r 10 (js/Math.cos tn)))
+                      :cy 200
+                      :fill (hsl [3 70 70 .3])}]
+            ;; b c
+            #_[:circle {
+                      :clip-path (m7/urll (str "#" c2))
+                      :r (* 6 r)
+                      :cx (+ 100 (* r 10 (js/Math.cos tn)))
+                      :cy 200
+                      :fill (hsl [3 70 70 .3])}]
+
+            ;; b
+            [:circle {
+
+                      :r (* 6 r)
+                      :cx (* r 10 (js/Math.cos tn))
+                      :cy (ve (* r 10 (js/Math.sin tn)))
+                      :fill (hsl [1 60 70 .3])}]
+
+
+            #_[:circle {:r (* 6 r)
+                      :clip-path (m7/urll (str "#" c2))
+                      :cx 0
+                      :cy -200
+                      :fill (hsl [2.3 65 70 .4])}]
+
+
+
+            #_[:circle {:clip-path (m7/urll (str "#" c5))
+                      :r (* 6 r)
+                      :cx (+ 100 (* r 10 (js/Math.cos tn)))
+                      :cy 200
+                      :fill (hsl [3 70 70 .3])}]
+
+
+
+
+
+
+            #_[:circle {:r (* 4 r)
 
                         :cx -2500
                         :cy 0
@@ -4825,13 +4945,13 @@
 
 
 
-            [:circle {:r (* 20 r)
+            #_[:circle {:r (* 20 r)
                       :filter (m7/url filter1)
                       :clip-path (m7/url c5)
-                        :cx -400
-                        :cy 0
-                        :fill (hsl [1.6 95 70 .6])
-                        }]
+                      :cx -400
+                      :cy 0
+                      :fill (hsl [1.6 95 70 .6])
+                      }]
 
               #_[:circle {:r (* 3 r)
                         :cx 0
@@ -4889,7 +5009,7 @@
 
 
 
-            [:text {:x 500
+            #_[:text {:x 500
                     :filter (m7/url filter1)
                     :font-size 1000
                     :dy (:dy angle)
