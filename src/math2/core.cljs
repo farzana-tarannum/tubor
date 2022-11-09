@@ -426,7 +426,8 @@
    #_[m19/home-work190 [1 0 0]]
    #_[trig/trig2]
    #_[trig/freq]
-   #_[trig/ladder2]
+   [trig/ladder2]
+
    #_[trig/freq3]
    #_[trig/circle]
    #_[trans/coordinates3]
@@ -435,7 +436,7 @@
 
    #_[trans/cd5]
    #_[stat/stat3]
-   [teacher/resume]
+   #_[teacher/resume]
    #_[py100/template4]
    #_[frac/stat]
    #_[frac/frection]

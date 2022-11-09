@@ -22,10 +22,31 @@
 (d/transact! conn db/data)
 
 
+(defn marking [marks paragraph color]
+  (reduce
+   (fn [acc e]
+     (if (some #(= e %) marks)
+       (conj acc
+             [:span " "
+              [:span {:style {:padding "2.5px 1px"
+                              :letter-spacing "1px"
+                              :background-color color
+                              :font-weight 700}}
+               (str  e)]])
+
+
+
+       (conj acc [:span (str " "  e)])))
+   [:div ]
+
+   (str/split paragraph
+              #"\s+")))
+
 
 
 (defn resume []
   (let [[name set-name] (react/useState "")
+        [rows set-rows] (react/useState 11)
         ref (react/useRef)]
     [:div {:style
            (into
@@ -34,6 +55,7 @@
                     (take 24 (repeat [8 :vh]))
                     (take 40 (repeat [8 :vh]))])
              {:background-color (hsl [1 70 90 .1])
+              :padding "50px"
               :gap ".14rem"})
             )}
 
@@ -78,11 +100,13 @@
             :key (gensym)
             :style (css
                     [[4 4 1 15  :center :center 2.3 :rem :column]
-                     [1 70 90 .4] [] {
-                                      :padding "20px"
-                                      :contenteditable :true
-                                      :gap "1rem"
-                                      :z-index 2}
+                     [1 70 90 .4]
+                     []
+                     {
+                      :padding "20px"
+                      :contenteditable :true
+                      :gap "1rem"
+                      :z-index 2}
                      ])
 
             }
@@ -99,7 +123,7 @@
                                               [1 70 90 .4] []
                                               {
 
-
+                                               :line-height 1.5
                                                :padding "20px"
                                                :font-family "Amazonia Var"
                                                :gap "1rem"
@@ -107,24 +131,31 @@
                                               ])
 
             }
-      db/summery3
+      (marking
+       ["Linux" "JVM" "Groovy" "React" "PostGreSQL"
+        "Docker," "Kubernetes," "RESTful"]
+       db/summery3
+       (m7/hsl [1.2 100 70 .8]))
       ]
 
 
 
 
      (map-indexed (fn [i [task sum row col id]]
+
                     [:div {:key (gensym)
+                           :contenteditable :true
                            :style (m7/css
-                                   [[(+ 13 (* i 4))
-                                     4 13 3 :center :center 1.2 :rem]
-                                    [2 70 90 .7] [] {:gap "1rem"
-                                                     :padding "2rem"}
+                                    [[(+ 11 (* i 4))
+                                     (if (> col 1) col 4) 13 3 :center :center 1.2 :rem]
+                                    [1 70 90 .4]
+                                     [] {:gap "1rem"
+                                         :padding "2rem"}
                                     (font/fv [[1 4] [1 1] [1 2] [2 1]])])}
 
 
                      task])
-                  (sort-by first <
+                  (sort-by #(nth % 2) <
                            (d/q '[:find  ?t ?s ?r ?c ?p
                                   :where
                                   [?e :rm/code :devops]
@@ -137,23 +168,28 @@
 
      (map-indexed (fn [i [task sum row col id]]
                     [:div {:key (gensym)
+                           :contenteditable :true
                            :style (m7/css
-                                   [[(+ 13 (* i 4)) 4 1 12 :center :center 1.5 :rem]
-                                    [2 70 90 .3] []
-                                    {:gap "1rem"
+                                   [[(+ 11 (* i 4)) (if (> col 1) col 4) 1 12 :center :center 1.5 :rem]
+                                    [1 70 90 .3]
+                                    []
+                                    {:line-height 1.5
+                                     :gap "1rem"
                                      :padding "10px"
                                      }
                                     ])}
-
-
-                     sum])
-                  (sort-by first <
+                     (marking ["SQL," "Java,"  "scripting" "scripting," "awk," "jetty," "ssh" "PostGreSQL." "wireshark" "vi" "leadership" "embaded" "boot" "KVM" "virtualiztoin" "docker" "docker" "vnc" "rdp" "GraalVM" "redis" "git" "git," "fork" "merge" "branch" "Linux" "Groovy" "RESTful" "react" "d3.js" "iptables," "emacs" "CentOS" "Ubuntu."
+                               "Archlinux" "reactjs" "webrtc" "ingress" "kafka" "groovy"]
+                              sum
+                              (m7/hsl [1.2 100 70 .8]))])
+                  (sort-by #(nth % 2) <
                    (d/q '[:find  ?t ?s ?r ?c ?p
                           :where
                           [?e :rm/code :devops]
                           [?e :rm/projects ?p]
                           [?p :rm/task ?t]
                           [?p :rm/summery ?s]
+
                           [?p :rm/row ?r]
                           [?p :rm/col ?c]
                           ] @conn)))
