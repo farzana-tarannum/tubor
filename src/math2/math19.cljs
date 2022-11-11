@@ -961,18 +961,18 @@
           rn (apply range (map #(* % a) [-6 6 1]))
           rnn (apply range (map #(* % a)  [-6 6 (if point .01 .1 )]))
           main-eq ((fun ([[1 0 0]]
-                         [m7/x `[= y [:p x 2]]])
+                         [m7/x `[= [:m f [:b x]] [:p x 2]]])
                         ([[1 m d]]
                          [m7/x `[= y
                                  [- [:p [:b [-  x ~m]] 2]
                                   [:p ~d 2]]]])
                         ([[a 0 0]]
-                         [m7/x `[= y [[:p x 2] ~a]]])
+                         [m7/x `[= [:m f [:b x]] [[:p x 2] ~a]]])
                         ([[a m 0]]
-                         [m7/x `[= y
+                         [m7/x `[= [:m f [:b x]]
                                  [[:p [:b [-  x ~m]] 2] ~a]]])
                         ([[a m d]]
-                         [m7/x `[= y
+                         [m7/x `[= [:m f [:b x]]
                                  [[- [:p [:b [-  x ~m]] 2]
                                    [:p ~d 2]] ~a]]]))
                    amd)

@@ -38,6 +38,8 @@
     :rm/jobs [9 10]
     :rm/projects.title "Projects and accomplishment"}
 
+
+
    {:db/id 111
     :rm/code :devops
    :rm/occupation "Computer Engineer"
@@ -48,7 +50,7 @@
 
 
 
-    :rm/summery "I am a DevOps engineer. I have more than 15 years experience working on cloud computing architectures on Linux platforms. I have built my career with start-ups to Bigtechs by developing infrastructure toolings, troubleshooting, system integration."
+    :rm/summery "I am a DevOps engineer. I have more than 15 years experience working on cloud computing architectures on Linux platforms. I have built my career with start-ups to Bigtechs by developing infrastructure tooling, troubleshooting, system integration. As a DevOps, fullstack developer to ensure developer productivity and ensure system reliability in the mean time still maintain faster development cycle"
     :rm/projects (into [27 25]
                        [12 13  16 117 23 7  127 15 35])
     :rm/jobs [9 10]

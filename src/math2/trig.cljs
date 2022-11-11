@@ -840,7 +840,7 @@
                       :to (m7/space viewbox2)
                       :dur "4s"
                       :fill :freeze}]
-           [flames]
+
            #_(grid-on 1 1)
 
 
@@ -859,12 +859,7 @@
              [:g
 
 
-
-
-
-
-
-              [:circle {:r r
+              #_[:circle {:r r
                         :cx 0
                         :cy 0
                         :stroke  (hsl [1 50 50 1])
@@ -896,12 +891,9 @@
 
 
 
-              [:circle {:r r
-                        :cx (* 20 3)
-                        :cy (* 20 5)
-                        :stroke  (hsl [1 70 70 1])
-                        :stroke-width 2
-                        :fill :none}]
+
+
+
               [:filter {:id f1}
                [:feOffset {:in :SourceGraphic
                            :dx (* 20 6)
@@ -909,13 +901,15 @@
                [:feComposite {:in2 :SourceGraphic
                               :operator :light}]]
 
+
               [:circle {:r r
                         :cx 0
                         :cy 0
                         :stroke  (hsl [1 50 50 1])
                         :stroke-width 2
-                        :fill (hsl [0 70 70 1])
-                        :filter (m7/url f1)
+                        :fill :none
+
+
                         }]
 
               [:circle {:r r
@@ -925,25 +919,36 @@
                         :cy 0
                         :stroke  (hsl [1 70 70 1])
                         :stroke-width 2
-
                         :fill (m7/hsl [2 70 70 .5])}]
 
 
+              [:clipPath {:id abc}
 
+               [:circle {:r r
+                         :id ab
+                         :clip-path (m7/url a)
+                         :cx (* 20 6)
+                         :cy 0
+                         :stroke  (hsl [1 70 70 1])
+                         :stroke-width 2
+                         :fill (m7/hsl [2 70 70 .5])}]]
 
-
-
-
-
-
-
-              #_[:circle {:r r
+              [:circle {:r r
                         :clip-path (m7/url abc)
                         :cx (* 20 3)
                         :cy (* 20 5)
                         :stroke  (hsl [1 70 70 1])
                         :stroke-width 2
-                        :fill (m7/hsl [2.9 70 70 1])}]
+                        :fill :none}]
+
+
+              [:circle {:r r
+                        :clip-path (m7/url abc)
+                        :cx (* 20 6)
+                        :cy 0
+                        :stroke  (hsl [1 70 70 1])
+                        :stroke-width 2
+                        :fill (m7/hsl [2 70 70 .5])}]
 
               #_[:g#arcs
                (map-indexed

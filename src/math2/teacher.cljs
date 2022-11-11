@@ -63,9 +63,12 @@
      [:div {:key (gensym)
             :style (css
                     [[1 3 1 12  :center :center 2.5 :rem :column]
-                     [1 70 90 .4] [] {
-                                      :padding "20px"
-                                      :font-size "62px"
+                     [1 70 90 .4]
+
+                     []
+                     {
+                      :padding "20px"
+                      :font-size "62px"
                                       :letter-spacing "0.08em"
                                       :font-weight "491"
                                       :font-stretch "113%"
@@ -99,7 +102,7 @@
      [:div {:contenteditable :true
             :key (gensym)
             :style (css
-                    [[4 4 1 15  :center :center 2.3 :rem :column]
+                    [[4 5 1 15  :center :center 2.3 :rem :column]
                      [1 70 90 .4]
                      []
                      {
@@ -117,26 +120,87 @@
               [?e :rm/summery ?s]] @conn))
       ]
 
-     [:div {:contenteditable :true
-            :key (gensym)            :style (css
-                                             [[8 3 1 15  :center :center 1.6 :rem :column]
-                                              [1 70 90 .4] []
-                                              {
 
-                                               :line-height 1.5
-                                               :padding "20px"
-                                               :font-family "Amazonia Var"
-                                               :gap "1rem"
-                                               :z-index 2}
-                                              ])
+     #_(let [car [["Linux" "JVM" "Groovy"
+                 ]
+                ["React" "PostGreSQL"
+                 "Docker," ]
+                ["Kubernetes," "RESTful" "afc"]]]
+       (for [i (range 0 3)
+             j (range 0 3)]
+         [:div {
+                :key (gensym)
+                :style (css
+                        [[(+ 9 i) 1 1 (+ 4 (* 4 j))
+                          :center :center 1.6 :rem ]
+                         [1 70 90 .4] []
+                         {
 
-            }
-      (marking
-       ["Linux" "JVM" "Groovy" "React" "PostGreSQL"
-        "Docker," "Kubernetes," "RESTful"]
-       db/summery3
-       (m7/hsl [1.2 100 70 .8]))
-      ]
+                          :line-height 1.5
+                          :padding "20px"
+                          :font-family "Amazonia Var"
+                          :gap "1rem"
+                          :z-index 2}
+                         ])
+
+                }
+
+          (get-in car [i j])
+          ])
+       )
+
+     (let  [car (vec (map vec (partition 6
+                                         ["PostGreSQL" "SQL-Query" "Indexing"
+                                          "Functions" "PostGIS"
+                                          "Java" "scripting" "awk" "jetty," "ssh"
+                                          "wireshark" "vi" "leadership" "embaded" "boot"
+                                          "KVM" "virtualiztoin" "docker"  "vnc" "rdp" "GraalVM" "redis" "git"  "branch" "Linux" "Groovy" "RESTful" "react" "d3.js" "iptables," "emacs" "CentOS" "Ubuntu."
+                                            "Archlinux" "reactjs" "webrtc" "ingress" "kafka" "groovy"])))]
+       (for [i (range 0 6)
+             j (range 0 5)]
+         [:div {
+                :key (gensym)
+                :style (css
+                        [[(+ 9 i) 1 (+ 1 (* 3 j)) 3
+                          :center :center 1.6 :rem ]
+                         [1 70 90 .4] []
+                         {
+
+
+
+                          :gap "1rem"
+                          :z-index 21}
+                         ])
+
+                }
+
+          (get-in car [i j] "none")
+          ])
+       )
+
+
+
+
+     #_[:div {:contenteditable :true
+              :key (gensym)            :style (css
+                                               [[8 3 1 15  :center :center 1.6 :rem :column]
+                                                [1 70 90 .4] []
+                                                {
+
+                                                 :line-height 1.5
+                                                 :padding "20px"
+                                                 :font-family "Amazonia Var"
+                                                 :gap "1rem"
+                                                 :z-index 2}
+                                                ])
+
+              }
+        (marking
+         ["Linux" "JVM" "Groovy" "React" "PostGreSQL"
+          "Docker," "Kubernetes," "RESTful"]
+         db/summery3
+         (m7/hsl [1.2 100 70 .8]))
+        ]
 
 
 
@@ -146,7 +210,7 @@
                     [:div {:key (gensym)
                            :contenteditable :true
                            :style (m7/css
-                                    [[(+ 11 (* i 4))
+                                    [[(+ 15 (* i 4))
                                      (if (> col 1) col 4) 13 3 :center :center 1.2 :rem]
                                     [1 70 90 .4]
                                      [] {:gap "1rem"
@@ -170,7 +234,7 @@
                     [:div {:key (gensym)
                            :contenteditable :true
                            :style (m7/css
-                                   [[(+ 11 (* i 4)) (if (> col 1) col 4) 1 12 :center :center 1.5 :rem]
+                                   [[(+ 15 (* i 4)) (if (> col 1) col 4) 1 12 :center :center 1.5 :rem]
                                     [1 70 90 .3]
                                     []
                                     {:line-height 1.5
