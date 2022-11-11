@@ -47,16 +47,30 @@
 (defn resume []
   (let [[name set-name] (react/useState "")
         [rows set-rows] (react/useState 11)
+        c (count (d/q '[:find  ?t ?s ?r ?c ?p
+                        :where
+                        [?e :rm/code :devops]
+                        [?e :rm/projects ?p]
+                        [?p :rm/task ?t]
+                        [?p :rm/summery ?s]
+
+                        [?p :rm/row ?r]
+                        [?p :rm/col ?c]
+                        ] @conn))
+        trow (fn [i col]
+               (if (> col 9)
+                 (+ 16 (count db/course) (* i 4))
+                 (+ 16 (* i 4))))
         ref (react/useRef)]
     [:div {:style
            (into
             (merge
              (grid [100 :vh 100 :vw
                     (take 24 (repeat [8 :vh]))
-                    (take 40 (repeat [8 :vh]))])
+                    (take 80 (repeat [7 :vh]))])
              {:background-color (hsl [1 70 90 .1])
               :padding "50px"
-              :gap ".14rem"})
+              :gap ".2rem"})
             )}
 
 
@@ -74,7 +88,7 @@
                                       :font-stretch "113%"
                                       :gap "1rem"
                                       :color "#333"
-                                      :font-family "Roboto Flex"
+                      :font-family "Roboto Flex"
                                       :font-variation-settings "\"XOPQ\" 175"
                                       :z-index 2}
 
@@ -111,7 +125,6 @@
                       :gap "1rem"
                       :z-index 2}
                      ])
-
             }
       (ffirst
        (d/q '[:find  ?s
@@ -149,32 +162,51 @@
           ])
        )
 
-     (let  [car (vec (map vec (partition 6
+     (let  [car (vec (map vec (partition 5
                                          ["PostGreSQL" "SQL-Query" "Indexing"
                                           "Functions" "PostGIS"
-                                          "Java" "scripting" "awk" "jetty," "ssh"
-                                          "wireshark" "vi" "leadership" "embaded" "boot"
-                                          "KVM" "virtualiztoin" "docker"  "vnc" "rdp" "GraalVM" "redis" "git"  "branch" "Linux" "Groovy" "RESTful" "react" "d3.js" "iptables," "emacs" "CentOS" "Ubuntu."
-                                            "Archlinux" "reactjs" "webrtc" "ingress" "kafka" "groovy"])))]
-       (for [i (range 0 6)
+
+                                          "scripting" "GraalVM" "shell" "go lang"
+                                          "awk"
+                                          "Command Line" "git ssh"  "wireshark"
+                                          "ip netstat ps"
+                                          "vi emacs"
+                                          "Linux" "Archlinux" "systemd" "alphine"
+                                          "ubtuntu"
+                                          "JVM"
+                                          "Groovy" "jetty" "clojure"  "jdbc"
+                                          "Virtualiztoin" "docker" "KVM" "kubernetes" "ingress"
+
+                                          "reactjs" "d3.js" "react hooks"
+                                          "redux" "animation"
+
+
+                                            "docker"  "vnc" "rdp"  "redis"   "branch"
+                                          "leadership"
+                                          "RESTful"
+                                          "react"
+
+                                          "emacs" "CentOS" "Ubuntu."
+                                             "reactjs" "webrtc" "ingress" "kafka" "groovy"])))]
+       (for [i (range 0 7)
              j (range 0 5)]
          [:div {
                 :key (gensym)
                 :style (css
                         [[(+ 9 i) 1 (+ 1 (* 3 j)) 3
                           :center :center 1.6 :rem ]
-                         [1 70 90 .4] []
+                         [1 70 (if (= j 0) 70 90) .4] []
                          {
 
 
-
+                          :font-family "Roboto Flex"
                           :gap "1rem"
                           :z-index 21}
                          ])
 
                 }
 
-          (get-in car [i j] "none")
+          (get-in car [i j] "")
           ])
        )
 
@@ -206,19 +238,19 @@
 
 
      (map-indexed (fn [i [task sum row col id]]
-
                     [:div {:key (gensym)
                            :contenteditable :true
                            :style (m7/css
-                                    [[(+ 15 (* i 4))
-                                     (if (> col 1) col 4) 13 3 :center :center 1.2 :rem]
+                                   [[(trow i row)
+                                     4
+                                     13 3 :center :center 1.2 :rem]
                                     [1 70 90 .4]
                                      [] {:gap "1rem"
                                          :padding "2rem"}
                                     (font/fv [[1 4] [1 1] [1 2] [2 1]])])}
 
 
-                     task])
+                     (str col " " id " " task)])
                   (sort-by #(nth % 2) <
                            (d/q '[:find  ?t ?s ?r ?c ?p
                                   :where
@@ -234,7 +266,7 @@
                     [:div {:key (gensym)
                            :contenteditable :true
                            :style (m7/css
-                                   [[(+ 15 (* i 4)) (if (> col 1) col 4) 1 12 :center :center 1.5 :rem]
+                                   [[(trow i row) 4 1 12 :center :center 1.5 :rem]
                                     [1 70 90 .3]
                                     []
                                     {:line-height 1.5
@@ -242,21 +274,60 @@
                                      :padding "10px"
                                      }
                                     ])}
-                     (marking ["SQL," "Java,"  "scripting" "scripting," "awk," "jetty," "ssh" "PostGreSQL." "wireshark" "vi" "leadership" "embaded" "boot" "KVM" "virtualiztoin" "docker" "docker" "vnc" "rdp" "GraalVM" "redis" "git" "git," "fork" "merge" "branch" "Linux" "Groovy" "RESTful" "react" "d3.js" "iptables," "emacs" "CentOS" "Ubuntu."
+                     sum
+                     #_(marking ["SQL," "Java,"  "scripting" "scripting," "awk," "jetty," "ssh" "PostGreSQL." "wireshark" "vi" "leadership" "embaded" "boot" "KVM" "virtualiztoin" "docker" "docker" "vnc" "rdp" "GraalVM" "redis" "git" "git," "fork" "merge" "branch" "Linux" "Groovy" "RESTful" "react" "d3.js" "iptables," "emacs" "CentOS" "Ubuntu."
                                "Archlinux" "reactjs" "webrtc" "ingress" "kafka" "groovy"]
                               sum
-                              (m7/hsl [1.2 100 70 .8]))])
+                              (m7/hsl [1.2 100 70 .8]))
+                     ])
                   (sort-by #(nth % 2) <
-                   (d/q '[:find  ?t ?s ?r ?c ?p
-                          :where
-                          [?e :rm/code :devops]
-                          [?e :rm/projects ?p]
-                          [?p :rm/task ?t]
-                          [?p :rm/summery ?s]
+                           (d/q '[:find  ?t ?s ?r ?c ?p
+                                  :where
+                                  [?e :rm/code :devops]
+                                  [?e :rm/projects ?p]
+                                  [?p :rm/task ?t]
+                                  [?p :rm/summery ?s]
 
-                          [?p :rm/row ?r]
-                          [?p :rm/col ?c]
-                          ] @conn)))
+                                  [?p :rm/row ?r]
+                                  [?p :rm/col ?c]
+                                  ] @conn)))
+
+     (let [tranings (vec (sort-by second > db/course))]
+       (for [i (range 0 (count db/course))
+             col [true false]
+             :let  [course (get-in  tranings [i 0])
+                    tm (get-in tranings [i 1])]
+             ]
+         (if col
+           [:div {:key (gensym)
+                  :contenteditable :true
+                  :style (m7/css
+                          [[(+ 8 (* 4 c) i) 1 1 12 :flex-start :center 1.5 :rem]
+                           [1 70 70 .3]
+                           []
+                           {:line-height 1.5
+                            :gap "1rem"
+                            :padding "10px"
+                            }
+                           ])}
+
+            course]
+           [:div {:key (gensym)
+                  :contenteditable :true
+                  :style (m7/css
+                          [[(+ 8 (* 4 c) i
+                               ) 1 13 3 :center :center 1.5 :rem]
+                           [1 70 70 .3]
+                           []
+                           {:line-height 1.5
+                            :gap "1rem"
+                            :padding "10px"
+                            }
+                           ])}
+
+            tm])))
+
+
 
 
 

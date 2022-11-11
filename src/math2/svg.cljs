@@ -13,9 +13,6 @@
    :x number?
    :y number?))
 
-
-
-
 (s/def :math7/path
   (s/cat
    :m :math7/point
@@ -33,7 +30,6 @@
                   :q #{:q :Q}
                   :control-point :math7/point
                   :end-point :math7/point)
-
         :arc (s/cat
               :a #{:a :A}
               :r1 number?
@@ -42,7 +38,6 @@
               :f1 boolean?
               :f2 boolean?
               :end :math7/point)))))
-
 
 
 (defn conjj [i]

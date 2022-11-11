@@ -50,9 +50,9 @@
 
 
 
-    :rm/summery "I am a DevOps engineer. I have more than 15 years experience working on cloud computing architectures on Linux platforms. I have built my career with start-ups to Bigtechs by developing infrastructure tooling, troubleshooting, system integration. As a DevOps, fullstack developer to ensure developer productivity and ensure system reliability in the mean time still maintain faster development cycle"
-    :rm/projects (into [27 25]
-                       [12 13  16 117 23 7  127 15 35])
+    :rm/summery "I am a DevOps engineer. I have more than 15 years experience working on cloud computing architectures on Linux platforms. I have built my career with start-ups to Bigtechs by developing infrastructure tooling, troubleshooting, system integration. As a DevOps & fullstack developer my primary objective is to ensure developer productivity and ensure system reliability in the mean time still maintain faster development cycle"
+    :rm/projects (into [27 25 42]
+                       [12 13  16 117 23 7  127 15 35 129 20 2 225 ])
     :rm/jobs [9 10]
     :rm/proects.title "Projects and accomplishment"}
   {:db/id 1
@@ -70,14 +70,14 @@
     :rm/row 0
     :rm/col 0
     :rm/task "Online classes on Virtual notebooks"
-    :rm/summery "Collaboration between teachers and students is hard using web Camera and limited zoom experience. Data scientist uses virtual notebooks to collaborate between themself. I have develope similar experience that would rather focus on student productivity that made a simple and elegant way of writing equation on web at the same speed on pen and paper. So that people can collaborate online. Moreover I made it visually more appealing by making use of digital typography and making use of computer animation and develop ways where computer can assist students helping with their homework."
+    :rm/summery "Collaboration between teachers and students is hard using web Camera and limited zoom experience. Data scientist uses virtual notebooks to collaborate between themself. I have develop similar experience that would rather focus on student productivity that made a simple and elegant way of writing equation on web at the same speed on pen and paper. Moreover I made it visually more appealing by making use of digital typography and making use of computer animation and develop ways where computer can assist students helping with their homework."
     :rm/referane ""}
 
    {:db/id 20
     :rm/row 7
     :rm/col 6
     :rm/task "Serverless end to end video conferencing and live Streaming v1 (2006-2012)"
-    :rm/summery "I having been making end to end low latency network connectivity solutions since 2006 using network UDP whole punching technologies which is becomming standard in 2021/2022 not only for voice and video (SRT) but also in http3 (QUIC). Streaming Vedeo providers like Google, zoom, facebook, twitch  uses of TCP-based protocls like RTMP, make unlaw full interceptions, make pessing encoding, transcoding, processing on the server side -  debending on network condition and data colocations their latency ended up 1000 times slower than my solution. In 2006 I have introdue network compressing using client and server side programs in event based c networking programming in linux, make it fault tolarent using arp spoofing then update this solution where servers help endpoints steaming through least latency route in 2008 and in 2011 added multiplxing to in crease network throughput 2013."
+    :rm/summery "End to end low latency network connectivity solutions using network UDP whole punching technologies which is becomming standard in 2021/2022 not only for voice and video (SRT) but also in http3 (QUIC) where as streaming Vedeo providers like Google, zoom, facebook, twitch  uses of TCP-based protocls like RTMP thus increase network latency."
     :rm/referane ""}
 
    {:db/id 225
@@ -105,7 +105,7 @@
    {:db/id 45
     :rm/row 0
     :rm/col 0
-    :rm/task "Actor model and CPS adoption for scalavility"
+    :rm/task "Actor model and CPS adoption for scalability"
     :rm/summery ""
     :rm/referane ""}
 
@@ -121,12 +121,10 @@
 
 
   {:db/id 7
-   :rm/row 1
+   :rm/row -30
    :rm/col 1
-   :rm/task "Virtual Desktop Environment(VDA) for University Labs"
-   :rm/summery "Implemented KVM Libvert virtualization on Archlinux based hypervisor that host virtualized linux and windows desktops and docker for
-containerization on the server and desktop is replaced by ARM based SoC with vnc & rdp clients
-installed where students can access remote desktops and spawn docker based services on remote servecs "
+   :rm/task "Fractals Labs (2016-2018)"
+   :rm/summery "Implemented Virtual Desktop Environment(VDE) for University Labs using KVM Libvert virtualization on Archlinux based hypervisor that hosts virtualized linux and windows desktops and docker for containerization on the server and desktop is replaced by ARM based SoC with vnc & rdp clients installed where students can access remote desktops and spawn docker based services on remote services"
    :rm/referane ""}
 
 
@@ -160,7 +158,7 @@ installed where students can access remote desktops and spawn docker based servi
    :rm/projects.title "Projects and accomplishment"}
 
    {:db/id 13
-    :rm/row -2
+    :rm/row -15
     :rm/col 0
     :rm/task "System Engineer at GrameenPhone. (2007-2009)"
     :rm/summery "Developed and maintained mediation servers which was in a nut shell modern days micro services with lot of bells and whistle with Java, Oracle SQL, shell scripting, jetty, linux command line utilities - awk, ssh port forwarding and reverse   proxy for remote server login and vi as remote editor. As well implemented push and pull based systems and services for monitoring alarms and IP packet tracing using wireshark"
@@ -194,7 +192,7 @@ I was an active member of National Telecommunication committee, I used to inspec
 
 
    {:db/id 16
-    :rm/row 0
+    :rm/row -20
     :rm/col 0
     :rm/task "Lead Engineer - SAMSUNG R&D Institute Bangladesh (2011-2013)"
     :rm/summery "I have worked on device drivers on Linux kernel on Android based mobile handsets and patched linux kernel with device specific changes based on git, As well as fork and maintain specific version then merge it to upstream when stable. Applied three way git merging as well as merge conflicts, mastered on taking systrace I also received leadership training for very big teams of developers"
@@ -216,13 +214,13 @@ I was an active member of National Telecommunication committee, I used to inspec
     :rm/referane ""}
 
    {:db/id 117
-    :rm/row 2
+    :rm/row -10
     :rm/col 1
     :rm/task "Software Engineer - GENUITY Systems Limited (2006-2007)"
-    :rm/summery "As a devOps on audio conferencing systems and I have worked with liunx, iptables, shell scripting, routing UDP packets over all type network environments, ssh and configure remote server using emacs editor. Worked with highly concorrent softswith routing with load blancing and priodity queues, medeia gateways on CentOS and Ubuntu. "
+    :rm/summery "As a devOps on audio conferencing systems and I have worked with liunx, iptables, shell scripting, routing UDP packets over all type network environments, ssh and configure remote server using emacs editor. Worked with highly concurrent softswith routing with load balancing and priority queues, media gateways on CentOS and Ubuntu. "
     :rm/referane ""}
 
-   {:db/id 127
+   {:db/id 1270
     :rm/row 2
     :rm/col 1
     :rm/task "Learn how to implement Intel Integated Performance primitives (IPP) api Audio/speech codec, udp hole punching technologies named (STRN, TURN, ICE), implemented web based audio, video streaming. Configured dns extentions DNS srv. Impement protocols from RFC draft."
@@ -230,14 +228,21 @@ I was an active member of National Telecommunication committee, I used to inspec
 
 
    {:db/id 129
-    :rm/row 2
+    :rm/row -35
     :rm/col 1
-    :rm/task "Fractals Labs"
-    :rm/summery "Successful server based deployment of Audio-video codec (G729AB, AMR-NB, H263, H264) transcoding on debian based systems. Addoption of Phyton and shell script replacement. commercialization of UART, gpio, smart card solutions on raspberry pi. Restful api development with Reactjs worked with phyton flux, websocket, gevent, sqlalkalemi. Learned how to run a startups without any investment and when to quet when bigtech with unlimited capital steps in."
+    :rm/task "Software Global Consultancy //SGC (science 2018)"
+    :rm/summery "Made a successful server based deployment of Audio & video codecs (G729AB, AMR-NB, H263, H264) transcoding on debian based systems. Adopted of Groovy as shell script replacement. Restful API development with Reactjs worked with clojure, scala, phyton flux, websocket, gevent, sqlalkalemi. Implemented CPS and actor model for concurrency using go lang and erlang. "
+    :rm/referane ""}
+
+   {:db/id 1290
+    :rm/row -35
+    :rm/col 1
+    :rm/task "Software Global Consultancy //sgc (science 2018)"
+    :rm/summery "Successful server based deployment of Audio-video codec (G729AB, AMR-NB, H263, H264) transcoding on debian based systems. Addoption of Phyton and shell script replacement. commercialization of UART, gpio, smart card solutions on raspberry pi. Restful api development with Reactjs worked with clojure, scala, phyton flux, websocket, gevent, sqlalkalemi, CPS and actor model of concurrency. Learned how to run a startups without any investment and when to quet when bigtech with unlimited capital steps in."
     :rm/referane ""}
 
 
-   {:db/id 42
+   {:db/id -18
     :rm/row 2
     :rm/col 1
     :rm/task "Senior Software Engineer - Eyeball Networks (2009-2009)"
@@ -253,12 +258,10 @@ I was an active member of National Telecommunication committee, I used to inspec
 
 
    {:db/id 25
-   :rm/row 7
-   :rm/col 0
+    :rm/row 17
+    :rm/col 0
     :rm/task "Personal Summery"
-    :rm/summery "I raised and born on noble family. My late father was an veteran we traveled a lot across the
-country. I collage was -
-Secondary and Higher Secondary from Rajshahi Cadet College. 1998-2000"
+    :rm/summery "I was raised and born on noble family in Bangladesh. My late father was an liberwation war veteran.  I passed  secondary and higher Secondary from Rajshahi Cadet College. 1998-2000"
     :rm/referane ""}
 
   {:db/id 26
@@ -269,10 +272,59 @@ Secondary and Higher Secondary from Rajshahi Cadet College. 1998-2000"
    :rm/referane ""}
 
   {:db/id 27
-   :rm/row 6
+   :rm/row 10
    :rm/col 1
    :rm/task "BSC on Computer Engineering. American International University Bangladesh (AIUB) (2001-2005)"
    :rm/summery "My CGPA was 3.69 out of 4, I have participated NCPC and ICPC programming contests. My final project was - Design project modeled and verified a multi-cycle and 5-stage pipelined version of 32-bit RISC processor - MIPS - with Verilog Hardware Description Language (HDL)"
 
    :rm/referane ""}
   ])
+
+
+(def course [["Samsung Device driver programming on SNMC" "2011 - Delhi"]
+             ["Online 8.01x - MIT Physics I: Classical Mechanics by Walter Lewin"
+              "2014 - Online"]
+             ["2015 Introduction to Dependent Type Theory — Robert Harper University of Oregon" "2015 Online"]
+
+             ["Introduction to Computer Graphics
+- UC Davis Academics" "2015 - Online"]
+             ["Tutorial: Building the Simplest Possible Linux System - Rob Landley, se-instruments.com" "2015 - Online"]
+             ["Online eBPF and Kubernetes: Little Helper Minions for Scaling Microservices - Daniel Borkmann, Cilium" "2022 - Online"]
+             ["Tutorial: Communication Is Key - Understanding Kubernetes Networking - Jeff Poole, Vivint Smart Home" "2022 Online"]
+             ["Webinar: Kubernetes and Networks: Why is This So Dang Hard?" "2022 - Online"]
+             ["Online Intro + Deep Dive: Kubernetes (Network) SIG - Tim Hockin, Google"
+              "2022 - Online"]
+             ["Container Networking From Scratch - Kristen Jacobs, Oracle" "2022 - Online"]
+
+             ["Kubernetes Networking Intro and Deep-Dive - Bowei Du & Tim Hockin, Google"
+              "2022 - Online"]
+
+             ["Demystifying Linux MIPI DSI Subsystem - Jagan Teki, Amarula Solutions"
+              "2022 - Online"]
+
+             ["Tutorial: Device Tree (DTS), Linux Board Bring-up and Kernel Version Changing 2018" "2022 - Online"]
+             ["Erlang Master Class, Joe Armstrong " "2017 - Online"]
+             ["Parsing With Derivatives David Nolen" "2017 - Online"]
+             ["The Do's and Don'ts of Error Handling • Joe Armstrong • GOTO" "2018 - Online"]
+             ["Logic Programming, Core.Async  Timothy Baldridge" "2015 - Online"]
+             ["Digital Design and Computer Architecture, ETH Zürich, Spring" "2021 - Online"]
+             ["Intro to Parallel Programming. John Owens University of California, Davis"
+              "2019 - Online"]
+             ["Building a container from scratch in Go - Liz Rice" "2022 - Online"]
+
+             ["\"Stop Writing Dead Programs\" by Jack Rusher (Strange Loop 2022)" "2022 - Online"]
+             ["Delimited Continuations for Everyone by Kenichi Asai Ochanomizu University "
+              "2017 - Online"]
+             ["Probabilistic scripts for automating common-sense tasks by Alexander Lew PHD student on MIT Probabilistic Computing Projects" "2019 - Online"]
+             ["Introduction to Computational Thinking  MIT 18.S191 aka 6.S083 aka 22.S092, Fall 2020 edition" "2021 - Online"]
+             [ "Differentiable Programming with Julia by Mike Innes." "2021 - Online"]
+             ["The impact of differentiable programming: how ∂P is enabling new science in Julia  ACM SIPGPLAN by Matt Bauman, Julia Computing" "2021  - Online"]
+             ["Binomial distributions and Bayesian view by Grant Sanderson, MIT" "2018 - Online"]
+             ["Public / Private Keys and Signing - Anders Brownworth" "2014 - Online"]
+             ["Online Online Use Least Squares method for Mathematically Darkened Colors."
+              "2015 - Online"]
+             ["MIT 6.001 Structure and Interpretation" "2016 - Online"]
+             ["The Beauty of Bézier Curves  Freya Holmér" "2020 - Online"]
+             ["Siggraph2019 Geometric Algebra" "2021 - Online"]
+             ["Pixar in a Box - Khan Academy" "2014 - Online"]
+             ["How I Design Programs, Jeremy Gibbons, Professor of Computing in the Department of Computer Science at the University of Oxford." "2021 - Online"]])
