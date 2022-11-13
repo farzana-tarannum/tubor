@@ -159,7 +159,7 @@
                   (m7/css
                    [[(* i 4) 4  4 1
                      :center :center  2 :rem :column]
-                    [3.5 70 (+ 50 (* 5 5))  .7] []
+                    [3.5 70 (+ 50 (* 5 5))  0.7] []
                     {:background-image (str "url(" img   ")")
                      :gap ".1rem"
                      :z-index 10}])}

@@ -193,9 +193,9 @@
         (map (fn [quadro]
                (let [[start-p [x1 y1 :as start] start-n _] quadro
                      [_ end-p [x2 y2 :as end] end-n] quadro
-                     start-len (* .3 (line-len start-p start-n))
+                     start-len (* 0.3 (line-len start-p start-n))
                      start-angle (angle start-p start-n)
-                     end-len (* .15 (line-len end-p end-n))
+                     end-len (* 0.15 (line-len end-p end-n))
                      end-angle (+ js/Math.PI (angle end-p end-n))
                      projection (fn [[x y] angle len]
                             [

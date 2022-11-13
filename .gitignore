@@ -34,3 +34,5 @@
 /*cider-error*
 /resources/public.tar.gz
 /src/math2/.#db.cljs
+/.shadow-cljs/
+/resources/public/out/

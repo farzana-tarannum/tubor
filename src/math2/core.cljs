@@ -7,7 +7,7 @@
             [math2.physics11 :as p11]
             [math2.math100 :as m100]
             [math2.math19 :as m19]
-            [math2.fraction :as frac]
+            [math2.frection :as frac]
             [math2.math :as mtemp]
             [math2.trig :as trig]
             [math2.stat :as stat]
@@ -436,7 +436,8 @@
 
    #_[trans/cd5]
    #_[stat/stat3]
-   [teacher/resume]
+   [m100/home-planets-banners4]
+
    #_[py100/template4]
    #_[frac/stat]
    #_[frac/frection]

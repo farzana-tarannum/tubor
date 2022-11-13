@@ -8,7 +8,7 @@
           (grid [100 :vh 100 :vw
                  (take 15 (repeat [8 :vh]))
                  (take 15 (repeat [8 :vh]))])
-          {:background-color (hsl [1.4 70 70 .8])})}
+          {:background-color (hsl [1.4 70 70 0.8])})}
 
    (for [[i rd]  (map
                   (fn [x y] [x y])
@@ -28,17 +28,17 @@
             :style
             (css
              [[r 1 c 2 :center :center 2 :rem]
-              [4 30 70 .2]
+              [4 30 70 0.2]
               [(+ i -1 j)
-               30 :% (+ i j .1) 30 60 0.3
-               40 :% .3 20 40 0.5
+               30 :% (+ i j 0.1) 30 60 0.3
+               40 :% 0.3 20 40 0.5
                70 :% 1 0 80 0.3]
               {:z-index 20}])} v])
 
    [:div {:key (gensym)
           :style (css
                   [[1 6 5 12 :center :center 6 :rem]
-                   [.2 30 70 .2] []
+                   [0.2 30 70 0.2] []
                    {:z-index 22
                     :flex-direction :column}]
                   )}
@@ -52,7 +52,7 @@
    #_[:div {:key (gensym)
             :style (css
                     [[1 6 5 12 :center :center 2 :rem]
-                     [.2 30 70 .2] []
+                     [0.2 30 70 0.2] []
                      {:z-index 22}]
                     )}
 
@@ -81,7 +81,7 @@
                          ])
                :stroke (hsl [0.5 70 70 1])
                :stroke-width 1
-               :fill (hsl [4 70 70 .9])}
+               :fill (hsl [4 70 70 0.9])}
         [:animateTransform
          {:attributeName :transform
           :begin :click
@@ -169,14 +169,14 @@
 
      [:circle {:cx 0
                :cy 0
-               :r .5}]
+               :r 0.5}]
 
      (map (fn [x]
             [:g {:key (gensym) }
              [:path {:key (gensym)
                      :d (path [x 0 :l 10 0 0 2])
                      :stroke (hsl [2 70 70 1])
-                     :stroke-width .5
+                     :stroke-width 0.5
                      :fill :none
                      }]
 
@@ -191,7 +191,7 @@
              [:path {:key (gensym)
                      :d (path [0 (ve y) :l 0 -10 -2 0])
                      :stroke (hsl [2 70 70 1])
-                     :stroke-width .5
+                     :stroke-width 0.5
                      :fill :none
                      }]
              [:text {:x -1
@@ -205,7 +205,7 @@
              [:circle {:key (gensym)
                        :cx x
                        :cy (ve y)
-                       :r .5}])
+                       :r 0.5}])
            (fn [[x y]]
              [(/ x 50)
               (* y 10)])
@@ -219,60 +219,60 @@
      [:path {:d (path [0 0
                        :l (/ 5200 50) (ve (* 10.4 10))])
              :stroke (hsl [2 70 70 1])
-             :stroke-width .5
+             :stroke-width 0.5
              }]
 
      [:path {:d (path [(/ 3200 50) 0
                        :l 0 (ve (* 6.6 10))])
              :stroke (hsl [2 70 70 1])
-             :stroke-width .5
+             :stroke-width 0.5
              }]
 
      [:path {:d (path (flatten
                        [ [0 -60 :l]
                         (take 10 (repeat [0 -1 -2 0 2 0]))]))
              :stroke (hsl [3 70 70 1])
-             :stroke-width .5
+             :stroke-width 0.5
              }]
 
      [:path {:d (path (flatten
                        [ [0 -50 :l]
                         (take 10 (repeat [0 -1 -2 0 2 0]))]))
              :stroke (hsl [3 70 70 1])
-             :stroke-width .5
+             :stroke-width 0.5
              }]
 
 
 
      [:path {:d (path [0 -64 :l 100 0 ])
              :stroke (hsl [3 70 70 1])
-             :stroke-width .5
+             :stroke-width 0.5
              }]
 
      [:path {:d (path [90 0 :l 0 -150 ])
              :stroke (hsl [3 70 70 1])
-             :stroke-width .5
+             :stroke-width 0.5
              }]
      [:path {:d (path [0 -90 :l 100 0 ])
              :stroke (hsl [3 70 70 1])
-             :stroke-width .5
+             :stroke-width 0.5
              }]
 
      [:path {:d (path [0 -52 :l 100 0 ])
              :stroke (hsl [0.4 70 70 1])
-             :stroke-width .5
+             :stroke-width 0.5
              }]
 
      [:path {:d (path [52 0 :l 0 -150 ])
-             :stroke (hsl [.2 70 70 1])
-             :stroke-width .5
+             :stroke (hsl [0.2 70 70 1])
+             :stroke-width 0.5
              }]
 
      [:path {:d (path (flatten
                        [ [60 0 :l]
                         (take 10 (repeat [1 0 0 2 0 -2]))]))
              :stroke (hsl [3 70 70 1])
-             :stroke-width .5
+             :stroke-width 0.5
              :fill :none
              }]]]])
 
@@ -284,12 +284,12 @@
            (grid [100 :vh 100 :vw
                   (take 15 (repeat [8 :vh]))
                   (take 15 (repeat [8 :vh]))])
-           {:background-color (hsl [1.4 70 70 .8])})}
+           {:background-color (hsl [1.4 70 70 0.8])})}
 
     [:div {:key (gensym)
            :style (css
                    [[2 6 2 12 :center :center 2 :rem :column]
-                    [2 70 70 .9] []
+                    [2 70 70 0.9] []
                     {:z-index 4}]
                    )}
 
@@ -303,7 +303,7 @@
     [:div {:key (gensym)
            :style (css
                    [[1 6 2 12 :center :center 2 :rem]
-                    [.2 30 70 .9] []
+                    [0.2 30 70 0.9] []
                     {:z-index 2}]
                    )}
 
@@ -324,7 +324,7 @@
                           ])
                 :stroke (hsl [0.5 50 50 1])
                 :stroke-width 1
-                :fill (hsl [4 70 70 .9])}]
+                :fill (hsl [4 70 70 0.9])}]
 
 
         [:path {:d (path

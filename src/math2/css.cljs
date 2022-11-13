@@ -208,7 +208,7 @@
 
 (css
  [[3 10 3 11  :center :center 2.2 :rem ]
-  [1 70 90 .4] [] {:gap "1rem"
+  [1 70 90 0.4] [] {:gap "1rem"
                    :z-index 2}])
 
 
@@ -302,7 +302,7 @@
     (:background-color
      (css2
       [[4 4 1 12  :center :center 1.5 :rem :column]
-       [2 70 90 .4] [] {:gap [1 :rem]
+       [2 70 90 0.4] [] {:gap [1 :rem]
                         :z-index 2}]))))
 
 

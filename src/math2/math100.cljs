@@ -3,6 +3,7 @@
    [math2.file :as file]
    [react]
    [math2.bdmap :as bdmap]
+   [applied-science.js-interop :as j]
    [clojure.string :as str]
    [clojure.walk :as w]
    [defun.core :refer [defun fun]]
@@ -52,10 +53,6 @@
 
 
 
-
-
-
-
 (defn fix [fr n]
   (js/parseFloat (.toFixed fr n)))
 
@@ -90,10 +87,10 @@
 
       ]
 
-                #_{:transform (m7/tranfrom [[:translate [-140 0]]
-                                            [:skewX -140]
-                                            [:scale [1.3 .4]]
-                                            ])}
+     #_{:transform (m7/tranfrom [[:translate [-140 0]]
+                                 [:skewX -140]
+                                 [:scale [1.3 0.4]]
+                                 ])}
 
      [:g {:transform (m7/tranfrom [[:translate [-140 0]]
 
@@ -161,7 +158,7 @@
   (fix 9.983 2))
 
 (defn alkine [n1]
-  [:g {:transform (m7/tranfrom [[:scale [.7 .7]]
+  [:g {:transform (m7/tranfrom [[:scale [0.7 0.7]]
                                          [:rotate 10]])}
    (let [n n1]
      [:g
@@ -194,18 +191,18 @@
                                     [(-  (* i 75) 60 ) -10 :l  40 0])
                                 :stroke (hsl [4 70 70 1])
                                 :stroke-width 2
-                                :fill (hsl [5 70 70 .2])}]
+                                :fill (hsl [5 70 70 0.2])}]
 
 
                       [:path {:d (path [(-  (* i 75) 60 ) 0 :l  40 0])
                               :stroke (hsl [4 70 70 1])
                               :stroke-width 2
-                              :fill (hsl [5 70 70 .2])}]
+                              :fill (hsl [5 70 70 0.2])}]
 
                       #_[:path {:d (path [(-  (* i 75) 60 ) 10 :l  40 0])
                                 :stroke (hsl [4 70 70 1])
                                 :stroke-width 2
-                                :fill (hsl [5 70 70 .2])}]]
+                                :fill (hsl [5 70 70 0.2])}]]
                      [:g ])
 
 
@@ -213,14 +210,14 @@
                                      0 :l 0 40  ])
                            :stroke (hsl [4 70 70 1])
                            :stroke-width 2
-                           :fill (hsl [5 70 70 .2])}]
+                           :fill (hsl [5 70 70 0.2])}]
 
 
                    [:path {:d (path [(* i 75)
                                      0 :l 0 -40  ])
                            :stroke (hsl [4 70 70 1])
                            :stroke-width 2
-                           :fill (hsl [5 70 70 .2])}]
+                           :fill (hsl [5 70 70 0.2])}]
 
 
                    [:circle {:cx (* i 75)
@@ -273,12 +270,12 @@
                [:path {:d (path [(-  (* n 75) 60 ) 0 :l  40 0])
                        :stroke (hsl [4 70 70 1])
                        :stroke-width 2
-                       :fill (hsl [5 70 70 .2])}]
+                       :fill (hsl [5 70 70 0.2])}]
 
                [:path {:d (path [(-  (* 0 75) 60 ) 0 :l  40 0])
                        :stroke (hsl [4 70 70 1])
                        :stroke-width 2
-                       :fill (hsl [5 70 70 .2])}]
+                       :fill (hsl [5 70 70 0.2])}]
 
                [:text {:x -75
                        :y 0
@@ -301,7 +298,7 @@
 
 
 (defn alkine-oh [n1]
-  [:g {:transform (m7/tranfrom [[:scale [.7 .7]]
+  [:g {:transform (m7/tranfrom [[:scale [0.7 0.7]]
                                          [:rotate 10]])}
 
 
@@ -338,18 +335,18 @@
                                     [(-  (* i 75) 60 ) -10 :l  40 0])
                                 :stroke (hsl [4 70 70 1])
                                 :stroke-width 2
-                                :fill (hsl [5 70 70 .2])}]
+                                :fill (hsl [5 70 70 0.2])}]
 
 
                       [:path {:d (path [(-  (* i 75) 60 ) 0 :l  40 0])
                               :stroke (hsl [4 70 70 1])
                               :stroke-width 2
-                              :fill (hsl [5 70 70 .2])}]
+                              :fill (hsl [5 70 70 0.2])}]
 
                       #_[:path {:d (path [(-  (* i 75) 60 ) 10 :l  40 0])
                                 :stroke (hsl [4 70 70 1])
                                 :stroke-width 2
-                                :fill (hsl [5 70 70 .2])}]]
+                                :fill (hsl [5 70 70 0.2])}]]
                      [:g ])
 
 
@@ -357,14 +354,14 @@
                                      0 :l 0 40  ])
                            :stroke (hsl [4 70 70 1])
                            :stroke-width 2
-                           :fill (hsl [5 70 70 .2])}]
+                           :fill (hsl [5 70 70 0.2])}]
 
 
                    [:path {:d (path [(* i 75)
                                      0 :l 0 -40  ])
                            :stroke (hsl [4 70 70 1])
                            :stroke-width 2
-                           :fill (hsl [5 70 70 .2])}]
+                           :fill (hsl [5 70 70 0.2])}]
 
 
                    [:circle {:cx (* i 75)
@@ -426,12 +423,12 @@
                [:path {:d (path [(-  (* n 75) 60 ) 0 :l  40 0])
                        :stroke (hsl [4 70 70 1])
                        :stroke-width 2
-                       :fill (hsl [5 70 70 .2])}]
+                       :fill (hsl [5 70 70 0.2])}]
 
                [:path {:d (path [(-  (* 0 75) 60 ) 0 :l  40 0])
                        :stroke (hsl [4 70 70 1])
                        :stroke-width 2
-                       :fill (hsl [5 70 70 .2])}]
+                       :fill (hsl [5 70 70 0.2])}]
 
 
                #_[:circle {:cx (* n 75)
@@ -468,7 +465,7 @@
 
 
 (defn alkine-oh-acid [n1]
-  [:g {:transform (m7/tranfrom [[:scale [.7 .7]]
+  [:g {:transform (m7/tranfrom [[:scale [0.7 0.7]]
                                          [:rotate 10]])}
 
 
@@ -505,18 +502,18 @@
                                     [(-  (* i 75) 60 ) -10 :l  40 0])
                                 :stroke (hsl [4 70 70 1])
                                 :stroke-width 2
-                                :fill (hsl [5 70 70 .2])}]
+                                :fill (hsl [5 70 70 0.2])}]
 
 
                       [:path {:d (path [(-  (* i 75) 60 ) 0 :l  40 0])
                               :stroke (hsl [4 70 70 1])
                               :stroke-width 2
-                              :fill (hsl [5 70 70 .2])}]
+                              :fill (hsl [5 70 70 0.2])}]
 
                       #_[:path {:d (path [(-  (* i 75) 60 ) 10 :l  40 0])
                                 :stroke (hsl [4 70 70 1])
                                 :stroke-width 2
-                                :fill (hsl [5 70 70 .2])}]]
+                                :fill (hsl [5 70 70 0.2])}]]
                      [:g ])
 
 
@@ -524,7 +521,7 @@
                                      0 :l 0 40  ])
                            :stroke (hsl [4 70 70 1])
                            :stroke-width 2
-                           :fill (hsl [5 70 70 .2])}]
+                           :fill (hsl [5 70 70 0.2])}]
 
 
 
@@ -534,7 +531,7 @@
                                      0 :l 0 -40  ])
                            :stroke (hsl [4 70 70 1])
                            :stroke-width 2
-                           :fill (hsl [5 70 70 .2])}]
+                           :fill (hsl [5 70 70 0.2])}]
 
 
                    [:circle {:cx (* i 75)
@@ -568,7 +565,7 @@
                                         0 :l 0 -40  ])
                               :stroke (hsl [4 70 70 1])
                               :stroke-width 2
-                              :fill (hsl [5 70 70 .2])}]
+                              :fill (hsl [5 70 70 0.2])}]
                       [:text {:x (* i 75)
                               :y -40
                               :dy 0
@@ -602,12 +599,12 @@
                [:path {:d (path [(-  (* n 75) 60 ) 0 :l  40 0])
                        :stroke (hsl [4 70 70 1])
                        :stroke-width 2
-                       :fill (hsl [5 70 70 .2])}]
+                       :fill (hsl [5 70 70 0.2])}]
 
                [:path {:d (path [(-  (* 0 75) 60 ) 0 :l  40 0])
                        :stroke (hsl [4 70 70 1])
                        :stroke-width 2
-                       :fill (hsl [5 70 70 .2])}]
+                       :fill (hsl [5 70 70 0.2])}]
 
 
                #_[:circle {:cx (* n 75)
@@ -655,8 +652,8 @@
        (fn [index i]
          [:path {:key (str "grid-onadfadsf" index)
                  :d (path [-400 (ve (+ ax-dx (* i 2))) :l 1200 0])
-                 :stroke (hsl [4 70 70 .5])
-                 :stroke-width .5
+                 :stroke (hsl [4 70 70 0.5])
+                 :stroke-width 0.5
                  :fill :none}
           ] )
        (range 0 11))
@@ -667,8 +664,8 @@
          [:path {:key (str "grid-onsdfasd2" index)
                  :d (path [(+ ax-dy (* i 2)) -400 :l 0 1200 ])
 
-                 :stroke (hsl [4 70 70 .5])
-                 :stroke-width .5
+                 :stroke (hsl [4 70 70 0.5])
+                 :stroke-width 0.5
                  :fill :none}
           ] )
        (range 0 11))
@@ -685,7 +682,7 @@
           [:path {:d (path [ (* 20 x)  0 :l 0 -400])
 
                   :stroke (hsl [(if (= x -2)  5 0) 70 70 1])
-                  :stroke-width .5
+                  :stroke-width 0.5
                   :fill :none}
            ]
 
@@ -693,7 +690,7 @@
           [:path {:d (path [ (* 20 x)  0 :l 0 400])
 
                   :stroke (hsl [0 70 70 1])
-                  :stroke-width .5
+                  :stroke-width 0.5
                   :fill :none}
            ]
 
@@ -794,10 +791,10 @@
       :in "SourceGraphic"}]
     [:feComponentTransfer
      {:result "threshhold"}
-     [:feFuncR {:tableValues "0 .2", :type "discrete"}]
-     [:feFuncG {:tableValues "0 .2", :type "discrete"}]
-     [:feFuncB {:tableValues "0 .2", :type "discrete"}]
-     [:feFuncA {:tableValues "0 .2", :type "discrete"}]]
+     [:feFuncR {:tableValues "0 0.2", :type "discrete"}]
+     [:feFuncG {:tableValues "0 0.2", :type "discrete"}]
+     [:feFuncB {:tableValues "0 0.2", :type "discrete"}]
+     [:feFuncA {:tableValues "0 0.2", :type "discrete"}]]
     [:feFlood {:result "yellow", :flood-color yellow}]
     [:feComposite
      {:result "yellow-threshhold",
@@ -846,7 +843,7 @@
                    :stroke-opacity 1
                    :fill (m7/hsl [3 70 70 1])
                    :fill-opacity 1}
-           :transform (m7/tranfrom [[:scale .4]
+           :transform (m7/tranfrom [[:scale 0.4]
                                     [:rotate 180]
                                     [:translate [12.5 0]]])
            }]]
@@ -890,12 +887,12 @@
             (grid [100 :vh 100 :vw
                    (take 15 (repeat [8 :vh]))
                    (take 15 (repeat [8 :vh]))])
-            {:background-color (hsl [1.4 70 70 .8])})}
+            {:background-color (hsl [1.4 70 70 0.8])})}
 
      [:div {:key (gensym)
             :style (css
                     [[2 2 2 11 :center :center 3 :rem :column]
-                     [.5 70 70 .3] []
+                     [0.5 70 70 0.3] []
                      {:z-index 23}]
                     )}
 
@@ -918,7 +915,7 @@
       [:div {:key (gensym)
              :style (css
                      [[4 11 2 11 :center :center 2 :rem]
-                      [.5 70 70 .9] []
+                      [0.5 70 70 0.9] []
                       {:z-index 22}]
                      )}
        [:svg {:viewBox (space (nth [[-100  -100 200 200 ]
@@ -933,8 +930,8 @@
                                (partial * bm)
                                square)]))
                 :stroke (hsl [0.5 50 50 1])
-                :stroke-width .1
-                :fill (hsl [4 70 70 .9])}
+                :stroke-width 0.1
+                :fill (hsl [4 70 70 0.9])}
          [:animateTransform
           {:attributeName :transform
            :begin (sec 0)
@@ -952,8 +949,8 @@
                                (partial * (bf 2))
                                square)]))
                 :stroke (hsl [1.7 50 50 1])
-                :stroke-width .1
-                :fill (hsl [3.5 70 70 .9])}
+                :stroke-width 0.1
+                :fill (hsl [3.5 70 70 0.9])}
          [:animateTransform
          {:attributeName :transform
            :begin :r1.begin
@@ -1002,7 +999,7 @@
      [:div {:key (gensym)
             :style (css
                     [[3 6 10 6 :center :center 2 :rem]
-                     [.5 70 70 .5] []
+                     [0.5 70 70 0.5] []
                      {:z-index 22}]
                     )}
 
@@ -1020,8 +1017,8 @@
                                 (partial * bm)
                                square)]))
                  :stroke (hsl [0.5 50 50 1])
-                 :stroke-width .1
-                 :fill (hsl [4 70 70 .9])}
+                 :stroke-width 0.1
+                 :fill (hsl [4 70 70 0.9])}
           [:animateTransform
            {:attributeName :transform
             :begin (sec 0)
@@ -1040,8 +1037,8 @@
                                 (partial * (bf 2))
                                 square)]))
                  :stroke (hsl [1.7 50 50 1])
-                 :stroke-width .1
-                 :fill (hsl [3.5 70 70 .9])}
+                 :stroke-width 0.1
+                 :fill (hsl [3.5 70 70 0.9])}
           [:animateTransform
            {:attributeName :transform
             :begin :r1.begin
@@ -1091,7 +1088,7 @@
           (grid [100 :vh 100 :vw
                  (take 15 (repeat [8 :vh]))
                  (take 15 (repeat [8 :vh]))])
-          {:background-color (hsl [1.4 70 70 .8])})}
+          {:background-color (hsl [1.4 70 70 0.8])})}
 
 
 
@@ -1101,14 +1098,14 @@
         [:div {:key (gensym)
                :style (css
                        [[(+ i 2) 1 (+ 4 (* 3 0)) 3 :center :center 2 :rem :column]
-                        [c 70 70 .8] []
+                        [c 70 70 0.8] []
                         {:z-index 2}]
                        )}
 
 
          n])
       [["Load (N)" 7.3]
-       ["Length (mm)" .7]
+       ["Length (mm)" 0.7]
        ["Extersion (mm)" 3.5]])
 
 
@@ -1121,7 +1118,7 @@
            [:div {:key (gensym)
                   :style (css
                           [[(+ 2 i) 1 (+ 5 (* 2 (inc j))) 2 :center :center 2 :rem :column]
-                           [c 70 70 .8] []
+                           [c 70 70 0.8] []
                            {:z-index 2}]
                           )}
 
@@ -1132,39 +1129,39 @@
       (take 1
             [
              [["0" 7.2]
-              ["50" .5]
+              ["50" 0.5]
               ["0" 3.5]
               ]
              [["1" 7.2]
-              ["58" .5]
+              ["58" 0.5]
               ["8" 3.5]
               ]
 
              [["2" 7.2]
-              ["70" .5]
+              ["70" 0.5]
               ["20" 3.5]
               ]
 
              [["3" 7.2]
-              ["74" .5]
+              ["74" 0.5]
               ["24" 3.5]
               ]
              [["4" 7.2]
-              ["82" .5]
+              ["82" 0.5]
               ["32" 3.5]
               ]
              [["5" 7.2]
-              ["90" .5]
+              ["90" 0.5]
               ["40" 3.5]
               ]
 
              [["6" 7.2]
-              ["102" .5]
+              ["102" 0.5]
               ["52" 3.5]
               ]
 
              [["7" 7.2]
-              ["125" .5]
+              ["125" 0.5]
               ["75" 3.5]
               ]
              ])
@@ -1178,7 +1175,7 @@
    [:div {:key (gensym)
             :style (css
                     [[2 11 2 11 :center :center 2 :rem]
-                     [.5 70 70 .5] []
+                     [0.5 70 70 0.5] []
                      {:z-index 30}]
                     )}
     [:svg {:viewBox (space  [-5  -180 200 200 ])
@@ -1256,7 +1253,7 @@
    [:div {:key (gensym)
             :style (css
                     [[2 11 10 11 :center :center 2 :rem]
-                     [.5 70 70 .5] []
+                     [0.5 70 70 0.5] []
                      {:z-index 30}]
                     )}
     [:svg {:viewBox (space  [-100  -10 200 200 ])
@@ -1300,7 +1297,7 @@
                         ])
               :marker-end (m7/url "i")
               :stroke (hsl [2 70 70 1])
-              :stroke-width .5
+              :stroke-width 0.5
               :fill :none}]
 
 
@@ -1352,7 +1349,7 @@
           (grid [100 :vh 100 :vw
                  (take 15 (repeat [8 :vh]))
                  (take 15 (repeat [8 :vh]))])
-          {:background-color (hsl [1.4 70 70 .8])})}
+          {:background-color (hsl [1.4 70 70 0.8])})}
 
 
 
@@ -1362,14 +1359,14 @@
            [:div {:key (gensym)
                :style (css
                        [[(+ i 2) 1 (+ 3 (* 3 0)) 3 :center :center 2 :rem :column]
-                        [c 70 70 .7] []
+                        [c 70 70 0.7] []
                         {:z-index 8}]
                        )}
 
 
          n])
          [["F (N)" 7.3]
-          ["L (mm)" .7]
+          ["L (mm)" 0.7]
           ["d (mm)" 3.5]])
 
 
@@ -1381,7 +1378,7 @@
            [:div {:key (gensym)
                   :style (css
                           [[(+ 2 i) 1 (+ 5 (* 1 (inc j))) 1 :center :center 2 :rem :column]
-                           [c 70 70 .7] []
+                           [c 70 70 0.7] []
                            {:z-index 8}]
                           )}
 
@@ -1391,39 +1388,39 @@
         )
       [
        [["0" 7.2]
-        ["50" .5]
+        ["50" 0.5]
         ["0" 3.5]
         ]
        [["1" 7.2]
-        ["58" .5]
+        ["58" 0.5]
         ["8" 3.5]
         ]
 
        [["2" 7.2]
-        ["70" .5]
+        ["70" 0.5]
         ["20" 3.5]
         ]
 
        [["3" 7.2]
-        ["74" .5]
+        ["74" 0.5]
         ["24" 3.5]
         ]
        [["4" 7.2]
-        ["82" .5]
+        ["82" 0.5]
         ["32" 3.5]
         ]
        [["5" 7.2]
-        ["90" .5]
+        ["90" 0.5]
         ["40" 3.5]
         ]
 
        [["6" 7.2]
-        ["102" .5]
+        ["102" 0.5]
         ["52" 3.5]
         ]
 
        [["7" 7.2]
-        ["125" .5]
+        ["125" 0.5]
         ["75" 3.5]
         ]
        ]
@@ -1438,7 +1435,7 @@
    [:div {:key (gensym)
             :style (css
                     [[2 11 2 11 :center :center 2 :rem]
-                     [.5 70 70 .5] []
+                     [0.5 70 70 0.5] []
                      {:z-index 2}]
                     )}
     [:svg {:viewBox (space  [-5  -180 200 200 ])
@@ -1516,7 +1513,7 @@
    [:div {:key (gensym)
             :style (css
                     [[2 11 14 11 :center :center 2 :rem]
-                     [.5 70 70 .5] []
+                     [0.5 70 70 0.5] []
                      {:z-index 30}]
                     )}
     [:svg {:viewBox (space  [-100  -10 200 200 ])
@@ -1563,7 +1560,7 @@
                              :a 1.5 1 0 false true   0 -3
                              ]))
                      )
-                   [0 .50 1 1.50]
+                   [0 0.50 1 1.50]
                    ))
 
          :fill :freeze
@@ -1588,7 +1585,7 @@
          :keyTimes (m7/sami-colon [0 0.5 0.8 1])
          :values (m7/sami-colon (map m7/space
                                      [
-                                      [0 0] [0 (* .5 10)]
+                                      [0 0] [0 (* 0.5 10)]
                                       [0 (* 1 10)] [0 (* 1.5 10)]]))
          :fill :freeze
          }]
@@ -1602,7 +1599,7 @@
                          ]))
               :marker-end (m7/url "i")
               :stroke (hsl [5 70 70 1])
-              :stroke-width .5
+              :stroke-width 0.5
               :fill :none}]]]]])
 
 
@@ -1612,7 +1609,7 @@
           (grid [100 :vh 100 :vw
                  (take 15 (repeat [8 :vh]))
                  (take 15 (repeat [8 :vh]))])
-          {:background-color (hsl [1.4 70 70 .8])})}
+          {:background-color (hsl [1.4 70 70 0.8])})}
 
 
 
@@ -1623,7 +1620,7 @@
    [:div {:key (gensym)
           :style (css
                   [[(+ 8 0) 4 (+ 5 (* 4 (inc 0))) 4 :center :center 5 :rem :column]
-                   [2 70 70 .8] []
+                   [2 70 70 0.8] []
                    {:z-index 2}]
                   )}
 
@@ -1635,7 +1632,7 @@
    [:div {:key (gensym)
             :style (css
                     [[2 11 2 11 :center :center 2 :rem]
-                     [.5 70 70 .5] []
+                     [0.5 70 70 0.5] []
                      {:z-index 30}]
                     )}
     [:svg {:viewBox (space  [-100  -180 200 200 ])
@@ -1737,7 +1734,7 @@
    [:div {:key (gensym)
             :style (css
                     [[2 11 14 11 :center :center 3 :rem :column]
-                     [.5 70 70 .5] []
+                     [0.5 70 70 0.5] []
                      {:z-index 30}]
                     )}
 
@@ -1780,7 +1777,7 @@
           (grid [100 :vh 100 :vw
                  (take 15 (repeat [8 :vh]))
                  (take 15 (repeat [8 :vh]))])
-          {:background-color (hsl [1.4 70 70 .8])})}
+          {:background-color (hsl [1.4 70 70 0.8])})}
 
 
 
@@ -1812,7 +1809,7 @@
    [:div {:key (gensym)
             :style (css
                     [[2 11 2 11 :center :center 2 :rem]
-                     [.5 70 70 .5] []
+                     [0.5 70 70 0.5] []
                      {:z-index 30}]
                     )}
     [:svg {:viewBox (space  [-100  -100 200 200 ])
@@ -1831,7 +1828,7 @@
                         50 0 -50
                         0 0 -55
                         50 55])
-              :stroke (hsl [.3 70 70 1])
+              :stroke (hsl [0.3 70 70 1])
               :stroke-width 1
               :fill :none}]
 
@@ -1909,7 +1906,7 @@
    #_[:div {:key (gensym)
             :style (css
                     [[2 11 2 11 :center :center 2 :rem]
-                     [.5 70 70 .5] []
+                     [0.5 70 70 0.5] []
                      {:z-index 30}]
                     )}
     [:svg {:viewBox (space  [-100  -100 200 200 ])
@@ -1929,7 +1926,7 @@
                        50 0 -50
                        0 0 -55
                        50 55])
-             :stroke (hsl [.3 70 70 1])
+             :stroke (hsl [0.3 70 70 1])
              :stroke-width 1
              :fill :none}]
 
@@ -1939,7 +1936,7 @@
                        ])
              :stroke (hsl [1 70 70 1])
              :stroke-width 1
-             :fill (hsl [.2 70 70 .2])}]
+             :fill (hsl [0.2 70 70 0.2])}]
 
 
      [:path {:d (path [0 0 :l
@@ -1947,7 +1944,7 @@
                        ])
              :stroke (hsl [1 70 70 1])
              :stroke-width 1
-             :fill (hsl [1 70 70 .2])}]
+             :fill (hsl [1 70 70 0.2])}]
 
 
      [:text {:x -50
@@ -2038,7 +2035,7 @@
              :stroke (hsl [2 70 70 1])
              :transform (m7/tranfrom
                          [[:scale 1.4]])
-             :stroke-width .74
+             :stroke-width 0.74
              :fill :none}]
 
 
@@ -2048,7 +2045,7 @@
                        50 70])
              :stroke (hsl [4 70 70 1])
              :transform (m7/tranfrom
-                         [[:scale .5]])
+                         [[:scale 0.5]])
              :stroke-width 2
              :fill :none}]
 
@@ -2146,7 +2143,7 @@
      [:div {:key (gensym)
             :style (css
                     [[2 11 2 11 :center :center 2 :rem]
-                     [.5 70 70 .5] []
+                     [0.5 70 70 0.5] []
                      {:z-index 30}]
                     )}
     [:svg {:viewBox (space  [-100  -100 200 200 ])
@@ -2157,7 +2154,7 @@
 
 
      #_[:path {:d (path [-40 -10 :q 44 -44   72 0])
-             :stroke (hsl [2 70 70 .5])
+             :stroke (hsl [2 70 70 0.5])
                :marker-end (m7/url "a")
              :stroke-width 1
              :fill :none}]
@@ -2169,7 +2166,7 @@
 
 
      #_[:path {:d (path [-40 -10 :q 44 -44 100 0])
-             :stroke (hsl [5 70 70 .5])
+             :stroke (hsl [5 70 70 0.5])
              :stroke-width 1
              :fill :none}]
 
@@ -2191,7 +2188,7 @@
 
 
      #_[:path {:d (path [0 90  :l 90 0 0 -160  -10 0  -80  160])
-             :stroke (hsl [2 70 70 .8])
+             :stroke (hsl [2 70 70 0.8])
              :stroke-width 2
              :fill :none}]
 
@@ -2202,12 +2199,12 @@
 
 
 
-    #_[:circle {:cx 85 :cy -80 :r 15 :fill (hsl [0 70 70 .7])}
+    #_[:circle {:cx 85 :cy -80 :r 15 :fill (hsl [0 70 70 0.7])}
       [:animateTransform
        {:id :sq
         :attributeName :transform
         :begin :click
-        :dur (sec .2)
+        :dur (sec 0.2)
         :type :translate
         :to (m7/space [0 160])
         :fill :freeze
@@ -2216,7 +2213,7 @@
 
 
      [:path {:d (path [-90 0 :l 180 0 ])
-             :stroke (hsl [3 70 70 .8])
+             :stroke (hsl [3 70 70 0.8])
              :marker-end (m7/url "i")
              :stroke-width 1
              :fill :none}]
@@ -2226,9 +2223,9 @@
 
      [:path {:d (path [-90 0 :l 20 0 0 -5 -5 0 0 -5 -10 0 0 5 -5 0 0 5])
              :transform (m7/tranfrom [[:scale 3]])
-             :stroke (hsl [1 70 70 .8])
+             :stroke (hsl [1 70 70 0.8])
              :stroke-width 1.1
-             :fill (hsl [1 70 70 .9])}
+             :fill (hsl [1 70 70 0.9])}
       [:animateTransform
        {:id :sq
         :attributeName :transform
@@ -2258,7 +2255,7 @@
           :style
           (css [
                 [2 11 2 10 :center :center 3 :rem :column]
-                [.5 70 70 1]
+                [0.5 70 70 1]
                 []
                 {:z-index 4}])}
 
@@ -2319,7 +2316,7 @@
           :style
           (css [
                 [2 11 14 5 :center :center 5 :rem :column]
-                [.5 70 70 .5]
+                [0.5 70 70 0.5]
                 []
                 {:z-index 3}])}
 
@@ -2384,7 +2381,7 @@
           :style
           (css [
                 [2 11 14 5 :flex-start :flex-start 2 :rem :column]
-                [.5 70 70 .5]
+                [0.5 70 70 0.5]
                 []
                 {:z-index 4}])}
 
@@ -2629,7 +2626,7 @@
      [:div {:key (gensym)
             :style (css
                     [[10 1 1 20 :center :center 3 :rem :column]
-                     [1 70 70 .8] []
+                     [1 70 70 0.8] []
                      {:z-index 2}]
                     )}
 
@@ -2644,14 +2641,14 @@
         [:div {:key (gensym)
                :style (css
                        [[(+ (* 2 i) 1) 2 (+ 5 (* 3 0)) 3 :center :center 2 :rem :column]
-                        [c 70 70 .8] []
+                        [c 70 70 0.8] []
                         {:z-index 2}]
                        )}
 
 
          n])
       [["" 7.3]
-       ["Top 5%" .7]
+       ["Top 5%" 0.7]
        ["Next 5%" 3.5]])
 
 
@@ -2664,7 +2661,7 @@
            [:div {:key (gensym)
                   :style (css
                           [[(+ 2 i) 1 (+ 5 (* 3 (inc j))) 3 :center :center 2 :rem :column]
-                           [c 70 70 .8] []
+                           [c 70 70 0.8] []
                            {:z-index 2}]
                           )}
 
@@ -2675,22 +2672,22 @@
       [
        [["Level/Year" 1.1]
         ["Primary 1 - 6" 7.2]
-        ["Secondary 1 - 5" .5]
+        ["Secondary 1 - 5" 0.5]
         ["Primary 1 - 6" 3.5]
-        ["Secondary 1 - 5" .3]
+        ["Secondary 1 - 5" 0.3]
         ]
        [["2008" 7.2]
-        ["$300" .5]
+        ["$300" 0.5]
         ["$500" 3.5]
         ["$250" 3.5]
-        ["$300" .3]
+        ["$300" 0.3]
         ]
 
        [["2009" 7.2]
-        ["$400" .5]
+        ["$400" 0.5]
         [[m7/m '[* 500 [135 100]]] 3.5]
         [[m7/m '[ [- 350 250] 250]] 3.5]
-        ["$400" .3]]
+        ["$400" 0.3]]
 
 
        ]
@@ -2700,7 +2697,7 @@
      #_[:div {:key (gensym)
             :style (css
                     [[5 1 (+ 5 (* 3 2)) 3 :center :flex-end 3 :rem :column]
-                     [1 70 70 .8] []
+                     [1 70 70 0.8] []
                      {:z-index 2}]
                     )}
 
@@ -2811,7 +2808,7 @@
                 [{:stroke (m7/hsl [0 70 70 0])
                   :strokeDasharray 100}
                  {:strokeDasharray 110
-                  :stroke (m7/hsl [0 70 70 .5])}
+                  :stroke (m7/hsl [0 70 70 0.5])}
                  {:strokeDasharray 120
                   :stroke (m7/hsl [0 70 70 1])
                   }
@@ -2854,7 +2851,7 @@
      [:div {:style
             (css
              [[1 1 2 6 :space-around :center 2 :rem]
-              [.5 70 70 1] []
+              [0.5 70 70 1] []
               {:z-index 4
                :gap "1rem"}]
              )}
@@ -2893,7 +2890,7 @@
      [:div {:style
             (css
              [[1 1 9 2 :center :center 1.2 :rem :column]
-              [.5 70 70 1] []
+              [0.5 70 70 1] []
               {:z-index 4
                :gap "1rem"}])}
       [:span "elapsed"]
@@ -2943,20 +2940,20 @@
      [:div {:key (gensym)
             :style (css
                     [[2 7 17 7 :center :center 2 :rem :column]
-                     [-3 70 70 .1] []
+                     [-3 70 70 0.1] []
                      {:z-index 4}]
                     )}
 
       [:div {:style {:font-size "2rem"
                      :font-weigh 700
-                     :color (hsl [.5 70 50 1 ])}}
+                     :color (hsl [0.5 70 50 1 ])}}
        (nth ["First Law of Motion" "Second Law of Motion" "velocity & accalaration" "Momentum" "Tense"] slider)]
 
       [:div {:on-click toggle-arrow
              :style {:font-size "5rem"
 
                      :font-weigh 700
-                     :color (hsl [.5 70 50 1 ])}}
+                     :color (hsl [0.5 70 50 1 ])}}
        (nth ["Inertia" "Momentum" " ∇ = Rate of change " "Mass times Velocity" "Simple Past"] slider)]
       [:div {:style {
                      :font-size "2.2rem"
@@ -2983,7 +2980,7 @@
      [:div {:keys (gensym)
             :style (css
                     [[7 1 17 7 :center :center 3 :rem]
-                     [-3 70 70 .1] []
+                     [-3 70 70 0.1] []
                      {:z-index 1}
                      (m7/fs [200 500 100 31 26 200 154 75 491 52])]
                     )}
@@ -3006,7 +3003,7 @@
      [:div {:keys (gensym)
             :style (css
                     [[8 2 18 2 :center :center 2.2 :rem]
-                     [-3 70 70 .1] []
+                     [-3 70 70 0.1] []
                      {:z-index 5
                       :padding ".3rem"}]
                     )}
@@ -3036,7 +3033,7 @@
             :on-click animate-path
             :style (css
                     [[9 2 20 2 :center :center 2 :rem]
-                     [-3 70 70 .1] []
+                     [-3 70 70 0.1] []
                      {:z-index 5}]
                     )}
       (nth [
@@ -3053,7 +3050,7 @@ in a straight line"]
      [:div {:key (gensym)
             :style (css
                     [[2 7 15 7 :center :center 2 :rem :column]
-                     [-3 70 70 .1] []
+                     [-3 70 70 0.1] []
                      {:z-index 2}]
                     )}
       [:svg {:viewBox (space [-6 -6 12 12])
@@ -3115,7 +3112,7 @@ in a straight line"]
      [:div {:key (gensym)
             :style (css
                     [[2 7 4 7 :center :center 2 :rem :column]
-                     [-3 70 70 .1] []
+                     [-3 70 70 0.1] []
                      {:z-index (if inertia 4 1)}]
                     )}
       [:svg {:viewBox (space [-100 -100 200 200])
@@ -3138,7 +3135,7 @@ in a straight line"]
                          :fill (hsl [4 70 70 1])
                          :fill-opacity 1}
                  :transform
-                 (m7/tranfrom [[:scale .2]
+                 (m7/tranfrom [[:scale 0.2]
                             [:rotate 180]
                             [:translate [12.5 0]]])}]
 
@@ -3215,7 +3212,7 @@ in a straight line"]
 
      [:div {:style (m7/css
                     [[2 7 6 6  :center :center  2.7 :rem :column]
-                     [(+ 1 (f 3)) 70 90 .2] [] {:gap "1rem"
+                     [(+ 1 (f 3)) 70 90 0.2] [] {:gap "1rem"
                                                 :z-index 4}])}
 
 
@@ -3234,14 +3231,14 @@ in a straight line"]
 
         "by 0.5 meters"]
 
-       ". He fires the arrow (mass = .2 kg) vertically upward.
+       ". He fires the arrow (mass = 0.2 kg) vertically upward.
  How much energy is stored in his bow and how high does the arrow go."]]
 
 
 
      [:div {:style (m7/css
                     [[2 8 7 10  :center :center  2.5 :rem :column]
-                     [(+ 1 (f 3)) 70 90 .2] [] {:gap "1rem"
+                     [(+ 1 (f 3)) 70 90 0.2] [] {:gap "1rem"
                                                 :z-index 4}])}
 
 
@@ -3276,11 +3273,11 @@ in a straight line"]
       #_[m7/m '[= PE [* m g h] ]]
 
       #_[m7/m '[= PE mgh]]
-;;       [m7/m '[= PE [* .2 kg 9.8 [m [:p s 2]] h ]  Elastic-enrgy ]]
+;;       [m7/m '[= PE [* 0.2 kg 9.8 [m [:p s 2]] h ]  Elastic-enrgy ]]
 
-;;       [m7/m '[=  [* .2 kg 9.8 [m [:p s 2]] h ] [:m 50 joules]]]
+;;       [m7/m '[=  [* 0.2 kg 9.8 [m [:p s 2]] h ] [:m 50 joules]]]
 
-;;       [m7/m '[=  [* .2 9.8  h ] 50]]
+;;       [m7/m '[=  [* 0.2 9.8  h ] 50]]
 
 
       ]
@@ -3309,8 +3306,8 @@ in a straight line"]
                  :markerHeight 5}
         [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                 :stroke (hsl [5 70 70 1])
-                :stroke-width .1
-                :transform (m7/tranfrom [[:scale [.4 .4]]
+                :stroke-width 0.1
+                :transform (m7/tranfrom [[:scale [0.4 0.4]]
                                          [:rotate 1]])
                 :fill (m7/hsl [2 70 70 1])}]]
        [:marker {:id (name :dot222)
@@ -3324,14 +3321,14 @@ in a straight line"]
         [:path {:d (m7/path [-3.7
                              0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                 :stroke (hsl [5 70 70 1])
-                :stroke-width .2
-                :transform (m7/tranfrom [[:scale [.6 .6]]
+                :stroke-width 0.2
+                :transform (m7/tranfrom [[:scale [0.6 0.6]]
                                          [:rotate 0]])
-                :fill (m7/hsl [.4 70 70 1])}]]
+                :fill (m7/hsl [0.4 70 70 1])}]]
 
 
        [:g {:transform (m7/tranfrom [[:translate [0 50]]
-                                     [:scale [.4 .4]]
+                                     [:scale [0.4 0.4]]
                                      [:rotate -90]])}
 
 
@@ -3400,7 +3397,7 @@ in a straight line"]
                                            (map
                                             m7/space
                                             [[-50 0] [100 0] [160 0]]))
-                                  :keyTimes (m7/sami-colon [0.0 .4 1])
+                                  :keyTimes (m7/sami-colon [0.0 0.4 1])
                                   ;;:from (m7/space [0 0])
                                   ;;:to (m7/space [200 0])
                                   :fill :freeze}])
@@ -3414,7 +3411,7 @@ in a straight line"]
                                          (map
                                           m7/space
                                           [[160 0] [100 0]  [-50 0] ]))
-                                :keyTimes (m7/sami-colon [0.0 .4 1])
+                                :keyTimes (m7/sami-colon [0.0 0.4 1])
                                 ;;:from (m7/space [0 0])
                                 ;;:to (m7/space [200 0])
                                 :fill :freeze}]
@@ -3445,7 +3442,7 @@ in a straight line"]
     ;;   (fn [n d]
     ;;     [:div {:style (m7/css
     ;;                    [[2 1 (+ 3 (* n 2)) 2  :center :center  3 :rem :column]
-    ;;                     [(* n .2) 70 (+ 50 (* 5 n))  .7] [] {:gap ".1rem"
+    ;;                     [(* n 0.2) 70 (+ 50 (* 5 n))  0.7] [] {:gap ".1rem"
     ;;                                                          :z-index 4}])}
 
     ;;      d])
@@ -3458,7 +3455,7 @@ in a straight line"]
     ;;   (fn [n d]
     ;;     [:div {:style (m7/css
     ;;                    [[3 1 (+ 3 (* n 2)) 2  :center :center  3 :rem :column]
-    ;;                     [(* n .2) 70 (+ 50 (* 5 n))  .7] [] {:gap ".1rem"
+    ;;                     [(* n 0.2) 70 (+ 50 (* 5 n))  0.7] [] {:gap ".1rem"
     ;;                                                          :z-index 4}])}
 
     ;;      d])
@@ -3470,7 +3467,7 @@ in a straight line"]
     ;;   (fn [n d]
     ;;     [:div {:style (m7/css
     ;;                    [[4 1 (+ 3 (* n 2)) 2  :center :center  3 :rem :column]
-    ;;                     [(* n .2) 70 (+ 50 (* 5 n))  .7] [] {:gap ".1rem"
+    ;;                     [(* n 0.2) 70 (+ 50 (* 5 n))  0.7] [] {:gap ".1rem"
     ;;                                                          :z-index 4}])}
 
     ;;      d])
@@ -3480,7 +3477,7 @@ in a straight line"]
 
      [:div {:style (m7/css
                     [[2 4 (+ 5 (* 0 2)) 15  :center :center  3 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
 
@@ -3568,22 +3565,22 @@ in a straight line"]
       #_[m7/m '[= [+ m1u1  m2u2 ] [+ m1v1  m2v2 ]]]
 
       #_[m7/m ['= 'a [ [:m (- 7.76 4.43) ['m 's]]
-                      [:m .29 's]]]]
+                      [:m 0.29 's]]]]
 
-      #_[m7/m ['= 'a   [:m  (/ (- 7.76 4.43) .29) ['m [:p 's 2]]] ]]
+      #_[m7/m ['= 'a   [:m  (/ (- 7.76 4.43) 0.29) ['m [:p 's 2]]] ]]
 
 
       #_[m7/m ['= [:m 'sin tt] ['a 'c]] ]
-      #_[m7/m ['= [:m 'sin 35] [70 'c] .573]]
-      #_[m7/m ['= [70 .573] 'c]]
+      #_[m7/m ['= [:m 'sin 35] [70 'c] 0.573]]
+      #_[m7/m ['= [70 0.573] 'c]]
 
-      #_[m7/m ['= (js/Math.round (/ 70 .573)) 'c]]
+      #_[m7/m ['= (js/Math.round (/ 70 0.573)) 'c]]
 
       ]
 
      [:div {:style (m7/css
                     [[8 4 (+ 1 (* 0 2)) 20  :center :center  3 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
 
@@ -3596,7 +3593,7 @@ in a straight line"]
 
      #_[:div {:style (m7/css
                     [[7 6 (+ 1 (* 0 2)) 7  :center :center  2 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
       [:div "Momentum of the green ball before collides"]
@@ -3610,7 +3607,7 @@ in a straight line"]
 
      #_[:div {:style (m7/css
                     [[7 6 (+ 10 (* 0 2)) 7  :center :center  2 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
       [:div "Momentum of the green ball after collides"]
@@ -3782,7 +3779,7 @@ in a straight line"]
 
      [:div {:style (m7/css
                     [[3 5 (+ 12 (* 0 2)) 8  :center :center  2 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
       [m7/m '[= Volume
@@ -3803,7 +3800,7 @@ in a straight line"]
 
      #_[:div {:style (m7/css
                     [[1 10 (+ 11 (* 0 2)) 6  :center :center  3 :rem :column]
-                     [(* 2 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 2 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
 
@@ -3896,7 +3893,7 @@ in a straight line"]
 
        [:g {:transform (m7/tranfrom [
                                      [:skewX -32]
-                                     [:scale [.7 .7]]])}
+                                     [:scale [0.7 0.7]]])}
 
 
         [:text {:x 40
@@ -4091,7 +4088,7 @@ in a straight line"]
         (fn [n d]
           [:div {:style (m7/css
                          [[2 1 (+ 2 (* n 2)) 2  :center :center  3 :rem :column]
-                          [(* n .2) 70 (+ 50 (* 5 n))  .7] [] {:gap ".1rem"
+                          [(* n 0.2) 70 (+ 50 (* 5 n))  0.7] [] {:gap ".1rem"
                                                                :z-index 4}])}
 
            d])
@@ -4105,7 +4102,7 @@ in a straight line"]
       (fn [n d]
         [:div {:style (m7/css
                        [[2 1 (+ 2 (* n 2)) 2  :center :center  2 :rem :column]
-                        [(* n .2) 70 (+ 50 (* 5 n))  .7] [] {:gap ".1rem"
+                        [(* n 0.2) 70 (+ 50 (* 5 n))  0.7] [] {:gap ".1rem"
                                                              :z-index 4}])}
 
          d])
@@ -4124,7 +4121,7 @@ in a straight line"]
       (fn [n d]
         [:div {:style (m7/css
                        [[3 4 (+ 2 (* n 2)) 3  :center :center  3 :rem :column]
-                        [(* 2 .2) 70 (+ 50 (* 5 n))  .7] [] {:gap ".1rem"
+                        [(* 2 0.2) 70 (+ 50 (* 5 n))  0.7] [] {:gap ".1rem"
                                                             :z-index 4}])}
 
          d])
@@ -4136,7 +4133,7 @@ in a straight line"]
       (fn [n d]
         [:div {:style (m7/css
                        [[4 1 (+ 2 (* n 2)) 2  :center :center  3 :rem :column]
-                        [(* n .2) 70 (+ 50 (* 5 n))  .7] [] {:gap ".1rem"
+                        [(* n 0.2) 70 (+ 50 (* 5 n))  0.7] [] {:gap ".1rem"
                                                              :z-index 4}])}
 
          d])
@@ -4147,7 +4144,7 @@ in a straight line"]
       (fn [n d]
         [:div {:style (m7/css
                        [[4 1 (+ 2 (* n 2)) 2  :center :center  3 :rem :column]
-                        [(* n .2) 70 (+ 50 (* 5 n))  .7] [] {:gap ".1rem"
+                        [(* n 0.2) 70 (+ 50 (* 5 n))  0.7] [] {:gap ".1rem"
                                                              :z-index 4}])}
 
          d])
@@ -4159,7 +4156,7 @@ in a straight line"]
       (fn [n d]
         [:div {:style (m7/css
                        [[3 1 (+ 9 (* n 2)) 2  :center :center  3 :rem :column]
-                        [(* n .2) 70 (+ 50 (* 5 n))  .7] [] {:gap ".1rem"
+                        [(* n 0.2) 70 (+ 50 (* 5 n))  0.7] [] {:gap ".1rem"
                                                              :z-index 4}])}
 
          d])
@@ -4172,7 +4169,7 @@ in a straight line"]
       (fn [n d]
         [:div {:style (m7/css
                        [[4 1 (+ 9 (* n 2)) 2  :center :center  3 :rem :column]
-                        [(* n .2) 70 (+ 50 (* 5 n))  .7] [] {:gap ".1rem"
+                        [(* n 0.2) 70 (+ 50 (* 5 n))  0.7] [] {:gap ".1rem"
                                                              :z-index 4}])}
 
          d])
@@ -4192,7 +4189,7 @@ in a straight line"]
 
      [:div {:style (m7/css
                       [[2 5 2 10  :center :center  1.5 :rem :column]
-                       [(* 5 .2) 70 (+ 50 (* 5 5)) .1] [] {:gap ".1rem"
+                       [(* 5 0.2) 70 (+ 50 (* 5 5)) 0.1] [] {:gap ".1rem"
                                                            :z-index 4}])}
 
 
@@ -4203,7 +4200,7 @@ in a straight line"]
       #_[m7/m '[= [:k C s] [:m 4.184 [j g] C]]]
 
 
-      #_[m7/m '[= [:k C fe] [:m .45 [j g] C]]]
+      #_[m7/m '[= [:k C fe] [:m 0.45 [j g] C]]]
 
 
       [:div "1068J of heat energy was applied to 50g of Aluminum metal. Then temperature changed from 21C to 45C. find out the heat capacity  "]
@@ -4218,7 +4215,7 @@ in a straight line"]
 
       #_[m7/m '[= [:k C s] [4.184 2]]]
 
-      #_[m7/m '[= [:m 1000 J]  [:m 10 g .45 [J g] C [:b [- [:k T 2] [:k T 1]]]] ]]
+      #_[m7/m '[= [:m 1000 J]  [:m 10 g 0.45 [J g] C [:b [- [:k T 2] [:k T 1]]]] ]]
 
 
       #_[m7/m '[= [:m 1000 J]  [:m 10 g 4.184 [J g] C [:b [- [:k T 2] [:k T 1]]]] ]]
@@ -4268,7 +4265,7 @@ in a straight line"]
              ax-dy 60
              small-mark 3
              flag true
-             fnt .5
+             fnt 0.5
              fixsize 4
              frac false]
          [:g
@@ -4280,8 +4277,8 @@ in a straight line"]
             (fn [i]
               [:path {:d (path [(+ ax-dy (* i 2)) -400 :l 0 1200 ])
 
-                      :stroke (hsl [(if (= i small-mark) 2 4) 70 70 .5])
-                      :stroke-width .4
+                      :stroke (hsl [(if (= i small-mark) 2 4) 70 70 0.5])
+                      :stroke-width 0.4
                       :fill :none}
                ])
             (range 0 11))]
@@ -4296,8 +4293,8 @@ in a straight line"]
              [:g
 
               [:path {:d (path [ (* 20 x)  0 :l 0 -400])
-                      :stroke (hsl [0 70 70 .5])
-                      :stroke-width .5
+                      :stroke (hsl [0 70 70 0.5])
+                      :stroke-width 0.5
                       :fill :none}
                ]
 
@@ -4305,7 +4302,7 @@ in a straight line"]
               [:path {:d (path [ (* 20 x)  0 :l 0 400])
 
                   :stroke (hsl [0 70 70 1])
-                  :stroke-width .5
+                  :stroke-width 0.5
                       :fill :none}
                ]
 
@@ -4328,7 +4325,7 @@ in a straight line"]
               [:path {:d (path [0 (ve (* 20 y))   :l 1200 0])
 
                       :stroke (hsl [1 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}
                ]
 
@@ -4336,7 +4333,7 @@ in a straight line"]
               [:path {:d (path [0 (ve (* 20 y))   :l -1200 0])
 
                       :stroke (hsl [1 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}
                ]
 
@@ -4350,13 +4347,13 @@ in a straight line"]
            (fn [i]
              [:g
               [:path {:d (path [-400 (ve (+ ax-dx (* i 2))) :l 1200 0])
-                      :stroke (hsl [4 70 70 .5])
-                      :stroke-width .5
+                      :stroke (hsl [4 70 70 0.5])
+                      :stroke-width 0.5
                       :fill :none}
                ]
               (if flag
                 [:text {:x (* 2 i)
-                        :fill (hsl [.6 90 40 1])
+                        :fill (hsl [0.6 90 40 1])
                         :font-size fnt
                         :y -3
                         :dx -0.15}
@@ -4373,9 +4370,9 @@ in a straight line"]
 
           [:path {:d (path [0 0 :l 20 0])
                   :id :grf22
-                  :stroke (hsl [1.2 30 40 .8])
-                  :stroke-dasharray (m7/space [1.9 .1])
-                  :stroke-width .2
+                  :stroke (hsl [1.2 30 40 0.8])
+                  :stroke-dasharray (m7/space [1.9 0.1])
+                  :stroke-width 0.2
                   :fill :none}
 
            ]
@@ -4390,7 +4387,7 @@ in a straight line"]
                      :fill (hsl [0 20 90 1])}
 
               [:tspan {:dy 0
-                       :dx .5}
+                       :dx 0.5}
 
                "x"]
 
@@ -4406,12 +4403,12 @@ in a straight line"]
                   :fill :none}
            ]
 
-          #_[:circle {:r .5
+          #_[:circle {:r 0.5
                     :cx 2
                     :cy 0
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .5
-                    :fill (hsl [5 70 70 .1])}
+                    :stroke-width 0.5
+                    :fill (hsl [5 70 70 0.1])}
              ]
 
 
@@ -4427,19 +4424,19 @@ in a straight line"]
 
 
           [:path {:d (path [-100 0 :l 1200 0])
-                  :stroke (hsl [0 70 70 .1])
-                  :stroke-width .1
+                  :stroke (hsl [0 70 70 0.1])
+                  :stroke-width 0.1
                   :fill :none}]
 
           [:path {:d (path [0 -600  :l 0 1200])
-                  :stroke (hsl [0 70 70 .5])
-                  :stroke-width .1
+                  :stroke (hsl [0 70 70 0.5])
+                  :stroke-width 0.1
                   :fill :none}]
 
 
           [:path {:d (path (mapcat identity  (into [[0 0  :l]] (repeat 60 [10 0 0 -10 0 10]))))
                   :stroke (hsl [0 70 70 1])
-                  :stroke-width .2
+                  :stroke-width 0.2
                   :fill :none}]
 
 
@@ -4449,7 +4446,7 @@ in a straight line"]
                                                             -10 0
                                                             10 0]))))
                   :stroke (hsl [0 70 70 1])
-                  :stroke-width .1
+                  :stroke-width 0.1
                   :fill :none}]
 
 
@@ -4458,7 +4455,7 @@ in a straight line"]
                                    (into [[0 0  :l]]
                                          (repeat 60 [10 0 0 -10 0 10]))))
                   :stroke (hsl [0 70 70 1])
-                  :stroke-width .1
+                  :stroke-width 0.1
                   :fill :none}]
 
 
@@ -4472,8 +4469,8 @@ in a straight line"]
                                                   [10 0 0 -10 -10 0
                                                    0 10 10 0 ])))))
                      :stroke (hsl [5 70 70 1])
-                     :stroke-width .1
-                     :fill (hsl [5 80 80 .5])}])
+                     :stroke-width 0.1
+                     :fill (hsl [5 80 80 0.5])}])
            (range 0 2))
 
 
@@ -4483,7 +4480,7 @@ in a straight line"]
            (fn [[x y]]
              [:circle {:cx (* x 10)
                        :cy (ve (* y 10))
-                       :r .1
+                       :r 0.1
                        :fill (hsl [0 70 70 1])}])
            [[0 0] [12 8] [24 (+ 8 4)] [36 (+ 8 4 2.4 )]
             [48 (+ 8 4 2.4 1.6)]])
@@ -4493,14 +4490,14 @@ in a straight line"]
                             120 -40 120 -24 120 -16])
                   ;; :marker-end (m7/url "i")
                   :stroke (hsl [2 70 70 1])
-                  :stroke-width .1
+                  :stroke-width 0.1
                   :fill :none}]
 
           [:path {:d (path [0 0 :l 30 0  :c  0 -5 -5 -10   -15 -10
                             :c -5 3  -5 3 -15 0 :l  -18 -18  0  5 ])
                   ;; :marker-end (m7/url "i")
                   :stroke (hsl [2 70 70 1])
-                  :stroke-width .2
+                  :stroke-width 0.2
                   :fill (hsl [4 70 70 1])}
            (if (= pull 0)
              [:animateTransform {:id :arrow2
@@ -4516,7 +4513,7 @@ in a straight line"]
                                                   [(* i 120) 0])
                                                 (range 0 5))))
                                  :keyTimes (m7/sami-colon
-                                            [0 .5 .75 .9 1])
+                                            [0 0.5 0.75 0.9 1])
                                  ;;:from (m7/space [0 0])
                                  ;;:to (m7/space [200 0])
                                  :fill :freeze}])]
@@ -4548,7 +4545,7 @@ in a straight line"]
       (fn [n d]
         [:div {:style (m7/css
                        [[6 1 10 2  :center :flex-end  3 :rem :column]
-                        [(* n .2) 70 (+ 50 (* 5 n))  .1] [] {:gap ".1rem"
+                        [(* n 0.2) 70 (+ 50 (* 5 n))  0.1] [] {:gap ".1rem"
                                                              :z-index 4}])}
 
          d])
@@ -4561,7 +4558,7 @@ in a straight line"]
       (fn [n d]
         [:div {:style (m7/css
                        [[7 1 9 1  :center :flex-end  3 :rem :column]
-                        [(* n .2) 70 (+ 50 (* 5 n))  .1] [] {:gap ".1rem"
+                        [(* n 0.2) 70 (+ 50 (* 5 n))  0.1] [] {:gap ".1rem"
                                                              :z-index 4}])}
 
          d])
@@ -4573,7 +4570,7 @@ in a straight line"]
       (fn [n d]
         [:div {:style (m7/css
                        [[8 4 9 1  :center :flex-end  3 :rem :column]
-                        [(* n .2) 70 (+ 50 (* 5 n))  .1] [] {:gap ".1rem"
+                        [(* n 0.2) 70 (+ 50 (* 5 n))  0.1] [] {:gap ".1rem"
                                                              :z-index 4}])}
 
          d])
@@ -4585,7 +4582,7 @@ in a straight line"]
       (fn [n d]
         [:div {:style (m7/css
                        [[6 1 12 3  :center :center  3 :rem :column]
-                        [(* n .2) 70 (+ 50 (* 5 n))  .1] [] {:gap ".1rem"
+                        [(* n 0.2) 70 (+ 50 (* 5 n))  0.1] [] {:gap ".1rem"
                                                              :z-index 4}])}
 
          d])
@@ -4597,7 +4594,7 @@ in a straight line"]
       (fn [n d]
         [:div {:style (m7/css
                        [[7 1 10 2  :center :center  3 :rem :column]
-                        [(* n .2) 70 (+ 50 (* 5 n))  .7] [] {:gap ".1rem"
+                        [(* n 0.2) 70 (+ 50 (* 5 n))  0.7] [] {:gap ".1rem"
                                                              :z-index 4}])}
 
          d])
@@ -4610,7 +4607,7 @@ in a straight line"]
       (fn [n d]
         [:div {:style (m7/css
                        [[7 1 12 3  :center :center  3 :rem :column]
-                        [(* n .2) 70 (+ 50 (* 5 n))  .7] [] {:gap ".1rem"
+                        [(* n 0.2) 70 (+ 50 (* 5 n))  0.7] [] {:gap ".1rem"
                                                              :z-index 4}])}
 
          d])
@@ -4623,7 +4620,7 @@ in a straight line"]
       (fn [n d]
         [:div {:style (m7/css
                        [[8 4 12 3  :center :center  3 :rem :column]
-                        [(* n .2) 70 (+ 50 (* 5 n))  .7] [] {:gap ".1rem"
+                        [(* n 0.2) 70 (+ 50 (* 5 n))  0.7] [] {:gap ".1rem"
                                                              :z-index 4}])}
 
          d])
@@ -4635,7 +4632,7 @@ in a straight line"]
       (fn [n d]
         [:div {:style (m7/css
                        [[8 4 10 2  :center :center  2 :rem :column]
-                        [(* n .2) 70 (+ 50 (* 5 n))  .7] [] {:gap ".1rem"
+                        [(* n 0.2) 70 (+ 50 (* 5 n))  0.7] [] {:gap ".1rem"
                                                              :z-index 4}])}
 
          d])
@@ -4648,7 +4645,7 @@ in a straight line"]
     ;;   (fn [n d]
     ;;     [:div {:style (m7/css
     ;;                    [[3 1 (+ 3 (* n 2)) 2  :center :center  3 :rem :column]
-    ;;                     [(* n .2) 70 (+ 50 (* 5 n))  .7] [] {:gap ".1rem"
+    ;;                     [(* n 0.2) 70 (+ 50 (* 5 n))  0.7] [] {:gap ".1rem"
     ;;                                                          :z-index 4}])}
 
     ;;      d])
@@ -4660,7 +4657,7 @@ in a straight line"]
     ;;   (fn [n d]
     ;;     [:div {:style (m7/css
     ;;                    [[4 1 (+ 3 (* n 2)) 2  :center :center  3 :rem :column]
-    ;;                     [(* n .2) 70 (+ 50 (* 5 n))  .7] [] {:gap ".1rem"
+    ;;                     [(* n 0.2) 70 (+ 50 (* 5 n))  0.7] [] {:gap ".1rem"
     ;;                                                          :z-index 4}])}
 
     ;;      d])
@@ -4670,7 +4667,7 @@ in a straight line"]
 
      #_[:div {:style (m7/css
                     [[1 4 (+ 9 (* 0 2)) 10  :center :center  3 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
       [m7/m '[= [- [:p a 2] [:p b 2]]
@@ -4687,7 +4684,7 @@ in a straight line"]
 
      #_[:div {:style (m7/css
                     [[2 8 (+ 1 (* 0 2)) 7  :center :center  3 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
 
@@ -4717,7 +4714,7 @@ in a straight line"]
 
      [:div {:style (m7/css
                     [[2 8 (+ 1 (* 0 2)) 7  :center :center  2 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
 
@@ -4759,7 +4756,7 @@ in a straight line"]
 
      [:div {:style (m7/css
                     [[2 8 (+ 16 (* 0 2)) 7  :center :center  3 :rem :column]
-                     [(* 1 .2) 70 (+ 50 (* 5 5))  .1] [] {:gap ".1rem"
+                     [(* 1 0.2) 70 (+ 50 (* 5 5))  0.1] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
 
@@ -4874,7 +4871,7 @@ in a straight line"]
 
      #_[:div {:style (m7/css
                     [[7 6 (+ 1 (* 0 2)) 7  :center :center  2 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
 
@@ -4925,7 +4922,7 @@ in a straight line"]
       (fn [n d]
         [:div {:style (m7/css
                        [[6 1 10 2  :center :flex-end  3 :rem :column]
-                        [(* n .2) 70 (+ 50 (* 5 n))  .1] [] {:gap ".1rem"
+                        [(* n 0.2) 70 (+ 50 (* 5 n))  0.1] [] {:gap ".1rem"
                                                              :z-index 4}])}
 
          d])
@@ -4938,7 +4935,7 @@ in a straight line"]
       (fn [n d]
         [:div {:style (m7/css
                        [[7 1 9 1  :center :flex-end  3 :rem :column]
-                        [(* n .2) 70 (+ 50 (* 5 n))  .1] [] {:gap ".1rem"
+                        [(* n 0.2) 70 (+ 50 (* 5 n))  0.1] [] {:gap ".1rem"
                                                              :z-index 4}])}
 
          d])
@@ -4950,7 +4947,7 @@ in a straight line"]
       (fn [n d]
         [:div {:style (m7/css
                        [[8 4 9 1  :center :flex-end  3 :rem :column]
-                        [(* n .2) 70 (+ 50 (* 5 n))  .1] [] {:gap ".1rem"
+                        [(* n 0.2) 70 (+ 50 (* 5 n))  0.1] [] {:gap ".1rem"
                                                              :z-index 4}])}
 
          d])
@@ -4962,7 +4959,7 @@ in a straight line"]
       (fn [n d]
         [:div {:style (m7/css
                        [[6 1 12 3  :center :center  3 :rem :column]
-                        [(* n .2) 70 (+ 50 (* 5 n))  .1] [] {:gap ".1rem"
+                        [(* n 0.2) 70 (+ 50 (* 5 n))  0.1] [] {:gap ".1rem"
                                                              :z-index 4}])}
 
          d])
@@ -4974,7 +4971,7 @@ in a straight line"]
       (fn [n d]
         [:div {:style (m7/css
                        [[7 1 10 2  :center :center  3 :rem :column]
-                        [(* n .2) 70 (+ 50 (* 5 n))  .7] [] {:gap ".1rem"
+                        [(* n 0.2) 70 (+ 50 (* 5 n))  0.7] [] {:gap ".1rem"
                                                              :z-index 4}])}
 
          d])
@@ -4987,7 +4984,7 @@ in a straight line"]
       (fn [n d]
         [:div {:style (m7/css
                        [[7 1 12 3  :center :center  3 :rem :column]
-                        [(* n .2) 70 (+ 50 (* 5 n))  .7] [] {:gap ".1rem"
+                        [(* n 0.2) 70 (+ 50 (* 5 n))  0.7] [] {:gap ".1rem"
                                                              :z-index 4}])}
 
          d])
@@ -5000,7 +4997,7 @@ in a straight line"]
       (fn [n d]
         [:div {:style (m7/css
                        [[8 4 12 3  :center :center  3 :rem :column]
-                        [(* n .2) 70 (+ 50 (* 5 n))  .7] [] {:gap ".1rem"
+                        [(* n 0.2) 70 (+ 50 (* 5 n))  0.7] [] {:gap ".1rem"
                                                              :z-index 4}])}
 
          d])
@@ -5012,7 +5009,7 @@ in a straight line"]
       (fn [n d]
         [:div {:style (m7/css
                        [[8 4 10 2  :center :center  2 :rem :column]
-                        [(* n .2) 70 (+ 50 (* 5 n))  .7] [] {:gap ".1rem"
+                        [(* n 0.2) 70 (+ 50 (* 5 n))  0.7] [] {:gap ".1rem"
                                                              :z-index 4}])}
 
          d])
@@ -5026,7 +5023,7 @@ in a straight line"]
 
      [:div {:style (m7/css
                     [[2 8 (+ 1 (* 0 2)) 7  :center :center  2 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
 
@@ -5052,7 +5049,7 @@ in a straight line"]
 
      [:div {:style (m7/css
                     [[2 8 (+ 16 (* 0 2)) 7  :center :center  3 :rem :column]
-                     [(* 1 .2) 70 (+ 50 (* 5 5))  .1] [] {:gap ".1rem"
+                     [(* 1 0.2) 70 (+ 50 (* 5 5))  0.1] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
 
@@ -5098,7 +5095,7 @@ in a straight line"]
 
      [:div {:style (m7/css
                     [[1 12 10 13  :center :center  2 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
       [:svg {:style {:height "100%"
                      :width "100%"}
@@ -5116,10 +5113,10 @@ in a straight line"]
         [:path {:d (m7/path [-3.7
                              0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                 :stroke (hsl [5 70 70 1])
-                :stroke-width .2
-                :transform (m7/tranfrom [[:scale [.6 .6]]
+                :stroke-width 0.2
+                :transform (m7/tranfrom [[:scale [0.6 0.6]]
                                          [:rotate 0]])
-                :fill (m7/hsl [.4 70 70 1])}]]
+                :fill (m7/hsl [0.4 70 70 1])}]]
        #_(grid-on 1 1)
 
        [:text [:textPath {:href ::#hello-w1
@@ -5131,7 +5128,7 @@ in a straight line"]
        [:path {:d (m7/path [0 0 :l 0  80 ])
                :id ::hello-w1
                :stroke (hsl [5 70 70 0.5])
-               :stroke-width .1
+               :stroke-width 0.1
                :fill :none
                :marker-end (m7/url (name :dot232))}
         [:animateTransform
@@ -5139,7 +5136,7 @@ in a straight line"]
           :begin :hellov.end
           :dur (sec 4)
           :type :scale
-          :from (m7/space [.2 .2])
+          :from (m7/space [0.2 0.2])
           :to (m7/space [1 1])
           :fill :freeze}]
 
@@ -5162,7 +5159,7 @@ in a straight line"]
 
         [:path {:d (m7/path `[0 0 :l ~@(map #(* -20 %1 %2)
                                             dx
-                                            (take 10 (cycle [10 .3])))])
+                                            (take 10 (cycle [10 0.3])))])
                 :stroke (hsl [0 70 70 1])
                 :stroke-width 5
                 :fill (hsl [2 70 70 1])
@@ -5182,7 +5179,7 @@ in a straight line"]
            :begin 0
            :dur (sec 2)
            :type :scale
-           :from (m7/space [.2 .2])
+           :from (m7/space [0.2 0.2])
            :to (m7/space [1 1])
            :fill :freeze}]]
 
@@ -5196,7 +5193,7 @@ in a straight line"]
           [:path {:d (m7/path [0 0 :l    -120 0 ])
                   :id ::hello2
                   :stroke (hsl [2 70 70 0.5])
-                  :stroke-width .1
+                  :stroke-width 0.1
                   :fill :none
                   :marker-end (m7/url (name :dot232))}
            [:animateTransform
@@ -5204,7 +5201,7 @@ in a straight line"]
              :begin :hellov.end
              :dur (sec 4)
              :type :scale
-             :from (m7/space [.2 .2])
+             :from (m7/space [0.2 0.2])
              :to (m7/space [1 1])
              :fill :freeze}]
 
@@ -5233,7 +5230,7 @@ in a straight line"]
         [:path {:d (m7/path [0 0 :l 0  80 ])
                 :id ::hello-w1
                 :stroke (hsl [5 70 70 0.5])
-                :stroke-width .1
+                :stroke-width 0.1
                 :fill :none
                 :marker-end (m7/url (name :dot232))}
          [:animateTransform
@@ -5241,7 +5238,7 @@ in a straight line"]
            :begin :hellov.end
            :dur (sec 4)
            :type :scale
-           :from (m7/space [.2 .2])
+           :from (m7/space [0.2 0.2])
            :to (m7/space [1 1])
            :fill :freeze}]
 
@@ -5264,7 +5261,7 @@ in a straight line"]
         [:path {:d (m7/path [0 0 :l 0  (ve 80) ])
                 :id ::hello-upw1
                 :stroke (hsl [5 70 70 0.5])
-                :stroke-width .1
+                :stroke-width 0.1
                 :fill :none
                 :marker-end (m7/url (name :dot232))}
          [:animateTransform
@@ -5272,7 +5269,7 @@ in a straight line"]
            :begin :hellov.end
            :dur (sec 4)
            :type :scale
-           :from (m7/space [.2 .2])
+           :from (m7/space [0.2 0.2])
            :to (m7/space [1 1])
            :fill :freeze}]
 
@@ -5293,7 +5290,7 @@ in a straight line"]
           #_[:path {:d (m7/path [0 0 :l 150 -90])
                   :id ::helloF3
                   :stroke (hsl [4.5 70 70 1])
-                  :stroke-width .1
+                  :stroke-width 0.1
                   :fill :none
                   :marker-end (m7/url (name :dot232))}
            #_[:animateTransform
@@ -5301,7 +5298,7 @@ in a straight line"]
                :begin :hellov.end
                :dur (sec 4)
                :type :scale
-               :from (m7/space [.2 .2])
+               :from (m7/space [0.2 0.2])
                :to (m7/space [1 1])
                :fill :freeze}]
 
@@ -5334,7 +5331,7 @@ in a straight line"]
 
      [:div {:style (m7/css
                     [[2 10 (+ 2 (* 0 2)) 12  :center :center  3 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
 
@@ -5400,7 +5397,7 @@ there are three forces on it."]
 
      #_[:div {:style (m7/css
                     [[1 12 10 13  :center :center  2 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
       [:svg {:style {:height "100%"
                      :width "100%"}
@@ -5418,10 +5415,10 @@ there are three forces on it."]
         [:path {:d (m7/path [-3.7
                              0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                 :stroke (hsl [5 70 70 1])
-                :stroke-width .2
-                :transform (m7/tranfrom [[:scale [.6 .6]]
+                :stroke-width 0.2
+                :transform (m7/tranfrom [[:scale [0.6 0.6]]
                                          [:rotate 0]])
-                :fill (m7/hsl [.4 70 70 1])}]]
+                :fill (m7/hsl [0.4 70 70 1])}]]
 
        [:foreignObject {:x 40
                         :y 0
@@ -5472,7 +5469,7 @@ there are three forces on it."]
 
      [:div {:style (m7/css
                       [[2 10 (+ 12 (* 0 2)) 12  :center :center  4 :rem :column]
-                     [(* 5 .5) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.5) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
       [m7/m '[= [- [:m 3 x] [:m 2 y] ] 1 ]]
@@ -5496,7 +5493,7 @@ there are three forces on it."]
 
      [:div {:style (m7/css
                     [[2 10 (+ 2 (* 0 2)) 12  :center :center  3.4 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
       #_[:div {:style {:font-size "1.9rem"}}
@@ -5653,7 +5650,7 @@ there are three forces on it."]
 
      [:div {:style (m7/css
                     [[1 12 10 13  :center :center  2 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
       [:svg {:style {:height "100%"
                      :width "100%"}
@@ -5671,10 +5668,10 @@ there are three forces on it."]
         [:path {:d (m7/path [-3.7
                              0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                 :stroke (hsl [5 70 70 1])
-                :stroke-width .2
-                :transform (m7/tranfrom [[:scale [.6 .6]]
+                :stroke-width 0.2
+                :transform (m7/tranfrom [[:scale [0.6 0.6]]
                                          [:rotate 0]])
-                :fill (m7/hsl [.4 70 70 1])}]]
+                :fill (m7/hsl [0.4 70 70 1])}]]
        #_(grid-on 1 1)
 
 
@@ -5699,14 +5696,14 @@ there are three forces on it."]
            :begin 0
            :dur (sec 2)
            :type :scale
-           :from (m7/space [.2 .2])
+           :from (m7/space [0.2 0.2])
            :to (m7/space [1 1])
            :fill :freeze}]]
 
           [:path {:d (m7/path [0 0 :l  30 -90])
                   :id ::hello2
                   :stroke (hsl [2 70 70 0.5])
-                  :stroke-width .1
+                  :stroke-width 0.1
                   :fill :none
                   :marker-end (m7/url (name :dot232))}
            [:animateTransform
@@ -5714,7 +5711,7 @@ there are three forces on it."]
              :begin :hellov.end
              :dur (sec 4)
              :type :scale
-             :from (m7/space [.2 .2])
+             :from (m7/space [0.2 0.2])
              :to (m7/space [1 1])
              :fill :freeze}]
 
@@ -5732,7 +5729,7 @@ there are three forces on it."]
           [:path {:d (m7/path [120 0 :l  30 -90])
                   :id ::hello21
                   :stroke (hsl [2 70 70 0.5])
-                  :stroke-width .1
+                  :stroke-width 0.1
                   :fill :none
                   :marker-end (m7/url (name :dot232))}
            [:animateTransform
@@ -5740,7 +5737,7 @@ there are three forces on it."]
              :begin :hellov.end
              :dur (sec 4)
              :type :scale
-             :from (m7/space [.2 .2])
+             :from (m7/space [0.2 0.2])
              :to (m7/space [1 1])
              :fill :freeze}]
 
@@ -5761,7 +5758,7 @@ there are three forces on it."]
           [:path {:d (m7/path [0 0 :l 150 -90])
                   :id ::helloF3
                   :stroke (hsl [4.5 70 70 1])
-                  :stroke-width .1
+                  :stroke-width 0.1
                   :fill :none
                   :marker-end (m7/url (name :dot232))}
            #_[:animateTransform
@@ -5769,7 +5766,7 @@ there are three forces on it."]
                :begin :hellov.end
                :dur (sec 4)
                :type :scale
-               :from (m7/space [.2 .2])
+               :from (m7/space [0.2 0.2])
                :to (m7/space [1 1])
                :fill :freeze}]
 
@@ -5786,7 +5783,7 @@ there are three forces on it."]
 
        [:path {:d (m7/path [0 0 :l (+ 70 80) -60])
                  :id ::hello4
-                 :stroke (hsl [4 70 70 .5])
+                 :stroke (hsl [4 70 70 0.5])
                  :fill :none
                  :marker-end (m7/url (name :dot22))}
           [:animateTransform
@@ -5794,7 +5791,7 @@ there are three forces on it."]
             :begin (sec 0)
             :dur (sec 4)
             :type :scale
-            :from (m7/space [.2 .2])
+            :from (m7/space [0.2 0.2])
             :to (m7/space [1 1])
             :fill :freeze}]]
 
@@ -5821,7 +5818,7 @@ there are three forces on it."]
 
      [:div {:style (m7/css
                     [[2 10 (+ 2 (* 0 2)) 12  :center :center  3 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
 
@@ -5906,7 +5903,7 @@ there are three forces on it."]
       (fn [n d]
         [:div {:style (m7/css
                        [[2 1 (+ 9 (* n 2)) 2  :center :center  2 :rem :column]
-                        [(* n .2) 70 (+ 50 (* 1 n))  .7] [] {:gap ".1rem"
+                        [(* n 0.2) 70 (+ 50 (* 1 n))  0.7] [] {:gap ".1rem"
                                                              :z-index 5}])}
 
          d])
@@ -5917,7 +5914,7 @@ there are three forces on it."]
       (fn [n d]
         [:div {:style (m7/css
                        [[3 1 (+ 9 (* n 2)) 2  :center :center  2 :rem :column]
-                        [(* n .2) 70 (+ 50 (* 1 n))  .7] [] {:gap ".1rem"
+                        [(* n 0.2) 70 (+ 50 (* 1 n))  0.7] [] {:gap ".1rem"
                                                              :z-index 5}])}
 
          d])
@@ -5929,7 +5926,7 @@ there are three forces on it."]
 
      [:div {:style (m7/css
                     [[1 12 10 13  :center :center  2 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
       [:svg {:style {:height "100%"
                      :width "100%"}
@@ -5947,10 +5944,10 @@ there are three forces on it."]
         [:path {:d (m7/path [-3.7
                              0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                 :stroke (hsl [5 70 70 1])
-                :stroke-width .2
-                :transform (m7/tranfrom [[:scale [.6 .6]]
+                :stroke-width 0.2
+                :transform (m7/tranfrom [[:scale [0.6 0.6]]
                                          [:rotate 0]])
-                :fill (m7/hsl [.4 70 70 1])}]]
+                :fill (m7/hsl [0.4 70 70 1])}]]
        #_(grid-on 1 1)
 
 
@@ -6002,7 +5999,7 @@ there are three forces on it."]
            :begin 0
            :dur (sec 2)
            :type :scale
-           :from (m7/space [.2 .2])
+           :from (m7/space [0.2 0.2])
            :to (m7/space [1 1])
            :fill :freeze}]]
 
@@ -6051,7 +6048,7 @@ there are three forces on it."]
            :begin 0
            :dur (sec 2)
            :type :scale
-           :from (m7/space [.2 .2])
+           :from (m7/space [0.2 0.2])
            :to (m7/space [-1 1])
            :fill :freeze}]]
 
@@ -6069,7 +6066,7 @@ there are three forces on it."]
            :begin 0
            :dur (sec 2)
            :type :scale
-           :from (m7/space [.2 .2])
+           :from (m7/space [0.2 0.2])
            :to (m7/space [1 -1])
            :fill :freeze}]]
 
@@ -6086,7 +6083,7 @@ there are three forces on it."]
            :begin 0
            :dur (sec 2)
            :type :scale
-           :from (m7/space [.2 .2])
+           :from (m7/space [0.2 0.2])
            :to (m7/space [-1 -1])
            :fill :freeze}]]
 
@@ -6097,7 +6094,7 @@ there are three forces on it."]
         [:path {:d (m7/path [-40 -40 :l 0  (* 40 (+ b' 1))   (* 40 (+ a' 1)) 0
                              0  (ve (* 40 (+ b' 1)))   (ve (* 40 (+ a' 1))) 0])
                   :id ::hello4
-                  :stroke (hsl [6 70 70 .5])
+                  :stroke (hsl [6 70 70 0.5])
                   :stroke-width 8
                   :fill :none
                   :marker-end (m7/url (name :dot22))}
@@ -6108,7 +6105,7 @@ there are three forces on it."]
 
      [:div {:style (m7/css
                     [[2 10 (+ 2 (* 0 2)) 12  :center :center  3 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
       (qd [4 8 3])
@@ -6176,7 +6173,7 @@ there are three forces on it."]
      [:div {:style (m7/css
                     [[1 12 10 13
                       :center :center 2 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .1]
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.1]
                      [] {:gap ".1rem"
                          :z-index 4}])}
       [:svg {:style {:height "100%"
@@ -6195,7 +6192,7 @@ there are three forces on it."]
                    [:g
 
                     [:path {:d (m7/path `[ ~x ~y1 :l ~@(map #(* (/ 40 smb) %) dx)])
-                            :fill (hsl  [(if (not y) 1.5 2.3) 90 60 .8])
+                            :fill (hsl  [(if (not y) 1.5 2.3) 90 60 0.8])
                             :stroke :#aaa
                             :stroke-width 2
                             }]
@@ -6225,7 +6222,7 @@ there are three forces on it."]
                   [:g
 
                    [:path {:d (m7/path `[ ~x ~y1 :l ~@(map #(* 40 %) dx)])
-                           :fill (hsl  [(if (not y) .1 .8) 90 60 .5])
+                           :fill (hsl  [(if (not y) 0.1 0.8) 90 60 0.5])
                            :stroke :#aaa
                            :stroke-width 2
                            }]
@@ -6272,7 +6269,7 @@ there are three forces on it."]
      [:div {:style
             (m7/css
              [[2 10 (+ 2 (* 0 2)) 12  :center :center  2.0 :rem :column]
-              [(* 5 .2) 70 (+ 50 (* 5 5))  .1]
+              [(* 5 0.2) 70 (+ 50 (* 5 5))  0.1]
               []
               {:gap ".1rem"
                :z-index 4}])}
@@ -6286,7 +6283,7 @@ there are three forces on it."]
 
 
       #_(if true
-        [:div {:style {:background-color (hsl [1 50 50 .7])}}
+        [:div {:style {:background-color (hsl [1 50 50 0.7])}}
          [m7/mx `[= [:p [:b [+ ~ax ~bx]]  2]
                   [+ [:p ~ax  2]  [:p ~bx  2] [* 2 ~ax ~bx ]]]]])
 
@@ -6534,7 +6531,7 @@ there are three forces on it."]
      [:div {:style (m7/css
                     [[1 12 10 13
                       :center :center 2 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .1]
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.1]
                      [] {:gap ".1rem"
                          :z-index 4}])}
       [:svg {:style {:height "100%"
@@ -6554,7 +6551,7 @@ there are three forces on it."]
                    [:g
 
                     [:path {:d (m7/path `[ ~x ~y1 :l ~@(map #(* (/ 40 smb) %) dx)])
-                            :fill (hsl  [(if (not y) 1.5 2.3) 90 60 .8])
+                            :fill (hsl  [(if (not y) 1.5 2.3) 90 60 0.8])
                             :stroke :#aaa
                             :stroke-width 2
                             }]
@@ -6584,7 +6581,7 @@ there are three forces on it."]
                     [:g
 
                      [:path {:d (m7/path `[ ~x ~y1 :l ~@(map #(* 40 %) dx)])
-                             :fill (hsl  [(if (not y) .1 .8) 90 60 .5])
+                             :fill (hsl  [(if (not y) 0.1 0.8) 90 60 0.5])
                              :stroke :#aaa
                              :stroke-width 2
                              }]
@@ -6608,7 +6605,7 @@ there are three forces on it."]
                   [:g
 
                    [:path {:d (m7/path `[ ~x ~y1 :l ~@(map #(* 40 %) dx)])
-                           :fill (hsl  [.8 90 60 .5])
+                           :fill (hsl  [0.8 90 60 0.5])
                            :stroke :#aaa
                            :stroke-width 1
                            }]
@@ -6635,7 +6632,7 @@ there are three forces on it."]
                   [:g
 
                    [:path {:d (m7/path `[ ~x ~y1 :l ~@(map #(* 40 %) dx)])
-                           :fill (hsl  [1.8 90 60 .2])
+                           :fill (hsl  [1.8 90 60 0.2])
                            :stroke :#aaa
                            :stroke-width 1
                            }]
@@ -6662,9 +6659,9 @@ there are three forces on it."]
                   [:g
 
                    [:path {:d (m7/path `[ ~x ~y1 :l ~@(map #(* 4 %) dx)])
-                           :fill (hsl  [.1 90 60 .5])
+                           :fill (hsl  [0.1 90 60 0.5])
                            :stroke :#aaa
-                           :stroke-width .1
+                           :stroke-width 0.1
                            }]
                    [:text {:x x
                            :y y1}
@@ -6737,7 +6734,7 @@ there are three forces on it."]
      [:div {:style
             (m7/css
              [[2 3 15 3 :center :center  3.0 :rem :column]
-              [(* 5 .2) 70 (+ 50 (* 5 5))  .1]
+              [(* 5 0.2) 70 (+ 50 (* 5 5))  0.1]
               []
               {:gap ".1rem"
                :z-index 4}])}
@@ -6767,7 +6764,7 @@ there are three forces on it."]
      [:div {:style
             (m7/css
              [[2 10 (+ 2 (* 0 2)) 12  :center :center  2.3 :rem :column]
-              [(* 5 .2) 70 (+ 50 (* 5 5))  .1]
+              [(* 5 0.2) 70 (+ 50 (* 5 5))  0.1]
               []
               {:gap ".1rem"
                :z-index 4}])}
@@ -6783,7 +6780,7 @@ there are three forces on it."]
 
 
       [m7/x '[=
-              .025
+              0.025
               [25 1000]
               [[* 5 5] [* 10 100]]
               [[* 5 5] [* 10 5 5]]
@@ -6828,7 +6825,7 @@ there are three forces on it."]
      #_[:div {:style
               (m7/css
                [[2 10 (+ 2 (* 0 2)) 12  :center :center  2.3 :rem :column]
-                [(* 5 .2) 70 (+ 50 (* 5 5))  .1]
+                [(* 5 0.2) 70 (+ 50 (* 5 5))  0.1]
                 []
                 {:gap ".1rem"
                  :z-index 4}])}
@@ -6880,7 +6877,7 @@ there are three forces on it."]
        'a '[:b [- g]]]
 
 
-      #_[:div {:style {:background-color (hsl [.6 95 70 1])}} "if we substitute " [m7/mx `[:a x [+ x [:k d x]]]]]
+      #_[:div {:style {:background-color (hsl [0.6 95 70 1])}} "if we substitute " [m7/mx `[:a x [+ x [:k d x]]]]]
       #_[m7/sx '[= [:m f [:b [+ t [:k d t]]]]
                [+ [:m f [:b t]] [:m [:k d t] g [:b t]]]] 't 'x]
 
@@ -6939,7 +6936,7 @@ there are three forces on it."]
 
 
       #_(if true
-        [:div {:style {:background-color (hsl [1 50 50 .7])}}
+        [:div {:style {:background-color (hsl [1 50 50 0.7])}}
          [m7/mx `[= [:p [:b [+ ~ax ~bx]]  2]
                   [+ [:p ~ax  2]  [:p ~bx  2] [* 2 ~ax ~bx ]]]]])
 
@@ -7154,7 +7151,7 @@ there are three forces on it."]
 
      [:div {:style (m7/css
                     [[1 4 (+ 9 (* 0 2)) 10  :center :center  3 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
 
@@ -7165,7 +7162,7 @@ there are three forces on it."]
 
      #_[:div {:style (m7/css
                       [[2 8 (+ 1 (* 0 2)) 20  :center :center  6 :rem :column]
-                       [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                       [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                             :z-index 4}])}
 
 
@@ -7182,7 +7179,7 @@ there are three forces on it."]
 
      [:div {:style (m7/css
                     [[2 8 (+ 1 (* 0 2)) 20  :center :center  6 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
       #_[:div  {:style {:font-size "1.5rem"}}  " At high temperatures (700–1100 °C) and in the presence of a metal-based catalyst (nickel), steam reacts with methane to yield a mixture of CO and H2, known as \"water gas\" or \"syngas\":  "]
@@ -7264,7 +7261,7 @@ there are three forces on it."]
 
      #_[:div {:style (m7/css
                     [[7 6 (+ 1 (* 0 2)) 7  :center :center  5 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
       [:div ""]
 
@@ -7321,7 +7318,7 @@ there are three forces on it."]
 
      #_[:div {:style (m7/css
                     [[1 4 (+ 9 (* 0 2)) 10  :center :center  3 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
 
@@ -7332,7 +7329,7 @@ there are three forces on it."]
 
      #_[:div {:style (m7/css
                       [[2 8 (+ 1 (* 0 2)) 20  :center :center  6 :rem :column]
-                       [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                       [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                             :z-index 4}])}
 
 
@@ -7349,7 +7346,7 @@ there are three forces on it."]
 
      #_[:div {:style (m7/css
                     [[2 8 (+ 1 (* 0 2)) 20  :center :center  6 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
 
@@ -7363,7 +7360,7 @@ there are three forces on it."]
 
      [:div {:style (m7/css
                     [[7 6 (+ 1 (* 1 2)) 17  :center :center  3 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
 
@@ -7421,7 +7418,7 @@ there are three forces on it."]
 
                :stroke (hsl [4 70 70 1])
                :stroke-width 2
-               :fill (hsl [4.5 80 70 .4]) }
+               :fill (hsl [4.5 80 70 0.4]) }
         ]
 
 
@@ -7429,7 +7426,7 @@ there are three forces on it."]
 
                :stroke (hsl [4 70 70 1])
                :stroke-width 2
-               :fill (hsl [4.5 80 70 .4]) }
+               :fill (hsl [4.5 80 70 0.4]) }
         ]
 
        [:path {:d (path [0 0 :l 100 0 -50 -120 -50 120 ])
@@ -7438,7 +7435,7 @@ there are three forces on it."]
                                         [:scale [1 -1]]])
                :stroke (hsl [4 70 70 1])
                :stroke-width 2
-               :fill (hsl [4.5 80 70 .4]) }
+               :fill (hsl [4.5 80 70 0.4]) }
         ]
 
 
@@ -7448,7 +7445,7 @@ there are three forces on it."]
                                         [:scale [1 1]]])
                :stroke (hsl [4 70 70 1])
                :stroke-width 2
-               :fill (hsl [4.5 80 70 .4]) }
+               :fill (hsl [4.5 80 70 0.4]) }
         ]
 
 
@@ -7457,7 +7454,7 @@ there are three forces on it."]
                                         [:rotate 90]])
                :stroke (hsl [4 70 70 1])
                :stroke-width 2
-               :fill (hsl [4.5 80 70 .4]) }
+               :fill (hsl [4.5 80 70 0.4]) }
         ]
 
        [:path {:d (path [0 0 :l 100 0 -50 -120 -50 120 ])
@@ -7467,7 +7464,7 @@ there are three forces on it."]
                                         ])
                :stroke (hsl [4 70 70 1])
                :stroke-width 2
-               :fill (hsl [4.5 80 70 .4]) }
+               :fill (hsl [4.5 80 70 0.4]) }
         ]
 
 
@@ -7482,14 +7479,14 @@ there are three forces on it."]
 
                  :stroke (hsl [4 70 70 1])
                  :stroke-width 2
-                 :fill (hsl [4.5 80 70 .4]) }
+                 :fill (hsl [4.5 80 70 0.4]) }
           ]
 
        #_[:path {:d (path [200 0 :l 100 0 -50 -120 -50 120 ])
 
                :stroke (hsl [4 70 70 1])
                :stroke-width 2
-               :fill (hsl [4.5 80 70 .4]) }
+               :fill (hsl [4.5 80 70 0.4]) }
         ]
 
 
@@ -7498,7 +7495,7 @@ there are three forces on it."]
 
                :stroke (hsl [4 70 70 1])
                :stroke-width 2
-               :fill (hsl [4 70 70 .4]) }
+               :fill (hsl [4 70 70 0.4]) }
         ]
 
 
@@ -7511,7 +7508,7 @@ there are three forces on it."]
 
                :stroke (hsl [4 70 70 1])
                :stroke-width 2
-               :fill (hsl [4 70 70 .4]) }
+               :fill (hsl [4 70 70 0.4]) }
         ]
 
 
@@ -7521,7 +7518,7 @@ there are three forces on it."]
                :stroke (hsl [4 70 70 1])
                :stroke-width 2
 
-               :fill (hsl [5 70 70 .4]) }
+               :fill (hsl [5 70 70 0.4]) }
         ]
 
 
@@ -7570,7 +7567,7 @@ there are three forces on it."]
 
      #_[:div {:style (m7/css
                     [[1 4 (+ 9 (* 0 2)) 10  :center :center  3 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
 
@@ -7581,7 +7578,7 @@ there are three forces on it."]
 
      [:div {:style (m7/css
                       [[2 4 (+ 1 (* 0 2)) 10  :center :center  3 :rem :column]
-                       [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                       [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                             :z-index 4}])}
 
 
@@ -7600,7 +7597,7 @@ there are three forces on it."]
 
      [:div {:style (m7/css
                     [[2 8 (+ 1 (* 0 2)) 20  :center :center  8 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
       ;; [:div "nearest 1,00,000"]
       ;; [m7/m '[= 698352
@@ -7634,9 +7631,9 @@ there are three forces on it."]
 
       #_[:div "nearest 3 decimal places "]
 
-      #_[m7/m '[= 45.7395 [+ 45.73 .0095] ]]
+      #_[m7/m '[= 45.7395 [+ 45.73 0.0095] ]]
 
-      #_[m7/m '[= 45.7395 [+ 45.73 .01] ]]
+      #_[m7/m '[= 45.7395 [+ 45.73 0.01] ]]
 
 
 
@@ -7665,7 +7662,7 @@ there are three forces on it."]
 
      #_[:div {:style (m7/css
                     [[7 4 (+ 12 (* 1 2)) 10  :center :center  2 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
 
@@ -7702,7 +7699,7 @@ there are three forces on it."]
 
      #_[:div {:style (m7/css
                     [[8 3 (+ 2 (* 3 4)) 5  :center :center  2 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
       ;; [m7/m ['= [:p 'c 2] ['+ [:p 'a 2] [:p 'b 2]]]]
@@ -7725,7 +7722,7 @@ there are three forces on it."]
 
      #_[:div {:style (m7/css
                     [[8 3 (+ 1 (* 1 1)) 8  :center :center  2 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
       ;; [m7/m ['= ['opp 'hyp] [:m 'sin 'A]]]
@@ -7773,16 +7770,16 @@ there are three forces on it."]
          [:g
           [:path {:d (path [b 0 :l 100 0 -50 -100 -50 100 0 -250 100 250])
                   :transform (m7/tranfrom [[:skewX -20]
-                                           [:scale [1 .5]]])
+                                           [:scale [1 0.5]]])
                   :stroke (hsl [2 70 70 1])
                   :stroke-width 2
-                  :fill (hsl [2 70 70 .4])}]
+                  :fill (hsl [2 70 70 0.4])}]
           [:path {:d (path [b 0 :l 100 0 -50 -100 -50 -150 ])
                   :transform (m7/tranfrom [[:skewX -20]
-                                           [:scale [1 .5]]])
+                                           [:scale [1 0.5]]])
                   :stroke (hsl [2 70 70 1])
                   :stroke-width 2
-                  :fill (hsl [2 70 70 .4])}]])
+                  :fill (hsl [2 70 70 0.4])}]])
 
 
 
@@ -7831,7 +7828,7 @@ there are three forces on it."]
           #_[:path {:d (path [80 bs :l 4 (ve (- bs 26)) ])
                   :stroke (hsl [2 70 70 1])
                   :stroke-width 2
-                  :fill (hsl [2 70 70 .4])}]
+                  :fill (hsl [2 70 70 0.4])}]
 
           #_[:text {:x bs
                   :y 0
@@ -7869,7 +7866,7 @@ there are three forces on it."]
           [:path {:d (path [0 bs :l  0 -80 0 80  100 0  -100 -80])
                   :stroke (hsl [2 70 70 1])
                   :stroke-width 2
-                  :fill (hsl [2 70 70 .4])}]
+                  :fill (hsl [2 70 70 0.4])}]
 
           [:text {:x bs
                   :y 0
@@ -7895,7 +7892,7 @@ there are three forces on it."]
 
                :stroke (hsl [2 70 70 1])
                :stroke-width 2
-               :fill (hsl [2 70 70 .4])}
+               :fill (hsl [2 70 70 0.4])}
         ]
 
 
@@ -7903,7 +7900,7 @@ there are three forces on it."]
 
                :stroke (hsl [2 70 70 1])
                :stroke-width 2
-               :fill (hsl [2 70 70 .4])}
+               :fill (hsl [2 70 70 0.4])}
         ]
 
 
@@ -7942,7 +7939,7 @@ there are three forces on it."]
           st (fn [aa row]
                {:style (m7/css
                         [[row 1 (+ 3 (* aa 1)) 1  :center :center  2 :rem :column]
-                         [(* 3 .2) 70 (+ 50 (* 5 5))  .7] []
+                         [(* 3 0.2) 70 (+ 50 (* 5 5))  0.7] []
                          {:gap ".1rem"
                           :z-index 10}])})]
       [:div {:style (merge
@@ -7981,7 +7978,7 @@ there are three forces on it."]
        ;;  (fn [x v]
        ;;    [:div {:style (m7/css
        ;;                   [[3 1 (+ 3 (* x 1)) 1  :center :center  2 :rem :column]
-       ;;                    [(* 5 .2) 70 (+ 50 (* 5 5))  .4] [] {:gap ".1rem"
+       ;;                    [(* 5 0.2) 70 (+ 50 (* 5 5))  0.4] [] {:gap ".1rem"
        ;;                                                         :z-index 10}])}
 
 
@@ -8002,7 +7999,7 @@ there are three forces on it."]
           (fn [[x v] ]
             [:div {:style (m7/css
                            [[7 1 (+ 12 (* x 1)) 4  :center :center  2 :rem :column]
-                            [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                            [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                                  :z-index 10}])}
 
 
@@ -8022,7 +8019,7 @@ there are three forces on it."]
        ;;  (fn [[x row v] ]
        ;;    [:div {:style (m7/css
        ;;                   [[row 1 (+ 12 (* x 1)) 4  :center :center  2 :rem :column]
-       ;;                    [(* 6 .3) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+       ;;                    [(* 6 0.3) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
        ;;                                                         :z-index 10}])}
 
 
@@ -8042,7 +8039,7 @@ there are three forces on it."]
        ;;  (fn [[x row v] ]
        ;;    [:div {:style (m7/css
        ;;                   [[row 1 (+ 3 (* x 1)) 4  :center :center  2 :rem :column]
-       ;;                    [(* 6 .3) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+       ;;                    [(* 6 0.3) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
        ;;                                                         :z-index 10}])}
 
 
@@ -8063,7 +8060,7 @@ there are three forces on it."]
        ;;  (fn [[x row v] ]
        ;;    [:div {:style (m7/css
        ;;                   [[row 1 (+ 12 (* x 1)) 4  :center :center  2 :rem :column]
-       ;;                    [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+       ;;                    [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
        ;;                                                         :z-index 10}])}
 
 
@@ -8084,7 +8081,7 @@ there are three forces on it."]
        ;;  (fn [[x row v] ]
        ;;    [:div {:style (m7/css
        ;;                   [[row 1 (+ 3 (* x 1)) 4  :center :center  2 :rem :column]
-       ;;                    [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+       ;;                    [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
        ;;                                                         :z-index 10}])}
 
 
@@ -8111,7 +8108,7 @@ there are three forces on it."]
        ;;  (fn [x v]
        ;;    [:div {:style (m7/css
        ;;                   [[4 1 (+ 12 (* x 1)) 1  :center :center  2 :rem :column]
-       ;;                    [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+       ;;                    [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
        ;;                                                         :z-index 10}])}
 
 
@@ -8135,7 +8132,7 @@ there are three forces on it."]
        ;;  (fn [x v]
        ;;    [:div {:style (m7/css
        ;;                   [[5 1 (+ 12 (* x 1)) 1  :center :center  2 :rem :column]
-       ;;                    [(* 5 .2) 70 (+ 50 (* 5 5))  .4] [] {:gap ".1rem"
+       ;;                    [(* 5 0.2) 70 (+ 50 (* 5 5))  0.4] [] {:gap ".1rem"
        ;;                                                         :z-index 10}])}
 
 
@@ -8193,8 +8190,8 @@ there are three forces on it."]
              (fn [i]
                [:path {:d (path [-400 (ve (+ ax-dx (* i 2))) :l 1200 0])
 
-                       :stroke (hsl [4 70 70 .5])
-                       :stroke-width .5
+                       :stroke (hsl [4 70 70 0.5])
+                       :stroke-width 0.5
                        :fill :none}
                 ] )
              (range 0 11))
@@ -8204,8 +8201,8 @@ there are three forces on it."]
              (fn [i]
                [:path {:d (path [(+ ax-dy (* i 2)) -400 :l 0 1200 ])
 
-                       :stroke (hsl [4 70 70 .5])
-                       :stroke-width .5
+                       :stroke (hsl [4 70 70 0.5])
+                       :stroke-width 0.5
                        :fill :none}
                 ] )
              (range 0 11))
@@ -8220,7 +8217,7 @@ there are three forces on it."]
                 [:path {:d (path [ (* 20 x)  0 :l 0 -400])
 
                         :stroke (hsl [(if (= x -2)  5 0) 70 70 1])
-                        :stroke-width .5
+                        :stroke-width 0.5
                         :fill :none}
                  ]
 
@@ -8228,7 +8225,7 @@ there are three forces on it."]
                 [:path {:d (path [ (* 20 x)  0 :l 0 400])
 
                         :stroke (hsl [0 70 70 1])
-                        :stroke-width .5
+                        :stroke-width 0.5
                         :fill :none}
                  ]
 
@@ -8560,7 +8557,7 @@ there are three forces on it."]
 
      [:div {:style (m7/css
                     [[2 1 (+ 1 (* 2 1)) 3  :center :center  3 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] []
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] []
                      {:gap ".1rem"
                       :z-index 7}])}
 
@@ -8572,7 +8569,7 @@ there are three forces on it."]
 
      [:div {:style (m7/css
                     [[3 1  (+ 1 (* 2 1)) 3  :center :center  3 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 7}])}
 
 
@@ -8583,7 +8580,7 @@ there are three forces on it."]
 
      [:div {:style (m7/css
                     [[4 1  (+ 1 (* 2 1)) 4  :center :center  3 :rem :column]
-                     [(* 7 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 7 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 7}])}
 
 
@@ -8594,7 +8591,7 @@ there are three forces on it."]
 
      [:div {:style (m7/css
                     [[5 1  (+ 1 (* 2 1)) 4  :center :center  3 :rem :column]
-                     [(* 7 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 7 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 7}])}
 
 
@@ -8613,7 +8610,7 @@ there are three forces on it."]
 
      #_[:div {:style (m7/css
                       [[2 8 (+ 2 (* 2 3)) 7  :center :center  2 :rem :column]
-                       [(* 10 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                       [(* 10 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                              :z-index 7}])}
 
 
@@ -8637,7 +8634,7 @@ there are three forces on it."]
 
      [:div {:style (m7/css
                     [[1 12 (+ 2 (* 2 3)) 7  :center :center  2 :rem :column]
-                     [(* 10 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 10 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                            :z-index 7}])}
 
 
@@ -8683,7 +8680,7 @@ there are three forces on it."]
 
      #_[:div {:style (m7/css
                     [[6 8 15 6  :center :center  2 :rem :column]
-                     [(* 10 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 10 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                            :z-index 7}])}
 
       [:div "A ball is thrown vertically upwards at 20 m/s ignoring air resistance and taking g = 10 m/s2,"]
@@ -8710,7 +8707,7 @@ there are three forces on it."]
 
      #_[:div {:style (m7/css
                     [[2 5 (+ 4 (* 2 2)) 7 :center :center  2 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
       [m7/m '[= accelaration [change-in-velocity time-taken]]]
@@ -8723,7 +8720,7 @@ there are three forces on it."]
 
      [:div {:style (m7/css
                     [[2 5 (+ 12 (* 2 2)) 7 :center :center  3 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
       [file/file-input]]
 
@@ -8766,7 +8763,7 @@ there are three forces on it."]
           st (fn [aa row]
                {:style (m7/css
                         [[row 1 (+ 3 (* aa 1)) 1  :center :center  2 :rem :column]
-                         [(* 3 .2) 70 (+ 50 (* 5 5))  .7] []
+                         [(* 3 0.2) 70 (+ 50 (* 5 5))  0.7] []
                          {:gap ".1rem"
                           :z-index 10}])})]
       [:div {:style (merge
@@ -8814,9 +8811,9 @@ there are three forces on it."]
                      :markerHeight 5}
             [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5 ])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
 
            [:animate {:attributeName :viewBox
                       :to (m7/space viewbox2)
@@ -8850,8 +8847,8 @@ there are three forces on it."]
              (fn [i]
                [:path {:d (path [-400 (ve (+ ax-dx (* i 2))) :l 1200 0])
 
-                       :stroke (hsl [4 70 70 .5])
-                       :stroke-width .5
+                       :stroke (hsl [4 70 70 0.5])
+                       :stroke-width 0.5
                        :fill :none}
                 ] )
              (range 0 11))
@@ -8861,8 +8858,8 @@ there are three forces on it."]
              (fn [i]
                [:path {:d (path [(+ ax-dy (* i 2)) -400 :l 0 1200 ])
 
-                       :stroke (hsl [4 70 70 .5])
-                       :stroke-width .5
+                       :stroke (hsl [4 70 70 0.5])
+                       :stroke-width 0.5
                        :fill :none}
                 ] )
              (range 0 11))
@@ -8877,7 +8874,7 @@ there are three forces on it."]
                 [:path {:d (path [ (* 20 x)  0 :l 0 -400])
 
                         :stroke (hsl [(if (= x -2)  5 0) 70 70 1])
-                        :stroke-width .5
+                        :stroke-width 0.5
                         :fill :none}
                  ]
 
@@ -8885,7 +8882,7 @@ there are three forces on it."]
                 [:path {:d (path [ (* 20 x)  0 :l 0 400])
 
                         :stroke (hsl [0 70 70 1])
-                        :stroke-width .5
+                        :stroke-width 0.5
                         :fill :none}
                  ]
 
@@ -9124,7 +9121,7 @@ there are three forces on it."]
                    :marker-end (m7/url (name :dot))
                    :stroke (hsl [4 70 70 1])
                    :stroke-width 2
-                   :fill (hsl [5 70 70 .2])}]
+                   :fill (hsl [5 70 70 0.2])}]
 
 
            [:circle {:cx 0
@@ -9438,7 +9435,7 @@ there are three forces on it."]
            [:path {:d (path [160 0 :a 160 160 0 true false   -160 160])
                    :stroke (hsl [0 70 70 1])
                    :stroke-width 2
-                   :transfrom (m7/tranfrom [[:scale .3]])
+                   :transfrom (m7/tranfrom [[:scale 0.3]])
                    :marker-end (m7/url (name :dot))
                    :fill :none}]
 
@@ -9525,7 +9522,7 @@ there are three forces on it."]
         (map (fn [quadro]
                (let [[start-p [x1 y1 :as start] start-n _] quadro
                      [_ end-p [x2 y2 :as end] end-n] quadro
-                     start-len (* .25 (line-len start-p start-n))
+                     start-len (* 0.25 (line-len start-p start-n))
                      start-angle (angle start-p start-n)
                      end-len (* 0.25 (line-len end-p end-n))
                      end-angle (+ js/Math.PI (angle end-p end-n))
@@ -9628,7 +9625,7 @@ there are three forces on it."]
         curve-points (map (fn [quadro]
                             (let [[start-p [x1 y1 :as start] start-n _] quadro
                                   [_ end-p [x2 y2 :as end] end-n] quadro
-                                  start-len (* .25 (line-len start-p start-n))
+                                  start-len (* 0.25 (line-len start-p start-n))
                                   start-angle (angle start-p start-n)
                                   end-len (* 0.25 (line-len end-p end-n))
                                   end-angle (+ js/Math.PI (angle end-p end-n))
@@ -9660,14 +9657,14 @@ there are three forces on it."]
           #(+ js/Math.PI %)
           angle2)
          (comp
-          #(* .15 %)
+          #(* 0.15 %)
           line-len2)))
        (comp
         projection2
         (juxt last
               angle2
               (comp
-               #(* .15 %)
+               #(* 0.15 %)
                line-len2))))
       (partition 2 1 (into [[-10 50]] points))))))
 
@@ -9721,7 +9718,7 @@ there are three forces on it."]
      [:div {:style
             (m7/css
              [[2 10 2 15  :center :center  4 :rem :column]
-              [(* 10 .2) 70 (+ 50 (* 5 5))  .3] []
+              [(* 10 0.2) 70 (+ 50 (* 5 5))  0.3] []
               {:gap ".1rem"
                :z-index 7}])}
 
@@ -9743,7 +9740,7 @@ there are three forces on it."]
             curve-points (map (fn [quadro]
                                 (let [[start-p [x1 y1 :as start] start-n _] quadro
                                       [_ end-p [x2 y2 :as end] end-n] quadro
-                                      start-len (* .25 (line-len start-p start-n))
+                                      start-len (* 0.25 (line-len start-p start-n))
                                       start-angle (angle start-p start-n)
                                       end-len (* 0.25 (line-len end-p end-n))
                                       end-angle (+ js/Math.PI (angle end-p end-n))
@@ -9816,7 +9813,7 @@ there are three forces on it."]
                            #(+ js/Math.PI %)
                            angle2)
                           (comp
-                           #(* .25 %)
+                           #(* 0.25 %)
                            line-len2)))))
             (comp
              m7/path
@@ -9828,7 +9825,7 @@ there are three forces on it."]
                     (juxt last
                           angle2
                           (comp
-                           #(* .25 %)
+                           #(* 0.25 %)
                            line-len2)))))
             )
            (partition 2 1 (into [[-10 50]] points))))
@@ -9926,7 +9923,7 @@ on time?"]
 
      #_[:div {:style (m7/css
                     [[2 5 (+ 4 (* 2 2)) 7 :center :center  2 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
 
       [m7/m '[= accelaration [change-in-velocity time-taken]]]
@@ -9939,7 +9936,7 @@ on time?"]
 
      #_[:div {:style (m7/css
                     [[2 5 (+ 12 (* 2 2)) 7 :center :center  3 :rem :column]
-                     [(* 5 .2) 70 (+ 50 (* 5 5))  .7] [] {:gap ".1rem"
+                     [(* 5 0.2) 70 (+ 50 (* 5 5))  0.7] [] {:gap ".1rem"
                                                           :z-index 4}])}
       [file/file-input]]
 
@@ -10005,7 +10002,7 @@ on time?"]
           st (fn [aa row]
                {:style (m7/css
                         [[row 1 (+ 3 (* aa 1)) 1  :center :center  2 :rem :column]
-                         [(* 3 .2) 70 (+ 50 (* 5 5))  .7] []
+                         [(* 3 0.2) 70 (+ 50 (* 5 5))  0.7] []
                          {:gap ".1rem"
                           :z-index 10}])})]
       [:div {:style (merge
@@ -10040,7 +10037,7 @@ on time?"]
 
        [:div {:style (m7/css
                       [[3 10 1 15 :center :center 2 :rem]
-                       [1 70 90 .1] [] {:gap "1rem"
+                       [1 70 90 0.1] [] {:gap "1rem"
                                         :z-index 5}])}
         ""]
 
@@ -10063,9 +10060,9 @@ on time?"]
                      :markerHeight 5}
             [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5 ])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
 
            [:animate {:attributeName :viewBox
                       :to (m7/space viewbox2)
@@ -10078,7 +10075,7 @@ on time?"]
 
 
 
-           [:g {:transform (m7/tranfrom [[:scale [.7 .7]]
+           [:g {:transform (m7/tranfrom [[:scale [0.7 0.7]]
                                          [:rotate 10]])}
 
 
@@ -10120,18 +10117,18 @@ on time?"]
                                       [(-  (* i 75) 60 ) -10 :l  40 0])
                                   :stroke (hsl [4 70 70 1])
                                   :stroke-width 2
-                                  :fill (hsl [5 70 70 .2])}]
+                                  :fill (hsl [5 70 70 0.2])}]
 
                           (if (not poly)
                             [:path {:d (path [(-  (* i 75) 60 ) 0 :l  40 0])
                                       :stroke (hsl [4 70 70 1])
                                       :stroke-width 2
-                                      :fill (hsl [5 70 70 .2])}])
+                                      :fill (hsl [5 70 70 0.2])}])
 
                           #_[:path {:d (path [(-  (* i 75) 60 ) 10 :l  40 0])
                                     :stroke (hsl [4 70 70 1])
                                     :stroke-width 2
-                                    :fill (hsl [5 70 70 .2])}]]
+                                    :fill (hsl [5 70 70 0.2])}]]
                          [:g ])
 
 
@@ -10139,14 +10136,14 @@ on time?"]
                                          0 :l 0 40  ])
                                :stroke (hsl [4 70 70 1])
                                :stroke-width 2
-                               :fill (hsl [5 70 70 .2])}]
+                               :fill (hsl [5 70 70 0.2])}]
 
 
                        [:path {:d (path [(* i 75)
                                          0 :l 0 -40  ])
                                :stroke (hsl [4 70 70 1])
                                :stroke-width 2
-                               :fill (hsl [5 70 70 .2])}]
+                               :fill (hsl [5 70 70 0.2])}]
 
 
                        [:circle {:cx (* i 75)
@@ -10575,7 +10572,7 @@ on time?"]
           st (fn [aa row]
                {:style (m7/css
                         [[row 1 (+ 3 (* aa 1)) 1  :center :center  1.5 :rem :column]
-                         [(* 3 .2) 70 (+ 50 (* 5 5))  .7] []
+                         [(* 3 0.2) 70 (+ 50 (* 5 5))  0.7] []
                          {:gap ".1rem"
                           :z-index 10}])})]
       [:div {:style (merge
@@ -10590,7 +10587,7 @@ on time?"]
               (m7/css
                [[12 20 2 18
                  :center :center  1.5 :rem :column]
-                [(* 3 .2) 70 (+ 50 (* 5 5))  .7] []
+                [(* 3 0.2) 70 (+ 50 (* 5 5))  0.7] []
                        {:gap ".1rem"
                         :z-index 10}])}
 
@@ -10638,9 +10635,9 @@ on time?"]
                      :markerHeight 5}
             [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
 
            [:animate {:attributeName :viewBox
                       :to (m7/space viewbox2)
@@ -10660,7 +10657,7 @@ on time?"]
                      :cy (ve (* 100 2))
                      :r 60
                      :fill :none
-                     :stroke (hsl [.5 70 70 1])
+                     :stroke (hsl [0.5 70 70 1])
                      :stroke-width 3
 
                      }]
@@ -10699,7 +10696,7 @@ on time?"]
   ([aa row s1 s2 fnt]
    {:style (m7/css
             [[row s1 (+ 3 (* aa 1)) s2  :center :center  fnt :rem :column]
-             [(* 3 .2) 70 (+ 50 (* 5 5))  .7] []
+             [(* 3 0.2) 70 (+ 50 (* 5 5))  0.7] []
              {:gap ".1rem"
               :z-index 10}])}))
 
@@ -10777,7 +10774,7 @@ on time?"]
                 (m7/css
                  [[2 3 3 15
                    :center :center  5 :rem :column]
-                  [5 70 (+ 50 (* 5 5))  .7] []
+                  [5 70 (+ 50 (* 5 5))  0.7] []
                   {:gap ".1rem"
                    :z-index 10}])}
 
@@ -10791,7 +10788,7 @@ on time?"]
               (m7/css
                [[2 3 3 15
                  :center :center  3 :rem :column]
-                [1.4 70 (+ 50 (* 5 5))  .7] []
+                [1.4 70 (+ 50 (* 5 5))  0.7] []
                 {:gap ".1rem"
                  :z-index 10}])}
 
@@ -10812,7 +10809,7 @@ on time?"]
               (m7/css
                [[7 5 3 15
                  :center :center  3 :rem :column]
-                [0 70 (+ 50 (* 5 5))  .7] []
+                [0 70 (+ 50 (* 5 5))  0.7] []
                 {:gap ".1rem"
                  :z-index 10}])}
 
@@ -10847,9 +10844,9 @@ on time?"]
                      :markerHeight 5}
             [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
 
            [:animate {:attributeName :viewBox
                       :to (m7/space viewbox2)
@@ -10919,7 +10916,7 @@ on time?"]
    [:path {:d (path [-1200 0
                      :l 2400 0])
            :id :pp2
-           :stroke (hsl [0 70 70 .5])
+           :stroke (hsl [0 70 70 0.5])
            :stroke-width 2
            :fill :none}
     ]
@@ -10972,19 +10969,19 @@ on time?"]
                    (.animate
                     (clj->js
                      [{
-                       :background (hsl [.5 70 70 .1])
+                       :background (hsl [0.5 70 70 0.1])
                        :transform (m7/tranfrom [[:rotate "10deg"]])
                        }
-                      {:background (hsl [.9 70 70 .7])
+                      {:background (hsl [0.9 70 70 0.7])
                        :transform (m7/tranfrom [[:rotate "-10deg"]])
 
                        }
 
-                      {:background (hsl [2 70 70 .9])
-                       :transform (m7/tranfrom [[:scale .9]])
+                      {:background (hsl [2 70 70 0.9])
+                       :transform (m7/tranfrom [[:scale 0.9]])
                        :offset (/ 9 14)}
 
-                      {:background (hsl [3.5 70 70 .7])
+                      {:background (hsl [3.5 70 70 0.7])
                        :transform (m7/tranfrom [[:scale 1]])
                        }])
                     (clj->js
@@ -11001,19 +10998,19 @@ on time?"]
                    (.animate
                     (clj->js
                      [{
-                       :background (hsl [.5 70 70 .1])
+                       :background (hsl [0.5 70 70 0.1])
                        :transform (m7/tranfrom [[:rotate "10deg"]])
                        }
-                      {:background (hsl [.9 70 70 .7])
+                      {:background (hsl [0.9 70 70 0.7])
                        :transform (m7/tranfrom [[:rotate "-10deg"]])
 
                        }
 
-                      {:background (hsl [2 70 70 .9])
-                       :transform (m7/tranfrom [[:scale .9]])
+                      {:background (hsl [2 70 70 0.9])
+                       :transform (m7/tranfrom [[:scale 0.9]])
                        :offset (/ 9 14)}
 
-                      {:background (hsl [3.5 70 70 .7])
+                      {:background (hsl [3.5 70 70 0.7])
                        :transform (m7/tranfrom [[:scale 1]])
                        }])
                     (clj->js
@@ -11032,18 +11029,18 @@ on time?"]
                    (.animate
                     (clj->js
                      [{
-                       :background (hsl [.5 70 70 .1])
+                       :background (hsl [0.5 70 70 0.1])
                        :transform (m7/tranfrom [[:rotate "10deg"]])
                        }
-                      {:background (hsl [.9 70 70 .7])
+                      {:background (hsl [0.9 70 70 0.7])
                        :transform (m7/tranfrom [[:rotate "-10deg"]])}
 
-                      {:background (hsl [2 70 70 .9])
-                       :transform (m7/tranfrom [[:scale .1]])
+                      {:background (hsl [2 70 70 0.9])
+                       :transform (m7/tranfrom [[:scale 0.1]])
                        :offset (/ 9 14)}
 
                       {
-                       :background (hsl [3.5 70 70 .7])
+                       :background (hsl [3.5 70 70 0.7])
                        :transform (m7/tranfrom [[:scale 1]])
                        }])
                     (clj->js
@@ -11110,7 +11107,7 @@ on time?"]
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
                             (take 24 (repeat [8 :vh]))])
-                     {:background (hsl [1.5 70 70 .9])
+                     {:background (hsl [1.5 70 70 0.9])
                       :gap              ".1rem"})}
 
 
@@ -11118,7 +11115,7 @@ on time?"]
         (fn [n d]
           [:div {:style (m7/css
                          [[2 1 (+ 2 (* n 1)) 1  :center :center  2 :rem :column]
-                          [(* n .2) 70 (+ 50 (* 1 n))  .4] [] {:gap ".1rem"
+                          [(* n 0.2) 70 (+ 50 (* 1 n))  0.4] [] {:gap ".1rem"
                                                                :z-index 4}])}
 
            d])
@@ -11129,7 +11126,7 @@ on time?"]
         (fn [n d]
           [:div {:style (m7/css
                          [[3 1 (+ 2 (* n 1)) 1  :center :center  2 :rem :column]
-                          [(* n .2) 70 (+ 50 (* 1 n))  .4] [] {:gap ".1rem"
+                          [(* n 0.2) 70 (+ 50 (* 1 n))  0.4] [] {:gap ".1rem"
                                                                :z-index 4}])}
 
            d])
@@ -11156,7 +11153,7 @@ on time?"]
                 (m7/css
                  [[4 6 3 7
                    :center :center  2 :rem :column]
-                  [3.5 70 (+ 50 (* 5 5))  .7]
+                  [3.5 70 (+ 50 (* 5 5))  0.7]
                   []
                   {:gap     ".1rem"
                    :z-index 10}])}
@@ -11177,7 +11174,7 @@ on time?"]
                        (m7/css
                           [[2 2 16 5
                             :center :center  3 :rem :column]
-                           [3.5 70 75 .5]
+                           [3.5 70 75 0.5]
                            []
                            {:gap     ".1rem"
                             :z-index 10}])}
@@ -11210,7 +11207,7 @@ on time?"]
                   (m7/css
                    [[4 7 14 12
                      :center :center  4 :rem :column]
-                    [1 70 (+ 50 (* 5 5))  .7]
+                    [1 70 (+ 50 (* 5 5))  0.7]
                     []
                     {:gap     ".1rem"
                      :z-index 10}])}
@@ -11280,9 +11277,9 @@ on time?"]
             [:path {:d
                     (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke       (hsl [5 70 70 1])
-                    :stroke-width .2
+                    :stroke-width 0.2
                     :transform    (m7/tranfrom [[:rotate 0]
-                                                [:scale [.8 .8]]])
+                                                [:scale [0.8 0.8]]])
                     :fill         (m7/hsl [-0.5 70 70 1])}]]
 
            [:animate {:attributeName :viewBox
@@ -11290,25 +11287,25 @@ on time?"]
                       :dur           "4s"
                       :fill          :freeze}]
 
-           [:linearGradient {:x1 .5
+           [:linearGradient {:x1 0.5
                              :y1 1
-                             :x2 .5
+                             :x2 0.5
                              :y2 0
                              :id (name :lgg1)
                              :gradientTransform (m7/tranfrom [[:rotate 10]])}
             [:stop  {:offset 0
-                     :stop-color (hsl [1 70 70 .1])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [.5 63 57 .3])}
+                     :stop-color (hsl [1 70 70 0.1])}]
+            [:stop  {:offset 0.33
+                     :stop-color (hsl [0.5 63 57 0.3])}
              [:animate {:attributeName :offset
-                        :from .2
-                        :to .5
+                        :from 0.2
+                        :to 0.5
                         :dur (m7/not-space [3 "s"])
                         :repeatCount :indefinite}]]
-            [:stop  {:offset .5
-                     :stop-color (hsl [1 70 70 .3])}
+            [:stop  {:offset 0.5
+                     :stop-color (hsl [1 70 70 0.3])}
              [:animate {:attributeName :offset
-                        :from .3
+                        :from 0.3
                         :to 1
                         :dur (m7/not-space [3 "s"])
                         :repeatCount :indefinite}]]
@@ -11326,16 +11323,16 @@ on time?"]
                                         (set-point (not point)))
                             :cx    x
                             :cy    y
-                            :r     (if point 1 .5)
+                            :r     (if point 1 0.5)
                             :fill (if point
-                                    (hsl [0 70 70 .8])
-                                    (hsl [2 70 70 .8]))
+                                    (hsl [0 70 70 0.8])
+                                    (hsl [2 70 70 0.8]))
                             :style {:font-size ".6rem"}}]
                   )
 
                 (map (fn [x]
-                       (* 20 x)) (range -10  20 .25))
-                (map eqs2 (range -10 20 .25)))
+                       (* 20 x)) (range -10  20 0.25))
+                (map eqs2 (range -10 20 0.25)))
 
 
 
@@ -11364,7 +11361,7 @@ on time?"]
                          [:scale [x 1]]
                          ])
                        :stroke (hsl [0 70 70 1])
-                       :stroke-width .1
+                       :stroke-width 0.1
                        :fill (m7/url (name :lgg1))
                        }
                 ]
@@ -11374,7 +11371,7 @@ on time?"]
                 [:path {:d (m7/path [0 0 :l
                                      0 (+ 0  (* 2 (* d d)))])
                         :fill :none
-                        :stroke-width .5
+                        :stroke-width 0.5
                         :transform
                         (m7/tranfrom
                          [
@@ -11406,8 +11403,8 @@ on time?"]
                                     [[:translate [(* 20 m) 0]]
                                      [:scale [x 1]]
                                      ])
-                        :stroke       (hsl [.5 90 70 1])
-                        :stroke-width .5
+                        :stroke       (hsl [0.5 90 70 1])
+                        :stroke-width 0.5
                         :id           (str "dd2" x)
                         :marker-end   (m7/url (name :dot))
                         :fill         :none}
@@ -11455,7 +11452,7 @@ on time?"]
 
             [:circle {:cx (* 8 20)
                            :cy 0
-                           :fill (hsl [.5 90 60 1] )
+                           :fill (hsl [0.5 90 60 1] )
                            :r 1}
                   [:animate {:attributeName :r
                              :from 1.7
@@ -11471,7 +11468,7 @@ on time?"]
                              (set-pos (not pos)))
                            :cx (* 0 20)
                            :cy (ve (+ (* 2 -6) (* 20 -1)))
-                           :fill (hsl [(if pos 0 .8) 90 60 .8] )
+                           :fill (hsl [(if pos 0 0.8) 90 60 0.8] )
                            :r 2}
                   [:animate {:attributeName :r
                              :from 1
@@ -11488,7 +11485,7 @@ on time?"]
 
             [:circle {:cx 0
                              :cy (* 2 d d)
-                             :fill (hsl [5 60 60 .5] )
+                             :fill (hsl [5 60 60 0.5] )
                              :r 2}
                     [:animate {:attributeName :r
                                :from 0
@@ -11575,19 +11572,19 @@ on time?"]
                    (.animate
                     (clj->js
                      [{
-                       :background (hsl [.5 70 70 .1])
+                       :background (hsl [0.5 70 70 0.1])
                        :transform (m7/tranfrom [[:rotate "10deg"]])
                        }
-                      {:background (hsl [.9 70 70 .7])
+                      {:background (hsl [0.9 70 70 0.7])
                        :transform (m7/tranfrom [[:rotate "-10deg"]])
 
                        }
 
-                      {:background (hsl [2 70 70 .9])
-                       :transform (m7/tranfrom [[:scale .9]])
+                      {:background (hsl [2 70 70 0.9])
+                       :transform (m7/tranfrom [[:scale 0.9]])
                        :offset (/ 9 14)}
 
-                      {:background (hsl [3.5 70 70 .7])
+                      {:background (hsl [3.5 70 70 0.7])
                        :transform (m7/tranfrom [[:scale 1]])
                        }])
                     (clj->js
@@ -11604,19 +11601,19 @@ on time?"]
                    (.animate
                     (clj->js
                      [{
-                       :background (hsl [.5 70 70 .1])
+                       :background (hsl [0.5 70 70 0.1])
                        :transform (m7/tranfrom [[:rotate "10deg"]])
                        }
-                      {:background (hsl [.9 70 70 .7])
+                      {:background (hsl [0.9 70 70 0.7])
                        :transform (m7/tranfrom [[:rotate "-10deg"]])
 
                        }
 
-                      {:background (hsl [2 70 70 .9])
-                       :transform (m7/tranfrom [[:scale .9]])
+                      {:background (hsl [2 70 70 0.9])
+                       :transform (m7/tranfrom [[:scale 0.9]])
                        :offset (/ 9 14)}
 
-                      {:background (hsl [3.5 70 70 .7])
+                      {:background (hsl [3.5 70 70 0.7])
                        :transform (m7/tranfrom [[:scale 1]])
                        }])
                     (clj->js
@@ -11635,18 +11632,18 @@ on time?"]
                    (.animate
                     (clj->js
                      [{
-                       :background (hsl [.5 70 70 .1])
+                       :background (hsl [0.5 70 70 0.1])
                        :transform (m7/tranfrom [[:rotate "10deg"]])
                        }
-                      {:background (hsl [.9 70 70 .7])
+                      {:background (hsl [0.9 70 70 0.7])
                        :transform (m7/tranfrom [[:rotate "-10deg"]])}
 
-                      {:background (hsl [2 70 70 .9])
-                       :transform (m7/tranfrom [[:scale .1]])
+                      {:background (hsl [2 70 70 0.9])
+                       :transform (m7/tranfrom [[:scale 0.1]])
                        :offset (/ 9 14)}
 
                       {
-                       :background (hsl [3.5 70 70 .7])
+                       :background (hsl [3.5 70 70 0.7])
                        :transform (m7/tranfrom [[:scale 1]])
                        }])
                     (clj->js
@@ -11689,9 +11686,9 @@ on time?"]
                      (m7/css
                       [[3 6 3 20
                         :center :center  3.5 :rem :column]
-                       [3.5 70 75 .5]
+                       [3.5 70 75 0.5]
                        []
-                       {:color (hsl [.5 80 45 1])
+                       {:color (hsl [0.5 80 45 1])
                         :gap (m7/np [1 :rem])
                         :z-index 10}])}
                [:div {:style {:font-size "1rem"
@@ -11728,9 +11725,9 @@ on time?"]
                      (m7/css
                       [[3 6 3 20
                         :center :center  3.5 :rem :column]
-                       [3.5 70 75 .5]
+                       [3.5 70 75 0.5]
                        []
-                       {:color (hsl [.5 80 45 1])
+                       {:color (hsl [0.5 80 45 1])
                         :gap (m7/np [1 :rem])
                         :z-index 10}])}
                [:div {:style {:font-size "1rem"
@@ -11775,14 +11772,14 @@ on time?"]
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
                             (take 24 (repeat [8 :vh]))])
-                     {:background (hsl [1.5 70 70 .9])
+                     {:background (hsl [1.5 70 70 0.9])
                       :gap              ".1rem"})}
 
 
        [:div (m7/css
               [[4 6 3 9
                 :center :center  2 :rem :column]
-               [3.5 70 (+ 50 (* 5 5))  .7]
+               [3.5 70 (+ 50 (* 5 5))  0.7]
                []
                {:gap     ".1rem"
                 :z-index 22}])
@@ -11798,7 +11795,7 @@ on time?"]
            {:style
             (m7/css
              [[2 1 (+ 2 (* n 1)) 1  :center :center  2 :rem :column]
-              [(* n .2) 70 (+ 50 (* 1 n))  .7] []
+              [(* n 0.2) 70 (+ 50 (* 1 n))  0.7] []
               {:gap ".1rem"
                :z-index 4}])}
 
@@ -11814,7 +11811,7 @@ on time?"]
            {:style
             (m7/css
              [[3 1 (+ 2 (* n 1)) 1  :center :center  2 :rem :column]
-              [(* n .2) 70 (+ 50 (* 1 n))  .7]
+              [(* n 0.2) 70 (+ 50 (* 1 n))  0.7]
               []
               {:gap ".1rem"
                :z-index 4}])}
@@ -11845,7 +11842,7 @@ on time?"]
                 (m7/css
                  [[4 6 3 7
                    :center :center  2 :rem :column]
-                  [3.5 70 (+ 50 (* 5 5))  .7]
+                  [3.5 70 (+ 50 (* 5 5))  0.7]
                   []
                   {:gap     ".1rem"
                    :z-index 10}])}
@@ -11862,7 +11859,7 @@ on time?"]
                   (m7/css
                    [[4 7 14 12
                      :center :center  4 :rem :column]
-                    [1 70 (+ 50 (* 5 5))  .7]
+                    [1 70 (+ 50 (* 5 5))  0.7]
                     []
                     {:gap     ".1rem"
                      :z-index 10}])}
@@ -11989,7 +11986,7 @@ on time?"]
             [:circle {:cx 5
                       :cy 5
                       :r 2
-                      :stroke (hsl [0 20 90 .7])
+                      :stroke (hsl [0 20 90 0.7])
                       :stroke-width 1
                       :fill :none}
              [:animate {
@@ -12009,7 +12006,7 @@ on time?"]
             [:g
              [:path#bikker {:d (m7/path [0 0 :l
                                          80 0 0 -20  -80 0 0 20 ])
-                            :fill (hsl [3 70 70 .51])
+                            :fill (hsl [3 70 70 0.51])
                             :transform (m7/tranfrom [[:translate [50 -20]]])
                             :stroke-dasharray (m7/space [100 80])
 
@@ -12034,20 +12031,20 @@ on time?"]
                :stroke-dasharray (m7/space [100 80])
 
                :stroke (hsl [0 70 70 1])
-               :stroke-width .5}]
+               :stroke-width 0.5}]
 
 
              [:path
               {:d (m7/path [-5 -5 :l
                             0 -40  10 0 0 40 ])
-               :fill (hsl [3 70 70 .51])
+               :fill (hsl [3 70 70 0.51])
                :transform (m7/tranfrom
                            [[:translate [105 -30]]
-                            [:scale [1 .1]]])
+                            [:scale [1 0.1]]])
                :stroke-dasharray (m7/space [100 80])
 
                :stroke (hsl [0 70 70 1])
-               :stroke-width .001}]]
+               :stroke-width 0.001}]]
 
 
 
@@ -12075,7 +12072,7 @@ on time?"]
                                   0 (ve 40)
                                   -20 0
                                   ])
-                     :transform (m7/tranfrom [[:scale [.5 .5]]])
+                     :transform (m7/tranfrom [[:scale [0.5 0.5]]])
                      :fill (m7/url (name :starc2))
                      :stroke (hsl [4 70 70 1])
                      :stroke-width 1}]
@@ -12089,7 +12086,7 @@ on time?"]
                                   0 (ve 40)
                                   -20 0
                                   ])
-                     :transform (m7/tranfrom [[:scale [-0.5 .5]]])
+                     :transform (m7/tranfrom [[:scale [-0.5 0.5]]])
                      :fill (m7/url (name :starc2))
                      :stroke (hsl [4 70 70 1])
                      :stroke-width 1}]]
@@ -12101,7 +12098,7 @@ on time?"]
                                   0 (ve 40)
                                   -20 0
                                   ])
-                     :transform (m7/tranfrom [[:scale [.5 .5]]])
+                     :transform (m7/tranfrom [[:scale [0.5 0.5]]])
                      :fill :none
                      :stroke (hsl [4 70 70 1])
                      :stroke-width 1}]
@@ -12113,7 +12110,7 @@ on time?"]
                                   0 (ve 40)
                                   -20 0
                                   ])
-                     :transform (m7/tranfrom [[:scale [-0.5 .5]]])
+                     :transform (m7/tranfrom [[:scale [-0.5 0.5]]])
                      :fill :none
                      :stroke (hsl [4 70 70 1])
                      :stroke-width 1}]]
@@ -12147,9 +12144,9 @@ on time?"]
                                  -20 0
                                  ])
                     :clip-path (m7/url (name :ca2))
-                    :transform (m7/tranfrom [[:scale [.5 .5]]])
+                    :transform (m7/tranfrom [[:scale [0.5 0.5]]])
                     :fill (hsl [2.5 70 70 1])
-                    :stroke (hsl [3 70 70 .1])
+                    :stroke (hsl [3 70 70 0.1])
                     :stroke-width 1}]
 
 
@@ -12160,9 +12157,9 @@ on time?"]
                                  -20 0
                                  ])
                     :clip-path (m7/url (name :ca2))
-                    :transform (m7/tranfrom [[:scale [-0.5 .5]]])
+                    :transform (m7/tranfrom [[:scale [-0.5 0.5]]])
                     :fill (hsl [2.5 70 70 1])
-                    :stroke (hsl [3 70 70 .1])
+                    :stroke (hsl [3 70 70 0.1])
                     :stroke-width 1}]]
 
            #_[:path {:d (m7/path [0 0 :l 10 0 0 7 -7 0 0 -7])
@@ -12188,7 +12185,7 @@ on time?"]
                                  -20 0
                                  ])
                     :clip-path (m7/url (name :ca))
-                    :transform (m7/tranfrom [[:scale [.5 .5]]])
+                    :transform (m7/tranfrom [[:scale [0.5 0.5]]])
                     :fill (m7/url (name :starg))
                     :stroke (hsl [3 70 70 1])
                     :stroke-width 1}]
@@ -12201,7 +12198,7 @@ on time?"]
                                  -20 0
                                  ])
                     :clip-path (m7/url (name :ca))
-                    :transform (m7/tranfrom [[:scale [-0.5 .5]]])
+                    :transform (m7/tranfrom [[:scale [-0.5 0.5]]])
                     :fill (m7/url (name :starg))
                     :stroke (hsl [3 70 70 1])
                     :stroke-width 1}]]
@@ -12262,7 +12259,7 @@ on time?"]
           st (fn [aa row]
                {:style (m7/css
                         [[row 1 (+ 3 (* aa 1)) 1  :center :center  1.5 :rem :column]
-                         [(* 3 .2) 70 (+ 50 (* 5 5))  .7] []
+                         [(* 3 0.2) 70 (+ 50 (* 5 5))  0.7] []
                          {:gap ".1rem"
                           :z-index 10}])})]
       [:div {:style (merge
@@ -12281,7 +12278,7 @@ on time?"]
                 (m7/css
                  [[4 4 10 7
                    :center :center  2 :rem :column]
-                  [3.5 70 (+ 50 (* 5 5))  .7] []
+                  [3.5 70 (+ 50 (* 5 5))  0.7] []
                   {:gap ".1rem"
                    :z-index 10}])}
 
@@ -12388,18 +12385,18 @@ on time?"]
                       :fill (hsl [0 70 70 1])
                       }]]
 
-           [:linearGradient {:x1 .5
+           [:linearGradient {:x1 0.5
                              :y1 1
-                             :x2 .5
+                             :x2 0.5
                              :y2 0
                              :id (name :llg1)
                              :gradientTransform (m7/tranfrom [[:rotate 4]])}
             [:stop  {:offset 0
                      :stop-color (hsl [2 70 70 1])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [2.3 70 70 .7])}]
-            [:stop  {:offset .77
-                     :stop-color (hsl [3 70 70 .4])}
+            [:stop  {:offset 0.33
+                     :stop-color (hsl [2.3 70 70 0.7])}]
+            [:stop  {:offset 0.77
+                     :stop-color (hsl [3 70 70 0.4])}
              [:animate {:attributeName :offset
                         :from 0
                         :to 1
@@ -12416,9 +12413,9 @@ on time?"]
                      :markerHeight 5}
             [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
 
            [:animate {:attributeName :viewBox
                       :to (m7/space viewbox2)
@@ -12524,7 +12521,7 @@ on time?"]
            (let [pth
                  (path [-10 0 :a 40 40 0 true false  20 0 :l 0 -60  10 0 0 -4 -20 0])]
              [:g {:transform (m7/tranfrom [[:translate [400 25]]
-                                           [:scale .7]])}
+                                           [:scale 0.7]])}
               [:path {:d pth
                       :stroke (hsl [4 70 70 1])
                       :stroke-width 2
@@ -12561,7 +12558,7 @@ on time?"]
 
               [:path {:d (path [0 d
                                 :l 0 (ve 120)  400 80 0 40 ])
-                      :stroke (hsl [0 70 70 .5])
+                      :stroke (hsl [0 70 70 0.5])
                       :stroke-width 5
                       :stroke-linejoin :round
                       :fill :none
@@ -12598,13 +12595,13 @@ on time?"]
            (let [y 0
                  d 3.5]
              [:g {:transform (m7/tranfrom [[:translate [405 0]]
-                                           [:scale .7]
+                                           [:scale 0.7]
                                            [:rotate 0]])}
 
 
               [:path {:d (path [0 d
                                 :l 0 (ve 120)  400 80 0 40 ])
-                      :stroke (hsl [0 70 70 .5])
+                      :stroke (hsl [0 70 70 0.5])
                       :stroke-width 5
                       :stroke-linejoin :round
                       :fill :none
@@ -12677,7 +12674,7 @@ on time?"]
           st (fn [aa row]
                {:style (m7/css
                         [[row 1 (+ 3 (* aa 1)) 1  :center :center  1.5 :rem :column]
-                         [(* 3 .2) 70 (+ 50 (* 5 5))  .7] []
+                         [(* 3 0.2) 70 (+ 50 (* 5 5))  0.7] []
                          {:gap ".1rem"
                           :z-index 10}])})]
       [:div {:style (merge
@@ -12696,7 +12693,7 @@ on time?"]
                 (m7/css
                  [[2 3 6 10
                    :center :center  1 :rem :column]
-                  [3.5 70 (+ 50 (* 5 5))  .7] []
+                  [3.5 70 (+ 50 (* 5 5))  0.7] []
                   {:gap ".1rem"
                    :z-index 10}])}
 
@@ -12734,7 +12731,7 @@ on time?"]
               (m7/css
                [[4 4 10 7
                  :center :center  2 :rem :column]
-                [3.5 70 (+ 50 (* 5 5))  .7] []
+                [3.5 70 (+ 50 (* 5 5))  0.7] []
                 {:gap ".1rem"
                  :z-index 10}])}
 
@@ -12777,18 +12774,18 @@ on time?"]
                       :fill (hsl [0 70 70 1])
                       }]]
 
-           [:linearGradient {:x1 .5
+           [:linearGradient {:x1 0.5
                              :y1 1
-                             :x2 .5
+                             :x2 0.5
                              :y2 0
                              :id (name :lg-chem1)
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
                      :stop-color (hsl [2 70 70 1])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [2.3 70 70 .7])}]
-            [:stop  {:offset .77
-                     :stop-color (hsl [3 70 70 .4])}
+            [:stop  {:offset 0.33
+                     :stop-color (hsl [2.3 70 70 0.7])}]
+            [:stop  {:offset 0.77
+                     :stop-color (hsl [3 70 70 0.4])}
              [:animate {:attributeName :offset
                         :from 0
                         :to 1
@@ -12805,9 +12802,9 @@ on time?"]
                      :markerHeight 5}
             [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
 
            [:animate {:attributeName :viewBox
                       :to (m7/space viewbox2)
@@ -12817,7 +12814,7 @@ on time?"]
            (grid-on 1 1)
 
            #_[:g
-            {:transform (m7/tranfrom [[:scale [.2 .2]]
+            {:transform (m7/tranfrom [[:scale [0.2 0.2]]
                                       [:translate [150 -50]]])}
             (alkine 3)]
            #_[:g
@@ -12929,7 +12926,7 @@ on time?"]
           (let [pth
                  (path [-10 0 :a 40 40 0 true false  20 0 :l 0 -60  10 0 0 -4 -20 0])]
              [:g#little-flask {:transform (m7/tranfrom [[:translate [400 25]]
-                                           [:scale .7]])}
+                                           [:scale 0.7]])}
               [:path {:d pth
                       :stroke (hsl [4 70 70 1])
                       :stroke-width 2
@@ -12966,7 +12963,7 @@ on time?"]
 
               [:path {:d (path [0 0
                                 :l 0 (ve 120)  400 80 0 40 ])
-                      :stroke (hsl [0 70 70 .5])
+                      :stroke (hsl [0 70 70 0.5])
                       :stroke-width 5
                       :stroke-linejoin :round
                       :fill :none
@@ -13003,13 +13000,13 @@ on time?"]
            (let [y 0
                  d 3.5]
              [:g {:transform (m7/tranfrom [[:translate [405 0]]
-                                           [:scale .7]
+                                           [:scale 0.7]
                                            [:rotate 0]])}
 
 
               [:path {:d (path [0 d
                                 :l 0 (ve 120)  400 80 0 40 ])
-                      :stroke (hsl [0 70 70 .5])
+                      :stroke (hsl [0 70 70 0.5])
                       :stroke-width 5
                       :stroke-linejoin :round
                       :fill :none
@@ -13081,7 +13078,7 @@ on time?"]
           st (fn [aa row]
                {:style (m7/css
                         [[row 1 (+ 3 (* aa 1)) 1  :center :center  1.5 :rem :column]
-                         [(* 3 .2) 70 (+ 50 (* 5 5))  .7] []
+                         [(* 3 0.2) 70 (+ 50 (* 5 5))  0.7] []
                          {:gap ".1rem"
                           :z-index 10}])})]
       [:div {:style (merge
@@ -13104,7 +13101,7 @@ on time?"]
 
            #_[:g
             {:transform (m7/tranfrom [[:translate [-50 -50]]
-                                      [:scale [.5 .5]]])}
+                                      [:scale [0.5 0.5]]])}
 
             #_[:text {:x -75
                     :y 150
@@ -13173,7 +13170,7 @@ on time?"]
           st (fn [aa row]
                {:style (m7/css
                         [[row 1 (+ 3 (* aa 1)) 1  :center :center  1.5 :rem :column]
-                         [(* 3 .2) 70 (+ 50 (* 5 5))  .7] []
+                         [(* 3 0.2) 70 (+ 50 (* 5 5))  0.7] []
                          {:gap ".1rem"
                           :z-index 10}])})]
       [:div {:style (merge
@@ -13188,7 +13185,7 @@ on time?"]
                  (m7/css
                   [[2 1 (* i 3) 3
                     :center :center  2 :rem :column]
-                   [5 70 (+ 50 (* 5 5))  .7] []
+                   [5 70 (+ 50 (* 5 5))  0.7] []
                    {:gap ".1rem"
                     :z-index 10}])}
            j])
@@ -13233,11 +13230,11 @@ on time?"]
                      :markerHeight 5}
             [:path {:d (m7/path [-5 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:scale [2 2]]
                                              [:rotate 0]
                                              ])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
 
            [:animate {:attributeName :viewBox
                       :to (m7/space viewbox2)
@@ -13477,7 +13474,7 @@ on time?"]
           st (fn [aa row]
                {:style (m7/css
                         [[row 1 (+ 3 (* aa 1)) 1  :center :center  1.5 :rem :column]
-                         [(* 3 .2) 70 (+ 50 (* 5 5))  .7] []
+                         [(* 3 0.2) 70 (+ 50 (* 5 5))  0.7] []
                          {:gap ".1rem"
                           :z-index 10}])})]
       [:div {:style (merge
@@ -13492,7 +13489,7 @@ on time?"]
                  (m7/css
                   [[2 1 (* i 3) 3
                     :center :center  2 :rem :column]
-                   [5 70 (+ 50 (* 5 5))  .7] []
+                   [5 70 (+ 50 (* 5 5))  0.7] []
                    {:gap ".1rem"
                     :z-index 10}])}
            j])
@@ -13506,7 +13503,7 @@ on time?"]
                  (m7/css
                   [[3 1 (* i 3) 3
                     :center :center  2 :rem :column]
-                   [5 70 (+ 50 (* 5 5))  .7] []
+                   [5 70 (+ 50 (* 5 5))  0.7] []
                    {:gap ".1rem"
                     :z-index 10}])}
            j])
@@ -13519,7 +13516,7 @@ on time?"]
                  (m7/css
                   [[4 1 (* i 3) 3
                     :center :center  2 :rem :column]
-                   [2 70 (+ 50 (* 5 5))  .7] []
+                   [2 70 (+ 50 (* 5 5))  0.7] []
                    {:gap ".1rem"
                     :z-index 10}])}
            j])
@@ -13532,7 +13529,7 @@ on time?"]
               (m7/css
                [[8 1 3 3
                  :center :center  1.5 :rem :column]
-                [3 70 (+ 50 (* 5 5))  .7] []
+                [3 70 (+ 50 (* 5 5))  0.7] []
                 {:gap ".1rem"
                  :z-index 10}])}
         (str "Dear "
@@ -13545,7 +13542,7 @@ on time?"]
               (m7/css
                [[8 1 9 3
                  :center :center  1.5 :rem :column]
-                [3 70 (+ 50 (* 5 5))  .7] []
+                [3 70 (+ 50 (* 5 5))  0.7] []
                 {:gap ".1rem"
                  :z-index 10}])}
         (nth tem 3)]
@@ -13555,7 +13552,7 @@ on time?"]
               (m7/css
                [[4 3 10 7
                  :center :center  4 :rem :column]
-                [3.5 70 (+ 50 (* 5 5))  .7] []
+                [3.5 70 (+ 50 (* 5 5))  0.7] []
                 {:gap ".1rem"
                  :z-index 10}])}
 
@@ -13603,7 +13600,7 @@ on time?"]
               (m7/css
                [[4 4 7 7
                  :center :center  5 :rem :column]
-                [3.5 70 (+ 50 (* 5 5))  .7] []
+                [3.5 70 (+ 50 (* 5 5))  0.7] []
                 {:gap ".1rem"
                  :z-index 10}])}
         [m7/m '[= P pgh]]
@@ -13615,7 +13612,7 @@ on time?"]
               (m7/css
                [[11 1 3 3
                  :center :center  1.5 :rem :column]
-                [3.5 70 (+ 50 (* 5 5))  .7] []
+                [3.5 70 (+ 50 (* 5 5))  0.7] []
                 {:gap ".1rem"
                  :z-index 10}])}
         (str "H# "  (nth tem 0))]
@@ -13624,7 +13621,7 @@ on time?"]
               (m7/css
                [[11 1 6 3
                  :center :center  1.5 :rem :column]
-                [3.5 70 (+ 50 (* 5 5))  .7] []
+                [3.5 70 (+ 50 (* 5 5))  0.7] []
                 {:gap ".1rem"
                  :z-index 10}])}
         (str "Road# "  (nth tem 1))]
@@ -13635,7 +13632,7 @@ on time?"]
               (m7/css
                [[9 3 3 7
                  :center :center  2 :rem :column]
-                [3.5 70 (+ 50 (* 5 5))  .7] []
+                [3.5 70 (+ 50 (* 5 5))  0.7] []
                 {:gap ".1rem"
                  :z-index 10}])}
         "Pressure of Liquid"
@@ -13758,18 +13755,18 @@ on time?"]
                       :fill (hsl [0 70 70 1])
                       }]]
 
-           [:linearGradient {:x1 .5
+           [:linearGradient {:x1 0.5
                              :y1 1
-                             :x2 .5
+                             :x2 0.5
                              :y2 0
                              :id (name :lg1)
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
                      :stop-color (hsl [2 70 70 1])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [2.3 70 70 .7])}]
-            [:stop  {:offset .77
-                     :stop-color (hsl [3 70 70 .4])}
+            [:stop  {:offset 0.33
+                     :stop-color (hsl [2.3 70 70 0.7])}]
+            [:stop  {:offset 0.77
+                     :stop-color (hsl [3 70 70 0.4])}
              [:animate {:attributeName :offset
                         :from 0
                         :to 1
@@ -13786,9 +13783,9 @@ on time?"]
                      :markerHeight 5}
             [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
  :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
 
            [:animate {:attributeName :viewBox
                       :to (m7/space viewbox2)
@@ -13890,7 +13887,7 @@ on time?"]
                              :l 20 0 0 (ve 120) -40 0 0 120 40 0])
                    :stroke (hsl [5 70 70 1])
                    :stroke-width 1
-                   :fill (hsl [2 70 70 .3])}
+                   :fill (hsl [2 70 70 0.3])}
             ]
 
            #_[:text {:x 0
@@ -13910,7 +13907,7 @@ on time?"]
                       :fill (m7/url (name :lg1))
                       }
                ]
-              ;; :fill (hsl [2 70 70 .3])
+              ;; :fill (hsl [2 70 70 0.3])
               #_[:path {:d (path [0 d
                                 :l 0 (ve 170)  8 0  0 120])
                       :stroke (hsl [0 70 70 1])
@@ -14064,7 +14061,7 @@ on time?"]
           st (fn [aa row]
                {:style (m7/css
                         [[row 1 (+ 3 (* aa 1)) 1  :center :center  1.5 :rem :column]
-                         [(* 3 .2) 70 (+ 50 (* 5 5))  .7] []
+                         [(* 3 0.2) 70 (+ 50 (* 5 5))  0.7] []
                          {:gap ".1rem"
                           :z-index 10}])})]
       [:div {:style (merge
@@ -14079,7 +14076,7 @@ on time?"]
               (m7/css
                [[4 3 10 7
                  :center :center  4 :rem :column]
-                [3.5 70 (+ 50 (* 5 5))  .7] []
+                [3.5 70 (+ 50 (* 5 5))  0.7] []
                 {:gap ".1rem"
                  :z-index 10}])}
 
@@ -14110,19 +14107,19 @@ on time?"]
                       :fill (hsl [0 70 70 1])
                       }]]
 
-           [:linearGradient {:x1 .5
+           [:linearGradient {:x1 0.5
                              :y1 1
-                             :x2 .5
+                             :x2 0.5
                              :y2 0
                              :id (name :lg1)
                              :gradientTransform
                              (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
                      :stop-color (hsl [2 70 70 1])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [2.3 70 70 .7])}]
-            [:stop  {:offset .77
-                     :stop-color (hsl [3 70 70 .4])}
+            [:stop  {:offset 0.33
+                     :stop-color (hsl [2.3 70 70 0.7])}]
+            [:stop  {:offset 0.77
+                     :stop-color (hsl [3 70 70 0.4])}
              [:animate {:attributeName :offset
                         :from 0
                         :to 1
@@ -14139,9 +14136,9 @@ on time?"]
                      :markerHeight 5}
             [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
 
            [:animate {:attributeName :viewBox
                       :to (m7/space viewbox2)
@@ -14177,7 +14174,7 @@ on time?"]
 
               {:d (m7/path [0 0 :a 110 80 0 false true 240 0])
                :mask (m7/url (name :msk))
-               :stroke-width .1
+               :stroke-width 0.1
                :stroke "pink"
                :id :kbrad
                :fill :none
@@ -14207,8 +14204,8 @@ on time?"]
 
 
 
-            [:text {:fill (hsl [.5 65 65 1])
-                    :stroke (hsl [.1 70 60 1])
+            [:text {:fill (hsl [0.5 65 65 1])
+                    :stroke (hsl [0.1 70 60 1])
                     :style (fv [[2 3] [4 3] [0 9] [5 5]])
                     :stroke-width 2.5
                     :font-size 50}
@@ -14221,15 +14218,15 @@ on time?"]
 
             [:text {:x 20
                     :y -20
-                    :stroke (hsl [.1 70 60 1])
-                    :fill (hsl [.5 65 65 1])
+                    :stroke (hsl [0.1 70 60 1])
+                    :fill (hsl [0.5 65 65 1])
                     :font-size 30}
              "ICECREAM"
              ]
 
 
             [:text {:x (+ 20 50)
-                    :fill (hsl [.5 60 60 1])
+                    :fill (hsl [0.5 60 60 1])
 
                     :y -0
                     :font-size 13}
@@ -14284,11 +14281,11 @@ on time?"]
               [:path {:d (m7/path [0 0 :l
                                    (* 150 (js/Math.sin (+ a (* 3 (/  js/Math.PI 2)) )))
                                    (ve (* 150 (js/Math.cos (+ a  (* 3 (/  js/Math.PI 2)) ))))])
-                      :stroke (hsl [.5 70 70 1])
-                      :stroke-width .5
+                      :stroke (hsl [0.5 70 70 1])
+                      :stroke-width 0.5
 
                       } ])
-            (range 0 js/Math.PI  .125))
+            (range 0 js/Math.PI  0.125))
 
 
 
@@ -14322,8 +14319,8 @@ on time?"]
                      :r 150
                      :stroke-dasharray 0
                      :stroke-width 10
-                     :fill (hsl [0 70 70 .75])
-                     :stroke (hsl [3 70 70 .75])}
+                     :fill (hsl [0 70 70 0.75])
+                     :stroke (hsl [3 70 70 0.75])}
 
             [:animate {:attributeName :r
                        :from 150
@@ -14358,7 +14355,7 @@ on time?"]
                        :repeatCount :indefinite}]
 
             [:animate {:attributeName :fill
-                       :from (hsl [0 70 70 .75])
+                       :from (hsl [0 70 70 0.75])
                        :to (hsl [4 70 70 1])
                        :dur (sec 5)
                        :repeatCount :indefinite}]
@@ -14478,14 +14475,14 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [0 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}]
 
             [:circle {:r 59
                       :cx 0
                       :cy 0
                       :stroke  (hsl [1 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}]
 
 
@@ -14493,7 +14490,7 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [2 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill :none}]
 
 
@@ -14501,7 +14498,7 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [2.7 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill :none}]
 
             [:path {:d (path [50 0
@@ -14519,7 +14516,7 @@ on time?"]
                               ])
 
                     :stroke (hsl [3 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :fill :none
                     :transform (m7/tranfrom [[:rotate -100]])
                     }
@@ -14580,7 +14577,7 @@ on time?"]
                 (m7/css
                  [[4 8 14 6
                    :center :center  3 :rem :column]
-                  [3.5 70 (+ 50 (* 5 5))  .3] []
+                  [3.5 70 (+ 50 (* 5 5))  0.3] []
                   {:gap ".1rem"
                    :z-index 10}])}
 
@@ -14686,12 +14683,12 @@ on time?"]
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
                      :stop-color (hsl [0 70 70 1])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [.2 70 70 .9])}]
-            [:stop  {:offset .77
-                     :stop-color (hsl [1 70 70 .8])}
+            [:stop  {:offset 0.33
+                     :stop-color (hsl [0.2 70 70 0.9])}]
+            [:stop  {:offset 0.77
+                     :stop-color (hsl [1 70 70 0.8])}
              [:animate {:attributeName :offset
-                        :from .88
+                        :from 0.88
                         :to 1
                         :dur (m7/not-space [3 "s"])
                         :repeatCount :indefinite}]]
@@ -14703,18 +14700,18 @@ on time?"]
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
                      :stop-color (hsl [3 40 40 1])}]
-            [:stop  {:offset .55
+            [:stop  {:offset 0.55
                      :stop-color (hsl [3.3 60 60 1])}]
 
-            [:stop  {:offset .77
-                     :stop-color (hsl [4.3 70 70 .3])}
+            [:stop  {:offset 0.77
+                     :stop-color (hsl [4.3 70 70 0.3])}
              ]
 
-            [:stop  {:offset .97
-                     :stop-color (hsl [1 90 80 .2])}
+            [:stop  {:offset 0.97
+                     :stop-color (hsl [1 90 80 0.2])}
              ]
             [:animate {:attributeName :offset
-                       :from .33
+                       :from 0.33
                        :to 1
                        :dur (m7/not-space [3 "s"])
                        :repeatCount :indefinite}]
@@ -14729,9 +14726,9 @@ on time?"]
                      :markerHeight 5}
             [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
 
            [:animate {:attributeName :viewBox
                       :to (m7/space viewbox2)
@@ -14802,14 +14799,14 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [0 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}]
 
             [:circle {:r 59
                       :cx 0
                       :cy 0
                       :stroke  (hsl [1 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}]
 
 
@@ -14817,7 +14814,7 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [2 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill :none}]
 
 
@@ -14825,7 +14822,7 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [2.7 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill :none}]
 
             [:path {:d (path [50 0
@@ -14843,7 +14840,7 @@ on time?"]
                               ])
 
                     :stroke (hsl [3 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :fill :none
                     :transform (m7/tranfrom [[:rotate -100]])
                     }
@@ -14902,13 +14899,13 @@ on time?"]
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
                             (take 20 (repeat [8 :vh]))])
-                     {:background-color (hsl [1 70 70 .1])
+                     {:background-color (hsl [1 70 70 0.1])
                       :gap ".1rem"})}
 
        [:div {:style (m7/css
                       [[1 12 3 20 :center :center
                         1.8 :rem :column]
-                       [1 70 90 .1] []
+                       [1 70 90 0.1] []
                        {:gap "1rem"
                         :color (hsl [3 20 30 1])
                         :z-index 2}])}
@@ -14920,7 +14917,7 @@ on time?"]
        [:div {:style (m7/css
                         [[1 12 2 20 :center :center
                           1.2 :rem :column]
-                         [1 70 90 .1] []
+                         [1 70 90 0.1] []
                          {:gap "1rem"
                           :color (hsl [3 20 30 1])
                           :z-index 2}])}
@@ -14976,7 +14973,7 @@ on time?"]
             [:circle {:cx 5
                       :cy 5
                       :r 4
-                      :fill (hsl [3 70 70 .3])
+                      :fill (hsl [3 70 70 0.3])
                       }]]
 
            [:pattern {:id (name :un2)
@@ -14994,14 +14991,14 @@ on time?"]
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
                      :stop-color (hsl [0 70 70 1])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [.2 70 70 .9])}]
-            [:stop  {:offset .77
-                     :stop-color (hsl [1 70 70 .8])}
+            [:stop  {:offset 0.33
+                     :stop-color (hsl [0.2 70 70 0.9])}]
+            [:stop  {:offset 0.77
+                     :stop-color (hsl [1 70 70 0.8])}
              [:animate {:attributeName :offset
                         :id :f113
                         :begin 0
-                        :from .88
+                        :from 0.88
                         :to 1
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
@@ -15009,7 +15006,7 @@ on time?"]
              [:animate {:attributeName :offset
                         :begin :f123.end
                         :from 1
-                        :to .88
+                        :to 0.88
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]]]
            [:radialGradient {
@@ -15017,16 +15014,16 @@ on time?"]
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
                      :stop-color (hsl [3 40 40 1])}]
-            [:stop  {:offset .55
+            [:stop  {:offset 0.55
                      :stop-color (hsl [3.3 60 60 1])}]
 
 
-            [:stop  {:offset .97
-                     :stop-color (hsl [1 70 70 .2])}
+            [:stop  {:offset 0.97
+                     :stop-color (hsl [1 70 70 0.2])}
              [:animate {:attributeName :offset
                         :id :f114
                         :begin 0
-                        :from .55
+                        :from 0.55
                         :to 1
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
@@ -15034,20 +15031,20 @@ on time?"]
              [:animate {:attributeName :offset
                         :begin :f114.end
                         :from 1
-                        :to .55
+                        :to 0.55
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin 0
                         :id :f115
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin :f115.end
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [13 "s"])
                         :repeatCount :indefinite}]]
 
@@ -15062,9 +15059,9 @@ on time?"]
                      :markerHeight 5}
             [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
 
            [:animate {:attributeName :viewBox
                       :to (m7/space viewbox2)
@@ -15109,7 +15106,7 @@ on time?"]
                         :cx 0
                         :cy 0
                         :stroke  (hsl [0 70 70 1])
-                        :stroke-width .5
+                        :stroke-width 0.5
                         :fill :none}]
 
 
@@ -15119,7 +15116,7 @@ on time?"]
                         :cx 570
                         :cy 0
                         :stroke (hsl [3 70 70 1])
-                        :stroke-width .5
+                        :stroke-width 0.5
                         :fill (m7/url (name :star2))
 
                         }
@@ -15157,7 +15154,7 @@ on time?"]
                         :cx 570
                         :cy 0
                         :stroke (hsl [3 70 70 1])
-                        :stroke-width .5
+                        :stroke-width 0.5
                         :fill (m7/url (name :star))}
 
 
@@ -15182,7 +15179,7 @@ on time?"]
                         :cx 0
                         :cy 0
                         :stroke  (hsl [1 70 70 1])
-                        :stroke-width .5
+                        :stroke-width 0.5
                         :fill :none}]
 
 
@@ -15193,7 +15190,7 @@ on time?"]
                         :cx 0
                         :cy 0
                         :stroke  (hsl [2 70 70 1])
-                        :stroke-width .3
+                        :stroke-width 0.3
                         :fill :none}]
 
               #_[:text {:dx 0
@@ -15218,8 +15215,8 @@ on time?"]
                                     [[:rotate -15]])
                         :cx 570
                         :cy 0
-                        :stroke (hsl [3 70 70 .5])
-                        :stroke-width .5
+                        :stroke (hsl [3 70 70 0.5])
+                        :stroke-width 0.5
                         :fill (m7/url (name :water22))}
 
 
@@ -15232,7 +15229,7 @@ on time?"]
                         :cx 0
                         :cy 0
                         :stroke  (hsl [2.7 70 70 1])
-                        :stroke-width .3
+                        :stroke-width 0.3
                         :fill :none}]
 
 
@@ -15350,7 +15347,7 @@ on time?"]
                           :id (keyword (str "bondd" i))
                           :transform
                           (m7/tranfrom
-                           [[:translate [(* sp d) (ve (* .5 d))]]
+                           [[:translate [(* sp d) (ve (* 0.5 d))]]
                             [:rotate -90]])
                           :stroke (hsl [0 70 70 1])
                           :stroke-width 5}]
@@ -15438,19 +15435,19 @@ on time?"]
                    (.animate
                     (clj->js
                      [{
-                       :background (hsl [.5 70 70 .1])
+                       :background (hsl [0.5 70 70 0.1])
                        :transform (m7/tranfrom [[:rotate "10deg"]])
                        }
-                      {:background (hsl [.9 70 70 .7])
+                      {:background (hsl [0.9 70 70 0.7])
                        :transform (m7/tranfrom [[:rotate "-10deg"]])
 
                        }
 
-                      {:background (hsl [2 70 70 .9])
-                       :transform (m7/tranfrom [[:scale .9]])
+                      {:background (hsl [2 70 70 0.9])
+                       :transform (m7/tranfrom [[:scale 0.9]])
                        :offset (/ 9 14)}
 
-                      {:background (hsl [3.5 70 70 .7])
+                      {:background (hsl [3.5 70 70 0.7])
                        :transform (m7/tranfrom [[:scale 1]])
                        }])
                     (clj->js
@@ -15470,7 +15467,7 @@ on time?"]
           ax-dx 80
           ax-dy 40
           vb (fn [z]
-               (nth [(map #(* .25 %) [-10 -20  83 40])
+               (nth [(map #(* 0.25 %) [-10 -20  83 40])
                      [0 -180  200 200]
                      [0 -50  100 100]
                      [0 -25  50 50]
@@ -15484,7 +15481,7 @@ on time?"]
           viewbox2 (vb 0)
           m 30
           d 9.4
-          scale2 [[.5 .5] [-0.5 .5]]
+          scale2 [[0.5 0.5] [-0.5 0.5]]
           ]
 
 
@@ -15494,7 +15491,7 @@ on time?"]
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
                             (take 20 (repeat [8 :vh]))])
-                     {:background-color (hsl [1 70 70 .5])
+                     {:background-color (hsl [1 70 70 0.5])
                       :gap ".2rem"})}
 
 
@@ -15502,7 +15499,7 @@ on time?"]
                 (m7/css
                [[2 8  3 18
                  :center :flex-start  5.3 :rem :column]
-                [1.5 70 80  .3] []
+                [1.5 70 80  0.3] []
                 {:gap ".1rem"
                  :color (hsl [0 30 30 1])
                  :z-index 10}])}
@@ -15585,25 +15582,25 @@ on time?"]
            [flames]
 
 
-           [:linearGradient {:x1 .5
+           [:linearGradient {:x1 0.5
                              :y1 1
-                             :x2 .5
+                             :x2 0.5
                              :y2 0
                              :id (name :lgg1)
                              :gradientTransform (m7/tranfrom [[:rotate 10]])}
             [:stop  {:offset 0
-                     :stop-color (hsl [1 70 70 .1])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [.3 70 70 .7])}
+                     :stop-color (hsl [1 70 70 0.1])}]
+            [:stop  {:offset 0.33
+                     :stop-color (hsl [0.3 70 70 0.7])}
              [:animate {:attributeName :offset
-                        :from .2
-                        :to .5
+                        :from 0.2
+                        :to 0.5
                         :dur (m7/not-space [3 "s"])
                         :repeatCount :indefinite}]]
-            [:stop  {:offset .5
-                     :stop-color (hsl [.6 70 70 .4])}
+            [:stop  {:offset 0.5
+                     :stop-color (hsl [0.6 70 70 0.4])}
              [:animate {:attributeName :offset
-                        :from .3
+                        :from 0.3
                         :to 1
                         :dur (m7/not-space [3 "s"])
                         :repeatCount :indefinite}]]
@@ -15624,14 +15621,14 @@ on time?"]
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
                      :stop-color (hsl [0 70 70 1])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [.2 70 70 .9])}]
-            [:stop  {:offset .77
-                     :stop-color (hsl [1 70 70 .8])}
+            [:stop  {:offset 0.33
+                     :stop-color (hsl [0.2 70 70 0.9])}]
+            [:stop  {:offset 0.77
+                     :stop-color (hsl [1 70 70 0.8])}
              [:animate {:attributeName :offset
                         :id :f113
                         :begin 0
-                        :from .88
+                        :from 0.88
                         :to 1
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
@@ -15639,7 +15636,7 @@ on time?"]
              [:animate {:attributeName :offset
                         :begin :f123.end
                         :from 1
-                        :to .88
+                        :to 0.88
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]]
             ]
@@ -15649,17 +15646,17 @@ on time?"]
                              :id (name :lg2)
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
-                     :stop-color (hsl [3 40 40 .7])}]
-            [:stop  {:offset .55
-                     :stop-color (hsl [3.3 60 60 .8])}]
+                     :stop-color (hsl [3 40 40 0.7])}]
+            [:stop  {:offset 0.55
+                     :stop-color (hsl [3.3 60 60 0.8])}]
 
 
-            [:stop  {:offset .97
-                     :stop-color (hsl [1 70 70 .2])}
+            [:stop  {:offset 0.97
+                     :stop-color (hsl [1 70 70 0.2])}
              [:animate {:attributeName :offset
                         :id :f114
                         :begin 0
-                        :from .55
+                        :from 0.55
                         :to 1
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
@@ -15667,20 +15664,20 @@ on time?"]
              [:animate {:attributeName :offset
                         :begin :f114.end
                         :from 1
-                        :to .55
+                        :to 0.55
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin 0
                         :id :f115
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin :f115.end
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [13 "s"])
                         :repeatCount :indefinite}]]
 
@@ -15695,9 +15692,9 @@ on time?"]
                      :markerHeight 5}
             [:path {:d (m7/path [-3 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
 
            [:animate {:attributeName :viewBox
                       :to (m7/space viewbox2)
@@ -15761,7 +15758,7 @@ on time?"]
 
 
             [:path#b1 {:d (m7/path [-10 0 :l 0 (ve (* 2 30 ))])
-                       :stroke-width .5
+                       :stroke-width 0.5
                        :marker-end (m7/url (name :mb2))
                        :marker-start (m7/url (name :mb2))
                        :stroke (hsl [2 30 30 1])
@@ -15771,8 +15768,8 @@ on time?"]
 
             [:path#tri2 {:d (m7/path [20 (ve (* 2 30 )) :l (* 16 2) (ve (* 2 7 ))
                                       0 (ve (ve (* 2 7 ))) (ve (* 16 2)) 0])
-                    :stroke (hsl [.5 70 70 1])
-                    :stroke-width .5
+                    :stroke (hsl [0.5 70 70 1])
+                    :stroke-width 0.5
                     :fill (hsl [1 70 70 1])}]
 
 
@@ -15784,13 +15781,13 @@ on time?"]
             [:path {:d (m7/path [ (+ 20 32) 0 :l 0 (ve (* 2 37 ))
                                  20 0 0 (* 2 37 )
                                  -20 0])
-                    :stroke-width .5
+                    :stroke-width 0.5
                     :fill (hsl [2 70 70 1])}]
 
             [:path#b2 {:d (m7/path [ (+ 50 32) 0 :l
                                     0 (ve (* 2 37))])
                        :stroke (hsl [1 20 20 1])
-                       :stroke-width .5
+                       :stroke-width 0.5
 
                        :marker-end (m7/url (name :mb2))
                        :marker-start (m7/url (name :mb2))
@@ -15801,7 +15798,7 @@ on time?"]
 
             [:path#b3 {:d (m7/path [(* 1 20) 0 :l (* 16 2) 0])
                        :stroke (hsl [1 20 20 1])
-                       :stroke-width .5
+                       :stroke-width 0.5
 
                        :marker-end (m7/url (name :mb2))
                        :marker-start (m7/url (name :mb2))
@@ -15910,7 +15907,7 @@ on time?"]
 
              [airplane2 [
                            [:translate [600 120]]
-                        [:scale [.3 .3]]
+                        [:scale [0.3 0.3]]
                          [:rotate -90]]]
 
 
@@ -15936,8 +15933,8 @@ on time?"]
             #_[:circle {:r 90
                       :cx 0
                       :cy 0
-                      :stroke (hsl [3 70 70 .5])
-                      :stroke-width .5
+                      :stroke (hsl [3 70 70 0.5])
+                      :stroke-width 0.5
                       :fill (m7/url (name :star))}
 
              #_[:animateTransform {
@@ -15959,7 +15956,7 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [0 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}]
 
 
@@ -15969,7 +15966,7 @@ on time?"]
                       :cx 470
                       :cy 0
                       :stroke (hsl [3 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill (m7/url (name :lg2))
 
                       }
@@ -16011,7 +16008,7 @@ on time?"]
                                         (fn [d x]
                                           (* d x))
                                         dx (cycle [ 300 70]))])
-                    :fill (hsl [.2 60 55 .5])}]
+                    :fill (hsl [0.2 60 55 0.5])}]
 
             [:text {}
              [:textPath {:startOffset (m7/np [5 :%])
@@ -16056,7 +16053,7 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [1 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}]
 
 
@@ -16067,7 +16064,7 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [2 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill :none}]
 
 
@@ -16078,7 +16075,7 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [2.7 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill :none}]
 
 
@@ -16094,7 +16091,7 @@ on time?"]
 
               (map
                (fn [y]
-                 [p [-300 y  :l 1600 0] .02
+                 [p [-300 y  :l 1600 0] 0.02
                   [1.8 70 70 1]
                   [1.8 70 70 1]])
                (range -5 5))
@@ -16102,7 +16099,7 @@ on time?"]
 
               (map
                (fn [x]
-                 [p [x -800  :l 0 1600 ] .02
+                 [p [x -800  :l 0 1600 ] 0.02
                   [2.5 70 70 1]
                   [2.5 70 70 1]])
                (range -5 5))
@@ -16121,9 +16118,9 @@ on time?"]
               (fn [x]
                 [:circle {:cx x
                           :cy (ve (+ x 1))
-                          :r .05
+                          :r 0.05
                           :fill (hsl [5 70 70 1])}])
-              (range -200 200 .1))
+              (range -200 200 0.1))
 
 
 
@@ -16132,15 +16129,15 @@ on time?"]
             (fn [x]
               [:circle {:cx x
                         :cy (ve (+ (* 2 x) 1))
-                        :r .05
+                        :r 0.05
                         :fill (hsl [5 70 70 1])}])
-            (range -200 200 .5))
+            (range -200 200 0.5))
 
 
 
            [:circle {:cx 0
                      :cy 0
-                     :r .05
+                     :r 0.05
                      :fill (hsl [5 70 70 1])
                      }]
 
@@ -16148,7 +16145,7 @@ on time?"]
                      :cy 0
                      :r (js/Math.sqrt 5)
                      :fill :none
-                     :stroke-width .01
+                     :stroke-width 0.01
                      :stroke (hsl [5 70 70 1])}]
 
 
@@ -16156,18 +16153,18 @@ on time?"]
               (fn [x]
                 [:circle {:cx x
                           :cy (ve (- 3 (* x x)))
-                          :r .05
+                          :r 0.05
                           :fill (hsl [0 70 70 1])}])
-              (range -200 200 .1))
+              (range -200 200 0.1))
 
 
            (map
             (fn [x]
               [:circle {:cx x
                         :cy (ve (+ (* x x) (* 2 x ) -3 ))
-                        :r .05
+                        :r 0.05
                         :fill (hsl [0 70 70 1])}])
-            (range -200 200 .1))
+            (range -200 200 0.1))
 
 
            [:clipPath#anik
@@ -16198,19 +16195,19 @@ on time?"]
         animate-ref (react/useRef)
         anm-style (clj->js
                    [{
-                     :background (hsl [.5 70 70 .1])
+                     :background (hsl [0.5 70 70 0.1])
                      :transform (m7/tranfrom [[:rotate "10deg"]])
                      }
-                    {:background (hsl [.9 70 70 .7])
+                    {:background (hsl [0.9 70 70 0.7])
                      :transform (m7/tranfrom [[:rotate "-10deg"]])
 
                      }
 
-                    {:background (hsl [2 70 70 .9])
-                     :transform (m7/tranfrom [[:scale .9]])
+                    {:background (hsl [2 70 70 0.9])
+                     :transform (m7/tranfrom [[:scale 0.9]])
                      :offset (/ 9 14)}
 
-                    {:background (hsl [3.5 70 70 .7])
+                    {:background (hsl [3.5 70 70 0.7])
                      :transform (m7/tranfrom [[:scale 1]])
                      }])
         anm-fn (fn []
@@ -16236,8 +16233,8 @@ on time?"]
         ax-dx 80
         ax-dy 40
         vb (fn [z]
-             (nth [(map #(* .25 %) [-10 -20  83 40])
-                   (map #(* .5 %) [-10 -20  83 40])
+             (nth [(map #(* 0.25 %) [-10 -20  83 40])
+                   (map #(* 0.5 %) [-10 -20  83 40])
                    [0 -180  200 200]
                    [0 -50  100 100]
                    [0 -25  50 50]
@@ -16252,12 +16249,12 @@ on time?"]
         [viewbox3 set-viewbox3] (react/useState (vb 0))
         m 30
         d 9.4
-        scale2 [[.5 .5] [-0.5 .5]]]
+        scale2 [[0.5 0.5] [-0.5 0.5]]]
     [:div {:style (merge
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
                             (take 20 (repeat [8 :vh]))])
-                     {:background-color (hsl [1 70 70 .5])
+                     {:background-color (hsl [1 70 70 0.5])
                       :gap ".2rem"})}
 
        (map-indexed
@@ -16268,7 +16265,7 @@ on time?"]
                                    (set-slider n))
                  :style (m7/css
                          [[(+ 0 (* 3 r)) 3 (+ 12 (* 3 c)) 3  f1 f2  1.5 :rem :column]
-                          [(if (= slider n) 3 1) 70 (+ 50 (* 2 n)) .1] []
+                          [(if (= slider n) 3 1) 70 (+ 50 (* 2 n)) 0.1] []
                           (into
                            {:font-size (m7/np [2.1 :rem])
                             :font-family "Roboto Flex"
@@ -16307,17 +16304,17 @@ on time?"]
                              :id (name :lg2)
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
-                     :stop-color (hsl [3 40 40 .7])}]
-            [:stop  {:offset .55
-                     :stop-color (hsl [3.3 60 60 .8])}]
+                     :stop-color (hsl [3 40 40 0.7])}]
+            [:stop  {:offset 0.55
+                     :stop-color (hsl [3.3 60 60 0.8])}]
 
 
-            [:stop  {:offset .97
-                     :stop-color (hsl [1 70 70 .2])}
+            [:stop  {:offset 0.97
+                     :stop-color (hsl [1 70 70 0.2])}
              [:animate {:attributeName :offset
                         :id :f114
                         :begin 0
-                        :from .55
+                        :from 0.55
                         :to 1
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
@@ -16325,20 +16322,20 @@ on time?"]
              [:animate {:attributeName :offset
                         :begin :f114.end
                         :from 1
-                        :to .55
+                        :to 0.55
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin 0
                         :id :f115
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin :f115.end
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [13 "s"])
                         :repeatCount :indefinite}]]
 
@@ -16395,7 +16392,7 @@ on time?"]
 
 
             [:path#b1 {:d (m7/path [-10 0 :l 0 (ve (* 2 30 ))])
-                       :stroke-width .5
+                       :stroke-width 0.5
                        :marker-end (m7/url (name :mb2))
                        :marker-start (m7/url (name :mb2))
                        :stroke (hsl [2 30 30 1])
@@ -16405,8 +16402,8 @@ on time?"]
 
             [:path#tri2 {:d (m7/path [20 (ve (* 2 30 )) :l (* 16 2) (ve (* 2 7 ))
                                       0 (ve (ve (* 2 7 ))) (ve (* 16 2)) 0])
-                    :stroke (hsl [.5 70 70 1])
-                    :stroke-width .5
+                    :stroke (hsl [0.5 70 70 1])
+                    :stroke-width 0.5
                     :fill (hsl [1 70 70 1])}]
 
 
@@ -16418,13 +16415,13 @@ on time?"]
             [:path {:d (m7/path [ (+ 20 32) 0 :l 0 (ve (* 2 37 ))
                                  20 0 0 (* 2 37 )
                                  -20 0])
-                    :stroke-width .5
+                    :stroke-width 0.5
                     :fill (hsl [2 70 70 1])}]
 
             [:path#b2 {:d (m7/path [ (+ 50 32) 0 :l
                                     0 (ve (* 2 37))])
                        :stroke (hsl [1 20 20 1])
-                       :stroke-width .5
+                       :stroke-width 0.5
 
                        :marker-end (m7/url (name :mb2))
                        :marker-start (m7/url (name :mb2))
@@ -16435,7 +16432,7 @@ on time?"]
 
             [:path#b3 {:d (m7/path [(* 1 20) 0 :l (* 16 2) 0])
                        :stroke (hsl [1 20 20 1])
-                       :stroke-width .5
+                       :stroke-width 0.5
 
                        :marker-end (m7/url (name :mb2))
                        :marker-start (m7/url (name :mb2))
@@ -16544,7 +16541,7 @@ on time?"]
 
              [airplane2 [
                            [:translate [600 120]]
-                        [:scale [.3 .3]]
+                        [:scale [0.3 0.3]]
                          [:rotate -90]]]
 
 
@@ -16570,8 +16567,8 @@ on time?"]
             #_[:circle {:r 90
                       :cx 0
                       :cy 0
-                      :stroke (hsl [3 70 70 .5])
-                      :stroke-width .5
+                      :stroke (hsl [3 70 70 0.5])
+                      :stroke-width 0.5
                       :fill (m7/url (name :star))}
 
              #_[:animateTransform {
@@ -16593,7 +16590,7 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [0 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}]
 
 
@@ -16603,7 +16600,7 @@ on time?"]
                       :cx 470
                       :cy 0
                       :stroke (hsl [3 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill (m7/url (name :lg2))
 
                       }
@@ -16645,7 +16642,7 @@ on time?"]
                                         (fn [d x]
                                           (* d x))
                                         dx (cycle [ 300 70]))])
-                    :fill (hsl [.2 60 55 .5])}]
+                    :fill (hsl [0.2 60 55 0.5])}]
 
             [:text {}
              [:textPath {:startOffset (m7/np [5 :%])
@@ -16690,7 +16687,7 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [1 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}]
 
 
@@ -16701,7 +16698,7 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [2 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill :none}]
 
 
@@ -16712,7 +16709,7 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [2.7 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill :none}]
 
 
@@ -16729,23 +16726,23 @@ on time?"]
               (map
                (fn [y]
                  (if (and (< y 4)  (> y 3))
-                   [p [-300 y  :l 1600 0] .02
-                    [.8 70 70 1]
-                    [.1 70 70 1]]
-                   [p [-300 y  :l 1600 0] .02
+                   [p [-300 y  :l 1600 0] 0.02
+                    [0.8 70 70 1]
+                    [0.1 70 70 1]]
+                   [p [-300 y  :l 1600 0] 0.02
                     [1.8 70 70 1]
                     [2.8 70 70 1]]
                    )
                  )
-               (range -5 5 .2))
+               (range -5 5 0.2))
 
 
               (map
                (fn [x]
-                 [p [x -800  :l 0 1600 ] .02
+                 [p [x -800  :l 0 1600 ] 0.02
                   [2.5 70 70 1]
                   [2.5 70 70 1]])
-               (range -5 5 .2))
+               (range -5 5 0.2))
 
 
 
@@ -16761,9 +16758,9 @@ on time?"]
               (fn [x]
                 [:circle {:cx x
                           :cy (ve (+ x 1))
-                          :r .05
+                          :r 0.05
                           :fill (hsl [5 70 70 1])}])
-              (range -200 200 .1))
+              (range -200 200 0.1))
 
 
 
@@ -16772,23 +16769,23 @@ on time?"]
             (fn [x]
               [:circle {:cx x
                         :cy (ve (+ (* 2 x) 1))
-                        :r .05
+                        :r 0.05
                         :fill (hsl [5 70 70 1])}])
-            (range -10 10 .2))
+            (range -10 10 0.2))
 
 
 
            [:circle {:cx 0
                      :cy 0
-                     :r .05
+                     :r 0.05
                      :fill (hsl [5 70 70 1])
                      }]
 
            [:circle {:cx 0
                      :cy 0
-                     :r (js/Math.sqrt .1)
+                     :r (js/Math.sqrt 0.1)
                      :fill :none
-                     :stroke-width .01
+                     :stroke-width 0.01
                      :stroke (hsl [5 70 70 1])}]
 
 
@@ -16796,19 +16793,19 @@ on time?"]
               (fn [x]
                 [:circle {:cx x
                           :cy (ve (- 3 (* x x)))
-                          :r .05
+                          :r 0.05
                           :fill (hsl [0 70 70 1])}])
-              (range -200 200 .1))
+              (range -200 200 0.1))
 
            ;; (* 2 x ) -3
            (map
             (fn [x]
               [:circle {:cx x
-                        :cy (* -1 .2 (ve (+ (* x x) -0)))
-                        :r .05
+                        :cy (* -1 0.2 (ve (+ (* x x) -0)))
+                        :r 0.05
                         :fill
                         (hsl [0 70 70 1])}])
-            (range -200 200 .1))
+            (range -200 200 0.1))
 
 
            [:clipPath#anik
@@ -16875,7 +16872,7 @@ on time?"]
         [clear set-clear] (react/useState false)
         m 30
         d 9.4
-        scale2 [[.5 .5] [-0.5 .5]]
+        scale2 [[0.5 0.5] [-0.5 0.5]]
         [text set-text] (react/useState "hello")
         [slider set-slider] (react/useState 1)
         [count set-count] (react/useState 1)
@@ -16888,56 +16885,56 @@ on time?"]
         text-ref (react/useRef)
         text-style (clj->js
                    [{
-                     :background (hsl [.5 70 70 .1])
-                     :transform (m7/tranfrom [[:scale .7]])
+                     :background (hsl [0.5 70 70 0.1])
+                     :transform (m7/tranfrom [[:scale 0.7]])
                      }
-                    {:background (hsl [1 60 70 .7])
-                     :transform (m7/tranfrom [[:scale .8]])
+                    {:background (hsl [1 60 70 0.7])
+                     :transform (m7/tranfrom [[:scale 0.8]])
 
                      }
 
-                    {:background (hsl [.5 60 60 .9])
-                     :transform (m7/tranfrom [[:scale .9]])
+                    {:background (hsl [0.5 60 60 0.9])
+                     :transform (m7/tranfrom [[:scale 0.9]])
                      :offset (/ 9 14)}
 
-                    {:background (hsl [.3 70 70 .7])
+                    {:background (hsl [0.3 70 70 0.7])
                      :transform (m7/tranfrom [[:scale 1]])
                      }])
         anm-style (clj->js
                    [{
-                     :background (hsl [.5 70 70 .1])
+                     :background (hsl [0.5 70 70 0.1])
                      :transform (m7/tranfrom [[:rotate "10deg"]])
                      }
-                    {:background (hsl [.9 70 70 .7])
+                    {:background (hsl [0.9 70 70 0.7])
                      :transform (m7/tranfrom [[:rotate "-10deg"]])
 
                      }
 
-                    {:background (hsl [2 70 70 .9])
-                     :transform (m7/tranfrom [[:scale .9]])
+                    {:background (hsl [2 70 70 0.9])
+                     :transform (m7/tranfrom [[:scale 0.9]])
                      :offset (/ 9 14)}
 
-                    {:background (hsl [3.5 70 70 .7])
+                    {:background (hsl [3.5 70 70 0.7])
                      :transform (m7/tranfrom [[:scale 1]])
                      }])
         svg-style (clj->js
                    [{
-                     :background (hsl [.5 70 70 .1])
+                     :background (hsl [0.5 70 70 0.1])
                      :transform (m7/tranfrom [[:rotate "10deg"]
-                                              [:scale .2 .3]])
+                                              [:scale 0.2 0.3]])
                      }
-                    {:background (hsl [.9 70 70 .7])
+                    {:background (hsl [0.9 70 70 0.7])
                      :transform (m7/tranfrom [[:rotate "-10deg"]
-                                              [:scale .5 .6]])
+                                              [:scale 0.5 0.6]])
                      }
 
                     {
-                     :background (hsl [2 70 70 .9])
-                     :transform (m7/tranfrom [[:scale .9]])
+                     :background (hsl [2 70 70 0.9])
+                     :transform (m7/tranfrom [[:scale 0.9]])
                      :offset (/ 9 14)}
 
                     {
-                     :background (hsl [3.5 70 70 .7])
+                     :background (hsl [3.5 70 70 0.7])
                      :transform (m7/tranfrom [[:scale 1]])
                      }])
         anm-fn (fn []
@@ -16972,18 +16969,18 @@ on time?"]
         [c ck] (react/useState [0 0])
         p (fn [svg x y]
             (let [p (js/DOMPoint. x y)
-                  t (-> svg
-                        (.getScreenCTM)
-                        (.inverse))
+                  t (j/call (j/call svg :getScreenCTM) :inverse)
+
                   xy (-> p
                          (.matrixTransform t))]
               (ck [(fix (/ (-> xy .-x) 2) 1)
-                   (fix (* -1 (/ (-> xy .-y) 2)) 1) ])))]
+                   (fix (* -1 (/ (-> xy .-y) 2)) 1) ])))
+        ]
     [:div {:style (merge
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
                             (take 20 (repeat [8 :vh]))])
-                     {:background-color (hsl [1 70 70 .5])
+                     {:background-color (hsl [1 70 70 0.5])
                       :gap ".2rem"})}
      [:div
       {:ref (if (and (= slider 0)
@@ -16991,12 +16988,12 @@ on time?"]
               text-ref nil)
        :style (m7/css
                [[3 6 12 23 :center :center 1.5 :rem :column]
-                [2 70 90 .5] [] {:gap "1rem"
+                [2 70 90 0.5] [] {:gap "1rem"
                                 :z-index 5}])}
 
 
-      #_[m7/x  `[= [[- ya yb] [- xa xb]] [[- -5 1] [- 0 [- 2]]] [-6 2]]]
-      #_[m7/x `[= [:p AB 2] [+ [:p [:b -6] 2]  [:p 2 2]] 40]]
+      [m7/x  `[= [[- ya yb] [- xa xb]] [[- -5 1] [- 0 [- 2]]] [-6 2]]]
+      [m7/x `[= [:p AB 2] [+ [:p [:b -6] 2]  [:p 2 2]] 40]]
 
       #_[m7/x  `[= [[- ya ya] [- xa xc]] [[- -5 5] [- 0 [- 10]]] [-10 -10]]]
 
@@ -17004,7 +17001,7 @@ on time?"]
 
       #_[m7/x  `[= [[-  yb yc] [-  xb xc]] [[-  1 5] [- [- 2] 10]] [-4 -12]]]
 
-      [m7/x `[= m gradient [rise run] [[:m r sin ~tt] [:m r cos ~tt]]
+     [m7/x `[= m gradient [rise run] [[:m r sin ~tt] [:m r cos ~tt]]
               [[- y y1] [- x x1]]]]
 
       [m7/x `[= length  [:sq [+ [:p rise 2] [:p run 2]]   ]]]
@@ -17055,7 +17052,7 @@ on time?"]
                  :style (m7/css
                          [[(* 2 r) 1 (* 3 c) 3  f1 f2  1.5
                            :rem :column]
-                          [(if (= slider n) 2.5 3.5 ) 70 (+ 50 (* 2 n)) .3] []
+                          [(if (= slider n) 2.5 3.5 ) 70 (+ 50 (* 2 n)) 0.3] []
                           (into
                            {:font-size (m7/np [2.1 :rem])
                             :font-family "Roboto Flex"
@@ -17124,9 +17121,9 @@ on time?"]
                              :d (m7/path [0 0 :l run rise
                                           0 (ve rise)
                                           (ve run) 0])
-                             :stroke (hsl [(rand 4) 70 70 .5])
-                             :stroke-width .5
-                             :fill (hsl [(rand 4) 70 70 .6])}]
+                             :stroke (hsl [(rand 4) 70 70 0.5])
+                             :stroke-width 0.5
+                             :fill (hsl [(rand 4) 70 70 0.6])}]
 
                      [:animateTransform
                       {:id (str (random-uuid))
@@ -17170,17 +17167,17 @@ on time?"]
                              :id (name :lg2)
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
-                     :stop-color (hsl [3 40 40 .7])}]
-            [:stop  {:offset .55
-                     :stop-color (hsl [3.3 60 60 .3])}]
+                     :stop-color (hsl [3 40 40 0.7])}]
+            [:stop  {:offset 0.55
+                     :stop-color (hsl [3.3 60 60 0.3])}]
 
 
-            [:stop  {:offset .97
-                     :stop-color (hsl [1 70 70 .2])}
+            [:stop  {:offset 0.97
+                     :stop-color (hsl [1 70 70 0.2])}
              [:animate {:attributeName :offset
                         :id :f114
                         :begin 0
-                        :from .55
+                        :from 0.55
                         :to 1
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
@@ -17188,20 +17185,20 @@ on time?"]
              [:animate {:attributeName :offset
                         :begin :f114.end
                         :from 1
-                        :to .55
+                        :to 0.55
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin 0
                         :id :f115
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin :f115.end
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [13 "s"])
                         :repeatCount :indefinite}]]
 
@@ -17224,8 +17221,8 @@ on time?"]
             [:path#tri2 {:d (m7/path [x1 y1 :l run rise
                                       0 (ve rise)
                                       (ve run) 0])
-                         :stroke (hsl [.5 70 70 1])
-                         :stroke-width .5
+                         :stroke (hsl [0.5 70 70 1])
+                         :stroke-width 0.5
                          :fill (hsl [1 70 70 1])}
              ]
 
@@ -17234,7 +17231,7 @@ on time?"]
                                        0 (ve rise)
                                        (ve run) 0])
                           :stroke (hsl [3.5 70 70 1])
-                          :stroke-width .5
+                          :stroke-width 0.5
                           :fill (hsl [4.1 70 70 1])}
              ]
 
@@ -17245,8 +17242,8 @@ on time?"]
 
             [:path#tri3 {:d (m7/path [x2 y2 :l (* 16 2 2) (ve (* 2 7 2))
                                       0 (ve (ve (* 2 7 2))) (ve (* 16 2 2)) 0])
-                         :stroke (hsl [.5 70 70 1])
-                         :stroke-width .5
+                         :stroke (hsl [0.5 70 70 1])
+                         :stroke-width 0.5
                          :fill (hsl [1 70 70 1])}
              ]
 
@@ -17254,15 +17251,15 @@ on time?"]
 
             [:path#tri3 {:d (m7/path [x2 y2 :l (* 16 2 2) (ve (* 2 7 2))
                                       0 (ve (ve (* 2 7 2))) (ve (* 16 2 2)) 0])
-                         :stroke (hsl [.5 70 70 1])
-                         :stroke-width .5
+                         :stroke (hsl [0.5 70 70 1])
+                         :stroke-width 0.5
                          :fill (hsl [1 70 70 1])}
              ]
 
             [:path#tri31 {:d (m7/path [x2 y2 :l (* 16 2 2) (ve (* 2 7 2))
                                       0 (ve (ve (* 2 7 2))) (ve (* 16 2 2)) 0])
-                         :stroke (hsl [.5 70 70 1])
-                         :stroke-width .5
+                         :stroke (hsl [0.5 70 70 1])
+                         :stroke-width 0.5
                          :fill (hsl [1 70 70 1])}
              ]
 
@@ -17287,7 +17284,7 @@ on time?"]
                                        (* 10 20) 0 0 (* 1 20 )
                                        (* 10 -20) 0])
                           :stroke-width 1
-                          :fill (hsl [2 70 70 .3])}
+                          :fill (hsl [2 70 70 0.3])}
              [:animateTransform {:id :green-car
                                  :attributeName :transform
                                  :begin 0
@@ -17300,7 +17297,7 @@ on time?"]
                                  (* 4 20) 0 0 (* 1 30 )
                                  (* 4 -20) 0])
                     :stroke-width 1
-                    :fill (hsl [2 70 70 .3])}]
+                    :fill (hsl [2 70 70 0.3])}]
 
             ]
            [:marker {:id (name :mb2)
@@ -17312,29 +17309,29 @@ on time?"]
                      :markerHeight 5}
             [:path {:d (m7/path [-3 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
 
            [:g
             [:path {:d (m7/path [0 0 :l 0 (ve (* 2 30 ))
                                  20 0 0 (* 2 30 )
                                  -20 0])
                     :stroke-width 1
-                    :fill (hsl [2 70 70 .2])}]
+                    :fill (hsl [2 70 70 0.2])}]
 
 
 
             [:path {:d (m7/path [ (+ 20 32) 0 :l 0 (ve (* 2 37 ))
                                  20 0 0 (* 2 37 )
                                  -20 0])
-                    :stroke-width .5
-                    :fill (hsl [2 70 70 .15])}]
+                    :stroke-width 0.5
+                    :fill (hsl [2 70 70 0.15])}]
             (if (and (= slider 0) (= clear false))
               [:g]
               [:g
                [:path#b1 {:d (m7/path [(* -5 20) y11 :L (* 5 20) y22])
-                          :stroke-width .5
+                          :stroke-width 0.5
                           :marker-end (m7/url (name :mb2))
                           :marker-start (m7/url (name :mb2))
                           :stroke (hsl [2 30 30 1])
@@ -17344,7 +17341,7 @@ on time?"]
                                        :L
                                        (* 5 20) y33])
                           :stroke (hsl [1 20 20 1])
-                          :stroke-width .5
+                          :stroke-width 0.5
 
                           :marker-end (m7/url (name :mb2))
                           :marker-start (m7/url (name :mb2))
@@ -17352,7 +17349,7 @@ on time?"]
                           :fill (hsl [1 70 70 1])}]
                [:path#b3 {:d (m7/path [(* 1 20) 0 :l (* 16 2) 0])
                           :stroke (hsl [1 20 20 1])
-                          :stroke-width .5
+                          :stroke-width 0.5
 
                           :marker-end (m7/url (name :mb2))
                           :marker-start (m7/url (name :mb2))
@@ -17441,8 +17438,8 @@ on time?"]
             #_[:circle {:r 90
                         :cx 0
                         :cy 0
-                        :stroke (hsl [3 70 70 .5])
-                        :stroke-width .5
+                        :stroke (hsl [3 70 70 0.5])
+                        :stroke-width 0.5
                         :fill (m7/url (name :star))}
 
                #_[:animateTransform {
@@ -17464,7 +17461,7 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [0 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}]
 
 
@@ -17474,7 +17471,7 @@ on time?"]
                       :cx 470
                       :cy 0
                       :stroke (hsl [3 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill (m7/url (name :lg2))
 
                       }
@@ -17516,7 +17513,7 @@ on time?"]
                                         (fn [d x]
                                           (* d x))
                                         dx (cycle [ 300 70]))])
-                    :fill (hsl [.2 60 55 .5])}]
+                    :fill (hsl [0.2 60 55 0.5])}]
 
             [:text {}
              [:textPath {:startOffset (m7/np [5 :%])
@@ -17561,7 +17558,7 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [1 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}]
 
 
@@ -17572,7 +17569,7 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [2 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill :none}]
 
 
@@ -17583,7 +17580,7 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [2.7 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill :none}]
 
 
@@ -17601,9 +17598,9 @@ on time?"]
               (fn [x]
                 [:circle {:cx x
                           :cy (ve (+ x 1))
-                          :r .05
+                          :r 0.05
                           :fill (hsl [5 70 70 1])}])
-              (range -200 200 .1))
+              (range -200 200 0.1))
 
 
 
@@ -17613,15 +17610,15 @@ on time?"]
               [:circle {:key (str "cir" i)
                         :cx x
                         :cy (ve (+ (* 2 x) 1))
-                        :r .05
+                        :r 0.05
                         :fill (hsl [5 70 70 1])}])
-            (range -200 200 .5))
+            (range -200 200 0.5))
 
 
 
            [:circle {:cx 0
                      :cy 0
-                     :r .05
+                     :r 0.05
                      :fill (hsl [5 70 70 1])
                      }]
 
@@ -17629,7 +17626,7 @@ on time?"]
                        :cy 0
                        :r (js/Math.sqrt 5)
                        :fill :none
-                       :stroke-width .01
+                       :stroke-width 0.01
                        :stroke (hsl [5 70 70 1])}]
 
 
@@ -17637,9 +17634,9 @@ on time?"]
               (fn [x]
                 [:circle {:cx x
                           :cy (ve (- 3 (* x x)))
-                          :r .05
+                          :r 0.05
                           :fill (hsl [0 70 70 1])}])
-              (range -200 200 .1))
+              (range -200 200 0.1))
 
 
            (map-indexed
@@ -17647,9 +17644,9 @@ on time?"]
               [:circle {:key (str (random-uuid))
                         :cx x
                         :cy (ve (+ (* x x) (* 2 x ) -3 ))
-                        :r .05
+                        :r 0.05
                         :fill (hsl [0 70 70 1])}])
-            (range -200 200 .1))])
+            (range -200 200 0.1))])
           )
       ]]))
 
@@ -17684,7 +17681,7 @@ on time?"]
         [clear set-clear] (react/useState false)
         m 30
         d 9.4
-        scale2 [[.5 .5] [-0.5 .5]]
+        scale2 [[0.5 0.5] [-0.5 0.5]]
         [text set-text] (react/useState "hello")
         [slider set-slider] (react/useState 0)
         [real-slider set-real-slider] (react/useState 50)
@@ -17698,56 +17695,56 @@ on time?"]
         text-ref (react/useRef)
         text-style (clj->js
                    [{
-                     :background (hsl [.5 70 70 .1])
-                     :transform (m7/tranfrom [[:scale .7]])
+                     :background (hsl [0.5 70 70 0.1])
+                     :transform (m7/tranfrom [[:scale 0.7]])
                      }
-                    {:background (hsl [1 60 70 .7])
-                     :transform (m7/tranfrom [[:scale .8]])
+                    {:background (hsl [1 60 70 0.7])
+                     :transform (m7/tranfrom [[:scale 0.8]])
 
                      }
 
-                    {:background (hsl [.5 60 60 .9])
-                     :transform (m7/tranfrom [[:scale .9]])
+                    {:background (hsl [0.5 60 60 0.9])
+                     :transform (m7/tranfrom [[:scale 0.9]])
                      :offset (/ 9 14)}
 
-                    {:background (hsl [.3 70 70 .7])
+                    {:background (hsl [0.3 70 70 0.7])
                      :transform (m7/tranfrom [[:scale 1]])
                      }])
         anm-style (clj->js
                    [{
-                     :background (hsl [.5 70 70 .1])
+                     :background (hsl [0.5 70 70 0.1])
                      :transform (m7/tranfrom [[:rotate "10deg"]])
                      }
-                    {:background (hsl [.9 70 70 .7])
+                    {:background (hsl [0.9 70 70 0.7])
                      :transform (m7/tranfrom [[:rotate "-10deg"]])
 
                      }
 
-                    {:background (hsl [2 70 70 .9])
-                     :transform (m7/tranfrom [[:scale .9]])
+                    {:background (hsl [2 70 70 0.9])
+                     :transform (m7/tranfrom [[:scale 0.9]])
                      :offset (/ 9 14)}
 
-                    {:background (hsl [3.5 70 70 .7])
+                    {:background (hsl [3.5 70 70 0.7])
                      :transform (m7/tranfrom [[:scale 1]])
                      }])
         svg-style (clj->js
                    [{
-                     :background (hsl [.5 70 70 .1])
+                     :background (hsl [0.5 70 70 0.1])
                      :transform (m7/tranfrom [[:rotate "10deg"]
-                                              [:scale .2 .3]])
+                                              [:scale 0.2 0.3]])
                      }
-                    {:background (hsl [.9 70 70 .7])
+                    {:background (hsl [0.9 70 70 0.7])
                      :transform (m7/tranfrom [[:rotate "-10deg"]
-                                              [:scale .5 .6]])
+                                              [:scale 0.5 0.6]])
                      }
 
                     {
-                     :background (hsl [2 70 70 .9])
-                     :transform (m7/tranfrom [[:scale .9]])
+                     :background (hsl [2 70 70 0.9])
+                     :transform (m7/tranfrom [[:scale 0.9]])
                      :offset (/ 9 14)}
 
                     {
-                     :background (hsl [3.5 70 70 .7])
+                     :background (hsl [3.5 70 70 0.7])
                      :transform (m7/tranfrom [[:scale 1]])
                      }])
         anm-fn (fn []
@@ -17782,9 +17779,8 @@ on time?"]
         [c ck] (react/useState [0 0])
         p (fn [svg x y]
             (let [p (js/DOMPoint. x y)
-                  t (-> svg
-                        (.getScreenCTM)
-                        (.inverse))
+                  t (j/call (j/call svg :getScreenCTM) :inverse)
+
                   xy (-> p
                          (.matrixTransform t))]
               (ck [(fix (/ (-> xy .-x) 2) 1)
@@ -17793,7 +17789,7 @@ on time?"]
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
                             (take 20 (repeat [8 :vh]))])
-                     {:background-color (hsl [1 70 70 .5])
+                     {:background-color (hsl [1 70 70 0.5])
                       :gap ".2rem"})}
 
 
@@ -17803,7 +17799,7 @@ on time?"]
                :style (m7/css
                        [[(* 2 r) 1 (* 2 c) 2  f1 f2  1.5
                          :rem :column]
-                        [30 70 70 .3] []
+                        [30 70 70 0.3] []
                         (into
                          {
                           :font-family "Roboto Flex"
@@ -17830,7 +17826,7 @@ on time?"]
                :style (m7/css
                        [[r 1 c 1  f1 f2  1.5
                          :rem :column]
-                        [30 70 70 .3] []
+                        [30 70 70 0.3] []
                         (into
                          {
                           :font-family "Roboto Flex"
@@ -17873,7 +17869,7 @@ on time?"]
                              :rem :column]
 
                             (if (or (= d 2) (= d 3) (= d 5) (= d 7) (= d 11) (= d 13))
-                              [0 70 70 .8]
+                              [0 70 70 0.8]
                               (if (or (= (mod d 2) 0)
                                       (= (mod d 3) 0)
                                       (= (mod d 5) 0)
@@ -17881,8 +17877,8 @@ on time?"]
                                       (= (mod d 11) 0)
                                       (= (mod d 13) 0)
                                       )
-                                [60 30 30 .3]
-                                [60 70 70 .3]
+                                [60 30 30 0.3]
+                                [60 70 70 0.3]
                                 ))
 
 
@@ -17911,7 +17907,7 @@ on time?"]
 
      [:div {:style (m7/css
                     [[1 3 1 24 :center :center 2.2 :rem :column]
-                     [2 70 90 .2] [] {:gap "1rem"
+                     [2 70 90 0.2] [] {:gap "1rem"
                                       :z-index 26}])}
 
       #_(let [n (* 11 41)
@@ -17992,7 +17988,7 @@ on time?"]
                  :style (m7/css
                          [[(* 2 r) 1 (* 3 c) 3  f1 f2  1.5
                            :rem :column]
-                          [(if (= slider n) 2.5 3.5 ) 70 (+ 50 (* 2 n)) .3] []
+                          [(if (= slider n) 2.5 3.5 ) 70 (+ 50 (* 2 n)) 0.3] []
                           (into
                            {:font-size (m7/np [2.1 :rem])
                             :font-family "Roboto Flex"
@@ -18060,9 +18056,9 @@ on time?"]
                              :d (m7/path [0 0 :l run rise
                                           0 (ve rise)
                                           (ve run) 0])
-                             :stroke (hsl [(rand 4) 70 70 .5])
-                             :stroke-width .5
-                             :fill (hsl [(rand 4) 70 70 .6])}]
+                             :stroke (hsl [(rand 4) 70 70 0.5])
+                             :stroke-width 0.5
+                             :fill (hsl [(rand 4) 70 70 0.6])}]
 
                      [:animateTransform
                       {:id (str (random-uuid))
@@ -18106,17 +18102,17 @@ on time?"]
                              :id (name :lg2)
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
-                     :stop-color (hsl [3 40 40 .7])}]
-            [:stop  {:offset .55
-                     :stop-color (hsl [3.3 60 60 .3])}]
+                     :stop-color (hsl [3 40 40 0.7])}]
+            [:stop  {:offset 0.55
+                     :stop-color (hsl [3.3 60 60 0.3])}]
 
 
-            [:stop  {:offset .97
-                     :stop-color (hsl [1 70 70 .2])}
+            [:stop  {:offset 0.97
+                     :stop-color (hsl [1 70 70 0.2])}
              [:animate {:attributeName :offset
                         :id :f114
                         :begin 0
-                        :from .55
+                        :from 0.55
                         :to 1
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
@@ -18124,20 +18120,20 @@ on time?"]
              [:animate {:attributeName :offset
                         :begin :f114.end
                         :from 1
-                        :to .55
+                        :to 0.55
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin 0
                         :id :f115
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin :f115.end
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [13 "s"])
                         :repeatCount :indefinite}]]
 
@@ -18160,8 +18156,8 @@ on time?"]
             [:path#tri2 {:d (m7/path [x1 y1 :l run rise
                                       0 (ve rise)
                                       (ve run) 0])
-                         :stroke (hsl [.5 70 70 1])
-                         :stroke-width .5
+                         :stroke (hsl [0.5 70 70 1])
+                         :stroke-width 0.5
                          :fill (hsl [1 70 70 1])}
              ]
 
@@ -18170,14 +18166,14 @@ on time?"]
                                        0 (ve rise)
                                        (ve run) 0])
                           :stroke (hsl [3.5 70 70 1])
-                          :stroke-width .5
+                          :stroke-width 0.5
                           :fill (hsl [4.1 70 70 1])}
              ]
 
             [:path#tri3 {:d (m7/path [x2 y2 :l (* 16 2 2) (ve (* 2 7 2))
                                       0 (ve (ve (* 2 7 2))) (ve (* 16 2 2)) 0])
-                         :stroke (hsl [.5 70 70 1])
-                         :stroke-width .5
+                         :stroke (hsl [0.5 70 70 1])
+                         :stroke-width 0.5
                          :fill (hsl [1 70 70 1])}
              ]
 
@@ -18202,7 +18198,7 @@ on time?"]
                                        (* 10 20) 0 0 (* 1 20 )
                                        (* 10 -20) 0])
                           :stroke-width 1
-                          :fill (hsl [2 70 70 .3])}
+                          :fill (hsl [2 70 70 0.3])}
              [:animateTransform {:id :green-car
                                  :attributeName :transform
                                  :begin 0
@@ -18215,7 +18211,7 @@ on time?"]
                                  (* 4 20) 0 0 (* 1 30 )
                                  (* 4 -20) 0])
                     :stroke-width 1
-                    :fill (hsl [2 70 70 .3])}]
+                    :fill (hsl [2 70 70 0.3])}]
 
             ]
            [:marker {:id (name :mb2)
@@ -18227,29 +18223,29 @@ on time?"]
                      :markerHeight 5}
             [:path {:d (m7/path [-3 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
 
            [:g
             [:path {:d (m7/path [0 0 :l 0 (ve (* 2 30 ))
                                  20 0 0 (* 2 30 )
                                  -20 0])
                     :stroke-width 1
-                    :fill (hsl [2 70 70 .2])}]
+                    :fill (hsl [2 70 70 0.2])}]
 
 
 
             [:path {:d (m7/path [ (+ 20 32) 0 :l 0 (ve (* 2 37 ))
                                  20 0 0 (* 2 37 )
                                  -20 0])
-                    :stroke-width .5
-                    :fill (hsl [2 70 70 .15])}]
+                    :stroke-width 0.5
+                    :fill (hsl [2 70 70 0.15])}]
             (if (and (= slider 0) (= clear false))
               [:g]
               [:g
                [:path#b1 {:d (m7/path [(* -5 20) y11 :L (* 5 20) y22])
-                          :stroke-width .5
+                          :stroke-width 0.5
                           :marker-end (m7/url (name :mb2))
                           :marker-start (m7/url (name :mb2))
                           :stroke (hsl [2 30 30 1])
@@ -18259,7 +18255,7 @@ on time?"]
                                        :L
                                        (* 5 20) y33])
                           :stroke (hsl [1 20 20 1])
-                          :stroke-width .5
+                          :stroke-width 0.5
 
                           :marker-end (m7/url (name :mb2))
                           :marker-start (m7/url (name :mb2))
@@ -18267,7 +18263,7 @@ on time?"]
                           :fill (hsl [1 70 70 1])}]
                [:path#b3 {:d (m7/path [(* 1 20) 0 :l (* 16 2) 0])
                           :stroke (hsl [1 20 20 1])
-                          :stroke-width .5
+                          :stroke-width 0.5
 
                           :marker-end (m7/url (name :mb2))
                           :marker-start (m7/url (name :mb2))
@@ -18347,8 +18343,8 @@ on time?"]
             #_[:circle {:r 90
                         :cx 0
                         :cy 0
-                        :stroke (hsl [3 70 70 .5])
-                        :stroke-width .5
+                        :stroke (hsl [3 70 70 0.5])
+                        :stroke-width 0.5
                         :fill (m7/url (name :star))}
 
                #_[:animateTransform {
@@ -18370,7 +18366,7 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [0 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}]
 
 
@@ -18380,7 +18376,7 @@ on time?"]
                       :cx 470
                       :cy 0
                       :stroke (hsl [3 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill (m7/url (name :lg2))
 
                       }
@@ -18422,7 +18418,7 @@ on time?"]
                                         (fn [d x]
                                           (* d x))
                                         dx (cycle [ 300 70]))])
-                    :fill (hsl [.2 60 55 .5])}]
+                    :fill (hsl [0.2 60 55 0.5])}]
 
             [:text {}
              [:textPath {:startOffset (m7/np [5 :%])
@@ -18467,7 +18463,7 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [1 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}]
 
 
@@ -18478,7 +18474,7 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [2 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill :none}]
 
 
@@ -18489,7 +18485,7 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [2.7 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill :none}]
 
 
@@ -18507,9 +18503,9 @@ on time?"]
               (fn [x]
                 [:circle {:cx x
                           :cy (ve (+ x 1))
-                          :r .05
+                          :r 0.05
                           :fill (hsl [5 70 70 1])}])
-              (range -200 200 .1))
+              (range -200 200 0.1))
 
 
 
@@ -18519,15 +18515,15 @@ on time?"]
               [:circle {:key (str "cir" i)
                         :cx x
                         :cy (ve (+ (* 2 x) 1))
-                        :r .05
+                        :r 0.05
                         :fill (hsl [5 70 70 1])}])
-            (range -200 200 .5))
+            (range -200 200 0.5))
 
 
 
            [:circle {:cx 0
                      :cy 0
-                     :r .05
+                     :r 0.05
                      :fill (hsl [5 70 70 1])
                      }]
 
@@ -18535,7 +18531,7 @@ on time?"]
                        :cy 0
                        :r (js/Math.sqrt 5)
                        :fill :none
-                       :stroke-width .01
+                       :stroke-width 0.01
                        :stroke (hsl [5 70 70 1])}]
 
 
@@ -18543,9 +18539,9 @@ on time?"]
               (fn [x]
                 [:circle {:cx x
                           :cy (ve (- 3 (* x x)))
-                          :r .05
+                          :r 0.05
                           :fill (hsl [0 70 70 1])}])
-              (range -200 200 .1))
+              (range -200 200 0.1))
 
 
            (map-indexed
@@ -18553,9 +18549,9 @@ on time?"]
               [:circle {:key (str (random-uuid))
                         :cx x
                         :cy (ve (+ (* x x) (* 2 x ) -3 ))
-                        :r .05
+                        :r 0.05
                         :fill (hsl [0 70 70 1])}])
-            (range -200 200 .1))])
+            (range -200 200 0.1))])
           )
       ]]))
 
@@ -18588,7 +18584,7 @@ on time?"]
         [clear set-clear] (react/useState false)
         m 30
         d 9.4
-        scale2 [[.5 .5] [-0.5 .5]]
+        scale2 [[0.5 0.5] [-0.5 0.5]]
         [text set-text] (react/useState "hello")
         [slider set-slider] (react/useState 0)
         [count set-count] (react/useState 1)
@@ -18601,55 +18597,55 @@ on time?"]
         text-ref (react/useRef)
         text-style (clj->js
                    [{
-                     :background (hsl [.5 70 70 .1])
-                     :transform (m7/tranfrom [[:scale .7]])
+                     :background (hsl [0.5 70 70 0.1])
+                     :transform (m7/tranfrom [[:scale 0.7]])
                      }
-                    {:background (hsl [1 60 70 .7])
-                     :transform (m7/tranfrom [[:scale .8]])
+                    {:background (hsl [1 60 70 0.7])
+                     :transform (m7/tranfrom [[:scale 0.8]])
 
                      }
 
-                    {:background (hsl [.5 60 60 .9])
-                     :transform (m7/tranfrom [[:scale .9]])
+                    {:background (hsl [0.5 60 60 0.9])
+                     :transform (m7/tranfrom [[:scale 0.9]])
                      :offset (/ 9 14)}
 
-                    {:background (hsl [.3 70 70 .7])
+                    {:background (hsl [0.3 70 70 0.7])
                      :transform (m7/tranfrom [[:scale 1]])
                      }])
         anm-style (clj->js
                    [{
-                     :background (hsl [.5 70 70 .1])
+                     :background (hsl [0.5 70 70 0.1])
                      :transform (m7/tranfrom [[:rotate "10deg"]])
                      }
-                    {:background (hsl [.9 70 70 .7])
+                    {:background (hsl [0.9 70 70 0.7])
                      :transform (m7/tranfrom [[:rotate "-10deg"]])
                      }
 
-                    {:background (hsl [2 70 70 .9])
-                     :transform (m7/tranfrom [[:scale .9]])
+                    {:background (hsl [2 70 70 0.9])
+                     :transform (m7/tranfrom [[:scale 0.9]])
                      :offset (/ 9 14)}
 
-                    {:background (hsl [3.5 70 70 .7])
+                    {:background (hsl [3.5 70 70 0.7])
                      :transform (m7/tranfrom [[:scale 1]])
                      }])
         svg-style (clj->js
                    [{
-                     :background (hsl [.5 70 70 .1])
+                     :background (hsl [0.5 70 70 0.1])
                      :transform (m7/tranfrom [[:rotate "10deg"]
-                                              [:scale .2 .3]])
+                                              [:scale 0.2 0.3]])
                      }
-                    {:background (hsl [.9 70 70 .7])
+                    {:background (hsl [0.9 70 70 0.7])
                      :transform (m7/tranfrom [[:rotate "-10deg"]
-                                              [:scale .5 .6]])
+                                              [:scale 0.5 0.6]])
                      }
 
                     {
-                     :background (hsl [2 70 70 .9])
-                     :transform (m7/tranfrom [[:scale .9]])
+                     :background (hsl [2 70 70 0.9])
+                     :transform (m7/tranfrom [[:scale 0.9]])
                      :offset (/ 9 14)}
 
                     {
-                     :background (hsl [3.5 70 70 .7])
+                     :background (hsl [3.5 70 70 0.7])
                      :transform (m7/tranfrom [[:scale 1]])
                      }])
         anm-fn (fn []
@@ -18684,18 +18680,18 @@ on time?"]
         [c ck] (react/useState [0 0])
         p (fn [svg x y]
             (let [p (js/DOMPoint. x y)
-                  t (-> svg
-                        (.getScreenCTM)
-                        (.inverse))
+                  t (j/call (j/call svg :getScreenCTM) :inverse)
+
                   xy (-> p
                          (.matrixTransform t))]
               (ck [(fix (/ (-> xy .-x) 2) 1)
-                   (fix (* -1 (/ (-> xy .-y) 2)) 1) ])))]
+                   (fix (* -1 (/ (-> xy .-y) 2)) 1) ])))
+        ]
     [:div {:style (merge
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
                             (take 20 (repeat [8 :vh]))])
-                     {:background-color (hsl [1 70 70 .5])
+                     {:background-color (hsl [1 70 70 0.5])
                       :gap ".2rem"})}
      [:div
       {:ref (if (and (= slider 0)
@@ -18703,7 +18699,7 @@ on time?"]
               text-ref nil)
        :style (m7/css
                [[3 6 1 23 :center :center 2.5 :rem]
-                [2 70 90 .3] [] {:gap "1rem"
+                [2 70 90 0.3] [] {:gap "1rem"
                                 :z-index 3}])}
 
 
@@ -18767,7 +18763,7 @@ on time?"]
                  :style (m7/css
                          [[(* 2 r) 1 (* 3 c) 3  f1 f2  1.5
                            :rem :column]
-                          [(if (= slider n) 2.5 3.5 ) 70 (+ 50 (* 2 n)) .3] []
+                          [(if (= slider n) 2.5 3.5 ) 70 (+ 50 (* 2 n)) 0.3] []
                           (into
                            {:font-size (m7/np [2.1 :rem])
                             :font-family "Roboto Flex"
@@ -18835,9 +18831,9 @@ on time?"]
                              :d (m7/path [0 0 :l run rise
                                           0 (ve rise)
                                           (ve run) 0])
-                             :stroke (hsl [(rand 4) 70 70 .5])
-                             :stroke-width .5
-                             :fill (hsl [(rand 4) 70 70 .6])}]
+                             :stroke (hsl [(rand 4) 70 70 0.5])
+                             :stroke-width 0.5
+                             :fill (hsl [(rand 4) 70 70 0.6])}]
 
                      [:animateTransform
                       {:id (str (random-uuid))
@@ -18881,17 +18877,17 @@ on time?"]
                              :id (name :lg2)
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
-                     :stop-color (hsl [3 40 40 .7])}]
-            [:stop  {:offset .55
-                     :stop-color (hsl [3.3 60 60 .3])}]
+                     :stop-color (hsl [3 40 40 0.7])}]
+            [:stop  {:offset 0.55
+                     :stop-color (hsl [3.3 60 60 0.3])}]
 
 
-            [:stop  {:offset .97
-                     :stop-color (hsl [1 70 70 .2])}
+            [:stop  {:offset 0.97
+                     :stop-color (hsl [1 70 70 0.2])}
              [:animate {:attributeName :offset
                         :id :f114
                         :begin 0
-                        :from .55
+                        :from 0.55
                         :to 1
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
@@ -18899,20 +18895,20 @@ on time?"]
              [:animate {:attributeName :offset
                         :begin :f114.end
                         :from 1
-                        :to .55
+                        :to 0.55
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin 0
                         :id :f115
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin :f115.end
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [13 "s"])
                         :repeatCount :indefinite}]]
 
@@ -18935,8 +18931,8 @@ on time?"]
             [:path#tri2 {:d (m7/path [x1 y1 :l run rise
                                       0 (ve rise)
                                       (ve run) 0])
-                         :stroke (hsl [.5 70 70 1])
-                         :stroke-width .5
+                         :stroke (hsl [0.5 70 70 1])
+                         :stroke-width 0.5
                          :fill (hsl [1 70 70 1])}
              ]
 
@@ -18945,14 +18941,14 @@ on time?"]
                                        0 (ve rise)
                                        (ve run) 0])
                           :stroke (hsl [3.5 70 70 1])
-                          :stroke-width .5
+                          :stroke-width 0.5
                           :fill (hsl [4.1 70 70 1])}
              ]
 
             [:path#tri3 {:d (m7/path [x2 y2 :l (* 16 2 2) (ve (* 2 7 2))
                                       0 (ve (ve (* 2 7 2))) (ve (* 16 2 2)) 0])
-                         :stroke (hsl [.5 70 70 1])
-                         :stroke-width .5
+                         :stroke (hsl [0.5 70 70 1])
+                         :stroke-width 0.5
                          :fill (hsl [1 70 70 1])}
              ]
 
@@ -18977,7 +18973,7 @@ on time?"]
                                        (* 10 20) 0 0 (* 1 20 )
                                        (* 10 -20) 0])
                           :stroke-width 1
-                          :fill (hsl [2 70 70 .3])}
+                          :fill (hsl [2 70 70 0.3])}
              [:animateTransform {:id :green-car
                                  :attributeName :transform
                                  :begin 0
@@ -18990,7 +18986,7 @@ on time?"]
                                  (* 4 20) 0 0 (* 1 30 )
                                  (* 4 -20) 0])
                     :stroke-width 1
-                    :fill (hsl [2 70 70 .3])}]
+                    :fill (hsl [2 70 70 0.3])}]
 
             ]
            [:marker {:id (name :mb2)
@@ -19002,24 +18998,24 @@ on time?"]
                      :markerHeight 5}
             [:path {:d (m7/path [-3 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
 
            [:g
             [:path {:d (m7/path [0 0 :l 0 (ve (* 2 30 ))
                                  20 0 0 (* 2 30 )
                                  -20 0])
                     :stroke-width 1
-                    :fill (hsl [2 70 70 .2])}]
+                    :fill (hsl [2 70 70 0.2])}]
 
 
 
             [:path {:d (m7/path [ (+ 20 32) 0 :l 0 (ve (* 2 37 ))
                                  20 0 0 (* 2 37 )
                                  -20 0])
-                    :stroke-width .5
-                    :fill (hsl [2 70 70 .15])}]
+                    :stroke-width 0.5
+                    :fill (hsl [2 70 70 0.15])}]
             (if (and (= slider 0) (= clear false))
               [:g]
               [:g
@@ -19028,7 +19024,7 @@ on time?"]
                [:path#b1 {:d (m7/path [(* -5 20)
                                        (* -0.5 -5 20)
                                        :L (* 5 10 20) (* -0.5 10 5 20)])
-                          :stroke-width .5
+                          :stroke-width 0.5
                           :marker-end (m7/url (name :mb2))
                           :marker-start (m7/url (name :mb2))
                           :stroke (hsl [2 30 30 1])
@@ -19036,7 +19032,7 @@ on time?"]
 
 
                #_[:path#b1 {:d (m7/path [(* -5 20) y11 :L (* 5 20) y22])
-                          :stroke-width .5
+                          :stroke-width 0.5
                           :marker-end (m7/url (name :mb2))
                           :marker-start (m7/url (name :mb2))
                           :stroke (hsl [2 30 30 1])
@@ -19046,7 +19042,7 @@ on time?"]
                                        :L
                                        (* 5 20) y33])
                           :stroke (hsl [1 20 20 1])
-                          :stroke-width .5
+                          :stroke-width 0.5
 
                           :marker-end (m7/url (name :mb2))
                           :marker-start (m7/url (name :mb2))
@@ -19054,7 +19050,7 @@ on time?"]
                           :fill (hsl [1 70 70 1])}]
                #_[:path#b3 {:d (m7/path [(* 1 20) 0 :l (* 16 2) 0])
                           :stroke (hsl [1 20 20 1])
-                          :stroke-width .5
+                          :stroke-width 0.5
 
                           :marker-end (m7/url (name :mb2))
                           :marker-start (m7/url (name :mb2))
@@ -19134,8 +19130,8 @@ on time?"]
             #_[:circle {:r 90
                         :cx 0
                         :cy 0
-                        :stroke (hsl [3 70 70 .5])
-                        :stroke-width .5
+                        :stroke (hsl [3 70 70 0.5])
+                        :stroke-width 0.5
                         :fill (m7/url (name :star))}
 
                #_[:animateTransform {
@@ -19157,7 +19153,7 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [0 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}]
 
 
@@ -19167,7 +19163,7 @@ on time?"]
                       :cx 470
                       :cy 0
                       :stroke (hsl [3 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill (m7/url (name :lg2))
 
                       }
@@ -19209,7 +19205,7 @@ on time?"]
                                         (fn [d x]
                                           (* d x))
                                         dx (cycle [ 300 70]))])
-                    :fill (hsl [.2 60 55 .5])}]
+                    :fill (hsl [0.2 60 55 0.5])}]
 
             [:text {}
              [:textPath {:startOffset (m7/np [5 :%])
@@ -19254,7 +19250,7 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [1 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}]
 
 
@@ -19265,7 +19261,7 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [2 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill :none}]
 
 
@@ -19276,7 +19272,7 @@ on time?"]
                       :cx 0
                       :cy 0
                       :stroke  (hsl [2.7 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill :none}]
 
 
@@ -19294,9 +19290,9 @@ on time?"]
               (fn [x]
                 [:circle {:cx x
                           :cy (ve (+ x 1))
-                          :r .05
+                          :r 0.05
                           :fill (hsl [5 70 70 1])}])
-              (range -200 200 .1))
+              (range -200 200 0.1))
 
 
 
@@ -19306,15 +19302,15 @@ on time?"]
               [:circle {:key (str "cir" i)
                         :cx x
                         :cy (ve (+ (* 2 x) 1))
-                        :r .05
+                        :r 0.05
                         :fill (hsl [5 70 70 1])}])
-            (range -200 200 .5))
+            (range -200 200 0.5))
 
 
 
            [:circle {:cx 0
                      :cy 0
-                     :r .05
+                     :r 0.05
                      :fill (hsl [5 70 70 1])
                      }]
 
@@ -19322,7 +19318,7 @@ on time?"]
                        :cy 0
                        :r (js/Math.sqrt 5)
                        :fill :none
-                       :stroke-width .01
+                       :stroke-width 0.01
                        :stroke (hsl [5 70 70 1])}]
 
 
@@ -19330,9 +19326,9 @@ on time?"]
               (fn [x]
                 [:circle {:cx x
                           :cy (ve (- 3 (* x x)))
-                          :r .05
+                          :r 0.05
                           :fill (hsl [0 70 70 1])}])
-              (range -200 200 .1))
+              (range -200 200 0.1))
 
 
            (map-indexed
@@ -19340,9 +19336,9 @@ on time?"]
               [:circle {:key (str (random-uuid))
                         :cx x
                         :cy (ve (+ (* x x) (* 2 x ) -3 ))
-                        :r .05
+                        :r 0.05
                         :fill (hsl [0 70 70 1])}])
-            (range -200 200 .1))])
+            (range -200 200 0.1))])
           )
       ]]))
 
@@ -19360,19 +19356,19 @@ on time?"]
         anm-style
         (clj->js
          [{
-           :background (hsl [.5 70 70 .1])
+           :background (hsl [0.5 70 70 0.1])
            :transform (m7/tranfrom [[:rotate "10deg"]])
            }
-          {:background (hsl [.9 70 70 .7])
+          {:background (hsl [0.9 70 70 0.7])
            :transform (m7/tranfrom [[:rotate "-10deg"]])
 
            }
 
-          {:background (hsl [2 70 70 .9])
-           :transform (m7/tranfrom [[:scale .9]])
+          {:background (hsl [2 70 70 0.9])
+           :transform (m7/tranfrom [[:scale 0.9]])
            :offset (/ 9 14)}
 
-          {:background (hsl [3.5 70 70 .7])
+          {:background (hsl [3.5 70 70 0.7])
            :transform (m7/tranfrom [[:scale 1]])
            }])
         _ (react/useEffect
@@ -19414,7 +19410,7 @@ on time?"]
           viewbox2 (vb 0)
           m 30
           d 9.4
-          scale2 [[.5 .5] [-0.5 .5]]
+          scale2 [[0.5 0.5] [-0.5 0.5]]
           ]
 
 
@@ -19424,7 +19420,7 @@ on time?"]
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
                             (take 20 (repeat [8 :vh]))])
-                     {:background-color (hsl [1 70 70 .5])
+                     {:background-color (hsl [1 70 70 0.5])
                       :gap ".2rem"})}
 
        sol/drivative
@@ -19437,7 +19433,7 @@ on time?"]
                  :ref (if (= n slider) animate-ref nil)
                  :style (m7/css
                          [[1 1 (+ 2 (* n 2)) 2  :center :center  1.5 :rem :column]
-                          [(* n .2) 70 (+ 10 (* 1 n))  .2] [] {:gap ".1rem"
+                          [(* n 0.2) 70 (+ 10 (* 1 n))  0.2] [] {:gap ".1rem"
                                                                :z-index 4}])}
 
            d])
@@ -19452,7 +19448,7 @@ on time?"]
         (fn [n d]
           [:div {:style (m7/css
                          [[12 1 (+ 2 (* n 2)) 2  :center :center  1.5 :rem :column]
-                          [1 70 70  .9] [] {:gap ".1rem"
+                          [1 70 70  0.9] [] {:gap ".1rem"
                                                                :z-index 4}])}
 
            d])
@@ -19480,26 +19476,26 @@ on time?"]
            [flames]
 
 
-           [:linearGradient {:x1 .5
+           [:linearGradient {:x1 0.5
                              :y1 1
-                             :x2 .5
+                             :x2 0.5
                              :y2 0
                              :id (name :lgg1)
                              :gradientTransform
                              (m7/tranfrom [[:rotate 10]])}
             [:stop  {:offset 0
-                     :stop-color (hsl [1 70 70 .9])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [.3 70 70 .7])}
+                     :stop-color (hsl [1 70 70 0.9])}]
+            [:stop  {:offset 0.33
+                     :stop-color (hsl [0.3 70 70 0.7])}
              [:animate {:attributeName :offset
-                        :from .2
-                        :to .5
+                        :from 0.2
+                        :to 0.5
                         :dur (m7/not-space [3 "s"])
                         :repeatCount :indefinite}]]
-            [:stop  {:offset .5
-                     :stop-color (hsl [.6 70 70 .8])}
+            [:stop  {:offset 0.5
+                     :stop-color (hsl [0.6 70 70 0.8])}
              [:animate {:attributeName :offset
-                        :from .3
+                        :from 0.3
                         :to 1
                         :dur (m7/not-space [3 "s"])
                         :repeatCount :indefinite}]]
@@ -19520,14 +19516,14 @@ on time?"]
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
                      :stop-color (hsl [0 70 70 1])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [.2 70 70 .9])}]
-            [:stop  {:offset .77
-                     :stop-color (hsl [1 70 70 .8])}
+            [:stop  {:offset 0.33
+                     :stop-color (hsl [0.2 70 70 0.9])}]
+            [:stop  {:offset 0.77
+                     :stop-color (hsl [1 70 70 0.8])}
              [:animate {:attributeName :offset
                         :id :f113
                         :begin 0
-                        :from .88
+                        :from 0.88
                         :to 1
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
@@ -19535,7 +19531,7 @@ on time?"]
              [:animate {:attributeName :offset
                         :begin :f123.end
                         :from 1
-                        :to .88
+                        :to 0.88
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]]
             ]
@@ -19545,17 +19541,17 @@ on time?"]
                              :id (name :lg2)
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
-                     :stop-color (hsl [3 40 40 .7])}]
-            [:stop  {:offset .55
-                     :stop-color (hsl [3.3 60 60 .8])}]
+                     :stop-color (hsl [3 40 40 0.7])}]
+            [:stop  {:offset 0.55
+                     :stop-color (hsl [3.3 60 60 0.8])}]
 
 
-            [:stop  {:offset .97
-                     :stop-color (hsl [1 70 70 .2])}
+            [:stop  {:offset 0.97
+                     :stop-color (hsl [1 70 70 0.2])}
              [:animate {:attributeName :offset
                         :id :f114
                         :begin 0
-                        :from .55
+                        :from 0.55
                         :to 1
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
@@ -19563,20 +19559,20 @@ on time?"]
              [:animate {:attributeName :offset
                         :begin :f114.end
                         :from 1
-                        :to .55
+                        :to 0.55
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin 0
                         :id :f115
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin :f115.end
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [13 "s"])
                         :repeatCount :indefinite}]]
 
@@ -19591,9 +19587,9 @@ on time?"]
                      :markerHeight 5}
             [:path {:d (m7/path [-3 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
 
            [:animate {:attributeName :viewBox
                       :to (m7/space viewbox2)
@@ -19643,7 +19639,7 @@ on time?"]
 
 
             [:path#b1 {:d (m7/path [-10 0 :l 0 (ve (* 2 30 ))])
-                       :stroke-width .5
+                       :stroke-width 0.5
                        :marker-end (m7/url (name :mb2))
                        :marker-start (m7/url (name :mb2))
                        :stroke (hsl [2 30 30 1])
@@ -19653,8 +19649,8 @@ on time?"]
 
             [:path#tri2 {:d (m7/path [20 (ve (* 2 30 )) :l (* 16 2) (ve (* 2 7 ))
                                       0 (ve (ve (* 2 7 ))) (ve (* 16 2)) 0])
-                    :stroke (hsl [.5 70 70 1])
-                    :stroke-width .5
+                    :stroke (hsl [0.5 70 70 1])
+                    :stroke-width 0.5
                     :fill (hsl [1 70 70 1])}]
 
 
@@ -19666,13 +19662,13 @@ on time?"]
             [:path {:d (m7/path [ (+ 20 32) 0 :l 0 (ve (* 2 37 ))
                                  20 0 0 (* 2 37 )
                                  -20 0])
-                    :stroke-width .5
+                    :stroke-width 0.5
                     :fill (hsl [2 70 70 1])}]
 
             [:path#b2 {:d (m7/path [ (+ 50 32) 0 :l
                                     0 (ve (* 2 37))])
                        :stroke (hsl [1 20 20 1])
-                       :stroke-width .5
+                       :stroke-width 0.5
 
                        :marker-end (m7/url (name :mb2))
                        :marker-start (m7/url (name :mb2))
@@ -19683,7 +19679,7 @@ on time?"]
 
             [:path#b3 {:d (m7/path [(* 1 20) 0 :l (* 16 2) 0])
                        :stroke (hsl [1 20 20 1])
-                       :stroke-width .5
+                       :stroke-width 0.5
 
                        :marker-end (m7/url (name :mb2))
                        :marker-start (m7/url (name :mb2))
@@ -19725,7 +19721,7 @@ on time?"]
 
            [airplane2 [
                        [:translate [200 120]]
-                       [:scale [.3 .3]]
+                       [:scale [0.3 0.3]]
                        [:rotate -30]]]
 
 
@@ -19740,9 +19736,9 @@ on time?"]
               (fn [x]
                 [:circle {:cx x
                           :cy (ve (+ x 1))
-                          :r .05
+                          :r 0.05
                           :fill (hsl [5 70 70 1])}])
-              (range -200 200 .1))
+              (range -200 200 0.1))
 
 
 
@@ -19753,7 +19749,7 @@ on time?"]
 
            [:circle {:cx 0
                      :cy 0
-                     :r .05
+                     :r 0.05
                      :fill (hsl [5 70 70 1])
                      }]
 
@@ -19761,7 +19757,7 @@ on time?"]
                      :cy 0
                      :r (js/Math.sqrt 5)
                      :fill :none
-                     :stroke-width .01
+                     :stroke-width 0.01
                      :stroke (hsl [5 70 70 1])}]
 
 
@@ -19769,9 +19765,9 @@ on time?"]
               (fn [x]
                 [:circle {:cx x
                           :cy (ve (- 3 (* x x)))
-                          :r .05
+                          :r 0.05
                           :fill (hsl [0 70 70 1])}])
-              (range -200 200 .1))
+              (range -200 200 0.1))
 
 
 
@@ -19797,19 +19793,19 @@ on time?"]
         anm-style
         (clj->js
          [{
-           :background (hsl [.5 70 70 .1])
+           :background (hsl [0.5 70 70 0.1])
            :transform (m7/tranfrom [[:rotate "10deg"]])
            }
-          {:background (hsl [.9 70 70 .7])
+          {:background (hsl [0.9 70 70 0.7])
            :transform (m7/tranfrom [[:rotate "-10deg"]])
 
            }
 
-          {:background (hsl [2 70 70 .9])
-           :transform (m7/tranfrom [[:scale .9]])
+          {:background (hsl [2 70 70 0.9])
+           :transform (m7/tranfrom [[:scale 0.9]])
            :offset (/ 9 14)}
 
-          {:background (hsl [3.5 70 70 .7])
+          {:background (hsl [3.5 70 70 0.7])
            :transform (m7/tranfrom [[:scale 1]])
            }])
         _ (react/useEffect
@@ -19851,7 +19847,7 @@ on time?"]
           viewbox2 (vb 0)
           m 30
           d 9.4
-          scale2 [[.5 .5] [-0.5 .5]]
+          scale2 [[0.5 0.5] [-0.5 0.5]]
           ]
 
 
@@ -19861,7 +19857,7 @@ on time?"]
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
                             (take 20 (repeat [8 :vh]))])
-                     {:background-color (hsl [1 70 70 .5])
+                     {:background-color (hsl [1 70 70 0.5])
                       :gap ".2rem"})}
 
 
@@ -19872,7 +19868,7 @@ on time?"]
                  :ref (if (= n slider) animate-ref nil)
                  :style (m7/css
                          [[1 1 (+ 2 (* n 2)) 2  :center :center  1.5 :rem :column]
-                          [(* n .2) 70 (+ 10 (* 1 n))  .2] [] {:gap ".1rem"
+                          [(* n 0.2) 70 (+ 10 (* 1 n))  0.2] [] {:gap ".1rem"
                                                                :z-index 4}])}
 
            d])
@@ -19886,7 +19882,7 @@ on time?"]
         (fn [n d]
           [:div {:style (m7/css
                          [[12 1 (+ 2 (* n 2)) 2  :center :center  1.5 :rem :column]
-                          [1 70 70  .9] [] {:gap ".1rem"
+                          [1 70 70  0.9] [] {:gap ".1rem"
                                                                :z-index 4}])}
 
            d])
@@ -19914,25 +19910,25 @@ on time?"]
 
 
 
-           [:linearGradient {:x1 .5
+           [:linearGradient {:x1 0.5
                              :y1 1
-                             :x2 .5
+                             :x2 0.5
                              :y2 0
                              :id (name :lgg1)
                              :gradientTransform (m7/tranfrom [[:rotate 10]])}
             [:stop  {:offset 0
-                     :stop-color (hsl [1 70 70 .1])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [.3 70 70 .7])}
+                     :stop-color (hsl [1 70 70 0.1])}]
+            [:stop  {:offset 0.33
+                     :stop-color (hsl [0.3 70 70 0.7])}
              [:animate {:attributeName :offset
-                        :from .2
-                        :to .5
+                        :from 0.2
+                        :to 0.5
                         :dur (m7/not-space [3 "s"])
                         :repeatCount :indefinite}]]
-            [:stop  {:offset .5
-                     :stop-color (hsl [.6 70 70 .4])}
+            [:stop  {:offset 0.5
+                     :stop-color (hsl [0.6 70 70 0.4])}
              [:animate {:attributeName :offset
-                        :from .3
+                        :from 0.3
                         :to 1
                         :dur (m7/not-space [3 "s"])
                         :repeatCount :indefinite}]]
@@ -19953,14 +19949,14 @@ on time?"]
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
                      :stop-color (hsl [0 70 70 1])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [.2 70 70 .9])}]
-            [:stop  {:offset .77
-                     :stop-color (hsl [1 70 70 .8])}
+            [:stop  {:offset 0.33
+                     :stop-color (hsl [0.2 70 70 0.9])}]
+            [:stop  {:offset 0.77
+                     :stop-color (hsl [1 70 70 0.8])}
              [:animate {:attributeName :offset
                         :id :f113
                         :begin 0
-                        :from .88
+                        :from 0.88
                         :to 1
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
@@ -19968,7 +19964,7 @@ on time?"]
              [:animate {:attributeName :offset
                         :begin :f123.end
                         :from 1
-                        :to .88
+                        :to 0.88
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]]
             ]
@@ -19978,17 +19974,17 @@ on time?"]
                              :id (name :lg2)
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
-                     :stop-color (hsl [3 40 40 .7])}]
-            [:stop  {:offset .55
-                     :stop-color (hsl [3.3 60 60 .8])}]
+                     :stop-color (hsl [3 40 40 0.7])}]
+            [:stop  {:offset 0.55
+                     :stop-color (hsl [3.3 60 60 0.8])}]
 
 
-            [:stop  {:offset .97
-                     :stop-color (hsl [1 70 70 .2])}
+            [:stop  {:offset 0.97
+                     :stop-color (hsl [1 70 70 0.2])}
              [:animate {:attributeName :offset
                         :id :f114
                         :begin 0
-                        :from .55
+                        :from 0.55
                         :to 1
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
@@ -19996,20 +19992,20 @@ on time?"]
              [:animate {:attributeName :offset
                         :begin :f114.end
                         :from 1
-                        :to .55
+                        :to 0.55
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin 0
                         :id :f115
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin :f115.end
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [13 "s"])
                         :repeatCount :indefinite}]]
 
@@ -20024,9 +20020,9 @@ on time?"]
                      :markerHeight 5}
             [:path {:d (m7/path [-3 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
 
            [:animate {:attributeName :viewBox
                       :to (m7/space viewbox2)
@@ -20050,7 +20046,7 @@ on time?"]
                                  20 0 0 (* 2 30 )
                                  -20 0])
                     :stroke-width 1
-                    :fill (hsl [2 70 70 .7])}]
+                    :fill (hsl [2 70 70 0.7])}]
 
             ;; y = m*(x - x1) + y1
 
@@ -20073,7 +20069,7 @@ on time?"]
               [:path#b1 {:d (m7/path [0 y11
                                       :l 40 y22
                                       ])
-                         :stroke-width .5
+                         :stroke-width 0.5
                          :marker-end (m7/url (name :mb2))
                          :marker-start (m7/url (name :mb2))
                          :stroke (hsl [2 30 30 1])
@@ -20088,9 +20084,9 @@ on time?"]
                                       (ve (* 2 20)) (* 20 1)
 
                                       ])
-                         :stroke (hsl [.5 70 70 1])
-                         :stroke-width .5
-                         :fill (hsl [1 70 70 .7])}]
+                         :stroke (hsl [0.5 70 70 1])
+                         :stroke-width 0.5
+                         :fill (hsl [1 70 70 0.7])}]
 
 
             [:path#tri5 {:d (m7/path [20 (ve (* 2 30 )) :l
@@ -20100,9 +20096,9 @@ on time?"]
 
                                       ])
                          :transform (m7/tranfrom [[:scale 1.5]])
-                         :stroke (hsl [.5 70 70 1])
-                         :stroke-width .5
-                         :fill (hsl [1 70 70 .7])}]
+                         :stroke (hsl [0.5 70 70 1])
+                         :stroke-width 0.5
+                         :fill (hsl [1 70 70 0.7])}]
 
 
             [:path#tri2 {:d (m7/path [20 (ve (* 2 30 )) :l
@@ -20112,8 +20108,8 @@ on time?"]
 
                                       ])
                          :transform (m7/tranfrom [[:scale 1.04]])
-                         :stroke (hsl [.5 70 70 1])
-                         :stroke-width .001
+                         :stroke (hsl [0.5 70 70 1])
+                         :stroke-width 0.001
                          :fill :none}]
 
 
@@ -20125,7 +20121,7 @@ on time?"]
             #_[:path {:d (m7/path [ (+ 20 32) 0 :l 0 (ve (* 2 37 ))
                                  20 0 0 (* 2 37 )
                                  -20 0])
-                    :stroke-width .5
+                    :stroke-width 0.5
                       :fill (hsl [2 70 70 1])}]
 
             (let [x1 (* 3 20)
@@ -20144,7 +20140,7 @@ on time?"]
               [:path#b2 {:d (m7/path [ 0 y11 :l
                                       120 y22])
                          :stroke (hsl [1 20 20 1])
-                         :stroke-width .5
+                         :stroke-width 0.5
 
                          :marker-end (m7/url (name :mb2))
                          :marker-start (m7/url (name :mb2))
@@ -20168,7 +20164,7 @@ on time?"]
               [:path#b3 {:d (m7/path [ 0 y11 :l
                                       120 y22])
                          :stroke (hsl [1 20 20 1])
-                         :stroke-width .5
+                         :stroke-width 0.5
 
                          :marker-end (m7/url (name :mb2))
                          :marker-start (m7/url (name :mb2))
@@ -20179,7 +20175,7 @@ on time?"]
 
             #_[:path#b3 {:d (m7/path [(* 1 20) 0 :l (* 16 2) 0])
                        :stroke (hsl [1 20 20 1])
-                       :stroke-width .5
+                       :stroke-width 0.5
 
                        :marker-end (m7/url (name :mb2))
                        :marker-start (m7/url (name :mb2))
@@ -20273,7 +20269,7 @@ on time?"]
 
            #_[airplane2 [
                        [:translate [0 0]]
-                       [:scale [.5 .5]]
+                       [:scale [0.5 0.5]]
                        [:rotate 0]]]
 
 
@@ -20288,9 +20284,9 @@ on time?"]
               (fn [x]
                 [:circle {:cx x
                           :cy (ve (+ x 1))
-                          :r .05
+                          :r 0.05
                           :fill (hsl [5 70 70 1])}])
-              (range -200 200 .1))
+              (range -200 200 0.1))
 
 
 
@@ -20301,7 +20297,7 @@ on time?"]
 
            [:circle {:cx 0
                      :cy 0
-                     :r .05
+                     :r 0.05
                      :fill (hsl [5 70 70 1])
                      }]
 
@@ -20309,7 +20305,7 @@ on time?"]
                      :cy 0
                      :r (js/Math.sqrt 5)
                      :fill :none
-                     :stroke-width .01
+                     :stroke-width 0.01
                      :stroke (hsl [5 70 70 1])}]
 
 
@@ -20317,9 +20313,9 @@ on time?"]
               (fn [x]
                 [:circle {:cx x
                           :cy (ve (- 3 (* x x)))
-                          :r .05
+                          :r 0.05
                           :fill (hsl [0 70 70 1])}])
-              (range -200 200 .1))
+              (range -200 200 0.1))
 
 
 
@@ -20350,19 +20346,19 @@ on time?"]
                    (.animate
                     (clj->js
                      [{
-                       :background (hsl [.5 70 70 .1])
+                       :background (hsl [0.5 70 70 0.1])
                        :transform (m7/tranfrom [[:rotate "10deg"]])
                        }
-                      {:background (hsl [.9 70 70 .7])
+                      {:background (hsl [0.9 70 70 0.7])
                        :transform (m7/tranfrom [[:rotate "-10deg"]])
 
                        }
 
-                      {:background (hsl [2 70 70 .9])
-                       :transform (m7/tranfrom [[:scale .9]])
+                      {:background (hsl [2 70 70 0.9])
+                       :transform (m7/tranfrom [[:scale 0.9]])
                        :offset (/ 9 14)}
 
-                      {:background (hsl [3.5 70 70 .7])
+                      {:background (hsl [3.5 70 70 0.7])
                        :transform (m7/tranfrom [[:scale 1]])
                        }])
                     (clj->js
@@ -20382,7 +20378,7 @@ on time?"]
           ax-dx 80
           ax-dy 40
           vb (fn [z]
-               (nth [(map #(* .25 %) [-10 -20  83 40])
+               (nth [(map #(* 0.25 %) [-10 -20  83 40])
                      [0 -180  200 200]
                      [0 -50  100 100]
                      [0 -25  50 50]
@@ -20396,7 +20392,7 @@ on time?"]
           viewbox2 (vb 0)
           m 30
           d 9.4
-          scale2 [[.5 .5] [-0.5 .5]]
+          scale2 [[0.5 0.5] [-0.5 0.5]]
           ]
 
 
@@ -20406,7 +20402,7 @@ on time?"]
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
                             (take 20 (repeat [8 :vh]))])
-                     {:background-color (hsl [1 70 70 .5])
+                     {:background-color (hsl [1 70 70 0.5])
                       :gap ".2rem"})}
 
        (map-indexed
@@ -20416,7 +20412,7 @@ on time?"]
                                    (set-slider n))
                  :style (m7/css
                          [[(+ 0 (* 3 r)) 3 (+ 12 (* 3 c)) 3  f1 f2  1.5 :rem :column]
-                          [(if (= slider n) 3 1) 70 (+ 50 (* 2 n)) .1] []
+                          [(if (= slider n) 3 1) 70 (+ 50 (* 2 n)) 0.1] []
                           (into
                            {:font-size (m7/np [2.1 :rem])
                             :font-family "Roboto Flex"
@@ -20436,7 +20432,7 @@ on time?"]
               (m7/css
                [[8 4  15 8
                  :center :flex-start  3.3 :rem :column]
-                [1.5 70 80  .3] []
+                [1.5 70 80  0.3] []
                 {:gap ".1rem"
                  :color (hsl [0 30 30 1])
                  :z-index 10}])}
@@ -20448,7 +20444,7 @@ on time?"]
               (m7/css
                [[2 8  3 18
                  :center :flex-start  2.2 :rem :column]
-                [1.5 70 80  .3] []
+                [1.5 70 80  0.3] []
                 {:gap ".1rem"
                  :color (hsl [0 30 30 1])
                  :z-index 10}])}
@@ -21332,7 +21328,7 @@ They are probably our most numerous songbird.
                   (m7/css
                    [[2 10  4 15
                      :center :center  4.0 :rem :column]
-                    [1.5 70 80  .5] []
+                    [1.5 70 80  0.5] []
                     {:gap ".1rem"
                      :color (hsl [0 30 60 1])
                      :z-index 10}])}
@@ -21466,7 +21462,7 @@ They are probably our most numerous songbird.
 
 
           #_[m7/m [1 1]]
-          #_[m7/m '[< [:p .00000000000000001 2] .00000000000000001 ]]
+          #_[m7/m '[< [:p 0.00000000000000001 2] 0.00000000000000001 ]]
 
           #_[m7/mx `[= [:k y [+ t ~d]] [:m v [:b [+ t ~d] ]]]]
 
@@ -21500,7 +21496,7 @@ They are probably our most numerous songbird.
         (fn [n d]
           [:div {:style (m7/css
                          [[3 1 (+ 2 (* n 2)) 2  :center :center  1.5 :rem :column]
-                          [(* n .2) 70 (+ 10 (* 1 n))  .2] [] {:gap ".1rem"
+                          [(* n 0.2) 70 (+ 10 (* 1 n))  0.2] [] {:gap ".1rem"
                                                                :z-index 4}])}
 
            d])
@@ -21515,7 +21511,7 @@ They are probably our most numerous songbird.
         (fn [n d]
           [:div {:style (m7/css
                          [[4 1 (+ 2 (* n 2)) 2  :center :center  1.5 :rem :column]
-                          [1 70 70  .9] [] {:gap ".1rem"
+                          [1 70 70  0.9] [] {:gap ".1rem"
                                                                :z-index 4}])}
 
            d])
@@ -21526,7 +21522,7 @@ They are probably our most numerous songbird.
 
        #_[:div {:style (m7/css
                       [[5 4 2 8 :center :center 1.8 :rem :column]
-                       [1 90 90 .01] []
+                       [1 90 90 0.01] []
                        (into
                         {:gap "1rem"
                          :font-family "Roboto Flex"
@@ -21559,11 +21555,11 @@ They are probably our most numerous songbird.
 
        [:div {:style (m7/css
                       [[8 5 1 18 :center :center 2.2 :rem ]
-                       [1 70 90 .1] [] {:gap "1rem"
+                       [1 70 90 0.1] [] {:gap "1rem"
                                         :color (hsl [3 20 30 1])
                                         :z-index 2}])}
 
-        #_[:span {:style {:background-color (hsl [1 70 70 .5])}}"9th October"]
+        #_[:span {:style {:background-color (hsl [1 70 70 0.5])}}"9th October"]
 
 
 
@@ -21588,25 +21584,25 @@ They are probably our most numerous songbird.
            [flames]
 
 
-           [:linearGradient {:x1 .5
+           [:linearGradient {:x1 0.5
                              :y1 1
-                             :x2 .5
+                             :x2 0.5
                              :y2 0
                              :id (name :lgg1)
                              :gradientTransform (m7/tranfrom [[:rotate 10]])}
             [:stop  {:offset 0
-                     :stop-color (hsl [1 70 70 .1])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [.3 70 70 .7])}
+                     :stop-color (hsl [1 70 70 0.1])}]
+            [:stop  {:offset 0.33
+                     :stop-color (hsl [0.3 70 70 0.7])}
              [:animate {:attributeName :offset
-                        :from .2
-                        :to .5
+                        :from 0.2
+                        :to 0.5
                         :dur (m7/not-space [3 "s"])
                         :repeatCount :indefinite}]]
-            [:stop  {:offset .5
-                     :stop-color (hsl [.6 70 70 .4])}
+            [:stop  {:offset 0.5
+                     :stop-color (hsl [0.6 70 70 0.4])}
              [:animate {:attributeName :offset
-                        :from .3
+                        :from 0.3
                         :to 1
                         :dur (m7/not-space [3 "s"])
                         :repeatCount :indefinite}]]
@@ -21627,14 +21623,14 @@ They are probably our most numerous songbird.
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
                      :stop-color (hsl [0 70 70 1])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [.2 70 70 .9])}]
-            [:stop  {:offset .77
-                     :stop-color (hsl [1 70 70 .8])}
+            [:stop  {:offset 0.33
+                     :stop-color (hsl [0.2 70 70 0.9])}]
+            [:stop  {:offset 0.77
+                     :stop-color (hsl [1 70 70 0.8])}
              [:animate {:attributeName :offset
                         :id :f113
                         :begin 0
-                        :from .88
+                        :from 0.88
                         :to 1
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
@@ -21642,7 +21638,7 @@ They are probably our most numerous songbird.
              [:animate {:attributeName :offset
                         :begin :f123.end
                         :from 1
-                        :to .88
+                        :to 0.88
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]]
             ]
@@ -21652,17 +21648,17 @@ They are probably our most numerous songbird.
                              :id (name :lg2)
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
-                     :stop-color (hsl [3 40 40 .7])}]
-            [:stop  {:offset .55
-                     :stop-color (hsl [3.3 60 60 .8])}]
+                     :stop-color (hsl [3 40 40 0.7])}]
+            [:stop  {:offset 0.55
+                     :stop-color (hsl [3.3 60 60 0.8])}]
 
 
-            [:stop  {:offset .97
-                     :stop-color (hsl [1 70 70 .2])}
+            [:stop  {:offset 0.97
+                     :stop-color (hsl [1 70 70 0.2])}
              [:animate {:attributeName :offset
                         :id :f114
                         :begin 0
-                        :from .55
+                        :from 0.55
                         :to 1
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
@@ -21670,20 +21666,20 @@ They are probably our most numerous songbird.
              [:animate {:attributeName :offset
                         :begin :f114.end
                         :from 1
-                        :to .55
+                        :to 0.55
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin 0
                         :id :f115
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin :f115.end
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [13 "s"])
                         :repeatCount :indefinite}]]
 
@@ -21698,9 +21694,9 @@ They are probably our most numerous songbird.
                      :markerHeight 5}
             [:path {:d (m7/path [-3 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
 
            [:animate {:attributeName :viewBox
                       :to (m7/space viewbox2)
@@ -21764,7 +21760,7 @@ They are probably our most numerous songbird.
 
 
             [:path#b1 {:d (m7/path [-10 0 :l 0 (ve (* 2 30 ))])
-                       :stroke-width .5
+                       :stroke-width 0.5
                        :marker-end (m7/url (name :mb2))
                        :marker-start (m7/url (name :mb2))
                        :stroke (hsl [2 30 30 1])
@@ -21774,8 +21770,8 @@ They are probably our most numerous songbird.
 
             [:path#tri2 {:d (m7/path [20 (ve (* 2 30 )) :l (* 16 2) (ve (* 2 7 ))
                                       0 (ve (ve (* 2 7 ))) (ve (* 16 2)) 0])
-                    :stroke (hsl [.5 70 70 1])
-                    :stroke-width .5
+                    :stroke (hsl [0.5 70 70 1])
+                    :stroke-width 0.5
                     :fill (hsl [1 70 70 1])}]
 
 
@@ -21787,13 +21783,13 @@ They are probably our most numerous songbird.
             [:path {:d (m7/path [ (+ 20 32) 0 :l 0 (ve (* 2 37 ))
                                  20 0 0 (* 2 37 )
                                  -20 0])
-                    :stroke-width .5
+                    :stroke-width 0.5
                     :fill (hsl [2 70 70 1])}]
 
             [:path#b2 {:d (m7/path [ (+ 50 32) 0 :l
                                     0 (ve (* 2 37))])
                        :stroke (hsl [1 20 20 1])
-                       :stroke-width .5
+                       :stroke-width 0.5
 
                        :marker-end (m7/url (name :mb2))
                        :marker-start (m7/url (name :mb2))
@@ -21804,7 +21800,7 @@ They are probably our most numerous songbird.
 
             [:path#b3 {:d (m7/path [(* 1 20) 0 :l (* 16 2) 0])
                        :stroke (hsl [1 20 20 1])
-                       :stroke-width .5
+                       :stroke-width 0.5
 
                        :marker-end (m7/url (name :mb2))
                        :marker-start (m7/url (name :mb2))
@@ -21913,7 +21909,7 @@ They are probably our most numerous songbird.
 
              [airplane2 [
                            [:translate [600 120]]
-                        [:scale [.3 .3]]
+                        [:scale [0.3 0.3]]
                          [:rotate -90]]]
 
 
@@ -21939,8 +21935,8 @@ They are probably our most numerous songbird.
             #_[:circle {:r 90
                       :cx 0
                       :cy 0
-                      :stroke (hsl [3 70 70 .5])
-                      :stroke-width .5
+                      :stroke (hsl [3 70 70 0.5])
+                      :stroke-width 0.5
                       :fill (m7/url (name :star))}
 
              #_[:animateTransform {
@@ -21962,7 +21958,7 @@ They are probably our most numerous songbird.
                       :cx 0
                       :cy 0
                       :stroke  (hsl [0 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}]
 
 
@@ -21972,7 +21968,7 @@ They are probably our most numerous songbird.
                       :cx 470
                       :cy 0
                       :stroke (hsl [3 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill (m7/url (name :lg2))
 
                       }
@@ -22014,7 +22010,7 @@ They are probably our most numerous songbird.
                                         (fn [d x]
                                           (* d x))
                                         dx (cycle [ 300 70]))])
-                    :fill (hsl [.2 60 55 .5])}]
+                    :fill (hsl [0.2 60 55 0.5])}]
 
             [:text {}
              [:textPath {:startOffset (m7/np [5 :%])
@@ -22059,7 +22055,7 @@ They are probably our most numerous songbird.
                       :cx 0
                       :cy 0
                       :stroke  (hsl [1 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}]
 
 
@@ -22070,7 +22066,7 @@ They are probably our most numerous songbird.
                       :cx 0
                       :cy 0
                       :stroke  (hsl [2 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill :none}]
 
 
@@ -22081,7 +22077,7 @@ They are probably our most numerous songbird.
                       :cx 0
                       :cy 0
                       :stroke  (hsl [2.7 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill :none}]
 
 
@@ -22097,7 +22093,7 @@ They are probably our most numerous songbird.
 
               (map
                (fn [y]
-                 [p [-300 y  :l 1600 0] .02
+                 [p [-300 y  :l 1600 0] 0.02
                   [1.8 70 70 1]
                   [1.8 70 70 1]])
                (range -5 5))
@@ -22105,7 +22101,7 @@ They are probably our most numerous songbird.
 
               (map
                (fn [x]
-                 [p [x -800  :l 0 1600 ] .02
+                 [p [x -800  :l 0 1600 ] 0.02
                   [2.5 70 70 1]
                   [2.5 70 70 1]])
                (range -5 5))
@@ -22124,9 +22120,9 @@ They are probably our most numerous songbird.
               (fn [x]
                 [:circle {:cx x
                           :cy (ve (+ x 1))
-                          :r .05
+                          :r 0.05
                           :fill (hsl [5 70 70 1])}])
-              (range -200 200 .1))
+              (range -200 200 0.1))
 
 
 
@@ -22135,15 +22131,15 @@ They are probably our most numerous songbird.
             (fn [x]
               [:circle {:cx x
                         :cy (ve (+ (* 2 x) 1))
-                        :r .05
+                        :r 0.05
                         :fill (hsl [5 70 70 1])}])
-            (range -200 200 .5))
+            (range -200 200 0.5))
 
 
 
            [:circle {:cx 0
                      :cy 0
-                     :r .05
+                     :r 0.05
                      :fill (hsl [5 70 70 1])
                      }]
 
@@ -22151,7 +22147,7 @@ They are probably our most numerous songbird.
                      :cy 0
                      :r (js/Math.sqrt 5)
                      :fill :none
-                     :stroke-width .01
+                     :stroke-width 0.01
                      :stroke (hsl [5 70 70 1])}]
 
 
@@ -22159,18 +22155,18 @@ They are probably our most numerous songbird.
               (fn [x]
                 [:circle {:cx x
                           :cy (ve (- 3 (* x x)))
-                          :r .05
+                          :r 0.05
                           :fill (hsl [0 70 70 1])}])
-              (range -200 200 .1))
+              (range -200 200 0.1))
 
 
            (map
             (fn [x]
               [:circle {:cx x
                         :cy (ve (+ (* x x) (* 2 x ) -3 ))
-                        :r .05
+                        :r 0.05
                         :fill (hsl [0 70 70 1])}])
-            (range -200 200 .1))
+            (range -200 200 0.1))
 
 
            [:clipPath#anik
@@ -22192,7 +22188,7 @@ They are probably our most numerous songbird.
                  (grid [100 :vh 100 :vw
                         (take 24 (repeat [8 :vh]))
                         (take 20 (repeat [8 :vh]))])
-                 {:background-color (hsl [1 70 70 .5])
+                 {:background-color (hsl [1 70 70 0.5])
                   :gap ".2rem"})}
 
 
@@ -22200,7 +22196,7 @@ They are probably our most numerous songbird.
           (m7/css
            [[8 4  15 8
              :center :flex-start  3.3 :rem :column]
-            [1.5 70 80  .3] []
+            [1.5 70 80  0.3] []
             {:gap ".1rem"
              :color (hsl [0 30 30 1])
              :z-index 10}])}
@@ -22212,7 +22208,7 @@ They are probably our most numerous songbird.
           (m7/css
            [[2 8  3 18
              :center :flex-start  2.2 :rem :column]
-            [1.5 70 80  .3] []
+            [1.5 70 80  0.3] []
             {:gap ".1rem"
              :color (hsl [0 30 30 1])
              :z-index 10}])}
@@ -22234,13 +22230,13 @@ They are probably our most numerous songbird.
   (let [[c ck] (react/useState [0 0])
         p (fn [svg x y]
             (let [p (js/DOMPoint. x y)
-                  t (-> svg
-                        (.getScreenCTM)
-                        (.inverse))
+                  t (j/call (j/call svg :getScreenCTM) :inverse)
+
                   xy (-> p
                          (.matrixTransform t))]
-              (ck [(fix (-> xy .-x) 1)
-                   (fix (-> xy .-y) 1) ])))
+              (ck [(fix (/ (-> xy .-x) 2) 1)
+                   (fix (* -1 (/ (-> xy .-y) 2)) 1) ])))
+
         ref (react/useRef)
 
         arr [["মোঃ গোলাম কিবরিয়া  খান চৌধুরী" [137 65] 12]
@@ -22336,19 +22332,19 @@ They are probably our most numerous songbird.
                    (.animate
                     (clj->js
                      [{
-                       :background (hsl [.5 70 70 .1])
+                       :background (hsl [0.5 70 70 0.1])
                        :transform (m7/tranfrom [[:rotate "10deg"]])
                        }
-                      {:background (hsl [.9 70 70 .7])
+                      {:background (hsl [0.9 70 70 0.7])
                        :transform (m7/tranfrom [[:rotate "-10deg"]])
 
                        }
 
-                      {:background (hsl [2 70 70 .9])
-                       :transform (m7/tranfrom [[:scale .9]])
+                      {:background (hsl [2 70 70 0.9])
+                       :transform (m7/tranfrom [[:scale 0.9]])
                        :offset (/ 9 14)}
 
-                      {:background (hsl [3.5 70 70 .7])
+                      {:background (hsl [3.5 70 70 0.7])
                        :transform (m7/tranfrom [[:scale 1]])
                        }])
                     (clj->js
@@ -22382,13 +22378,13 @@ They are probably our most numerous songbird.
           viewbox2 (vb 0)
           m 30
           d 9.4
-          scale2 [[.5 .5] [-0.5 .5]]
+          scale2 [[0.5 0.5] [-0.5 0.5]]
           ]
       [:div {:style (merge
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
                             (take 20 (repeat [8 :vh]))])
-                     {:background-color (hsl [1 70 70 .1])
+                     {:background-color (hsl [1 70 70 0.1])
                       :gap ".2rem"})}
 
 
@@ -22401,7 +22397,7 @@ They are probably our most numerous songbird.
                    :style
                    (m7/css
                     [[ (+ 3 n) 1 (+ 1 2) 4  :center :center  1.5 :rem :column]
-                     [(if (= slider n) 3 1) 70 (+ 50 (* 2 n)) .3] []
+                     [(if (= slider n) 3 1) 70 (+ 50 (* 2 n)) 0.3] []
                      (into
                       {:font-size (m7/np [1.7 :rem])
                        :font-family "Roboto Flex"
@@ -22425,9 +22421,9 @@ They are probably our most numerous songbird.
                  :style
                  (m7/css
                   [[ (+ 2 n) 1 (+ 1 2) 18  :center :center  1.1 :rem :column]
-                   [(if (= slider n) 3 1) 70 (+ 50 (* 2 n)) .3] []
+                   [(if (= slider n) 3 1) 70 (+ 50 (* 2 n)) 0.3] []
                    (into
-                    {:font-size (m7/np [.7 :rem])
+                    {:font-size (m7/np [0.7 :rem])
                      :font-family "Roboto Flex"
                      :gap (m7/np [1 :rem])
                      :color (hsl [1 70 (if (= slider n) 40 90) 1])
@@ -22451,7 +22447,7 @@ They are probably our most numerous songbird.
                    :style
                    (m7/css
                     [[ (+ 3 n) 1 (+ 1 2 5) 4  :center :center  1.5 :rem :column]
-                     [(if (= slider n) 3 1) 70 (+ 50 (* 2 n)) .3] []
+                     [(if (= slider n) 3 1) 70 (+ 50 (* 2 n)) 0.3] []
                      (into
                       {:font-size (m7/np [1.7 :rem])
                        :font-family "Roboto Flex"
@@ -22475,7 +22471,7 @@ They are probably our most numerous songbird.
                  :style
                  (m7/css
                   [[ (+ 3 n) 1 (+ 1 2 5) 4  :center :center  1.5 :rem :column]
-                   [(if (= slider n) 3 1) 70 (+ 50 (* 2 n)) .3] []
+                   [(if (= slider n) 3 1) 70 (+ 50 (* 2 n)) 0.3] []
                    (into
                     {:font-size (m7/np [1.7 :rem])
                      :font-family "Roboto Flex"
@@ -22492,7 +22488,7 @@ They are probably our most numerous songbird.
               (m7/css
                [[2 10  12 15
                  :center :center  1.8 :rem :column]
-                [1.5 70 80  .5] []
+                [1.5 70 80  0.5] []
                 {:gap ".1rem"
                  :color (hsl [0 30 60 1])
                  :z-index 10}])}
@@ -22502,7 +22498,7 @@ They are probably our most numerous songbird.
                                 "coming" "cowered" "looked" "cried"] )
              (conj acc
                    [:span " "
-                    [:span {:style {:background-color (hsl [.5 95 70 1])
+                    [:span {:style {:background-color (hsl [0.5 95 70 1])
                                     :color (hsl [1 40 40 1])
                                     :font-weight 600}}
                      (str  e)]])
@@ -22520,7 +22516,7 @@ They are probably our most numerous songbird.
 
        #_[:div {:style (m7/css
                       [[5 4 2 8 :center :center 1.8 :rem :column]
-                       [1 90 90 .01] []
+                       [1 90 90 0.01] []
                        (into
                         {:gap "1rem"
                          :font-family "Roboto Flex"
@@ -22535,11 +22531,11 @@ They are probably our most numerous songbird.
 
        [:div {:style (m7/css
                       [[8 5 1 18 :center :center 2.2 :rem ]
-                       [1 70 90 .1] [] {:gap "1rem"
+                       [1 70 90 0.1] [] {:gap "1rem"
                                         :color (hsl [3 20 30 1])
                                         :z-index 2}])}
 
-        #_[:span {:style {:background-color (hsl [1 70 70 .5])}}"9th October"]
+        #_[:span {:style {:background-color (hsl [1 70 70 0.5])}}"9th October"]
 
 
 
@@ -22564,25 +22560,25 @@ They are probably our most numerous songbird.
            [flames]
 
 
-           [:linearGradient {:x1 .5
+           [:linearGradient {:x1 0.5
                              :y1 1
-                             :x2 .5
+                             :x2 0.5
                              :y2 0
                              :id (name :lgg1)
                              :gradientTransform (m7/tranfrom [[:rotate 10]])}
             [:stop  {:offset 0
-                     :stop-color (hsl [1 70 70 .1])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [.3 70 70 .7])}
+                     :stop-color (hsl [1 70 70 0.1])}]
+            [:stop  {:offset 0.33
+                     :stop-color (hsl [0.3 70 70 0.7])}
              [:animate {:attributeName :offset
-                        :from .2
-                        :to .5
+                        :from 0.2
+                        :to 0.5
                         :dur (m7/not-space [3 "s"])
                         :repeatCount :indefinite}]]
-            [:stop  {:offset .5
-                     :stop-color (hsl [.6 70 70 .4])}
+            [:stop  {:offset 0.5
+                     :stop-color (hsl [0.6 70 70 0.4])}
              [:animate {:attributeName :offset
-                        :from .3
+                        :from 0.3
                         :to 1
                         :dur (m7/not-space [3 "s"])
                         :repeatCount :indefinite}]]
@@ -22603,14 +22599,14 @@ They are probably our most numerous songbird.
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
                      :stop-color (hsl [0 70 70 1])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [.2 70 70 .9])}]
-            [:stop  {:offset .77
-                     :stop-color (hsl [1 70 70 .8])}
+            [:stop  {:offset 0.33
+                     :stop-color (hsl [0.2 70 70 0.9])}]
+            [:stop  {:offset 0.77
+                     :stop-color (hsl [1 70 70 0.8])}
              [:animate {:attributeName :offset
                         :id :f113
                         :begin 0
-                        :from .88
+                        :from 0.88
                         :to 1
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
@@ -22618,7 +22614,7 @@ They are probably our most numerous songbird.
              [:animate {:attributeName :offset
                         :begin :f123.end
                         :from 1
-                        :to .88
+                        :to 0.88
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]]
             ]
@@ -22628,17 +22624,17 @@ They are probably our most numerous songbird.
                              :id (name :lg2)
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
-                     :stop-color (hsl [3 40 40 .7])}]
-            [:stop  {:offset .55
-                     :stop-color (hsl [3.3 60 60 .8])}]
+                     :stop-color (hsl [3 40 40 0.7])}]
+            [:stop  {:offset 0.55
+                     :stop-color (hsl [3.3 60 60 0.8])}]
 
 
-            [:stop  {:offset .97
-                     :stop-color (hsl [1 70 70 .2])}
+            [:stop  {:offset 0.97
+                     :stop-color (hsl [1 70 70 0.2])}
              [:animate {:attributeName :offset
                         :id :f114
                         :begin 0
-                        :from .55
+                        :from 0.55
                         :to 1
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
@@ -22646,20 +22642,20 @@ They are probably our most numerous songbird.
              [:animate {:attributeName :offset
                         :begin :f114.end
                         :from 1
-                        :to .55
+                        :to 0.55
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin 0
                         :id :f115
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin :f115.end
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [13 "s"])
                         :repeatCount :indefinite}]]
 
@@ -22674,9 +22670,9 @@ They are probably our most numerous songbird.
                      :markerHeight 5}
             [:path {:d (m7/path [-3 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
 
            [:animate {:attributeName :viewBox
                       :to (m7/space viewbox2)
@@ -22691,7 +22687,7 @@ They are probably our most numerous songbird.
            (grid-on 1 1)
 
            [:g {:transform (m7/tranfrom [[:translate [180 50] ]
-                                         [:scale [.7 .7]]
+                                         [:scale [0.7 0.7]]
                                          ])}
             [:path {:d (m7/path [0 0 :l 0 (ve (* 2 30 ))
                                  20 0 0 (* 2 30 )
@@ -22701,7 +22697,7 @@ They are probably our most numerous songbird.
 
 
             [:path#b1 {:d (m7/path [-10 0 :l 0 (ve (* 2 30 ))])
-                       :stroke-width .5
+                       :stroke-width 0.5
                        :marker-end (m7/url (name :mb2))
                        :marker-start (m7/url (name :mb2))
                        :stroke (hsl [2 30 30 1])
@@ -22711,8 +22707,8 @@ They are probably our most numerous songbird.
 
             [:path#tri2 {:d (m7/path [20 (ve (* 2 30 )) :l (* 16 2) (ve (* 2 7 ))
                                       0 (ve (ve (* 2 7 ))) (ve (* 16 2)) 0])
-                    :stroke (hsl [.5 70 70 1])
-                    :stroke-width .5
+                    :stroke (hsl [0.5 70 70 1])
+                    :stroke-width 0.5
                     :fill (hsl [1 70 70 1])}]
 
 
@@ -22724,13 +22720,13 @@ They are probably our most numerous songbird.
             [:path {:d (m7/path [ (+ 20 32) 0 :l 0 (ve (* 2 37 ))
                                  20 0 0 (* 2 37 )
                                  -20 0])
-                    :stroke-width .5
+                    :stroke-width 0.5
                     :fill (hsl [2 70 70 1])}]
 
             [:path#b2 {:d (m7/path [ (+ 50 32) 0 :l
                                     0 (ve (* 2 37))])
                        :stroke (hsl [1 20 20 1])
-                       :stroke-width .5
+                       :stroke-width 0.5
 
                        :marker-end (m7/url (name :mb2))
                        :marker-start (m7/url (name :mb2))
@@ -22741,7 +22737,7 @@ They are probably our most numerous songbird.
 
             [:path#b3 {:d (m7/path [(* 1 20) 0 :l (* 16 2) 0])
                        :stroke (hsl [1 20 20 1])
-                       :stroke-width .5
+                       :stroke-width 0.5
 
                        :marker-end (m7/url (name :mb2))
                        :marker-start (m7/url (name :mb2))
@@ -22783,7 +22779,7 @@ They are probably our most numerous songbird.
 
 
            [:g
-            [:g#logo {:transform (m7/tranfrom [[:scale [.3 .3]]])}
+            [:g#logo {:transform (m7/tranfrom [[:scale [0.3 0.3]]])}
              (map
              (fn [x]
                [:g
@@ -22850,7 +22846,7 @@ They are probably our most numerous songbird.
 
              [airplane2 [
                            [:translate [600 120]]
-                        [:scale [.3 .3]]
+                        [:scale [0.3 0.3]]
                         [:rotate -90]]]
             ]
 
@@ -22872,8 +22868,8 @@ They are probably our most numerous songbird.
             #_[:circle {:r 90
                       :cx 0
                       :cy 0
-                      :stroke (hsl [3 70 70 .5])
-                      :stroke-width .5
+                      :stroke (hsl [3 70 70 0.5])
+                      :stroke-width 0.5
                       :fill (m7/url (name :star))}
 
              #_[:animateTransform {
@@ -22895,7 +22891,7 @@ They are probably our most numerous songbird.
                       :cx 0
                       :cy 0
                       :stroke  (hsl [0 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}]
 
 
@@ -22905,7 +22901,7 @@ They are probably our most numerous songbird.
                       :cx 470
                       :cy 0
                       :stroke (hsl [3 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill (m7/url (name :lg2))
 
                       }
@@ -22947,7 +22943,7 @@ They are probably our most numerous songbird.
                                         (fn [d x]
                                           (* d x))
                                         dx (cycle [ 300 70]))])
-                    :fill (hsl [.2 60 55 .5])}]
+                    :fill (hsl [0.2 60 55 0.5])}]
 
             [:text {}
              [:textPath {:startOffset (m7/np [5 :%])
@@ -22992,7 +22988,7 @@ They are probably our most numerous songbird.
                       :cx 0
                       :cy 0
                       :stroke  (hsl [1 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}]
 
 
@@ -23003,7 +22999,7 @@ They are probably our most numerous songbird.
                       :cx 0
                       :cy 0
                       :stroke  (hsl [2 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill :none}]
 
 
@@ -23014,7 +23010,7 @@ They are probably our most numerous songbird.
                       :cx 0
                       :cy 0
                       :stroke  (hsl [2.7 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill :none}]
 
 
@@ -23051,19 +23047,19 @@ They are probably our most numerous songbird.
                    (.animate
                     (clj->js
                      [{
-                       :background (hsl [.5 70 70 .1])
+                       :background (hsl [0.5 70 70 0.1])
                        :transform (m7/tranfrom [[:rotate "10deg"]])
                        }
-                      {:background (hsl [.9 70 70 .7])
+                      {:background (hsl [0.9 70 70 0.7])
                        :transform (m7/tranfrom [[:rotate "-10deg"]])
 
                        }
 
-                      {:background (hsl [2 70 70 .9])
-                       :transform (m7/tranfrom [[:scale .9]])
+                      {:background (hsl [2 70 70 0.9])
+                       :transform (m7/tranfrom [[:scale 0.9]])
                        :offset (/ 9 14)}
 
-                      {:background (hsl [3.5 70 70 .7])
+                      {:background (hsl [3.5 70 70 0.7])
                        :transform (m7/tranfrom [[:scale 1]])
                        }])
                     (clj->js
@@ -23097,7 +23093,7 @@ They are probably our most numerous songbird.
           viewbox2 (vb 0)
           m 30
           d 9.4
-          scale2 [[.5 .5] [-0.5 .5]]
+          scale2 [[0.5 0.5] [-0.5 0.5]]
           sen   (fn [a b]
             (reduce
              (fn [acc e]
@@ -23122,7 +23118,7 @@ They are probably our most numerous songbird.
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
                             (take 20 (repeat [8 :vh]))])
-                     {:background-color (hsl [1 70 70 .1])
+                     {:background-color (hsl [1 70 70 0.1])
                       :gap ".2rem"})}
 
 
@@ -23135,9 +23131,9 @@ They are probably our most numerous songbird.
               (m7/css
                [[4 10  4 20
                  :flex-start :flex-start  3.8 :rem :column]
-                [1.5 70 80  .2] []
+                [1.5 70 80  0.2] []
                 {:gap ".1rem"
-                 :color (hsl [.4 30 30 1])
+                 :color (hsl [0.4 30 30 1])
                  :z-index 20
                  }])}
 
@@ -23269,25 +23265,25 @@ Example: I put the high crime rate down to the high unemployment."])
            [flames]
 
 
-           [:linearGradient {:x1 .5
+           [:linearGradient {:x1 0.5
                              :y1 1
-                             :x2 .5
+                             :x2 0.5
                              :y2 0
                              :id (name :lgg1)
                              :gradientTransform (m7/tranfrom [[:rotate 10]])}
             [:stop  {:offset 0
-                     :stop-color (hsl [1 70 70 .1])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [.3 70 70 .7])}
+                     :stop-color (hsl [1 70 70 0.1])}]
+            [:stop  {:offset 0.33
+                     :stop-color (hsl [0.3 70 70 0.7])}
              [:animate {:attributeName :offset
-                        :from .2
-                        :to .5
+                        :from 0.2
+                        :to 0.5
                         :dur (m7/not-space [3 "s"])
                         :repeatCount :indefinite}]]
-            [:stop  {:offset .5
-                     :stop-color (hsl [.6 70 70 .4])}
+            [:stop  {:offset 0.5
+                     :stop-color (hsl [0.6 70 70 0.4])}
              [:animate {:attributeName :offset
-                        :from .3
+                        :from 0.3
                         :to 1
                         :dur (m7/not-space [3 "s"])
                         :repeatCount :indefinite}]]
@@ -23308,14 +23304,14 @@ Example: I put the high crime rate down to the high unemployment."])
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
                      :stop-color (hsl [0 70 70 1])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [.2 70 70 .9])}]
-            [:stop  {:offset .77
-                     :stop-color (hsl [1 70 70 .8])}
+            [:stop  {:offset 0.33
+                     :stop-color (hsl [0.2 70 70 0.9])}]
+            [:stop  {:offset 0.77
+                     :stop-color (hsl [1 70 70 0.8])}
              [:animate {:attributeName :offset
                         :id :f113
                         :begin 0
-                        :from .88
+                        :from 0.88
                         :to 1
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
@@ -23323,7 +23319,7 @@ Example: I put the high crime rate down to the high unemployment."])
              [:animate {:attributeName :offset
                         :begin :f123.end
                         :from 1
-                        :to .88
+                        :to 0.88
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]]
             ]
@@ -23333,17 +23329,17 @@ Example: I put the high crime rate down to the high unemployment."])
                              :id (name :lg2)
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
-                     :stop-color (hsl [3 40 40 .7])}]
-            [:stop  {:offset .55
-                     :stop-color (hsl [3.3 60 60 .8])}]
+                     :stop-color (hsl [3 40 40 0.7])}]
+            [:stop  {:offset 0.55
+                     :stop-color (hsl [3.3 60 60 0.8])}]
 
 
-            [:stop  {:offset .97
-                     :stop-color (hsl [1 70 70 .2])}
+            [:stop  {:offset 0.97
+                     :stop-color (hsl [1 70 70 0.2])}
              [:animate {:attributeName :offset
                         :id :f114
                         :begin 0
-                        :from .55
+                        :from 0.55
                         :to 1
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
@@ -23351,20 +23347,20 @@ Example: I put the high crime rate down to the high unemployment."])
              [:animate {:attributeName :offset
                         :begin :f114.end
                         :from 1
-                        :to .55
+                        :to 0.55
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin 0
                         :id :f115
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin :f115.end
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [13 "s"])
                         :repeatCount :indefinite}]]
 
@@ -23379,9 +23375,9 @@ Example: I put the high crime rate down to the high unemployment."])
                      :markerHeight 5}
             [:path {:d (m7/path [-3 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
 
            [:animate {:attributeName :viewBox
                       :to (m7/space viewbox2)
@@ -23395,7 +23391,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
            (grid-on 1 1)
            #_[:g {:transform (m7/tranfrom [[:translate [-150 -200]]
-                                         [:scale [.66 .6]]])}
+                                         [:scale [0.66 0.6]]])}
             [bdmap/bd-map]]
 
 
@@ -23429,9 +23425,9 @@ Example: I put the high crime rate down to the high unemployment."])
                                  (* 2 d d)]]
                     [:scale x]
                     ])
-                  :stroke (hsl [4 70 70 .1])
+                  :stroke (hsl [4 70 70 0.1])
                   :stroke-width 10
-                  :fill  (hsl [0 70 70 .1])
+                  :fill  (hsl [0 70 70 0.1])
                   }
                  ]
 
@@ -23458,9 +23454,9 @@ Example: I put the high crime rate down to the high unemployment."])
                                    (* 2 d d)]]
                       [:scale x]
                       ])
-                    :stroke (hsl [4 70 70 .1])
+                    :stroke (hsl [4 70 70 0.1])
                     :stroke-width 10
-                    :fill  (hsl [0 70 70 .2])
+                    :fill  (hsl [0 70 70 0.2])
                     }
                    ]
                 ])
@@ -23469,7 +23465,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
              [airplane2 [
                          [:translate [600 120]]
-                         [:scale [.3 .3]]
+                         [:scale [0.3 0.3]]
                          [:rotate -90]]]
             ]
 
@@ -23491,8 +23487,8 @@ Example: I put the high crime rate down to the high unemployment."])
             #_[:circle {:r 90
                       :cx 0
                       :cy 0
-                      :stroke (hsl [3 70 70 .5])
-                      :stroke-width .5
+                      :stroke (hsl [3 70 70 0.5])
+                      :stroke-width 0.5
                       :fill (m7/url (name :star))}
 
              #_[:animateTransform {
@@ -23514,7 +23510,7 @@ Example: I put the high crime rate down to the high unemployment."])
                       :cx 0
                       :cy 0
                       :stroke  (hsl [0 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}]
 
 
@@ -23524,7 +23520,7 @@ Example: I put the high crime rate down to the high unemployment."])
                       :cx 470
                       :cy 0
                       :stroke (hsl [3 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill (m7/url (name :lg2))
 
                       }
@@ -23566,11 +23562,11 @@ Example: I put the high crime rate down to the high unemployment."])
                                         (fn [d x]
                                           (* d x))
                                         dx (cycle [ 300 70]))])
-                    :fill (hsl [.2 60 55 .5])}]
+                    :fill (hsl [0.2 60 55 0.5])}]
 
             [:text {}
              [:textPath {:startOffset (m7/np [5 :%])
-                         :fill (hsl [1 70 70 .3])
+                         :fill (hsl [1 70 70 0.3])
                          :href :#com-id}
               "SCIENCE Café Scientifique"]]
 
@@ -23599,7 +23595,7 @@ Example: I put the high crime rate down to the high unemployment."])
             [:text {:dx -18
                     :x 250
                     :y 0
-                    :fill (hsl [1 18 70 .5])}
+                    :fill (hsl [1 18 70 0.5])}
 
 
 
@@ -23610,8 +23606,8 @@ Example: I put the high crime rate down to the high unemployment."])
             [:circle {:r 250
                       :cx 0
                       :cy 0
-                      :stroke  (hsl [1 70 70 .5])
-                      :stroke-width .5
+                      :stroke  (hsl [1 70 70 0.5])
+                      :stroke-width 0.5
                       :fill :none}]
 
 
@@ -23621,8 +23617,8 @@ Example: I put the high crime rate down to the high unemployment."])
             [:circle {:r 470
                       :cx 0
                       :cy 0
-                      :stroke  (hsl [2 70 70 .5])
-                      :stroke-width .3
+                      :stroke  (hsl [2 70 70 0.5])
+                      :stroke-width 0.3
                       :fill :none}]
 
 
@@ -23632,8 +23628,8 @@ Example: I put the high crime rate down to the high unemployment."])
             [:circle {:r 580
                       :cx 0
                       :cy 0
-                      :stroke  (hsl [2.7 70 70 .5])
-                      :stroke-width .3
+                      :stroke  (hsl [2.7 70 70 0.5])
+                      :stroke-width 0.3
                       :fill :none}]
 
 
@@ -23646,22 +23642,22 @@ Example: I put the high crime rate down to the high unemployment."])
                                  80 0 0 (* 2 20 )
                                  -80 0])
                     :stroke-width 1
-                    :fill (hsl [2 70 70 .5])}]
+                    :fill (hsl [2 70 70 0.5])}]
 
 
             [:path#b0 {:d (m7/path [0 0 :l 80 (ve (* 2 20 ))])
-                    :stroke (hsl [2 20 40 .5])
-                    :stroke-width .5
+                    :stroke (hsl [2 20 40 0.5])
+                    :stroke-width 0.5
 
-                    :fill (hsl [2 70 70 .5])}]
+                    :fill (hsl [2 70 70 0.5])}]
 
 
 
             [:path#b1 {:d (m7/path [-10 0 :l 0 (ve (* 2 20 ))])
-                       :stroke-width .5
+                       :stroke-width 0.5
                        :marker-end (m7/url (name :mb2))
                        :marker-start (m7/url (name :mb2))
-                       :stroke (hsl [2 30 30 .5])
+                       :stroke (hsl [2 30 30 0.5])
                        :fill :none}]
 
 
@@ -23675,33 +23671,33 @@ Example: I put the high crime rate down to the high unemployment."])
             [:path#b2 {:d (m7/path [ (+ 50 40) 0 :l
                                     0 (ve (* 2 20))])
                        :stroke (hsl [1 20 20 1])
-                       :stroke-width .5
+                       :stroke-width 0.5
 
                        :marker-end (m7/url (name :mb2))
                        :marker-start (m7/url (name :mb2))
 
-                       :fill (hsl [1 70 70 .5])}]
+                       :fill (hsl [1 70 70 0.5])}]
 
 
 
             [:path#b3 {:d (m7/path [0 10 :l (* 40 2) 0])
-                       :stroke (hsl [1 20 20 .5])
-                       :stroke-width .5
+                       :stroke (hsl [1 20 20 0.5])
+                       :stroke-width 0.5
 
                        :marker-end (m7/url (name :mb2))
                        :marker-start (m7/url (name :mb2))
 
-                       :fill (hsl [1 70 70 .5])}]
+                       :fill (hsl [1 70 70 0.5])}]
 
 
             [:path#b4 {:d (m7/path [0 -50 :l (* 40 2) 0])
-                       :stroke (hsl [1 20 20 .5])
-                       :stroke-width .5
+                       :stroke (hsl [1 20 20 0.5])
+                       :stroke-width 0.5
 
                        :marker-end (m7/url (name :mb2))
                        :marker-start (m7/url (name :mb2))
 
-                       :fill (hsl [1 70 70 .5])}]
+                       :fill (hsl [1 70 70 0.5])}]
 
 
 
@@ -23769,19 +23765,19 @@ Example: I put the high crime rate down to the high unemployment."])
                    (.animate
                     (clj->js
                      [{
-                       :background (hsl [.5 70 70 .1])
+                       :background (hsl [0.5 70 70 0.1])
                        :transform (m7/tranfrom [[:rotate "10deg"]])
                        }
-                      {:background (hsl [.9 70 70 .7])
+                      {:background (hsl [0.9 70 70 0.7])
                        :transform (m7/tranfrom [[:rotate "-10deg"]])
 
                        }
 
-                      {:background (hsl [2 70 70 .9])
-                       :transform (m7/tranfrom [[:scale .9]])
+                      {:background (hsl [2 70 70 0.9])
+                       :transform (m7/tranfrom [[:scale 0.9]])
                        :offset (/ 9 14)}
 
-                      {:background (hsl [3.5 70 70 .7])
+                      {:background (hsl [3.5 70 70 0.7])
                        :transform (m7/tranfrom [[:scale 1]])
                        }])
                     (clj->js
@@ -23813,14 +23809,14 @@ Example: I put the high crime rate down to the high unemployment."])
           viewbox2 (vb 0)
           m 30
           d 9.4
-          scale2 [[.5 .5] [-0.5 .5]]
+          scale2 [[0.5 0.5] [-0.5 0.5]]
           ]
       [:div {:style (merge
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
                             (take 20 (repeat [8 :vh]))])
                      {
-                      :background-color (hsl [1 70 70 .1])
+                      :background-color (hsl [1 70 70 0.1])
                       :gap ".2rem"})}
 
        (map-indexed
@@ -23848,7 +23844,7 @@ Example: I put the high crime rate down to the high unemployment."])
               (m7/css
                [[2 10  4 19
                  :center :center 2.9 :rem :column]
-                [1.5 70 80  .5] []
+                [1.5 70 80  0.5] []
                 {:gap ".1rem"
                  :color (hsl [0 30 30 1])
                  :z-index 10}])}
@@ -24051,7 +24047,7 @@ Example: I put the high crime rate down to the high unemployment."])
              (if (some #(= e %)  ["has" "been"] )
                (conj acc
                      [:span " "
-                      [:span {:style {:background-color (hsl [.5 95 70 1])
+                      [:span {:style {:background-color (hsl [0.5 95 70 1])
                                       :color (hsl [1 40 40 1])
                                       :font-weight 600}}
                        (str  e)]])
@@ -24068,7 +24064,7 @@ Example: I put the high crime rate down to the high unemployment."])
            (if (some #(= e %)  ["had"] )
              (conj acc
                    [:span " "
-                    [:span {:style {:background-color (hsl [.5 95 70 1])
+                    [:span {:style {:background-color (hsl [0.5 95 70 1])
                                     :color (hsl [1 40 40 1])
                                     :font-weight 600}}
                      (str  e)]])
@@ -24086,7 +24082,7 @@ Example: I put the high crime rate down to the high unemployment."])
            (if (some #(= e %)  ["seen"] )
              (conj acc
                    [:span " "
-                    [:span {:style {:background-color (hsl [.5 95 70 1])
+                    [:span {:style {:background-color (hsl [0.5 95 70 1])
                                     :color (hsl [1 40 40 1])
                                     :font-weight 600}}
                      (str  e)]])
@@ -24280,7 +24276,7 @@ Example: I put the high crime rate down to the high unemployment."])
                   (m7/css
                    [[2 10  4 15
                      :center :center  4.0 :rem :column]
-                    [1.5 70 80  .5] []
+                    [1.5 70 80  0.5] []
                     {:gap ".1rem"
                      :color (hsl [0 30 60 1])
                      :z-index 10}])}
@@ -24414,7 +24410,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
 
           #_[m7/m [1 1]]
-          #_[m7/m '[< [:p .00000000000000001 2] .00000000000000001 ]]
+          #_[m7/m '[< [:p 0.00000000000000001 2] 0.00000000000000001 ]]
 
           #_[m7/mx `[= [:k y [+ t ~d]] [:m v [:b [+ t ~d] ]]]]
 
@@ -24448,7 +24444,7 @@ Example: I put the high crime rate down to the high unemployment."])
         (fn [n d]
           [:div {:style (m7/css
                          [[3 1 (+ 2 (* n 1)) 1  :center :center  1.5 :rem :column]
-                          [(* n .2) 70 (+ 10 (* 1 n))  .2] [] {:gap ".1rem"
+                          [(* n 0.2) 70 (+ 10 (* 1 n))  0.2] [] {:gap ".1rem"
                                                                :z-index 4}])}
 
            d])
@@ -24462,7 +24458,7 @@ Example: I put the high crime rate down to the high unemployment."])
         (fn [n d]
           [:div {:style (m7/css
                          [[4 1 (+ 2 (* n 1)) 1  :center :center  1.5 :rem :column]
-                          [1 70 70  .9] [] {:gap ".1rem"
+                          [1 70 70  0.9] [] {:gap ".1rem"
                                                                :z-index 4}])}
 
            d])
@@ -24472,7 +24468,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
        [:div {:style (m7/css
                       [[5 4 4 8 :center :center 3 :rem ]
-                       [1 90 90 .01] []
+                       [1 90 90 0.01] []
                        (into
                         {:gap "1rem"
                          :font-family "Roboto Flex"
@@ -24495,11 +24491,11 @@ Example: I put the high crime rate down to the high unemployment."])
 
        [:div {:style (m7/css
                       [[8 5 1 18 :center :center 2.2 :rem ]
-                       [1 70 90 .1] [] {:gap "1rem"
+                       [1 70 90 0.1] [] {:gap "1rem"
                                         :color (hsl [3 20 30 1])
                                         :z-index 2}])}
 
-        #_[:span {:style {:background-color (hsl [1 70 70 .5])}}"9th October"]
+        #_[:span {:style {:background-color (hsl [1 70 70 0.5])}}"9th October"]
 
 
 
@@ -24524,25 +24520,25 @@ Example: I put the high crime rate down to the high unemployment."])
            [flames]
 
 
-           [:linearGradient {:x1 .5
+           [:linearGradient {:x1 0.5
                              :y1 1
-                             :x2 .5
+                             :x2 0.5
                              :y2 0
                              :id (name :lgg1)
                              :gradientTransform (m7/tranfrom [[:rotate 10]])}
             [:stop  {:offset 0
-                     :stop-color (hsl [1 70 70 .1])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [.3 70 70 .7])}
+                     :stop-color (hsl [1 70 70 0.1])}]
+            [:stop  {:offset 0.33
+                     :stop-color (hsl [0.3 70 70 0.7])}
              [:animate {:attributeName :offset
-                        :from .2
-                        :to .5
+                        :from 0.2
+                        :to 0.5
                         :dur (m7/not-space [3 "s"])
                         :repeatCount :indefinite}]]
-            [:stop  {:offset .5
-                     :stop-color (hsl [.6 70 70 .4])}
+            [:stop  {:offset 0.5
+                     :stop-color (hsl [0.6 70 70 0.4])}
              [:animate {:attributeName :offset
-                        :from .3
+                        :from 0.3
                         :to 1
                         :dur (m7/not-space [3 "s"])
                         :repeatCount :indefinite}]]
@@ -24563,14 +24559,14 @@ Example: I put the high crime rate down to the high unemployment."])
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
                      :stop-color (hsl [0 70 70 1])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [.2 70 70 .9])}]
-            [:stop  {:offset .77
-                     :stop-color (hsl [1 70 70 .8])}
+            [:stop  {:offset 0.33
+                     :stop-color (hsl [0.2 70 70 0.9])}]
+            [:stop  {:offset 0.77
+                     :stop-color (hsl [1 70 70 0.8])}
              [:animate {:attributeName :offset
                         :id :f113
                         :begin 0
-                        :from .88
+                        :from 0.88
                         :to 1
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
@@ -24578,7 +24574,7 @@ Example: I put the high crime rate down to the high unemployment."])
              [:animate {:attributeName :offset
                         :begin :f123.end
                         :from 1
-                        :to .88
+                        :to 0.88
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]]
             ]
@@ -24588,17 +24584,17 @@ Example: I put the high crime rate down to the high unemployment."])
                              :id (name :lg2)
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
-                     :stop-color (hsl [3 40 40 .7])}]
-            [:stop  {:offset .55
-                     :stop-color (hsl [3.3 60 60 .8])}]
+                     :stop-color (hsl [3 40 40 0.7])}]
+            [:stop  {:offset 0.55
+                     :stop-color (hsl [3.3 60 60 0.8])}]
 
 
-            [:stop  {:offset .97
-                     :stop-color (hsl [1 70 70 .2])}
+            [:stop  {:offset 0.97
+                     :stop-color (hsl [1 70 70 0.2])}
              [:animate {:attributeName :offset
                         :id :f114
                         :begin 0
-                        :from .55
+                        :from 0.55
                         :to 1
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
@@ -24606,20 +24602,20 @@ Example: I put the high crime rate down to the high unemployment."])
              [:animate {:attributeName :offset
                         :begin :f114.end
                         :from 1
-                        :to .55
+                        :to 0.55
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin 0
                         :id :f115
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin :f115.end
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [13 "s"])
                         :repeatCount :indefinite}]]
 
@@ -24634,9 +24630,9 @@ Example: I put the high crime rate down to the high unemployment."])
                      :markerHeight 5}
             [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
 
            [:animate {:attributeName :viewBox
                       :to (m7/space viewbox2)
@@ -24728,7 +24724,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
              #_[airplane2 [
                         [:translate [600 120]]
-                        [:scale [.3 .3]]
+                        [:scale [0.3 0.3]]
                         [:rotate -90]]]
             ]
 
@@ -24750,8 +24746,8 @@ Example: I put the high crime rate down to the high unemployment."])
             #_[:circle {:r 90
                       :cx 0
                       :cy 0
-                      :stroke (hsl [3 70 70 .5])
-                      :stroke-width .5
+                      :stroke (hsl [3 70 70 0.5])
+                      :stroke-width 0.5
                       :fill (m7/url (name :star))}
 
              #_[:animateTransform {
@@ -24773,7 +24769,7 @@ Example: I put the high crime rate down to the high unemployment."])
                       :cx 0
                       :cy 0
                       :stroke  (hsl [0 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}]
 
 
@@ -24783,7 +24779,7 @@ Example: I put the high crime rate down to the high unemployment."])
                       :cx 470
                       :cy 0
                       :stroke (hsl [3 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill (m7/url (name :lg2))
 
                       }
@@ -24825,7 +24821,7 @@ Example: I put the high crime rate down to the high unemployment."])
                                         (fn [d x]
                                           (* d x))
                                         dx (cycle [ 300 70]))])
-                    :fill (hsl [.2 60 55 .5])}]
+                    :fill (hsl [0.2 60 55 0.5])}]
 
             [:text {}
              [:textPath {:startOffset (m7/np [5 :%])
@@ -24870,7 +24866,7 @@ Example: I put the high crime rate down to the high unemployment."])
                       :cx 0
                       :cy 0
                       :stroke  (hsl [1 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}]
 
 
@@ -24881,7 +24877,7 @@ Example: I put the high crime rate down to the high unemployment."])
                       :cx 0
                       :cy 0
                       :stroke  (hsl [2 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill :none}]
 
 
@@ -24892,7 +24888,7 @@ Example: I put the high crime rate down to the high unemployment."])
                       :cx 0
                       :cy 0
                       :stroke  (hsl [2.7 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill :none}]
 
 
@@ -24932,19 +24928,19 @@ Example: I put the high crime rate down to the high unemployment."])
                    (.animate
                     (clj->js
                      [{
-                       :background (hsl [.5 70 70 .1])
+                       :background (hsl [0.5 70 70 0.1])
                        :transform  (m7/tranfrom [[:rotate "10deg"]])
                        }
-                      {:background (hsl [.9 70 70 .7])
+                      {:background (hsl [0.9 70 70 0.7])
                        :transform  (m7/tranfrom [[:rotate "-10deg"]])
 
                        }
 
-                      {:background (hsl [2 70 70 .9])
-                       :transform  (m7/tranfrom [[:scale .9]])
+                      {:background (hsl [2 70 70 0.9])
+                       :transform  (m7/tranfrom [[:scale 0.9]])
                        :offset     (/ 9 14)}
 
-                      {:background (hsl [3.5 70 70 .7])
+                      {:background (hsl [3.5 70 70 0.7])
                        :transform  (m7/tranfrom [[:scale 1]])
                        }])
                     (clj->js
@@ -24978,14 +24974,14 @@ Example: I put the high crime rate down to the high unemployment."])
           viewbox2 (vb 0)
           m        30
           d        9.4
-          scale2   [[.5 .5] [-0.5 .5]]
+          scale2   [[0.5 0.5] [-0.5 0.5]]
           ]
       [:div {:style (merge
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
                             (take 20 (repeat [8 :vh]))])
                      {
-                      :background-color (hsl [1 70 70 .1])
+                      :background-color (hsl [1 70 70 0.1])
                       :gap              ".2rem"})}
 
        (map-indexed
@@ -25013,7 +25009,7 @@ Example: I put the high crime rate down to the high unemployment."])
               (m7/css
                [[2 10  4 15
                  :center :center  3.0 :rem :column]
-                [1.5 70 80  .5] []
+                [1.5 70 80  0.5] []
                 {:gap     ".1rem"
                  :color   (hsl [0 30 60 1])
                  :z-index 10}])}
@@ -25035,7 +25031,7 @@ Example: I put the high crime rate down to the high unemployment."])
                   (m7/css
                    [[2 10  4 15
                      :center :center  4.0 :rem :column]
-                    [1.5 70 80  .5] []
+                    [1.5 70 80  0.5] []
                     {:gap     ".1rem"
                      :color   (hsl [0 30 60 1])
                      :z-index 10}])}
@@ -25169,7 +25165,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
 
           #_[m7/m [1 1]]
-          #_[m7/m '[< [:p .00000000000000001 2] .00000000000000001 ]]
+          #_[m7/m '[< [:p 0.00000000000000001 2] 0.00000000000000001 ]]
 
           #_[m7/mx `[= [:k y [+ t ~d]] [:m v [:b [+ t ~d] ]]]]
 
@@ -25203,7 +25199,7 @@ Example: I put the high crime rate down to the high unemployment."])
         (fn [n d]
           [:div {:style (m7/css
                          [[3 1 (+ 2 (* n 2)) 2  :center :center  1.5 :rem :column]
-                          [(* n .2) 70 (+ 10 (* 1 n))  .2] [] {:gap     ".1rem"
+                          [(* n 0.2) 70 (+ 10 (* 1 n))  0.2] [] {:gap     ".1rem"
                                                                :z-index 4}])}
 
            d])
@@ -25218,7 +25214,7 @@ Example: I put the high crime rate down to the high unemployment."])
         (fn [n d]
           [:div {:style (m7/css
                          [[4 1 (+ 2 (* n 2)) 2  :center :center  1.5 :rem :column]
-                          [1 70 70  .9] [] {:gap     ".1rem"
+                          [1 70 70  0.9] [] {:gap     ".1rem"
                                             :z-index 4}])}
 
            d])
@@ -25229,7 +25225,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
        #_[:div {:style (m7/css
                       [[5 4 4 8 :center :center 3 :rem ]
-                       [1 90 90 .01] []
+                       [1 90 90 0.01] []
                        (into
                         {:gap         "1rem"
                          :font-family "Roboto Flex"
@@ -25252,11 +25248,11 @@ Example: I put the high crime rate down to the high unemployment."])
 
        [:div {:style (m7/css
                       [[8 5 1 18 :center :center 2.2 :rem ]
-                       [1 70 90 .1] [] {:gap     "1rem"
+                       [1 70 90 0.1] [] {:gap     "1rem"
                                         :color   (hsl [3 20 30 1])
                                         :z-index 2}])}
 
-        #_[:span {:style {:background-color (hsl [1 70 70 .5])}}"9th October"]
+        #_[:span {:style {:background-color (hsl [1 70 70 0.5])}}"9th October"]
 
 
 
@@ -25281,25 +25277,25 @@ Example: I put the high crime rate down to the high unemployment."])
            [flames]
 
 
-             [:linearGradient {:x1                .5
+             [:linearGradient {:x1                0.5
                                :y1                1
-                               :x2                .5
+                               :x2                0.5
                                :y2                0
                                :id                (name :lgg1)
                                :gradientTransform (m7/tranfrom [[:rotate 10]])}
               [:stop  {:offset     0
-                       :stop-color (hsl [1 70 70 .1])}]
-              [:stop  {:offset     .33
-                       :stop-color (hsl [.3 70 70 .7])}
+                       :stop-color (hsl [1 70 70 0.1])}]
+              [:stop  {:offset     0.33
+                       :stop-color (hsl [0.3 70 70 0.7])}
                [:animate {:attributeName :offset
-                          :from          .2
-                          :to            .5
+                          :from          0.2
+                          :to            0.5
                           :dur           (m7/not-space [3 "s"])
                           :repeatCount   :indefinite}]]
-              [:stop  {:offset     .5
-                       :stop-color (hsl [.6 70 70 .4])}
+              [:stop  {:offset     0.5
+                       :stop-color (hsl [0.6 70 70 0.4])}
                [:animate {:attributeName :offset
-                          :from          .3
+                          :from          0.3
                           :to            1
                           :dur           (m7/not-space [3 "s"])
                           :repeatCount   :indefinite}]]
@@ -25320,14 +25316,14 @@ Example: I put the high crime rate down to the high unemployment."])
                                :gradientTransform (m7/tranfrom [[:rotate 0]])}
               [:stop  {:offset     0
                        :stop-color (hsl [0 70 70 1])}]
-              [:stop  {:offset     .33
-                       :stop-color (hsl [.2 70 70 .9])}]
-              [:stop  {:offset     .77
-                       :stop-color (hsl [1 70 70 .8])}
+              [:stop  {:offset     0.33
+                       :stop-color (hsl [0.2 70 70 0.9])}]
+              [:stop  {:offset     0.77
+                       :stop-color (hsl [1 70 70 0.8])}
                [:animate {:attributeName :offset
                           :id            :f113
                           :begin         0
-                          :from          .88
+                          :from          0.88
                           :to            1
                           :dur           (m7/not-space [120 "s"])
                           :repeatCount   :indefinite}]
@@ -25335,7 +25331,7 @@ Example: I put the high crime rate down to the high unemployment."])
                [:animate {:attributeName :offset
                           :begin         :f123.end
                           :from          1
-                          :to            .88
+                          :to            0.88
                           :dur           (m7/not-space [120 "s"])
                           :repeatCount   :indefinite}]]
             ]
@@ -25345,17 +25341,17 @@ Example: I put the high crime rate down to the high unemployment."])
                                :id                (name :lg2)
                                :gradientTransform (m7/tranfrom [[:rotate 0]])}
               [:stop  {:offset     0
-                       :stop-color (hsl [3 40 40 .7])}]
-              [:stop  {:offset     .55
-                       :stop-color (hsl [3.3 60 60 .8])}]
+                       :stop-color (hsl [3 40 40 0.7])}]
+              [:stop  {:offset     0.55
+                       :stop-color (hsl [3.3 60 60 0.8])}]
 
 
-              [:stop  {:offset     .97
-                       :stop-color (hsl [1 70 70 .2])}
+              [:stop  {:offset     0.97
+                       :stop-color (hsl [1 70 70 0.2])}
                [:animate {:attributeName :offset
                           :id            :f114
                           :begin         0
-                          :from          .55
+                          :from          0.55
                           :to            1
                           :dur           (m7/not-space [120 "s"])
                           :repeatCount   :indefinite}]
@@ -25363,20 +25359,20 @@ Example: I put the high crime rate down to the high unemployment."])
                [:animate {:attributeName :offset
                           :begin         :f114.end
                           :from          1
-                          :to            .55
+                          :to            0.55
                           :dur           (m7/not-space [120 "s"])
                           :repeatCount   :indefinite}]
                [:animate {:attributeName :stop-color
                           :begin         0
                           :id            :f115
-                          :from          (hsl [1 90 80 .2])
-                          :to            (hsl [1 90 80 .8])
+                          :from          (hsl [1 90 80 0.2])
+                          :to            (hsl [1 90 80 0.8])
                           :dur           (m7/not-space [120 "s"])
                           :repeatCount   :indefinite}]
                [:animate {:attributeName :stop-color
                           :begin         :f115.end
-                          :from          (hsl [1 90 80 .2])
-                          :to            (hsl [1 90 80 .8])
+                          :from          (hsl [1 90 80 0.2])
+                          :to            (hsl [1 90 80 0.8])
                           :dur           (m7/not-space [13 "s"])
                           :repeatCount   :indefinite}]]
 
@@ -25391,9 +25387,9 @@ Example: I put the high crime rate down to the high unemployment."])
                        :markerHeight 5}
               [:path {:d            (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                       :stroke       (hsl [5 70 70 1])
-                      :stroke-width .1
+                      :stroke-width 0.1
                       :transform    (m7/tranfrom [[:rotate 0]])
-                      :fill         (m7/hsl [.4 70 70 1])}]]
+                      :fill         (m7/hsl [0.4 70 70 1])}]]
 
              [:animate {:attributeName :viewBox
                         :to            (m7/space viewbox2)
@@ -25480,7 +25476,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
              #_[airplane2 [
                         [:translate [600 120]]
-                        [:scale [.3 .3]]
+                        [:scale [0.3 0.3]]
                         [:rotate -90]]]
             ]
 
@@ -25502,8 +25498,8 @@ Example: I put the high crime rate down to the high unemployment."])
             #_[:circle {:r            90
                         :cx           0
                         :cy           0
-                        :stroke       (hsl [3 70 70 .5])
-                        :stroke-width .5
+                        :stroke       (hsl [3 70 70 0.5])
+                        :stroke-width 0.5
                         :fill         (m7/url (name :star))}
 
                #_[:animateTransform {
@@ -25525,7 +25521,7 @@ Example: I put the high crime rate down to the high unemployment."])
                       :cx           0
                       :cy           0
                       :stroke       (hsl [0 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill         :none}]
 
 
@@ -25535,7 +25531,7 @@ Example: I put the high crime rate down to the high unemployment."])
                       :cx           470
                       :cy           0
                       :stroke       (hsl [3 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill         (m7/url (name :lg2))
 
                       }
@@ -25577,7 +25573,7 @@ Example: I put the high crime rate down to the high unemployment."])
                                         (fn [d x]
                                           (* d x))
                                         dx (cycle [ 300 70]))])
-                    :fill (hsl [.2 60 55 .5])}]
+                    :fill (hsl [0.2 60 55 0.5])}]
 
             [:text {}
              [:textPath {:startOffset (m7/np [5 :%])
@@ -25622,7 +25618,7 @@ Example: I put the high crime rate down to the high unemployment."])
                       :cx           0
                       :cy           0
                       :stroke       (hsl [1 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill         :none}]
 
 
@@ -25633,7 +25629,7 @@ Example: I put the high crime rate down to the high unemployment."])
                       :cx           0
                       :cy           0
                       :stroke       (hsl [2 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill         :none}]
 
 
@@ -25644,7 +25640,7 @@ Example: I put the high crime rate down to the high unemployment."])
                       :cx           0
                       :cy           0
                       :stroke       (hsl [2.7 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill         :none}]
 
 
@@ -25734,7 +25730,7 @@ Example: I put the high crime rate down to the high unemployment."])
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
                             (take 20 (repeat [8 :vh]))])
-                     {:background-color (hsl [1 70 70 .1])
+                     {:background-color (hsl [1 70 70 0.1])
 
                       :gap ".1rem"})}
 
@@ -25743,7 +25739,7 @@ Example: I put the high crime rate down to the high unemployment."])
        #_[:div {:style (m7/css
                       [[2 6 2 9 :center :center
                         1.8 :rem :column]
-                       [1 70 90 .1] []
+                       [1 70 90 0.1] []
                        {:gap "1rem"
                         :color (hsl [3 50 30 1])
                         :z-index 2}])}
@@ -25756,7 +25752,7 @@ Example: I put the high crime rate down to the high unemployment."])
        [:div {:style (m7/css
                       [[2 10 14 9 :center :center
                         2 :rem :column]
-                       [1 70 90 .1] []
+                       [1 70 90 0.1] []
                        {:gap "1rem"
                         :color (hsl [3 50 30 1])
                         :z-index 3}])}
@@ -25778,8 +25774,8 @@ Example: I put the high crime rate down to the high unemployment."])
 
        [:div {:style (m7/css
                       [[2 10 14 9 :center :center
-                        .2 :rem :column]
-                       [1 70 90 .1] []
+                        0.2 :rem :column]
+                       [1 70 90 0.1] []
                        {:gap "1rem"
                         :color (hsl [3 50 30 1])
                         :z-index 2}])}
@@ -25956,7 +25952,7 @@ Example: I put the high crime rate down to the high unemployment."])
               [:circle {:r r
                         :cx 0
                         :cy 0
-                        :fill (hsl [.6 95 70 .5])}]
+                        :fill (hsl [0.6 95 70 0.5])}]
 
 
 
@@ -25964,7 +25960,7 @@ Example: I put the high crime rate down to the high unemployment."])
                         :cx 0
                         :cy 0
                         :stroke  (hsl [0 70 70 1])
-                        :stroke-width .5
+                        :stroke-width 0.5
                         :fill :none}]
 
 
@@ -25973,14 +25969,14 @@ Example: I put the high crime rate down to the high unemployment."])
                         :cx 0
                         :cy 0
                         :stroke  (hsl [0 70 70 1])
-                        :stroke-width .5
+                        :stroke-width 0.5
                         :fill :none}]
 
               [:circle {:r 25
                         :cx 470
                         :cy 0
                         :stroke (hsl [3 70 70 1])
-                        :stroke-width .5
+                        :stroke-width 0.5
                         :fill (m7/url (name :lg2))}
 
 
@@ -26004,7 +26000,7 @@ Example: I put the high crime rate down to the high unemployment."])
                         :cx 0
                         :cy 0
                         :stroke  (hsl [1 70 70 1])
-                        :stroke-width .5
+                        :stroke-width 0.5
                         :fill :none}]
 
 
@@ -26012,7 +26008,7 @@ Example: I put the high crime rate down to the high unemployment."])
                         :cx 0
                         :cy 0
                         :stroke  (hsl [2 70 70 1])
-                        :stroke-width .3
+                        :stroke-width 0.3
                         :fill :none}]
 
 
@@ -26035,7 +26031,7 @@ Example: I put the high crime rate down to the high unemployment."])
                           :fill :none
                           :transform (m7/tranfrom
                                       [[:rotate ang]])
-                          :stroke (hsl [2 70 80 .6])
+                          :stroke (hsl [2 70 80 0.6])
                           :stroke-width 3}])
                 [(ve (/ 180 tn)) 0])]
 
@@ -26049,9 +26045,9 @@ Example: I put the high crime rate down to the high unemployment."])
                                                   (nth turns sec2))))])
                               "z")
                           :id :rrrt1
-                          :fill (hsl [4 70 80 .6])
+                          :fill (hsl [4 70 80 0.6])
                           :transform (m7/tranfrom [[:rotate ang]])
-                          :stroke (hsl [4 70 80 .6])
+                          :stroke (hsl [4 70 80 0.6])
                           :stroke-width 3}])
                 [(ve (/ 180 rad))])]
 
@@ -26067,10 +26063,10 @@ Example: I put the high crime rate down to the high unemployment."])
                                                   (nth turns sec2))))])
                               "z")
                           :id :rrrt1
-                          :fill (hsl [4 70 80 .6])
+                          :fill (hsl [4 70 80 0.6])
                           :transform (m7/tranfrom [
                                                    [:rotate ang]])
-                          :stroke (hsl [4 70 80 .6])
+                          :stroke (hsl [4 70 80 0.6])
                           :stroke-width 3}])
                 [(ve (/ 180 rad))])
 
@@ -26080,7 +26076,7 @@ Example: I put the high crime rate down to the high unemployment."])
                     [:path {:d (m7/path [0 0 :l  0
                                          20 -20 0 0 -20 ])
 
-                            :fill (hsl [0 70 80 .6])
+                            :fill (hsl [0 70 80 0.6])
                             :transform (m7/tranfrom [
                                                      [:rotate ang]
                                                      [:translate [r 0]]])
@@ -26104,7 +26100,7 @@ Example: I put the high crime rate down to the high unemployment."])
                   [:textPath {:href :#rrrt1
                               :font-size 20
                               :startOffset
-                              (+ r (* .5 r
+                              (+ r (* 0.5 r
                                       (js/Math.tan
                                        (/ js/Math.PI
                                           (nth turns sec2)))))}
@@ -26136,9 +26132,9 @@ Example: I put the high crime rate down to the high unemployment."])
                               [0 0 :l r 0 :a r r 0 false false
                                (ve (- r (* 20 adj))) (ve (* 20  op))])
                              :stroke (hsl [3 70 70 1])
-                             :transform (m7/tranfrom [[:scale [.2 .2]]])
+                             :transform (m7/tranfrom [[:scale [0.2 0.2]]])
                              :stroke-width 3
-                             :fill (hsl [3 70 70 .5])}]
+                             :fill (hsl [3 70 70 0.5])}]
 
 
 
@@ -26149,7 +26145,7 @@ Example: I put the high crime rate down to the high unemployment."])
                            :id :tri22
                            :stroke (hsl [1 70 70 1])
                            :stroke-width 1
-                           :fill (hsl [1.5 70 70 .5])}]]
+                           :fill (hsl [1.5 70 70 0.5])}]]
 
 
               #_[:g {:transform (m7/tranfrom [[:translate [0 0]]])}
@@ -26158,9 +26154,9 @@ Example: I put the high crime rate down to the high unemployment."])
                                [0 0 :l r 0 :a r r 0 false false
                                 (ve (- r (* 20 adj2))) (ve (* 20  op2))])
                               :stroke (hsl [4 70 70 1])
-                              :transform (m7/tranfrom [[:scale [.2 .2]]])
+                              :transform (m7/tranfrom [[:scale [0.2 0.2]]])
                               :stroke-width 3
-                              :fill (hsl [3 70 70 .5])}]
+                              :fill (hsl [3 70 70 0.5])}]
 
 
                [:path#sin2 {:d
@@ -26168,7 +26164,7 @@ Example: I put the high crime rate down to the high unemployment."])
                             :id :tri222
                             :stroke (hsl [4.5 70 70 1])
                             :stroke-width 1
-                            :fill (hsl [2.5 70 70 .5])}]
+                            :fill (hsl [2.5 70 70 0.5])}]
 
 
                #_[:text
@@ -26182,7 +26178,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
                 [:textPath {:href :#tri222
                             :font-size 10
-                            :startOffset (+ (* .95 op2 20) (* adj2 20))}
+                            :startOffset (+ (* 0.95 op2 20) (* adj2 20))}
 
                  (str "A1" "")]
 
@@ -26204,12 +26200,12 @@ Example: I put the high crime rate down to the high unemployment."])
 
 
               [:path.tri2 {:d (m7/path
-                          [0 0 :l (* .3 adj 20) 0 0 (ve (* 20 op))])
+                          [0 0 :l (* 0.3 adj 20) 0 0 (ve (* 20 op))])
                       :transform (m7/tranfrom
-                                  [[:translate [(* .7 20 adj) 0]]])
+                                  [[:translate [(* 0.7 20 adj) 0]]])
                       :stroke (hsl [1 70 70 1])
                       :stroke-width 3
-                      :fill (hsl [3.5 70 70 .5])}]
+                      :fill (hsl [3.5 70 70 0.5])}]
 
 
               [:text
@@ -26230,13 +26226,13 @@ Example: I put the high crime rate down to the high unemployment."])
 
                #_[:textPath {:href :#tri22
                              :font-size 15
-                           :startOffset (+ 0 (* 20 .7 adj))}
+                           :startOffset (+ 0 (* 20 0.7 adj))}
 
                 (str "T" "")]
 
                [:textPath {:href :#tri22
                            :font-size 10
-                           :startOffset (+ (* .95 op 20) (* adj 20))}
+                           :startOffset (+ (* 0.95 op 20) (* adj 20))}
 
                 (str "A" "")]
 
@@ -26245,7 +26241,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
                #_[:textPath {:href :#tri22
                            :font-size 10
-                           :startOffset (+ (* .3 adj 20) 0)}
+                           :startOffset (+ (* 0.3 adj 20) 0)}
 
                 #_(str "adj" "")
                 adj
@@ -26258,7 +26254,7 @@ Example: I put the high crime rate down to the high unemployment."])
                            :startOffset
                            (+
                             (* 20 adj)
-                            (* .4 20 op))}
+                            (* 0.4 20 op))}
 
                 (str "opp" "")
 
@@ -26277,7 +26273,7 @@ Example: I put the high crime rate down to the high unemployment."])
                       :dx (:dx angle)
                       :y 0}
                (name tt)
-               (fix (* (/ 180 js/Math.PI) (js/Math.asin .92)
+               (fix (* (/ 180 js/Math.PI) (js/Math.asin 0.92)
                        ) 2)
                (fix (/ 180 (nth turns sec2)) 1)
                [:tspan {:dy -6}
@@ -26289,7 +26285,7 @@ Example: I put the high crime rate down to the high unemployment."])
                         :cx 0
                         :cy 0
                         :stroke  (hsl [2.7 70 70 1])
-                        :stroke-width .3
+                        :stroke-width 0.3
                         :fill :none}]])])]])))
 
 
@@ -26307,8 +26303,8 @@ Example: I put the high crime rate down to the high unemployment."])
       #_(map
        (fn [i]
          [:path {:d (path [-400 (ve (+ ax-dx (* i 2))) :l 1200 0])
-                 :stroke (hsl [4 70 70 .5])
-                 :stroke-width .5
+                 :stroke (hsl [4 70 70 0.5])
+                 :stroke-width 0.5
                  :fill :none}
           ] )
        (range 0 11))
@@ -26318,8 +26314,8 @@ Example: I put the high crime rate down to the high unemployment."])
        (fn [i]
          [:path {:d (path [(+ ax-dy (* i 2)) -400 :l 0 1200 ])
 
-                 :stroke (hsl [4 70 70 .5])
-                 :stroke-width .5
+                 :stroke (hsl [4 70 70 0.5])
+                 :stroke-width 0.5
                  :fill :none}
           ] )
        (range 0 11))
@@ -26335,7 +26331,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
           [:path {:d (path [ (* 100 x)  0 :l 0 -400])
                   :stroke (hsl [(if (= (mod x 2) 0)  5 0) 70 70 1])
-                  :stroke-width .5
+                  :stroke-width 0.5
                   :fill :none}
            ]
 
@@ -26343,7 +26339,7 @@ Example: I put the high crime rate down to the high unemployment."])
           [:path {:d (path [ (* 64 x)  0 :l 0 400])
 
                   :stroke (hsl [0 70 70 1])
-                  :stroke-width .5
+                  :stroke-width 0.5
                   :fill :none}
            ]
 
@@ -26460,12 +26456,12 @@ Example: I put the high crime rate down to the high unemployment."])
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
                             (take 20 (repeat [8 :vh]))])
-                     {:background-color (hsl [1 70 70 .1])})}
+                     {:background-color (hsl [1 70 70 0.1])})}
 
 
        [:div {:style (m7/css
                       [[2 8 3 10 :center :center 2.1 :rem :column]
-                       [1 70 90 .1] []
+                       [1 70 90 0.1] []
                        {:gap "1rem"
 
 
@@ -26615,21 +26611,21 @@ Example: I put the high crime rate down to the high unemployment."])
               [:circle {:r r
                         :cx 0
                         :cy 0
-                        :stroke-width .5
+                        :stroke-width 0.5
                         :stroke-dashoffset 0
                         :stroke-dasharray 0
-                        :stroke (hsl [1 20 20 .8])
-                        :fill (hsl [.6 95 70 .2])}]
+                        :stroke (hsl [1 20 20 0.8])
+                        :fill (hsl [0.6 95 70 0.2])}]
 
 
               #_[:circle {:r (* 2 r)
                         :cx 0
                         :cy 0
-                        :stroke-width .5
+                        :stroke-width 0.5
                         :stroke-dashoffset 0
                         :stroke-dasharray 0
-                        :stroke (hsl [1 20 20 .8])
-                        :fill (hsl [.6 95 70 .2])}]
+                        :stroke (hsl [1 20 20 0.8])
+                        :fill (hsl [0.6 95 70 0.2])}]
 
 
 
@@ -26642,7 +26638,7 @@ Example: I put the high crime rate down to the high unemployment."])
                    [:circle {:r 2.11
                              :cx (* r (js/Math.cos (* se angle)))
                              :cy (ve (* r (js/Math.sin (* se angle))))
-                             :fill (hsl [(mod se 8) 70 70 .9])}]
+                             :fill (hsl [(mod se 8) 70 70 0.9])}]
                    [:text {:x (* r (js/Math.cos  (* se angle)))
                            :y (ve (* r (js/Math.sin (* se  angle))))
                            :font-size 5
@@ -26699,8 +26695,8 @@ Example: I put the high crime rate down to the high unemployment."])
                                              ])
                                    "z")
 
-                           :fill (hsl [5 70 70 .3])
-                           :stroke (hsl [5 30 30 .3])
+                           :fill (hsl [5 70 70 0.3])
+                           :stroke (hsl [5 30 30 0.3])
                            :stroke-width 1}]
 
 
@@ -26725,8 +26721,8 @@ Example: I put the high crime rate down to the high unemployment."])
                                         ])
 
                            :fill :none
-                           :stroke (hsl [.2 30 30 1])
-                           :stroke-width .5}]
+                           :stroke (hsl [0.2 30 30 1])
+                           :stroke-width 0.5}]
 
 
 
@@ -26734,14 +26730,14 @@ Example: I put the high crime rate down to the high unemployment."])
                (map
                 (fn [se]
                   [:g
-                   [:circle {:r .5
+                   [:circle {:r 0.5
                              :cx (* r (* se angle))
                              :cy (ve (* r (js/Math.sin (* se angle))))
-                             :fill (hsl [(mod se 8) 70 70 .9])}]
+                             :fill (hsl [(mod se 8) 70 70 0.9])}]
                    [:text {:x (* r (js/Math.cos (* se angle)))
                            :y (ve (* r (js/Math.sin (* se angle))))
                            :font-size 5
-                           :fill (hsl [4 70 70 .4])} se]])
+                           :fill (hsl [4 70 70 0.4])} se]])
                 (range 0 (* 2 ps)))]
 
 
@@ -26753,7 +26749,7 @@ Example: I put the high crime rate down to the high unemployment."])
                  [:g
                   [:path {:d (m7/path [(* r js/Math.PI se (/ 1 ps)) 1200 :l 0 -2400])
                           :stroke (hsl [(mod se 8) 70 70 1])
-                          :stroke-width .3
+                          :stroke-width 0.3
                           :fill :none
                           }]
                   [:text {:x (* r js/Math.PI se (/ 1 ps))
@@ -26761,7 +26757,7 @@ Example: I put the high crime rate down to the high unemployment."])
                           :dy 10
                           :dx -5
                           :font-size 4
-                          :fill (hsl [4 10 10 .5])
+                          :fill (hsl [4 10 10 0.5])
                           }
                    (mod se (* 2 ps))]
                   ])
@@ -26771,16 +26767,16 @@ Example: I put the high crime rate down to the high unemployment."])
                                         (* 7.5 r angle) (ve (* r (js/Math.sin (* angle 8)) ))
                                         (* 8 r angle) (ve (* r (js/Math.sin (* angle 8)) ))
                                         :c
-                                        (* 6 r angle) (ve (* r .4))
-                                        (* 10 r angle) (ve (* r .4))
+                                        (* 6 r angle) (ve (* r 0.4))
+                                        (* 10 r angle) (ve (* r 0.4))
                                         (* 16 r angle) (ve (* r (- (js/Math.sin (* angle 24)) (js/Math.sin (* angle 8))) ))
                                         :c
-                                        (* .1 r angle) (ve (* r .07))
+                                        (* 0.1 r angle) (ve (* r 0.07))
                                         (* 15.8 r angle) (ve (* r (+ -0.07 (- (js/Math.sin (* angle 40)) (js/Math.sin (* angle 24)))) ))
                                         (* 16 r angle) (ve (* r (- (js/Math.sin (* angle 40)) (js/Math.sin (* angle 24))) ))
                                         :c
-                                        (* 6 r angle) (ve (ve (* r .4)))
-                                        (* 10 r angle) (ve (ve (* r .4)))
+                                        (* 6 r angle) (ve (ve (* r 0.4)))
+                                        (* 10 r angle) (ve (ve (* r 0.4)))
                                         (* 16 r angle) (ve (* r (- (js/Math.sin (* angle 24)) (js/Math.sin (* angle 8))) ))
                                         :c
                                         (* 0.2 r angle) (ve (ve (* r 0.04)))
@@ -26790,8 +26786,8 @@ Example: I put the high crime rate down to the high unemployment."])
                                         ])
 
                            :fill :none
-                           :stroke (hsl [.2 30 30 .5])
-                           :stroke-width .5}]
+                           :stroke (hsl [0.2 30 30 0.5])
+                           :stroke-width 0.5}]
 
 
 
@@ -26812,13 +26808,13 @@ Example: I put the high crime rate down to the high unemployment."])
                  :keyTimes (m7/sami-colon [0  0.15  0.3 0.45  0.6   0.75  0.9 1])
                  :keySplines (m7/sami-colon
                               (map m7/space
-                                   [[.42 0 1 1]
-                                    [0 0 .59 1]
-                                    [.42 0 1 1]
-                                    [0 0 .59 1]
-                                    [.42 0 1 1]
-                                    [0 0 .59 1]
-                                    [.42 0 1 1]]))
+                                   [[0.42 0 1 1]
+                                    [0 0 0.59 1]
+                                    [0.42 0 1 1]
+                                    [0 0 0.59 1]
+                                    [0.42 0 1 1]
+                                    [0 0 0.59 1]
+                                    [0.42 0 1 1]]))
                  :fill :freeze}]]
 
 
@@ -26845,7 +26841,7 @@ Example: I put the high crime rate down to the high unemployment."])
                   :begin :click
                   :dur (sec 10)
                   :repeatCount 20
-                  :keyTimes (m7/sami-colon [0 0.3  0.4 .5
+                  :keyTimes (m7/sami-colon [0 0.3  0.4 0.5
                                             0.6 0.75 0.9 1])
                   :values (m7/sami-colon
                            (map
@@ -26863,7 +26859,7 @@ Example: I put the high crime rate down to the high unemployment."])
                                       ]))
                               )
                             (map #(* % 8) [0.1 0.50 0.7   1
-                                           0.70 0.5  .3  0
+                                           0.70 0.5  0.3  0
                                            ])
                             [1 1.1 1.2 1.5
                              1.5 1.2 1.1 1]
@@ -26895,7 +26891,7 @@ Example: I put the high crime rate down to the high unemployment."])
                      [:circle {:r 4
                                :cx (* r (js/Math.cos (* js/Math.PI se (/ 1 32))))
                                :cy (ve (* r (js/Math.sin (* js/Math.PI se (/ 1 32)))))
-                               :fill (hsl [4 70 70 .5])}]
+                               :fill (hsl [4 70 70 0.5])}]
                      [:text {:x (* r (js/Math.cos (* js/Math.PI se (/ 1 32))))
                              :y (ve (* r (js/Math.sin (* js/Math.PI se (/ 1 32)))))
                              :font-size 10
@@ -26913,7 +26909,7 @@ Example: I put the high crime rate down to the high unemployment."])
                           :fill :none
                           :transform (m7/tranfrom
                                       [[:rotate ang]])
-                          :stroke (hsl [5 70 80 .6])
+                          :stroke (hsl [5 70 80 0.6])
                           :stroke-width 3}])
                 [(ve tn) 0])]
 
@@ -26927,9 +26923,9 @@ Example: I put the high crime rate down to the high unemployment."])
                                                   (nth turns sec2))))])
                               "z")
                           :id :rrrt1
-                          :fill (hsl [4 70 80 .6])
+                          :fill (hsl [4 70 80 0.6])
                           :transform (m7/tranfrom [[:rotate ang]])
-                          :stroke (hsl [4 70 80 .6])
+                          :stroke (hsl [4 70 80 0.6])
                           :stroke-width 3}])
                 [(ve (/ 180 rad))])]
 
@@ -26945,10 +26941,10 @@ Example: I put the high crime rate down to the high unemployment."])
                                                   (nth turns sec2))))])
                               "z")
                           :id :rrrt1
-                          :fill (hsl [4 70 80 .6])
+                          :fill (hsl [4 70 80 0.6])
                           :transform (m7/tranfrom [
                                                    [:rotate ang]])
-                          :stroke (hsl [4 70 80 .6])
+                          :stroke (hsl [4 70 80 0.6])
                           :stroke-width 3}])
                 [(ve (/ 180 rad))])
 
@@ -26958,7 +26954,7 @@ Example: I put the high crime rate down to the high unemployment."])
                     [:path {:d (m7/path [0 0 :l  0
                                          20 -20 0 0 -20 ])
 
-                            :fill (hsl [0 70 80 .6])
+                            :fill (hsl [0 70 80 0.6])
                             :transform (m7/tranfrom [
                                                      [:rotate ang]
                                                      [:translate [r 0]]])
@@ -26982,7 +26978,7 @@ Example: I put the high crime rate down to the high unemployment."])
                   [:textPath {:href :#rrrt1
                               :font-size 20
                               :startOffset
-                              (+ r (* .5 r
+                              (+ r (* 0.5 r
                                       (js/Math.tan
                                        (/ js/Math.PI
                                           (nth turns sec2)))))}
@@ -27014,9 +27010,9 @@ Example: I put the high crime rate down to the high unemployment."])
                                 [0 0 :l r 0 :a r r 0 (if (< op 0) true false) false
                                  (ve (- r (* 20 adj))) (ve (* 20  op))])
                                :stroke (hsl [3 70 70 1])
-                               :transform (m7/tranfrom [[:scale [.2 .2]]])
+                               :transform (m7/tranfrom [[:scale [0.2 0.2]]])
                                :stroke-width 3
-                               :fill (hsl [3 70 70 .5])}]
+                               :fill (hsl [3 70 70 0.5])}]
 
 
 
@@ -27027,7 +27023,7 @@ Example: I put the high crime rate down to the high unemployment."])
                              :id :tri22
                              :stroke (hsl [1 70 70 1])
                              :stroke-width 1
-                             :fill (hsl [1.5 70 70 .5])}]])
+                             :fill (hsl [1.5 70 70 0.5])}]])
 
 
               #_[:g {:transform (m7/tranfrom [[:translate [73 0]]])}
@@ -27036,9 +27032,9 @@ Example: I put the high crime rate down to the high unemployment."])
                                [0 0 :l r 0 :a r r 0 false false
                                 (ve (- r (* 20 adj2))) (ve (* 20  op2))])
                               :stroke (hsl [4 70 70 1])
-                              :transform (m7/tranfrom [[:scale [.2 .2]]])
+                              :transform (m7/tranfrom [[:scale [0.2 0.2]]])
                               :stroke-width 3
-                              :fill (hsl [3 70 70 .5])}]
+                              :fill (hsl [3 70 70 0.5])}]
 
 
                [:path#sin2 {:d
@@ -27046,7 +27042,7 @@ Example: I put the high crime rate down to the high unemployment."])
                             :id :tri222
                             :stroke (hsl [4.5 70 70 1])
                             :stroke-width 1
-                            :fill (hsl [2.5 70 70 .5])}]
+                            :fill (hsl [2.5 70 70 0.5])}]
 
 
                [:text
@@ -27060,7 +27056,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
                 [:textPath {:href :#tri222
                             :font-size 10
-                            :startOffset (+ (* .95 op2 20) (* adj2 20))}
+                            :startOffset (+ (* 0.95 op2 20) (* adj2 20))}
 
                  (str "A1" "")]
 
@@ -27082,12 +27078,12 @@ Example: I put the high crime rate down to the high unemployment."])
 
 
               #_[:path.tri2 {:d (m7/path
-                          [0 0 :l (* .3 adj 20) 0 0 (ve (* 20 op))])
+                          [0 0 :l (* 0.3 adj 20) 0 0 (ve (* 20 op))])
                       :transform (m7/tranfrom
-                                  [[:translate [(* .7 20 adj) 0]]])
+                                  [[:translate [(* 0.7 20 adj) 0]]])
                       :stroke (hsl [1 70 70 1])
                       :stroke-width 3
-                      :fill (hsl [3.5 70 70 .5])}]
+                      :fill (hsl [3.5 70 70 0.5])}]
 
 
               #_[:text
@@ -27107,13 +27103,13 @@ Example: I put the high crime rate down to the high unemployment."])
 
                #_[:textPath {:href :#tri22
                            :font-size 15
-                           :startOffset (+ 0 (* 20 .7 adj))}
+                           :startOffset (+ 0 (* 20 0.7 adj))}
 
                 (str "T" "")]
 
                [:textPath {:href :#tri22
                            :font-size 10
-                           :startOffset (+ (* .95 op 20) (* adj 20))}
+                           :startOffset (+ (* 0.95 op 20) (* adj 20))}
 
                 (str "A" "")]
 
@@ -27122,7 +27118,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
                #_[:textPath {:href :#tri22
                            :font-size 10
-                           :startOffset (+ (* .3 adj 20) 0)}
+                           :startOffset (+ (* 0.3 adj 20) 0)}
 
                 #_(str "adj" "")
                 adj
@@ -27135,7 +27131,7 @@ Example: I put the high crime rate down to the high unemployment."])
                            :startOffset
                            (+
                             (* 20 adj)
-                            (* .4 20 op))}
+                            (* 0.4 20 op))}
 
                 #_(str "opp" "")
 
@@ -27258,7 +27254,7 @@ Example: I put the high crime rate down to the high unemployment."])
                       :dx (:dx angle)
                       :y 0}
                #_(name tt)
-               #_(fix (* (/ 180 js/Math.PI) (js/Math.asin .92)
+               #_(fix (* (/ 180 js/Math.PI) (js/Math.asin 0.92)
                        ) 2)
                (fix (/ 180 (nth turns sec2)) 1)
                [:tspan {:dy -6}
@@ -27331,14 +27327,14 @@ Example: I put the high crime rate down to the high unemployment."])
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
                             (take 20 (repeat [8 :vh]))])
-                     {:background-color (hsl [1 70 70 .1])})}
+                     {:background-color (hsl [1 70 70 0.1])})}
 
 
        (if false
          [:div {:style (m7/css
                         [[2 7 2 9 :center :center
                           3.8 :rem :column]
-                         [1 70 90 .1] []
+                         [1 70 90 0.1] []
                          {:gap "1rem"
                           :color (hsl [3 50 30 1])
                           :z-index 2}])}
@@ -27410,7 +27406,7 @@ Example: I put the high crime rate down to the high unemployment."])
          [:div {:style (m7/css
                         [[2 10 14 9 :center :center
                           2.8 :rem :column]
-                         [1 70 90 .1] []
+                         [1 70 90 0.1] []
                          {:gap "1rem"
                           :color (hsl [3 50 30 1])
                           :z-index 2}])}
@@ -27511,7 +27507,7 @@ Example: I put the high crime rate down to the high unemployment."])
                         :stroke-dashoffset 0
                         :stroke-dasharray 0
                         :stroke (hsl [1 30 70 1])
-                        :fill (hsl [.6 95 70 .5])}]
+                        :fill (hsl [0.6 95 70 0.5])}]
 
 
               (if true
@@ -27523,7 +27519,7 @@ Example: I put the high crime rate down to the high unemployment."])
                      [:circle {:r 4
                                :cx (* r (js/Math.cos (* js/Math.PI se (/ 1 32))))
                                :cy (ve (* r (js/Math.sin (* js/Math.PI se (/ 1 32)))))
-                               :fill (hsl [4 70 70 .5])}]
+                               :fill (hsl [4 70 70 0.5])}]
                      [:text {:x (* r (js/Math.cos (* js/Math.PI se (/ 1 32))))
                              :y (ve (* r (js/Math.sin (* js/Math.PI se (/ 1 32)))))
                              :font-size 10
@@ -27541,7 +27537,7 @@ Example: I put the high crime rate down to the high unemployment."])
                           :fill :none
                           :transform (m7/tranfrom
                                       [[:rotate ang]])
-                          :stroke (hsl [5 70 80 .6])
+                          :stroke (hsl [5 70 80 0.6])
                           :stroke-width 3}])
                 [(ve tn) 0])]
 
@@ -27555,9 +27551,9 @@ Example: I put the high crime rate down to the high unemployment."])
                                                   (nth turns sec2))))])
                               "z")
                           :id :rrrt1
-                          :fill (hsl [4 70 80 .6])
+                          :fill (hsl [4 70 80 0.6])
                           :transform (m7/tranfrom [[:rotate ang]])
-                          :stroke (hsl [4 70 80 .6])
+                          :stroke (hsl [4 70 80 0.6])
                           :stroke-width 3}])
                 [(ve (/ 180 rad))])]
 
@@ -27573,10 +27569,10 @@ Example: I put the high crime rate down to the high unemployment."])
                                                   (nth turns sec2))))])
                               "z")
                           :id :rrrt1
-                          :fill (hsl [4 70 80 .6])
+                          :fill (hsl [4 70 80 0.6])
                           :transform (m7/tranfrom [
                                                    [:rotate ang]])
-                          :stroke (hsl [4 70 80 .6])
+                          :stroke (hsl [4 70 80 0.6])
                           :stroke-width 3}])
                 [(ve (/ 180 rad))])
 
@@ -27586,7 +27582,7 @@ Example: I put the high crime rate down to the high unemployment."])
                     [:path {:d (m7/path [0 0 :l  0
                                          20 -20 0 0 -20 ])
 
-                            :fill (hsl [0 70 80 .6])
+                            :fill (hsl [0 70 80 0.6])
                             :transform (m7/tranfrom [
                                                      [:rotate ang]
                                                      [:translate [r 0]]])
@@ -27610,7 +27606,7 @@ Example: I put the high crime rate down to the high unemployment."])
                   [:textPath {:href :#rrrt1
                               :font-size 20
                               :startOffset
-                              (+ r (* .5 r
+                              (+ r (* 0.5 r
                                       (js/Math.tan
                                        (/ js/Math.PI
                                           (nth turns sec2)))))}
@@ -27642,9 +27638,9 @@ Example: I put the high crime rate down to the high unemployment."])
                                 [0 0 :l r 0 :a r r 0 (if (< op 0) true false) false
                                  (ve (- r (* 20 adj))) (ve (* 20  op))])
                                :stroke (hsl [3 70 70 1])
-                               :transform (m7/tranfrom [[:scale [.2 .2]]])
+                               :transform (m7/tranfrom [[:scale [0.2 0.2]]])
                                :stroke-width 3
-                               :fill (hsl [3 70 70 .5])}]
+                               :fill (hsl [3 70 70 0.5])}]
 
 
 
@@ -27655,7 +27651,7 @@ Example: I put the high crime rate down to the high unemployment."])
                              :id :tri22
                              :stroke (hsl [1 70 70 1])
                              :stroke-width 1
-                             :fill (hsl [1.5 70 70 .5])}]])
+                             :fill (hsl [1.5 70 70 0.5])}]])
 
 
               #_[:g {:transform (m7/tranfrom [[:translate [73 0]]])}
@@ -27664,9 +27660,9 @@ Example: I put the high crime rate down to the high unemployment."])
                                [0 0 :l r 0 :a r r 0 false false
                                 (ve (- r (* 20 adj2))) (ve (* 20  op2))])
                               :stroke (hsl [4 70 70 1])
-                              :transform (m7/tranfrom [[:scale [.2 .2]]])
+                              :transform (m7/tranfrom [[:scale [0.2 0.2]]])
                               :stroke-width 3
-                              :fill (hsl [3 70 70 .5])}]
+                              :fill (hsl [3 70 70 0.5])}]
 
 
                [:path#sin2 {:d
@@ -27674,7 +27670,7 @@ Example: I put the high crime rate down to the high unemployment."])
                             :id :tri222
                             :stroke (hsl [4.5 70 70 1])
                             :stroke-width 1
-                            :fill (hsl [2.5 70 70 .5])}]
+                            :fill (hsl [2.5 70 70 0.5])}]
 
 
                [:text
@@ -27688,7 +27684,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
                 [:textPath {:href :#tri222
                             :font-size 10
-                            :startOffset (+ (* .95 op2 20) (* adj2 20))}
+                            :startOffset (+ (* 0.95 op2 20) (* adj2 20))}
 
                  (str "A1" "")]
 
@@ -27710,12 +27706,12 @@ Example: I put the high crime rate down to the high unemployment."])
 
 
               #_[:path.tri2 {:d (m7/path
-                          [0 0 :l (* .3 adj 20) 0 0 (ve (* 20 op))])
+                          [0 0 :l (* 0.3 adj 20) 0 0 (ve (* 20 op))])
                       :transform (m7/tranfrom
-                                  [[:translate [(* .7 20 adj) 0]]])
+                                  [[:translate [(* 0.7 20 adj) 0]]])
                       :stroke (hsl [1 70 70 1])
                       :stroke-width 3
-                      :fill (hsl [3.5 70 70 .5])}]
+                      :fill (hsl [3.5 70 70 0.5])}]
 
 
               #_[:text
@@ -27735,13 +27731,13 @@ Example: I put the high crime rate down to the high unemployment."])
 
                #_[:textPath {:href :#tri22
                            :font-size 15
-                           :startOffset (+ 0 (* 20 .7 adj))}
+                           :startOffset (+ 0 (* 20 0.7 adj))}
 
                 (str "T" "")]
 
                [:textPath {:href :#tri22
                            :font-size 10
-                           :startOffset (+ (* .95 op 20) (* adj 20))}
+                           :startOffset (+ (* 0.95 op 20) (* adj 20))}
 
                 (str "A" "")]
 
@@ -27750,7 +27746,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
                #_[:textPath {:href :#tri22
                            :font-size 10
-                           :startOffset (+ (* .3 adj 20) 0)}
+                           :startOffset (+ (* 0.3 adj 20) 0)}
 
                 #_(str "adj" "")
                 adj
@@ -27763,7 +27759,7 @@ Example: I put the high crime rate down to the high unemployment."])
                            :startOffset
                            (+
                             (* 20 adj)
-                            (* .4 20 op))}
+                            (* 0.4 20 op))}
 
                 #_(str "opp" "")
 
@@ -27886,7 +27882,7 @@ Example: I put the high crime rate down to the high unemployment."])
                       :dx (:dx angle)
                       :y 0}
                #_(name tt)
-               #_(fix (* (/ 180 js/Math.PI) (js/Math.asin .92)
+               #_(fix (* (/ 180 js/Math.PI) (js/Math.asin 0.92)
                        ) 2)
                (fix (/ 180 (nth turns sec2)) 1)
                [:tspan {:dy -6}
@@ -27960,14 +27956,14 @@ Example: I put the high crime rate down to the high unemployment."])
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
                             (take 20 (repeat [8 :vh]))])
-                     {:background-color (hsl [1 70 70 .1])})}
+                     {:background-color (hsl [1 70 70 0.1])})}
 
 
        (if false
          [:div {:style (m7/css
                         [[2 7 2 9 :center :center
                           3.8 :rem :column]
-                         [1 70 90 .1] []
+                         [1 70 90 0.1] []
                          {:gap "1rem"
                           :color (hsl [3 50 30 1])
                           :z-index 2}])}
@@ -28039,7 +28035,7 @@ Example: I put the high crime rate down to the high unemployment."])
          [:div {:style (m7/css
                         [[2 10 14 9 :center :center
                           2.8 :rem :column]
-                         [1 70 90 .1] []
+                         [1 70 90 0.1] []
                          {:gap "1rem"
                           :color (hsl [3 50 30 1])
                           :z-index 2}])}
@@ -28147,7 +28143,7 @@ Example: I put the high crime rate down to the high unemployment."])
                         :stroke-dashoffset 0
                         :stroke-dasharray 0
                         :stroke (hsl [1 30 70 1])
-                        :fill (hsl [.6 95 70 .5])}]
+                        :fill (hsl [0.6 95 70 0.5])}]
 
 
               (if true
@@ -28159,7 +28155,7 @@ Example: I put the high crime rate down to the high unemployment."])
                      [:circle {:r 4
                                :cx (* r (js/Math.cos (* js/Math.PI se (/ 1 32))))
                                :cy (ve (* r (js/Math.sin (* js/Math.PI se (/ 1 32)))))
-                               :fill (hsl [4 70 70 .5])}]
+                               :fill (hsl [4 70 70 0.5])}]
                      [:text {:x (* r (js/Math.cos (* js/Math.PI se (/ 1 32))))
                              :y (ve (* r (js/Math.sin (* js/Math.PI se (/ 1 32)))))
                              :font-size 10
@@ -28177,7 +28173,7 @@ Example: I put the high crime rate down to the high unemployment."])
                           :fill :none
                           :transform (m7/tranfrom
                                       [[:rotate ang]])
-                          :stroke (hsl [5 70 80 .6])
+                          :stroke (hsl [5 70 80 0.6])
                           :stroke-width 3}])
                 [(ve tn) 0])]
 
@@ -28191,9 +28187,9 @@ Example: I put the high crime rate down to the high unemployment."])
                                                   (nth turns sec2))))])
                               "z")
                           :id :rrrt1
-                          :fill (hsl [4 70 80 .6])
+                          :fill (hsl [4 70 80 0.6])
                           :transform (m7/tranfrom [[:rotate ang]])
-                          :stroke (hsl [4 70 80 .6])
+                          :stroke (hsl [4 70 80 0.6])
                           :stroke-width 3}])
                 [(ve (/ 180 rad))])]
 
@@ -28209,10 +28205,10 @@ Example: I put the high crime rate down to the high unemployment."])
                                                   (nth turns sec2))))])
                               "z")
                           :id :rrrt1
-                          :fill (hsl [4 70 80 .6])
+                          :fill (hsl [4 70 80 0.6])
                           :transform (m7/tranfrom [
                                                    [:rotate ang]])
-                          :stroke (hsl [4 70 80 .6])
+                          :stroke (hsl [4 70 80 0.6])
                           :stroke-width 3}])
                 [(ve (/ 180 rad))])
 
@@ -28222,7 +28218,7 @@ Example: I put the high crime rate down to the high unemployment."])
                     [:path {:d (m7/path [0 0 :l  0
                                          20 -20 0 0 -20 ])
 
-                            :fill (hsl [0 70 80 .6])
+                            :fill (hsl [0 70 80 0.6])
                             :transform (m7/tranfrom [
                                                      [:rotate ang]
                                                      [:translate [r 0]]])
@@ -28246,7 +28242,7 @@ Example: I put the high crime rate down to the high unemployment."])
                   [:textPath {:href :#rrrt1
                               :font-size 20
                               :startOffset
-                              (+ r (* .5 r
+                              (+ r (* 0.5 r
                                       (js/Math.tan
                                        (/ js/Math.PI
                                           (nth turns sec2)))))}
@@ -28278,9 +28274,9 @@ Example: I put the high crime rate down to the high unemployment."])
                                 [0 0 :l r 0 :a r r 0 (if (< op 0) true false) false
                                  (ve (- r (* 20 adj))) (ve (* 20  op))])
                                :stroke (hsl [3 70 70 1])
-                               :transform (m7/tranfrom [[:scale [.2 .2]]])
+                               :transform (m7/tranfrom [[:scale [0.2 0.2]]])
                                :stroke-width 3
-                               :fill (hsl [3 70 70 .5])}]
+                               :fill (hsl [3 70 70 0.5])}]
 
 
 
@@ -28291,7 +28287,7 @@ Example: I put the high crime rate down to the high unemployment."])
                              :id :tri22
                              :stroke (hsl [1 70 70 1])
                              :stroke-width 1
-                             :fill (hsl [1.5 70 70 .5])}]])
+                             :fill (hsl [1.5 70 70 0.5])}]])
 
 
               #_[:g {:transform (m7/tranfrom [[:translate [73 0]]])}
@@ -28300,9 +28296,9 @@ Example: I put the high crime rate down to the high unemployment."])
                                [0 0 :l r 0 :a r r 0 false false
                                 (ve (- r (* 20 adj2))) (ve (* 20  op2))])
                               :stroke (hsl [4 70 70 1])
-                              :transform (m7/tranfrom [[:scale [.2 .2]]])
+                              :transform (m7/tranfrom [[:scale [0.2 0.2]]])
                               :stroke-width 3
-                              :fill (hsl [3 70 70 .5])}]
+                              :fill (hsl [3 70 70 0.5])}]
 
 
                [:path#sin2 {:d
@@ -28310,7 +28306,7 @@ Example: I put the high crime rate down to the high unemployment."])
                             :id :tri222
                             :stroke (hsl [4.5 70 70 1])
                             :stroke-width 1
-                            :fill (hsl [2.5 70 70 .5])}]
+                            :fill (hsl [2.5 70 70 0.5])}]
 
 
                [:text
@@ -28324,7 +28320,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
                 [:textPath {:href :#tri222
                             :font-size 10
-                            :startOffset (+ (* .95 op2 20) (* adj2 20))}
+                            :startOffset (+ (* 0.95 op2 20) (* adj2 20))}
 
                  (str "A1" "")]
 
@@ -28346,12 +28342,12 @@ Example: I put the high crime rate down to the high unemployment."])
 
 
               #_[:path.tri2 {:d (m7/path
-                          [0 0 :l (* .3 adj 20) 0 0 (ve (* 20 op))])
+                          [0 0 :l (* 0.3 adj 20) 0 0 (ve (* 20 op))])
                       :transform (m7/tranfrom
-                                  [[:translate [(* .7 20 adj) 0]]])
+                                  [[:translate [(* 0.7 20 adj) 0]]])
                       :stroke (hsl [1 70 70 1])
                       :stroke-width 3
-                      :fill (hsl [3.5 70 70 .5])}]
+                      :fill (hsl [3.5 70 70 0.5])}]
 
 
               #_[:text
@@ -28371,13 +28367,13 @@ Example: I put the high crime rate down to the high unemployment."])
 
                #_[:textPath {:href :#tri22
                            :font-size 15
-                           :startOffset (+ 0 (* 20 .7 adj))}
+                           :startOffset (+ 0 (* 20 0.7 adj))}
 
                 (str "T" "")]
 
                [:textPath {:href :#tri22
                            :font-size 10
-                           :startOffset (+ (* .95 op 20) (* adj 20))}
+                           :startOffset (+ (* 0.95 op 20) (* adj 20))}
 
                 (str "A" "")]
 
@@ -28386,7 +28382,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
                #_[:textPath {:href :#tri22
                            :font-size 10
-                           :startOffset (+ (* .3 adj 20) 0)}
+                           :startOffset (+ (* 0.3 adj 20) 0)}
 
                 #_(str "adj" "")
                 adj
@@ -28399,7 +28395,7 @@ Example: I put the high crime rate down to the high unemployment."])
                            :startOffset
                            (+
                             (* 20 adj)
-                            (* .4 20 op))}
+                            (* 0.4 20 op))}
 
                 #_(str "opp" "")
 
@@ -28522,7 +28518,7 @@ Example: I put the high crime rate down to the high unemployment."])
                       :dx (:dx angle)
                       :y 0}
                #_(name tt)
-               #_(fix (* (/ 180 js/Math.PI) (js/Math.asin .92)
+               #_(fix (* (/ 180 js/Math.PI) (js/Math.asin 0.92)
                        ) 2)
                (fix (/ 180 (nth turns sec2)) 1)
                [:tspan {:dy -6}
@@ -28553,7 +28549,7 @@ Example: I put the high crime rate down to the high unemployment."])
                  {:attributeName :d
                   :begin :click
                   :dur (sec 10)
-                  :keyTimes (m7/sami-colon [0 0.3  0.4 .5
+                  :keyTimes (m7/sami-colon [0 0.3  0.4 0.5
                                             0.6 0.75 0.9 1])
                   :values (m7/sami-colon
                            (map
@@ -28570,9 +28566,9 @@ Example: I put the high crime rate down to the high unemployment."])
                                       :a 2 j 0 false true   0 -3
                                       ]))
                               )
-                            (map #(* % 5) [0 .50 .7 1
-                                           1 .7 .5 0
-                                           -0.7 .5  ])
+                            (map #(* % 5) [0 0.50 0.7 1
+                                           1 0.7 0.5 0
+                                           -0.7 0.5  ])
                             [1 1.1 1.2 1.5
                              1.5 1.2 1.1 1]
                          ))
@@ -28601,7 +28597,7 @@ Example: I put the high crime rate down to the high unemployment."])
                                             (fn [[x y]]
                                               [0 (* y 10)])
                                             [
-                                             [0 0] [0 (* .5 10)]
+                                             [0 0] [0 (* 0.5 10)]
                                              [0 (* 1 10)] [0 (* 1.5 10)]])))
                :fill :freeze
                }]
@@ -28651,7 +28647,7 @@ Example: I put the high crime rate down to the high unemployment."])
                 (m7/css
                  [[4 3 15 7
                    :center :center  2 :rem :column]
-                  [3.5 70 (+ 50 (* 5 5))  .7] []
+                  [3.5 70 (+ 50 (* 5 5))  0.7] []
                   {:gap ".1rem"
                    :z-index 10}])}
 
@@ -28673,7 +28669,7 @@ Example: I put the high crime rate down to the high unemployment."])
                     (m7/css
                      [[(+ 4 j) 1 (+ 2 i) 1
                        :center :center  2 :rem :column]
-                      [3.5 70 (+ 50 (* 5 5))  .7] []
+                      [3.5 70 (+ 50 (* 5 5))  0.7] []
                       {:gap ".1rem"
                        :z-index 10}])}
               (* i k)]
@@ -28707,20 +28703,20 @@ Example: I put the high crime rate down to the high unemployment."])
                       :fill (hsl [0 70 70 1])
                       }]]
 
-           [:radialGradient {:x1 .5
+           [:radialGradient {:x1 0.5
                              :y1 1
-                             :x2 .5
+                             :x2 0.5
                              :y2 0
                              :id (name :lg1)
                              :gradientTransform (m7/tranfrom [[:rotate 10]])}
             [:stop  {:offset 0
                      :stop-color (hsl [1 70 70 1])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [2 70 70 .7])}]
-            [:stop  {:offset .77
-                     :stop-color (hsl [3 70 70 .4])}
+            [:stop  {:offset 0.33
+                     :stop-color (hsl [2 70 70 0.7])}]
+            [:stop  {:offset 0.77
+                     :stop-color (hsl [3 70 70 0.4])}
              [:animate {:attributeName :offset
-                        :from .88
+                        :from 0.88
                         :to 1
                         :dur (m7/not-space [3 "s"])
                         :repeatCount :indefinite}]]
@@ -28732,18 +28728,18 @@ Example: I put the high crime rate down to the high unemployment."])
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
                      :stop-color (hsl [4.3 40 40 1])}]
-            [:stop  {:offset .55
+            [:stop  {:offset 0.55
                      :stop-color (hsl [4.3 60 60 1])}]
 
-            [:stop  {:offset .77
-                     :stop-color (hsl [4.3 70 70 .3])}
+            [:stop  {:offset 0.77
+                     :stop-color (hsl [4.3 70 70 0.3])}
              ]
 
-            [:stop  {:offset .97
-                     :stop-color (hsl [4 90 80 .2])}
+            [:stop  {:offset 0.97
+                     :stop-color (hsl [4 90 80 0.2])}
              ]
             [:animate {:attributeName :offset
-                       :from .33
+                       :from 0.33
                        :to 1
                        :dur (m7/not-space [3 "s"])
                        :repeatCount :indefinite}]
@@ -28758,9 +28754,9 @@ Example: I put the high crime rate down to the high unemployment."])
                      :markerHeight 5}
             [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
 
            [:animate {:attributeName :viewBox
                       :to (m7/space viewbox2)
@@ -28866,7 +28862,7 @@ Example: I put the high crime rate down to the high unemployment."])
                 (m7/css
                  [[4 3 15 7
                    :center :center  2 :rem :column]
-                  [3.5 70 (+ 50 (* 5 5))  .7] []
+                  [3.5 70 (+ 50 (* 5 5))  0.7] []
                   {:gap ".1rem"
                    :z-index 10}])}
 
@@ -28896,7 +28892,7 @@ Example: I put the high crime rate down to the high unemployment."])
                     (m7/css
                      [[(+ 4 j) 1 (+ 2 i) 1
                        :center :center  2 :rem :column]
-                      [3.5 70 (+ 50 (* 5 5))  .7] []
+                      [3.5 70 (+ 50 (* 5 5))  0.7] []
                       {:gap ".1rem"
                        :z-index 10}])}
               (* i k)]
@@ -28930,20 +28926,20 @@ Example: I put the high crime rate down to the high unemployment."])
                       :fill (hsl [0 70 70 1])
                       }]]
 
-           [:radialGradient {:x1 .5
+           [:radialGradient {:x1 0.5
                              :y1 1
-                             :x2 .5
+                             :x2 0.5
                              :y2 0
                              :id (name :lg1)
                              :gradientTransform (m7/tranfrom [[:rotate 10]])}
             [:stop  {:offset 0
                      :stop-color (hsl [1 70 70 1])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [2 70 70 .7])}]
-            [:stop  {:offset .77
-                     :stop-color (hsl [3 70 70 .4])}
+            [:stop  {:offset 0.33
+                     :stop-color (hsl [2 70 70 0.7])}]
+            [:stop  {:offset 0.77
+                     :stop-color (hsl [3 70 70 0.4])}
              [:animate {:attributeName :offset
-                        :from .88
+                        :from 0.88
                         :to 1
                         :dur (m7/not-space [3 "s"])
                         :repeatCount :indefinite}]]
@@ -28955,18 +28951,18 @@ Example: I put the high crime rate down to the high unemployment."])
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
                      :stop-color (hsl [4.3 40 40 1])}]
-            [:stop  {:offset .55
+            [:stop  {:offset 0.55
                      :stop-color (hsl [4.3 60 60 1])}]
 
-            [:stop  {:offset .77
-                     :stop-color (hsl [4.3 70 70 .3])}
+            [:stop  {:offset 0.77
+                     :stop-color (hsl [4.3 70 70 0.3])}
              ]
 
-            [:stop  {:offset .97
-                     :stop-color (hsl [4 90 80 .2])}
+            [:stop  {:offset 0.97
+                     :stop-color (hsl [4 90 80 0.2])}
              ]
             [:animate {:attributeName :offset
-                       :from .33
+                       :from 0.33
                        :to 1
                        :dur (m7/not-space [3 "s"])
                        :repeatCount :indefinite}]
@@ -28981,9 +28977,9 @@ Example: I put the high crime rate down to the high unemployment."])
                      :markerHeight 5}
             [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
 
            [:animate {:attributeName :viewBox
                       :to (m7/space viewbox2)
@@ -29025,21 +29021,21 @@ Example: I put the high crime rate down to the high unemployment."])
                    :stroke-width 1
                    :stroke (hsl [5 70 70 1])
 
-                   :fill (hsl [5 70 70 .9])}]
+                   :fill (hsl [5 70 70 0.9])}]
 
 
            #_[:path {:d (m7/path [-120 -50 :l 140  -140 -20  130 -110 8 ])
                    :stroke-width 1
                    :stroke (hsl [5 70 70 1])
 
-                   :fill (hsl [5 70 70 .9])}]
+                   :fill (hsl [5 70 70 0.9])}]
 
 
            #_[:path {:d (m7/path [0 -60 :l 20 -130 137 143 ])
                    :stroke-width 1
                    :stroke (hsl [4 70 70 1])
 
-                   :fill (hsl [3.5 70 70 .9])}]
+                   :fill (hsl [3.5 70 70 0.9])}]
 
 
            #_[:path {:d (m7/path [160 -30 :l 0 -194])
@@ -29050,7 +29046,7 @@ Example: I put the high crime rate down to the high unemployment."])
            #_[:path {:d (m7/path [0 -60 :l -120 8 150 10 126 -4.5])
                    :stroke-width 2
                    :stroke (hsl [4 70 70 1])
-                   :fill (hsl [4 70 70 .8])}]
+                   :fill (hsl [4 70 70 0.8])}]
 
 
            [:g
@@ -29140,7 +29136,7 @@ Example: I put the high crime rate down to the high unemployment."])
                       :transform (m7/tranfrom [
                                                [:skewX -0]])
                       :stroke (hsl [4 70 70 1])
-                      :fill (hsl [4 70 70 .3])}]
+                      :fill (hsl [4 70 70 0.3])}]
 
 
               [:path {:d (str
@@ -29254,14 +29250,14 @@ Example: I put the high crime rate down to the high unemployment."])
                       :cx 0
                       :cy 0
                       :stroke  (hsl [0 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}]
 
             [:circle {:r 59
                       :cx 0
                       :cy 0
                       :stroke  (hsl [1 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}]
 
 
@@ -29269,7 +29265,7 @@ Example: I put the high crime rate down to the high unemployment."])
                       :cx 0
                       :cy 0
                       :stroke  (hsl [2 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill :none}]
 
 
@@ -29277,7 +29273,7 @@ Example: I put the high crime rate down to the high unemployment."])
                       :cx 0
                       :cy 0
                       :stroke  (hsl [2.7 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill :none}]
 
             [:path {:d (path [50 0
@@ -29295,7 +29291,7 @@ Example: I put the high crime rate down to the high unemployment."])
                               ])
 
                     :stroke (hsl [3 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :fill :none
                     :transform (m7/tranfrom [[:rotate -100]])
                     }
@@ -29364,7 +29360,7 @@ Example: I put the high crime rate down to the high unemployment."])
                 (m7/css
                  [[4 3 15 7
                    :center :center  2 :rem :column]
-                  [3.5 70 (+ 50 (* 5 5))  .7] []
+                  [3.5 70 (+ 50 (* 5 5))  0.7] []
                   {:gap ".1rem"
                    :z-index 10}])}
 
@@ -29394,7 +29390,7 @@ Example: I put the high crime rate down to the high unemployment."])
                     (m7/css
                      [[(+ 4 j) 1 (+ 2 i) 1
                        :center :center  2 :rem :column]
-                      [3.5 70 (+ 50 (* 5 5))  .7] []
+                      [3.5 70 (+ 50 (* 5 5))  0.7] []
                       {:gap ".1rem"
                        :z-index 10}])}
               (* i k)]
@@ -29428,20 +29424,20 @@ Example: I put the high crime rate down to the high unemployment."])
                       :fill (hsl [0 70 70 1])
                       }]]
 
-           [:radialGradient {:x1 .5
+           [:radialGradient {:x1 0.5
                              :y1 1
-                             :x2 .5
+                             :x2 0.5
                              :y2 0
                              :id (name :lg1)
                              :gradientTransform (m7/tranfrom [[:rotate 10]])}
             [:stop  {:offset 0
                      :stop-color (hsl [1 70 70 1])}]
-            [:stop  {:offset .33
-                     :stop-color (hsl [2 70 70 .7])}]
-            [:stop  {:offset .77
-                     :stop-color (hsl [3 70 70 .4])}
+            [:stop  {:offset 0.33
+                     :stop-color (hsl [2 70 70 0.7])}]
+            [:stop  {:offset 0.77
+                     :stop-color (hsl [3 70 70 0.4])}
              [:animate {:attributeName :offset
-                        :from .88
+                        :from 0.88
                         :to 1
                         :dur (m7/not-space [3 "s"])
                         :repeatCount :indefinite}]]
@@ -29453,18 +29449,18 @@ Example: I put the high crime rate down to the high unemployment."])
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
                      :stop-color (hsl [4.3 40 40 1])}]
-            [:stop  {:offset .55
+            [:stop  {:offset 0.55
                      :stop-color (hsl [4.3 60 60 1])}]
 
-            [:stop  {:offset .77
-                     :stop-color (hsl [4.3 70 70 .3])}
+            [:stop  {:offset 0.77
+                     :stop-color (hsl [4.3 70 70 0.3])}
              ]
 
-            [:stop  {:offset .97
-                     :stop-color (hsl [4 90 80 .2])}
+            [:stop  {:offset 0.97
+                     :stop-color (hsl [4 90 80 0.2])}
              ]
             [:animate {:attributeName :offset
-                       :from .33
+                       :from 0.33
                        :to 1
                        :dur (m7/not-space [3 "s"])
                        :repeatCount :indefinite}]
@@ -29479,9 +29475,9 @@ Example: I put the high crime rate down to the high unemployment."])
                      :markerHeight 5}
             [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
 
            [:animate {:attributeName :viewBox
                       :to (m7/space viewbox2)
@@ -29523,21 +29519,21 @@ Example: I put the high crime rate down to the high unemployment."])
                    :stroke-width 1
                    :stroke (hsl [5 70 70 1])
 
-                   :fill (hsl [5 70 70 .9])}]
+                   :fill (hsl [5 70 70 0.9])}]
 
 
            #_[:path {:d (m7/path [-120 -50 :l 140  -140 -20  130 -110 8 ])
                    :stroke-width 1
                    :stroke (hsl [5 70 70 1])
 
-                   :fill (hsl [5 70 70 .9])}]
+                   :fill (hsl [5 70 70 0.9])}]
 
 
            #_[:path {:d (m7/path [0 -60 :l 20 -130 137 143 ])
                    :stroke-width 1
                    :stroke (hsl [4 70 70 1])
 
-                   :fill (hsl [3.5 70 70 .9])}]
+                   :fill (hsl [3.5 70 70 0.9])}]
 
 
            #_[:path {:d (m7/path [160 -30 :l 0 -194])
@@ -29548,7 +29544,7 @@ Example: I put the high crime rate down to the high unemployment."])
            #_[:path {:d (m7/path [0 -60 :l -120 8 150 10 126 -4.5])
                    :stroke-width 2
                    :stroke (hsl [4 70 70 1])
-                   :fill (hsl [4 70 70 .8])}]
+                   :fill (hsl [4 70 70 0.8])}]
 
 
            [:g
@@ -29638,7 +29634,7 @@ Example: I put the high crime rate down to the high unemployment."])
                       :transform (m7/tranfrom [
                                                [:skewX -0]])
                       :stroke (hsl [4 70 70 1])
-                      :fill (hsl [4 70 70 .3])}]
+                      :fill (hsl [4 70 70 0.3])}]
 
 
               [:path {:d (str
@@ -29752,14 +29748,14 @@ Example: I put the high crime rate down to the high unemployment."])
                       :cx 0
                       :cy 0
                       :stroke  (hsl [0 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}]
 
             [:circle {:r 59
                       :cx 0
                       :cy 0
                       :stroke  (hsl [1 70 70 1])
-                      :stroke-width .5
+                      :stroke-width 0.5
                       :fill :none}]
 
 
@@ -29767,7 +29763,7 @@ Example: I put the high crime rate down to the high unemployment."])
                       :cx 0
                       :cy 0
                       :stroke  (hsl [2 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill :none}]
 
 
@@ -29775,7 +29771,7 @@ Example: I put the high crime rate down to the high unemployment."])
                       :cx 0
                       :cy 0
                       :stroke  (hsl [2.7 70 70 1])
-                      :stroke-width .3
+                      :stroke-width 0.3
                       :fill :none}]
 
             [:path {:d (path [50 0
@@ -29793,7 +29789,7 @@ Example: I put the high crime rate down to the high unemployment."])
                               ])
 
                     :stroke (hsl [3 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :fill :none
                     :transform (m7/tranfrom [[:rotate -100]])
                     }
@@ -29884,7 +29880,7 @@ Example: I put the high crime rate down to the high unemployment."])
               (m7/css
                [[4 2  6 2
                  :center :center  3.0 :rem :column]
-                [3.5 70 (+ 50 (* 5 5))  .7] []
+                [3.5 70 (+ 50 (* 5 5))  0.7] []
                 {:gap ".1rem"
                  :color (hsl [0 30 60 1])
                  :z-index 10}])}
@@ -29897,7 +29893,7 @@ Example: I put the high crime rate down to the high unemployment."])
                   (m7/css
                    [[2 5  8 8
                      :center :center 4.0 :rem :column]
-                    [3.5 70 (+ 50 (* 5 5))  .7] []
+                    [3.5 70 (+ 50 (* 5 5))  0.7] []
                     {:gap ".1rem"
                      :color (hsl [0 30 60 1])
                      :z-index 10}])}
@@ -30015,7 +30011,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
 
             #_[m7/m [1 1]]
-            #_[m7/m '[< [:p .00000000000000001 2] .00000000000000001 ]]
+            #_[m7/m '[< [:p 0.00000000000000001 2] 0.00000000000000001 ]]
 
             #_[m7/mx `[= [:k y [+ t ~d]] [:m v [:b [+ t ~d] ]]]]
 
@@ -30066,7 +30062,7 @@ Example: I put the high crime rate down to the high unemployment."])
                             :stroke-opacity 1
                             :fill (m7/hsl [3 70 70 1])
                             :fill-opacity 1}
-                    :transform (m7/tranfrom [[:scale .4]
+                    :transform (m7/tranfrom [[:scale 0.4]
                                              [:rotate 180]
                                              [:translate [12.5 0]]])
                     }]]
@@ -30092,7 +30088,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
            [:g#scale-1 {:transform (m7/tranfrom [
                                                  [:rotate -90]
-                                                 [:scale [.2 .2]]])}
+                                                 [:scale [0.2 0.2]]])}
             (map (fn [x]
                    [:circle {:cx (* 2 2 50 x)
                              :cy 0
@@ -30141,7 +30137,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
              [airplane2 [[:rotate 0]
                          [:translate [-110 0]]
-                         [:scale [.3 .3]]]]
+                         [:scale [0.3 0.3]]]]
 
 
 
@@ -30154,7 +30150,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
 
 
-           #_(let [a .11]
+           #_(let [a 0.11]
              [:g.scale2
               (map (fn [x]
                      [:circle {:cx (*  2   a  (* 10 x)  (* 10 x))
@@ -30232,7 +30228,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
                [airplane2 [[:rotate 0]
                            [:translate [-110 150]]
-                           [:scale [.3 .3]]]]
+                           [:scale [0.3 0.3]]]]
 
 
 
@@ -30301,7 +30297,7 @@ Example: I put the high crime rate down to the high unemployment."])
        #_[:div {:style (m7/css
                         [[2 10 10 20 :center :center 2 :rem :column]
 
-                         [1 70 90 .1] [] {:gap "1rem"
+                         [1 70 90 0.1] [] {:gap "1rem"
                                           :z-index 4}])}
           [:div
            "Lets, add point A,C"]
@@ -30328,7 +30324,7 @@ Example: I put the high crime rate down to the high unemployment."])
               (m7/css
                [[4 3 10 7
                  :center :center  4 :rem :column]
-                [3.5 70 (+ 50 (* 5 5))  .7] []
+                [3.5 70 (+ 50 (* 5 5))  0.7] []
                 {:gap ".1rem"
                  :z-index 10}])}
 
@@ -30389,7 +30385,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
         [m7/m '[=
                 [ V1 V] [[:m [* 0.5 [:p 10 3]] kg [:p m 3]]
-                         [:m [:p 10 3] kg [:p m 3]]] .5 ]]
+                         [:m [:p 10 3] kg [:p m 3]]] 0.5 ]]
 
 
 
@@ -30422,9 +30418,9 @@ Example: I put the high crime rate down to the high unemployment."])
                      :markerHeight 5}
             [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
            [:pattern {:id (name :star)
                       :viewBox (space [0 0 10 10])
                       :width "10%"
@@ -30533,7 +30529,7 @@ Example: I put the high crime rate down to the high unemployment."])
                  :begin (sec 0)
                  :dur (sec 1)
                  :type :scale
-                 :from (m7/space  [1 .05])
+                 :from (m7/space  [1 0.05])
                  :to (m7/space  [1 1.8])
                  :fill :freeze
                  :id :rff1
@@ -30550,7 +30546,7 @@ Example: I put the high crime rate down to the high unemployment."])
                :begin (sec 0)
                :dur (sec 1)
                :type :scale
-               :from (m7/space  [1 .05])
+               :from (m7/space  [1 0.05])
                :to (m7/space  [1 1.8])
                :fill :freeze
                :id :rff1
@@ -30649,7 +30645,7 @@ Example: I put the high crime rate down to the high unemployment."])
             [:path {:d (m7/path [0 0 :l 200 -150])
 
                     :stroke-width 3
-                    :stroke (hsl [.5 70 70 1])
+                    :stroke (hsl [0.5 70 70 1])
                     :fill :none}]
 
 
@@ -30708,7 +30704,7 @@ Example: I put the high crime rate down to the high unemployment."])
               (m7/css
                [[2 8 2 8
                  :center :center  2.1 :rem :column]
-                [2.5 70 (+ 50 (* 5 5))  .7] []
+                [2.5 70 (+ 50 (* 5 5))  0.7] []
                 {:gap ".1rem"
                  :z-index 10}])}
 
@@ -30739,14 +30735,14 @@ Example: I put the high crime rate down to the high unemployment."])
 
 
 
-        [:div {:style {:background-color (hsl [0 70 70 .31])}} ""]
+        [:div {:style {:background-color (hsl [0 70 70 0.31])}} ""]
 
         ]
 
        [:div {:style (m7/css
                         [[2 10 10 20 :center :center 4.5 :rem :column]
 
-                         [1 70 90 .1] [] {:gap "1rem"
+                         [1 70 90 0.1] [] {:gap "1rem"
                                           :z-index 4}])}
 
 
@@ -30882,7 +30878,7 @@ Example: I put the high crime rate down to the high unemployment."])
   [:g {:transform (m7/tranfrom tf)}
 [:path {:d (m7/path `[0 0 :c 30 20 40 40 40 120 ])
                      :stroke-width 0
-                     :stroke (hsl [.5 70 70 1])
+                     :stroke (hsl [0.5 70 70 1])
                      :fill :none}
               [:animateTransform
                {
@@ -30892,7 +30888,7 @@ Example: I put the high crime rate down to the high unemployment."])
                 :dur (m7/sec 2)
                 :fill :freeze
                 :from (m7/space [1.3 1])
-                :to (m7/space [.7 1])}
+                :to (m7/space [0.7 1])}
 
                ]
               [:path {:d (m7/path `[0 0 :c 34 20 40 40 40 60 ])
@@ -30907,7 +30903,7 @@ Example: I put the high crime rate down to the high unemployment."])
                  :dur (m7/sec 2)
                  :fill :freeze
                  :from (m7/space [1.3 1])
-                 :to (m7/space [.7 1])}
+                 :to (m7/space [0.7 1])}
 
                 ]
                ]
@@ -30923,7 +30919,7 @@ Example: I put the high crime rate down to the high unemployment."])
                  :dur (m7/sec 10)
                  :fill :freeze
                  :from (m7/space [1.3 1])
-                 :to (m7/space [.7 1])}
+                 :to (m7/space [0.7 1])}
 
                 ]
                ]
@@ -30953,7 +30949,7 @@ Example: I put the high crime rate down to the high unemployment."])
          :dur (m7/sec 2)
          :fill :freeze
          :from (m7/space [1.3 1])
-         :to (m7/space [.7 1])}
+         :to (m7/space [0.7 1])}
 
         ]
 
@@ -31016,7 +31012,7 @@ Example: I put the high crime rate down to the high unemployment."])
               (m7/css
                [[2 8 14 8
                  :center :center  2.5 :rem :column]
-                [3.5 70 (+ 50 (* 5 5))  .7] []
+                [3.5 70 (+ 50 (* 5 5))  0.7] []
                 {:gap ".1rem"
                  :z-index 10}])}
 
@@ -31096,7 +31092,7 @@ Example: I put the high crime rate down to the high unemployment."])
         #_[m7/m '[= [:m 6 N] [:k W d] [:m 10 ρ [:k V crown] N]]]
 
 
-        #_[m7/m '[= [:m [* .6 [:p 10 -3]] [:p m 3]] [:k V crown]]]
+        #_[m7/m '[= [:m [* 0.6 [:p 10 -3]] [:p m 3]] [:k V crown]]]
 
 
 
@@ -31120,7 +31116,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
 
 
-        [:div {:style {:background-color (hsl [0 70 70 .31])}}
+        [:div {:style {:background-color (hsl [0 70 70 0.31])}}
          #_[m7/m '[[:k ρ s]
                    [:m  [:p 10 3]  Kg  [:p m -3]]]]
 
@@ -31133,9 +31129,9 @@ Example: I put the high crime rate down to the high unemployment."])
 
         #_[m7/m '[= [:m [:k m b] g]   [- mg [:m [:k m s] g]]]]
 
-        #_[m7/m '[=  [:k ρ a] [[:m [:m 10 kg] ρ] [:m .6 kg]]  ]]
+        #_[m7/m '[=  [:k ρ a] [[:m [:m 10 kg] ρ] [:m 0.6 kg]]  ]]
 
-        #_[m7/m '[=  [:k ρ g]  [m V] [ [:m [:m 10 Kg]  [:p 10 3] [kg [:m m 3]] ] [:m .6 Kg]]]]
+        #_[m7/m '[=  [:k ρ g]  [m V] [ [:m [:m 10 Kg]  [:p 10 3] [kg [:m m 3]] ] [:m 0.6 Kg]]]]
 
 
         #_[m7/m '[=  [:k ρ g] [:m 166666.6 [kg [:p m 3]]]]]
@@ -31153,7 +31149,7 @@ Example: I put the high crime rate down to the high unemployment."])
         #_[m7/m '[=  [ V1 V] [[:k ρ w]  ρ ] ]]
         #_[m7/m '[=
                 [ V1 V] [[:m [* 0.5 [:p 10 3]] kg [:p m 3]]
-                         [:m [:p 10 3] kg [:p m 3]]] .5 ]]
+                         [:m [:p 10 3] kg [:p m 3]]] 0.5 ]]
 
         ;; [m7/m '[= P [W A] [[:m ρ A h g] A]  [:m ρ h g]  ]]
 
@@ -31165,7 +31161,7 @@ Example: I put the high crime rate down to the high unemployment."])
               (m7/css
                [[5 3 12 10
                  :center :center  7 :rem ]
-                [1.5 70 (+ 50 (* 5 5))  .7] []
+                [1.5 70 (+ 50 (* 5 5))  0.7] []
                 {:gap ".1rem"
                  :z-index 10}])}
 
@@ -31216,8 +31212,8 @@ Example: I put the high crime rate down to the high unemployment."])
                      :markerHeight 5}
             [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
-                    :transform (m7/tranfrom [[:scale [.4 .4]]
+                    :stroke-width 0.1
+                    :transform (m7/tranfrom [[:scale [0.4 0.4]]
                                              [:rotate 1]])
                     :fill (m7/hsl [2 70 70 1])}]]
            [:pattern {:id (name :star)
@@ -31284,7 +31280,7 @@ Example: I put the high crime rate down to the high unemployment."])
                   :dur (m7/sec 2)
                   :fill :freeze
                   :to (m7/space [1 1])
-                  :from (m7/space [1 .1])}
+                  :from (m7/space [1 0.1])}
                  ]]
                ])
 
@@ -31321,7 +31317,7 @@ Example: I put the high crime rate down to the high unemployment."])
                           :cy (- (* 6 20) 10)
                           :r 20
                           :stroke (hsl [1 60 70 1])
-                          :fill (hsl [3 70 70 .6])}]
+                          :fill (hsl [3 70 70 0.6])}]
 
 
                 [:circle {:cx 0
@@ -31332,12 +31328,12 @@ Example: I put the high crime rate down to the high unemployment."])
                 #_(let [x -60
                       y 0]
                   [:g  {:transform (m7/tranfrom [[:translate [0 (* 6 20)]]
-                                                [:scale [.05 1]]])}
+                                                [:scale [0.05 1]]])}
 
                    [:path {:d (m7/path `[~x ~y :l ~@(map #(* 120 %) dx)])
                            :stroke-dasharray (m7/space [(* 2 120) 120])
                            :stroke-width 3
-                           :stroke (hsl [0 70 70 .6])
+                           :stroke (hsl [0 70 70 0.6])
                            :fill :none}]
 
 
@@ -31347,7 +31343,7 @@ Example: I put the high crime rate down to the high unemployment."])
                            :stroke-dasharray (m7/space [(* 3 120)])
                            :stroke-width 0
                            :stroke (hsl [0 70 70 1])
-                           :fill (hsl [3.5 70 70 .6])}
+                           :fill (hsl [3.5 70 70 0.6])}
                     ]
 
 
@@ -31433,7 +31429,7 @@ Example: I put the high crime rate down to the high unemployment."])
                  ]
 
                 #_[:path {:d (m7/path `[0 0 :l ~@(let [[x y] f1]
-                                                 [(* .2  x) (* .2 (ve y))])
+                                                 [(* 0.2  x) (* 0.2 (ve y))])
                                       20 0])
                         :id :paswbarang2
                         :stroke-width 2
@@ -31466,7 +31462,7 @@ Example: I put the high crime rate down to the high unemployment."])
                     :begin :buoyancy3.end
                     :dur (sec 5)
                     :from (hsl [0 70 70 0])
-                    :to (hsl [.5 50 50 1])
+                    :to (hsl [0.5 50 50 1])
                     :fill :freeze
 
                  }]]
@@ -31474,7 +31470,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
               [:g
                [:text {:dy -3} [:textPath {
-                                          :fill (hsl [0 70 70 .7])
+                                          :fill (hsl [0 70 70 0.7])
                                           :href :#pasw3
                                           :startOffset "21%"
                                           :font-size 10}
@@ -31486,7 +31482,7 @@ Example: I put the high crime rate down to the high unemployment."])
                        :stroke-width 4
                        :marker-end (m7/url (name :dot3))
 
-                       :stroke (hsl [0.5 70 80 .5])
+                       :stroke (hsl [0.5 70 80 0.5])
                        :fill (hsl [0.5 70 80 1])}
                 [:animateTransform
                  {:attributeName :transform
@@ -31506,8 +31502,8 @@ Example: I put the high crime rate down to the high unemployment."])
                         :id :paswr2
                         :stroke-width 0
                         :marker-end (m7/url (name :dot3))
-                        :stroke (hsl [4.5 70 80 .9])
-                        :fill (hsl [4.5 70 80 .9])}
+                        :stroke (hsl [4.5 70 80 0.9])
+                        :fill (hsl [4.5 70 80 0.9])}
 
                     [:animate
                      {:attributeName :stroke-width
@@ -31603,7 +31599,7 @@ Example: I put the high crime rate down to the high unemployment."])
               (m7/css
                [[2 8 14 8
                  :center :center  2.5 :rem :column]
-                [3.5 70 (+ 50 (* 5 5))  .7] []
+                [3.5 70 (+ 50 (* 5 5))  0.7] []
                 {:gap ".1rem"
                  :z-index 10}])}
 
@@ -31643,8 +31639,8 @@ Example: I put the high crime rate down to the high unemployment."])
                      :markerHeight 5}
             [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
-                    :transform (m7/tranfrom [[:scale [.4 .4]]
+                    :stroke-width 0.1
+                    :transform (m7/tranfrom [[:scale [0.4 0.4]]
                                              [:rotate 1]])
                     :fill (m7/hsl [2 70 70 1])}]]
            [:pattern {:id (name :star)
@@ -31686,7 +31682,7 @@ Example: I put the high crime rate down to the high unemployment."])
                       :cy (- (* 6 20) 10)
                       :r 20
                       :stroke (hsl [1 60 70 1])
-                      :fill (hsl [3 70 70 .6])}]
+                      :fill (hsl [3 70 70 0.6])}]
 
 
             ]])]
@@ -31738,7 +31734,7 @@ Example: I put the high crime rate down to the high unemployment."])
               (m7/css
                [[2 8 14 8
                  :center :center  2.5 :rem :column]
-                [3.5 70 (+ 50 (* 5 5))  .7] []
+                [3.5 70 (+ 50 (* 5 5))  0.7] []
                 {:gap ".1rem"
                  :z-index 10}])}
 
@@ -31786,7 +31782,7 @@ Example: I put the high crime rate down to the high unemployment."])
         ;; [m7/m '[= [:m 6 N] [:k W d] [:m 10 ρ [:k V crown] N]]]
 
 
-        ;; [m7/m '[= [:m [* .6 [:p 10 -3]] [:p m 3]] [:k V crown]]]
+        ;; [m7/m '[= [:m [* 0.6 [:p 10 -3]] [:p m 3]] [:k V crown]]]
 
 
 
@@ -31810,7 +31806,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
 
 
-        [:div {:style {:background-color (hsl [0 70 70 .31])}}
+        [:div {:style {:background-color (hsl [0 70 70 0.31])}}
          #_[m7/m '[[:k ρ s]
                    [:m  [:p 10 3]  Kg  [:p m -3]]]]
 
@@ -31823,9 +31819,9 @@ Example: I put the high crime rate down to the high unemployment."])
 
         #_[m7/m '[= [:m [:k m b] g]   [- mg [:m [:k m s] g]]]]
 
-        #_[m7/m '[=  [:k ρ a] [[:m [:m 10 kg] ρ] [:m .6 kg]]  ]]
+        #_[m7/m '[=  [:k ρ a] [[:m [:m 10 kg] ρ] [:m 0.6 kg]]  ]]
 
-        #_[m7/m '[=  [:k ρ g]  [m V] [ [:m [:m 10 Kg]  [:p 10 3] [kg [:m m 3]] ] [:m .6 Kg]]]]
+        #_[m7/m '[=  [:k ρ g]  [m V] [ [:m [:m 10 Kg]  [:p 10 3] [kg [:m m 3]] ] [:m 0.6 Kg]]]]
 
 
         #_[m7/m '[=  [:k ρ g] [:m 166666.6 [kg [:p m 3]]]]]
@@ -31843,7 +31839,7 @@ Example: I put the high crime rate down to the high unemployment."])
         #_[m7/m '[=  [ V1 V] [[:k ρ w]  ρ ] ]]
         #_[m7/m '[=
                 [ V1 V] [[:m [* 0.5 [:p 10 3]] kg [:p m 3]]
-                         [:m [:p 10 3] kg [:p m 3]]] .5 ]]
+                         [:m [:p 10 3] kg [:p m 3]]] 0.5 ]]
 
         ;; [m7/m '[= P [W A] [[:m ρ A h g] A]  [:m ρ h g]  ]]
 
@@ -31855,7 +31851,7 @@ Example: I put the high crime rate down to the high unemployment."])
               (m7/css
                [[5 3 12 10
                  :center :center  7 :rem ]
-                [1.5 70 (+ 50 (* 5 5))  .7] []
+                [1.5 70 (+ 50 (* 5 5))  0.7] []
                 {:gap ".1rem"
                  :z-index 10}])}
 
@@ -31906,8 +31902,8 @@ Example: I put the high crime rate down to the high unemployment."])
                      :markerHeight 5}
             [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
-                    :transform (m7/tranfrom [[:scale [.4 .4]]
+                    :stroke-width 0.1
+                    :transform (m7/tranfrom [[:scale [0.4 0.4]]
                                              [:rotate 1]])
                     :fill (m7/hsl [2 70 70 1])}]]
 
@@ -31994,7 +31990,7 @@ Example: I put the high crime rate down to the high unemployment."])
                           :cy (- (* 6 20) 10)
                           :r 20
                           :stroke (hsl [1 60 70 1])
-                          :fill (hsl [3 70 70 .6])}]
+                          :fill (hsl [3 70 70 0.6])}]
 
 
                 [:circle {:cx 0
@@ -32005,12 +32001,12 @@ Example: I put the high crime rate down to the high unemployment."])
                 (let [x -60
                       y 0]
                   [:g  {:transform (m7/tranfrom [[:translate [0 (* 6 20)]]
-                                                [:scale [.05 1]]])}
+                                                [:scale [0.05 1]]])}
 
                    [:path {:d (m7/path `[~x ~y :l ~@(map #(* 120 %) dx)])
                            :stroke-dasharray (m7/space [(* 2 120) 120])
                            :stroke-width 3
-                           :stroke (hsl [0 70 70 .6])
+                           :stroke (hsl [0 70 70 0.6])
                            :fill :none}]
 
 
@@ -32020,7 +32016,7 @@ Example: I put the high crime rate down to the high unemployment."])
                            :stroke-dasharray (m7/space [(* 3 120)])
                            :stroke-width 0
                            :stroke (hsl [0 70 70 1])
-                           :fill (hsl [3.5 70 70 .6])}
+                           :fill (hsl [3.5 70 70 0.6])}
                     ]
 
 
@@ -32106,7 +32102,7 @@ Example: I put the high crime rate down to the high unemployment."])
                  ]
 
                 [:path {:d (m7/path `[0 0 :l ~@(let [[x y] f1]
-                                                 [(* .2  x) (* .2 (ve y))])
+                                                 [(* 0.2  x) (* 0.2 (ve y))])
                                       20 0])
                         :id :paswbarang2
                         :stroke-width 2
@@ -32139,7 +32135,7 @@ Example: I put the high crime rate down to the high unemployment."])
                     :begin :buoyancy3.end
                     :dur (sec 5)
                     :from (hsl [0 70 70 0])
-                    :to (hsl [.5 50 50 1])
+                    :to (hsl [0.5 50 50 1])
                     :fill :freeze
 
                  }]]
@@ -32147,7 +32143,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
               [:g
                [:text {:dy -3} [:textPath {
-                                          :fill (hsl [0 70 70 .7])
+                                          :fill (hsl [0 70 70 0.7])
                                           :href :#pasw3
                                           :startOffset "21%"
                                           :font-size 10}
@@ -32159,7 +32155,7 @@ Example: I put the high crime rate down to the high unemployment."])
                        :stroke-width 4
                        :marker-end (m7/url (name :dot3))
 
-                       :stroke (hsl [0.5 70 80 .5])
+                       :stroke (hsl [0.5 70 80 0.5])
                        :fill (hsl [0.5 70 80 1])}
                 [:animateTransform
                  {:attributeName :transform
@@ -32179,8 +32175,8 @@ Example: I put the high crime rate down to the high unemployment."])
                         :id :paswr2
                         :stroke-width 0
                         :marker-end (m7/url (name :dot3))
-                        :stroke (hsl [4.5 70 80 .9])
-                        :fill (hsl [4.5 70 80 .9])}
+                        :stroke (hsl [4.5 70 80 0.9])
+                        :fill (hsl [4.5 70 80 0.9])}
 
                     [:animate
                      {:attributeName :stroke-width
@@ -32274,7 +32270,7 @@ Example: I put the high crime rate down to the high unemployment."])
        [:div {:style (m7/css
                       [[2 10 1 20 :center :center 3 :rem]
 
-                       [1 70 90 .1] [] {:gap "1rem"
+                       [1 70 90 0.1] [] {:gap "1rem"
                                         :z-index 3}])}
 
         [m7/m '[= [:m tan A] [ opp adj]]]]
@@ -32298,8 +32294,8 @@ Example: I put the high crime rate down to the high unemployment."])
                      :markerHeight 5}
             [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
-                    :transform (m7/tranfrom [[:scale [.4 .4]]
+                    :stroke-width 0.1
+                    :transform (m7/tranfrom [[:scale [0.4 0.4]]
                                              [:rotate 1]])
                     :fill (m7/hsl [2 70 70 1])}]]
 
@@ -32360,7 +32356,7 @@ Example: I put the high crime rate down to the high unemployment."])
                     :begin :buoyancy3.end
                     :dur (sec 5)
                     :from (hsl [0 70 70 0])
-                    :to (hsl [.5 50 50 1])
+                    :to (hsl [0.5 50 50 1])
                     :fill :freeze
 
                  }]]
@@ -32368,7 +32364,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
               [:g
                [:text {:dy -3} [:textPath {
-                                          :fill (hsl [0 70 70 .7])
+                                          :fill (hsl [0 70 70 0.7])
                                           :href :#pasw3
                                           :startOffset "20%"
                                           :font-size 20}
@@ -32380,7 +32376,7 @@ Example: I put the high crime rate down to the high unemployment."])
                        :stroke-width 4
                        :marker-end (m7/url (name :dot3))
 
-                       :stroke (hsl [0.5 70 80 .5])
+                       :stroke (hsl [0.5 70 80 0.5])
                        :fill (hsl [0.5 70 80 1])}
                 [:animateTransform
                  {:attributeName :transform
@@ -32400,8 +32396,8 @@ Example: I put the high crime rate down to the high unemployment."])
                         :id :paswr2
                         :stroke-width 0
                         :marker-end (m7/url (name :dot3))
-                        :stroke (hsl [4.5 70 80 .9])
-                        :fill (hsl [4.5 70 80 .9])}
+                        :stroke (hsl [4.5 70 80 0.9])
+                        :fill (hsl [4.5 70 80 0.9])}
 
                     [:animate
                      {:attributeName :stroke-width
@@ -32496,7 +32492,7 @@ Example: I put the high crime rate down to the high unemployment."])
               (m7/css
                [[2 7 10 8
                  :center :center  4.5 :rem :column]
-                [3.5 70 (+ 50 (* 5 5))  .7] []
+                [3.5 70 (+ 50 (* 5 5))  0.7] []
                 {:gap ".1rem"
                  :z-index 10}])}
 
@@ -32508,7 +32504,7 @@ Example: I put the high crime rate down to the high unemployment."])
                 (m7/css
                  [[2 10 10 10
                    :center :center  3.8 :rem :column]
-                  [3.5 70 (+ 50 (* 5 5))  .7] []
+                  [3.5 70 (+ 50 (* 5 5))  0.7] []
                   {:gap ".1rem"
                    :z-index 10}])}
 
@@ -32541,7 +32537,7 @@ Example: I put the high crime rate down to the high unemployment."])
                 (m7/css
                  [[2 10 10 10
                    :center :center  2.8 :rem :column]
-                  [3.5 70 (+ 50 (* 5 5))  .7] []
+                  [3.5 70 (+ 50 (* 5 5))  0.7] []
                   {:gap ".1rem"
                    :z-index 10}])}
 
@@ -32571,7 +32567,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
 ;;         [m7/m '[= PE [:m m g [:k h 2] ] ]]
 
-;;         [m7/m '[= PE [* .2
+;;         [m7/m '[= PE [* 0.2
 ;;                       10 [:k h 2]]
 ;;                 [:m 80 J]]]
 
@@ -32584,7 +32580,7 @@ Example: I put the high crime rate down to the high unemployment."])
 ;;         [m7/m '[= KE  [:m [1 2] m [:p [:b [- u gt] ] 2]]]]
 
 
-;;         [m7/m '[= KE  [:m [1 2] .2 [:p [:b [- [:m 30 [m s]] [* [:m 10 [m [:p s 2]]]
+;;         [m7/m '[= KE  [:m [1 2] 0.2 [:p [:b [- [:m 30 [m s]] [* [:m 10 [m [:p s 2]]]
 ;;                                                              [:m 2 s]]] ] 2]]]]
 
 
@@ -32725,8 +32721,8 @@ Example: I put the high crime rate down to the high unemployment."])
                      :markerHeight 5}
             [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
-                    :transform (m7/tranfrom [[:scale [.4 .4]]
+                    :stroke-width 0.1
+                    :transform (m7/tranfrom [[:scale [0.4 0.4]]
                                              [:rotate 1]])
                     :fill (m7/hsl [2 70 70 1])}]]
 
@@ -32739,7 +32735,7 @@ Example: I put the high crime rate down to the high unemployment."])
                      :markerHeight 5}
             [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:scale [1 1]]
                                              [:rotate 1]])
                     :fill (m7/hsl [2 70 70 1])}]]
@@ -32760,7 +32756,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
 
 
-           (let [a .22]
+           (let [a 0.22]
              [:g
               [:g {:transform
                    (m7/tranfrom
@@ -32852,7 +32848,7 @@ Example: I put the high crime rate down to the high unemployment."])
                            :r 20
                            :stroke-width 2
                            :stroke (hsl [3.5 70 70 1])
-                           :fill (hsl [.5 70 70 1])}]
+                           :fill (hsl [0.5 70 70 1])}]
 
                  [:path#ew1 {:d (m7/path [0 0 :l 0 40])
                              :stroke-width 3
@@ -32879,7 +32875,7 @@ Example: I put the high crime rate down to the high unemployment."])
                [:g {:transform (m7/tranfrom [[:translate [0 0]]])}
                 (map (fn [i]
                        [:path {:stroke-width 2
-                               :fill (hsl [(if (< i n1)  3.5 1) 70 70 .6])
+                               :fill (hsl [(if (< i n1)  3.5 1) 70 70 0.6])
                                :stroke (hsl [7 70 70 1])
                                :d (m7/path
                                    `[~(* i 40) 0 :l ~@(map #(* 20 %1 %2)
@@ -32896,7 +32892,7 @@ Example: I put the high crime rate down to the high unemployment."])
                [:g {:transform (m7/tranfrom [[:translate [0 0]]])}
                 (map (fn [i]
                        [:path {:stroke-width 2
-                               :fill (hsl [(if (< i n1)  3.5 1) 70 70 .6])
+                               :fill (hsl [(if (< i n1)  3.5 1) 70 70 0.6])
                                :stroke (hsl [7 70 70 1])
                                :d (m7/path
                                    `[~(* i 40) 30 :l ~@(map #(* 20 %1 %2)
@@ -32912,7 +32908,7 @@ Example: I put the high crime rate down to the high unemployment."])
                [:g {:transform (m7/tranfrom [[:translate [0 0]]])}
                 (map (fn [i]
                        [:path {:stroke-width 2
-                               :fill (hsl [(if (< i n1)  .5 6) 70 70 .6])
+                               :fill (hsl [(if (< i n1)  0.5 6) 70 70 0.6])
                                :stroke (hsl [7 70 70 1])
                                :d (m7/path
                                    `[~(* i 40) 60 :l ~@(map #(* 20 %1 %2)
@@ -32928,7 +32924,7 @@ Example: I put the high crime rate down to the high unemployment."])
                   [:g {:transform (m7/tranfrom [[:translate [0 0]]])}
                    (map (fn [i]
                           [:path {:stroke-width 2
-                                  :fill (hsl [(if (< i n1)  .5 6) 70 70 .6])
+                                  :fill (hsl [(if (< i n1)  0.5 6) 70 70 0.6])
                                   :stroke (hsl [7 70 70 1])
                                   :d (m7/path
                                       `[~(* i 40) ~(* w 30) :l ~@(map #(* 20 %1 %2)
@@ -32952,7 +32948,7 @@ Example: I put the high crime rate down to the high unemployment."])
                [:g {:transform (m7/tranfrom [[:translate [0 0]]])}
                 (map (fn [i]
                        [:path {:stroke-width 2
-                               :fill (hsl [(if (< i n1)  3.5 1) 70 70 .8])
+                               :fill (hsl [(if (< i n1)  3.5 1) 70 70 0.8])
                                :stroke (hsl [7 70 70 1])
                                :d (m7/path
                                    `[~(* i 40) 0 :l ~@(map #(* 20 %1 %2)
@@ -32971,7 +32967,7 @@ Example: I put the high crime rate down to the high unemployment."])
                [:g {:transform (m7/tranfrom [[:translate [0 0]]])}
                 (map (fn [i]
                        [:path {:stroke-width 2
-                               :fill (hsl [(if (< i n1)  3.5 1) 70 70 .8])
+                               :fill (hsl [(if (< i n1)  3.5 1) 70 70 0.8])
                                :stroke (hsl [7 70 70 1])
                                :d (m7/path
                                    `[~(* i 40) 0 :l ~@(map #(* 20 %1 %2)
@@ -33135,7 +33131,7 @@ Example: I put the high crime rate down to the high unemployment."])
               (m7/css
                [[2 10 2 8
                  :center :center  2.0 :rem :column]
-                [2.5 70 (+ 50 (* 5 5))  .7] []
+                [2.5 70 (+ 50 (* 5 5))  0.7] []
                 {:gap ".1rem"
                  :z-index 10}])}
 
@@ -33417,7 +33413,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
 
 
-        [:div {:style {:background-color (hsl [0 70 70 .31])}}]]
+        [:div {:style {:background-color (hsl [0 70 70 0.31])}}]]
 
 
 
@@ -33443,8 +33439,8 @@ Example: I put the high crime rate down to the high unemployment."])
            (for [j (range 0 a)
                  i (range 0 (+  b c))]
              [:path {:stroke-width 1
-                     :fill (hsl [(if (< i b) 1 2) 70 70 .8])
-                     :stroke (hsl [1 70 50 .8])
+                     :fill (hsl [(if (< i b) 1 2) 70 70 0.8])
+                     :stroke (hsl [1 70 50 0.8])
                      :d (m7/path
                          `[~(* i 20) ~(+ -80 (* 20 j )) :l ~@(map #(* 20 %1 %2)
                                                           dx
@@ -33526,7 +33522,7 @@ Example: I put the high crime rate down to the high unemployment."])
                     (m7/css
                      [[(+ 4 j) 1 (+ 2 i) 1
                        :center :center  2 :rem :column]
-                      [3.5 70 (+ 50 (* 5 5))  .7] []
+                      [3.5 70 (+ 50 (* 5 5))  0.7] []
                       {:gap ".1rem"
                        :z-index 10}])}
               (* i k)]
@@ -33541,7 +33537,7 @@ Example: I put the high crime rate down to the high unemployment."])
        [:div {:style (m7/css
                       [[1 12 1 20 :center :center 3 :rem]
 
-                       [1 70 90 .3] [] {:gap "1rem"
+                       [1 70 90 0.3] [] {:gap "1rem"
                                        }])}
         (let []
           [:svg {:style {:height "100%"
@@ -33559,9 +33555,9 @@ Example: I put the high crime rate down to the high unemployment."])
                      :markerHeight 5}
             [:path {:d (m7/path [0 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                     :stroke (hsl [5 70 70 1])
-                    :stroke-width .1
+                    :stroke-width 0.1
                     :transform (m7/tranfrom [[:rotate 0]])
-                    :fill (m7/hsl [.4 70 70 1])}]]
+                    :fill (m7/hsl [0.4 70 70 1])}]]
            [:pattern {:id (name :star)
                       :viewBox (space [0 0 10 10])
                       :width "10%"
@@ -33679,7 +33675,7 @@ Example: I put the high crime rate down to the high unemployment."])
        [:div {:style (m7/css
                       [[1 12 1 20 :center :center 3 :rem]
 
-                       [1 70 90 .3] [] {:gap "1rem"
+                       [1 70 90 0.3] [] {:gap "1rem"
                                        }])}
         (let []
           [:svg {:style {:height "100%"
@@ -33815,7 +33811,7 @@ Example: I put the high crime rate down to the high unemployment."])
        [:div {:style (m7/css
                       [[1 12 1 20 :center :center 3 :rem]
 
-                       [1 70 90 .3] [] {:gap "1rem"
+                       [1 70 90 0.3] [] {:gap "1rem"
                                        }])}
         (let []
           [:svg {:style {:height "100%"
@@ -33953,7 +33949,7 @@ Example: I put the high crime rate down to the high unemployment."])
        [:div {:style (m7/css
                       [[1 12 1 20 :center :center 3 :rem]
 
-                       [1 70 90 .3] [] {:gap "1rem"
+                       [1 70 90 0.3] [] {:gap "1rem"
                                        }])}
         (let []
           [:svg {:style {:height "100%"

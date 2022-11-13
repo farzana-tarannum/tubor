@@ -9,6 +9,7 @@
    [math2.solution :as sol]
    [math2.solve :as sl]
    [math2.svg :as svg]
+   [applied-science.js-interop :as j]
    [math2.math7 :as m7 :refer
     [grid hsl css space size path ve sec]]))
 
@@ -26,8 +27,8 @@
        (fn [index i]
          [:path {:key (str "grid-onadfadsf" index)
                  :d (path [-400 (ve (+ ax-dx (* i 4))) :l 1200 0])
-                 :stroke (hsl [4 70 70 .5])
-                 :stroke-width .5
+                 :stroke (hsl [4 70 70 0.5])
+                 :stroke-width 0.5
                  :fill :none}
           ] )
        (range 0 5))
@@ -37,8 +38,8 @@
          [:path {:key (str "grid-onsdfasd2" index)
                  :d (path [(+ ax-dy (* i 4)) -400 :l 0 1200 ])
 
-                 :stroke (hsl [4 70 70 .5])
-                 :stroke-width .5
+                 :stroke (hsl [4 70 70 0.5])
+                 :stroke-width 0.5
                  :fill :none}
           ] )
        (range 0 5))
@@ -58,14 +59,14 @@
          [:path {:d (path [ (* 20 x)  0 :l 0 -400])
 
                  :stroke (hsl [(if (= x -2)  5 0) 70 70 1])
-                 :stroke-width .5
+                 :stroke-width 0.5
                  :fill :none}
           ]
 
          [:path {:d (path [ (* 20 x)  0 :l 0 400])
 
                  :stroke (hsl [0 70 70 1])
-                 :stroke-width .5
+                 :stroke-width 0.5
                  :fill :none}
           ]
           ;;; imp
@@ -116,7 +117,7 @@
                               (* 10 20) 0 0 (* 1 20 )
                               (* 10 -20) 0])
                  :stroke-width 1
-                 :fill (hsl [2 70 70 .3])}
+                 :fill (hsl [2 70 70 0.3])}
     [:animateTransform {:id :green-car
                         :attributeName :transform
                         :begin 0
@@ -129,7 +130,7 @@
                         (* 4 20) 0 0 (* 1 30 )
                         (* 4 -20) 0])
            :stroke-width 1
-           :fill (hsl [2 70 70 .3])}]
+           :fill (hsl [2 70 70 0.3])}]
 
    ])
 
@@ -138,17 +139,17 @@
                              :id (name :lg2)
                              :gradientTransform (m7/tranfrom [[:rotate 0]])}
             [:stop  {:offset 0
-                     :stop-color (hsl [3 40 40 .7])}]
-            [:stop  {:offset .55
-                     :stop-color (hsl [3.3 60 60 .3])}]
+                     :stop-color (hsl [3 40 40 0.7])}]
+            [:stop  {:offset 0.55
+                     :stop-color (hsl [3.3 60 60 0.3])}]
 
 
-            [:stop  {:offset .97
-                     :stop-color (hsl [1 70 70 .2])}
+            [:stop  {:offset 0.97
+                     :stop-color (hsl [1 70 70 0.2])}
              [:animate {:attributeName :offset
                         :id :f114
                         :begin 0
-                        :from .55
+                        :from 0.55
                         :to 1
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
@@ -156,20 +157,20 @@
              [:animate {:attributeName :offset
                         :begin :f114.end
                         :from 1
-                        :to .55
+                        :to 0.55
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin 0
                         :id :f115
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [120 "s"])
                         :repeatCount :indefinite}]
              [:animate {:attributeName :stop-color
                         :begin :f115.end
-                        :from (hsl [1 90 80 .2])
-                        :to (hsl [1 90 80 .8])
+                        :from (hsl [1 90 80 0.2])
+                        :to (hsl [1 90 80 0.8])
                         :dur (m7/not-space [13 "s"])
                         :repeatCount :indefinite}]]
 
@@ -201,16 +202,14 @@
         viewbox3 (vb 1)
         m 30
         d 9.4
-        scale2 [[.5 .5] [-0.5 .5]]
+        scale2 [[0.5 0.5] [-0.5 0.5]]
         [xx set-xx] (react/useState 2)
         [yy set-yy] (react/useState 3)
 
         [c ck] (react/useState [0 0])
         p (fn [svg x y]
             (let [p (js/DOMPoint. x y)
-                  t (-> svg
-                        (.getScreenCTM)
-                        (.inverse))
+                  t (j/call (j/call svg :getScreenCTM)  :inverse)
                   xy (-> p
                          (.matrixTransform t))]
               (ck [(fix (/ (-> xy .-x) 2) 1)
@@ -219,12 +218,12 @@
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
                             (take 20 (repeat [8 :vh]))])
-                     {:background-color (hsl [1 70 70 .5])
+                     {:background-color (hsl [1 70 70 0.5])
                       :gap ".2rem"})}
      [:div
       {:style (m7/css
                [[3 1 8 11  :center :center 2.2 :rem ]
-                [2 70 90 .4] [] {:gap "1rem"
+                [2 70 90 0.4] [] {:gap "1rem"
                                  :z-index 2}])}
 
       [:div {:on-click (fn [_]
@@ -249,7 +248,7 @@
      [:div
       {:style (m7/css
                [[4 4 1 12  :center :center 2.5 :rem :column]
-                [2 70 90 .4] [] {:gap "1rem"
+                [2 70 90 0.4] [] {:gap "1rem"
                                  :z-index 2}])}
 
 
@@ -314,9 +313,9 @@
                    :markerHeight 5}
           [:path {:d (m7/path [-3 0 :l 5 0 -10 -5 5 5 5 0 -10 5 5 -5])
                   :stroke (hsl [5 70 70 1])
-                  :stroke-width .1
+                  :stroke-width 0.1
                   :transform (m7/tranfrom [[:rotate 0]])
-                  :fill (m7/hsl [.4 70 70 1])}]]
+                  :fill (m7/hsl [0.4 70 70 1])}]]
 
          [:g
 
@@ -345,7 +344,7 @@
                   :marker-end (m7/url (name :mb2))
                   :marker-start (m7/url (name :mb2))
                   :stroke (hsl [2 30 30 1])
-                  :fill (hsl [2 70 70 .5])}]
+                  :fill (hsl [2 70 70 0.5])}]
 
 
           #_[:path {:d (m7/path [80 (ve (* 20 6)) :l (* 4 20) (ve (* 2 20))
@@ -356,7 +355,7 @@
                   :marker-end (m7/url (name :mb2))
                   :marker-start (m7/url (name :mb2))
                   :stroke (hsl [1 30 30 1])
-                  :fill (hsl [1 70 70 .5])}]
+                  :fill (hsl [1 70 70 0.5])}]
 
 
 
@@ -378,7 +377,7 @@
                   :marker-start (m7/url (name :mb2))
                   :stroke-dasharray (str/join " " [2 1])
                   :stroke (hsl [2 30 30 1])
-                  :fill (hsl [1  70 60 .5])}]
+                  :fill (hsl [1  70 60 0.5])}]
 
 
 

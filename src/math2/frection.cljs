@@ -1,4 +1,4 @@
-(ns math2.fraction
+(ns math2.frection
   (:require
    [math2.file :as file]
    [react]
@@ -25,8 +25,8 @@
        (fn [index i]
          [:path {:key (str "grid-onadfadsf" index)
                  :d (path [-400 (ve (+ ax-dx (* i 2))) :l 1200 0])
-                 :stroke (hsl [4 70 70 .5])
-                 :stroke-width .5
+                 :stroke (hsl [4 70 70 0.5])
+                 :stroke-width 0.5
                  :fill :none}
           ] )
        (range 0 11))
@@ -37,8 +37,8 @@
          [:path {:key (str "grid-onsdfasd2" index)
                  :d (path [(+ ax-dy (* i 2)) -400 :l 0 1200 ])
 
-                 :stroke (hsl [4 70 70 .5])
-                 :stroke-width .5
+                 :stroke (hsl [4 70 70 0.5])
+                 :stroke-width 0.5
                  :fill :none}
           ] )
        (range 0 11))
@@ -55,7 +55,7 @@
           [:path {:d (path [ (* 20 x)  0 :l 0 -400])
 
                   :stroke (hsl [(if (= x -2)  5 0) 70 70 1])
-                  :stroke-width .5
+                  :stroke-width 0.5
                   :fill :none}
            ]
 
@@ -63,7 +63,7 @@
           [:path {:d (path [ (* 20 x)  0 :l 0 400])
 
                   :stroke (hsl [0 70 70 1])
-                  :stroke-width .5
+                  :stroke-width 0.5
                   :fill :none}
            ]
 
@@ -259,7 +259,7 @@
        [:div {:style
                 (m7/css
                  [[1 7 2 8 :center :flex-start 1.5 :rem :column]
-                  [1 70 (+ 50 (* 5 5))  .7]
+                  [1 70 (+ 50 (* 5 5))  0.7]
                   []
                   {:padding-left "25px"
                    :gap ".1rem"
@@ -459,8 +459,8 @@
            #_(for [j (range 0 a)
                    i (range 0 (+  b c))]
                [:path {:stroke-width 1
-                       :fill (hsl [(if (< i b) 1 2) 70 70 .8])
-                       :stroke (hsl [1 70 50 .8])
+                       :fill (hsl [(if (< i b) 1 2) 70 70 0.8])
+                       :stroke (hsl [1 70 50 0.8])
                        :d (m7/path
                            `[~(* i 20) ~(+ -80 (* 20 j )) :l ~@(map #(* 20 %1 %2)
                                                                     dx
@@ -482,8 +482,8 @@
                             ]
                       ]
                   [:path {:stroke-width 1
-                          :fill (hsl [color 70 70 .8])
-                          :stroke (hsl [1 70 50 .8])
+                          :fill (hsl [color 70 70 0.8])
+                          :stroke (hsl [1 70 50 0.8])
                           :d (m7/path
                               `[~(* i 20) ~(ve (* 20 j )) :l ~@(map #(* 20 %1 %2)
                                                                     dx
@@ -493,8 +493,8 @@
            #_(for [j (range 0 a)
                    i (range 0 (+  b c))]
                [:path {:stroke-width 1
-                       :fill (hsl [(if (< i b) 1 2) 70 70 .8])
-                       :stroke (hsl [1 70 50 .8])
+                       :fill (hsl [(if (< i b) 1 2) 70 70 0.8])
+                       :stroke (hsl [1 70 50 0.8])
                        :d (m7/path
                            `[~(* i 20) ~(+ -80 (* 20 j )) :l ~@(map #(* 20 %1 %2)
                                                                     dx
@@ -507,8 +507,8 @@
            #_(for [j (range 3 8)
                    i (range 0 (+  b c))]
                [:path {:stroke-width 1
-                       :fill (hsl [(if (< i b) 3 4) 70 70 .8])
-                       :stroke (hsl [3 70 50 .8])
+                       :fill (hsl [(if (< i b) 3 4) 70 70 0.8])
+                       :stroke (hsl [3 70 50 0.8])
                        :d (m7/path
                            `[~(* i 20) ~(+ -80 (* 20 j )) :l
                              ~@(map #(* 20 %1 %2)
@@ -571,7 +571,7 @@
          [:div {:style
                 (m7/css
                  [[1 7 2 8 :center :flex-start 2 :rem :column]
-                  [1 70 (+ 50 (* 5 5))  .7]
+                  [1 70 (+ 50 (* 5 5))  0.7]
                   []
                   {:padding-left "25px"
                    :gap ".1rem"
@@ -626,8 +626,8 @@
                 [:g
 
                  [:path {:stroke-width 1
-                         :fill (hsl [color 70 70 .8])
-                         :stroke (hsl [color 70 50 .8])
+                         :fill (hsl [color 70 70 0.8])
+                         :stroke (hsl [color 70 50 0.8])
                          :d (m7/path
                              `[~(* i 20) ~(ve (* 20 j )) :l ~@(map #(* 20 %1 %2)
                                                                    dx
@@ -663,7 +663,7 @@
    [:div {:style
                 (m7/css
                  [[1 7 10 8 :center :flex-start 4 :rem :column]
-                  [2 70 (+ 50 (* 5 5))  .7]
+                  [2 70 (+ 50 (* 5 5))  0.7]
                   []
                   {:padding-left "25px"
                    :gap ".1rem"
@@ -689,7 +689,7 @@
    [:div {:style
                 (m7/css
                  [[1 7 2 8 :center :flex-start 2 :rem :column]
-                  [1 70 (+ 50 (* 5 5))  .7]
+                  [1 70 (+ 50 (* 5 5))  0.7]
                   []
                   {:padding-left "25px"
                    :gap ".1rem"

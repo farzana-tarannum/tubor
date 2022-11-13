@@ -543,7 +543,7 @@ The pipelined version also modeled at RTL level."]
 
 
 (defn t3 []
-  [:div {:style {:background (hsl [0 70 70 .1])
+  [:div {:style {:background (hsl [0 70 70 0.1])
                  :height (m7/np [100 :vh])
                  :width (m7/np [100 :vw])}}
    [file/file-input-background]])
@@ -785,7 +785,7 @@ The pipelined version also modeled at RTL level."]
        [:div {:key (gensym)
               :style (m7/css
                       [[2 8 5 20 :center :center 2.3 :rem]
-                       [1 70 90 .2] [] {:gap "1rem"
+                       [1 70 90 0.2] [] {:gap "1rem"
                                         :padding "2rem"}
                        ])}
 
@@ -799,7 +799,7 @@ The pipelined version also modeled at RTL level."]
        #_[:div {:key (gensym)
               :style (m7/css
                       [[2 3 25 8 :center :center 2.3 :rem :column]
-                       [3 70 90 .8] [] {:gap "1rem"
+                       [3 70 90 0.8] [] {:gap "1rem"
                                         :z-index 10
                                         :padding "2rem"}
                        (fv [[1 4] [1 1] [1 2] [2 1]])])}
@@ -813,7 +813,7 @@ The pipelined version also modeled at RTL level."]
        #_[:div {:key (gensym)
                 :style (m7/css
                         [[2 30 25 8 :center :center 2.3 :rem :column]
-                         [3 70 90 .8] [] {:gap "1rem"
+                         [3 70 90 0.8] [] {:gap "1rem"
                                           :z-index 10
                                           :padding "2rem"}
                          (fv [[1 4] [1 1] [1 2] [2 1]])])}
@@ -873,7 +873,7 @@ The pipelined version also modeled at RTL level."]
                              :style (m7/css
                                      [[(+ 10 (* row 20)) 3 (+ 5 (* col 10))
                                        10 :center :center 2 :rem]
-                                      [2 70 90 .7] [] {:gap "1rem"
+                                      [2 70 90 0.7] [] {:gap "1rem"
                                                        :padding "2rem"}
                                       (fv [[1 4] [1 1] [1 2] [2 1]])])}
 
@@ -916,7 +916,7 @@ The pipelined version also modeled at RTL level."]
 
              (map (fn [x]
                     [:div
-                     {:style {:background-color (hsl [.5 70 70 1])}}
+                     {:style {:background-color (hsl [0.5 70 70 1])}}
                      x]) sum)])
 
 
@@ -1033,7 +1033,7 @@ The pipelined version also modeled at RTL level."]
             (m7/grid [600 :vh 100 :vw
                       (take 38 (repeat [5 :vh]))
                       (take 60 (repeat [5 :vh]))])
-            {:background-color (hsl [1.5 70 70 .1])
+            {:background-color (hsl [1.5 70 70 0.1])
              :gap ".5rem"})}
 
      [:div {:key (gensym)
@@ -1041,7 +1041,7 @@ The pipelined version also modeled at RTL level."]
             :contenteditable :true
             :style (m7/css
                       [[2 8 5 20 :center :center 2.3 :rem]
-                       [1 70 90 .2] [] {:gap "1rem"
+                       [1 70 90 0.2] [] {:gap "1rem"
                                         :padding "2rem"}
                        (fv [[1 4] [1 1] [1 2] [2 1]])])}
 
@@ -1072,7 +1072,7 @@ The pipelined version also modeled at RTL level."]
                           [[(+ 10 (* row 12)) 3
                             (+ 5 (* col 10)) 10
                             :center :center 2 :rem]
-                           [2 70 90 .7] [] {:gap "1rem"
+                           [2 70 90 0.7] [] {:gap "1rem"
                                             :padding "2rem"}
                            (fv [[1 4] [1 1] [1 2] [2 1]])])}
             task
@@ -1115,13 +1115,13 @@ The pipelined version also modeled at RTL level."]
             (m7/grid [600 :vh 100 :vw
                       (take 38 (repeat [5 :vh]))
                       (take 20 (repeat [5 :vh]))])
-            {:background-color (hsl [1.5 70 70 .1])
+            {:background-color (hsl [1.5 70 70 0.1])
              :gap ".5rem"})}
 
        [:div {:key (gensym)
               :style (m7/css
                       [[2 8 5 20 :center :center 2.3 :rem]
-                       [1 70 90 .2] [] {:gap "1rem"
+                       [1 70 90 0.2] [] {:gap "1rem"
                                         :padding "2rem"}
                        (fv [[1 4] [1 1] [1 2] [2 1]])])}
 
@@ -1135,7 +1135,7 @@ The pipelined version also modeled at RTL level."]
        #_[:div {:key (gensym)
               :style (m7/css
                       [[2 3 25 8 :center :center 2.3 :rem :column]
-                       [3 70 90 .8] [] {:gap "1rem"
+                       [3 70 90 0.8] [] {:gap "1rem"
                                         :z-index 10
                                         :padding "2rem"}
                        (fv [[1 4] [1 1] [1 2] [2 1]])])}
@@ -1149,7 +1149,7 @@ The pipelined version also modeled at RTL level."]
        #_[:div {:key (gensym)
                 :style (m7/css
                         [[2 30 25 8 :center :center 2.3 :rem :column]
-                         [3 70 90 .8] [] {:gap "1rem"
+                         [3 70 90 0.8] [] {:gap "1rem"
                                           :z-index 10
                                           :padding "2rem"}
                          (fv [[1 4] [1 1] [1 2] [2 1]])])}
@@ -1209,7 +1209,7 @@ The pipelined version also modeled at RTL level."]
                              :style (m7/css
                                      [[(+ 10 (* row 20)) 3 (+ 5 (* col 10))
                                        10 :center :center 2 :rem]
-                                      [2 70 90 .7] [] {:gap "1rem"
+                                      [2 70 90 0.7] [] {:gap "1rem"
                                                        :padding "2rem"}
                                       (fv [[1 4] [1 1] [1 2] [2 1]])])}
 
@@ -1253,7 +1253,7 @@ The pipelined version also modeled at RTL level."]
 
              (map (fn [x]
                     [:div
-                     {:style {:background-color (hsl [.5 70 70 1])}}
+                     {:style {:background-color (hsl [0.5 70 70 1])}}
                      x]) sum)])
 
 

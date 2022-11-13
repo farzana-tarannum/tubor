@@ -68,7 +68,7 @@
              (grid [100 :vh 100 :vw
                     (take 24 (repeat [8 :vh]))
                     (take 80 (repeat [7 :vh]))])
-             {:background-color (hsl [1 70 90 .1])
+             {:background-color (hsl [1 70 90 0.1])
               :padding "50px"
               :gap ".2rem"})
             )}
@@ -77,7 +77,7 @@
      [:div {:key (gensym)
             :style (css
                     [[1 3 1 12  :center :center 2.5 :rem :column]
-                     [1 70 90 .4]
+                     [1 70 90 0.4]
 
                      []
                      {
@@ -104,7 +104,7 @@
      [:div {:key (gensym)
             :style (m7/css
                     [[1 3 13 3  :center :center 2.2 :rem ]
-                     [2 70 90 .4] [] {:gap "1rem"
+                     [2 70 90 0.4] [] {:gap "1rem"
                                       :z-index 4}])
 
 
@@ -117,7 +117,7 @@
             :key (gensym)
             :style (css
                     [[4 5 1 15  :center :center 2.3 :rem :column]
-                     [1 70 90 .4]
+                     [1 70 90 0.4]
                      []
                      {
                       :padding "20px"
@@ -146,7 +146,7 @@
                 :style (css
                         [[(+ 9 i) 1 1 (+ 4 (* 4 j))
                           :center :center 1.6 :rem ]
-                         [1 70 90 .4] []
+                         [1 70 90 0.4] []
                          {
 
                           :line-height 1.5
@@ -199,7 +199,7 @@
                 :style (css
                         [[(+ 9 i) 1 (+ 1 (* 3 j)) 3
                           :center :center 1.6 :rem ]
-                         [1 70 (if (= j 0) 70 90) .4] []
+                         [1 70 (if (= j 0) 70 90) 0.4] []
                          {
 
 
@@ -220,7 +220,7 @@
      #_[:div {:contenteditable :true
               :key (gensym)            :style (css
                                                [[8 3 1 15  :center :center 1.6 :rem :column]
-                                                [1 70 90 .4] []
+                                                [1 70 90 0.4] []
                                                 {
 
                                                  :line-height 1.5
@@ -235,7 +235,7 @@
          ["Linux" "JVM" "Groovy" "React" "PostGreSQL"
           "Docker," "Kubernetes," "RESTful"]
          db/summery3
-         (m7/hsl [1.2 100 70 .8]))
+         (m7/hsl [1.2 100 70 0.8]))
         ]
 
 
@@ -248,7 +248,7 @@
                                    [[(trow i row)
                                      4
                                      13 3 :center :center 1.2 :rem]
-                                    [1 70 90 .4]
+                                    [1 70 90 0.4]
                                      [] {:gap "1rem"
                                          :padding "2rem"}
                                     (font/fv [[1 4] [1 1] [1 2] [2 1]])])}
@@ -271,7 +271,7 @@
                            :contenteditable :true
                            :style (m7/css
                                    [[(trow i row) 4 1 12 :center :center 1.5 :rem]
-                                    [1 70 90 .3]
+                                    [1 70 90 0.3]
                                     []
                                     {:line-height 1.5
                                      :gap "1rem"
@@ -282,7 +282,7 @@
                      #_(marking ["SQL," "Java,"  "scripting" "scripting," "awk," "jetty," "ssh" "PostGreSQL." "wireshark" "vi" "leadership" "embaded" "boot" "KVM" "virtualiztoin" "docker" "docker" "vnc" "rdp" "GraalVM" "redis" "git" "git," "fork" "merge" "branch" "Linux" "Groovy" "RESTful" "react" "d3.js" "iptables," "emacs" "CentOS" "Ubuntu."
                                "Archlinux" "reactjs" "webrtc" "ingress" "kafka" "groovy"]
                               sum
-                              (m7/hsl [1.2 100 70 .8]))
+                              (m7/hsl [1.2 100 70 0.8]))
                      ])
                   (sort-by #(nth % 2) <
                            (d/q '[:find  ?t ?s ?r ?c ?p
@@ -307,7 +307,7 @@
                   :contenteditable :true
                   :style (m7/css
                           [[(+ 8 (* 4 c) i) 1 1 12 :flex-start :center 1.5 :rem]
-                           [1 70 70 .3]
+                           [1 70 70 0.3]
                            []
                            {:line-height 1.5
                             :gap "1rem"
@@ -321,7 +321,7 @@
                   :style (m7/css
                           [[(+ 8 (* 4 c) i
                                ) 1 13 3 :center :center 1.5 :rem]
-                           [1 70 70 .3]
+                           [1 70 70 0.3]
                            []
                            {:line-height 1.5
                             :gap "1rem"
