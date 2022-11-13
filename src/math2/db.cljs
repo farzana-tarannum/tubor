@@ -327,4 +327,6 @@ I was an active member of National Telecommunication committee, I used to inspec
              ["The Beauty of Bézier Curves  Freya Holmér" "2020 - Online"]
              ["Siggraph2019 Geometric Algebra" "2021 - Online"]
              ["Pixar in a Box - Khan Academy" "2014 - Online"]
+             ["2021-04-29 Arun Raghavan - How to get started with GStreamer"
+              "2020 - Online"]
              ["How I Design Programs, Jeremy Gibbons, Professor of Computing in the Department of Computer Science at the University of Oxford." "2021 - Online"]])

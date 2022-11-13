@@ -370,7 +370,7 @@
   [:div
 
    #_[m100/pressure]
-   #_[m100/home-work19]
+   [m100/home-work19]
    #_[m100/home-work3]
    #_[m100/chem-rate]
    #_[m100/home-work22]
@@ -387,7 +387,7 @@
    #_[m100/map-family3]
    #_[m100/map-family2]
    #_[py100/template2]
-   [py100/template3]
+   #_[py100/template3]
    #_[py100/template4]
    ])
 
@@ -422,7 +422,7 @@
 
 (defn curveslasses []
   [:div
-
+   #_[m100/home-work20]
    #_[m19/home-work190 [1 0 0]]
    #_[trig/trig2]
    #_[trig/freq]

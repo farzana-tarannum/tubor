@@ -961,7 +961,11 @@
           rn (apply range (map #(* % a) [-6 6 1]))
           rnn (apply range (map #(* % a)  [-6 6 (if point .01 .1 )]))
           main-eq ((fun ([[1 0 0]]
-                         [m7/x `[= [:m f [:b x]] [:p x 2]]])
+                         [:div
+                          [:div [m7/x `[=> [:m f ~(symbol ": x")] [:p x 2]]]]
+                          [:div
+
+                           [m7/x `[= [:m f [:b x]] [:p x 2]]]]])
                         ([[1 m d]]
                          [m7/x `[= y
                                  [- [:p [:b [-  x ~m]] 2]
@@ -1241,7 +1245,7 @@
                   :stroke-width .2
                   :transform    (m7/tranfrom [[:rotate 0]
                                               [:scale [.6 .6]]])
-                  :fill         (m7/hsl [-0.5 70 70 .2])}]]
+                  :fill         (m7/hsl [-0.5 30 30 1])}]]
 
          [:animate {:attributeName :viewBox
                     :to            (m7/space viewbox2)
@@ -1275,6 +1279,56 @@
 
 
          (apply grid-on gd)
+
+
+         (map
+          (fn [x text s]
+            (let [d (gensym)]
+              [:g
+               [:circle {:cx (+ 20 (* x 20))
+                         :cy (* -1 20)
+                         :fill (hsl [.5 90 60 .5] )
+                         :r 10}
+                [:animate {:attributeName :r
+                           :from 1
+                           :to 5
+                           :dur (m7/not-space [1 "s"])
+                           :repeatCount "1"}]
+                ]
+
+               [:path {:id d
+                       :d (m7/path [(* x 20) -20 :l
+                                    (* 20 .5) 0 ])
+                       :fill :none
+                       :stroke-width .5
+                       :marker-end (m7/url (name :dot))
+                       :stroke (hsl [3.5 30 30 .3])}
+                ]
+
+               [:text
+                [:textPath {:href (str "#" d)
+                            :font-size 5
+                            :startOffset "3"
+                            :fill (hsl [1 40 40 1])
+                            } s]]
+
+
+
+               [:text {:x (* x 20)
+                       :y (* -1 20)
+                       :dx 12
+                       :font-size 3
+                       :fill (hsl [0 30 30 1])}
+                text]
+
+
+
+
+               ]))
+
+          (range -4 4 1.5)
+          ["suare" "add"]
+          ["x" "y"])
 
 
 
@@ -1381,16 +1435,7 @@
 
 
 
-         [:circle {:cx (* 2 20)
-                   :cy (* my 20)
-                   :fill (hsl [.5 90 60 .5] )
-                   :r 20}
-          [:animate {:attributeName :r
-                     :from 1
-                     :to 20
-                     :dur (m7/not-space [1 "s"])
-                     :repeatCount "1"}]
-          ]
+
 
 
 

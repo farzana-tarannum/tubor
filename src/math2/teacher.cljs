@@ -180,8 +180,12 @@
                                           "reactjs" "d3.js" "react hooks"
                                           "redux" "animation"
 
+                                          "audio/video" "gstreamer" "pluseaudio" "vnc" "rdp"
+                                          "db" "redis" "graphdb" "mongodb"
 
-                                            "docker"  "vnc" "rdp"  "redis"   "branch"
+                                          "event streaming" "kafka" "" "" ""
+                                          "editor" "vi"
+                                          "docker"    "redis"   "branch"
                                           "leadership"
                                           "RESTful"
                                           "react"
