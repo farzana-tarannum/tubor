@@ -436,8 +436,8 @@
 
    #_[trans/cd5]
    #_[stat/stat3]
-   [m100/home-planets-banners4]
-
+   #_[m100/home-planets-banners4]
+   [teacher/resume]
    #_[py100/template4]
    #_[frac/stat]
    #_[frac/frection]

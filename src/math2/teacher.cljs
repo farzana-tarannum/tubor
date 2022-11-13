@@ -61,22 +61,24 @@
                (if (> col 9)
                  (+ 16 (count db/course) (* i 4))
                  (+ 16 (* i 4))))
-        ref (react/useRef)]
+        ref (react/useRef)
+        vh 8
+        tvh 15]
     [:div {:style
-           (into
-            (merge
-             (grid [100 :vh 100 :vw
-                    (take 24 (repeat [8 :vh]))
-                    (take 80 (repeat [7 :vh]))])
-             {:background-color (hsl [1 70 90 0.1])
-              :padding "50px"
-              :gap ".2rem"})
-            )}
+           (merge
+            (grid [100 :vh 100 :vw
+                   (take tvh (repeat [vh :vh]))
+                   (take (* tvh 6) (repeat [vh :vh]))])
+            {:background-color (hsl [1 70 90 0.1])
+             :padding "50px"
+             :gap ".2rem"})
+
+           }
 
 
      [:div {:key (gensym)
             :style (css
-                    [[1 3 1 12  :center :center 2.5 :rem :column]
+                    [[1 3 1 (/ (* 4 tvh) 5)  :center :center 2.5 :rem :column]
                      [1 70 90 0.4]
 
                      []
@@ -103,7 +105,7 @@
 
      [:div {:key (gensym)
             :style (m7/css
-                    [[1 3 13 3  :center :center 2.2 :rem ]
+                    [[1 (/ 24 vh) (inc (/ (* 4 tvh) 5)) (/ tvh 5)  :center :center 2.2 :rem ]
                      [2 70 90 0.4] [] {:gap "1rem"
                                       :z-index 4}])
 
@@ -116,7 +118,7 @@
      [:div {:contenteditable :true
             :key (gensym)
             :style (css
-                    [[4 5 1 15  :center :center 2.3 :rem :column]
+                    [[(inc (/ 24 vh )) (/ 40 vh) 1 tvh  :center :center 2.3 :rem :column]
                      [1 70 90 0.4]
                      []
                      {
@@ -134,33 +136,10 @@
       ]
 
 
-     #_(let [car [["Linux" "JVM" "Groovy"
-                 ]
-                ["React" "PostGreSQL"
-                 "Docker," ]
-                ["Kubernetes," "RESTful" "afc"]]]
-       (for [i (range 0 3)
-             j (range 0 3)]
-         [:div {
-                :key (gensym)
-                :style (css
-                        [[(+ 9 i) 1 1 (+ 4 (* 4 j))
-                          :center :center 1.6 :rem ]
-                         [1 70 90 0.4] []
-                         {
 
-                          :line-height 1.5
-                          :padding "20px"
-                          :font-family "Amazonia Var"
-                          :gap "1rem"
-                          :z-index 2}
-                         ])
 
-                }
 
-          (get-in car [i j])
-          ])
-       )
+
 
      (let  [car (vec (map vec (partition 5
                                          ["PostGreSQL" "SQL-Query" "Indexing"
@@ -191,13 +170,14 @@
                                           "react"
 
                                           "emacs" "CentOS" "Ubuntu."
-                                             "reactjs" "webrtc" "ingress" "kafka" "groovy"])))]
-       (for [i (range 0 7)
+                                          "reactjs" "webrtc" "ingress" "kafka" "groovy"])))]
+
+       (for [i (range 0 9)
              j (range 0 5)]
          [:div {
                 :key (gensym)
                 :style (css
-                        [[(+ 9 i) 1 (+ 1 (* 3 j)) 3
+                        [[(+ (/ (* 8 9) vh) i) 1 (+ 1 (* 3 j)) 3
                           :center :center 1.6 :rem ]
                          [1 70 (if (= j 0) 70 90) 0.4] []
                          {
