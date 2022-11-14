@@ -21,6 +21,20 @@
 
 (d/transact! conn db/data)
 
+(def tasks
+  (d/q '[:find  ?t ?s ?r ?c ?p
+         :where
+         [?e :rm/code :devops]
+         [?e :rm/projects ?p]
+         [?p :rm/task ?t]
+         [?p :rm/summery ?s]
+
+         [?p :rm/row ?r]
+         [?p :rm/col ?c]
+         ] @conn))
+
+
+
 
 (defn marking [marks paragraph color]
   (reduce
@@ -47,23 +61,18 @@
 (defn resume []
   (let [[name set-name] (react/useState "")
         [rows set-rows] (react/useState 11)
-        c (count (d/q '[:find  ?t ?s ?r ?c ?p
-                        :where
-                        [?e :rm/code :devops]
-                        [?e :rm/projects ?p]
-                        [?p :rm/task ?t]
-                        [?p :rm/summery ?s]
-
-                        [?p :rm/row ?r]
-                        [?p :rm/col ?c]
-                        ] @conn))
+        psizie 5
+        car (vec (map vec (partition psizie db/topics)))
+        c (count tasks)
         trow (fn [i col]
                (if (> col 9)
                  (+ 16 (count db/course) (* i 4))
                  (+ 16 (* i 4))))
         ref (react/useRef)
         vh 8
-        tvh 15]
+        tvh 15
+        spacing [3  4 (/ (count car) psizie) (- c 2) 2]
+        ]
     [:div {:style
            (merge
             (grid [100 :vh 100 :vw
@@ -80,23 +89,20 @@
             :style (css
                     [[1 3 1 (/ (* 4 tvh) 5)  :center :center 2.5 :rem :column]
                      [1 70 90 0.4]
-
                      []
                      {
                       :padding "20px"
                       :font-size "62px"
-                                      :letter-spacing "0.08em"
-                                      :font-weight "491"
-                                      :font-stretch "113%"
-                                      :gap "1rem"
-                                      :color "#333"
+                      :letter-spacing "0.08em"
+                      :font-weight "491"
+                      :font-stretch "113%"
+                      :gap "1rem"
+                      :color "#333"
                       :font-family "Roboto Flex"
-                                      :font-variation-settings "\"XOPQ\" 175"
-                                      :z-index 2}
+                      :font-variation-settings "\"XOPQ\" 175"
+                      :z-index 2}
 
-                     ])
-
-            }
+                     ])}
 
       [:div "Ashik Ahmed"]
       [:div {:style {:font-size "1.1rem"}} "H# 192, R# 2, Mirpur DOHS, DHAKA, BANGLADESH"]
@@ -141,43 +147,13 @@
 
 
 
-     (let  [car (vec (map vec (partition 5
-                                         ["PostGreSQL" "SQL-Query" "Indexing"
-                                          "Functions" "PostGIS"
-
-                                          "scripting" "GraalVM" "shell" "go lang"
-                                          "awk"
-                                          "Command Line" "git ssh"  "wireshark"
-                                          "ip netstat ps"
-                                          "vi emacs"
-                                          "Linux" "Archlinux" "systemd" "alphine"
-                                          "ubtuntu"
-                                          "JVM"
-                                          "Groovy" "jetty" "clojure"  "jdbc"
-                                          "Virtualiztoin" "docker" "KVM" "kubernetes" "ingress"
-
-                                          "reactjs" "d3.js" "react hooks"
-                                          "redux" "animation"
-
-                                          "audio/video" "gstreamer" "pluseaudio" "vnc" "rdp"
-                                          "db" "redis" "graphdb" "mongodb"
-
-                                          "event streaming" "kafka" "" "" ""
-                                          "editor" "vi"
-                                          "docker"    "redis"   "branch"
-                                          "leadership"
-                                          "RESTful"
-                                          "react"
-
-                                          "emacs" "CentOS" "Ubuntu."
-                                          "reactjs" "webrtc" "ingress" "kafka" "groovy"])))]
-
+     (let  []
        (for [i (range 0 9)
              j (range 0 5)]
          [:div {
                 :key (gensym)
                 :style (css
-                        [[(+ (/ (* 8 9) vh) i) 1 (+ 1 (* 3 j)) 3
+                        [[(+ (/ 72 vh) i) 1 (+ 1 (* 3 j)) 3
                           :center :center 1.6 :rem ]
                          [1 70 (if (= j 0) 70 90) 0.4] []
                          {
@@ -196,58 +172,26 @@
 
 
 
-
-     #_[:div {:contenteditable :true
-              :key (gensym)            :style (css
-                                               [[8 3 1 15  :center :center 1.6 :rem :column]
-                                                [1 70 90 0.4] []
-                                                {
-
-                                                 :line-height 1.5
-                                                 :padding "20px"
-                                                 :font-family "Amazonia Var"
-                                                 :gap "1rem"
-                                                 :z-index 2}
-                                                ])
-
-              }
-        (marking
-         ["Linux" "JVM" "Groovy" "React" "PostGreSQL"
-          "Docker," "Kubernetes," "RESTful"]
-         db/summery3
-         (m7/hsl [1.2 100 70 0.8]))
-        ]
+     (let [tsk (sort-by #(nth % 2) < tasks)]
+       (map (fn [ind]
+              (let [i (js/Math.floor (/ ind 2))
+                    tsk? (if (= 0 (mod ind 2)) true false)
+                    [task sum row col id] (get (vec tsk) i)]
+                (if tsk?
+                  [:div {:key (gensym)
+                         :contenteditable :true
+                         :style (m7/css
+                                 [[(trow i row)
+                                   4
+                                   13 3 :center :center 1.2 :rem]
+                                  [1 70 90 0.4]
+                                  [] {:gap "1rem"
+                                      :padding "2rem"}
+                                  (font/fv [[1 4] [1 1] [1 2] [2 1]])])}
 
 
-
-
-     (map-indexed (fn [i [task sum row col id]]
-                    [:div {:key (gensym)
-                           :contenteditable :true
-                           :style (m7/css
-                                   [[(trow i row)
-                                     4
-                                     13 3 :center :center 1.2 :rem]
-                                    [1 70 90 0.4]
-                                     [] {:gap "1rem"
-                                         :padding "2rem"}
-                                    (font/fv [[1 4] [1 1] [1 2] [2 1]])])}
-
-
-                     (str col " " id " " task)])
-                  (sort-by #(nth % 2) <
-                           (d/q '[:find  ?t ?s ?r ?c ?p
-                                  :where
-                                  [?e :rm/code :devops]
-                                  [?e :rm/projects ?p]
-                                  [?p :rm/task ?t]
-                                  [?p :rm/summery ?s]
-                                  [?p :rm/row ?r]
-                                  [?p :rm/col ?c]
-                                  ] @conn)))
-
-     (map-indexed (fn [i [task sum row col id]]
-                    [:div {:key (gensym)
+                   (str col " " id " " task)]
+                  [:div {:key (gensym)
                            :contenteditable :true
                            :style (m7/css
                                    [[(trow i row) 4 1 12 :center :center 1.5 :rem]
@@ -258,64 +202,14 @@
                                      :padding "10px"
                                      }
                                     ])}
-                     sum
-                     #_(marking ["SQL," "Java,"  "scripting" "scripting," "awk," "jetty," "ssh" "PostGreSQL." "wireshark" "vi" "leadership" "embaded" "boot" "KVM" "virtualiztoin" "docker" "docker" "vnc" "rdp" "GraalVM" "redis" "git" "git," "fork" "merge" "branch" "Linux" "Groovy" "RESTful" "react" "d3.js" "iptables," "emacs" "CentOS" "Ubuntu."
-                               "Archlinux" "reactjs" "webrtc" "ingress" "kafka" "groovy"]
+
+                   (marking db/topics
                               sum
                               (m7/hsl [1.2 100 70 0.8]))
                      ])
-                  (sort-by #(nth % 2) <
-                           (d/q '[:find  ?t ?s ?r ?c ?p
-                                  :where
-                                  [?e :rm/code :devops]
-                                  [?e :rm/projects ?p]
-                                  [?p :rm/task ?t]
-                                  [?p :rm/summery ?s]
-
-                                  [?p :rm/row ?r]
-                                  [?p :rm/col ?c]
-                                  ] @conn)))
-
-     (let [tranings (vec (sort-by second > db/course))]
-       (for [i (range 0 (count db/course))
-             col [true false]
-             :let  [course (get-in  tranings [i 0])
-                    tm (get-in tranings [i 1])]
-             ]
-         (if col
-           [:div {:key (gensym)
-                  :contenteditable :true
-                  :style (m7/css
-                          [[(+ 8 (* 4 c) i) 1 1 12 :flex-start :center 1.5 :rem]
-                           [1 70 70 0.3]
-                           []
-                           {:line-height 1.5
-                            :gap "1rem"
-                            :padding "10px"
-                            }
-                           ])}
-
-            course]
-           [:div {:key (gensym)
-                  :contenteditable :true
-                  :style (m7/css
-                          [[(+ 8 (* 4 c) i
-                               ) 1 13 3 :center :center 1.5 :rem]
-                           [1 70 70 0.3]
-                           []
-                           {:line-height 1.5
-                            :gap "1rem"
-                            :padding "10px"
-                            }
-                           ])}
-
-            tm])))
-
-
-
-
-
-     ]))
+                ))
+            (range 0 (* 2 (count tasks))))
+       )]))
 
 
 (comment

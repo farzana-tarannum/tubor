@@ -330,3 +330,35 @@ I was an active member of National Telecommunication committee, I used to inspec
              ["2021-04-29 Arun Raghavan - How to get started with GStreamer"
               "2020 - Online"]
              ["How I Design Programs, Jeremy Gibbons, Professor of Computing in the Department of Computer Science at the University of Oxford." "2021 - Online"]])
+
+
+(def topics
+  ["PostGreSQL" "SQL-Query" "Indexing"
+   "Functions" "PostGIS"
+
+   "scripting" "GraalVM" "shell" "go lang"
+   "awk"
+   "Command Line" "git ssh"  "wireshark"
+   "ip netstat ps"
+   "vi emacs"
+   "Linux" "Archlinux" "systemd" "alphine"
+   "ubtuntu"
+   "JVM"
+   "Groovy" "jetty" "clojure"  "jdbc"
+   "Virtualiztoin" "docker" "KVM" "kubernetes" "ingress"
+
+   "reactjs" "d3.js" "react hooks"
+   "redux" "animation"
+
+   "audio/video" "gstreamer" "pluseaudio" "vnc" "rdp"
+   "db" "redis" "graphdb" "mongodb"
+
+   "event streaming" "kafka" "" "" ""
+   "editor" "vi"
+   "docker"    "redis"   "branch"
+   "leadership"
+   "RESTful"
+   "react"
+
+   "emacs" "CentOS" "Ubuntu."
+   "reactjs" "webrtc" "ingress" "kafka" "groovy"])
