@@ -11,67 +11,78 @@
    })
 
 
-
-
-(def summery2 "As a DevOps, my primary goal is to ensure developer productivity and ensure system reliability. I achieved these goals by leveraging in depth knowledge in the past as a network system programming on C and Linux systems and micro architectures (ISA) from there I had gradually migrated to jvm with Clojure, Scala finally back to the system as DevOps with Elixir, Rust, GO-lang which ensure memory safety guarantees and faster development cycle. I am a strong believer of multi-database, programming paradigm as each developer community have their strengths as well as weakness, so I leverage modern tooling like service meshes on microservices and stream-processing, RESTful API routing to reduce fiction and boiler plates hence increase productivity and reliability.")
-
-
-(def summery3 "As a DevOps, fullstack developer to ensure developer productivity and ensure system reliability in the mean time still maintain faster development cycle, I have been using Groovy on JVM and React as fontend since 2014 and Linux system integration and PostGreSQL since 2006. So I also leverage modern tooling such as Docker, Kubernetes, RESTful API to reduce fiction and boiler plates hence increase productivity and reliability.")
-
-
-(def summery
-  "I have been teaching A level computer science, mathematics, physics, IT online since 2019. My lectures are very well prepared by leveraging my hands on programming skill on computer graphics, animation, user interaction and web technologies. It is really helpful for those who want to study at top Universities around the world as well as top Engineering Universities in Bangladesh. My teaching techniques with visual interaction helps students get better at receiving intuition of science & technologies even who those who have short attention span."
+(def vert-hostdevice "Pass host devices (/dev/kvm, GPU passthough) into pod environment untimately onto the Virtual Machine (VM) using DevicOkuDe Plugins without granting the pod elevate host previlages"
   )
+
+(def gitops "gitops manage infrastructure and application operation declaratively, versioned and Immutabe, pulled automatically, continuously reconciled the system state and attempt to apply desired state, adopted  these gitops principle as guideline and comming by with get practices thus gateway confiration drift, everyting written in code make it reusable and have a audit trail by making it immutabe no seaking in chane.")
+
+
 
 (def data
   [
-   {:db/id 43
-    :rm/code :couch
+   {:db/id 111
+    :rm/code :devops
     :rm/occupation "Computer Engineer"
     :rm/name ""
     :rm/age 38
     :rm/phone "880-1711961024"
     :rm/email ""
-    :rm/summery summery
-    :rm/projects (into [2 3 5 7 8]
-                       [12 14 13 16 17 22 8 23 ])
-    :rm/jobs [9 10]
-    :rm/projects.title "Projects and accomplishment"}
-
-
-
-   {:db/id 111
-    :rm/code :devops
-   :rm/occupation "Computer Engineer"
-    :rm/name ""
-    :rm/age 38
-    :rm/phone "880-1711961024"
-    :rm/email ""
-
-
-
     :rm/summery "I am a DevOps engineer. I have more than 15 years experience working on cloud computing architectures on Linux platforms. I have built my career with start-ups to Bigtechs by developing infrastructure tooling, troubleshooting, system integration. As a DevOps & fullstack developer my primary objective is to ensure developer productivity and ensure system reliability in the mean time still maintain faster development cycle"
-    :rm/projects (into [27 25 42]
-                       [12 13  16 117 23 7  127 15 35 129 20 2 225 ])
+    :rm/projects (into [2 27 25 42]
+                       [12 13  16 117 23 7  127 15 35 129 20 2 225 1132
+                        2132])
     :rm/jobs [9 10]
     :rm/proects.title "Projects and accomplishment"}
-  {:db/id 1
-   :rm/code :abc
-   :rm/occupation "Computer Engineer"
-   :rm/name ""
-   :rm/age 38
-   :rm/phone "880-1711961024"
-   :rm/email ""
-   :rm/summery "I am a fullstack senior software engineer and  DevOps engineer who has more than 10 years experience working on disruptive technological innovation on cloud computing telecommunication finance education sector. I have built my career with start ups to bigtech and from small caps to fortune 500 companies, government organization and universities."
-   :rm/projects (into [12 14 13 16 17 22 8 23  25 26 27] [2 3 5 7 8 15] )
-   :rm/jobs [9 10]
-   :rm/projects.title "Projects and accomplishment"}
+
+
+
    {:db/id 2
     :rm/row 0
     :rm/col 0
-    :rm/task "Online classes on Virtual notebooks"
-    :rm/summery "Collaboration between teachers and students is hard using web Camera and limited zoom experience. Data scientist uses virtual notebooks to collaborate between themself. I have develop similar experience that would rather focus on student productivity that made a simple and elegant way of writing equation on web at the same speed on pen and paper. Moreover I made it visually more appealing by making use of digital typography and making use of computer animation and develop ways where computer can assist students helping with their homework."
+    :rm/task "design and develop a computational notebooks with interactive programming techniques"
+    :rm/summery "I have been teaching Cambridge IAL computer science, mathematics, physics, IT online since covid statred. My lectures are very well prepared by leveraging my hands on programming skill on computer graphics, animation, user interaction and web technologies these visual interaction with reactjs svg bazier curves d3.js gematric algebra symbolic AI with clojure and clojurescript and deffientiable programming for calculus and gredient decent that is a prelude to machine learing and AI. I have leveraged react hot loading technics to generate code to graphics realtime
+on classes. These techniques helps students get better at receiving intuition of science & technologies even who those who have short attention span. "
     :rm/referane ""}
+
+
+   {:db/id 1132
+    :rm/row 0
+    :rm/col 0
+    :rm/task  "Edge computing, discover and Manage IoT devices from Kubbernetes with Akri."
+    :rm/summery  (clojure.string/join
+                  ""
+                  ["In our scenario we customers are migrant workers, they really depands on us to maintain and deploy IOT on their home, monitoring health of bio gas based reactor, maintain 24/7 connectivity as their clildren depends on distance learning, powering home with solar and hydogen based fuel cell. Our job is to maintain and install IOT  and network device on those hetarogenious envirnoment on remote locations. In order to smooth sailing we have migrathed to kubbernetes leverage akri to communicates via  common Iot protocols udev for divices on linux local file systems (USB cameras, GPU, microphone), OPC UA (industrial machinery), ONVIF (IP cameras) and simple gRPC interface for adding support for new protocols on RUSt & Go lang (for example adding zeroconf based mdns devices)."
+                   "Pattern of communication made with devices are discovery handlers by implemanting these are protocols thn deploy a long running pod as information broaker for exaple for ip cameras, pulling streams of I frames and P frames from camera work as protocl translation gateway so dicover a usb camera and broker aka long running pod advertises as an ip camera using akri to discover microphone, cameras then use it on streaming applicaion then go one step further by managing this divices by performing formal update on them. Run k3s on the Edge Amlogic based Arm SOCs not only hatarogenious compute by also environment. IOT devices, mcu class sensors controllers etc and not only there a bunch of different ones but also they're constantly scaling up and down. As these devices are too small to run kuberneters temselves or have just one fix functionor. okri enables dynamicallly leverge these devices in kubernetes cluster and aim to the interface that abstracts the way the dtails of discovering and using iot devices on the edge. First it discovers the devices then for every device that ocari discovers in connects it to a the cluster by creating a kubernetes resource to represent device, then we have a controller that can automatically deploy workloads to discover devices, handle common occurrences that are more common on the edge such as devices dynamicallly disappearing, loos fo connectivity to the device or over heating or all of sudden coming online and Akri can detech these occurrences create, update, remove kubernetesw resource and bring down or deploy appropriate worklaod automatically. Bulit in rust to optimize to being as low footprint as possible" "hetarogenious gpu cluster"])
+    :rm/referane ""}
+
+   {:db/id 2132
+    :rm/row 0
+    :rm/col 0
+    :rm/task  ""
+    :rm/summery "KubeVirt is Kubernetes extension that allows running  VM and Firecracer MicroVM workloads and  natively side by side with container workloads , as a infrastructure as a service that allows put together VM and cotainer orkastation under Kubernetes which was previously done using with openstack in our case, transition path of old VM based workloads to containerized workloads for Virtual desktop (VDI), Video Fx Rendering. Another one kind of emereged which is a predominat use case to get hold of nested kubernetes on top of kubernetes using kubevirt for virtual machines that works uderlying infrastructure as service nested layer for development or staging. say you have kubernetes cluster and you want to spawn lots of little kubernetes clusters on top of that for development or staging this is how we run the productions, deploying cube verts on the under layer so the bare metal kubernetes layer spin up virtual machines that's the underlying substrate for the next layer of kubernetes clusters and also buliding pipelines like tecton. posting a virtual machine from manifests, hit the api server get persisted on etcd virt-controller spin up virt-hadler instruct virt-lancher, virt operator that manage install update kubevert that pretty neat ensure 0 downtime updates that going to guarantee when doing updates not to disrupt workloads and protect people from kubbernetes doing node level upgrate by evacuating and live migrating virtual machines. by posting a custom resurce that gives operator instractions install on kubevert
+namespace,persistent virtual machine can be lunch with by combining storage creation and import and how we want virtual machine to start all in one manifest yaml of VirtualMachine kind. Way of doing storage part is this thing call data volume template where pvc is defined and the source that is going to be imported into that pvc then import virtual machine disk from a container image on the pvc and bind the network interface"
+    :rm/referane ""}
+
+
+   {:db/id 3132
+    :rm/row 0
+    :rm/col 0
+    :rm/task  ""
+    :rm/summery  (clojure.string/join "" ["enhace machine learning model to real time data pipeline with kafka and webassembly"
+                                          "Building fully managed cloud services with kafka and Rust with no runtime or garbage collaboration."
+                                          "Realtime stream processing and data transformation using webassembly all in a single unified cluster with upto 3x less latency 5x throughput, 7x cpu utilization, 50x memory utilization."
+                                          "feed stream clean data to kafka topic starting with rust http source connector, streaming data sink into kafka source connector where webassembly pipeline is applied which enable direct contorl over the streaming datathen transform event flows to kafka consumer."
+                                          ])
+    :rm/referane ""}
+
+
+
+
+
+
+
+
+
 
    {:db/id 20
     :rm/row 7
@@ -142,20 +153,6 @@
    :rm/job "Lead Engineer at Mobile Development"
    :rm/company "Samsuang R&D"
    :rm/duration "2013-2015"}
-  {:db/id 11
-   :rm/code :sap
-   :rm/occupation "Computer Engineer"
-   :rm/name ""
-   :rm/age 38
-   :rm/phone ""
-   :rm/email ""
-   :rm/summery "I am a skilled IT professional with years of experience on
-                System & database Administration. Thought my carrier I have nailed
-                every kind of task an IT professional asked for. I am spetialized on
-                SAP based DevOps, continuous integration systems"
-   :rm/projects [12 14 13 16 117 22 8 23 24 25 26 27 ]
-   :rm/jobs [9 10]
-   :rm/projects.title "Projects and accomplishment"}
 
    {:db/id 13
     :rm/row -15
@@ -281,7 +278,8 @@ I was an active member of National Telecommunication committee, I used to inspec
   ])
 
 
-(def course [["Samsung Device driver programming on SNMC" "2011 - Delhi"]
+(def course [["Getting to Grips with Kubernetes RBAC • Liz Rice • GOTO 2019 " "2022 Online"]
+             ["Samsung Device driver programming on SNMC" "2011 - Delhi"]
              ["Online 8.01x - MIT Physics I: Classical Mechanics by Walter Lewin"
               "2014 - Online"]
              ["2015 Introduction to Dependent Type Theory — Robert Harper University of Oregon" "2015 Online"]
@@ -311,6 +309,7 @@ I was an active member of National Telecommunication committee, I used to inspec
              ["Intro to Parallel Programming. John Owens University of California, Davis"
               "2019 - Online"]
              ["Building a container from scratch in Go - Liz Rice" "2022 - Online"]
+
 
              ["\"Stop Writing Dead Programs\" by Jack Rusher (Strange Loop 2022)" "2022 - Online"]
              ["Delimited Continuations for Everyone by Kenichi Asai Ochanomizu University "

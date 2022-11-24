@@ -59,35 +59,39 @@
 
 
 (defn resume []
-  (let [[name set-name] (react/useState "")
-        [rows set-rows] (react/useState 11)
-        psizie 5
+  (let [psizie 5
         car (vec (map vec (partition psizie db/topics)))
         c (count tasks)
-        trow (fn [i col]
-               (if (> col 9)
-                 (+ 16 (count db/course) (* i 4))
-                 (+ 16 (* i 4))))
         ref (react/useRef)
-        vh 8
-        tvh 15
-        spacing [3  4 (/ (count car) psizie) (- c 2) 2]
+        vh 4
+        tvh (js/Math.floor (/ (* 15 8) vh))
+        spacing [3  5 (count car) (* 4 c) (* 2 (count db/course))]
+        width tvh
+        fifth (js/Math.floor (/ tvh 5))
+        fifth4 (* 4 fifth)
+        heights (map-indexed (fn [i x] (if (= i 2)
+                                         x
+                                         (js/Math.floor
+                                          (/ (* 8 x) vh)))) spacing)
+        heights2 (reduce
+                  (fn [acc x]
+                    (conj acc (+ x (last acc))))
+                  []
+                  heights)
         ]
     [:div {:style
            (merge
             (grid [100 :vh 100 :vw
                    (take tvh (repeat [vh :vh]))
-                   (take (* tvh 6) (repeat [vh :vh]))])
+                   (take 200  (repeat [vh :vh]))])
             {:background-color (hsl [1 70 90 0.1])
              :padding "50px"
-             :gap ".2rem"})
-
-           }
-
+             :gap ".2rem"})}
 
      [:div {:key (gensym)
             :style (css
-                    [[1 3 1 (/ (* 4 tvh) 5)  :center :center 2.5 :rem :column]
+                    [[1 (first heights) 1 width
+                      :center :center 2.5 :rem :column]
                      [1 70 90 0.4]
                      []
                      {
@@ -107,13 +111,20 @@
       [:div "Ashik Ahmed"]
       [:div {:style {:font-size "1.1rem"}} "H# 192, R# 2, Mirpur DOHS, DHAKA, BANGLADESH"]
       [:div {:style {:font-size "1.3rem"}}
-       "+8801711961024, jaharapi@protonmail.com"]]
+       "+8801711961024, jaharapi@protonmail.com"]
+
+
+
+      ]
 
      [:div {:key (gensym)
             :style (m7/css
-                    [[1 (/ 24 vh) (inc (/ (* 4 tvh) 5)) (/ tvh 5)  :center :center 2.2 :rem ]
+                    [[1 (first heights)
+                      (inc fifth4)
+                      fifth
+                      :center :center 2.2 :rem ]
                      [2 70 90 0.4] [] {:gap "1rem"
-                                      :z-index 4}])
+                                       :z-index 4}])
 
 
 
@@ -124,7 +135,7 @@
      [:div {:contenteditable :true
             :key (gensym)
             :style (css
-                    [[(inc (/ 24 vh )) (/ 40 vh) 1 tvh  :center :center 2.3 :rem :column]
+                    [[(inc (first heights)) (second heights) 1 tvh  :center :center 2.3 :rem :column]
                      [1 70 90 0.4]
                      []
                      {
@@ -148,13 +159,13 @@
 
 
      (let  []
-       (for [i (range 0 9)
-             j (range 0 5)]
+       (for [i (range 0 (count car))
+             j (range 0 psizie)]
          [:div {
                 :key (gensym)
                 :style (css
-                        [[(+ (/ 72 vh) i) 1 (+ 1 (* 3 j)) 3
-                          :center :center 1.6 :rem ]
+                        [[(+ 1 i (second heights2)) 1 (+ 1 (* 3 j)) 3
+                          :center :center 0.9 :rem ]
                          [1 70 (if (= j 0) 70 90) 0.4] []
                          {
 
@@ -181,9 +192,9 @@
                   [:div {:key (gensym)
                          :contenteditable :true
                          :style (m7/css
-                                 [[(trow i row)
-                                   4
-                                   13 3 :center :center 1.2 :rem]
+                                 [[(+ 1 (* (js/Math.floor (/ (* 4 8) vh)) i) (nth heights2 2))
+                                   (js/Math.floor (/ (* 4 8) vh))
+                                   (inc fifth4) fifth :center :center 1.2 :rem]
                                   [1 70 90 0.4]
                                   [] {:gap "1rem"
                                       :padding "2rem"}
@@ -194,7 +205,11 @@
                   [:div {:key (gensym)
                            :contenteditable :true
                            :style (m7/css
-                                   [[(trow i row) 4 1 12 :center :center 1.5 :rem]
+                                   [[(+ 1
+                                        (*
+                                         (js/Math.floor (/ (* 4 8) vh)) i)
+                                        (nth heights2 2))
+                                     (js/Math.floor (/ (* 4 8) vh)) 1 fifth4 :center :center 1.5 :rem]
                                     [1 70 90 0.3]
                                     []
                                     {:line-height 1.5
@@ -209,7 +224,26 @@
                      ])
                 ))
             (range 0 (* 2 (count tasks))))
-       )]))
+       )
+
+     (for [i (range 0 (count db/course))]
+       [:div {:key (gensym)
+              :style (m7/css
+                      [[(+ 1 (* 2 i) (nth heights2 3)) 2 1 tvh  :center :center 1.2 :rem ]
+                       [2 70 90 0.4] [] {:gap "1rem"
+                                         :z-index 4}])
+
+
+
+              }
+        (get-in db/course [i 0])])
+
+
+
+
+
+
+     ]))
 
 
 (comment
