@@ -219,7 +219,7 @@
                                     ])}
 
                    (marking db/topics
-                              sum
+                            (str/join "" (take 600 sum))
                               (m7/hsl [1.2 100 70 0.8]))
                      ])
                 ))
@@ -237,12 +237,6 @@
 
               }
         (get-in db/course [i 0])])
-
-
-
-
-
-
      ]))
 
 
