@@ -36,6 +36,8 @@
   (rdom/render
    #_[m100/app]
    #_[m100/map-family2]
+   #_[m100/home-planets-banners]
+   #_[m100/chem-rate]
    [teacher/resume]
    (js/document.getElementById "app")
    functional-compiler))

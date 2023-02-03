@@ -108,7 +108,7 @@
 
                      ])}
 
-      [:div "Ashik Ahmed"]
+      [:div "Ash Ahmed"]
       [:div {:style {:font-size "1.1rem"}} "H# 192, R# 2, Mirpur DOHS, DHAKA, BANGLADESH"]
       [:div {:style {:font-size "1.3rem"}}
        "+8801711961024, jaharapi@protonmail.com"]

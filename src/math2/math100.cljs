@@ -16233,10 +16233,11 @@ on time?"]
         ax-dx 80
         ax-dy 40
         vb (fn [z]
-             (nth [(map #(* 0.25 %) [-10 -20  83 40])
+             (nth [(map #(* 0.15 %) [10 -20  83 40])
                    (map #(* 0.5 %) [-10 -20  83 40])
                    [0 -180  200 200]
                    [0 -50  100 100]
+
                    [0 -25  50 50]
                    [-100 -200  800 200]
                    [40 120  80 80]
@@ -16276,19 +16277,26 @@ on time?"]
                            {:z-index 19}
                            )])
                  }
-           d])
+           [:div
+            [:div d
+             ]
+            [:div n]]])
         (let [[f1 f2] [7 -2]
               x 'x]
-          [[[m7/x `[:m 8 [:p ~x 2]]] 1 1 :center :center]
+          [[[:div
+
+
+             [m7/x `[:m 8 [:p ~x 2]]]
+
+             ]
+
+            1 1 :center :center]
            [[m7/x `[* ~f1 ~f2]] 2 2 :center :center]
            [[m7/x `[:m 7 ~x]] 2 1 :center :center]
            [[m7/x `[:m -16 ~x]] 1 2 :center :center]
-           [[m7/x `[:m 1 ~x]]
-            1 1 :flex-end :center]
-           [[m7/x `[:m 8 ~x]]
-            1 1 :center :flex-start]
-           [f1
-            2 2 :center :flex-start]
+           [[m7/x `[:m 1 ~x]] 1 1 :flex-end :center]
+           [[m7/x `[:m 8 ~x]] 1 1 :center :flex-start]
+           [f1 2 2 :center :flex-start]
            [f2 2 2 :flex-end  :center]]))
 
        [:div {:style (m7/css
