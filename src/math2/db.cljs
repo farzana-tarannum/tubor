@@ -10,12 +10,52 @@
    :rm/code {:db/unique :db.unique/identity}
    })
 
+;; (/dev/kvm, GPU pass-through)
 
-(def vert-hostdevice "Pass host devices (/dev/kvm, GPU passthough) into pod environment untimately onto the Virtual Machine (VM) using DevicOkuDe Plugins without granting the pod elevate host previlages"
-  )
+(def vert-hostdevice "Building a virtualization Desktop Lab (VDE)  on cloud infrastructure supervised by
+engineers of NASA Jet Propulsion Lab where  distributed computers are acting as physical hosts
+on the Cloud which is spawning millions of virtual operating systems while the  users are connected
+through the consoles that are based on ARM-SOC over the network to access the system.
+Converting thousands of physical systems
+resources into million of virtual operating systems in a secure and efficient way was the primary
+challenge of that project. After having rollout done in a concise timeframe, we then pay attention
+to network latency and shared graphics co-processors that enables users to stream games using consoles
+rather than purchasing high performance graphics computers. We use Kubernetes, alpine linux and
+Amazon firecracker OS under KVM hypervisor to scale these system into millions.")
 
-(def gitops "gitops manage infrastructure and application operation declaratively, versioned and Immutabe, pulled automatically, continuously reconciled the system state and attempt to apply desired state, adopted  these gitops principle as guideline and comming by with get practices thus gateway confiration drift, everyting written in code make it reusable and have a audit trail by making it immutabe no seaking in chane.")
+(def vde
+  {:project "Building a virtualization Desktop Lab (VDE) on cloud infrastructure supervised by engineers of NASA Jet Propulsion Lab"
+ :details [
+   {:description "Utilized distributed computers as physical hosts on the cloud."
+    :feature "distributed-computing"}
+   {:description "Spawned millions of virtual operating systems on the cloud infrastructure."
+    :feature "virtualization"}
+   {:description "Users connected through consoles based on ARM-SOC over the network to access the system."
+    :feature "ARM-SOC consoles"}
+   {:description "Converted thousands of physical system resources into millions of virtual operating systems."
+    :feature "resource-conversion"}
+   {:description "Ensured secure and efficient virtualization of resources was the primary challenge of the project."
+    :feature "security"}
+   {:description "Paid attention to network latency and shared graphics co-processors for streaming games using consoles instead of high-performance graphics computers."
+    :feature "game-streaming"}
+   {:description "Used Kubernetes, Alpine Linux, and Amazon Firecracker OS under the KVM hypervisor to scale the system into millions."
+    :feature "technology-stack"}]
+   })
 
+
+
+(def gitops "gitops manage infrastructure and application operation declaratively,
+versioned and Immutabe, pulled automatically, continuously reconciled the system state and attempt to apply desired state, adopted  these gitops principle as guideline and comming by with get practices thus gateway confiration drift, everyting written in code make it reusable and have a audit trail by making it immutabe no seaking in chane.")
+
+(def gitops-tasks
+  {:manage "infrastructure and application operations declaratively, versioned, and immutable"
+   :pull "changes automatically"
+   :reconcile "system state continuously"
+   :apply "desired state"
+   :adopt "GitOps principles as guidelines"
+   :adhere "to best practices for preventing configuration drift"
+   :write "everything in code for reusability"
+   :maintain "immutability for audit trail and preventing ad hoc changes"})
 
 
 (def data
@@ -35,6 +75,22 @@
     :rm/proects.title "Projects and accomplishment"}
 
 
+   {:db/id 1666
+    :rm/code :iccddrb
+    :rm/occupation "Computer Engineer"
+    :rm/name ""
+    :rm/age 38
+    :rm/phone "880-1711961024"
+    :rm/email ""
+
+    :rm/summery  "With over 15 years of experience in Software engineering, data scientist, colud engineering, my primary focus is on ensuring developer productivity and system reliability while maintaining faster development cycles. I specialize in designing and managing databases, developing error detection tools, programming logic, and creating applications for the management of study tools. Additionally, I excel in creating detailed test plans and executing automation scripts to identify and track bugs, conducting vulnerability assessments, and promoting gender diversity and collaboration amongst team members. I am dedicated to mentoring young professionals and preparing them for higher responsibilities while maintaining high standards"
+    :rm/projects (into [2 27 25 42]
+                       [12 13  16 117 23 7  127 15 35 129 20 2 225 1132
+                        2132])
+    :rm/jobs [9 10]
+    :rm/proects.title "Projects and accomplishment"}
+
+
 
    {:db/id 2
     :rm/row 0
@@ -42,6 +98,20 @@
     :rm/task "design and develop a computational notebooks with interactive programming techniques"
     :rm/summery "I have been teaching Cambridge IAL computer science, mathematics, physics, IT online since covid statred. My lectures are very well prepared by leveraging my hands on programming skill on computer graphics, animation, user interaction and web technologies these visual interaction with reactjs svg bazier curves d3.js gematric algebra symbolic AI with clojure and clojurescript and deffientiable programming for calculus and gredient decent that is a prelude to machine learing and AI. I have leveraged react hot loading technics to generate code to graphics realtime
 on classes. These techniques helps students get better at receiving intuition of science & technologies even who those who have short attention span. "
+    :rm/breakdowns
+    {:teaching "Cambridge IAL computer science, mathematics, physics, IT online"
+     :realtime "Realtime collaboration platform for data scientist"
+     :prepare "well-prepared lectures"
+     :leverage "hands-on programming skills"
+     :topics "computer graphics, animation, user interaction, web technologies"
+     :utilize "visual interaction with ReactJS, SVG, Bezier curves, D3.js and React hot loading techniques"
+     :apply "geometric algebra, symbolic AI with Clojure and ClojureScript"
+     :employ "differentiable programming for calculus and gradient descent"
+     :introduce "machine learning and AI concepts"
+     :generate "real-time code to graphics"
+     :enhance "students' intuition in science and technologies"
+     :accommodate "students with short attention spans"}
+
     :rm/referane ""}
 
 
@@ -49,6 +119,23 @@ on classes. These techniques helps students get better at receiving intuition of
     :rm/row 0
     :rm/col 0
     :rm/task  "Edge computing, discover and Manage IoT devices from Kubbernetes with Akri."
+    :rm/breakdowns [{:customers "migrant workers"
+                    :tasks ["maintain and deploy IoT on their homes"
+                            "monitor health of biogas-based reactor"
+                            "maintain 24/7 connectivity for distance learning"
+                            "power homes with solar and hydrogen-based fuel cell"]
+                    :job "maintain and install IoT and network devices"
+                    :environment "heterogeneous environments on remote locations"
+                    :technologies "Kubernetes, Akri, udev, OPC UA, ONVIF, gRPC"
+                    :protocols ["common IoT protocols"
+                                "protocol translation gateway"
+                                "dynamic device discovery and management"]
+                    :platform "K3s on Edge Amlogic-based Arm SOCs"
+                    :challenges "scaling heterogeneous compute and IoT devices"
+                    :akri "enables dynamic leverage of devices in Kubernetes cluster"
+                    :controller "automatically deploys workloads to discovered devices"
+                    :rust "built for low footprint optimization"}
+                   {:scenario "hetereogeneous GPU cluster"}]
     :rm/summery  (clojure.string/join
                   ""
                   ["In our scenario we customers are migrant workers, they really depands on us to maintain and deploy IOT on their home, monitoring health of bio gas based reactor, maintain 24/7 connectivity as their clildren depends on distance learning, powering home with solar and hydogen based fuel cell. Our job is to maintain and install IOT  and network device on those hetarogenious envirnoment on remote locations. In order to smooth sailing we have migrathed to kubbernetes leverage akri to communicates via  common Iot protocols udev for divices on linux local file systems (USB cameras, GPU, microphone), OPC UA (industrial machinery), ONVIF (IP cameras) and simple gRPC interface for adding support for new protocols on RUSt & Go lang (for example adding zeroconf based mdns devices)."
@@ -67,6 +154,10 @@ on classes. These techniques helps students get better at receiving intuition of
     :rm/row 0
     :rm/col 0
     :rm/task  ""
+    :rm/breakdowns ["enhace machine learning model to real time data pipeline with kafka and webassembly"
+                    "Building fully managed cloud services with kafka and Rust with no runtime or garbage collaboration."
+                    "Realtime stream processing and data transformation using webassembly all in a single unified cluster with upto 3x less latency 5x throughput, 7x cpu utilization, 50x memory utilization."
+                    "feed stream clean data to kafka topic starting with rust http source connector, streaming data sink into kafka source connector where webassembly pipeline is applied which enable direct contorl over the streaming datathen transform event flows to kafka consumer."]
     :rm/summery  (clojure.string/join "" ["enhace machine learning model to real time data pipeline with kafka and webassembly"
                                           "Building fully managed cloud services with kafka and Rust with no runtime or garbage collaboration."
                                           "Realtime stream processing and data transformation using webassembly all in a single unified cluster with upto 3x less latency 5x throughput, 7x cpu utilization, 50x memory utilization."
@@ -87,45 +178,35 @@ on classes. These techniques helps students get better at receiving intuition of
     :rm/row 7
     :rm/col 6
     :rm/task "Serverless end to end video conferencing and live Streaming v1 (2006-2012)"
+    :rm/breakdowns [
+                    {:task "Implement end-to-end low latency network connectivity solutions."},
+                    {:task "Utilize network UDP hole punching technologies, which are becoming the standard in 2021/2022."},
+                    {:task "Apply UDP hole punching for voice and video communication using protocols like SRT."},
+                    {:task "Implement UDP hole punching for HTTP3 (QUIC) to reduce network latency."},
+                    {:task "Explore the use of TCP-based protocols like RTMP for streaming video providers such as Google, Zoom, Facebook, and Twitch."},
+                    {:task "Identify the drawbacks of TCP-based protocols in terms of increased network latency."},
+                    {:task "actor modle in scala to make it scalabe and configuration managed side mongodb nodejs with reactjs fontend with webrtc. "}
+                    {:task "Near real time Edge processing with
+Actor model and CPS adoption for scalability"}]
+
     :rm/summery "End to end low latency network connectivity solutions using network UDP whole punching technologies which is becomming standard in 2021/2022 not only for voice and video (SRT) but also in http3 (QUIC) where as streaming Vedeo providers like Google, zoom, facebook, twitch  uses of TCP-based protocls like RTMP thus increase network latency."
-    :rm/referane ""}
-
-   {:db/id 225
-    :rm/row 7
-    :rm/col 6
-    :rm/task "Serverless end to end video conferencing and live Streaming with Edge processing v2 (from 2013)"
-    :rm/summery "actor modle in scala to make it scalabe and configuration managed side mongodb nodejs with reactjs fontend with webrtc. "
-    :rm/referane ""}
-
-
-   {:db/id 353
-    :rm/row -1
-    :rm/col 0
-    :rm/task "Near real time Edge processing"
-    :rm/summery ""
     :rm/referane ""}
 
    {:db/id 35
     :rm/row -1
     :rm/col 0
+    :rm/breakdowns [
+                    {:task "Develop the frontend using React.js and WebRTC."},
+                    {:task "Create a collaboration platform similar to Google Docs for data scientists and students."},
+                    {:task "Build backend services with an Ingress API gateway."},
+                    {:task "Incorporate Kafka for messaging functionality in the backend."},
+                    {:task "Utilize clojure, rust, go for connecting PostgreSQL, Kafka, and the frontend components."},
+                    ]
     :rm/task "Web based audio & video conferencing"
     :rm/summery "Fontend is developed with reactjs and webrtc with google doc like collaboration platform for data scientist and students. Developing backend services with ingress API gateway, kafka for messaging, groovy for connecting postgresql, kafka and fontend."
     :rm/referane ""}
 
-   {:db/id 45
-    :rm/row 0
-    :rm/col 0
-    :rm/task "Actor model and CPS adoption for scalability"
-    :rm/summery ""
-    :rm/referane ""}
 
-
-  {:db/id 3
-   :rm/row 2
-   :rm/col 1
-   :rm/task "Realtime collaboration platform for data scientist"
-   :rm/summery ""
-   :rm/referane ""}
 
 
 
@@ -134,29 +215,15 @@ on classes. These techniques helps students get better at receiving intuition of
    :rm/row -30
    :rm/col 1
    :rm/task "Fractals Labs (2016-2018)"
+   :rm/breakdowns "Realtime collaboration platform for data scientist"
    :rm/summery "Implemented Virtual Desktop Environment(VDE) for University Labs using KVM Libvert virtualization on Archlinux based hypervisor that hosts virtualized linux and windows desktops and docker for containerization on the server and desktop is replaced by ARM based SoC with vnc & rdp clients installed where students can access remote desktops and spawn docker based services on remote services"
    :rm/referane ""}
 
 
-
-
-  {:db/id 9
-   :rm/row 2
-   :rm/col 1
-   :rm/job "System Engineer at Operations System and Software"
-   :rm/company "Grameenphone"
-   :rm/duration "2009-2013"}
-
-  {:db/id 10
-   :rm/row 3
-   :rm/job "Lead Engineer at Mobile Development"
-   :rm/company "Samsuang R&D"
-   :rm/duration "2013-2015"}
-
    {:db/id 13
     :rm/row -15
     :rm/col 0
-    :rm/task "System Engineer at GrameenPhone. (2007-2009)"
+    :rm/task "System Engineer on  Operations System and Software at GrameenPhone. (2007-2009)"
     :rm/summery "Developed and maintained mediation servers which was in a nut shell modern days micro services with lot of bells and whistle with Java, Oracle SQL, shell scripting, jetty, linux command line utilities - awk, ssh port forwarding and reverse   proxy for remote server login and vi as remote editor. As well implemented push and pull based systems and services for monitoring alarms and IP packet tracing using wireshark"
     :rm/referane ""}
 
@@ -165,6 +232,12 @@ on classes. These techniques helps students get better at receiving intuition of
     :rm/row 1
     :rm/col 0
     :rm/task "System Engineer at GrameenPhone. (2007-2009)"
+    :rm/breakdowns [
+                    {:task "Develop and maintain mediation servers for telecommunication systems."},
+                    {:task "Implement modern Microservices architecture with a focus on simplicity."},
+                    {:task "Ensure seamless communication between different nodes and systems in multi-vendor environments."},
+                    {:task "Address compatibility issues and ensure smooth interoperability between systems."},
+                    ]
     :rm/summery "Main goal is to develop and maintain mediation servers which is in a nut shell modern days MicroServies with less of bells and whistle. In order to telecommunication system work properly every single nodes has to communicate with other systems and often in multi-vendor system things are not compatible."
     :rm/referane ""}
 
@@ -174,6 +247,14 @@ on classes. These techniques helps students get better at receiving intuition of
     :rm/row 8
     :rm/col 1
     :rm/task "Assistant Director - Bangladesh Telecommunication Regulatory Commision - BTRC (2009-2011)"
+    :rm/breakdowns [
+                    {:task "Performed extensive packet tracing and analysis using Wireshark for millions of network interactions."},
+                    {:task "Utilized Lua scripting in Wireshark for custom analysis and filtering."},
+                    {:task "Served as a Lawful Interceptor for the Bangladesh Telecommunication Regulatory Commission."},
+                    {:task "Participated as an active member of the National Telecommunication committee."},
+                    {:task "Inspected and assessed the Telecommunication and IT infrastructure for potential reverses or tax leaks."},
+                    {:task "Worked tirelessly, including extended hours and 24/7 availability, to fulfill job responsibilities."},
+                    ]
     :rm/summery "tasted by at least millions time using wireshark packct tracing and lua scripting when I was Lawful Interseptor Bangladesh Telecommunication Regulatory Commisions.
 I was an active member of National Telecommunication committee, I used to inspect Telecommunication and IT infrastructure, primary goal is to find out potential reverse or Tax leak from those infrastructure. As only person that had proper communication background my job was very extensive, some time it was extended 24/7."
     }
@@ -182,6 +263,15 @@ I was an active member of National Telecommunication committee, I used to inspec
     :rm/row -1
     :rm/col 4
     :rm/task "Deep packet Inspections (DPI)"
+    :rm/breakdowns [
+                    {:task "Performed packet inspection and auditing for detecting malicious activities and lawful interception in the Linux kernel space."},
+                    {:task "Utilized eBPF technologies and systrace for packet inspection and auditing purposes."},
+                    {:task "Implemented shell scripting for systrace functionality and later transitioned to using Groovy on GraalVM."},
+                    {:task "Optimized PostGreSQL queries through join planning and indexing."},
+                    {:task "Utilized Redis cluster for efficient caching of frequently accessed data."},
+                    {:task "Developed data visualization using d3.js in the React-based frontend."},
+                    {:task "Implemented a RESTful API backend using Groovy for data processing and communication."},
+                    ]
     :rm/summery "Packet Inspection and Auditing for malicious activities and Lawful Interception in Linux Kernel Space using eBPF technologies and systrace using shell scripting later successfully used groovy on GraalVM and PostGreSQL query optimization using join planing and indexing also used redis cluster for cashing frequent data. Develop react based data visualization using d3.js and Groovy based RESTful API backend."
     }
 
@@ -192,34 +282,106 @@ I was an active member of National Telecommunication committee, I used to inspec
     :rm/col 0
     :rm/task "Lead Engineer - SAMSUNG R&D Institute Bangladesh (2011-2013)"
     :rm/summery "I have worked on device drivers on Linux kernel on Android based mobile handsets and patched linux kernel with device specific changes based on git, As well as fork and maintain specific version then merge it to upstream when stable. Applied three way git merging as well as merge conflicts, mastered on taking systrace I also received leadership training for very big teams of developers"
+    :rm/breakdowns
+    [
+     {
+      :task "Worked on device drivers for Linux kernel on Android-based mobile handsets."
+      }
+     {
+      :task "Patched Linux kernel with device-specific changes based on Git."
+      }
+     {
+      :task "Forked and maintained specific versions of the kernel."
+      }
+     {
+      :task "Merged changes to upstream when stable, including applying three-way Git merging and resolving merge conflicts."
+      }
+     {
+      :task "Mastered the process of taking systrace, JTAG, and analyzing core dumps using GDB tooling on embedded Linux systems."
+      }
+     {
+      :task "Acquired knowledge of the Linux boot sequence on UBOOT and handled UART and GPIO interactions."
+      }
+     {
+      :task "Developed memory-mapped network drivers."
+      }
+     {
+      :task "Received 2+1 months of training in low-level device driver programming in C from Samsung SNMC in India and Bangladesh."
+      }
+     {
+      :task "Received leadership training for managing large teams of developers."
+      }
+     ]
+
+
     :rm/referane ""}
 
 
-   {:db/id 160
-    :rm/row 0
-    :rm/col 0
-    :rm/task "Lead Engineer - SAMSUNG R&D Institute Bangladesh (2011-2013)"
-    :rm/summery "I have worked on device drivers on Linux kernel on Android based mobile handsets and patched linux kernel with device specific changes based on git, As well as fork and maintain specific version then merge it to upstream when stable. Appled three way git merging as well as merge conflicts, mastered on taking systrace, JTAG. analyze core dump using GDB tooling on embedded linux, linux boot sequence on UBOOT, handle UART and GPIO, memory mapped network drivers. I have go 2+1 months training low level device driver programming in c both from SAMSANG SNMC, India and Bangladesh. I also received leadership training for very big teams of developers"
-    :rm/referane ""}
 
-   {:db/id 17
-    :rm/row 2
-    :rm/col 1
-    :rm/task "Software Engineer - GENUITY Systems Limited (2006-2007)"
-    :rm/summery "I was a Linux Network programmer in c, I used to develop select and epoll based network SBC worked with syscalls, lexical parsers, gather indepth knowledge about real time protocols voice and video packets and UDB based session controlers and implemented high avabalibility on failover using ICMP and arp. Master Postgre sql query optimitaion and hardisk raid for data redandency, mastering remote with ssh and emacs and shell scripting, yum and apt-get for avoyding dependency hell. Worked with highly concorrent softswith routing with load blancing and priodity queues, medeia gateways on CentOS and ubuntu. "
-    :rm/referane ""}
+
 
    {:db/id 117
     :rm/row -10
     :rm/col 1
     :rm/task "Software Engineer - GENUITY Systems Limited (2006-2007)"
+    :rm/breakdowns [
+                    {
+                     :task "Worked as a Linux network programmer in C."
+                     }
+                    {
+                     :task "Developed select and epoll-based network SBC (Session Border Controller) and worked with syscalls and lexical parsers."
+                     }
+                    {
+                     :task "Gained in-depth knowledge of real-time protocols, voice and video packets, and UDP-based session controllers."
+}
+                    {
+                     :task "Implemented high availability failover mechanisms using ICMP and ARP protocols."
+                     }
+                    {
+                     :task "Mastered PostgreSQL query optimization and configured disk RAID for data redundancy."
+                     }
+                    {
+                     :task "Demonstrated proficiency in remote administration using SSH, Emacs, and shell scripting."
+                     }
+                    {
+                     :task "Utilized package managers such as yum and apt-get to manage software dependencies effectively."
+                     }
+                    {
+                     :task "Worked with highly concurrent softswitch routing, load balancing, and priority queues."
+                     }
+                    {
+                     :task "Developed media gateways on CentOS and Ubuntu."
+                     }
+                    {
+                     :task "Worked as a DevOps on audio conferencing systems, managing Linux, iptables, and routing UDP packets across diverse network environments."
+                     }
+                    {
+                     :task "Configured remote servers using Emacs editor and SSH."
+                     }
+                    {
+                     :task "Worked with highly concurrent softswitch routing, load balancing, and priority queues."
+                     }
+                    {
+                     :task "Developed media gateways on CentOS and Ubuntu."
+                     }
+                    {
+                     :task "Learned how to implement Intel Integrated Performance Primitives (IPP) API for audio/speech codecs."
+                     }
+                    {
+                     :task "Implemented UDP hole punching technologies such as STUN, TURN, and ICE."
+                     }
+                    {
+                     :task "Developed web-based audio and video streaming solutions."
+                     }
+                    {
+                     :task "Configured DNS extensions, specifically DNS SRV records."
+                     }
+                    {
+                     :task "Implemented protocols based on RFC drafts."
+                     }
+]
     :rm/summery "As a devOps on audio conferencing systems and I have worked with liunx, iptables, shell scripting, routing UDP packets over all type network environments, ssh and configure remote server using emacs editor. Worked with highly concurrent softswith routing with load balancing and priority queues, media gateways on CentOS and Ubuntu. "
-    :rm/referane ""}
 
-   {:db/id 1270
-    :rm/row 2
-    :rm/col 1
-    :rm/task "Learn how to implement Intel Integated Performance primitives (IPP) api Audio/speech codec, udp hole punching technologies named (STRN, TURN, ICE), implemented web based audio, video streaming. Configured dns extentions DNS srv. Impement protocols from RFC draft."
     :rm/referane ""}
 
 
@@ -233,34 +395,39 @@ I was an active member of National Telecommunication committee, I used to inspec
    {:db/id 1290
     :rm/row -35
     :rm/col 1
+    :rm/breakdowns [
+                    {
+                     :task "Successfully deployed server-based transcoding of audio-video codecs (G729AB, AMR-NB, H263, H264) on Debian-based systems."
+                     }
+                    {
+                     :task "Adopted Python and replaced shell scripts for development purposes."
+                     }
+                    {
+                     :task "Commercialized UART, GPIO, and smart card solutions on Raspberry Pi."
+                     }
+                    {
+                     :task "Developed RESTful APIs using React.js and worked with Clojure, Scala, Python, Flux, WebSocket, gevent, and SQLAlchemy."
+                     }
+                    {
+                     :task "Implemented the CPS (Continuation-Passing Style) and actor model of concurrency."
+                     }
+                    {
+                     :task "Gained knowledge and experience in running startups without any investment and understanding when to quit when big tech companies with unlimited capital enter the market."
+                     }
+                    {:task {:manage "infrastructure and application operations declaratively, versioned, and immutable"
+                      :pull "changes automatically"
+                      :reconcile "system state continuously"
+                      :apply "desired state"
+                      :adopt "GitOps principles as guidelines"
+                      :adhere "to best practices for preventing configuration drift"
+                      :write "everything in code for reusability"
+                      :maintain "immutability for audit trail and preventing ad hoc changes"}}
+                    ]
     :rm/task "Software Global Consultancy //sgc (science 2018)"
     :rm/summery "Successful server based deployment of Audio-video codec (G729AB, AMR-NB, H263, H264) transcoding on debian based systems. Addoption of Phyton and shell script replacement. commercialization of UART, gpio, smart card solutions on raspberry pi. Restful api development with Reactjs worked with clojure, scala, phyton flux, websocket, gevent, sqlalkalemi, CPS and actor model of concurrency. Learned how to run a startups without any investment and when to quet when bigtech with unlimited capital steps in."
     :rm/referane ""}
 
-
-   {:db/id -18
-    :rm/row 2
-    :rm/col 1
-    :rm/task "Senior Software Engineer - Eyeball Networks (2009-2009)"
-    :rm/summery ""
-    :rm/referane ""}
-
-  {:db/id 22
-   :rm/row 3
-   :rm/col 0
-   :rm/task "Video conferencing solution with Virtual notebooks"
-   :rm/summery "Worked with KVM Libvert virtualiztoin on Archlinux, gstreamer video audio routing from souce to sink."
-   :rm/referane ""}
-
-
-   {:db/id 25
-    :rm/row 17
-    :rm/col 0
-    :rm/task "Personal Summery"
-    :rm/summery "I was raised and born on noble family in Bangladesh. My late father was an liberwation war veteran.  I passed  secondary and higher Secondary from Rajshahi Cadet College. 1998-2000"
-    :rm/referane ""}
-
-  {:db/id 26
+   {:db/id 26
    :rm/row 5
    :rm/col 1
    :rm/task "Reference"
@@ -270,6 +437,17 @@ I was an active member of National Telecommunication committee, I used to inspec
   {:db/id 27
    :rm/row 10
    :rm/col 1
+   :rm/breakdowns [
+                   {
+                    :task "Achieved a CGPA of 3.69 out of 4."
+                    }
+                   {
+                    :task "Participated in NCPC and ICPC programming contests."
+                    }
+                   {
+                    :task "Completed a final project involving the design, modeling, and verification of a multi-cycle and 5-stage pipelined 32-bit RISC processor (MIPS) using Verilog Hardware Description Language (HDL)."
+                    }
+                   ]
    :rm/task "BSC on Computer Engineering. American International University Bangladesh (AIUB) (2001-2005)"
    :rm/summery "My CGPA was 3.69 out of 4, I have participated NCPC and ICPC programming contests. My final project was - Design project modeled and verified a multi-cycle and 5-stage pipelined version of 32-bit RISC processor - MIPS - with Verilog Hardware Description Language (HDL)"
 
@@ -331,32 +509,25 @@ I was an active member of National Telecommunication committee, I used to inspec
 
 
 (def topics
-  ["PostGreSQL" "SQL-Query" "Indexing"
-   "Functions" "PostGIS"
-
-   "scripting" "GraalVM" "shell" "go lang"
-   "awk"
-   "Command Line" "git ssh"  "wireshark"
-   "ip netstat ps"
-   "vi emacs"
-   "Linux" "Archlinux" "systemd" "alphine"
-   "ubtuntu"
-   "JVM"
-   "Groovy" "jetty" "clojure"  "jdbc"
-   "Virtualiztoin" "docker" "KVM" "kubernetes" "ingress"
-
-   "reactjs" "d3.js" "react hooks"
-   "redux" "animation"
-
-   "audio/video" "gstreamer" "pluseaudio" "vnc" "rdp"
-   "db" "redis" "graphdb" "mongodb"
-
-   "event streaming" "kafka" "" "" ""
-   "editor" "vi"
-   "docker"    "redis"   "branch"
-   "leadership"
-   "RESTful"
-   "react"
-
-   "emacs" "CentOS" "Ubuntu."
-   "reactjs" "webrtc" "ingress" "kafka" "groovy"])
+  ["JavaScript" "React" "Angular" "Vue.js" "Node.js"
+   "Python" "Django" "Flask" "NumPy" "Pandas"
+   "Java" "Spring" "Hibernate" "Kotlin" "Gradle"
+   "Ruby" "Rails" "Sinatra" "RSpec" "Capistrano"
+   "PHP" "Laravel" "Symfony" "Composer" "PHPUnit"
+   "Go" "Gin" "Beego" "Gorm" "GoLand"
+   "Scala" "Akka" "Play" "Slick" "SBT"
+   "Swift" "iOS" "Objective-C" "Cocoa" "Xcode"
+   "Kotlin Native" "Multiplatform" "Coroutines" "Gradle Plugin" "Ktor"
+   "Docker" "Kubernetes" "Jenkins" "Ansible" "Terraform"
+   "PostgreSQL" "MongoDB" "Redis" "Elasticsearch" "Cassandra"
+   "GraphQL" "RESTful" "gRPC" "OpenAPI" "JSON"
+   "AWS" "Azure" "Google Cloud" "Firebase" "Lambda"
+   "Git" "GitHub" "GitLab" "Bitbucket" "SourceTree"
+   "CI/CD" "DevOps" "Agile" "Scrum" "Kanban"
+   "Machine Learning" "Deep Learning" "Computer Vision" "NLP" "TensorFlow"
+   "Big Data" "Hadoop" "Spark" "Hive" "Pig"
+   "Blockchain" "Smart Contracts" "Ethereum" "Solidity" "Hyperledger Fabric"
+   "Security" "OWASP" "Penetration Testing" "Encryption" "Authentication"
+   "Microservices" "Service Mesh" "Istio" "Linkerd" "Envoy"
+   "PostGreSQL" "SQL-Query" "Indexing" "Functions" "PostGIS"
+   "Serverless" "FaaS" "AWS Lambda" "Azure Functions" "Google Cloud Functions"])

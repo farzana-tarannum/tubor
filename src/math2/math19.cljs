@@ -231,7 +231,7 @@
         [xx set-xx] (react/useState 2)
         [yy set-yy] (react/useState 3)
         [zm set-zm] (react/useState [])
-        [q2 set-q2] (react/useState [6 1 1])
+        [q2 set-q2] (react/useState [1 0 0])
         [center set-center] (react/useState true)
         [zoom-in set-zoom-in] (react/useState false)
         [zoom-out set-zoom-out] (react/useState false)
@@ -290,7 +290,7 @@
                  (ve (* (/ 20 a) (- (* (- x m) (- x m)) (* d d)))))
 
           eqs2 (fn [x]
-                 (ve (* (/ 20 a) (- (* (- x m) (- x m) (- x m)) (* d d)))))
+                 (ve (* (/ 20 a) (- (* (- x m) (- x m) ) (* d d)))))
 
           ]
       [:div {
@@ -395,7 +395,7 @@
           [:div {:style (m7/css
                          [[1 1 (+ 2 (* n 1)) 1  :center :center  2 :rem :column]
                           [(+ (/ n 10) 0.8) 70 (+ 50 (* 1 n))  0.4] [] {:gap ".1rem"
-                                                               :z-index 4}])}
+                                                                        :z-index 4}])}
 
            d])
         (range 0 24)
@@ -440,19 +440,21 @@
                    :z-index 10}])}
           [m7/m ['= 'y [:m 'a [:b ['- [:p [:b ['- 'x 'm]] 2] [:p 'd 2]]]]]]
 
-          [m7/m ['= [:m 8 [:b ['- [:p [:b ['- 'x m]] 2] [:p d 2]]]] 0 ]]
+          #_[m7/m ['= [:m 1 [:b ['- [:p [:b ['- 'x [5 2]]] 2] [:p [:sq [7 2]] 2]]]] 0 ]]
 
-          [m7/m ['= [[:m 8 [:b ['- [:p [:b ['- 'x m]] 2] [:p d 2]]]] 8] [0 8] ]]
+          [m7/m ['= ['- [:p [:b ['- 'x [5 2]]] 2] [:p [:sq [7 2]] 2]] 0 ]]
 
-          [m7/m ['= ['- [:p [:b ['- 'x m]] 2] [:p d 2]] 0 ]]
+          #_[m7/m ['= [[:m 1 [:b ['- [:p [:b ['- 'x m]] 2] [:p d 2]]]] 8] [0 8] ]]
+
+          #_[m7/m ['= ['- [:p [:b ['- 'x m]] 2] [:p d 2]] 0 ]]
 
           [:div  {:ref font-ref
                   :style {:font-size "2rem"
                           }}
-             [m7/m ['= [:m [:b ['- 'x m d]]  [:b ['+ ['- 'x m] d]]] 0 ]]]
+           [m7/m ['= [:m [:b ['- 'x m d]]  [:b ['+ ['- 'x m] d]]] 0 ]]]
 
-          [m7/m ['= ['+ ['- 'x m] d] 0]]
-          [m7/m ['= ['- 'x m d] 0]]
+          #_[m7/m ['= ['+ ['- 'x m] d] 0]]
+          #_[m7/m ['= ['- 'x m d] 0]]
           ]
 
          [:div {:on-click (fn [_]

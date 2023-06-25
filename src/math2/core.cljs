@@ -30,15 +30,53 @@
 
 (def functional-compiler (r/create-compiler {:function-components true}))
 
+(defn handle-mouse-move [event]
+  (let [x (.-clientX event)
+        y (.-clientY event)]
+    (println "Mouse coordinates: x=" x "y=" y)))
 
+
+
+(defn fs []
+  [:div {
+         :style {:margin "0px"
+                  :background "#0e0e0e"
+                 :height "100%"}}
+   (let [x 852
+         y 595]
+     [:div#unicodeCharacter
+      {:style {:position "absolute"
+               :font-size "24px"
+               :transform (str "translate(" x "px, " y "px)")}}
+      (char 0x2714)
+      ])
+
+
+
+   [:img {:on-mouseMove handle-mouse-move
+          :style {:display "block"
+                  "-webkit-user-select" "none"
+                  :margin "auto"
+                  :cursor "zoom-in"
+                  :background-color "hsl(0, 0%, 90%)"
+                  :transition "background-color 300ms"}
+          :src "resume_nov12_Page_4.jpg"
+          :width "656"
+          :height "927"}]
+   ])
 
 (defn render-simple []
   (rdom/render
+   [fs]
+   #_[m19/home-work19]
    #_[m100/app]
-   #_[m100/map-family2]
+ #_[trig/ladder]
+ #_[trig/freq3]
+   #_[m100/map-family22]
+   #_[m100/airplane]
    #_[m100/home-planets-banners]
-   #_[m100/chem-rate]
-   [teacher/resume]
+   #_[m100/chem-ratee]
+   #_[teacher/resume2]
    (js/document.getElementById "app")
    functional-compiler))
 

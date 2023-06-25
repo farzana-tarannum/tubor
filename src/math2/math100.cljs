@@ -12219,6 +12219,609 @@ on time?"]
 
 
 
+(defn chem-ratee []
+  (let [[slider set-slider] (react/useState false)
+        animate-ref (react/useRef)
+        animate-ref2 (react/useRef)
+        font-ref (react/useRef)
+        _ (react/useEffect
+           (fn []
+             (if (and animate-ref (-> animate-ref .-current))
+               (-> animate-ref
+                   .-current
+                   (.animate
+                    (clj->js
+                     [{
+                       :background (hsl [0.5 70 70 0.1])
+                       :transform (m7/tranfrom [[:rotate "10deg"]])
+                       }
+                      {:background (hsl [0.9 70 70 0.7])
+                       :transform (m7/tranfrom [[:rotate "-10deg"]])
+
+                       }
+
+                      {:background (hsl [2 70 70 0.9])
+                       :transform (m7/tranfrom [[:scale 0.9]])
+                       :offset (/ 9 14)}
+
+                      {:background (hsl [3.5 70 70 0.7])
+                       :transform (m7/tranfrom [[:scale 1]])
+                       }])
+                    (clj->js
+                     {:duration 2000
+                      :iterations 1})
+                    )))
+             (js/console.log "3")
+             ))
+        _ (react/useEffect
+           (fn []
+             (if (and animate-ref2 (-> animate-ref .-current))
+               (-> animate-ref2
+                   .-current
+                   (.animate
+                    (clj->js
+                     [{
+                       :background (hsl [0.5 70 70 0.1])
+                       :transform (m7/tranfrom [[:rotate "10deg"]])
+                       }
+                      {:background (hsl [0.9 70 70 0.7])
+                       :transform (m7/tranfrom [[:rotate "-10deg"]])
+
+                       }
+
+                      {:background (hsl [2 70 70 0.9])
+                       :transform (m7/tranfrom [[:scale 0.9]])
+                       :offset (/ 9 14)}
+
+                      {:background (hsl [3.5 70 70 0.7])
+                       :transform (m7/tranfrom [[:scale 1]])
+                       }])
+                    (clj->js
+                     {:duration 2000
+                      :iterations 1})
+                    )))
+             (js/console.log "1")
+             ))
+
+
+        _ (react/useEffect
+           (fn []
+             (if (and font-ref (-> font-ref .-current))
+               (-> font-ref
+                   .-current
+                   (.animate
+                    (clj->js
+                     [{
+                       :background (hsl [0.5 70 70 0.1])
+                       :transform (m7/tranfrom [[:rotate "10deg"]])
+                       }
+                      {:background (hsl [0.9 70 70 0.7])
+                       :transform (m7/tranfrom [[:rotate "-10deg"]])}
+
+                      {:background (hsl [2 70 70 0.9])
+                       :transform (m7/tranfrom [[:scale 0.1]])
+                       :offset (/ 9 14)}
+
+                      {
+                       :background (hsl [3.5 70 70 0.7])
+                       :transform (m7/tranfrom [[:scale 1]])
+                       }])
+                    (clj->js
+                     {:duration 12000
+                      :iterations 1})
+                    )))
+             (js/console.log "")))
+        f                   (fn [n] (/ 1 n))
+        tt                  'θ
+        dx                  [1 0  0 1 -1  0 0 -1 ]
+        sq                  (fn [n]
+                              (comp
+                               (partial map (partial * n))))
+        [point set-point] (react/useState false)]
+    (let [
+          ax-dx 40
+          ax-dy    (* 20 10)
+          m          0
+          d          0
+          vb       (fn [z]
+                     (nth [[-250 -450  600 600]
+                           [0 -25  50 50]
+                           [-25 -40  50 50]
+                           [80 -20  50 40]
+                           [100 -80  100 100]
+                           [-400 -200  800 200]
+                           [40 120  80 80]
+                           [0 0  200 200]
+                           [75 -175  150 150]
+                           [-20 -20  100 100]
+                           [-400 -350  800 400]
+                           [-250 -120  800 400]
+                           ] z))
+          fix false
+          viewbox  (vb 7)
+          viewbox2 (vb 7)
+          rn (range 0 0)
+          scales []
+          dfl [:div {:style
+                     (m7/css
+                      [[3 6 3 20
+                        :center :center  1.5 :rem :column]
+                       [3.5 70 75 0.5]
+                       []
+                       {:color (hsl [0.5 80 45 1])
+                        :gap (m7/np [1 :rem])
+                        :z-index 10}])}
+               [:div {:style {:font-size "1rem"
+                              :width "50%"
+                              :background-color (hsl [1 90 90 1])
+                              :justify-content :space-between
+                              :display :flex}}
+                #_[:div "Calcium Carbonate"]
+                #_[:div "Hydrochoric Acid"]]
+               [:div "Redox Reaction"]
+               [m7/m '[:a [- K
+                           [:m 1 [:m e -]]]
+                       [:p K +]]]
+
+               [m7/m '[:a [ [:m  O H]
+                           [:m 1 [:m e -]]]
+                       [:p OH -]]]
+
+               #_[:div {:style {:background-color (hsl [2 40 40 1])
+                              :height "4px"
+                              :width "100%"}}]
+
+               #_[m7/mx `[:a [+ [:m 2 Fe] [:m 3 O]]
+
+                        [:m [:p Fe [:m 3 +]]
+                         [:p O [:m 2 -]]]]]
+
+               #_[m7/mx `[:a [+ [:m 2 Fe] [:m 3 O]]
+
+                        [:m [:k Fe 2]
+                         [:k O 3]]]]
+               ]
+          dfl2 [:div {:style
+                     (m7/css
+                      [[3 6 3 20
+                        :center :center  3.5 :rem :column]
+                       [3.5 70 75 0.5]
+                       []
+                       {:color (hsl [0.5 80 45 1])
+                        :gap (m7/np [1 :rem])
+                        :z-index 10}])}
+               [:div {:style {:font-size "1rem"
+                              :width "50%"
+                              :background-color (hsl [1 90 90 1])
+                              :justify-content :space-between
+                              :display :flex}}
+                #_[:div "Calcium Carbonate"]
+                #_[:div "Hydrochoric Acid"]]
+               [:div "Redox Reaction"]
+               [m7/m '[:a [- [:m 2 Fe]
+                           [:m 6 [:m e -]]]
+                       [:m 2 [:p Fe [:m 3 +]]]]]
+
+               [m7/m '[:a [+ [:m 3 O]
+                           [:m 6 [:m e -]]]
+                       [:m 3 [:p O [:m 2 -]]]]]
+
+               [:div {:style {:background-color (hsl [2 40 40 1])
+                              :height "4px"
+                              :width "100%"}}]
+
+               [m7/mx `[:a [+ [:m 2 Fe] [:m 3 O]]
+
+                        [:m [:p Fe [:m 3 +]]
+                         [:p O [:m 2 -]]]]]
+
+               [m7/mx `[:a [+ [:m 2 Fe] [:m 3 O]]
+
+                        [:m [:k Fe 2]
+                         [:k O 3]]]]
+               ]
+
+
+
+
+          extra [:g  ]
+
+          ]
+      [:div {
+             :style (merge
+                     (grid [100 :vh 100 :vw
+                            (take 24 (repeat [8 :vh]))
+                            (take 24 (repeat [8 :vh]))])
+                     {:background (hsl [1.5 70 70 0.9])
+                      :gap              ".1rem"})}
+
+
+       [:div (m7/css
+              [[4 6 3 9
+                :center :center  2 :rem :column]
+               [3.5 70 (+ 50 (* 5 5))  0.7]
+               []
+               {:gap     ".1rem"
+                :z-index 22}])
+
+        ]
+
+
+
+
+
+
+
+
+
+       [:div {:style (m7/css
+                      [[2 10 1 24 :center :center 3 :rem]
+                       [1 70 90 1] [] {:gap "1rem"}])}
+        (let []
+          [:svg {:style   {:height "100%"
+                           :width  "100%"}
+                 :viewBox (m7/space
+                           viewbox)}
+
+           [:animate {:attributeName :viewBox
+                      :to            (m7/space viewbox2)
+                      :dur           "4s"
+                      :fill          :freeze}]
+
+
+
+
+
+           [:defs
+            [:linearGradient {:id "morningGradient" :gradientUnits "userSpaceOnUse" :x1 "0%" :y1 "0%" :x2 "100%" :y2 "0%"}
+             [:animate
+              {:attributeName "x1" :values "0%;100%" :dur "10s" :repeatCount "indefinite"}]
+             [:stop {:offset "0%" :stop-color "#89CFF0"}]
+             [:stop {:offset "30%" :stop-color "#A5D8F3"}]
+             [:stop {:offset "70%" :stop-color "#E6F4F1"}]
+             [:stop {:offset "100%" :stop-color "#F9F7E8"}]]]
+           [:rect {:width "200" :height "200" :fill "url(#morningGradient)"}]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+           #_(flames)
+
+           #_(grid-on 1 10 ax-dx ax-dy)
+
+
+
+
+           [:pattern {:id (name :starg)
+                      :viewBox (space [0 0 10 10])
+                      :width "9%"
+                      :height "5%"}
+            #_[:circle {:cx 5
+                        :cy 5
+                        :r 4
+                        :fill (hsl [0 90 90 1])
+                        }]
+            [:filter#caco3
+             [:feTurbulence {:type :turbulence
+                             :baseFrequency 0.05
+                             :numOctaves 1
+                             :result "t"}
+              ]
+             [:feDisplacementMap {:in2 "t"
+                                  :in "SourceGraphic"
+                                  :scale 4
+                                  :xChannelSelector "R"
+                                  :yChannelSelector "G"}]
+
+             ]
+
+
+
+
+            #_[:path {:d (m7/path [0 0 :l
+                                 10 0 0  10
+                                   -10 0 0 -10])
+                    :fill (hsl [0 90 90 1])
+                    :filter (m7/url "caco3")
+                    }]
+
+            [:path {:d (m7/path [0 0 :l
+                                 4.5 0 0  5
+                                 -4.5 0 0 -5])
+                    :fill (hsl [0 90 90 1])
+                    :filter (m7/url "caco3")
+                    }]
+
+            [:path {:d (m7/path [0 5 :l
+                                 4.5 0 0  5
+                                 -4.5 0 0 -5])
+                    :fill (hsl [0 90 90 1])
+                    :filter (m7/url "caco3")
+                    }]
+
+            #_[:path {:d (m7/path [0 0 :l
+                                 4.5 0 0  10
+                                 -4.5 0 0 -10])
+                    :fill (hsl [0 90 90 1])
+                    :filter (m7/url "caco3")
+                    }]
+
+
+            #_[:path {:d (m7/path [5.5 0 :l
+                                 4.5 0 0  10
+                                 -4.5 0 0 -10])
+                    :fill (hsl [0 90 90 1])
+                    :filter (m7/url "caco3")
+                    }]
+
+            [:path {:d (m7/path [5.5 0 :l
+                                 4.5 0 0  5
+                                 -4.5 0 0 -5])
+                    :fill (hsl [0 90 90 1])
+                    :filter (m7/url "caco3")
+                    }]
+
+            [:path {:d (m7/path [5.5 5.5 :l
+                                 4.5 0 0  5
+                                 -4.5 0 0 -5])
+                    :fill (hsl [0 90 90 1])
+                    :filter (m7/url "caco3")
+                    }]
+
+
+            ]
+
+
+           [:pattern {:id (name :starc2)
+                      :viewBox (space [0 0 10 10])
+                      :width "20%"
+                      :height "10%"}
+            [:circle {:cx 5
+                      :cy 5
+                      :r 2
+                      :stroke (hsl [0 20 90 0.7])
+                      :stroke-width 1
+                      :fill :none}
+             [:animate {
+                        :attributeName :r
+                        :begin (sec 0)
+                        :dur (sec 4)
+                        :type :scale
+                        :from 2
+                        :to 5
+                        :repeatCount :indefinite
+                        :fill :freeze}]]]
+
+
+
+           [:g {:transform (m7/tranfrom [[:translate [100 20]]])}
+
+            [:g
+             [:path#bikker {:d (m7/path [0 0 :l
+                                         80 0 0 -20  -80 0 0 20 ])
+                            :fill (hsl [3 70 70 0.51])
+                            :transform (m7/tranfrom [[:translate [50 -20]]])
+                            :stroke-dasharray (m7/space [100 80])
+
+                            :stroke (hsl [0 70 70 1])
+                            :stroke-width 1}]
+
+             [:path {:d (m7/path [0 0 :l
+                                  80 0 0 -20  -80 0 0 20 ])
+                     :fill :none
+                     :transform (m7/tranfrom [[:translate [50 -20]]])
+                     :stroke-dasharray (m7/space [100 80])
+                     :stroke (hsl [0 70 70 1])
+                     :stroke-width 1}]]
+
+
+            [:g#tube
+             [:path
+              {:d (m7/path [-5 -5 :l
+                            0 -40  10 0 0 40 ])
+               :fill (m7/url (name :starc2))
+               :transform (m7/tranfrom [[:translate [105 -30]]])
+               :stroke-dasharray (m7/space [100 80])
+
+               :stroke (hsl [0 70 70 1])
+               :stroke-width 0.5}]
+
+
+             [:path
+              {:d (m7/path [-5 -5 :l
+                            0 -40  10 0 0 40 ])
+               :fill (hsl [3 70 70 0.51])
+               :transform (m7/tranfrom
+                           [[:translate [105 -30]]
+                            [:scale [1 0.1]]])
+               :stroke-dasharray (m7/space [100 80])
+
+               :stroke (hsl [0 70 70 1])
+               :stroke-width 0.001}]]
+
+
+
+            #_[:linearGradient#pipeg
+             [:stop {:offset "0%" :stop-color (hsl [0 70 70 1])}]
+             [:stop {:offset "10%" :stop-color (hsl [0 70 90 1])}]]
+
+            [:g
+             [:path.pipe {:d (m7/path [0 -50 :l 0 -20 (* 5 20) (* 2 20) 5 0 0 -5])
+                          :fill :none
+                          :stroke-linejoin :round
+                          :stroke (hsl [3 70 70 1])
+                          :stroke-width 3}]
+             [:path.pipe {:d (m7/path [0 -50 :l 0 -20 (* 5 20) (* 2 20) 5 0 0 -5])
+                          :fill :none
+                          :stroke-linejoin :round
+                          :stroke (hsl [3 70 90 1])
+                          :stroke-width 2}]
+             ]
+
+
+            [:g#flux-co2
+             [:path {:d (m7/path [0 0 :l 50 0
+                                  -30 (ve (* 4 20))
+                                  0 (ve 40)
+                                  -20 0
+                                  ])
+                     :transform (m7/tranfrom [[:scale [0.5 0.5]]])
+                     :fill (m7/url (name :starc2))
+                     :stroke (hsl [4 70 70 1])
+                     :stroke-width 1}]
+
+
+
+
+
+             [:path {:d (m7/path [0 0 :l 50 0
+                                  -30 (ve (* 4 20))
+                                  0 (ve 40)
+                                  -20 0
+                                  ])
+                     :transform (m7/tranfrom [[:scale [-0.5 0.5]]])
+                     :fill (m7/url (name :starc2))
+                     :stroke (hsl [4 70 70 1])
+                     :stroke-width 1}]]
+
+
+            [:g#flux
+             [:path {:d (m7/path [0 0 :l 50 0
+                                  -30 (ve (* 4 20))
+                                  0 (ve 40)
+                                  -20 0
+                                  ])
+                     :transform (m7/tranfrom [[:scale [0.5 0.5]]])
+                     :fill :none
+                     :stroke (hsl [4 70 70 1])
+                     :stroke-width 1}]
+
+
+
+             [:path {:d (m7/path [0 0 :l 50 0
+                                  -30 (ve (* 4 20))
+                                  0 (ve 40)
+                                  -20 0
+                                  ])
+                     :transform (m7/tranfrom [[:scale [-0.5 0.5]]])
+                     :fill :none
+                     :stroke (hsl [4 70 70 1])
+                     :stroke-width 1}]]
+
+            ]
+
+           [:clipPath {:id :ca}
+            [:path
+             {
+              :d (m7/path [0 0 :l 50 0 0 -20 -50 0 0 20])
+              :fill :none
+              :stroke (hsl [3 70 70 1])
+              :stroke-width 1}]]
+
+           [:clipPath {:id :ca2}
+            [:path
+             {
+              :d (m7/path [0 0 :l 50 0 0 -30 -50 0 0 30])
+              :fill :none
+              :stroke (hsl [3 70 70 1])
+              :stroke-width 1}]]
+
+
+
+
+
+           [:g#acid {:transform (m7/tranfrom [[:translate [100 20]]])}
+              [:path {:d (m7/path [0 0 :l 50 0
+                                 -30 (ve (* 4 20))
+                                 0 (ve 40)
+                                 -20 0
+                                 ])
+                    :clip-path (m7/url (name :ca2))
+                    :transform (m7/tranfrom [[:scale [0.5 0.5]]])
+                    :fill (hsl [2.5 70 70 1])
+                    :stroke (hsl [3 70 70 0.1])
+                    :stroke-width 1}]
+
+
+
+            [:path {:d (m7/path [0 0 :l 50 0
+                                 -30 (ve (* 4 20))
+                                 0 (ve 40)
+                                 -20 0
+                                 ])
+                    :clip-path (m7/url (name :ca2))
+                    :transform (m7/tranfrom [[:scale [-0.5 0.5]]])
+                    :fill (hsl [2.5 70 70 1])
+                    :stroke (hsl [3 70 70 0.1])
+                    :stroke-width 1}]]
+
+           #_[:path {:d (m7/path [0 0 :l 10 0 0 7 -7 0 0 -7])
+                     :transform (m7/tranfrom [[:scale [3 3]]])
+                     :fill (hsl [0 90 90 1])
+                     }]
+           [:g#surface
+            (map
+             (fn [s]
+               [:path {:d (m7/path [0 0 :l 10 0 0 7 -7 0 0 -7])
+                       :transform (m7/tranfrom [[:translate [(* s 12) 0]]
+                                                [:scale [1 3]]])
+                       :fill (hsl [0 90 90 1])
+                       }])
+             (range 0 4))]
+
+
+           [:g {:transform (m7/tranfrom [[:translate [100 20]]])
+                }
+            [:path {:d (m7/path [0 0 :l 50 0
+                                 -30 (ve (* 4 20))
+                                 0 (ve 40)
+                                 -20 0
+                                 ])
+                    :clip-path (m7/url (name :ca))
+                    :transform (m7/tranfrom [[:scale [0.5 0.5]]])
+                    :fill (m7/url (name :starg))
+                    :stroke (hsl [3 70 70 1])
+                    :stroke-width 1}]
+
+
+
+            [:path {:d (m7/path [0 0 :l 50 0
+                                 -30 (ve (* 4 20))
+                                 0 (ve 40)
+                                 -20 0
+                                 ])
+                    :clip-path (m7/url (name :ca))
+                    :transform (m7/tranfrom [[:scale [-0.5 0.5]]])
+                    :fill (m7/url (name :starg))
+                    :stroke (hsl [3 70 70 1])
+                    :stroke-width 1}]]
+
+
+
+           (line2 0 "")
+
+
+           extra
+           ])
+
+
+        ]
+
+
+       ])))
+
+
+
 
 
 
@@ -16229,7 +16832,7 @@ on time?"]
         sq (fn [n]
                 (comp
                  (partial map (partial * n))))
-        zoom 4
+        zoom 3
         ax-dx 80
         ax-dy 40
         vb (fn [z]
@@ -33827,14 +34430,6 @@ Example: I put the high crime rate down to the high unemployment."])
                  :viewBox (m7/space
                            viewbox)}
 
-           [:animate {:attributeName :viewBox
-                      :to (m7/space viewbox2)
-                      :dur "4s"
-                      :fill :freeze}]
-
-
-
-
 
            #_(grid-on 20 20)
 
@@ -33891,6 +34486,88 @@ Example: I put the high crime rate down to the high unemployment."])
                        :dur (sec 3)
                        :fill :freeze}]]
 
+
+
+
+
+
+
+
+
+           ]
+          )]
+
+
+       ])))
+
+
+
+
+(defn map-family22 []
+  (let [[slider get-slider] (react/useState 0)
+        f (fn [n] (/ 1 n))
+        tt 'θ
+        dx [1 0  0 1 -1  0 0 -1 ]
+        sq (fn [n]
+                (comp
+                 (partial map (partial * n))))]
+    (let [zoom 4
+          ax-dx 80
+          ax-dy 40
+          vb (fn [z]
+               (nth [[100 -450  500 500]
+                     [0 -180  200 200]
+                     [0 -50  100 100]
+                     [0 -25  50 50]
+                     [-100 -200  800 200]
+                     [40 120  80 80]
+                     [0 40  100 100]
+                     [75 -175  150 150]
+                     [-20 -20  100 100]
+                     [-400 -200  800 200]] z))
+          viewbox (vb 0)
+          viewbox2 (vb 0)
+          ]
+
+
+
+      [:div {:style (merge
+                     (grid [100 :vh 100 :vw
+                            (take 15 (repeat [8 :vh]))
+                            (take 20 (repeat [8 :vh]))])
+                     {:background-size :cover
+                      :background-position :center
+                      :background-color (hsl [2 100 100 1])
+                      ;; :background-image (str "url(" (.getItem js/localStorage "file-input-img" )   ")")
+                      :gap ".1rem"})}
+
+       #_[file/file-input-background2]
+
+
+
+
+
+
+
+       [:div {:style (m7/css
+                      [[1 12 1 20 :center :center 3 :rem]
+
+                       [1 70 90 0.3] [] {:gap "1rem"
+                                         }])}
+        (let []
+          [:svg {:style {:height "100%"
+                         :width "100%"}
+                 :viewBox (m7/space
+                           viewbox)}
+
+
+           [:defs
+            [:linearGradient {:id "myGradient" :gradientUnits "userSpaceOnUse" :x1 "0%" :y1 "0%" :x2 "100%" :y2 "0%"}
+             [:stop {:offset "0%" :stop-color "#FF0000"}]
+             [:stop {:offset "100%" :stop-color "#0000FF"}]]]
+           [:path {:d "M10 10 L190 10 L190 190 L10 190 Z" :fill "url(#myGradient)"}]
+
+           [:rect {:width 200 :height 200 :fill "url(#gradient)"}]
 
 
 

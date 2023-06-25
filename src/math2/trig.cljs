@@ -107,7 +107,7 @@
                  :stroke (hsl [4 70 70 0.5])
                  :stroke-width 0.5
                  :fill :none}
-          ] )
+          ])
        (range 0 11))
 
 
@@ -205,7 +205,13 @@
 
 (defn ladder []
   (let [[timer update-time] (react/useState 0)
-        sec2 5
+        _ (react/useEffect
+           (fn []
+             (let [i (js/setInterval
+                      (fn [x] (update-time (mod (inc timer) 16))) 5000)]
+               (fn []
+                 (js/clearInterval i)))))
+        sec2 timer
         angle {:font-size 12 :dy -5 :dx 30}
         turns (mapcat (fn [y]
                         (map
@@ -224,12 +230,7 @@
         op2 (fix (* r  (js/Math.sin tn))  2)
         opp12 (fix (* r  (js/Math.tan tn))  2)
 
-        _ (react/useEffect
-           (fn []
-             (let [i (js/setInterval
-                      (fn [x] (update-time (mod (inc timer) 16))) 5000)]
-               (fn []
-                 (js/clearInterval i)))))
+
 
         [slider get-slider] (react/useState 0)
         pi 'π
@@ -255,7 +256,7 @@
                      [0 40  100 100]
                      [75 -175  150 150]
                      [-20 -20  100 100]
-                     [-200 -500  1200 800]
+                     [-200 -500  1200 900]
                      ] z))
           viewbox (vb 0)
           viewbox2 (vb 9)
@@ -269,6 +270,119 @@
                       :gap ".1rem"})}
 
 
+       (map
+        (fn [r an]
+          [:div
+           {:style (m7/css
+                    [[5 1 (+ 9 r) 1 :center :center
+                      1.8 :rem :column]
+                     [1 70 90 0.1] []
+                     {:gap "1rem"
+                      :color (hsl [3 50 30 1])
+                      :z-index 2}])}
+           an])
+
+
+        (range 0 17)
+        [0 [m7/x `[~pi
+                   6]]
+
+         [m7/x `[~pi
+                 4]]
+         [m7/x `[~pi
+                 3]]
+         [m7/x `[~pi
+                 2]]
+         [m7/x `[[:m 2 ~pi]
+                 3]]
+
+         [m7/x `[[:m 3 ~pi]
+                 4]]
+         [m7/x `[[:m 3 ~pi]
+                 4]]
+         [m7/x `[[:m 5 ~pi]
+                 6]]
+
+         pi
+         [m7/x `[[:m 7 ~pi]
+                 6]]
+
+         [m7/x `[[:m 5 ~pi]
+                 4]]
+
+         [m7/x `[[:m 4 ~pi]
+                 3]]
+         [m7/x `[[:m 3 ~pi]
+                 2]]
+         ]
+        )
+
+       (map
+        (fn [r an]
+          [:div
+           {:style (m7/css
+                    [[6 1 (+ 9 r) 1 :center :center
+                      1.2 :rem :column]
+                     [1 70 90 0.1] []
+                     {:gap "1rem"
+                      :color (hsl [3 50 30 1])
+                      :z-index 2}])}
+           (fix an 3)])
+
+
+        (range 0 17)
+        [0 (js/Math.sin (/ (* 1 js/Math.PI)  6))
+         (js/Math.sin (/ (* 1 js/Math.PI)  4))
+         (js/Math.sin (/ (* 1 js/Math.PI)  3))
+         (js/Math.sin (/ (* 1 js/Math.PI)  2))
+         (js/Math.sin (/ (* 2 js/Math.PI)  3))
+         (js/Math.sin (/ (* 3 js/Math.PI)  4))
+         (js/Math.sin (/ (* 5 js/Math.PI)  6))
+         (js/Math.sin (/ (* 5 js/Math.PI)  6))
+         (js/Math.sin js/Math.PI)
+         (js/Math.sin (/ (* 7 js/Math.PI)  6))
+         (js/Math.sin (/ (* 6 js/Math.PI)  4))
+         (js/Math.sin (/ (* 4 js/Math.PI)  3))
+         (js/Math.sin (/ (* 3 js/Math.PI)  2))
+
+         ]
+        )
+
+
+
+       (map
+        (fn [r an]
+          [:div
+           {:style (m7/css
+                    [[7 1 (+ 9 r) 1 :center :center
+                      1.2 :rem :column]
+                     [1 70 90 0.1] []
+                     {:gap "1rem"
+                      :color (hsl [3 50 30 1])
+                      :z-index 2}])}
+           (fix an 3)])
+
+
+        (range 0 17)
+        [0 (js/Math.cos (/ (* 1 js/Math.PI)  6))
+         (js/Math.cos (/ (* 1 js/Math.PI)  4))
+         (js/Math.cos (/ (* 1 js/Math.PI)  3))
+         (js/Math.cos (/ (* 1 js/Math.PI)  2))
+         (js/Math.cos (/ (* 2 js/Math.PI)  3))
+         (js/Math.cos (/ (* 3 js/Math.PI)  4))
+         (js/Math.cos (/ (* 5 js/Math.PI)  6))
+         (js/Math.cos (/ (* 5 js/Math.PI)  6))
+         (js/Math.cos (/ (* 1 js/Math.PI)  1))
+         (js/Math.cos (/ (* 7 js/Math.PI)  6))
+         (js/Math.cos (/ (* 6 js/Math.PI)  4))
+         (js/Math.cos (/ (* 4 js/Math.PI)  3))
+         (js/Math.cos (/ (* 3 js/Math.PI)  2))
+
+         ]
+        )
+
+
+
        [:div {:style (m7/css
                       [[2 6 2 9 :center :center
                         1.8 :rem :column]
@@ -276,27 +390,93 @@
                        {:gap "1rem"
                         :color (hsl [3 50 30 1])
                         :z-index 2}])}
+        (map
+          (fn [t]
+            (let [snr (nth (mapcat (fn [y]
+                                     (map
+                                      (fn [x]
+                                        [[:m (+ y 1) pi] x])
+                                      [6 4 3 2]))
+                                   [0 1 2 3]) t)
 
-        [:div {:style (m7/css
-                       [[2 6 2 9 :center :center
-                         1.8 :rem :column]
-                        [1 70 90 0.1] []
-                        {:gap "1rem"
-                         :color (hsl [3 50 30 1])
-                         :z-index 2}])}
+                  snb (nth (mapcat (fn [y]
+                                     (map
+                                      (fn [x]
+
+                                        (fix (js/Math.cos (/ (* (+ y 1) js/Math.PI) x) )  3))
+                                      [6 4 3 2]))
+                                   [0 1 2 3]) t)
 
 
-         ]
+                  snh (nth (mapcat (fn [y]
+                                     (map
+                                      (fn [x]
+
+                                        (fix (js/Math.sin (/ (* (+ y 1) js/Math.PI) x) )  3))
+                                      [6 4 3 2]))
+                                   [0 1 2 3]) t)
+
+                  ]
+              [:div
+               [m7/x `[= h  [:m sin ~snr]
+                       ~snh
+                       ]]
+               ","
+               [m7/x `[= b  [:m cos ~snr]
+                       ~snb
+                       ]]])
+            )
+          (range 0 3))
 
 
 
-        #_[:div (str " Angle " )]
-        #_[m7/x `[= ~tt [:s ~(nth (mapcat (fn [y]
-                                            (map
-                                             (fn [x]
-                                               [[:m y pi] x])
-                                             [6 4 3 2]))
-                                          [0 1 2 3]) timer) ]]]]
+
+
+        [:div (str " Angle " )]
+
+
+        [m7/x `[= ~tt [:s ~(nth (mapcat (fn [y]
+                                          (map
+                                           (fn [x]
+                                             [[:m (+ y 1) pi] x])
+                                           [6 4 3 2]))
+                                        [0 1 2 3]) timer) ]]]
+        (let [snr (nth (mapcat (fn [y]
+                                 (map
+                                  (fn [x]
+                                    [[:m (+ y 1) pi] x])
+                                  [6 4 3 2]))
+                               [0 1 2 3]) timer)
+              snh (nth (mapcat (fn [y]
+                                 (map
+                                  (fn [x]
+
+                                    (fix (js/Math.sin (/ (* (+ y 1) js/Math.PI) x) )  3))
+                                  [6 4 3 2]))
+                               [0 1 2 3]) timer)]
+          [m7/x `[= h [:m sin ~tt] [:m sin ~snr]
+                  ~snh
+                  ]])
+
+
+        [m7/x `[= b [:m cos ~tt] [:m cos ~(nth (mapcat (fn [y]
+                                                       (map
+                                                        (fn [x]
+                                                          [[:m (+ y 1) pi] x])
+                                                        [6 4 3 2]))
+                                                     [0 1 2 3]) timer)]]]
+
+        #_[m7/x `[= ~pi [c [:m 2 r]] ]]
+
+        #_[m7/x `[= [:m ~pi 2 r]  [[:m 2 r c ] [:m 2 r]] ]]
+
+        #_[m7/x `[= [:m 2 ~pi  r] c]]
+
+        #_[m7/x `[= [:m 2 ~pi  ] c]]
+
+        #_[m7/x `[= [[:m 2 ~pi  ] 4] [c 4]]]
+
+        ]
 
 
 
@@ -313,7 +493,7 @@
 
 
 
-       [:div {:style (m7/css
+       #_[:div {:style (m7/css
                       [[2 10 14 9 :center :center
                         2.1 :rem :column]
                        [1 70 90 0.1] []
@@ -463,9 +643,9 @@
               [:g#arcs
                (map
                 (fn [se]
-                  [:circle {:r 2
-                            :cx (* r (js/Math.cos se))
-                            :cy (ve (* r (js/Math.sin se)))
+                  [:circle {:r 5
+                            :cx (* 1 r (js/Math.cos se))
+                            :cy (ve (* 1 r (js/Math.sin se)))
                             :fill (hsl [3 70 70 1])}])
                 turns)]
 
@@ -583,7 +763,7 @@
                              :stroke (hsl [3 70 70 1])
                              :transform (m7/tranfrom [[:scale [0.4 0.4]]])
                              :stroke-width 3
-                             :fill (hsl [3 70 70 0.5])}]
+                             :fill (hsl [1.2 70 70 0.5])}]
 
 
                [:path#sin {:d (m7/path [0 0 :l (* 20 adj) 0
@@ -594,7 +774,7 @@
                            :fill (hsl [1.5 70 70 0.5])}]]
 
 
-              #_[:g {:transform (m7/tranfrom [[:translate [0 0]]])}
+              [:g {:transform (m7/tranfrom [[:translate [0 0]]])}
                [:path#angle2 {:d
                               (m7/path
                                [0 0 :l r 0 :a r r 0 false false
@@ -613,7 +793,7 @@
                             :fill (hsl [2.5 70 70 0.5])}]
 
 
-               #_[:text
+               [:text
 
                 [:textPath {:href :#tri222
                             :font-size 10
@@ -645,7 +825,7 @@
 
 
 
-              #_[:path.tri2 {:d (m7/path
+              [:path.tri2 {:d (m7/path
                                [0 0 :l (* 0.3 adj 20) 0 0 (ve (* 20 op))])
                       :transform (m7/tranfrom
                                   [[:translate [(* 0.7 20 adj) 0]]])
@@ -670,7 +850,7 @@
 
 
 
-               #_[:textPath {:href :#tri22
+               [:textPath {:href :#tri22
                              :font-size 15
                            :startOffset (+ 0 (* 20 0.7 adj))}
 
@@ -685,7 +865,7 @@
 
 
 
-               #_[:textPath {:href :#tri22
+               [:textPath {:href :#tri22
                            :font-size 10
                            :startOffset (+ (* 0.3 adj 20) 0)}
 
@@ -695,7 +875,7 @@
                 ]
 
 
-               #_[:textPath {:href :#tri22
+               [:textPath {:href :#tri22
                            :font-size 10
                            :startOffset
                            (+
@@ -714,7 +894,7 @@
 
 
               #_[:text {:x 0
-                        :style {:font-size (:font-size angle)}
+                      :style {:font-size (:font-size angle)}
                       :dy (:dy angle)
                       :dx (:dx angle)
                       :y 0}
@@ -1890,21 +2070,21 @@
         sq (fn [n]
                 (comp
                  (partial map (partial * n))))]
-    (let [zoom 4
+    (let [zoom 0
           ax-dx 80
           ax-dy 40
           vb (fn [z]
-               (nth [(map  #(* % 8) [15 -20  40 45])
+               (nth [(map  #(* % 7) [15 -20  40 45])
                      (map  #(* % 24) [0 -25  100 50])
 
-                     (map  #(* % 8) [-25 -30  100 52])
+                     (map  #(* % 8) [-25 -40  100 62])
                      (map  #(* % 5) [20 -25  100 50])
                      (map  #(* % 8) [-50 -25  100 50])
 
 
                      ] z))
-          viewbox (vb 2)
-          viewbox2 (vb 1)]
+          viewbox (vb 1)
+          viewbox2 (vb 0)]
       [:div {:style (merge
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
@@ -1913,13 +2093,60 @@
 
 
        [:div {:style (m7/css
-                      [[2 8 3 10 :center :center 2.1 :rem :column]
+                      [[2 8 3 16 :center :center 2.4 :rem :column]
                        [1 70 90 0.1] []
                        {:gap "1rem"
-
-
                         :z-index 2}])}
 
+
+        [m7/x `[= a [1 [:m ln 10]]]]
+
+        [m7/x `[= y [:p ~pi [:m a [:p x 2]]]
+                ]]
+
+        #_[m7/x `[= [:m ln x] [:m [:k log  e] x]]]
+
+        #_[m7/x `[= [:m [d dx] ln x] [:m [d dx] [:k log  e] x]
+                [1 x]]]
+
+
+        #_[m7/x `[= [:m  [:k log  10] x]  [[:m  [:k log  e] x]
+                                         [:m  [:k log  e] 10]]]]
+
+
+        #_[m7/x `[= [:m [d dx]  [:k log  10] x]  [:m [d dx][:b [[:m  [:k log  e] x]
+                                                              [:m  [:k log  e] 10]]]]]
+
+
+         ]
+
+        #_[m7/x `[= [:m [d dx] 10 [:p e x]]  [:m 10 [d dx]  [:p e x]]]]
+
+        #_[m7/x `[= [:m [d dx]  [:k log  10] x]  [:m [1 [:m  [:k log  e] 10]]  [d dx] [:m  [:k log  e] x] ]]
+
+
+
+
+         ]
+
+        #_[m7/x `[= [:m [d dx]  [:k log  10] x]  [:m [1 [:m  [:k log  e] 10]]  [d dx] [:m ln x] ]]
+
+
+         #_[m7/x `[:m ~pi [:b [+ [1 4] [1 2] [1 2]]]]]]
+
+        #_[m7/x `[= [:m [d dx]  [:k log  10] x]  [:m [1 [:m  [:k log  e] 10]] [ 1 x]]]
+
+
+         #_[m7/x `[:m ~pi [:b [+ [1 4] [1 2] [1 2]]]]]]
+
+        #_[m7/x `[= [:m [d dx]  [:k log  10] x]  [1 [:m x  [:k log  e] 10]]]
+
+
+         #_[m7/x `[:m ~pi [:b [+ [1 4] [1 2] [1 2]]]]]]
+
+        #_[m7/mx `[= [* ~r [:m tan [:p ~(fix (/ 180 tn) 1)
+                                    ~deg]]]
+                   ~opp1]]
 
 
 
@@ -1993,22 +2220,33 @@
                            :stroke-width 1}]
 
 
+              (let [a (* angle 8)]
+                [:g
+                 [:path#rad5 {:d (str (m7/path [0 0 :l
+                                                (* r (js/Math.cos a)) 0
+                                                0 (ve (* r (js/Math.sin (* angle 8))))
 
 
-              [:path#rad5 {:d (str (m7/path [0 0 :l
-                                             (* r (js/Math.cos (* angle 8))) 0
-                                             0 (ve (* r (js/Math.sin (* angle 8))))
+                                                ])
+                                      "z")
+                              :transform (m7/tranfrom [[:scale [1 1]]])
+                              :fill (hsl [2 70 70 1])
+                              :stroke (hsl [2 30 30 1])
+                              :stroke-width 1}]
+                 [:path#rad5 {:d (str (m7/path [0 0 :l
+                                                (* r (js/Math.cos (* angle 8))) 0
+                                                0 (ve (* r (js/Math.sin (* angle 8))))
 
 
-                                             ])
-                                   "z")
+                                                ])
+                                      "z")
+                              :transform (m7/tranfrom [[:scale [1 -1]]])
+                              :fill (hsl [2 70 70 1])
+                              :stroke (hsl [2 30 30 1])
+                              :stroke-width 1}]])
 
-                           :fill (hsl [2 70 70 1])
-                           :stroke (hsl [2 30 30 1])
-                           :stroke-width 1}]
 
-
-              [:path#rad51 {:d (str (m7/path [0 0 :l
+              #_[:path#rad51 {:d (str (m7/path [0 0 :l
                                             (* 2 r (js/Math.cos (* angle 8))) 0
                                              0 (ve (* r 2 (js/Math.sin (* angle 8))))
 
@@ -2023,7 +2261,7 @@
 
 
 
-              [:path#rad6 {:d (str (m7/path [0 0 :l
+              #_[:path#rad6 {:d (str (m7/path [0 0 :l
                                              (* r (js/Math.cos (* angle 24))) 0
                                              0 (ve (* r (js/Math.sin (* angle 8))))
 
@@ -3344,14 +3582,14 @@
           ax-dx 80
           ax-dy 40
           vb (fn [z]
-               (nth [(map  #(* % 15) [20 -22  40 45])
-                     (map  #(* % 30) [20 -22  40 45])
+               (nth [(map  #(* % 19) [25 -22  40 45])
+                     (map  #(* % 15) [20 -22  40 45])
                      [0 -180  200 200]
                      [0 -50  100 100]
 
                      ] z))
-          viewbox (vb 0)
-          viewbox2 (vb 1)
+          viewbox (vb 1)
+          viewbox2 (vb 0)
           ]
       [:div {:style (merge
                      (grid [100 :vh 100 :vw
@@ -3360,76 +3598,104 @@
                      {:background-color (hsl [1 70 70 0.1])})}
 
 
-       (if true
-         [:div {:style (m7/css
-                        [[2 10 14 9 :center :center
-                          2.8 :rem :column]
-                         [1 70 90 0.1] []
-                         {:gap "1rem"
-                          :color (hsl [3 50 30 1])
-                          :z-index 2}])}
+
+       (map
+        (fn [n d]
+          [:div {:style (m7/css
+                         [[1 1 (+ 2 (* n 1)) 1  :center :center  1 :rem :column]
+                          [(+ (/ n 10) 0.8) 70 (+ 50 (* 1 n))  0.4] [] {:gap ".1rem"
+                                                                        :z-index 4}])}
+
+           d])
+        (range 0 23)
+        (map (fn [ph]
+               [m7/x `[:m ~ph  ~pi ]])
+             [0 [1 6] [1 4] [1 3] [1 2]
+              [5 6] [3 4] [2 3] 1
+              [7 6] [5 4] [3 4] [3 2]
+              [5 3] [(+ 9 2) 6] [(+ 6 1) 4] [(+ 6 1) 6]
+              2 [13 6] [9 4] [7 3] [5 2] 3])
+        )
 
 
+       (map
+        (fn [n d]
+          [:div {:style (m7/css
+                         [[2 1 (+ 2 (* n 1)) 1  :center :center  1 :rem :column]
+                          [(+ (/ n 10) 0.8) 70 (+ 50 (* 1 n))  0.4] [] {:gap ".1rem"
+                                                                        :z-index 4}])}
 
-
-          [m7/x `[[:m  ~timer ~pi] 32]]
-
-          [:div "Periodic Time"]
-          [m7/x `[=  T [:m 64 s]]]
-          [:div "Wave length, \u03BB"]
-          [m7/x `[= ~(symbol "\u03BB") ~(fix (* 2 js/Math.PI ) 2)]]
-
-
-          [m7/m '[= f [1 T] [:m [1 64] Hz] ]]
-          #_[:div tn]
-
-
-
-
-
-          #_[m7/mx `[= [:m r ~(symbol (str "tan" (name tt)))] [:k opp 1]]]
-          [m7/mx `[= [:m r ~(symbol (str "sin" (name tt)))]
-                   opp]]
-
-
-          [m7/x `[= [:m sin [[:m ~timer ~pi] 64]] ~(fix (js/Math.sin tn) 2)]]
-
-
-          [m7/mx `[= [:m r ~(symbol (str "cos" (name tt)))]
-                   adj]]
-
-          #_[m7/mx `[= ~tt [:p ~(fix (/ 180 tn) 1)
-                            ~deg]]]
-
-          #_[m7/mx `[= [:k ~tt 2] [:p ~(fix (/ 180 tn2) 1)
-                                   ~deg]]]
-
-
-          #_[m7/mx `[= [* ~r [:m tan [:p ~(fix (/ 180 tn) 1)
-                                      ~deg]]]
-                     [:k opp 1]]]
-
-
-          #_[m7/mx `[= [* ~r [:m tan [:p ~(fix (/ 180 tn) 1)
-                                      ~deg]]]
-                     ~opp1]]
+           d])
+        (range 0 23)
+        (map (fun
+              ([[x y]]
+               (/ (* 180 x) y))
+              ([ph]
+                   (* 180 ph))
+                  )
+             [0 [1 6] [1 4] [1 3] [1 2]
+              [4 6] [3 4]
+              [2 3] 1
+              [7 6] [5 4] [3 4] [3 2]
+              [5 3] [(+ 9 2) 6] [(+ 6 1) 4] [(+ 6 1) 6]
+              2 [13 6] [9 4] [7 3] [5 2] 3])
+        )
 
 
 
 
 
 
+       #_[30 15 15 30]
 
+       #_[0 30 45 60 90 120 135 150 180 210 235]
 
-
-
-          ])
 
 
 
        [:div {:style (m7/css
                       [[2 10 3 23 :center :center 3 :rem]
-                       [1 70 90 1] []
+                       [1 70 90 0.6]
+                       []
+                       {:gap "1rem"
+
+                        :z-index 1}])}
+        #_[m7/x `[= [:m h [:b t]] [:m  sin [:m ~pi t]]]]
+        [m7/x `[= [:m T [:b t]] [- 20 [:m 7 cos [:m [~pi 12] 6]]]]]
+
+        #_[m7/x `[= [:m T [:b t]] [- 20 [:m 7 cos [~pi 2]]]]]
+        #_[m7/x `[= [~pi 2] [:m [~pi 12] t]]]
+        #_[m7/x `[= [1 2] [:m [1 12] t]]]
+        #_[m7/x `[= 6 [12 2] t]]
+
+
+
+
+
+        #_[m7/x `[= [:m T [:b 6]] [- 20 [:m 7 cos [:m [~pi 12] 6]]]]]
+
+        #_[m7/x `[= [:m T [:b 6]] [- 20 [* 7 1]]]]
+
+        #_[:div "template varies from 7 deg to -7 deg"]
+
+        #_[m7/x `[= [:m T [:b 12]] [+ 20 7]]]
+        #_[m7/x `[= [:m h [:b t]] [+ 9 [:m 3 sin [[:m ~pi t] 6] ]]]]
+
+        #_[m7/x `[= [:m h [:b 3]] [+ 9 [:m 3 sin [[* ~pi 3] 6] ]]]]
+
+
+        ]
+
+
+
+
+
+       ;; hsl(3.18rad, 42.6%, 81.6%)
+       ;; [1 70 90 1]
+       [:div {:style (m7/css
+                      [[2 10 3 23 :center :center 3 :rem]
+                       [1 70 90 0.6]
+                       []
                        {:gap "1rem"
                         :z-index 1}])}
         (let []
@@ -3446,6 +3712,34 @@
 
 
 
+           #_(grid-on)
+
+
+
+           [:path {
+                   :d (path [-400 0 :l 3700 0])
+                   :stroke (hsl [4 70 70 0.9])
+                   :stroke-width 0.8
+                   :fill :none}
+            ]
+
+
+           [:path {
+                   :d (path [0 -400 :l 0 800])
+                   :stroke (hsl [4 70 70 0.9])
+                   :stroke-width 0.5
+                   :fill :none}
+            ]
+
+           (map
+            (fn [f]
+              [:text {:x -10
+                      :y (ve (* f r 20))
+                      :font-size 20
+                      }
+               #_(+ 9 (* 3 f))
+               (+ 0 f)])
+            [ 0 0.5 0.707 0.866 1 -0.866  -0.707 -0.5 -1])
 
 
 
@@ -3461,21 +3755,71 @@
 
               (if true
                 [:g#arcs
-                 (map
+                 #_(map
                   (fn [se]
                     [:g
 
                      [:circle {:r 3
                                :cx (* se 80)
-                               :cy (ve (* r (js/Math.sin (* js/Math.PI se (/ 1 8)))))
-                               :fill (hsl [4 70 70 0.5])}]
+                               :cy (ve (* r (js/Math.cos (* js/Math.PI se (/ 1 8)))))
+                               :fill (hsl [4 70 70 1])}]
                      #_[:text {:x (* se 20)
-                             :y (ve (* r (js/Math.sin (* js/Math.PI se (/ 1 32)))))
-                             :font-size 10
-                             }
+                               :y (ve (* r (js/Math.cos (* js/Math.PI se (/ 1 32)))))
+                               :font-size 10
+                               }
                         se]
                      ])
-                  (range (ve (* 2 32)) (* 4 32)))])
+                  (range (ve (* 2 32)) (* 4 32)))
+
+
+                 (map
+                  (fn [ran val]
+                    [:g
+
+                     [:circle {:r 6
+                               :cx (* ran 80)
+                               :cy (ve (* r val))
+                               :fill (hsl [2 70 70 1])}]
+                     #_[:text {:x (* se 20)
+                               :y (ve (* r (js/Math.sin (* js/Math.PI se (/ 1 32)))))
+                               :font-size 10
+                               }
+                        se]
+                     ])
+
+                  #_(map
+                   (fn [p]
+                     (* js/Math.PI p))
+                   [0 (/ 1 6) (/ 1 4) (/ 3) (/ 1 2)])
+                  (map (fn [s]
+                         (js/Math.sin s))
+                       (map
+                        (fn [p]
+                          (* js/Math.PI p))
+                        [0 (/ 1 6) (/ 1 4) (/ 3) (/ 1 2)]))
+
+                  )
+
+
+                 (map
+                  (fn [se]
+                    [:g
+
+                     [:circle {:r 6
+                               :cx (* se 80)
+                               :cy (ve (* r (js/Math.sin (* js/Math.PI se (/ 1 8)))))
+                               :fill (hsl [2 70 70 1])}]
+                     #_[:text {:x (* se 20)
+                               :y (ve (* r (js/Math.sin (* js/Math.PI se (/ 1 32)))))
+                               :font-size 10
+                               }
+                        se]
+                     ])
+                  (range (ve (* 2 32)) (* 4 32))
+
+                  )
+
+                 ])
 
 
 
@@ -4421,14 +4765,14 @@
   (let [[timer update-time]
         (react/useState 0)
         vb (fn [z]
-             (nth [(map  #(* % 8) [15 -20  40 45])
+             (nth [(map  #(* % 5) [15 -20  40 65])
                    (map  #(* % 24) [0 -25  100 50])
 
                    (map  #(* % 8) [-25 -30  100 52])
                    (map  #(* % 5) [20 -25  100 50])
                    ] z))
         viewbox (vb 2)
-        viewbox2 (vb 1)
+        viewbox2 (vb 0)
         ]
     (let []
       [:div {:style (merge
@@ -5064,7 +5408,7 @@
 
 (defn circle1 []
   (let [[timer update-time] (react/useState 0)
-        sec2 0
+        sec2 1
         sin (fn [t]
               (fix (js/Math.sin (/ (* t js/Math.PI) 180)) 5))
 
@@ -5151,28 +5495,41 @@
                         :color (hsl [3 50 30 1])
                         :z-index 2}])}
 
-        [m7/x `[= ACD [:p 30 ~deg]]]
+        [m7/x `[= [h r] [:m sin [:p 45 ~deg]]]]
 
-        [m7/x `[= DAC [:p [:b [- 90 30]] ~deg]]]
+        [m7/x `[= [h 1] [:m sin [:p 45 ~deg]]]]
+
+        [m7/x `[= h [:m sin [:p 45 ~deg]]]]
+
+        [m7/x `[= 1 [+ [:p h 2] [:p b 2 ]]]]
+
+        [m7/x `[= 1 [+ [:p h 2] [:p h 2 ]]]]
+
+        [m7/x `[= 1 [:m 2 [:p h 2] ]]]
+
+        [m7/x `[=  [1 2 ]  [:p h 2]]]
+        [m7/x `[=  [1 2 ]  [:p h 2]]]
+
+        #_[m7/x `[= DAC [:p [:b [- 90 30]] ~deg]]]
 
 
-        [m7/x `[= BAC [:p 90 ~deg]]]
+        #_[m7/x `[= BAC [:p 90 ~deg]]]
 
 
-        [m7/x `[= BAC [+ BAD DAC] [:p 90 ~deg]]]
+        #_[m7/x `[= BAC [+ BAD DAC] [:p 90 ~deg]]]
 
 
-        [m7/x `[=  [+ BAD [:p 60 ~deg]] [:p 90 ~deg]]]
+        #_[m7/x `[=  [+ BAD [:p 60 ~deg]] [:p 90 ~deg]]]
 
-        [m7/x `[= BAD [:p 30 ~deg]]]
-
-
-        [m7/x `[= BAD [:p 30 ~deg]]]
+        #_[m7/x `[= BAD [:p 30 ~deg]]]
 
 
-        [m7/x `[= BD [:m 20 sin [:p 30 ~deg]]]]
+        #_[m7/x `[= BAD [:p 30 ~deg]]]
 
-        [m7/x `[= BD [:m 20 cos B]]]
+
+        #_[m7/x `[= BD [:m 20 sin [:p 30 ~deg]]]]
+
+        #_[m7/x `[= BD [:m 20 cos B]]]
 
 
         #_[m7/x `[= AD [:m 20 cos [:p 30 ~deg]]]]
@@ -5283,11 +5640,11 @@
                   0.866 [:m cos 30 ~deg]]]
 
 
-        [m7/x `[+ [:m 2 cos  45 ~deg] [:m 3 cos  135 ~deg]]]
+        #_[m7/x `[+ [:m 2 cos  45 ~deg] [:m 3 cos  135 ~deg]]]
 
-        [m7/x `[+ [:m 2 cos  45 ~deg] [:m 3 cos  [:b [- 180 45]] ~deg]]]
-        [m7/x `[- [:m 2 cos  45 ~deg] [:m 3 cos  45 ~deg]]]
-        [m7/x `[- [* 2 0.7] [* 3 0.7]]]
+        #_[m7/x `[+ [:m 2 cos  45 ~deg] [:m 3 cos  [:b [- 180 45]] ~deg]]]
+        #_[m7/x `[- [:m 2 cos  45 ~deg] [:m 3 cos  45 ~deg]]]
+        #_[m7/x `[- [* 2 0.7] [* 3 0.7]]]
         ]
 
 
@@ -5425,7 +5782,7 @@
                         :fill :none}]
 
 
-              [:circle {:r (* 10 r)
+              #_[:circle {:r (* 10 r)
                         :cx (* r 10 (js/Math.cos tn))
                         :cy (ve (* r 10 (js/Math.sin tn)))
                         :fill (hsl [1 70 70 0.3])}]
