@@ -1,6 +1,7 @@
 (ns math2.db
   (:require
-   [datascript.core :as d]))
+   [datascript.core :as d]
+   [clojure.string :as str]))
 
 (def schema
   {:rm/projects {:db/cardinality :db.cardinality/many
@@ -11,6 +12,11 @@
    })
 
 ;; (/dev/kvm, GPU pass-through)
+
+(defn join [m]
+  (mapv
+   (fn [[a b]]
+     {:task (str (str/capitalize (name a)) " " b)}) m))
 
 (def vert-hostdevice "Building a virtualization Desktop Lab (VDE)  on cloud infrastructure supervised by
 engineers of NASA Jet Propulsion Lab where  distributed computers are acting as physical hosts
@@ -44,18 +50,29 @@ Amazon firecracker OS under KVM hypervisor to scale these system into millions."
 
 
 
+
+
+
+
+
+
 (def gitops "gitops manage infrastructure and application operation declaratively,
 versioned and Immutabe, pulled automatically, continuously reconciled the system state and attempt to apply desired state, adopted  these gitops principle as guideline and comming by with get practices thus gateway confiration drift, everyting written in code make it reusable and have a audit trail by making it immutabe no seaking in chane.")
 
 (def gitops-tasks
-  {:manage "infrastructure and application operations declaratively, versioned, and immutable"
-   :pull "changes automatically"
-   :reconcile "system state continuously"
-   :apply "desired state"
-   :adopt "GitOps principles as guidelines"
-   :adhere "to best practices for preventing configuration drift"
-   :write "everything in code for reusability"
-   :maintain "immutability for audit trail and preventing ad hoc changes"})
+  (map
+   (fn [[a b]]
+     {:task (str (str/capitalize (name a)) " " b)})
+   {:manage "infrastructure and application operations declaratively, versioned, and immutable"
+    :pull "changes automatically"
+    :reconcile "system state continuously"
+    :apply "desired state"
+    :adopt "GitOps principles as guidelines"
+    :adhere "to best practices for preventing configuration drift"
+    :write "everything in code for reusability"
+    :maintain "immutability for audit trail and preventing ad hoc changes"}))
+
+
 
 
 (def data
@@ -99,18 +116,19 @@ versioned and Immutabe, pulled automatically, continuously reconciled the system
     :rm/summery "I have been teaching Cambridge IAL computer science, mathematics, physics, IT online since covid statred. My lectures are very well prepared by leveraging my hands on programming skill on computer graphics, animation, user interaction and web technologies these visual interaction with reactjs svg bazier curves d3.js gematric algebra symbolic AI with clojure and clojurescript and deffientiable programming for calculus and gredient decent that is a prelude to machine learing and AI. I have leveraged react hot loading technics to generate code to graphics realtime
 on classes. These techniques helps students get better at receiving intuition of science & technologies even who those who have short attention span. "
     :rm/breakdowns
-    {:teaching "Cambridge IAL computer science, mathematics, physics, IT online"
-     :realtime "Realtime collaboration platform for data scientist"
-     :prepare "well-prepared lectures"
-     :leverage "hands-on programming skills"
-     :topics "computer graphics, animation, user interaction, web technologies"
-     :utilize "visual interaction with ReactJS, SVG, Bezier curves, D3.js and React hot loading techniques"
-     :apply "geometric algebra, symbolic AI with Clojure and ClojureScript"
-     :employ "differentiable programming for calculus and gradient descent"
-     :introduce "machine learning and AI concepts"
-     :generate "real-time code to graphics"
-     :enhance "students' intuition in science and technologies"
-     :accommodate "students with short attention spans"}
+    (join
+     {:teaching "Cambridge IAL computer science, mathematics, physics, IT online"
+      :realtime "Realtime collaboration platform for data scientist"
+      :prepare "well-prepared lectures"
+      :leverage "hands-on programming skills"
+      :topics "computer graphics, animation, user interaction, web technologies"
+      :utilize "visual interaction with ReactJS, SVG, Bezier curves, D3.js and React hot loading techniques"
+      :apply "geometric algebra, symbolic AI with Clojure and ClojureScript"
+      :employ "differentiable programming for calculus and gradient descent"
+      :introduce "machine learning and AI concepts"
+      :generate "real-time code to graphics"
+      :enhance "students' intuition in science and technologies"
+      :accommodate "students with short attention spans"})
 
     :rm/referane ""}
 
@@ -118,24 +136,23 @@ on classes. These techniques helps students get better at receiving intuition of
    {:db/id 1132
     :rm/row 0
     :rm/col 0
-    :rm/task  "Edge computing, discover and Manage IoT devices from Kubbernetes with Akri."
-    :rm/breakdowns [{:customers "migrant workers"
-                    :tasks ["maintain and deploy IoT on their homes"
-                            "monitor health of biogas-based reactor"
-                            "maintain 24/7 connectivity for distance learning"
-                            "power homes with solar and hydrogen-based fuel cell"]
-                    :job "maintain and install IoT and network devices"
-                    :environment "heterogeneous environments on remote locations"
-                    :technologies "Kubernetes, Akri, udev, OPC UA, ONVIF, gRPC"
-                    :protocols ["common IoT protocols"
-                                "protocol translation gateway"
-                                "dynamic device discovery and management"]
-                    :platform "K3s on Edge Amlogic-based Arm SOCs"
-                    :challenges "scaling heterogeneous compute and IoT devices"
-                    :akri "enables dynamic leverage of devices in Kubernetes cluster"
-                    :controller "automatically deploys workloads to discovered devices"
-                    :rust "built for low footprint optimization"}
-                   {:scenario "hetereogeneous GPU cluster"}]
+    :rm/task  "Edge computing using hetereogeneous GPU cluster, discover and Manage IoT devices from Kubbernetes with Akri."
+    :rm/breakdowns (join {:customers "migrant workers"
+                           :tasks (str/join " "  ["maintain and deploy IoT on their homes"
+                                              "monitor health of biogas-based reactor"
+                                              "maintain 24/7 connectivity for distance learning"
+                                              "power homes with solar and hydrogen-based fuel cell"])
+                           :job "maintain and install IoT and network devices"
+                           :environment "heterogeneous environments on remote locations"
+                           :technologies "Kubernetes, Akri, udev, OPC UA, ONVIF, gRPC"
+                           :protocols (str/join ["common IoT protocols"
+                                                 "protocol translation gateway"
+                                                 "dynamic device discovery and management"])
+                           :platform "K3s on Edge Amlogic-based Arm SOCs"
+                           :challenges "scaling heterogeneous compute and IoT devices"
+                           :akri "enables dynamic leverage of devices in Kubernetes cluster"
+                           :controller "automatically deploys workloads to discovered devices"
+                          :rust "built for low footprint optimization"})
     :rm/summery  (clojure.string/join
                   ""
                   ["In our scenario we customers are migrant workers, they really depands on us to maintain and deploy IOT on their home, monitoring health of bio gas based reactor, maintain 24/7 connectivity as their clildren depends on distance learning, powering home with solar and hydogen based fuel cell. Our job is to maintain and install IOT  and network device on those hetarogenious envirnoment on remote locations. In order to smooth sailing we have migrathed to kubbernetes leverage akri to communicates via  common Iot protocols udev for divices on linux local file systems (USB cameras, GPU, microphone), OPC UA (industrial machinery), ONVIF (IP cameras) and simple gRPC interface for adding support for new protocols on RUSt & Go lang (for example adding zeroconf based mdns devices)."
@@ -146,6 +163,22 @@ on classes. These techniques helps students get better at receiving intuition of
     :rm/row 0
     :rm/col 0
     :rm/task  ""
+    :rm/breakdowns [{:task "Run VM and Firecracker MicroVM workloads alongside container workloads in Kubernetes using KubeVirt."
+                           }
+                          {:task "Serve as an infrastructure-as-a-service platform for combining VM and container orchestration under Kubernetes, replacing OpenStack."
+                           }
+                          {:task "Transition old VM-based workloads to containerized workloads for Virtual Desktop Infrastructure (VDI) and Video FX Rendering."
+                           }
+                          {:task "Enable nested Kubernetes on top of Kubernetes using KubeVirt for virtual machines as an underlying infrastructure-as-a-service layer for development or staging."
+                           }
+                          {:task "Spawn multiple Kubernetes clusters on top of an existing cluster for development, staging, and production environments."
+                           }
+                          {:task "Build pipelines, like Tecton, for managing virtual machines and containers using KubeVirt."
+                           }
+                          {:task "Ensure zero-downtime updates by avoiding disruptions to workloads during updates and protecting against node-level upgrades."
+                           }
+                          {:task "Deploy and manage virtual machines with persistent storage, network interfaces, and other configuration using KubeVirt."
+                           }]
     :rm/summery "KubeVirt is Kubernetes extension that allows running  VM and Firecracer MicroVM workloads and  natively side by side with container workloads , as a infrastructure as a service that allows put together VM and cotainer orkastation under Kubernetes which was previously done using with openstack in our case, transition path of old VM based workloads to containerized workloads for Virtual desktop (VDI), Video Fx Rendering. Another one kind of emereged which is a predominat use case to get hold of nested kubernetes on top of kubernetes using kubevirt for virtual machines that works uderlying infrastructure as service nested layer for development or staging. say you have kubernetes cluster and you want to spawn lots of little kubernetes clusters on top of that for development or staging this is how we run the productions, deploying cube verts on the under layer so the bare metal kubernetes layer spin up virtual machines that's the underlying substrate for the next layer of kubernetes clusters and also buliding pipelines like tecton. posting a virtual machine from manifests, hit the api server get persisted on etcd virt-controller spin up virt-hadler instruct virt-lancher, virt operator that manage install update kubevert that pretty neat ensure 0 downtime updates that going to guarantee when doing updates not to disrupt workloads and protect people from kubbernetes doing node level upgrate by evacuating and live migrating virtual machines. by posting a custom resurce that gives operator instractions install on kubevert namespace, persistent virtual machine can be lunch with by combining storage creation and import and how we want virtual machine to start all in one manifest yaml of VirtualMachine kind. Way of doing storage part is this thing call data volume template where pvc is defined and the source that is going to be imported into that pvc then import virtual machine disk from a container image on the pvc and bind the network interface"
     :rm/referane ""}
 
@@ -154,10 +187,10 @@ on classes. These techniques helps students get better at receiving intuition of
     :rm/row 0
     :rm/col 0
     :rm/task  ""
-    :rm/breakdowns ["enhace machine learning model to real time data pipeline with kafka and webassembly"
-                    "Building fully managed cloud services with kafka and Rust with no runtime or garbage collaboration."
-                    "Realtime stream processing and data transformation using webassembly all in a single unified cluster with upto 3x less latency 5x throughput, 7x cpu utilization, 50x memory utilization."
-                    "feed stream clean data to kafka topic starting with rust http source connector, streaming data sink into kafka source connector where webassembly pipeline is applied which enable direct contorl over the streaming datathen transform event flows to kafka consumer."]
+    :rm/breakdowns (mapv (fn [a] {:task a}) ["enhace machine learning model to real time data pipeline with kafka and webassembly"
+                         "Building fully managed cloud services with kafka and Rust with no runtime or garbage collaboration."
+                         "Realtime stream processing and data transformation using webassembly all in a single unified cluster with upto 3x less latency 5x throughput, 7x cpu utilization, 50x memory utilization."
+                         "feed stream clean data to kafka topic starting with rust http source connector, streaming data sink into kafka source connector where webassembly pipeline is applied which enable direct contorl over the streaming datathen transform event flows to kafka consumer."])
     :rm/summery  (clojure.string/join "" ["enhace machine learning model to real time data pipeline with kafka and webassembly"
                                           "Building fully managed cloud services with kafka and Rust with no runtime or garbage collaboration."
                                           "Realtime stream processing and data transformation using webassembly all in a single unified cluster with upto 3x less latency 5x throughput, 7x cpu utilization, 50x memory utilization."
@@ -215,7 +248,8 @@ Actor model and CPS adoption for scalability"}]
    :rm/row -30
    :rm/col 1
    :rm/task "Fractals Labs (2016-2018)"
-   :rm/breakdowns "Realtime collaboration platform for data scientist"
+   :rm/breakdowns (mapv (fn [{:keys [description feature]}]
+                          {:task (str description " " feature)}) (:details vde))
    :rm/summery "Implemented Virtual Desktop Environment(VDE) for University Labs using KVM Libvert virtualization on Archlinux based hypervisor that hosts virtualized linux and windows desktops and docker for containerization on the server and desktop is replaced by ARM based SoC with vnc & rdp clients installed where students can access remote desktops and spawn docker based services on remote services"
    :rm/referane ""}
 
@@ -224,6 +258,13 @@ Actor model and CPS adoption for scalability"}]
     :rm/row -15
     :rm/col 0
     :rm/task "System Engineer on  Operations System and Software at GrameenPhone. (2007-2009)"
+    :rm/breakdowns [{:task "Develop and maintain mediation servers as modern microservices using Java, Oracle SQL, shell scripting, Jetty, and Linux command line utilities."
+                     }
+                    {:task "Implement reverse proxy and SSH port forwarding for remote server login and utilize vi as a remote editor."
+                     }
+                    {:task "Design and implement push and pull-based systems and services for monitoring alarms and IP packet tracing using Wireshark."
+                     }]
+
     :rm/summery "Developed and maintained mediation servers which was in a nut shell modern days micro services with lot of bells and whistle with Java, Oracle SQL, shell scripting, jetty, linux command line utilities - awk, ssh port forwarding and reverse   proxy for remote server login and vi as remote editor. As well implemented push and pull based systems and services for monitoring alarms and IP packet tracing using wireshark"
     :rm/referane ""}
 
@@ -531,3 +572,20 @@ I was an active member of National Telecommunication committee, I used to inspec
    "Microservices" "Service Mesh" "Istio" "Linkerd" "Envoy"
    "PostGreSQL" "SQL-Query" "Indexing" "Functions" "PostGIS"
    "Serverless" "FaaS" "AWS Lambda" "Azure Functions" "Google Cloud Functions"])
+
+
+(comment
+  (def conn
+    (d/create-conn schema))
+
+  (d/transact! conn data)
+
+
+  (d/q '[:find ?s ?b
+         :where
+         [?p :rm/task ?s]
+         [?p :rm/breakdowns ?b]
+         ] @conn)
+
+
+  )

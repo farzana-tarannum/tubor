@@ -21,6 +21,12 @@
 
 (d/transact! conn db/data)
 
+(d/q '[:find  ?t ?br
+       :where
+       [?p :rm/task ?t]
+       [?p :rm/breakdowns ?br]
+       ] @conn)
+
 (def tasks
   (d/q '[:find  ?t ?s ?r ?c ?p
          :where
@@ -34,11 +40,9 @@
          ] @conn))
 
 
-(d/q '[:find  ?t ?br
-       :where
-       [?p :rm/task ?t]
-       [?p :rm/breakdowns ?br]
-       ] @conn)
+
+
+
 
 #_(d/q '[:find  ?t
        :where
@@ -62,7 +66,7 @@
 
 ;; (->
 ;;  (moment to-date)
-;;  (.add "days" 2)
+;;  (.add "days" 33)
 ;;  (.fromNow))
 
 ;; (->
