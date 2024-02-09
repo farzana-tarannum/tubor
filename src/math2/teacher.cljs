@@ -48,8 +48,8 @@
        :where
        [?e :rm/code :devops]
        [?e :rm/projects ?p]
-       [?p :rm/task ?t]
-       [?p :rm/summery ?s]
+         [?p :rm/task ?t]
+         [?p :rm/summery ?s]
 
        [?p :rm/row ?r]
        [?p :rm/col ?c]
@@ -62,17 +62,22 @@
 
 
 
-;; (def to-date #inst "2014-05-01T00:00:00.000-00:00")
+#_(def to-date #inst "2014-05-01T00:00:00.000-00:00")
 
-;; (->
-;;  (moment to-date)
-;;  (.add "days" 33)
-;;  (.fromNow))
+#_(->
+  (moment to-date)
+  (.formal "MMM YYYY"))
 
-;; (->
-;;  (moment to-date)
-;;  (.add "days" 2)
-;;  (.fromNow))
+#_(->
+ (moment to-date))
+
+
+#_(->
+ (moment to-date)
+ (.add "days" 2)
+ (.fromNow))
+
+
 
 ;; (->
 ;;  (moment)
@@ -153,7 +158,7 @@
      [:div {:key (gensym)
             :style (css
                     [[1 (first heights) 1 width
-                      :center :center 0.4 :rem :column]
+                      :center :center 1.4 :rem :column]
                      [1 70 90 0.4]
                      []
                      {
@@ -174,11 +179,9 @@
       [:div {:style {:font-size "0.2rem"}}
        "+8801711961024, jaharapi@protonmail.com"]]
 
-     #_[:div {:key (gensym)
+     [:div {:key (gensym)
             :style (m7/css
-                    [[1 (first heights)
-                      (inc fifth4)
-                      fifth
+                    [[1 (first heights) (inc fifth4) fifth
                       :center :center 0.8 :rem ]
                      [2 70 90 0.4] [] {:gap "1rem"
                                        :z-index 4}])
@@ -189,13 +192,17 @@
       [file/file-input-background4]]
 
 
+
+
      [:div {:contenteditable :true
             :key (gensym)
             :style (css
-                    [[(inc (first heights)) (second heights) 1 tvh  :center :center 0.3 :rem :column]
+                    [[(inc (first heights)) (second heights) 1 tvh  :center
+                      :center 1.3 :rem :column]
                      [1 70 90 0.4]
                      []
                      {
+
                       :padding "20px"
                       :contenteditable :true
                       :gap "1rem"

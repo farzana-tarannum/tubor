@@ -31,28 +31,21 @@ Amazon firecracker OS under KVM hypervisor to scale these system into millions."
 
 (def vde
   {:project "Building a virtualization Desktop Lab (VDE) on cloud infrastructure supervised by engineers of NASA Jet Propulsion Lab"
- :details [
-   {:description "Utilized distributed computers as physical hosts on the cloud."
-    :feature "distributed-computing"}
-   {:description "Spawned millions of virtual operating systems on the cloud infrastructure."
-    :feature "virtualization"}
-   {:description "Users connected through consoles based on ARM-SOC over the network to access the system."
-    :feature "ARM-SOC consoles"}
-   {:description "Converted thousands of physical system resources into millions of virtual operating systems."
-    :feature "resource-conversion"}
-   {:description "Ensured secure and efficient virtualization of resources was the primary challenge of the project."
-    :feature "security"}
-   {:description "Paid attention to network latency and shared graphics co-processors for streaming games using consoles instead of high-performance graphics computers."
-    :feature "game-streaming"}
-   {:description "Used Kubernetes, Alpine Linux, and Amazon Firecracker OS under the KVM hypervisor to scale the system into millions."
-    :feature "technology-stack"}]
-   })
-
-
-
-
-
-
+   :details [
+             {:description "Utilized distributed computers as physical hosts on the cloud."
+              :feature "distributed-computing"}
+             {:description "Spawned millions of virtual operating systems on the cloud infrastructure."
+              :feature "virtualization"}
+             {:description "Users connected through consoles based on ARM-SOC over the network to access the system."
+              :feature "ARM-SOC consoles"}
+             {:description "Converted thousands of physical system resources into millions of virtual operating systems."
+              :feature "resource-conversion"}
+             {:description "Ensured secure and efficient virtualization of resources was the primary challenge of the project."
+              :feature "security"}
+             {:description "Paid attention to network latency and shared graphics co-processors for streaming games using consoles instead of high-performance graphics computers."
+              :feature "game-streaming"}
+             {:description "Used Kubernetes, Alpine Linux, and Amazon Firecracker OS under the KVM hypervisor to scale the system into millions."
+              :feature "technology-stack"}]})
 
 
 
@@ -75,7 +68,7 @@ versioned and Immutabe, pulled automatically, continuously reconciled the system
 
 
 
-(def data
+(defonce data
   [
    {:db/id 111
     :rm/code :devops
@@ -100,7 +93,7 @@ versioned and Immutabe, pulled automatically, continuously reconciled the system
     :rm/phone "880-1711961024"
     :rm/email ""
 
-    :rm/summery  "With over 15 years of experience in Software engineering, data scientist, colud engineering, my primary focus is on ensuring developer productivity and system reliability while maintaining faster development cycles. I specialize in designing and managing databases, developing error detection tools, programming logic, and creating applications for the management of study tools. Additionally, I excel in creating detailed test plans and executing automation scripts to identify and track bugs, conducting vulnerability assessments, and promoting gender diversity and collaboration amongst team members. I am dedicated to mentoring young professionals and preparing them for higher responsibilities while maintaining high standards"
+    :rm/summery  "With over 15 years of experience in Software engineering, data scientist, cloud engineering, my primary focus is on ensuring developer productivity and system reliability while maintaining faster development cycles. I specialize in designing and managing databases, developing error detection tools, programming logic, and creating applications for the management of study tools. Additionally, I excel in creating detailed test plans and executing automation scripts to identify and track bugs, conducting vulnerability assessments, and promoting gender diversity and collaboration among the team members. I am dedicated to mentoring young professionals and preparing them for higher responsibilities while maintaining high standards"
     :rm/projects (into [2 27 25 42]
                        [12 13  16 117 23 7  127 15 35 129 20 2 225 1132
                         2132])
@@ -112,9 +105,11 @@ versioned and Immutabe, pulled automatically, continuously reconciled the system
    {:db/id 2
     :rm/row 0
     :rm/col 0
-    :rm/task "design and develop a computational notebooks with interactive programming techniques"
+    :rm/task "Design and develop a computational notebooks with interactive programming techniques on RUST lang"
     :rm/summery "I have been teaching Cambridge IAL computer science, mathematics, physics, IT online since covid statred. My lectures are very well prepared by leveraging my hands on programming skill on computer graphics, animation, user interaction and web technologies these visual interaction with reactjs svg bazier curves d3.js gematric algebra symbolic AI with clojure and clojurescript and deffientiable programming for calculus and gredient decent that is a prelude to machine learing and AI. I have leveraged react hot loading technics to generate code to graphics realtime
-on classes. These techniques helps students get better at receiving intuition of science & technologies even who those who have short attention span. "
+on classes. These techniques helps students get better at receiving intuition of science & technologies even who those who have short attention span."
+    :rm/from-date #inst "2019-05-01T00:00:00.000-00:00"
+    :rm/to-date #inst "2023-07-01T00:00:00.000-00:00"
     :rm/breakdowns
     (join
      {:teaching "Cambridge IAL computer science, mathematics, physics, IT online"
@@ -122,13 +117,12 @@ on classes. These techniques helps students get better at receiving intuition of
       :prepare "well-prepared lectures"
       :leverage "hands-on programming skills"
       :topics "computer graphics, animation, user interaction, web technologies"
-      :utilize "visual interaction with ReactJS, SVG, Bezier curves, D3.js and React hot loading techniques"
-      :apply "geometric algebra, symbolic AI with Clojure and ClojureScript"
+      :utilize "visual interaction with Dioxus, SVG, Bezier curves with hot loading techniques"
+      :apply "geometric algebra, symbolic AI with Rust"
       :employ "differentiable programming for calculus and gradient descent"
       :introduce "machine learning and AI concepts"
       :generate "real-time code to graphics"
-      :enhance "students' intuition in science and technologies"
-      :accommodate "students with short attention spans"})
+      })
 
     :rm/referane ""}
 
@@ -136,6 +130,8 @@ on classes. These techniques helps students get better at receiving intuition of
    {:db/id 1132
     :rm/row 0
     :rm/col 0
+    :rm/from-date #inst "2015-05-01T00:00:00.000-00:00"
+    :rm/to-date #inst "2022-07-01T00:00:00.000-00:00"
     :rm/task  "Edge computing using hetereogeneous GPU cluster, discover and Manage IoT devices from Kubbernetes with Akri."
     :rm/breakdowns (join {:customers "migrant workers"
                            :tasks (str/join " "  ["maintain and deploy IoT on their homes"
@@ -162,7 +158,9 @@ on classes. These techniques helps students get better at receiving intuition of
    {:db/id 2132
     :rm/row 0
     :rm/col 0
-    :rm/task  ""
+    :rm/from-date #inst "2015-05-01T00:00:00.000-00:00"
+    :rm/to-date #inst "2023-01-01T00:00:00.000-00:00"
+    :rm/task  "Firecracker MicroVM using KubeVirt on Kubernetes cluster."
     :rm/breakdowns [{:task "Run VM and Firecracker MicroVM workloads alongside container workloads in Kubernetes using KubeVirt."
                            }
                           {:task "Serve as an infrastructure-as-a-service platform for combining VM and container orchestration under Kubernetes, replacing OpenStack."
@@ -186,15 +184,17 @@ on classes. These techniques helps students get better at receiving intuition of
    {:db/id 3132
     :rm/row 0
     :rm/col 0
-    :rm/task  ""
-    :rm/breakdowns (mapv (fn [a] {:task a}) ["enhace machine learning model to real time data pipeline with kafka and webassembly"
+    :rm/from-date #inst "2020-03-01T00:00:00.000-00:00"
+    :rm/to-date #inst "2023-02-01T00:00:00.000-00:00"
+    :rm/task  "enhance machine learning model to real time data pipeline with kafka and WebAssembly"
+    :rm/breakdowns (mapv (fn [a] {:task a}) [
                          "Building fully managed cloud services with kafka and Rust with no runtime or garbage collaboration."
-                         "Realtime stream processing and data transformation using webassembly all in a single unified cluster with upto 3x less latency 5x throughput, 7x cpu utilization, 50x memory utilization."
-                         "feed stream clean data to kafka topic starting with rust http source connector, streaming data sink into kafka source connector where webassembly pipeline is applied which enable direct contorl over the streaming datathen transform event flows to kafka consumer."])
-    :rm/summery  (clojure.string/join "" ["enhace machine learning model to real time data pipeline with kafka and webassembly"
+                         "Realtime stream processing and data transformation using WebAssembly all in a single unified cluster with upto 3x less latency 5x throughput, 7x cpu utilization, 50x memory utilization."
+                         "feed stream clean data to kafka topic starting with rust http source connector, streaming data sink into kafka source connector where WebAssembly pipeline is applied which enable direct contorl over the streaming datathen transform event flows to kafka consumer."])
+    :rm/summery  (clojure.string/join "" [
                                           "Building fully managed cloud services with kafka and Rust with no runtime or garbage collaboration."
-                                          "Realtime stream processing and data transformation using webassembly all in a single unified cluster with upto 3x less latency 5x throughput, 7x cpu utilization, 50x memory utilization."
-                                          "feed stream clean data to kafka topic starting with rust http source connector, streaming data sink into kafka source connector where webassembly pipeline is applied which enable direct contorl over the streaming datathen transform event flows to kafka consumer."
+                                          "Realtime stream processing and data transformation using WebAssembly all in a single unified cluster with upto 3x less latency 5x throughput, 7x cpu utilization, 50x memory utilization."
+                                          "feed stream clean data to kafka topic starting with rust http source connector, streaming data sink into kafka source connector where WebAssembly pipeline is applied which enable direct contorl over the streaming datathen transform event flows to kafka consumer."
                                           ])
     :rm/referane ""}
 
@@ -210,7 +210,9 @@ on classes. These techniques helps students get better at receiving intuition of
    {:db/id 20
     :rm/row 7
     :rm/col 6
-    :rm/task "Serverless end to end video conferencing and live Streaming v1 (2006-2012)"
+    :rm/task "Serverless end to end video conferencing and live Streaming v1"
+    :rm/from-date #inst "2005-02-01T00:00:00.000-00:00"
+    :rm/to-date #inst "2012-01-01T00:00:00.000-00:00"
     :rm/breakdowns [
                     {:task "Implement end-to-end low latency network connectivity solutions."},
                     {:task "Utilize network UDP hole punching technologies, which are becoming the standard in 2021/2022."},
@@ -228,6 +230,8 @@ Actor model and CPS adoption for scalability"}]
    {:db/id 35
     :rm/row -1
     :rm/col 0
+    :rm/from-date #inst "2012-02-01T00:00:00.000-00:00"
+    :rm/to-date #inst "2023-01-01T00:00:00.000-00:00"
     :rm/breakdowns [
                     {:task "Develop the frontend using React.js and WebRTC."},
                     {:task "Create a collaboration platform similar to Google Docs for data scientists and students."},
@@ -236,7 +240,7 @@ Actor model and CPS adoption for scalability"}]
                     {:task "Utilize clojure, rust, go for connecting PostgreSQL, Kafka, and the frontend components."},
                     ]
     :rm/task "Web based audio & video conferencing"
-    :rm/summery "Fontend is developed with reactjs and webrtc with google doc like collaboration platform for data scientist and students. Developing backend services with ingress API gateway, kafka for messaging, groovy for connecting postgresql, kafka and fontend."
+    :rm/summery "Fontend is developed with reactjs and webrtc with google doc like collaboration platform for data scientist and students. Developing backend services with ingress API gateway, kafka for messaging, clojure for connecting postgresql, kafka and fontend."
     :rm/referane ""}
 
 
@@ -247,9 +251,16 @@ Actor model and CPS adoption for scalability"}]
   {:db/id 7
    :rm/row -30
    :rm/col 1
-   :rm/task "Fractals Labs (2016-2018)"
-   :rm/breakdowns (mapv (fn [{:keys [description feature]}]
-                          {:task (str description " " feature)}) (:details vde))
+   :rm/task "Fractals Labs"
+   :rm/from-date #inst "2016-01-01T00:00:00.000-00:00"
+   :rm/to-date #inst "2023-07-01T00:00:00.000-00:00"
+   :rm/breakdowns [
+                   {:task ""},
+                   {:task ""},
+                   {:task ""},
+                   {:task ""},
+
+                   ]
    :rm/summery "Implemented Virtual Desktop Environment(VDE) for University Labs using KVM Libvert virtualization on Archlinux based hypervisor that hosts virtualized linux and windows desktops and docker for containerization on the server and desktop is replaced by ARM based SoC with vnc & rdp clients installed where students can access remote desktops and spawn docker based services on remote services"
    :rm/referane ""}
 
@@ -257,37 +268,35 @@ Actor model and CPS adoption for scalability"}]
    {:db/id 13
     :rm/row -15
     :rm/col 0
-    :rm/task "System Engineer on  Operations System and Software at GrameenPhone. (2007-2009)"
-    :rm/breakdowns [{:task "Develop and maintain mediation servers as modern microservices using Java, Oracle SQL, shell scripting, Jetty, and Linux command line utilities."
-                     }
-                    {:task "Implement reverse proxy and SSH port forwarding for remote server login and utilize vi as a remote editor."
-                     }
-                    {:task "Design and implement push and pull-based systems and services for monitoring alarms and IP packet tracing using Wireshark."
-                     }]
-
-    :rm/summery "Developed and maintained mediation servers which was in a nut shell modern days micro services with lot of bells and whistle with Java, Oracle SQL, shell scripting, jetty, linux command line utilities - awk, ssh port forwarding and reverse   proxy for remote server login and vi as remote editor. As well implemented push and pull based systems and services for monitoring alarms and IP packet tracing using wireshark"
-    :rm/referane ""}
-
-
-   {:db/id 113
-    :rm/row 1
-    :rm/col 0
-    :rm/task "System Engineer at GrameenPhone. (2007-2009)"
-    :rm/breakdowns [
+    :rm/from-date #inst "2007-06-01T00:00:00.000-00:00"
+    :rm/to-date #inst "2009-01-01T00:00:00.000-00:00"
+    :rm/task "System Engineer on  Operations System and Software at GrameenPhone."
+    :rm/breakdowns [{:task "Develop and maintain mediation servers as modern microservices using Java, Oracle SQL, shell scripting, Jetty, and Linux command line utilities."}
+                    {:task "Implement reverse proxy and SSH port forwarding for remote server login and utilize vi as a remote editor."}
+                    {:task "Design and implement push and pull-based systems and services for monitoring alarms and IP packet tracing using Wireshark."}
                     {:task "Develop and maintain mediation servers for telecommunication systems."},
                     {:task "Implement modern Microservices architecture with a focus on simplicity."},
                     {:task "Ensure seamless communication between different nodes and systems in multi-vendor environments."},
                     {:task "Address compatibility issues and ensure smooth interoperability between systems."},
-                    ]
-    :rm/summery "Main goal is to develop and maintain mediation servers which is in a nut shell modern days MicroServies with less of bells and whistle. In order to telecommunication system work properly every single nodes has to communicate with other systems and often in multi-vendor system things are not compatible."
+]
+
+    :rm/summery "Developed and maintained mediation servers which was in a nut shell modern days micro services with lot of bells and whistle with Java, Oracle SQL, shell scripting, jetty, linux command line utilities - awk, ssh port forwarding and reverse   proxy for remote server login and vi as remote editor. As well implemented push and pull based systems and services for monitoring alarms and IP packet tracing using wireshark. Main goal is to develop and maintain mediation servers which is in a nut shell modern days MicroServies with less of bells and whistle. In order to telecommunication system work properly every single nodes has to communicate with other systems and often in multi-vendor system things are not compatible."
     :rm/referane ""}
+
+
+
 
 
 
    {:db/id 115
     :rm/row 8
     :rm/col 1
-    :rm/task "Assistant Director - Bangladesh Telecommunication Regulatory Commision - BTRC (2009-2011)"
+
+    :rm/from-date #inst "2009-12-01T00:00:00.000-00:00"
+    :rm/to-date #inst "2011-02-01T00:00:00.000-00:00"
+
+
+    :rm/task "Assistant Director - Bangladesh Telecommunication Regulatory Commision - BTRC."
     :rm/breakdowns [
                     {:task "Performed extensive packet tracing and analysis using Wireshark for millions of network interactions."},
                     {:task "Utilized Lua scripting in Wireshark for custom analysis and filtering."},
@@ -303,17 +312,20 @@ I was an active member of National Telecommunication committee, I used to inspec
    {:db/id 15
     :rm/row -1
     :rm/col 4
+    :rm/from-date #inst "2011-02-01T00:00:00.000-00:00"
+    :rm/to-date #inst "2014-07-01T00:00:00.000-00:00"
+
     :rm/task "Deep packet Inspections (DPI)"
     :rm/breakdowns [
                     {:task "Performed packet inspection and auditing for detecting malicious activities and lawful interception in the Linux kernel space."},
                     {:task "Utilized eBPF technologies and systrace for packet inspection and auditing purposes."},
-                    {:task "Implemented shell scripting for systrace functionality and later transitioned to using Groovy on GraalVM."},
+                    {:task "Implemented shell scripting for systrace functionality and later transitioned to using Clojure on GraalVM."},
                     {:task "Optimized PostGreSQL queries through join planning and indexing."},
                     {:task "Utilized Redis cluster for efficient caching of frequently accessed data."},
                     {:task "Developed data visualization using d3.js in the React-based frontend."},
-                    {:task "Implemented a RESTful API backend using Groovy for data processing and communication."},
+                    {:task "Implemented a RESTful API backend using Clojure for data processing and communication."},
                     ]
-    :rm/summery "Packet Inspection and Auditing for malicious activities and Lawful Interception in Linux Kernel Space using eBPF technologies and systrace using shell scripting later successfully used groovy on GraalVM and PostGreSQL query optimization using join planing and indexing also used redis cluster for cashing frequent data. Develop react based data visualization using d3.js and Groovy based RESTful API backend."
+    :rm/summery "Packet Inspection and Auditing for malicious activities and Lawful Interception in Linux Kernel Space using eBPF technologies and systrace using shell scripting later successfully used clojure on GraalVM and PostGreSQL query optimization using join planing and indexing also used redis cluster for cashing frequent data. Develop react based data visualization using d3.js and Clojure based RESTful API backend."
     }
 
 
@@ -321,7 +333,10 @@ I was an active member of National Telecommunication committee, I used to inspec
    {:db/id 16
     :rm/row -20
     :rm/col 0
-    :rm/task "Lead Engineer - SAMSUNG R&D Institute Bangladesh (2011-2013)"
+    :rm/from-date #inst "2011-05-01T00:00:00.000-00:00"
+    :rm/to-date #inst "2013-11-01T00:00:00.000-00:00"
+
+    :rm/task "Lead Engineer - SAMSUNG R&D"
     :rm/summery "I have worked on device drivers on Linux kernel on Android based mobile handsets and patched linux kernel with device specific changes based on git, As well as fork and maintain specific version then merge it to upstream when stable. Applied three way git merging as well as merge conflicts, mastered on taking systrace I also received leadership training for very big teams of developers"
     :rm/breakdowns
     [
@@ -364,17 +379,15 @@ I was an active member of National Telecommunication committee, I used to inspec
    {:db/id 117
     :rm/row -10
     :rm/col 1
-    :rm/task "Software Engineer - GENUITY Systems Limited (2006-2007)"
-    :rm/breakdowns [
-                    {
-                     :task "Worked as a Linux network programmer in C."
-                     }
-                    {
-                     :task "Developed select and epoll-based network SBC (Session Border Controller) and worked with syscalls and lexical parsers."
-                     }
-                    {
-                     :task "Gained in-depth knowledge of real-time protocols, voice and video packets, and UDP-based session controllers."
-}
+
+    :rm/from-date #inst "2003-05-01T00:00:00.000-00:00"
+    :rm/to-date #inst "2008-06-01T00:00:00.000-00:00"
+
+
+    :rm/task "Software Engineer - GENUITY Systems Limited"
+    :rm/breakdowns [{:task "Worked as a Linux network programmer in C."}
+                    {:task "Developed select and epoll-based network SBC (Session Border Controller) and worked with syscalls and lexical parsers."}
+                    {:task "Gained in-depth knowledge of real-time protocols, voice and video packets, and UDP-based session controllers."}
                     {
                      :task "Implemented high availability failover mechanisms using ICMP and ARP protocols."
                      }
@@ -402,59 +415,28 @@ I was an active member of National Telecommunication committee, I used to inspec
                     {
                      :task "Worked with highly concurrent softswitch routing, load balancing, and priority queues."
                      }
-                    {
-                     :task "Developed media gateways on CentOS and Ubuntu."
-                     }
-                    {
-                     :task "Learned how to implement Intel Integrated Performance Primitives (IPP) API for audio/speech codecs."
-                     }
-                    {
-                     :task "Implemented UDP hole punching technologies such as STUN, TURN, and ICE."
-                     }
-                    {
-                     :task "Developed web-based audio and video streaming solutions."
-                     }
-                    {
-                     :task "Configured DNS extensions, specifically DNS SRV records."
-                     }
-                    {
-                     :task "Implemented protocols based on RFC drafts."
-                     }
+                    { :task "Developed media gateways on CentOS and Ubuntu."}
+                    { :task "Learned how to implement Intel Integrated Performance Primitives (IPP) API for audio/speech codecs."}
+                    { :task "Implemented UDP hole punching technologies such as STUN, TURN, and ICE."}
+                    { :task "Developed web-based audio and video streaming solutions."}
+                    { :task "Configured DNS extensions, specifically DNS SRV records."}
+                    { :task "Implemented protocols based on RFC drafts."}
 ]
     :rm/summery "As a devOps on audio conferencing systems and I have worked with liunx, iptables, shell scripting, routing UDP packets over all type network environments, ssh and configure remote server using emacs editor. Worked with highly concurrent softswith routing with load balancing and priority queues, media gateways on CentOS and Ubuntu. "
 
     :rm/referane ""}
 
 
-   {:db/id 129
-    :rm/row -35
-    :rm/col 1
-    :rm/task "Software Global Consultancy //SGC (science 2018)"
-    :rm/summery "Made a successful server based deployment of Audio & video codecs (G729AB, AMR-NB, H263, H264) transcoding on debian based systems. Adopted of Groovy as shell script replacement. Restful API development with Reactjs worked with clojure, scala, phyton flux, websocket, gevent, sqlalkalemi. Implemented CPS and actor model for concurrency using go lang and erlang. "
-    :rm/referane ""}
-
    {:db/id 1290
     :rm/row -35
     :rm/col 1
     :rm/breakdowns [
-                    {
-                     :task "Successfully deployed server-based transcoding of audio-video codecs (G729AB, AMR-NB, H263, H264) on Debian-based systems."
-                     }
-                    {
-                     :task "Adopted Python and replaced shell scripts for development purposes."
-                     }
-                    {
-                     :task "Commercialized UART, GPIO, and smart card solutions on Raspberry Pi."
-                     }
-                    {
-                     :task "Developed RESTful APIs using React.js and worked with Clojure, Scala, Python, Flux, WebSocket, gevent, and SQLAlchemy."
-                     }
-                    {
-                     :task "Implemented the CPS (Continuation-Passing Style) and actor model of concurrency."
-                     }
-                    {
-                     :task "Gained knowledge and experience in running startups without any investment and understanding when to quit when big tech companies with unlimited capital enter the market."
-                     }
+                    {:task "Successfully deployed server-based transcoding of audio-video codecs (G729AB, AMR-NB, H263, H264) on Debian-based systems."}
+                    { :task "Adopted Python and replaced shell scripts for development purposes."}
+                    { :task "Commercialized UART, GPIO, and smart card solutions on Raspberry Pi."}
+                    { :task "Developed RESTful APIs using React.js and worked with Clojure, Scala, Python, Flux, WebSocket, gevent, and SQLAlchemy."}
+                    { :task "Implemented the CPS (Continuation-Passing Style) and actor model of concurrency."}
+                    { :task "Gained knowledge and experience in running startups without any investment and understanding when to quit when big tech companies with unlimited capital enter the market."}
                     {:task {:manage "infrastructure and application operations declaratively, versioned, and immutable"
                       :pull "changes automatically"
                       :reconcile "system state continuously"
@@ -464,7 +446,9 @@ I was an active member of National Telecommunication committee, I used to inspec
                       :write "everything in code for reusability"
                       :maintain "immutability for audit trail and preventing ad hoc changes"}}
                     ]
-    :rm/task "Software Global Consultancy //sgc (science 2018)"
+    :rm/from-date #inst "2013-05-01T00:00:00.000-00:00"
+    :rm/to-date #inst "2018-06-01T00:00:00.000-00:00"
+    :rm/task "Software Global Consultancy //SGC"
     :rm/summery "Successful server based deployment of Audio-video codec (G729AB, AMR-NB, H263, H264) transcoding on debian based systems. Addoption of Phyton and shell script replacement. commercialization of UART, gpio, smart card solutions on raspberry pi. Restful api development with Reactjs worked with clojure, scala, phyton flux, websocket, gevent, sqlalkalemi, CPS and actor model of concurrency. Learned how to run a startups without any investment and when to quet when bigtech with unlimited capital steps in."
     :rm/referane ""}
 
@@ -479,99 +463,167 @@ I was an active member of National Telecommunication committee, I used to inspec
    :rm/row 10
    :rm/col 1
    :rm/breakdowns [
-                   {
-                    :task "Achieved a CGPA of 3.69 out of 4."
-                    }
-                   {
-                    :task "Participated in NCPC and ICPC programming contests."
-                    }
-                   {
-                    :task "Completed a final project involving the design, modeling, and verification of a multi-cycle and 5-stage pipelined 32-bit RISC processor (MIPS) using Verilog Hardware Description Language (HDL)."
-                    }
+                   {:task "Participated in NCPC and ICPC programming contests."}
+                   {:task "Completed a final project involving the design, modeling,
+                          and verification of a multi-cycle and 5-stage pipelined 32-bit
+                          RISC processor (MIPS) using Verilog Hardware Description Language (HDL)."}
                    ]
-   :rm/task "BSC on Computer Engineering. American International University Bangladesh (AIUB) (2001-2005)"
+   :rm/task "BSC on Computer Engineering"
+   :rm/from-date #inst "2000-05-01T00:00:00.000-00:00"
+   :rm/to-date #inst "2005-06-01T00:00:00.000-00:00"
+
    :rm/summery "My CGPA was 3.69 out of 4, I have participated NCPC and ICPC programming contests. My final project was - Design project modeled and verified a multi-cycle and 5-stage pipelined version of 32-bit RISC processor - MIPS - with Verilog Hardware Description Language (HDL)"
 
    :rm/referane ""}
-  ])
-
-
-(def course [["Getting to Grips with Kubernetes RBAC • Liz Rice • GOTO 2019 " "2022 Online"]
-             ["Samsung Device driver programming on SNMC" "2011 - Delhi"]
-             ["Online 8.01x - MIT Physics I: Classical Mechanics by Walter Lewin"
-              "2014 - Online"]
-             ["2015 Introduction to Dependent Type Theory — Robert Harper University of Oregon" "2015 Online"]
-
-             ["Introduction to Computer Graphics
-- UC Davis Academics" "2015 - Online"]
-             ["Tutorial: Building the Simplest Possible Linux System - Rob Landley, se-instruments.com" "2015 - Online"]
-             ["Online eBPF and Kubernetes: Little Helper Minions for Scaling Microservices - Daniel Borkmann, Cilium" "2022 - Online"]
-             ["Tutorial: Communication Is Key - Understanding Kubernetes Networking - Jeff Poole, Vivint Smart Home" "2022 Online"]
-             ["Webinar: Kubernetes and Networks: Why is This So Dang Hard?" "2022 - Online"]
-             ["Online Intro + Deep Dive: Kubernetes (Network) SIG - Tim Hockin, Google"
-              "2022 - Online"]
-             ["Container Networking From Scratch - Kristen Jacobs, Oracle" "2022 - Online"]
-
-             ["Kubernetes Networking Intro and Deep-Dive - Bowei Du & Tim Hockin, Google"
-              "2022 - Online"]
-
-             ["Demystifying Linux MIPI DSI Subsystem - Jagan Teki, Amarula Solutions"
-              "2022 - Online"]
-
-             ["Tutorial: Device Tree (DTS), Linux Board Bring-up and Kernel Version Changing 2018" "2022 - Online"]
-             ["Erlang Master Class, Joe Armstrong " "2017 - Online"]
-             ["Parsing With Derivatives David Nolen" "2017 - Online"]
-             ["The Do's and Don'ts of Error Handling • Joe Armstrong • GOTO" "2018 - Online"]
-             ["Logic Programming, Core.Async  Timothy Baldridge" "2015 - Online"]
-             ["Digital Design and Computer Architecture, ETH Zürich, Spring" "2021 - Online"]
-             ["Intro to Parallel Programming. John Owens University of California, Davis"
-              "2019 - Online"]
-             ["Building a container from scratch in Go - Liz Rice" "2022 - Online"]
-
-
-             ["\"Stop Writing Dead Programs\" by Jack Rusher (Strange Loop 2022)" "2022 - Online"]
-             ["Delimited Continuations for Everyone by Kenichi Asai Ochanomizu University "
-              "2017 - Online"]
-             ["Probabilistic scripts for automating common-sense tasks by Alexander Lew PHD student on MIT Probabilistic Computing Projects" "2019 - Online"]
-             ["Introduction to Computational Thinking  MIT 18.S191 aka 6.S083 aka 22.S092, Fall 2020 edition" "2021 - Online"]
-             [ "Differentiable Programming with Julia by Mike Innes." "2021 - Online"]
-             ["The impact of differentiable programming: how ∂P is enabling new science in Julia  ACM SIPGPLAN by Matt Bauman, Julia Computing" "2021  - Online"]
-             ["Binomial distributions and Bayesian view by Grant Sanderson, MIT" "2018 - Online"]
-             ["Public / Private Keys and Signing - Anders Brownworth" "2014 - Online"]
-             ["Online Online Use Least Squares method for Mathematically Darkened Colors."
-              "2015 - Online"]
-             ["MIT 6.001 Structure and Interpretation" "2016 - Online"]
-             ["The Beauty of Bézier Curves  Freya Holmér" "2020 - Online"]
-             ["Siggraph2019 Geometric Algebra" "2021 - Online"]
-             ["Pixar in a Box - Khan Academy" "2014 - Online"]
-             ["2021-04-29 Arun Raghavan - How to get started with GStreamer"
-              "2020 - Online"]
-             ["How I Design Programs, Jeremy Gibbons, Professor of Computing in the Department of Computer Science at the University of Oxford." "2021 - Online"]])
-
+   ])
 
 (def topics
-  ["JavaScript" "React" "Angular" "Vue.js" "Node.js"
-   "Python" "Django" "Flask" "NumPy" "Pandas"
-   "Java" "Spring" "Hibernate" "Kotlin" "Gradle"
-   "Ruby" "Rails" "Sinatra" "RSpec" "Capistrano"
-   "PHP" "Laravel" "Symfony" "Composer" "PHPUnit"
-   "Go" "Gin" "Beego" "Gorm" "GoLand"
-   "Scala" "Akka" "Play" "Slick" "SBT"
-   "Swift" "iOS" "Objective-C" "Cocoa" "Xcode"
-   "Kotlin Native" "Multiplatform" "Coroutines" "Gradle Plugin" "Ktor"
-   "Docker" "Kubernetes" "Jenkins" "Ansible" "Terraform"
-   "PostgreSQL" "MongoDB" "Redis" "Elasticsearch" "Cassandra"
-   "GraphQL" "RESTful" "gRPC" "OpenAPI" "JSON"
-   "AWS" "Azure" "Google Cloud" "Firebase" "Lambda"
-   "Git" "GitHub" "GitLab" "Bitbucket" "SourceTree"
-   "CI/CD" "DevOps" "Agile" "Scrum" "Kanban"
-   "Machine Learning" "Deep Learning" "Computer Vision" "NLP" "TensorFlow"
-   "Big Data" "Hadoop" "Spark" "Hive" "Pig"
-   "Blockchain" "Smart Contracts" "Ethereum" "Solidity" "Hyperledger Fabric"
-   "Security" "OWASP" "Penetration Testing" "Encryption" "Authentication"
-   "Microservices" "Service Mesh" "Istio" "Linkerd" "Envoy"
-   "PostGreSQL" "SQL-Query" "Indexing" "Functions" "PostGIS"
-   "Serverless" "FaaS" "AWS Lambda" "Azure Functions" "Google Cloud Functions"])
+  [
+   {:db/id :G__20
+    :rm/tag :react
+    :rm/names ["React" "Vue.js" "Node.js" "webpack" ]
+    :rm/parent :G__15}
+   {:db/id :G__24
+    :rm/tag :python
+    :rm/names ["Python" "Django" "Flask" "NumPy" "Pandas"]}
+   {:db/id :G__26
+    :rm/tag :java
+    :rm/names ["Java" "Spring" "Hibernate" "Kotlin" "Gradle"
+               "Kotlin Native" "Coroutines" "Gradle Plugin" "Ktor"]}
+   {:db/id :G__30
+    :rm/tag :ruby
+    :rm/names ["Ruby" "Rails" "Sinatra" "RSpec" "Capistrano"]}
+   {:db/id :G__32
+    :rm/tag :ruby
+    :rm/names []}
+   {:db/id :G__36
+    :rm/tag :fp
+    :rm/names ["Scala" "Akka" "Play" "Slick" "SBT"]}
+   {:db/id :G__15
+    :rm/parent :G__36
+    :rm/tag :js
+    :rm/names ["JavaScript"]}
+   {:db/id :G__343
+    :rm/tag :devops
+    :rm/name "Devops"}
+   {:db/id :G__39
+    :rm/parent :G__343
+    :rm/tag :container
+    :rm/names ["Docker" "Go" "Kubernetes" "Jenkins" "Ansible" "Terraform"
+               "Microservices" "Service Mesh" "Istio" "Linkerd" "Envoy"
+               "Serverless" "FaaS" "AWS Lambda" "Azure Functions" "Google Cloud Functions"]}
+   {:db/id :G__41
+    :rm/tag :db
+    :rm/names ["PostgreSQL" "MongoDB" "Redis" "Elasticsearch" "SQL-Query" "Indexing" "Functions" "PostGIS"]
+    }
+   {:db/id :G__46
+    :rm/names ["GraphQL" "RESTful" "gRPC" "OpenAPI" "JSON"]
+    :rm/tag :rpc
+    }
+   {:db/id :G__49
+    :rm/tag :cloud
+    :rm/names ["AWS" "Azure" "Google Cloud" "Firebase" "Lambda"]}
+   {:db/id :G__51
+    :rm/tag :git
+    :rm/names ["Git" "GitHub" "GitLab" "Bitbucket" "CI/CD"]}
+   {:db/id :G__54
+    :rm/tag :se
+    :rm/names ["Agile" "Scrum" "Kanban"]}
+   {:db/id :G__57
+    :rm/tag :ml
+    :rm/names ["Machine Learning" "Deep Learning" "Computer Vision" "NLP" "TensorFlow"]}
+   {:db/id :G__60
+    :rm/names ["Security" "OWASP" "Penetration Testing" "Encryption" "Authentication"]
+    :rm/tag :hack}
+   {:db/id :G__5
+    :rm/tag :cs
+    :rm/names ["computer graphics"]
+    }
+   {:db/id :G__8
+    :rm/tag :cs}
+   {:db/id :G__11
+    :db/tag :system-programming
+    :db/names ["c" "posix" "epoll" "linux kernel"]}
+   {:db/id :G__14
+    :rm/tag :math
+    :rm/names ["math" "physics"]
+    }])
+
+
+
+(def course (map (fn [[a b & rest]]
+                   {:db/id (gensym)
+                    :rm/course a
+                    :rm/timeline b
+                    })
+                 [["Getting to Grips with Kubernetes RBAC • Liz Rice • GOTO 2019"
+                   "2022 Online" :kubernetes ]
+                  ["Samsung Device driver programming on SNMC"
+                   "2011 - Delhi" :kernel]
+                  ["Online 8.01x - MIT Physics I: Classical Mechanics by Walter Lewin"
+                   "2014 - Online" :physics]
+                  ["2015 Introduction to Dependent Type Theory — Robert Harper University of Oregon"
+                   "2015 Online" :cs]
+
+                  ["Introduction to Computer Graphics - UC Davis Academics"
+                   "2015 - Online" :cs ]
+                  ["Tutorial: Building the Simplest Possible Linux System - Rob Landley, se-instruments.com" "2015 - Online" :linux]
+                  ["Online eBPF and Kubernetes: Little Helper Minions for Scaling Microservices - Daniel Borkmann, Cilium" "2022 - Online"  :kubernetes]
+                  ["Tutorial: Communication Is Key - Understanding Kubernetes Networking - Jeff Poole, Vivint Smart Home"
+                   "2022 Online" :kubernetes]
+                  ["Webinar: Kubernetes and Networks: Why is This So Dang Hard?" "2022 - Online"
+                   :kubernetes ]
+                  ["Online Intro + Deep Dive: Kubernetes (Network) SIG - Tim Hockin, Google"
+                   "2022 - Online"
+                   :kubernetes ]
+                  ["Container Networking From Scratch - Kristen Jacobs, Oracle" "2022 - Online"
+                   :docker ]
+                  ["Kubernetes Networking Intro and Deep-Dive - Bowei Du & Tim Hockin, Google"
+                   "2022 - Online" :kubernetes]
+                  ["Demystifying Linux MIPI DSI Subsystem - Jagan Teki, Amarula Solutions"
+                   "2022 - Online" :kernel]
+
+                  ["Tutorial: Device Tree (DTS), Linux Board Bring-up and Kernel Version Changing 2018" "2022 - Online" :kernel ]
+                  ["Erlang Master Class, Joe Armstrong " "2017 - Online"
+                   :actor-model]
+                  ["Parsing With Derivatives David Nolen" "2017 - Online" :cs]
+                  ["The Do's and Don'ts of Error Handling • Joe Armstrong • GOTO" "2018 - Online"
+                   :actor-model]
+                  ["Logic Programming, Core.Async  Timothy Baldridge" "2015 - Online"
+                   :fp :logic :ai]
+                  ["Digital Design and Computer Architecture, ETH Zürich, Spring" "2021 - Online"
+                   :cse]
+                  ["Intro to Parallel Programming. John Owens University of California, Davis"
+                   "2019 - Online" :cuda :ai]
+                  ["Building a container from scratch in Go - Liz Rice" "2022 - Online"
+                   :linux :go]
+
+
+                  ["\"Stop Writing Dead Programs\" by Jack Rusher (Strange Loop 2022)" "2022 - Online" :cs]
+                  ["Delimited Continuations for Everyone by Kenichi Asai Ochanomizu University "
+                     "2017 - Online" :cs]
+                    ["Probabilistic scripts for automating common-sense tasks by Alexander Lew PHD student on MIT Probabilistic Computing Projects" "2019 - Online" :ai]
+                    ["Introduction to Computational Thinking  MIT 18.S191 aka 6.S083 aka 22.S092, Fall 2020 edition" "2021 - Online":cs]
+                  ["Differentiable Programming with Julia by Mike Innes." "2021 - Online" :ml :julia]
+                    ["The impact of differentiable programming: how ∂P is enabling new science in Julia  ACM SIPGPLAN by Matt Bauman, Julia Computing" "2021  - Online" :ml :julia]
+                    ["Binomial distributions and Bayesian view by Grant Sanderson, MIT" "2018 - Online" :math]
+                    ["Public / Private Keys and Signing - Anders Brownworth" "2014 - Online" :cryptography]
+                    ["Online Online Use Least Squares method for Mathematically Darkened Colors."
+                     "2015 - Online" :cs :uiux :colors]
+                    ["MIT 6.001 Structure and Interpretation" "2016 - Online" :cs]
+                  ["The Beauty of Bézier Curves  Freya Holmér" "2020 - Online"
+                   :cg :react :svg]
+                    ["Siggraph2019 Geometric Algebra" "2021 - Online" :math]
+                    ["Pixar in a Box - Khan Academy" "2014 - Online" :cg :math :svg :react]
+                    ["2021-04-29 Arun Raghavan - How to get started with GStreamer"
+                     "2020 - Online" :voip :linux]
+                  ["How I Design Programs, Jeremy Gibbons, Professor of Computing in the Department of Computer Science at the University of Oxford."
+                   "2021 - Online" :cs] ]  ))
+
+
+
+
+
 
 
 (comment

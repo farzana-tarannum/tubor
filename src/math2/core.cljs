@@ -18,7 +18,9 @@
    [clojure.walk :as w]
    [math2.transfrom :as trans]
    [math2.physics100 :as py100]
-   [math2.fss :as fss]))
+   [math2.fss :as fss]
+   [math2.all :as all]
+   [math2.resume :as resume]))
 
 ;;(defn ^:before-load my-before-reload-callback []
 ;;    (println "BEFORE reload!!!"))
@@ -34,6 +36,15 @@
 
 (defn render-simple []
   (rdom/render
+   #_[m100/map-asia]
+   #_[m100/eng-tense]
+   #_[m100/banner-factor-identities]
+   #_[py100/t2]
+   #_[all/math]
+
+   #_[m100/map-asia]
+   #_[m100/sine-wave2]
+   #_[m100/banner-factor-identities2]
    #_[fss/fsall ["rs/rs1.png" ]]
    #_[fss/fspdf "resume_nov12.pdf" ]
    #_[fss/fs2 ["rs3/r1.png" "rs3/r2.png" "rs3/r3.png" "rs3/r4.png"]
@@ -44,16 +55,20 @@
    #_[fs "resume_nov12_Page_3.jpg" [[852 38 23] [852 190 19]]]
    #_[fs "resume_nov12_Page_2.jpg" [[852 48 20] [852 201 19]
                                   [852 343 19] [852 501 19]
-                                  [852 651 19] [852 799 16]]]
+                                    [852 651 19] [852 799 16]]]
+
+   #_[m100/banner-brand]
+
    #_[m19/home-work19]
    #_[m100/app]
    #_[trig/ladder]
    #_[trig/freq3]
-   #_[m100/map-family22]
+   #_[m100/map-family]
    #_[m100/airplane]
    #_[m100/home-planets-banners]
    #_[m100/chem-ratee]
-   [teacher/resume2]
+   #_[teacher/resume2]
+   [resume/resume]
    (js/document.getElementById "app")
    functional-compiler))
 

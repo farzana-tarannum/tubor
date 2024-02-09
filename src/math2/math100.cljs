@@ -12338,8 +12338,8 @@ on time?"]
                            [-250 -120  800 400]
                            ] z))
           fix false
-          viewbox  (vb 7)
-          viewbox2 (vb 7)
+          viewbox  (vb 0)
+          viewbox2 (vb 2)
           rn (range 0 0)
           scales []
           dfl [:div {:style
@@ -16837,7 +16837,7 @@ on time?"]
         ax-dy 40
         vb (fn [z]
              (nth [(map #(* 0.15 %) [10 -20  83 40])
-                   (map #(* 0.5 %) [-10 -20  83 40])
+                   (map #(* 0.25 %) [-10 -20  83 40])
                    [0 -180  200 200]
                    [0 -50  100 100]
 
@@ -16850,7 +16850,7 @@ on time?"]
                    [-400 -200  800 200]] z))
         viewbox (vb 0)
         viewbox2 (vb 0)
-        [viewbox3 set-viewbox3] (react/useState (vb 0))
+        [viewbox3 set-viewbox3] (react/useState (vb 1))
         m 30
         d 9.4
         scale2 [[0.5 0.5] [-0.5 0.5]]]
@@ -16861,37 +16861,29 @@ on time?"]
                      {:background-color (hsl [1 70 70 0.5])
                       :gap ".2rem"})}
 
-       (map-indexed
-        (fn [n [d r c f1 f2]]
-          [:div {:ref (if (= n slider) animate-ref nil)
-                 :on-mouse-enter (fn [e]
-                                   (set-viewbox3 (vb n))
-                                   (set-slider n))
-                 :style (m7/css
-                         [[(+ 0 (* 3 r)) 3 (+ 12 (* 3 c)) 3  f1 f2  1.5 :rem :column]
-                          [(if (= slider n) 3 1) 70 (+ 50 (* 2 n)) 0.1] []
-                          (into
-                           {:font-size (m7/np [2.1 :rem])
-                            :font-family "Roboto Flex"
-                            :gap (m7/np [1 :rem])
-                            :color (hsl [1 30 (if (= slider n) 20 40) 1])
-                            :z-index 4
-                            :cursor :grab}
-                           {:z-index 19}
-                           )])
+     (map-indexed
+      (fn [n [d r c f1 f2]]
+        [:div {:ref (if (= n slider) animate-ref nil)
+               :on-mouse-enter (fn [e]
+                                 (set-viewbox3 (vb n))
+                                 (set-slider n))
+               :style (m7/css
+                       [[(+ 0 (* 3 r)) 3 (+ 12 (* 3 c)) 3  f1 f2  1.5 :rem :column]
+                        [(if (= slider n) 3 1) 70 (+ 50 (* 2 n)) 0.1] []
+                        (into
+                         {:font-size (m7/np [2.1 :rem])
+                          :font-family "Roboto Flex"
+                          :gap (m7/np [1 :rem])
+                          :color (hsl [1 30 (if (= slider n) 20 40) 1])
+                          :z-index 4
+                          :cursor :grab}
+                         {:z-index 19})])
                  }
-           [:div
-            [:div d
-             ]
-            [:div n]]])
+           d])
         (let [[f1 f2] [7 -2]
               x 'x]
           [[[:div
-
-
-             [m7/x `[:m 8 [:p ~x 2]]]
-
-             ]
+             [m7/x `[:m 8 [:p ~x 2]]]]
 
             1 1 :center :center]
            [[m7/x `[* ~f1 ~f2]] 2 2 :center :center]
@@ -16900,7 +16892,8 @@ on time?"]
            [[m7/x `[:m 1 ~x]] 1 1 :flex-end :center]
            [[m7/x `[:m 8 ~x]] 1 1 :center :flex-start]
            [f1 2 2 :center :flex-start]
-           [f2 2 2 :flex-end  :center]]))
+           [f2 2 2 :flex-end  :center]
+           ]))
 
        [:div {:style (m7/css
                       [[2 10 2 23 :center :center 3 :rem]
@@ -30626,7 +30619,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
             #_[m7/mx `[= [:k y [+ t ~d]] [:m v [:b [+ t ~d] ]]]]
 
-            #_[m7/mx `[= [:k y [+ t ~d]] [+ [:m v t] [:m v ~d]]]]
+            [m7/mx `[= [:k y [+ t ~d]] [+ [:m v t] [:m v ~d]]]]
 
             #_[m7/mx `[= [:k y [+ t ~d]]
                        [+ [:k y t] [:m [:p y .] ~d]]]]
@@ -34086,6 +34079,7 @@ Example: I put the high crime rate down to the high unemployment."])
 
 (defn map-asia []
   (let [[slider get-slider] (react/useState 0)
+        circle-ref (react/useRef)
         f (fn [n] (/ 1 n))
         tt 'θ
         dx [1 0  0 1 -1  0 0 -1 ]
@@ -34147,14 +34141,13 @@ Example: I put the high crime rate down to the high unemployment."])
 
        [:div {:style (m7/css
                       [[1 12 1 20 :center :center 3 :rem]
-
-                       [1 70 90 0.3] [] {:gap "1rem"
-                                       }])}
+                       [1 70 90 0.3] [] {:gap "1rem"}])}
         (let []
-          [:svg {:style {:height "100%"
-                         :width "100%"}
+          [:svg {:style {:height "50%"
+                         :width "50%"
+                         :background-color (hsl [2 70 70 0.5])}
                  :viewBox (m7/space
-                           viewbox)}
+                           [-100 -100  200 200])}
 
            (flames)
            [:marker {:id (name :dot3)
@@ -34188,12 +34181,35 @@ Example: I put the high crime rate down to the high unemployment."])
 
 
 
-           #_(grid-on 20 20)
+           (grid-on 20 20)
+
+
+
+           [:circle {:ref circle-ref
+                     :cx 0
+                     :cy 0
+                     :r 20
+                     :stroke-width 2
+                     :stroke (hsl [0 40 40 1])
+                     :fill (hsl [0 70 70 1])}
+            [:animateTransform {:attributeName :transform
+                                :type :rotate
+                                :from (m7/space [0 0 0])
+                                :to (m7/space [180 0 20])
+                                :dur "2s"
+                                :repeatCount :indefinite
+                                :begin :indefinite
+                                }]]
+
+
+
+
 
 
 
            [:image {:on-click (fn [e]
                                 (js/console.log "hello animals"))
+                    :begin :click
                     :height 100
                     :width 100
                     :x 300
@@ -34201,8 +34217,8 @@ Example: I put the high crime rate down to the high unemployment."])
                     :href "https://cdn.britannica.com/s:800x450,c:crop/83/195983-138-66807699/numbers-tiger-populations.jpg"}
             [:animate {:attributeName :width
                        :begin :click
-                       :to 150
-                       :dur (sec 3)
+                       :to 450
+                       :dur (sec 10)
                        :fill :freeze}]]
 
 
@@ -34221,10 +34237,10 @@ Example: I put the high crime rate down to the high unemployment."])
 
 
            [:image {:height 80
-                    :width 80
-                    :x 320
-                    :y 0
-                    :href "https://www.insidescience.org/sites/default/files/2020-07/disturbed-monkey_cropped_0.gif"}]
+                      :width 80
+                      :x 320
+                      :y 0
+                      :href "https://www.insidescience.org/sites/default/files/2020-07/disturbed-monkey_cropped_0.gif"}]
 
 
            ]

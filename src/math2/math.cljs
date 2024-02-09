@@ -793,6 +793,7 @@
               20 :% (+ n n 0.5) 70 70 0.3
               80 :% (+ n n 0.5)  70 70 0.7]))
 
+
 (def grid22 {:background-color (c [90 70 70])
              :display :grid
              :height (size [100 :vh])
@@ -1541,7 +1542,7 @@
             :grid-template-columns (size (apply concat (take 14 (repeat [10 :vh]))))
             :grid-template-rows (size (apply concat (take 10 (repeat [10 :vh]))))}}
 
-     [lhs [2 2] [5 2]]
+     (lhs [2 2] [5 2])
 
      [lhs2 [4 2] [5 2] [m '[:m 6 x]]]
 
@@ -1555,7 +1556,7 @@
 
      [center [6 1] [5 5] [m '[+ x 7]] ]
 
-     [rhs2 [7 3] [3 9]]
+     (rhs2 [7 3] [3 9])
 
      [:div {
             :style

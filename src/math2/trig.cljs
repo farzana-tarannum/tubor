@@ -3594,8 +3594,8 @@
       [:div {:style (merge
                      (grid [100 :vh 100 :vw
                             (take 24 (repeat [8 :vh]))
-                            (take 20 (repeat [8 :vh]))])
-                     {:background-color (hsl [1 70 70 0.1])})}
+                            (take 24 (repeat [8 :vh]))])
+                     {:background-color (hsl [1 30 70 0.4])})}
 
 
 

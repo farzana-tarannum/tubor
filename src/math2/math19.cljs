@@ -305,19 +305,19 @@
        (map
         (fn [n d]
           [:div {:on-mouse-enter (fn [e] (set-btn n))
-                    :on-mouse-leave (fn [e] (set-btn 100))
-                    :style (m7/css
-                            [[12 1 (+ 1 (* n 1)) 1  :center :center  2 :rem :column]
+                 :on-mouse-leave (fn [e] (set-btn 100))
+                 :style (m7/css
+                            [[11 1 (+ 1 (* n 1)) 1  :center :center  2 :rem :column]
                              [(if (= btn n) 1 0.5) 70 70  0.8] []
                              {:font-size (m7/np
-                                          [(if (= btn n) 2 1.8 ) :rem])
+                                          [(if (= btn n) 1 0.8 ) :rem])
                               :font-family "Roboto Flex"
                               :gap (m7/np [1 :rem])
                               :border-radius "50%"
                               :color (hsl
                                       (if (= btn n)
-                                        [1 30 30 1]
-                                        [1 70 60 0.7]))
+                                        [1 30 70 1]
+                                        [1 70 90 0.7]))
                               :z-index 4
                               :cursor :grab}
                              ])}
@@ -393,28 +393,32 @@
        (map
         (fn [n d]
           [:div {:style (m7/css
-                         [[1 1 (+ 2 (* n 1)) 1  :center :center  2 :rem :column]
-                          [(+ (/ n 10) 0.8) 70 (+ 50 (* 1 n))  0.4] [] {:gap ".1rem"
-                                                                        :z-index 4}])}
+                         [[1 1 (+ 2 (* n 1)) 1  :center :center  0.8 :rem :column]
+                          [(+ (/ n 10) 0.8) 70 (+ 50 (* 1 n))  0.4] []
+                          {:gap ".1rem"
+                           :color (hsl [3 90 90 1])
+                           :z-index 4}])}
 
            d])
         (range 0 24)
-        (into [[:div {:style {:font-size "3rem"}}  "x"]]
+        (into [[:div {:style {:font-size "1rem"
+                              :color (hsl [3 90 90 1])}}  "x"]]
               rn))
 
        (map
         (fn [n d]
           [:div {:style (m7/css
-                         [[2 1 (+ 2 (* n 1)) 1  :center :center  2 :rem :column]
+                         [[2 1 (+ 2 (* n 1)) 1  :center :center  0.5 :rem :column]
                           [(+ (/ n 10) 0.8) 70 (+ 50 (* 1 n))  0.4]
                           [] {:gap ".1rem"
-                                                               :z-index 4}])}
+
+                              :z-index 4}])}
 
            d])
         (range 0 24)
         (into [[:div {:style {:cursor :pointer
                               :color (hsl [3 90 90 1])
-                              :font-size "4rem"}
+                              :font-size "1rem"}
                       :on-click (fn [e]
                                   (do
                                     (set-slider (not slider))
@@ -424,7 +428,8 @@
                 (name :y)
                 ]]
               (map (fn [x]
-                     [:div {:style {:font-size "1.2rem"}}
+                     [:div {:style {:color (hsl [3 90 90 1])
+                                    :font-size "0.6rem"}}
                       (eqs x)]) rn)))
 
 
@@ -519,7 +524,7 @@
 
 
        [:div {:style (m7/css
-                      [[2 10 1 25 :center :center 3 :rem]
+                      [[2 10 1 25 :center :center 2 :rem]
                        [1 70 90 1] [] {:gap "1rem"}])}
         (let []
           [:svg {:style   {:height "100%"

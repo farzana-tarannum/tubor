@@ -56,28 +56,47 @@
    #_[m100/index2]
    #_[m100/sine-wave2]
    #_[m100/sine-wave2]
-   [trig/ladder]
+   #_[trig/ladder]
    #_[m100/home-planets-banners]
    #_[m100/eng-tense]
    #_[m100/board2
-    (s/board5)
-    (let [[f1 f2] [7 -2]
-          x 'x]
-      [[[m7/x `[:m 8 [:p ~x 2]]] 1 1 :center :center]
-       [[m7/x `[* ~f1 ~f2]] 2 2 :center :center]
-       [[m7/x `[:m 7 ~x]] 2 1 :center :center]
-       [[m7/x `[:m -16 ~x]] 1 2 :center :center]
-       [[m7/x `[:m 1 ~x]]
-        1 1 :flex-end :center]
-       [[m7/x `[:m 8 ~x]]
-        1 1 :center :flex-start]
-       [f1
-        2 2 :center :flex-start]
-       [f2 2 2 :flex-end  :center]])
-    [
-     [m7/x `[[:m 108
-              [:p y 2] ] 25]]]
-    ]
+      (s/board5)
+      (let [[f1 f2] [7 -2]
+            x 'x]
+        [[[m7/x `[:m 8 [:p ~x 2]]] 1 1 :center :center]
+         [[m7/x `[* ~f1 ~f2]] 2 2 :center :center]
+         [[m7/x `[:m 7 ~x]] 2 1 :center :center]
+         [[m7/x `[:m -16 ~x]] 1 2 :center :center]
+         [[m7/x `[:m 1 ~x]]
+          1 1 :flex-end :center]
+         [[m7/x `[:m 8 ~x]]
+          1 1 :center :flex-start]
+         [f1
+          2 2 :center :flex-start]
+         [f2 2 2 :flex-end  :center]])
+      [
+       [m7/x `[[:m 108
+                [:p y 2] ] 25]]]
+      ]
+   #_[m100/board2
+      (s/board5)
+      (let [[f1 f2] [7 -2]
+            x 'x]
+        [[[m7/x `[:m 8 [:p ~x 2]]] 1 1 :center :center]
+         [[m7/x `[* ~f1 ~f2]] 2 2 :center :center]
+         [[m7/x `[:m 7 ~x]] 2 1 :center :center]
+         [[m7/x `[:m -16 ~x]] 1 2 :center :center]
+         [[m7/x `[:m 1 ~x]]
+          1 1 :flex-end :center]
+         [[m7/x `[:m 8 ~x]]
+          1 1 :center :flex-start]
+         [f1
+          2 2 :center :flex-start]
+         [f2 2 2 :flex-end  :center]])
+      [
+       [m7/x `[[:m 108
+                [:p y 2] ] 25]]]
+      ]
    #_[m100/board3
     (s/board6)
     []
